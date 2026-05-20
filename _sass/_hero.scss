@@ -1,0 +1,68 @@
+.hero {
+    background: linear-gradient(135deg, $color-bg-dark 0%, darken($color-primary-dark, 15%) 100%);
+    color: #FFFFFF;
+    padding: 100px 0 80px;
+    text-align: center;
+
+    h1 {
+        font-size: 3rem;
+        font-weight: 800;
+        margin: 0 0 20px;
+        letter-spacing: -0.03em;
+        line-height: 1.15;
+
+        .hero-accent {
+            color: $color-accent;
+        }
+    }
+
+    p {
+        font-size: 1.25rem;
+        color: #CBD5E1;
+        max-width: 640px;
+        margin: 0 auto 36px;
+        line-height: 1.6;
+    }
+
+    .hero-actions {
+        display: flex;
+        justify-content: center;
+        gap: 16px;
+        flex-wrap: wrap;
+    }
+}
+
+.btn {
+    display: inline-block;
+    padding: 12px 28px;
+    border-radius: $border-radius;
+    font-weight: 600;
+    font-size: 1rem;
+    text-decoration: none;
+    transition: all 0.2s;
+    cursor: pointer;
+    border: none;
+
+    &:hover {
+        text-decoration: none;
+    }
+}
+
+.btn-primary {
+    background-color: $color-accent;
+    color: #FFFFFF;
+    &:hover {
+        background-color: $color-accent-dark;
+        color: #FFFFFF;
+    }
+}
+
+.btn-outline {
+    background-color: transparent;
+    color: #FFFFFF;
+    border: 2px solid #475569;
+    &:hover {
+        border-color: #FFFFFF;
+        color: #FFFFFF;
+    }
+}

@@ -1,0 +1,89 @@
+.site-header {
+    background-color: $color-bg-dark;
+    padding: 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+
+    .container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: 64px;
+    }
+
+    .site-logo {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        color: #FFFFFF;
+        font-size: 1.4rem;
+        font-weight: 700;
+        letter-spacing: -0.02em;
+        text-decoration: none;
+
+        &:hover {
+            color: #FFFFFF;
+            text-decoration: none;
+        }
+
+        .logo-accent {
+            color: $color-accent;
+        }
+    }
+
+    .site-nav {
+        display: flex;
+        align-items: center;
+        gap: 28px;
+
+        a {
+            color: #CBD5E1;
+            font-size: 0.95rem;
+            font-weight: 500;
+            text-decoration: none;
+            transition: color 0.2s;
+
+            &:hover, &.active {
+                color: #FFFFFF;
+                text-decoration: none;
+            }
+        }
+
+        .nav-github {
+            display: flex;
+            align-items: center;
+        }
+    }
+}
+
+.mobile-nav-toggle {
+    display: none;
+    background: none;
+    border: none;
+    color: #FFFFFF;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+@media (max-width: 768px) {
+    .mobile-nav-toggle {
+        display: block;
+    }
+
+    .site-nav {
+        display: none !important;
+        position: absolute;
+        top: 64px;
+        left: 0;
+        right: 0;
+        background-color: $color-bg-dark;
+        flex-direction: column;
+        padding: 20px;
+        gap: 16px !important;
+
+        &.open {
+            display: flex !important;
+        }
+    }
+}
