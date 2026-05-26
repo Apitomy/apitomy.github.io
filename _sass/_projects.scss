@@ -27,17 +27,25 @@
     gap: 24px;
 }
 
+a.project-card {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+}
+
 .project-card {
     background-color: $color-bg;
     border: 1px solid $color-border;
     border-radius: $border-radius;
     padding: 32px;
     transition: all 0.2s;
+    cursor: pointer;
 
     &:hover {
         border-color: $color-primary-light;
         box-shadow: 0 4px 24px rgba($color-primary, 0.08);
         transform: translateY(-2px);
+        text-decoration: none;
     }
 
     .project-icon {

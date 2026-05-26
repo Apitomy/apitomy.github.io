@@ -1,0 +1,88 @@
+---
+layout: project
+title: "Data Models MCP"
+permalink: /projects/data-models-mcp/
+project_color: "#059669"
+project_icon: "MCP"
+tagline: "An MCP server that enables AI coding assistants to view and edit OpenAPI and AsyncAPI documents."
+github_url: https://github.com/Apitomy/apitomy-data-models-mcp
+npm_package: "@apitomy/data-models-mcp"
+---
+
+<div class="project-section">
+    <h2>Installation</h2>
+    <div class="install-tabs">
+        <button class="install-tab active" data-target="install-npm">npm</button>
+        <button class="install-tab" data-target="install-claude">Claude Code</button>
+        <button class="install-tab" data-target="install-manual">Manual</button>
+    </div>
+    <div class="install-panel active" id="install-npm">
+        <pre class="install-code"><code>npm install -g @apitomy/data-models-mcp</code></pre>
+    </div>
+    <div class="install-panel" id="install-claude">
+        <pre class="install-code"><code># Add to your Claude Code MCP settings:
+{
+  "mcpServers": {
+    "apitomy-data-models": {
+      "command": "npx",
+      "args": ["-y", "@apitomy/data-models-mcp"]
+    }
+  }
+}</code></pre>
+    </div>
+    <div class="install-panel" id="install-manual">
+        <pre class="install-code"><code># Run directly with npx (no install required):
+npx @apitomy/data-models-mcp</code></pre>
+    </div>
+</div>
+
+<div class="project-section">
+    <h2>Features</h2>
+    <div class="feature-grid">
+        <div class="feature-card">
+            <div class="feature-icon">&#129302;</div>
+            <h3>AI-Powered Editing</h3>
+            <p>Let AI coding assistants like Claude create, edit, and validate your OpenAPI
+                and AsyncAPI specifications through natural language.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">&#128736;</div>
+            <h3>100+ Tools</h3>
+            <p>Over 100 MCP tools for session management, querying, editing, validation, and
+                format transformation of API documents.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">&#128196;</div>
+            <h3>Multi-Format</h3>
+            <p>Load and save documents in JSON or YAML. Convert between formats and
+                between OpenAPI spec versions on the fly.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">&#10003;</div>
+            <h3>Real-Time Validation</h3>
+            <p>Validate documents against the OpenAPI or AsyncAPI specification and get
+                detailed problem reports with locations.</p>
+        </div>
+    </div>
+</div>
+
+<div class="project-section">
+    <h2>Links</h2>
+    <div class="project-links-section">
+        <a href="https://github.com/Apitomy/apitomy-data-models-mcp" class="project-link">
+            GitHub Repository
+        </a>
+        <a href="https://www.npmjs.com/package/@apitomy/data-models-mcp"
+           class="project-link">npm Package</a>
+        <a href="https://github.com/Apitomy/apitomy-data-models-mcp/releases"
+           class="project-link">Changelog</a>
+    </div>
+</div>
+
+<div class="project-section">
+    <h2>Related Projects</h2>
+    <div class="related-projects">
+        <a href="/projects/data-models/">Data Models &rarr;</a>
+        <a href="/projects/openapi-editor/">OpenAPI Editor &rarr;</a>
+    </div>
+</div>

@@ -1,0 +1,44 @@
+---
+layout: default
+---
+
+<div style="--project-color: {{ page.project_color }}">
+
+<section class="project-hero"
+         style="background: linear-gradient(135deg, {{ page.project_color }} 0%, #0F172A 100%);">
+    <div class="container">
+        <div class="project-hero-icon">{{ page.project_icon }}</div>
+        <h1>{{ page.title }}</h1>
+        <p class="project-hero-tagline">{{ page.tagline }}</p>
+        <div class="project-hero-actions">
+            <a href="{{ page.github_url }}" class="btn btn-primary">View on GitHub</a>
+            {% if page.npm_package %}
+            <a href="https://www.npmjs.com/package/{{ page.npm_package }}" class="btn btn-outline">npm</a>
+            {% endif %}
+            {% if page.maven_artifact %}
+            <a href="https://central.sonatype.com/artifact/{{ page.maven_group }}/{{ page.maven_artifact }}"
+               class="btn btn-outline">Maven Central</a>
+            {% endif %}
+        </div>
+    </div>
+</section>
+
+<div class="project-body">
+    <div class="container" style="max-width: 860px;">
+        {{ content }}
+    </div>
+</div>
+
+</div>
+
+<script>
+document.querySelectorAll('.install-tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+        const group = tab.closest('.project-section');
+        group.querySelectorAll('.install-tab').forEach(t => t.classList.remove('active'));
+        group.querySelectorAll('.install-panel').forEach(p => p.classList.remove('active'));
+        tab.classList.add('active');
+        group.querySelector('#' + tab.dataset.target).classList.add('active');
+    });
+});
+</script>

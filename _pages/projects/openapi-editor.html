@@ -1,0 +1,89 @@
+---
+layout: project
+title: "OpenAPI Editor"
+permalink: /projects/openapi-editor/
+project_color: "#7C3AED"
+project_icon: "OE"
+tagline: "A reusable React component for visual OpenAPI editing that can be embedded in any React application."
+github_url: https://github.com/Apitomy/apitomy-openapi-editor
+npm_package: "@apitomy/openapi-editor"
+---
+
+<div class="project-section">
+    <h2>Installation</h2>
+    <div class="install-tabs">
+        <button class="install-tab active" data-target="install-npm">npm</button>
+        <button class="install-tab" data-target="install-yarn">yarn</button>
+    </div>
+    <div class="install-panel active" id="install-npm">
+        <pre class="install-code"><code>npm install @apitomy/openapi-editor</code></pre>
+    </div>
+    <div class="install-panel" id="install-yarn">
+        <pre class="install-code"><code>yarn add @apitomy/openapi-editor</code></pre>
+    </div>
+</div>
+
+<div class="project-section">
+    <h2>Features</h2>
+    <div class="feature-grid">
+        <div class="feature-card">
+            <div class="feature-icon">&#127912;</div>
+            <h3>Visual Editing</h3>
+            <p>Inline property editing with auto-save for all major OpenAPI sections. No
+                YAML or JSON knowledge required.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">&#128450;</div>
+            <h3>Navigation Tree</h3>
+            <p>Browse Paths, Schemas, Responses, and Tags with a collapsible tree view
+                and right-click context menus.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">&#8634;</div>
+            <h3>Undo / Redo</h3>
+            <p>Full command-pattern-based undo and redo support for all editing operations.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">&#128196;</div>
+            <h3>Source View</h3>
+            <p>Toggle between the visual editor and raw YAML/JSON source with format
+                conversion and syntax highlighting.</p>
+        </div>
+    </div>
+</div>
+
+<div class="project-section project-quick-start">
+    <h2>Quick Start</h2>
+    <span class="code-label">React</span>
+    <pre><code>import { OpenAPIEditor } from '@apitomy/openapi-editor';
+
+function App() {
+    return (
+        &lt;OpenAPIEditor
+            content={openApiDocument}
+            onChange={(newContent) =&gt; console.log(newContent)}
+        /&gt;
+    );
+}</code></pre>
+</div>
+
+<div class="project-section">
+    <h2>Links</h2>
+    <div class="project-links-section">
+        <a href="https://github.com/Apitomy/apitomy-openapi-editor" class="project-link">
+            GitHub Repository
+        </a>
+        <a href="https://www.npmjs.com/package/@apitomy/openapi-editor"
+           class="project-link">npm Package</a>
+        <a href="https://github.com/Apitomy/apitomy-openapi-editor/releases"
+           class="project-link">Changelog</a>
+    </div>
+</div>
+
+<div class="project-section">
+    <h2>Related Projects</h2>
+    <div class="related-projects">
+        <a href="/projects/data-models/">Data Models &rarr;</a>
+        <a href="/projects/apicurito/">Apicurito &rarr;</a>
+    </div>
+</div>
