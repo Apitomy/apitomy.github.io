@@ -17,11 +17,18 @@ mission: making it easier to work with OpenAPI and AsyncAPI specifications.
 Apitomy currently includes the following projects:
 
 - **[Data Models](https://github.com/Apitomy/apitomy-data-models)** -- A Java and TypeScript library
-  for reading, writing, and manipulating OpenAPI and AsyncAPI documents.
-- **[Codegen](https://github.com/Apitomy/apitomy-codegen)** -- Generate client SDKs, server stubs,
-  and more from OpenAPI specifications.
+  for reading, writing, and manipulating OpenAPI and AsyncAPI documents using a rich, typed object
+  model. Available on both Maven Central and npm.
 - **[Data Models MCP](https://github.com/Apitomy/apitomy-data-models-mcp)** -- An MCP server that
-  enables AI coding assistants to work with OpenAPI and AsyncAPI documents.
+  exposes the Data Models library to AI coding assistants, enabling AI-powered OpenAPI and AsyncAPI
+  document editing directly from tools like Claude Code.
+- **[Codegen](https://github.com/Apitomy/apitomy-codegen)** -- Generate client SDKs, server stubs,
+  and other code artifacts from OpenAPI specifications. Supports multiple languages and frameworks.
+- **[OpenAPI Editor](https://github.com/Apitomy/apitomy-openapi-editor)** -- A reusable React
+  component for visual OpenAPI editing. Provides an intuitive interface for creating and editing
+  OpenAPI documents without writing YAML or JSON directly.
+- **[Apicurito](https://github.com/Apitomy/apicurito)** -- A lightweight, standalone OpenAPI editor
+  application. Design and edit OpenAPI specifications with a clean, browser-based visual interface.
 
 ## Get involved
 
