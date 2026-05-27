@@ -17,7 +17,8 @@
         align-items: center;
         gap: 10px;
         color: #FFFFFF;
-        font-size: 1.4rem;
+        font-family: "Inter", $font-family-base;
+        font-size: 22.4px;
         font-weight: 700;
         letter-spacing: -0.02em;
         text-decoration: none;
@@ -39,7 +40,8 @@
 
         a {
             color: #CBD5E1;
-            font-size: 0.95rem;
+            font-family: "Inter", $font-family-base;
+            font-size: 15.2px;
             font-weight: 500;
             text-decoration: none;
             transition: color 0.2s;
