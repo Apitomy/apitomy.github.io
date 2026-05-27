@@ -1,0 +1,5126 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="An MCP server for AI-assisted OpenAPI and AsyncAPI document editing">
+      
+      
+        <meta name="author" content="Apitomy">
+      
+      
+        <link rel="canonical" href="https://www.apitomy.io/projects/data-models-mcp/docs/Tools.html">
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>MCP Tools Reference - Apitomy Data Models MCP</title>
+      
+    
+    
+      <link rel="stylesheet" href="assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="theme/css/project-colors.css">
+    
+      <link rel="stylesheet" href="theme/css/apitomy-base.css">
+    
+    <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#mcp-tools-reference" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+        <aside class="md-banner">
+          <div class="md-banner__inner md-grid md-typeset">
+            
+            
+<div class="apitomy-masthead">
+    <div class="apitomy-masthead-inner">
+        <a href="https://www.apitomy.io/" class="apitomy-masthead-logo">Apitomy</a>
+        <nav class="apitomy-masthead-nav">
+            <a href="https://www.apitomy.io/#projects">Projects</a>
+            <a href="https://www.apitomy.io/blog/">Blog</a>
+            <a href="https://github.com/Apitomy" class="apitomy-masthead-github" aria-label="GitHub">
+                <svg width="22" height="22" viewBox="0 0 16 16" fill="currentColor">
+                    <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/>
+                </svg>
+            </a>
+        </nav>
+    </div>
+</div>
+
+          </div>
+          
+        </aside>
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="index.html" title="Apitomy Data Models MCP" class="md-header__button md-logo" aria-label="Apitomy Data Models MCP" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Apitomy Data Models MCP
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              MCP Tools Reference
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom"  aria-hidden="true"  type="radio" name="__palette" id="__palette_0">
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="Share" aria-label="Share" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/Apitomy/apitomy-data-models-mcp" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Apitomy/apitomy-data-models-mcp
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="index.html" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="getting-started.html" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Getting Started
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="user-guide/index.html" class="md-tabs__link">
+          
+  
+  
+  User Guide
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="index.html" title="Apitomy Data Models MCP" class="md-nav__button md-logo" aria-label="Apitomy Data Models MCP" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Apitomy Data Models MCP
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/Apitomy/apitomy-data-models-mcp" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Apitomy/apitomy-data-models-mcp
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="getting-started.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Getting Started
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    User Guide
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    User Guide
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="user-guide/index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tools Reference
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#index" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Index
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#session" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Session
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Session">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#document_load" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        document_load
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#document_create" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        document_create
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#document_save" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        document_save
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#document_close" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        document_close
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#document_list_sessions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        document_list_sessions
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#document_export" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        document_export
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#document_clone_session" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        document_clone_session
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#query" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Query
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Query">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#document_get_info" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        document_get_info
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#document_list_paths" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        document_list_paths
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#document_get_operation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        document_get_operation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#document_list_schemas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        document_list_schemas
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#document_get_node" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        document_get_node
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#document_list_operations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        document_list_operations
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#document_get_schema" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        document_get_schema
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#document_list_security_schemes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        document_list_security_schemes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#document_list_servers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        document_list_servers
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#document_list_tags" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        document_list_tags
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#document_list_parameters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        document_list_parameters
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#document_list_responses" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        document_list_responses
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#document_list_media_types" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        document_list_media_types
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#document_list_extensions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        document_list_extensions
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#document_list_examples" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        document_list_examples
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#document_find_refs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        document_find_refs
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#edit" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Edit
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Edit">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#document_set_info" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        document_set_info
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#document_add_path" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        document_add_path
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#document_add_schema" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        document_add_schema
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#document_set_node" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        document_set_node
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#document_remove_node" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        document_remove_node
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#document_add_operation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        document_add_operation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#document_remove_operation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        document_remove_operation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#document_add_response" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        document_add_response
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#document_add_parameter" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        document_add_parameter
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#document_add_request_body" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        document_add_request_body
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#document_add_media_type" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        document_add_media_type
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#document_set_media_type_schema" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        document_set_media_type_schema
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#document_add_security_scheme" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        document_add_security_scheme
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#document_remove_response" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        document_remove_response
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#document_add_response_definition" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        document_add_response_definition
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#document_remove_parameter" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        document_remove_parameter
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#document_remove_security_scheme" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        document_remove_security_scheme
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#document_add_tag" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        document_add_tag
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#document_add_server" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        document_add_server
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#document_set_contact" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        document_set_contact
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#document_set_license" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        document_set_license
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#document_remove_schema" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        document_remove_schema
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#document_remove_path" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        document_remove_path
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#document_add_channel" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        document_add_channel
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#document_add_response_header" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        document_add_response_header
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#document_remove_request_body" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        document_remove_request_body
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#document_update_security_scheme" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        document_update_security_scheme
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#document_remove_tag" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        document_remove_tag
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#document_rename_tag" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        document_rename_tag
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#document_remove_server" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        document_remove_server
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#document_add_extension" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        document_add_extension
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#document_remove_extension" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        document_remove_extension
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#document_remove_response_header" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        document_remove_response_header
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#document_add_schema_property" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        document_add_schema_property
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#document_remove_schema_property" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        document_remove_schema_property
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#document_add_security_requirement" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        document_add_security_requirement
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#document_add_example" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        document_add_example
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#document_set_operation_info" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        document_set_operation_info
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#document_set_operation_tags" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        document_set_operation_tags
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#document_set_schema_required" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        document_set_schema_required
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#document_set_schema_type" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        document_set_schema_type
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#document_add_schema_enum" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        document_add_schema_enum
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#document_remove_all_security_requirements" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        document_remove_all_security_requirements
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#document_remove_media_type" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        document_remove_media_type
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#document_add_parameter_definition" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        document_add_parameter_definition
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#document_remove_parameter_definition" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        document_remove_parameter_definition
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#document_add_header_definition" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        document_add_header_definition
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#document_remove_header_definition" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        document_remove_header_definition
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#document_add_example_definition" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        document_add_example_definition
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#document_remove_example_definition" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        document_remove_example_definition
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#document_add_request_body_definition" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        document_add_request_body_definition
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#document_remove_request_body_definition" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        document_remove_request_body_definition
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#document_delete_contact" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        document_delete_contact
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#document_delete_license" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        document_delete_license
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#document_update_extension" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        document_update_extension
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#document_remove_all_examples" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        document_remove_all_examples
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#document_rename_path" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        document_rename_path
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#document_rename_schema" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        document_rename_schema
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#document_copy_operation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        document_copy_operation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#document_move_operation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        document_move_operation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#document_add_callback" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        document_add_callback
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#document_remove_callback" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        document_remove_callback
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#document_add_link" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        document_add_link
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#document_remove_link" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        document_remove_link
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#document_set_external_docs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        document_set_external_docs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#document_add_server_variable" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        document_add_server_variable
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#document_remove_server_variable" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        document_remove_server_variable
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#document_remove_all_operations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        document_remove_all_operations
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#document_remove_all_responses" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        document_remove_all_responses
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#document_remove_all_parameters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        document_remove_all_parameters
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#document_remove_all_response_headers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        document_remove_all_response_headers
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#document_remove_all_schema_properties" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        document_remove_all_schema_properties
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#document_remove_all_servers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        document_remove_all_servers
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#document_remove_all_tags" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        document_remove_all_tags
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#document_remove_all_security_schemes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        document_remove_all_security_schemes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#document_remove_all_extensions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        document_remove_all_extensions
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#validation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Validation
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Validation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#document_validate" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        document_validate
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#transform" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Transform
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Transform">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#document_transform" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        document_transform
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#document_dereference" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        document_dereference
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="mcp-tools-reference">MCP Tools Reference</h1>
+<p>This document lists all 102 tools provided by the apitomy-data-models MCP server, organized
+by category.</p>
+<h2 id="index">Index</h2>
+<ul>
+<li><a href="#session">Session Tools (7)</a></li>
+<li><a href="#document_load"><code>document_load</code></a></li>
+<li><a href="#document_create"><code>document_create</code></a></li>
+<li><a href="#document_save"><code>document_save</code></a></li>
+<li><a href="#document_close"><code>document_close</code></a></li>
+<li><a href="#document_list_sessions"><code>document_list_sessions</code></a></li>
+<li><a href="#document_export"><code>document_export</code></a></li>
+<li><a href="#document_clone_session"><code>document_clone_session</code></a></li>
+<li><a href="#query">Query Tools (16)</a></li>
+<li><a href="#document_get_info"><code>document_get_info</code></a></li>
+<li><a href="#document_list_paths"><code>document_list_paths</code></a></li>
+<li><a href="#document_get_operation"><code>document_get_operation</code></a></li>
+<li><a href="#document_list_schemas"><code>document_list_schemas</code></a></li>
+<li><a href="#document_get_node"><code>document_get_node</code></a></li>
+<li><a href="#document_list_operations"><code>document_list_operations</code></a></li>
+<li><a href="#document_get_schema"><code>document_get_schema</code></a></li>
+<li><a href="#document_list_security_schemes"><code>document_list_security_schemes</code></a></li>
+<li><a href="#document_list_servers"><code>document_list_servers</code></a></li>
+<li><a href="#document_list_tags"><code>document_list_tags</code></a></li>
+<li><a href="#document_list_parameters"><code>document_list_parameters</code></a></li>
+<li><a href="#document_list_responses"><code>document_list_responses</code></a></li>
+<li><a href="#document_list_media_types"><code>document_list_media_types</code></a></li>
+<li><a href="#document_list_extensions"><code>document_list_extensions</code></a></li>
+<li><a href="#document_list_examples"><code>document_list_examples</code></a></li>
+<li><a href="#document_find_refs"><code>document_find_refs</code></a></li>
+<li><a href="#edit">Edit Tools (76)</a></li>
+<li><a href="#document_set_info"><code>document_set_info</code></a></li>
+<li><a href="#document_add_path"><code>document_add_path</code></a></li>
+<li><a href="#document_add_schema"><code>document_add_schema</code></a></li>
+<li><a href="#document_set_node"><code>document_set_node</code></a></li>
+<li><a href="#document_remove_node"><code>document_remove_node</code></a></li>
+<li><a href="#document_add_operation"><code>document_add_operation</code></a></li>
+<li><a href="#document_remove_operation"><code>document_remove_operation</code></a></li>
+<li><a href="#document_add_response"><code>document_add_response</code></a></li>
+<li><a href="#document_add_parameter"><code>document_add_parameter</code></a></li>
+<li><a href="#document_add_request_body"><code>document_add_request_body</code></a></li>
+<li><a href="#document_add_media_type"><code>document_add_media_type</code></a></li>
+<li><a href="#document_set_media_type_schema"><code>document_set_media_type_schema</code></a></li>
+<li><a href="#document_add_security_scheme"><code>document_add_security_scheme</code></a></li>
+<li><a href="#document_remove_response"><code>document_remove_response</code></a></li>
+<li><a href="#document_add_response_definition"><code>document_add_response_definition</code></a></li>
+<li><a href="#document_remove_parameter"><code>document_remove_parameter</code></a></li>
+<li><a href="#document_remove_security_scheme"><code>document_remove_security_scheme</code></a></li>
+<li><a href="#document_add_tag"><code>document_add_tag</code></a></li>
+<li><a href="#document_add_server"><code>document_add_server</code></a></li>
+<li><a href="#document_set_contact"><code>document_set_contact</code></a></li>
+<li><a href="#document_set_license"><code>document_set_license</code></a></li>
+<li><a href="#document_remove_schema"><code>document_remove_schema</code></a></li>
+<li><a href="#document_remove_path"><code>document_remove_path</code></a></li>
+<li><a href="#document_add_channel"><code>document_add_channel</code></a></li>
+<li><a href="#document_add_response_header"><code>document_add_response_header</code></a></li>
+<li><a href="#document_remove_request_body"><code>document_remove_request_body</code></a></li>
+<li><a href="#document_update_security_scheme"><code>document_update_security_scheme</code></a></li>
+<li><a href="#document_remove_tag"><code>document_remove_tag</code></a></li>
+<li><a href="#document_rename_tag"><code>document_rename_tag</code></a></li>
+<li><a href="#document_remove_server"><code>document_remove_server</code></a></li>
+<li><a href="#document_add_extension"><code>document_add_extension</code></a></li>
+<li><a href="#document_remove_extension"><code>document_remove_extension</code></a></li>
+<li><a href="#document_remove_response_header"><code>document_remove_response_header</code></a></li>
+<li><a href="#document_add_schema_property"><code>document_add_schema_property</code></a></li>
+<li><a href="#document_remove_schema_property"><code>document_remove_schema_property</code></a></li>
+<li><a href="#document_add_security_requirement"><code>document_add_security_requirement</code></a></li>
+<li><a href="#document_add_example"><code>document_add_example</code></a></li>
+<li><a href="#document_set_operation_info"><code>document_set_operation_info</code></a></li>
+<li><a href="#document_set_operation_tags"><code>document_set_operation_tags</code></a></li>
+<li><a href="#document_set_schema_required"><code>document_set_schema_required</code></a></li>
+<li><a href="#document_set_schema_type"><code>document_set_schema_type</code></a></li>
+<li><a href="#document_add_schema_enum"><code>document_add_schema_enum</code></a></li>
+<li><a href="#document_remove_all_security_requirements"><code>document_remove_all_security_requirements</code></a></li>
+<li><a href="#document_remove_media_type"><code>document_remove_media_type</code></a></li>
+<li><a href="#document_add_parameter_definition"><code>document_add_parameter_definition</code></a></li>
+<li><a href="#document_remove_parameter_definition"><code>document_remove_parameter_definition</code></a></li>
+<li><a href="#document_add_header_definition"><code>document_add_header_definition</code></a></li>
+<li><a href="#document_remove_header_definition"><code>document_remove_header_definition</code></a></li>
+<li><a href="#document_add_example_definition"><code>document_add_example_definition</code></a></li>
+<li><a href="#document_remove_example_definition"><code>document_remove_example_definition</code></a></li>
+<li><a href="#document_add_request_body_definition"><code>document_add_request_body_definition</code></a></li>
+<li><a href="#document_remove_request_body_definition"><code>document_remove_request_body_definition</code></a></li>
+<li><a href="#document_delete_contact"><code>document_delete_contact</code></a></li>
+<li><a href="#document_delete_license"><code>document_delete_license</code></a></li>
+<li><a href="#document_update_extension"><code>document_update_extension</code></a></li>
+<li><a href="#document_remove_all_examples"><code>document_remove_all_examples</code></a></li>
+<li><a href="#document_rename_path"><code>document_rename_path</code></a></li>
+<li><a href="#document_rename_schema"><code>document_rename_schema</code></a></li>
+<li><a href="#document_copy_operation"><code>document_copy_operation</code></a></li>
+<li><a href="#document_move_operation"><code>document_move_operation</code></a></li>
+<li><a href="#document_add_callback"><code>document_add_callback</code></a></li>
+<li><a href="#document_remove_callback"><code>document_remove_callback</code></a></li>
+<li><a href="#document_add_link"><code>document_add_link</code></a></li>
+<li><a href="#document_remove_link"><code>document_remove_link</code></a></li>
+<li><a href="#document_set_external_docs"><code>document_set_external_docs</code></a></li>
+<li><a href="#document_add_server_variable"><code>document_add_server_variable</code></a></li>
+<li><a href="#document_remove_server_variable"><code>document_remove_server_variable</code></a></li>
+<li><a href="#document_remove_all_operations"><code>document_remove_all_operations</code></a></li>
+<li><a href="#document_remove_all_responses"><code>document_remove_all_responses</code></a></li>
+<li><a href="#document_remove_all_parameters"><code>document_remove_all_parameters</code></a></li>
+<li><a href="#document_remove_all_response_headers"><code>document_remove_all_response_headers</code></a></li>
+<li><a href="#document_remove_all_schema_properties"><code>document_remove_all_schema_properties</code></a></li>
+<li><a href="#document_remove_all_servers"><code>document_remove_all_servers</code></a></li>
+<li><a href="#document_remove_all_tags"><code>document_remove_all_tags</code></a></li>
+<li><a href="#document_remove_all_security_schemes"><code>document_remove_all_security_schemes</code></a></li>
+<li><a href="#document_remove_all_extensions"><code>document_remove_all_extensions</code></a></li>
+<li><a href="#validation">Validation Tools (1)</a></li>
+<li><a href="#document_validate"><code>document_validate</code></a></li>
+<li><a href="#transform">Transform Tools (2)</a></li>
+<li><a href="#document_transform"><code>document_transform</code></a></li>
+<li><a href="#document_dereference"><code>document_dereference</code></a></li>
+</ul>
+<hr />
+<h2 id="session">Session</h2>
+<p>Tools for loading, creating, saving, closing, and listing document sessions.</p>
+<h3 id="document_load"><code>document_load</code></h3>
+<p>Load an OpenAPI or AsyncAPI file into a named session.</p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>session</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Name for this session</td>
+</tr>
+<tr>
+<td><code>filePath</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Absolute or relative path to the file</td>
+</tr>
+<tr>
+<td><code>format</code></td>
+<td><code>"json"</code> | <code>"yaml"</code></td>
+<td>no</td>
+<td>Force format; auto-detected if omitted</td>
+</tr>
+</tbody>
+</table>
+<h3 id="document_create"><code>document_create</code></h3>
+<p>Create a new empty OpenAPI or AsyncAPI document in a named session.</p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>session</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Name for this session</td>
+</tr>
+<tr>
+<td><code>modelType</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Document type to create (<code>openapi2</code>, <code>openapi3</code>, <code>asyncapi2</code>, etc.)</td>
+</tr>
+<tr>
+<td><code>title</code></td>
+<td>string</td>
+<td>no</td>
+<td>Document title</td>
+</tr>
+<tr>
+<td><code>version</code></td>
+<td>string</td>
+<td>no</td>
+<td>Document version</td>
+</tr>
+</tbody>
+</table>
+<h3 id="document_save"><code>document_save</code></h3>
+<p>Save the document from a session to a file.</p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>session</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Session name</td>
+</tr>
+<tr>
+<td><code>filePath</code></td>
+<td>string</td>
+<td>no</td>
+<td>File path to save to; defaults to the original load path</td>
+</tr>
+<tr>
+<td><code>format</code></td>
+<td><code>"json"</code> | <code>"yaml"</code></td>
+<td>no</td>
+<td>Output format; defaults to session format</td>
+</tr>
+</tbody>
+</table>
+<h3 id="document_close"><code>document_close</code></h3>
+<p>Close a named session and release the document from memory.</p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>session</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Session name to close</td>
+</tr>
+</tbody>
+</table>
+<h3 id="document_list_sessions"><code>document_list_sessions</code></h3>
+<p>List all active document sessions.</p>
+<p><em>No arguments.</em></p>
+<h3 id="document_export"><code>document_export</code></h3>
+<p>Export the document content as a JSON or YAML string.</p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>session</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Session name</td>
+</tr>
+<tr>
+<td><code>format</code></td>
+<td><code>"json"</code> | <code>"yaml"</code></td>
+<td>no</td>
+<td>Output format; defaults to the session's current format</td>
+</tr>
+</tbody>
+</table>
+<h3 id="document_clone_session"><code>document_clone_session</code></h3>
+<p>Clone an existing session into a new session with a deep copy of the document.</p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>session</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Source session name to clone</td>
+</tr>
+<tr>
+<td><code>newSession</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Name for the cloned session</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="query">Query</h2>
+<p>Tools for inspecting and navigating document content.</p>
+<h3 id="document_get_info"><code>document_get_info</code></h3>
+<p>Get document overview: type, title, version, path/schema counts.</p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>session</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Session name</td>
+</tr>
+</tbody>
+</table>
+<h3 id="document_list_paths"><code>document_list_paths</code></h3>
+<p>List all paths (OpenAPI) or channels (AsyncAPI) with their operations.</p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>session</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Session name</td>
+</tr>
+</tbody>
+</table>
+<h3 id="document_get_operation"><code>document_get_operation</code></h3>
+<p>Get full details of a specific operation by path and HTTP method.</p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>session</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Session name</td>
+</tr>
+<tr>
+<td><code>path</code></td>
+<td>string</td>
+<td>yes</td>
+<td>The API path (e.g. <code>/pets/{petId}</code>)</td>
+</tr>
+<tr>
+<td><code>method</code></td>
+<td>string</td>
+<td>no</td>
+<td>HTTP method (<code>get</code>, <code>post</code>, <code>put</code>, etc.); if omitted, returns all operations on the path</td>
+</tr>
+</tbody>
+</table>
+<h3 id="document_list_schemas"><code>document_list_schemas</code></h3>
+<p>List all schema/component definitions in the document.</p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>session</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Session name</td>
+</tr>
+</tbody>
+</table>
+<h3 id="document_get_node"><code>document_get_node</code></h3>
+<p>Get any node by its node path (e.g. <code>/paths[/pets]/get</code>, <code>/info</code>,
+<code>/components/schemas[Pet]</code>).</p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>session</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Session name</td>
+</tr>
+<tr>
+<td><code>nodePath</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Node path string (e.g. <code>/info</code>, <code>/paths[/pets]/get</code>)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="document_list_operations"><code>document_list_operations</code></h3>
+<p>List all operations across the entire document with path, method, operationId, summary, and
+tags.</p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>session</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Session name</td>
+</tr>
+</tbody>
+</table>
+<h3 id="document_get_schema"><code>document_get_schema</code></h3>
+<p>Get a specific schema definition by name with its full content.</p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>session</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Session name</td>
+</tr>
+<tr>
+<td><code>name</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Schema name (e.g. <code>Pet</code>, <code>Error</code>)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="document_list_security_schemes"><code>document_list_security_schemes</code></h3>
+<p>List all security scheme definitions in the document.</p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>session</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Session name</td>
+</tr>
+</tbody>
+</table>
+<h3 id="document_list_servers"><code>document_list_servers</code></h3>
+<p>List all server definitions in the document.</p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>session</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Session name</td>
+</tr>
+</tbody>
+</table>
+<h3 id="document_list_tags"><code>document_list_tags</code></h3>
+<p>List all tag definitions in the document.</p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>session</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Session name</td>
+</tr>
+</tbody>
+</table>
+<h3 id="document_list_parameters"><code>document_list_parameters</code></h3>
+<p>List parameters on a specific path item or operation.</p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>session</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Session name</td>
+</tr>
+<tr>
+<td><code>path</code></td>
+<td>string</td>
+<td>yes</td>
+<td>The API path (e.g. <code>/pets</code>)</td>
+</tr>
+<tr>
+<td><code>method</code></td>
+<td>string</td>
+<td>no</td>
+<td>HTTP method (omit for path-item-level parameters)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="document_list_responses"><code>document_list_responses</code></h3>
+<p>List responses on a specific operation with status codes and descriptions.</p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>session</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Session name</td>
+</tr>
+<tr>
+<td><code>path</code></td>
+<td>string</td>
+<td>yes</td>
+<td>The API path (e.g. <code>/pets</code>)</td>
+</tr>
+<tr>
+<td><code>method</code></td>
+<td>string</td>
+<td>yes</td>
+<td>HTTP method</td>
+</tr>
+</tbody>
+</table>
+<h3 id="document_list_media_types"><code>document_list_media_types</code></h3>
+<p>List media types on a request body or response.</p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>session</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Session name</td>
+</tr>
+<tr>
+<td><code>nodePath</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Node path to the request body or response</td>
+</tr>
+</tbody>
+</table>
+<h3 id="document_list_extensions"><code>document_list_extensions</code></h3>
+<p>List all vendor extensions (<code>x-*</code> properties) on a specific node.</p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>session</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Session name</td>
+</tr>
+<tr>
+<td><code>nodePath</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Node path to the node</td>
+</tr>
+</tbody>
+</table>
+<h3 id="document_list_examples"><code>document_list_examples</code></h3>
+<p>List examples on a media type, parameter, or header.</p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>session</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Session name</td>
+</tr>
+<tr>
+<td><code>nodePath</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Node path to the media type, parameter, or header</td>
+</tr>
+</tbody>
+</table>
+<h3 id="document_find_refs"><code>document_find_refs</code></h3>
+<p>Find all <code>$ref</code> references to a given definition throughout the document.</p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>session</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Session name</td>
+</tr>
+<tr>
+<td><code>ref</code></td>
+<td>string</td>
+<td>yes</td>
+<td>The <code>$ref</code> string to search for (e.g. <code>#/components/schemas/Pet</code>)</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="edit">Edit</h2>
+<p>Tools for modifying document content.</p>
+<h3 id="document_set_info"><code>document_set_info</code></h3>
+<p>Set document title, description, and/or version.</p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>session</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Session name</td>
+</tr>
+<tr>
+<td><code>title</code></td>
+<td>string</td>
+<td>no</td>
+<td>New document title</td>
+</tr>
+<tr>
+<td><code>description</code></td>
+<td>string</td>
+<td>no</td>
+<td>New document description</td>
+</tr>
+<tr>
+<td><code>version</code></td>
+<td>string</td>
+<td>no</td>
+<td>New document version</td>
+</tr>
+</tbody>
+</table>
+<h3 id="document_add_path"><code>document_add_path</code></h3>
+<p>Add a new path item to an OpenAPI document.</p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>session</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Session name</td>
+</tr>
+<tr>
+<td><code>path</code></td>
+<td>string</td>
+<td>yes</td>
+<td>The path string (e.g. <code>/users</code>)</td>
+</tr>
+<tr>
+<td><code>pathItem</code></td>
+<td>string</td>
+<td>no</td>
+<td>JSON string with path item content (operations, etc.)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="document_add_schema"><code>document_add_schema</code></h3>
+<p>Add a schema definition to the document.</p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>session</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Session name</td>
+</tr>
+<tr>
+<td><code>name</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Schema name</td>
+</tr>
+<tr>
+<td><code>schema</code></td>
+<td>string</td>
+<td>yes</td>
+<td>JSON string with the schema definition</td>
+</tr>
+</tbody>
+</table>
+<h3 id="document_set_node"><code>document_set_node</code></h3>
+<p>Set or replace any node at a given node path using in-place update.</p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>session</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Session name</td>
+</tr>
+<tr>
+<td><code>nodePath</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Node path to set (e.g. <code>/info</code>, <code>/paths[/pets]/get</code>)</td>
+</tr>
+<tr>
+<td><code>value</code></td>
+<td>string</td>
+<td>yes</td>
+<td>JSON string with the new node value</td>
+</tr>
+</tbody>
+</table>
+<h3 id="document_remove_node"><code>document_remove_node</code></h3>
+<p>Remove any node at a given node path.</p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>session</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Session name</td>
+</tr>
+<tr>
+<td><code>nodePath</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Node path to remove (e.g. <code>/paths[/pets]</code>, <code>/components/schemas[Pet]</code>)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="document_add_operation"><code>document_add_operation</code></h3>
+<p>Add a new HTTP operation to an existing path item.</p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>session</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Session name</td>
+</tr>
+<tr>
+<td><code>path</code></td>
+<td>string</td>
+<td>yes</td>
+<td>The API path (e.g. <code>/pets</code>)</td>
+</tr>
+<tr>
+<td><code>method</code></td>
+<td>string</td>
+<td>yes</td>
+<td>HTTP method (<code>get</code>, <code>post</code>, <code>put</code>, <code>delete</code>, <code>patch</code>, <code>options</code>, <code>head</code>)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="document_remove_operation"><code>document_remove_operation</code></h3>
+<p>Remove a specific HTTP operation from a path item.</p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>session</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Session name</td>
+</tr>
+<tr>
+<td><code>path</code></td>
+<td>string</td>
+<td>yes</td>
+<td>The API path (e.g. <code>/pets</code>)</td>
+</tr>
+<tr>
+<td><code>method</code></td>
+<td>string</td>
+<td>yes</td>
+<td>HTTP method to remove</td>
+</tr>
+</tbody>
+</table>
+<h3 id="document_add_response"><code>document_add_response</code></h3>
+<p>Add a response to an operation by status code and description.</p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>session</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Session name</td>
+</tr>
+<tr>
+<td><code>path</code></td>
+<td>string</td>
+<td>yes</td>
+<td>The API path</td>
+</tr>
+<tr>
+<td><code>method</code></td>
+<td>string</td>
+<td>yes</td>
+<td>HTTP method</td>
+</tr>
+<tr>
+<td><code>statusCode</code></td>
+<td>string</td>
+<td>yes</td>
+<td>HTTP status code (e.g. <code>200</code>, <code>404</code>, <code>default</code>)</td>
+</tr>
+<tr>
+<td><code>description</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Response description</td>
+</tr>
+</tbody>
+</table>
+<h3 id="document_add_parameter"><code>document_add_parameter</code></h3>
+<p>Add a parameter to a path item or operation.</p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>session</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Session name</td>
+</tr>
+<tr>
+<td><code>path</code></td>
+<td>string</td>
+<td>yes</td>
+<td>The API path</td>
+</tr>
+<tr>
+<td><code>method</code></td>
+<td>string</td>
+<td>no</td>
+<td>HTTP method (omit to add to path item level)</td>
+</tr>
+<tr>
+<td><code>name</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Parameter name</td>
+</tr>
+<tr>
+<td><code>location</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Parameter location: <code>query</code>, <code>path</code>, <code>header</code>, <code>cookie</code></td>
+</tr>
+<tr>
+<td><code>description</code></td>
+<td>string</td>
+<td>no</td>
+<td>Parameter description</td>
+</tr>
+<tr>
+<td><code>required</code></td>
+<td>boolean</td>
+<td>no</td>
+<td>Whether the parameter is required (auto-set to <code>true</code> for path params)</td>
+</tr>
+<tr>
+<td><code>type</code></td>
+<td>string</td>
+<td>no</td>
+<td>Schema type (<code>string</code>, <code>integer</code>, <code>number</code>, <code>boolean</code>, <code>array</code>). Defaults to <code>string</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="document_add_request_body"><code>document_add_request_body</code></h3>
+<p>Add an empty request body to an operation (OpenAPI 3.x only).</p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>session</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Session name</td>
+</tr>
+<tr>
+<td><code>path</code></td>
+<td>string</td>
+<td>yes</td>
+<td>The API path</td>
+</tr>
+<tr>
+<td><code>method</code></td>
+<td>string</td>
+<td>yes</td>
+<td>HTTP method (e.g. <code>post</code>, <code>put</code>, <code>patch</code>)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="document_add_media_type"><code>document_add_media_type</code></h3>
+<p>Add a media type to a request body or response (OpenAPI 3.x).</p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>session</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Session name</td>
+</tr>
+<tr>
+<td><code>nodePath</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Node path to the request body or response (e.g. <code>/paths[/pets]/post/requestBody</code>)</td>
+</tr>
+<tr>
+<td><code>mediaType</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Media type string (e.g. <code>application/json</code>, <code>application/xml</code>)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="document_set_media_type_schema"><code>document_set_media_type_schema</code></h3>
+<p>Set the schema for a media type, either as a <code>$ref</code> or inline type.</p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>session</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Session name</td>
+</tr>
+<tr>
+<td><code>nodePath</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Node path to the media type (e.g. <code>/paths[/pets]/post/requestBody/content[application/json]</code>)</td>
+</tr>
+<tr>
+<td><code>schemaRef</code></td>
+<td>string</td>
+<td>no</td>
+<td>Schema <code>$ref</code> string (e.g. <code>#/components/schemas/Pet</code>)</td>
+</tr>
+<tr>
+<td><code>schemaType</code></td>
+<td>string</td>
+<td>no</td>
+<td>Inline schema type (<code>string</code>, <code>integer</code>, <code>object</code>, <code>array</code>, etc.)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="document_add_security_scheme"><code>document_add_security_scheme</code></h3>
+<p>Add a security scheme definition to the document.</p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>session</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Session name</td>
+</tr>
+<tr>
+<td><code>name</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Security scheme name (e.g. <code>bearerAuth</code>, <code>apiKey</code>)</td>
+</tr>
+<tr>
+<td><code>scheme</code></td>
+<td>string</td>
+<td>yes</td>
+<td>JSON string with the security scheme definition</td>
+</tr>
+</tbody>
+</table>
+<h3 id="document_remove_response"><code>document_remove_response</code></h3>
+<p>Remove a response from an operation by status code.</p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>session</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Session name</td>
+</tr>
+<tr>
+<td><code>path</code></td>
+<td>string</td>
+<td>yes</td>
+<td>The API path (e.g. <code>/pets</code>)</td>
+</tr>
+<tr>
+<td><code>method</code></td>
+<td>string</td>
+<td>yes</td>
+<td>HTTP method</td>
+</tr>
+<tr>
+<td><code>statusCode</code></td>
+<td>string</td>
+<td>yes</td>
+<td>HTTP status code to remove (e.g. <code>200</code>, <code>404</code>, <code>default</code>)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="document_add_response_definition"><code>document_add_response_definition</code></h3>
+<p>Add a reusable response definition to the document.</p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>session</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Session name</td>
+</tr>
+<tr>
+<td><code>name</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Response definition name (e.g. <code>NotFound</code>, <code>ErrorResponse</code>)</td>
+</tr>
+<tr>
+<td><code>response</code></td>
+<td>string</td>
+<td>yes</td>
+<td>JSON string with the response definition</td>
+</tr>
+</tbody>
+</table>
+<h3 id="document_remove_parameter"><code>document_remove_parameter</code></h3>
+<p>Remove a parameter from a path item or operation.</p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>session</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Session name</td>
+</tr>
+<tr>
+<td><code>path</code></td>
+<td>string</td>
+<td>yes</td>
+<td>The API path</td>
+</tr>
+<tr>
+<td><code>method</code></td>
+<td>string</td>
+<td>no</td>
+<td>HTTP method (omit to remove from path item level)</td>
+</tr>
+<tr>
+<td><code>name</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Parameter name to remove</td>
+</tr>
+<tr>
+<td><code>location</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Parameter location: <code>query</code>, <code>path</code>, <code>header</code>, <code>cookie</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="document_remove_security_scheme"><code>document_remove_security_scheme</code></h3>
+<p>Remove a security scheme definition from the document.</p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>session</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Session name</td>
+</tr>
+<tr>
+<td><code>name</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Security scheme name to remove</td>
+</tr>
+</tbody>
+</table>
+<h3 id="document_add_tag"><code>document_add_tag</code></h3>
+<p>Add a tag definition to the document.</p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>session</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Session name</td>
+</tr>
+<tr>
+<td><code>name</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Tag name</td>
+</tr>
+<tr>
+<td><code>description</code></td>
+<td>string</td>
+<td>no</td>
+<td>Tag description</td>
+</tr>
+</tbody>
+</table>
+<h3 id="document_add_server"><code>document_add_server</code></h3>
+<p>Add a server to the document or to a specific path/operation.</p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>session</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Session name</td>
+</tr>
+<tr>
+<td><code>url</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Server URL (e.g. <code>https://api.example.com/v1</code>)</td>
+</tr>
+<tr>
+<td><code>description</code></td>
+<td>string</td>
+<td>no</td>
+<td>Server description</td>
+</tr>
+<tr>
+<td><code>nodePath</code></td>
+<td>string</td>
+<td>no</td>
+<td>Node path to add the server to; if omitted, adds to document level</td>
+</tr>
+</tbody>
+</table>
+<h3 id="document_set_contact"><code>document_set_contact</code></h3>
+<p>Set the contact information in the document info.</p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>session</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Session name</td>
+</tr>
+<tr>
+<td><code>name</code></td>
+<td>string</td>
+<td>no</td>
+<td>Contact name</td>
+</tr>
+<tr>
+<td><code>email</code></td>
+<td>string</td>
+<td>no</td>
+<td>Contact email</td>
+</tr>
+<tr>
+<td><code>url</code></td>
+<td>string</td>
+<td>no</td>
+<td>Contact URL</td>
+</tr>
+</tbody>
+</table>
+<h3 id="document_set_license"><code>document_set_license</code></h3>
+<p>Set the license information in the document info.</p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>session</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Session name</td>
+</tr>
+<tr>
+<td><code>name</code></td>
+<td>string</td>
+<td>yes</td>
+<td>License name (e.g. <code>Apache 2.0</code>, <code>MIT</code>)</td>
+</tr>
+<tr>
+<td><code>url</code></td>
+<td>string</td>
+<td>no</td>
+<td>License URL</td>
+</tr>
+</tbody>
+</table>
+<h3 id="document_remove_schema"><code>document_remove_schema</code></h3>
+<p>Remove a schema definition from the document.</p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>session</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Session name</td>
+</tr>
+<tr>
+<td><code>name</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Schema name to remove (e.g. <code>Pet</code>, <code>Error</code>)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="document_remove_path"><code>document_remove_path</code></h3>
+<p>Remove a path item from the document.</p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>session</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Session name</td>
+</tr>
+<tr>
+<td><code>path</code></td>
+<td>string</td>
+<td>yes</td>
+<td>The API path to remove (e.g. <code>/pets/{petId}</code>)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="document_add_channel"><code>document_add_channel</code></h3>
+<p>Add a channel item to an AsyncAPI document.</p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>session</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Session name</td>
+</tr>
+<tr>
+<td><code>channel</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Channel name (e.g. <code>user/signedup</code>)</td>
+</tr>
+<tr>
+<td><code>channelItem</code></td>
+<td>string</td>
+<td>no</td>
+<td>JSON string with channel item content</td>
+</tr>
+</tbody>
+</table>
+<h3 id="document_add_response_header"><code>document_add_response_header</code></h3>
+<p>Add a header to an OpenAPI response.</p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>session</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Session name</td>
+</tr>
+<tr>
+<td><code>nodePath</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Node path to the response (e.g. <code>/paths[/pets]/get/responses[200]</code>)</td>
+</tr>
+<tr>
+<td><code>name</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Header name (e.g. <code>X-Rate-Limit</code>)</td>
+</tr>
+<tr>
+<td><code>description</code></td>
+<td>string</td>
+<td>no</td>
+<td>Header description</td>
+</tr>
+<tr>
+<td><code>schemaType</code></td>
+<td>string</td>
+<td>no</td>
+<td>Schema type (defaults to <code>string</code>)</td>
+</tr>
+<tr>
+<td><code>schemaRef</code></td>
+<td>string</td>
+<td>no</td>
+<td>Schema <code>$ref</code> string</td>
+</tr>
+</tbody>
+</table>
+<h3 id="document_remove_request_body"><code>document_remove_request_body</code></h3>
+<p>Remove the request body from an operation (OpenAPI 3.x only).</p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>session</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Session name</td>
+</tr>
+<tr>
+<td><code>path</code></td>
+<td>string</td>
+<td>yes</td>
+<td>The API path (e.g. <code>/pets</code>)</td>
+</tr>
+<tr>
+<td><code>method</code></td>
+<td>string</td>
+<td>yes</td>
+<td>HTTP method (e.g. <code>post</code>, <code>put</code>, <code>patch</code>)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="document_update_security_scheme"><code>document_update_security_scheme</code></h3>
+<p>Update an existing security scheme definition.</p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>session</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Session name</td>
+</tr>
+<tr>
+<td><code>name</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Security scheme name to update</td>
+</tr>
+<tr>
+<td><code>scheme</code></td>
+<td>string</td>
+<td>yes</td>
+<td>JSON string with the updated security scheme definition</td>
+</tr>
+</tbody>
+</table>
+<h3 id="document_remove_tag"><code>document_remove_tag</code></h3>
+<p>Remove a tag definition from the document.</p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>session</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Session name</td>
+</tr>
+<tr>
+<td><code>name</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Tag name to remove</td>
+</tr>
+</tbody>
+</table>
+<h3 id="document_rename_tag"><code>document_rename_tag</code></h3>
+<p>Rename a tag across the entire document (updates both the tag definition and all operation
+references).</p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>session</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Session name</td>
+</tr>
+<tr>
+<td><code>oldName</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Current tag name</td>
+</tr>
+<tr>
+<td><code>newName</code></td>
+<td>string</td>
+<td>yes</td>
+<td>New tag name</td>
+</tr>
+</tbody>
+</table>
+<h3 id="document_remove_server"><code>document_remove_server</code></h3>
+<p>Remove a server from the document or a specific scope.</p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>session</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Session name</td>
+</tr>
+<tr>
+<td><code>url</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Server URL to remove</td>
+</tr>
+<tr>
+<td><code>nodePath</code></td>
+<td>string</td>
+<td>no</td>
+<td>Node path for scoped servers; if omitted, removes from document level</td>
+</tr>
+</tbody>
+</table>
+<h3 id="document_add_extension"><code>document_add_extension</code></h3>
+<p>Add a vendor extension (<code>x-*</code> property) to any node in the document.</p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>session</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Session name</td>
+</tr>
+<tr>
+<td><code>nodePath</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Node path to the parent (e.g. <code>/info</code>, <code>/paths[/pets]/get</code>)</td>
+</tr>
+<tr>
+<td><code>name</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Extension name (must start with <code>x-</code>)</td>
+</tr>
+<tr>
+<td><code>value</code></td>
+<td>string</td>
+<td>yes</td>
+<td>JSON string with the extension value</td>
+</tr>
+</tbody>
+</table>
+<h3 id="document_remove_extension"><code>document_remove_extension</code></h3>
+<p>Remove a vendor extension (<code>x-*</code> property) from a node.</p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>session</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Session name</td>
+</tr>
+<tr>
+<td><code>nodePath</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Node path to the parent</td>
+</tr>
+<tr>
+<td><code>name</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Extension name to remove (must start with <code>x-</code>)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="document_remove_response_header"><code>document_remove_response_header</code></h3>
+<p>Remove a header from an OpenAPI response.</p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>session</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Session name</td>
+</tr>
+<tr>
+<td><code>nodePath</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Node path to the response (e.g. <code>/paths[/pets]/get/responses[200]</code>)</td>
+</tr>
+<tr>
+<td><code>name</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Header name to remove (e.g. <code>X-Rate-Limit</code>)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="document_add_schema_property"><code>document_add_schema_property</code></h3>
+<p>Add a named property to an object schema definition.</p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>session</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Session name</td>
+</tr>
+<tr>
+<td><code>schemaName</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Name of the schema definition (e.g. <code>Pet</code>)</td>
+</tr>
+<tr>
+<td><code>propertyName</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Property name to add (e.g. <code>status</code>)</td>
+</tr>
+<tr>
+<td><code>schema</code></td>
+<td>string</td>
+<td>yes</td>
+<td>JSON string with the property schema (e.g. <code>{"type":"string"}</code>)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="document_remove_schema_property"><code>document_remove_schema_property</code></h3>
+<p>Remove a named property from an object schema definition.</p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>session</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Session name</td>
+</tr>
+<tr>
+<td><code>schemaName</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Name of the schema definition (e.g. <code>Pet</code>)</td>
+</tr>
+<tr>
+<td><code>propertyName</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Property name to remove</td>
+</tr>
+</tbody>
+</table>
+<h3 id="document_add_security_requirement"><code>document_add_security_requirement</code></h3>
+<p>Add a security requirement to the document or to a specific operation.</p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>session</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Session name</td>
+</tr>
+<tr>
+<td><code>requirement</code></td>
+<td>string</td>
+<td>yes</td>
+<td>JSON object mapping scheme names to scopes (e.g. <code>{"bearerAuth":[]}</code>)</td>
+</tr>
+<tr>
+<td><code>path</code></td>
+<td>string</td>
+<td>no</td>
+<td>API path (required if applying to an operation)</td>
+</tr>
+<tr>
+<td><code>method</code></td>
+<td>string</td>
+<td>no</td>
+<td>HTTP method (required if applying to an operation)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="document_add_example"><code>document_add_example</code></h3>
+<p>Add a named example to a media type, parameter, or header (OpenAPI 3.x only).</p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>session</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Session name</td>
+</tr>
+<tr>
+<td><code>nodePath</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Node path to the media type, parameter, or header</td>
+</tr>
+<tr>
+<td><code>name</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Example name</td>
+</tr>
+<tr>
+<td><code>value</code></td>
+<td>string</td>
+<td>yes</td>
+<td>JSON string with the example value</td>
+</tr>
+<tr>
+<td><code>summary</code></td>
+<td>string</td>
+<td>no</td>
+<td>Example summary</td>
+</tr>
+<tr>
+<td><code>description</code></td>
+<td>string</td>
+<td>no</td>
+<td>Example description</td>
+</tr>
+</tbody>
+</table>
+<h3 id="document_set_operation_info"><code>document_set_operation_info</code></h3>
+<p>Set metadata properties on an operation (operationId, summary, description, deprecated).</p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>session</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Session name</td>
+</tr>
+<tr>
+<td><code>path</code></td>
+<td>string</td>
+<td>yes</td>
+<td>The API path (e.g. <code>/pets</code>)</td>
+</tr>
+<tr>
+<td><code>method</code></td>
+<td>string</td>
+<td>yes</td>
+<td>HTTP method (<code>get</code>, <code>post</code>, <code>put</code>, etc.)</td>
+</tr>
+<tr>
+<td><code>operationId</code></td>
+<td>string</td>
+<td>no</td>
+<td>Operation ID</td>
+</tr>
+<tr>
+<td><code>summary</code></td>
+<td>string</td>
+<td>no</td>
+<td>Operation summary</td>
+</tr>
+<tr>
+<td><code>description</code></td>
+<td>string</td>
+<td>no</td>
+<td>Operation description</td>
+</tr>
+<tr>
+<td><code>deprecated</code></td>
+<td>boolean</td>
+<td>no</td>
+<td>Whether the operation is deprecated</td>
+</tr>
+</tbody>
+</table>
+<h3 id="document_set_operation_tags"><code>document_set_operation_tags</code></h3>
+<p>Set the tags array on an operation.</p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>session</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Session name</td>
+</tr>
+<tr>
+<td><code>path</code></td>
+<td>string</td>
+<td>yes</td>
+<td>The API path (e.g. <code>/pets</code>)</td>
+</tr>
+<tr>
+<td><code>method</code></td>
+<td>string</td>
+<td>yes</td>
+<td>HTTP method (<code>get</code>, <code>post</code>, <code>put</code>, etc.)</td>
+</tr>
+<tr>
+<td><code>tags</code></td>
+<td>string</td>
+<td>yes</td>
+<td>JSON array of tag names (e.g. <code>["pets","admin"]</code>)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="document_set_schema_required"><code>document_set_schema_required</code></h3>
+<p>Set the <code>required</code> array on a schema, controlling which properties are mandatory.</p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>session</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Session name</td>
+</tr>
+<tr>
+<td><code>schemaName</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Name of the schema definition (e.g. <code>Pet</code>)</td>
+</tr>
+<tr>
+<td><code>required</code></td>
+<td>string</td>
+<td>yes</td>
+<td>JSON array of required property names (e.g. <code>["id","name"]</code>)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="document_set_schema_type"><code>document_set_schema_type</code></h3>
+<p>Set the <code>type</code> field on a schema (string, object, array, integer, number, boolean).</p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>session</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Session name</td>
+</tr>
+<tr>
+<td><code>nodePath</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Node path to the schema</td>
+</tr>
+<tr>
+<td><code>type</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Schema type value</td>
+</tr>
+</tbody>
+</table>
+<h3 id="document_add_schema_enum"><code>document_add_schema_enum</code></h3>
+<p>Set enum values on a schema.</p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>session</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Session name</td>
+</tr>
+<tr>
+<td><code>nodePath</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Node path to the schema</td>
+</tr>
+<tr>
+<td><code>values</code></td>
+<td>string</td>
+<td>yes</td>
+<td>JSON array of enum values (e.g. <code>["active","inactive"]</code>)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="document_remove_all_security_requirements"><code>document_remove_all_security_requirements</code></h3>
+<p>Remove all security requirements from the document or from a specific operation.</p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>session</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Session name</td>
+</tr>
+<tr>
+<td><code>path</code></td>
+<td>string</td>
+<td>no</td>
+<td>API path (if targeting an operation)</td>
+</tr>
+<tr>
+<td><code>method</code></td>
+<td>string</td>
+<td>no</td>
+<td>HTTP method (if targeting an operation)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="document_remove_media_type"><code>document_remove_media_type</code></h3>
+<p>Remove a specific media type from a request body or response.</p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>session</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Session name</td>
+</tr>
+<tr>
+<td><code>nodePath</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Node path to the media type</td>
+</tr>
+</tbody>
+</table>
+<h3 id="document_add_parameter_definition"><code>document_add_parameter_definition</code></h3>
+<p>Add a reusable parameter definition to the document components.</p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>session</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Session name</td>
+</tr>
+<tr>
+<td><code>name</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Parameter definition name (e.g. <code>pageSize</code>)</td>
+</tr>
+<tr>
+<td><code>parameter</code></td>
+<td>string</td>
+<td>yes</td>
+<td>JSON string with the parameter definition</td>
+</tr>
+</tbody>
+</table>
+<h3 id="document_remove_parameter_definition"><code>document_remove_parameter_definition</code></h3>
+<p>Remove a reusable parameter definition from the document components.</p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>session</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Session name</td>
+</tr>
+<tr>
+<td><code>name</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Parameter definition name to remove</td>
+</tr>
+</tbody>
+</table>
+<h3 id="document_add_header_definition"><code>document_add_header_definition</code></h3>
+<p>Add a reusable header definition to the document components (OpenAPI 3.x only).</p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>session</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Session name</td>
+</tr>
+<tr>
+<td><code>name</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Header definition name (e.g. <code>X-Rate-Limit</code>)</td>
+</tr>
+<tr>
+<td><code>header</code></td>
+<td>string</td>
+<td>yes</td>
+<td>JSON string with the header definition</td>
+</tr>
+</tbody>
+</table>
+<h3 id="document_remove_header_definition"><code>document_remove_header_definition</code></h3>
+<p>Remove a reusable header definition from the document components (OpenAPI 3.x only).</p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>session</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Session name</td>
+</tr>
+<tr>
+<td><code>name</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Header definition name to remove</td>
+</tr>
+</tbody>
+</table>
+<h3 id="document_add_example_definition"><code>document_add_example_definition</code></h3>
+<p>Add a reusable example definition to the document components (OpenAPI 3.x only).</p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>session</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Session name</td>
+</tr>
+<tr>
+<td><code>name</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Example definition name</td>
+</tr>
+<tr>
+<td><code>example</code></td>
+<td>string</td>
+<td>yes</td>
+<td>JSON string with the example definition</td>
+</tr>
+</tbody>
+</table>
+<h3 id="document_remove_example_definition"><code>document_remove_example_definition</code></h3>
+<p>Remove a reusable example definition from the document components (OpenAPI 3.x only).</p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>session</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Session name</td>
+</tr>
+<tr>
+<td><code>name</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Example definition name to remove</td>
+</tr>
+</tbody>
+</table>
+<h3 id="document_add_request_body_definition"><code>document_add_request_body_definition</code></h3>
+<p>Add a reusable request body definition to the document components (OpenAPI 3.x only).</p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>session</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Session name</td>
+</tr>
+<tr>
+<td><code>name</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Request body definition name</td>
+</tr>
+<tr>
+<td><code>requestBody</code></td>
+<td>string</td>
+<td>yes</td>
+<td>JSON string with the request body definition</td>
+</tr>
+</tbody>
+</table>
+<h3 id="document_remove_request_body_definition"><code>document_remove_request_body_definition</code></h3>
+<p>Remove a reusable request body definition from the document components (OpenAPI 3.x only).</p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>session</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Session name</td>
+</tr>
+<tr>
+<td><code>name</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Request body definition name to remove</td>
+</tr>
+</tbody>
+</table>
+<h3 id="document_delete_contact"><code>document_delete_contact</code></h3>
+<p>Remove the contact object from the document info.</p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>session</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Session name</td>
+</tr>
+</tbody>
+</table>
+<h3 id="document_delete_license"><code>document_delete_license</code></h3>
+<p>Remove the license object from the document info.</p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>session</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Session name</td>
+</tr>
+</tbody>
+</table>
+<h3 id="document_update_extension"><code>document_update_extension</code></h3>
+<p>Update the value of an existing vendor extension.</p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>session</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Session name</td>
+</tr>
+<tr>
+<td><code>nodePath</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Node path to the parent node</td>
+</tr>
+<tr>
+<td><code>name</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Extension name (must start with <code>x-</code>)</td>
+</tr>
+<tr>
+<td><code>value</code></td>
+<td>string</td>
+<td>yes</td>
+<td>JSON string with the new extension value</td>
+</tr>
+</tbody>
+</table>
+<h3 id="document_remove_all_examples"><code>document_remove_all_examples</code></h3>
+<p>Remove all examples from a media type, parameter, or header (OpenAPI 3.x only).</p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>session</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Session name</td>
+</tr>
+<tr>
+<td><code>nodePath</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Node path to the media type, parameter, or header</td>
+</tr>
+</tbody>
+</table>
+<h3 id="document_rename_path"><code>document_rename_path</code></h3>
+<p>Rename a path (e.g. <code>/users</code> to <code>/accounts</code>), preserving all operations and configuration.</p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>session</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Session name</td>
+</tr>
+<tr>
+<td><code>oldPath</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Current path string</td>
+</tr>
+<tr>
+<td><code>newPath</code></td>
+<td>string</td>
+<td>yes</td>
+<td>New path string</td>
+</tr>
+</tbody>
+</table>
+<h3 id="document_rename_schema"><code>document_rename_schema</code></h3>
+<p>Rename a schema definition and update all <code>$ref</code> references throughout the document.</p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>session</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Session name</td>
+</tr>
+<tr>
+<td><code>oldName</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Current schema name</td>
+</tr>
+<tr>
+<td><code>newName</code></td>
+<td>string</td>
+<td>yes</td>
+<td>New schema name</td>
+</tr>
+</tbody>
+</table>
+<h3 id="document_copy_operation"><code>document_copy_operation</code></h3>
+<p>Copy an operation from one path/method to another.</p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>session</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Session name</td>
+</tr>
+<tr>
+<td><code>sourcePath</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Source API path</td>
+</tr>
+<tr>
+<td><code>sourceMethod</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Source HTTP method</td>
+</tr>
+<tr>
+<td><code>targetPath</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Target API path</td>
+</tr>
+<tr>
+<td><code>targetMethod</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Target HTTP method</td>
+</tr>
+</tbody>
+</table>
+<h3 id="document_move_operation"><code>document_move_operation</code></h3>
+<p>Move an operation from one path/method to another (copy + delete source).</p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>session</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Session name</td>
+</tr>
+<tr>
+<td><code>sourcePath</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Source API path</td>
+</tr>
+<tr>
+<td><code>sourceMethod</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Source HTTP method</td>
+</tr>
+<tr>
+<td><code>targetPath</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Target API path</td>
+</tr>
+<tr>
+<td><code>targetMethod</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Target HTTP method</td>
+</tr>
+</tbody>
+</table>
+<h3 id="document_add_callback"><code>document_add_callback</code></h3>
+<p>Add a callback definition to an operation (OpenAPI 3.x only).</p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>session</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Session name</td>
+</tr>
+<tr>
+<td><code>nodePath</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Node path to the operation</td>
+</tr>
+<tr>
+<td><code>name</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Callback name</td>
+</tr>
+<tr>
+<td><code>callback</code></td>
+<td>string</td>
+<td>no</td>
+<td>JSON string with the callback definition</td>
+</tr>
+</tbody>
+</table>
+<h3 id="document_remove_callback"><code>document_remove_callback</code></h3>
+<p>Remove a callback from an operation (OpenAPI 3.x only).</p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>session</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Session name</td>
+</tr>
+<tr>
+<td><code>nodePath</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Node path to the operation</td>
+</tr>
+<tr>
+<td><code>name</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Callback name to remove</td>
+</tr>
+</tbody>
+</table>
+<h3 id="document_add_link"><code>document_add_link</code></h3>
+<p>Add a link to a response (OpenAPI 3.x only).</p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>session</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Session name</td>
+</tr>
+<tr>
+<td><code>nodePath</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Node path to the response</td>
+</tr>
+<tr>
+<td><code>name</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Link name</td>
+</tr>
+<tr>
+<td><code>link</code></td>
+<td>string</td>
+<td>yes</td>
+<td>JSON string with the link definition</td>
+</tr>
+</tbody>
+</table>
+<h3 id="document_remove_link"><code>document_remove_link</code></h3>
+<p>Remove a link from a response (OpenAPI 3.x only).</p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>session</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Session name</td>
+</tr>
+<tr>
+<td><code>nodePath</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Node path to the response</td>
+</tr>
+<tr>
+<td><code>name</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Link name to remove</td>
+</tr>
+</tbody>
+</table>
+<h3 id="document_set_external_docs"><code>document_set_external_docs</code></h3>
+<p>Set external documentation on a node (document, tag, operation, or schema).</p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>session</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Session name</td>
+</tr>
+<tr>
+<td><code>nodePath</code></td>
+<td>string</td>
+<td>no</td>
+<td>Node path to the target; omit for document level</td>
+</tr>
+<tr>
+<td><code>url</code></td>
+<td>string</td>
+<td>yes</td>
+<td>External documentation URL</td>
+</tr>
+<tr>
+<td><code>description</code></td>
+<td>string</td>
+<td>no</td>
+<td>Description of the external docs</td>
+</tr>
+</tbody>
+</table>
+<h3 id="document_add_server_variable"><code>document_add_server_variable</code></h3>
+<p>Add a variable to a server definition (OpenAPI 3.x only).</p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>session</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Session name</td>
+</tr>
+<tr>
+<td><code>nodePath</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Node path to the server</td>
+</tr>
+<tr>
+<td><code>name</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Variable name (e.g. <code>environment</code>)</td>
+</tr>
+<tr>
+<td><code>default</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Default value</td>
+</tr>
+<tr>
+<td><code>description</code></td>
+<td>string</td>
+<td>no</td>
+<td>Variable description</td>
+</tr>
+<tr>
+<td><code>enum</code></td>
+<td>string</td>
+<td>no</td>
+<td>JSON array of allowed values</td>
+</tr>
+</tbody>
+</table>
+<h3 id="document_remove_server_variable"><code>document_remove_server_variable</code></h3>
+<p>Remove a variable from a server definition (OpenAPI 3.x only).</p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>session</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Session name</td>
+</tr>
+<tr>
+<td><code>nodePath</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Node path to the server</td>
+</tr>
+<tr>
+<td><code>name</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Variable name to remove</td>
+</tr>
+</tbody>
+</table>
+<h3 id="document_remove_all_operations"><code>document_remove_all_operations</code></h3>
+<p>Remove all operations from a path item.</p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>session</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Session name</td>
+</tr>
+<tr>
+<td><code>path</code></td>
+<td>string</td>
+<td>yes</td>
+<td>The API path</td>
+</tr>
+</tbody>
+</table>
+<h3 id="document_remove_all_responses"><code>document_remove_all_responses</code></h3>
+<p>Remove all responses from an operation.</p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>session</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Session name</td>
+</tr>
+<tr>
+<td><code>path</code></td>
+<td>string</td>
+<td>yes</td>
+<td>The API path</td>
+</tr>
+<tr>
+<td><code>method</code></td>
+<td>string</td>
+<td>yes</td>
+<td>HTTP method</td>
+</tr>
+</tbody>
+</table>
+<h3 id="document_remove_all_parameters"><code>document_remove_all_parameters</code></h3>
+<p>Remove all parameters (or parameters of a specific type) from a path item or operation.</p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>session</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Session name</td>
+</tr>
+<tr>
+<td><code>path</code></td>
+<td>string</td>
+<td>yes</td>
+<td>The API path</td>
+</tr>
+<tr>
+<td><code>method</code></td>
+<td>string</td>
+<td>no</td>
+<td>HTTP method (omit for path-item level)</td>
+</tr>
+<tr>
+<td><code>type</code></td>
+<td>string</td>
+<td>no</td>
+<td>Parameter type filter (<code>query</code>, <code>header</code>, <code>path</code>, <code>cookie</code>)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="document_remove_all_response_headers"><code>document_remove_all_response_headers</code></h3>
+<p>Remove all headers from a response.</p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>session</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Session name</td>
+</tr>
+<tr>
+<td><code>nodePath</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Node path to the response</td>
+</tr>
+</tbody>
+</table>
+<h3 id="document_remove_all_schema_properties"><code>document_remove_all_schema_properties</code></h3>
+<p>Remove all properties from a schema.</p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>session</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Session name</td>
+</tr>
+<tr>
+<td><code>schemaName</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Schema name</td>
+</tr>
+</tbody>
+</table>
+<h3 id="document_remove_all_servers"><code>document_remove_all_servers</code></h3>
+<p>Remove all servers from the document, a path item, or an operation.</p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>session</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Session name</td>
+</tr>
+<tr>
+<td><code>nodePath</code></td>
+<td>string</td>
+<td>no</td>
+<td>Node path; omit for document level</td>
+</tr>
+</tbody>
+</table>
+<h3 id="document_remove_all_tags"><code>document_remove_all_tags</code></h3>
+<p>Remove all tag definitions from the document.</p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>session</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Session name</td>
+</tr>
+</tbody>
+</table>
+<h3 id="document_remove_all_security_schemes"><code>document_remove_all_security_schemes</code></h3>
+<p>Remove all security scheme definitions from the document.</p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>session</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Session name</td>
+</tr>
+</tbody>
+</table>
+<h3 id="document_remove_all_extensions"><code>document_remove_all_extensions</code></h3>
+<p>Remove all vendor extensions from a node.</p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>session</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Session name</td>
+</tr>
+<tr>
+<td><code>nodePath</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Node path to the node</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="validation">Validation</h2>
+<p>Tools for validating documents against their specification.</p>
+<h3 id="document_validate"><code>document_validate</code></h3>
+<p>Validate the document and return structured validation problems.</p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>session</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Session name</td>
+</tr>
+<tr>
+<td><code>nodePath</code></td>
+<td>string</td>
+<td>no</td>
+<td>Optional node path to validate a specific subtree</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="transform">Transform</h2>
+<p>Tools for converting document format and spec version.</p>
+<h3 id="document_transform"><code>document_transform</code></h3>
+<p>Convert an OpenAPI document between spec versions (e.g. OpenAPI 2.0 to 3.0, 3.0 to 3.1).</p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>session</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Session name</td>
+</tr>
+<tr>
+<td><code>targetType</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Target document type (e.g. <code>openapi3</code>)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="document_dereference"><code>document_dereference</code></h3>
+<p>Resolve all <code>$ref</code> references in the document, pulling external references inline.</p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>session</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Session name</td>
+</tr>
+</tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/Apitomy/apitomy-data-models-mcp" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": ".", "features": ["navigation.tabs", "navigation.sections", "navigation.expand", "navigation.top", "search.highlight", "search.share", "search.suggest", "content.code.copy"], "search": "assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>
