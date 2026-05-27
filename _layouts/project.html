@@ -11,7 +11,10 @@ layout: default
         <h1>{{ page.title }}</h1>
         <p class="project-hero-tagline">{{ page.tagline }}</p>
         <div class="project-hero-actions">
-            <a href="{{ page.github_url }}" class="btn btn-primary">View on GitHub</a>
+            {% if page.docs_url %}
+            <a href="{{ page.docs_url }}" class="btn btn-primary">Documentation</a>
+            {% endif %}
+            <a href="{{ page.github_url }}" class="btn btn-outline">View on GitHub</a>
             {% if page.npm_package %}
             <a href="https://www.npmjs.com/package/{{ page.npm_package }}" class="btn btn-outline">npm</a>
             {% endif %}
