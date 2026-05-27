@@ -37,4 +37,4 @@ exclude:
   - dev.sh
 
 keep_files:
-  - codegen/docs
+  - projects/codegen/docs
