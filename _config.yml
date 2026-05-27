@@ -38,3 +38,4 @@ exclude:
 
 keep_files:
   - projects/codegen/docs
+  - projects/data-models/docs
