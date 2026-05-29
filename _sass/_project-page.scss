@@ -25,6 +25,21 @@
         letter-spacing: -0.03em;
     }
 
+    .project-hero-version {
+        margin-bottom: 12px;
+
+        .version-badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 20px;
+            padding: 4px 14px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 0.02em;
+        }
+    }
+
     .project-hero-tagline {
         font-size: 1.2rem;
         color: rgba(255, 255, 255, 0.85);
