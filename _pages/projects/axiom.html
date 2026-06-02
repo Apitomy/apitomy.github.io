@@ -1,0 +1,81 @@
+---
+layout: project
+title: "Axiom"
+permalink: /projects/axiom/
+project_color: "#D97706"
+project_icon: "AX"
+tagline: "Event-driven project orchestration platform that delegates work to human and AI actors."
+github_url: https://github.com/Apitomy/apitomy-axiom
+---
+
+<div class="project-section">
+    <h2>Features</h2>
+    <div class="feature-grid">
+        <div class="feature-card">
+            <div class="feature-icon">&#129302;</div>
+            <h3>AI-Powered Triage</h3>
+            <p>An AI Manager triages GitHub and Jira events, decides what actions to take,
+                and assigns tasks to the right actors.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">&#128101;</div>
+            <h3>Human + AI Actors</h3>
+            <p>Pluggable actor system supports Claude Code CLI, OpenCode, and human actors.
+                Tasks are assigned based on capability and availability.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">&#128196;</div>
+            <h3>Project Lifecycle</h3>
+            <p>Long-lived projects track the full lifecycle of work tied to each issue,
+                from triage through implementation to completion.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">&#127760;</div>
+            <h3>Web Dashboard</h3>
+            <p>A React + PatternFly UI provides visibility into projects, tasks, activity,
+                and configuration with real-time updates.</p>
+        </div>
+    </div>
+</div>
+
+<div class="project-section">
+    <h2>Tech Stack</h2>
+    <div class="feature-grid">
+        <div class="feature-card">
+            <h3>Backend</h3>
+            <p>Java 25 / Quarkus 3.33 LTS with H2 database and Flyway migrations.</p>
+        </div>
+        <div class="feature-card">
+            <h3>Frontend</h3>
+            <p>TypeScript / React 19 / PatternFly 6 with Vite build tooling.</p>
+        </div>
+        <div class="feature-card">
+            <h3>AI Engines</h3>
+            <p>Pluggable: Claude Code CLI or OpenCode. Configurable via
+                application.properties.</p>
+        </div>
+        <div class="feature-card">
+            <h3>API</h3>
+            <p>Contract-first OpenAPI with code generation via Apitomy Codegen.</p>
+        </div>
+    </div>
+</div>
+
+<div class="project-section">
+    <h2>Links</h2>
+    <div class="project-links-section">
+        <a href="https://github.com/Apitomy/apitomy-axiom" class="project-link">
+            GitHub Repository
+        </a>
+        <a href="https://github.com/Apitomy/apitomy-axiom/releases"
+           class="project-link">Releases</a>
+    </div>
+</div>
+
+<div class="project-section">
+    <h2>Related Projects</h2>
+    <div class="related-projects">
+        <a href="/projects/codegen/">Codegen &rarr;</a>
+        <a href="/projects/data-models/">Data Models &rarr;</a>
+    </div>
+</div>
