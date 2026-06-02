@@ -41,3 +41,4 @@ keep_files:
   - projects/data-models/docs
   - projects/data-models-mcp/docs
   - projects/openapi-editor/docs
+  - projects/axiom/docs
