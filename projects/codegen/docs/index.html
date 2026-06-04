@@ -577,7 +577,147 @@
   <span class="md-ellipsis">
     
   
-    User Guide
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="user-guide/maven-plugin.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Maven Plugin
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="user-guide/configuration-reference.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Configuration Reference
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="user-guide/openapi-extensions.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OpenAPI Extensions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="user-guide/generated-output.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Generated Output
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="user-guide/examples.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Examples
   
 
     
@@ -711,48 +851,51 @@
 
 
 <h1 id="apitomy-codegen">Apitomy Codegen</h1>
-<p>Welcome to <strong>Apitomy Codegen</strong> - an open source API design code generator that helps you generate high-quality code from OpenAPI specifications.</p>
+<p>Welcome to <strong>Apitomy Codegen</strong> — an open source API design code generator that produces high-quality Java code from OpenAPI specifications.</p>
 <h2 id="what-is-apitomy-codegen">What is Apitomy Codegen?</h2>
-<p>Apitomy Codegen is a powerful tool that automatically generates code from OpenAPI (formerly Swagger) specifications. It specializes in generating:</p>
+<p>Apitomy Codegen reads an OpenAPI 3.x specification and generates:</p>
 <ul>
-<li><strong>JAX-RS server stubs</strong> for Java applications</li>
-<li><strong>Quarkus-optimized code</strong> with reactive and blocking variants</li>
-<li><strong>Data models and DTOs</strong> from OpenAPI schemas</li>
-<li><strong>Client libraries</strong> for consuming APIs</li>
+<li><strong>JAX-RS interfaces</strong> — fully annotated resource interfaces ready for you to implement</li>
+<li><strong>Data model beans</strong> — Jackson-annotated Java classes from your schema definitions</li>
+<li><strong>Quarkus-optimized projects</strong> — optional full project scaffolding with Dockerfiles, config, and Maven wrapper</li>
 </ul>
+<p>You write the OpenAPI spec and the business logic. Apitomy Codegen handles the boilerplate.</p>
 <h2 id="key-features">Key Features</h2>
 <ul>
-<li>🚀 <strong>Quarkus Native</strong> - Optimized for Quarkus applications with native compilation support</li>
-<li>📝 <strong>OpenAPI 3.x Support</strong> - Full support for modern OpenAPI specifications</li>
-<li>⚡ <strong>Multiple Integration Options</strong> - Maven plugin, CLI tool, or programmatic API</li>
-<li>🔧 <strong>Highly Configurable</strong> - Extensive customization options for generated code</li>
-<li>🏗️ <strong>Production Ready</strong> - Battle-tested in enterprise environments</li>
+<li><strong>OpenAPI 3.x Support</strong> — full support for modern OpenAPI specifications</li>
+<li><strong>Interface-Based Design</strong> — generated interfaces define the API contract; you implement the behavior</li>
+<li><strong>Maven Plugin</strong> — integrates code generation into your build lifecycle</li>
+<li><strong>Highly Configurable</strong> — 14+ project settings, 10+ OpenAPI extensions for fine-grained control</li>
+<li><strong>Reactive Support</strong> — optional <code>CompletionStage&lt;&gt;</code> wrapping for async endpoints</li>
+<li><strong>Bean Validation</strong> — optional JSR-303 annotations from OpenAPI constraints</li>
+<li><strong>Production Ready</strong> — battle-tested in enterprise environments</li>
 </ul>
 <h2 id="project-structure">Project Structure</h2>
-<p>This project consists of several modules:</p>
 <ul>
-<li><strong><code>core/</code></strong> - Core code generation engine</li>
-<li><strong><code>maven-plugin/</code></strong> - Maven plugin for build integration</li>
-<li><strong><code>cli/</code></strong> - Command-line interface</li>
-<li><strong><code>quarkus-extension/</code></strong> - Quarkus extension for seamless integration</li>
+<li><strong><code>core/</code></strong> — core code generation engine (can also be used as a library)</li>
+<li><strong><code>maven-plugin/</code></strong> — Maven plugin for build integration</li>
+<li><strong><code>maven-plugin-tests/</code></strong> — integration tests for the Maven plugin</li>
 </ul>
 <h2 id="quick-links">Quick Links</h2>
 <ul>
-<li><a href="getting-started.html">Getting Started</a> - Jump right in with a simple example</li>
-<li><a href="user-guide/">User Guide</a> - Comprehensive documentation</li>
-<li><a href="https://github.com/Apitomy/apitomy-codegen">GitHub Repository</a> - Source code and issues</li>
-<li><a href="https://www.apitomy.io/">Apitomy Project</a> - Main project website</li>
+<li><a href="getting-started.html">Getting Started</a> — generate your first API in minutes</li>
+<li><a href="user-guide/maven-plugin.html">Maven Plugin</a> — plugin setup and configuration</li>
+<li><a href="user-guide/configuration-reference.html">Configuration Reference</a> — all project settings</li>
+<li><a href="user-guide/openapi-extensions.html">OpenAPI Extensions</a> — customize generation from your spec</li>
+<li><a href="user-guide/generated-output.html">Generated Output</a> — what the generator produces</li>
+<li><a href="user-guide/examples.html">Examples</a> — practical recipes for common use cases</li>
+<li><a href="https://github.com/Apitomy/apitomy-codegen">GitHub Repository</a> — source code and issues</li>
 </ul>
 <h2 id="license">License</h2>
 <p>This project is licensed under the Apache License 2.0. See the <a href="https://github.com/Apitomy/apitomy-codegen/blob/main/LICENSE">LICENSE</a> file for details.</p>
 <h2 id="community">Community</h2>
 <ul>
 <li><strong>Issues</strong>: Report bugs and request features on <a href="https://github.com/Apitomy/apitomy-codegen/issues">GitHub Issues</a></li>
-<li><strong>Discussions</strong>: Join the conversation in our community forums</li>
-<li><strong>Contributing</strong>: We welcome contributions! Check out our contribution guidelines</li>
+<li><strong>Discussions</strong>: <a href="https://github.com/Apitomy/apitomy-codegen/discussions">GitHub Discussions</a></li>
+<li><strong>Contributing</strong>: See the <a href="https://github.com/Apitomy/apitomy-codegen/blob/main/CONTRIBUTING.md">Contributing Guidelines</a></li>
 </ul>
 <hr />
-<p><em>Developed by Red Hat as part of the Apitomy project.</em></p>
+<p><em>Part of the <a href="https://www.apitomy.io">Apitomy</a> project. Licensed under the Apache License 2.0.</em></p>
 
 
 
