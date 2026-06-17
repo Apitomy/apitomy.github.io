@@ -2,46 +2,50 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://www.apitomy.io/projects/data-models/docs/index.html</loc>
-         <lastmod>2026-06-05</lastmod>
+         <lastmod>2026-06-17</lastmod>
     </url>
     <url>
          <loc>https://www.apitomy.io/projects/data-models/docs/getting-started.html</loc>
-         <lastmod>2026-06-05</lastmod>
+         <lastmod>2026-06-17</lastmod>
     </url>
     <url>
          <loc>https://www.apitomy.io/projects/data-models/docs/examples/index.html</loc>
-         <lastmod>2026-06-05</lastmod>
+         <lastmod>2026-06-17</lastmod>
     </url>
     <url>
          <loc>https://www.apitomy.io/projects/data-models/docs/user-guide/index.html</loc>
-         <lastmod>2026-06-05</lastmod>
+         <lastmod>2026-06-17</lastmod>
     </url>
     <url>
          <loc>https://www.apitomy.io/projects/data-models/docs/user-guide/commands.html</loc>
-         <lastmod>2026-06-05</lastmod>
+         <lastmod>2026-06-17</lastmod>
     </url>
     <url>
          <loc>https://www.apitomy.io/projects/data-models/docs/user-guide/dereferencing.html</loc>
-         <lastmod>2026-06-05</lastmod>
+         <lastmod>2026-06-17</lastmod>
     </url>
     <url>
          <loc>https://www.apitomy.io/projects/data-models/docs/user-guide/document-transformation.html</loc>
-         <lastmod>2026-06-05</lastmod>
+         <lastmod>2026-06-17</lastmod>
     </url>
     <url>
          <loc>https://www.apitomy.io/projects/data-models/docs/user-guide/node-paths.html</loc>
-         <lastmod>2026-06-05</lastmod>
+         <lastmod>2026-06-17</lastmod>
     </url>
     <url>
          <loc>https://www.apitomy.io/projects/data-models/docs/user-guide/reading-and-writing.html</loc>
-         <lastmod>2026-06-05</lastmod>
+         <lastmod>2026-06-17</lastmod>
+    </url>
+    <url>
+         <loc>https://www.apitomy.io/projects/data-models/docs/user-guide/schema-compatibility.html</loc>
+         <lastmod>2026-06-17</lastmod>
     </url>
     <url>
          <loc>https://www.apitomy.io/projects/data-models/docs/user-guide/validation.html</loc>
-         <lastmod>2026-06-05</lastmod>
+         <lastmod>2026-06-17</lastmod>
     </url>
     <url>
          <loc>https://www.apitomy.io/projects/data-models/docs/user-guide/visitor-pattern.html</loc>
-         <lastmod>2026-06-05</lastmod>
+         <lastmod>2026-06-17</lastmod>
     </url>
 </urlset>

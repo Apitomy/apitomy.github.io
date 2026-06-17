@@ -6,7 +6,7 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="A library for reading, writing, and manipulating OpenAPI and AsyncAPI documents">
+        <meta name="description" content="A library for reading, writing, and manipulating OpenAPI, AsyncAPI, OpenRPC, and JSON Schema documents">
       
       
         <meta name="author" content="Apitomy">
@@ -708,6 +708,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#error-handling" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Error Handling
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#extra-properties" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -882,6 +893,34 @@
     
   
     Document Transformation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="schema-compatibility.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Schema Compatibility
   
 
     
@@ -1088,6 +1127,17 @@
     <span class="md-ellipsis">
       
         Cloning a Document
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#error-handling" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Error Handling
       
     </span>
   </a>
@@ -1358,33 +1408,86 @@ populate it using typed setters and <code>createXxx()</code> factory methods.</p
 </div>
 </div>
 <hr />
-<h2 id="extra-properties">Extra Properties</h2>
-<p>API specifications allow vendor extensions (properties prefixed with <code>x-</code>). These are
-preserved as "extra properties" on each node.</p>
+<h2 id="error-handling">Error Handling</h2>
+<p>The library uses a typed exception hierarchy rooted at <code>DataModelsException</code> (which extends
+<code>RuntimeException</code> for backward compatibility). When reading a document with an unrecognized
+specification version, the library throws <code>UnsupportedModelTypeException</code>.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="9:2"><input checked="checked" id="__tabbed_9_1" name="__tabbed_9" type="radio" /><input id="__tabbed_9_2" name="__tabbed_9" type="radio" /><div class="tabbed-labels"><label for="__tabbed_9_1">Java</label><label for="__tabbed_9_2">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<div class="language-java highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">com.fasterxml.jackson.databind.node.TextNode</span><span class="p">;</span>
+<div class="language-java highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">io.apitomy.datamodels.UnsupportedModelTypeException</span><span class="p">;</span>
 </span><span id="__span-16-2"><a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a>
-</span><span id="__span-16-3"><a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a><span class="c1">// Add a custom extension</span>
-</span><span id="__span-16-4"><a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a><span class="n">doc</span><span class="p">.</span><span class="na">getInfo</span><span class="p">().</span><span class="na">addExtraProperty</span><span class="p">(</span><span class="s">&quot;x-api-owner&quot;</span><span class="p">,</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">TextNode</span><span class="p">(</span><span class="s">&quot;platform-team&quot;</span><span class="p">));</span>
-</span><span id="__span-16-5"><a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a>
-</span><span id="__span-16-6"><a id="__codelineno-16-6" name="__codelineno-16-6" href="#__codelineno-16-6"></a><span class="c1">// Read it back</span>
-</span><span id="__span-16-7"><a id="__codelineno-16-7" name="__codelineno-16-7" href="#__codelineno-16-7"></a><span class="n">String</span><span class="w"> </span><span class="n">owner</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">doc</span><span class="p">.</span><span class="na">getInfo</span><span class="p">().</span><span class="na">getExtraProperty</span><span class="p">(</span><span class="s">&quot;x-api-owner&quot;</span><span class="p">).</span><span class="na">asText</span><span class="p">();</span>
-</span><span id="__span-16-8"><a id="__codelineno-16-8" name="__codelineno-16-8" href="#__codelineno-16-8"></a>
-</span><span id="__span-16-9"><a id="__codelineno-16-9" name="__codelineno-16-9" href="#__codelineno-16-9"></a><span class="c1">// List all extensions on a node</span>
-</span><span id="__span-16-10"><a id="__codelineno-16-10" name="__codelineno-16-10" href="#__codelineno-16-10"></a><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">extensions</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">doc</span><span class="p">.</span><span class="na">getInfo</span><span class="p">().</span><span class="na">getExtraPropertyNames</span><span class="p">();</span>
+</span><span id="__span-16-3"><a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a><span class="k">try</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-16-4"><a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a><span class="w">    </span><span class="n">Document</span><span class="w"> </span><span class="n">doc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Library</span><span class="p">.</span><span class="na">readDocumentFromJSONString</span><span class="p">(</span><span class="n">json</span><span class="p">);</span>
+</span><span id="__span-16-5"><a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">UnsupportedModelTypeException</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-16-6"><a id="__codelineno-16-6" name="__codelineno-16-6" href="#__codelineno-16-6"></a><span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">err</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Unsupported spec version: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">e</span><span class="p">.</span><span class="na">getMessage</span><span class="p">());</span>
+</span><span id="__span-16-7"><a id="__codelineno-16-7" name="__codelineno-16-7" href="#__codelineno-16-7"></a><span class="p">}</span>
 </span></code></pre></div>
 </div>
 <div class="tabbed-block">
-<div class="language-typescript highlight"><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="c1">// Add a custom extension</span>
-</span><span id="__span-17-2"><a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a><span class="nx">doc</span><span class="p">.</span><span class="nx">getInfo</span><span class="p">().</span><span class="nx">addExtraProperty</span><span class="p">(</span><span class="s1">&#39;x-api-owner&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;platform-team&#39;</span><span class="p">);</span>
-</span><span id="__span-17-3"><a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a>
-</span><span id="__span-17-4"><a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a><span class="c1">// Read it back</span>
-</span><span id="__span-17-5"><a id="__codelineno-17-5" name="__codelineno-17-5" href="#__codelineno-17-5"></a><span class="kd">const</span><span class="w"> </span><span class="nx">owner</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">doc</span><span class="p">.</span><span class="nx">getInfo</span><span class="p">().</span><span class="nx">getExtraProperty</span><span class="p">(</span><span class="s1">&#39;x-api-owner&#39;</span><span class="p">);</span>
-</span><span id="__span-17-6"><a id="__codelineno-17-6" name="__codelineno-17-6" href="#__codelineno-17-6"></a>
-</span><span id="__span-17-7"><a id="__codelineno-17-7" name="__codelineno-17-7" href="#__codelineno-17-7"></a><span class="c1">// List all extensions on a node</span>
-</span><span id="__span-17-8"><a id="__codelineno-17-8" name="__codelineno-17-8" href="#__codelineno-17-8"></a><span class="kd">const</span><span class="w"> </span><span class="nx">extensions</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">[]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">doc</span><span class="p">.</span><span class="nx">getInfo</span><span class="p">().</span><span class="nx">getExtraPropertyNames</span><span class="p">();</span>
+<div class="language-typescript highlight"><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="k">try</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-17-2"><a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a><span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">doc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">Library</span><span class="p">.</span><span class="nx">readDocumentFromJSONString</span><span class="p">(</span><span class="nx">json</span><span class="p">);</span>
+</span><span id="__span-17-3"><a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="nx">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-17-4"><a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a><span class="w">    </span><span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="s1">&#39;Unsupported spec version:&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">e</span><span class="p">.</span><span class="nx">message</span><span class="p">);</span>
+</span><span id="__span-17-5"><a id="__codelineno-17-5" name="__codelineno-17-5" href="#__codelineno-17-5"></a><span class="p">}</span>
+</span></code></pre></div>
+</div>
+</div>
+</div>
+<table>
+<thead>
+<tr>
+<th>Exception</th>
+<th>Thrown When</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>DataModelsException</code></td>
+<td>Base class for all library exceptions</td>
+</tr>
+<tr>
+<td><code>UnsupportedModelTypeException</code></td>
+<td>Unknown or unsupported specification version</td>
+</tr>
+<tr>
+<td><code>TransformationException</code></td>
+<td>Unsupported document transformation (see <a href="document-transformation.html">Document Transformation</a>)</td>
+</tr>
+<tr>
+<td><code>CommandException</code></td>
+<td>Command marshalling or unmarshalling failure (see <a href="commands.html">Commands</a>)</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="extra-properties">Extra Properties</h2>
+<p>API specifications allow vendor extensions (properties prefixed with <code>x-</code>). These are
+preserved as "extra properties" on each node.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="10:2"><input checked="checked" id="__tabbed_10_1" name="__tabbed_10" type="radio" /><input id="__tabbed_10_2" name="__tabbed_10" type="radio" /><div class="tabbed-labels"><label for="__tabbed_10_1">Java</label><label for="__tabbed_10_2">TypeScript</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="language-java highlight"><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">com.fasterxml.jackson.databind.node.TextNode</span><span class="p">;</span>
+</span><span id="__span-18-2"><a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a>
+</span><span id="__span-18-3"><a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a><span class="c1">// Add a custom extension</span>
+</span><span id="__span-18-4"><a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a><span class="n">doc</span><span class="p">.</span><span class="na">getInfo</span><span class="p">().</span><span class="na">addExtraProperty</span><span class="p">(</span><span class="s">&quot;x-api-owner&quot;</span><span class="p">,</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">TextNode</span><span class="p">(</span><span class="s">&quot;platform-team&quot;</span><span class="p">));</span>
+</span><span id="__span-18-5"><a id="__codelineno-18-5" name="__codelineno-18-5" href="#__codelineno-18-5"></a>
+</span><span id="__span-18-6"><a id="__codelineno-18-6" name="__codelineno-18-6" href="#__codelineno-18-6"></a><span class="c1">// Read it back</span>
+</span><span id="__span-18-7"><a id="__codelineno-18-7" name="__codelineno-18-7" href="#__codelineno-18-7"></a><span class="n">String</span><span class="w"> </span><span class="n">owner</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">doc</span><span class="p">.</span><span class="na">getInfo</span><span class="p">().</span><span class="na">getExtraProperty</span><span class="p">(</span><span class="s">&quot;x-api-owner&quot;</span><span class="p">).</span><span class="na">asText</span><span class="p">();</span>
+</span><span id="__span-18-8"><a id="__codelineno-18-8" name="__codelineno-18-8" href="#__codelineno-18-8"></a>
+</span><span id="__span-18-9"><a id="__codelineno-18-9" name="__codelineno-18-9" href="#__codelineno-18-9"></a><span class="c1">// List all extensions on a node</span>
+</span><span id="__span-18-10"><a id="__codelineno-18-10" name="__codelineno-18-10" href="#__codelineno-18-10"></a><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">extensions</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">doc</span><span class="p">.</span><span class="na">getInfo</span><span class="p">().</span><span class="na">getExtraPropertyNames</span><span class="p">();</span>
+</span></code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="language-typescript highlight"><pre><span></span><code><span id="__span-19-1"><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="c1">// Add a custom extension</span>
+</span><span id="__span-19-2"><a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a><span class="nx">doc</span><span class="p">.</span><span class="nx">getInfo</span><span class="p">().</span><span class="nx">addExtraProperty</span><span class="p">(</span><span class="s1">&#39;x-api-owner&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;platform-team&#39;</span><span class="p">);</span>
+</span><span id="__span-19-3"><a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a>
+</span><span id="__span-19-4"><a id="__codelineno-19-4" name="__codelineno-19-4" href="#__codelineno-19-4"></a><span class="c1">// Read it back</span>
+</span><span id="__span-19-5"><a id="__codelineno-19-5" name="__codelineno-19-5" href="#__codelineno-19-5"></a><span class="kd">const</span><span class="w"> </span><span class="nx">owner</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">doc</span><span class="p">.</span><span class="nx">getInfo</span><span class="p">().</span><span class="nx">getExtraProperty</span><span class="p">(</span><span class="s1">&#39;x-api-owner&#39;</span><span class="p">);</span>
+</span><span id="__span-19-6"><a id="__codelineno-19-6" name="__codelineno-19-6" href="#__codelineno-19-6"></a>
+</span><span id="__span-19-7"><a id="__codelineno-19-7" name="__codelineno-19-7" href="#__codelineno-19-7"></a><span class="c1">// List all extensions on a node</span>
+</span><span id="__span-19-8"><a id="__codelineno-19-8" name="__codelineno-19-8" href="#__codelineno-19-8"></a><span class="kd">const</span><span class="w"> </span><span class="nx">extensions</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">[]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">doc</span><span class="p">.</span><span class="nx">getInfo</span><span class="p">().</span><span class="nx">getExtraPropertyNames</span><span class="p">();</span>
 </span></code></pre></div>
 </div>
 </div>

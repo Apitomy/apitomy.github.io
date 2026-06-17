@@ -6,7 +6,7 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="A library for reading, writing, and manipulating OpenAPI and AsyncAPI documents">
+        <meta name="description" content="A library for reading, writing, and manipulating OpenAPI, AsyncAPI, OpenRPC, and JSON Schema documents">
       
       
         <meta name="author" content="Apitomy">
@@ -828,6 +828,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="schema-compatibility.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Schema Compatibility
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -1027,8 +1055,8 @@ in a self-contained document.</p>
 </div>
 <hr />
 <h2 id="strict-mode">Strict Mode</h2>
-<p>By default, unresolvable references are silently skipped. Enable strict mode to preserve them
-as-is (the <code>$ref</code> remains in the output).</p>
+<p>By default, unresolvable references are silently skipped. Enable strict mode to throw a
+<code>DataModelsException</code> if any external references could not be resolved.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Java</label><label for="__tabbed_2_2">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">

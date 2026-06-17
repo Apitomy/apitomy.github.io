@@ -6,7 +6,7 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="A library for reading, writing, and manipulating OpenAPI and AsyncAPI documents">
+        <meta name="description" content="A library for reading, writing, and manipulating OpenAPI, AsyncAPI, OpenRPC, and JSON Schema documents">
       
       
         <meta name="author" content="Apitomy">
@@ -822,6 +822,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="schema-compatibility.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Schema Compatibility
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -1079,44 +1107,151 @@ use the default severity levels.</p>
 </tbody>
 </table>
 <h2 id="error-code-prefixes">Error Code Prefixes</h2>
-<p>Validation error codes follow a consistent naming convention. The prefix indicates the type
-of rule:</p>
+<p>Validation error codes use an entity-based naming convention. The prefix identifies which
+part of the specification the rule applies to:</p>
 <table>
 <thead>
 <tr>
 <th>Prefix</th>
-<th>Meaning</th>
+<th>Entity</th>
 <th>Example</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><code>REQ</code></td>
-<td>Required property is missing</td>
-<td><code>REQ-001</code></td>
-</tr>
-<tr>
 <td><code>INF</code></td>
-<td>Invalid format</td>
+<td>Info</td>
 <td><code>INF-001</code></td>
 </tr>
 <tr>
-<td><code>INV</code></td>
-<td>Invalid value</td>
-<td><code>INV-001</code></td>
+<td><code>OP</code></td>
+<td>Operation</td>
+<td><code>OP-001</code></td>
 </tr>
 <tr>
-<td><code>UNQ</code></td>
-<td>Uniqueness violation</td>
-<td><code>UNQ-001</code></td>
+<td><code>PAR</code></td>
+<td>Parameter</td>
+<td><code>PAR-001</code></td>
 </tr>
 <tr>
-<td><code>MUT</code></td>
-<td>Mutual exclusivity violation</td>
-<td><code>MUT-001</code></td>
+<td><code>PATH</code></td>
+<td>Path Item</td>
+<td><code>PATH-001</code></td>
+</tr>
+<tr>
+<td><code>SCH</code></td>
+<td>Schema</td>
+<td><code>SCH-001</code></td>
+</tr>
+<tr>
+<td><code>HEAD</code></td>
+<td>Header</td>
+<td><code>HEAD-001</code></td>
+</tr>
+<tr>
+<td><code>RES</code></td>
+<td>Response</td>
+<td><code>RES-001</code></td>
+</tr>
+<tr>
+<td><code>RB</code></td>
+<td>Request Body</td>
+<td><code>RB-001</code></td>
+</tr>
+<tr>
+<td><code>SS</code></td>
+<td>Security Scheme</td>
+<td><code>SS-001</code></td>
+</tr>
+<tr>
+<td><code>SREQ</code></td>
+<td>Security Requirement</td>
+<td><code>SREQ-001</code></td>
+</tr>
+<tr>
+<td><code>SRV</code></td>
+<td>Server</td>
+<td><code>SRV-001</code></td>
+</tr>
+<tr>
+<td><code>SVAR</code></td>
+<td>Server Variable</td>
+<td><code>SVAR-001</code></td>
+</tr>
+<tr>
+<td><code>TAG</code></td>
+<td>Tag</td>
+<td><code>TAG-001</code></td>
+</tr>
+<tr>
+<td><code>FLOW</code></td>
+<td>OAuth Flow</td>
+<td><code>FLOW-001</code></td>
+</tr>
+<tr>
+<td><code>LINK</code></td>
+<td>Link</td>
+<td><code>LINK-001</code></td>
+</tr>
+<tr>
+<td><code>ENC</code></td>
+<td>Encoding</td>
+<td><code>ENC-001</code></td>
+</tr>
+<tr>
+<td><code>MT</code></td>
+<td>Media Type</td>
+<td><code>MT-001</code></td>
+</tr>
+<tr>
+<td><code>DISC</code></td>
+<td>Discriminator</td>
+<td><code>DISC-001</code></td>
+</tr>
+<tr>
+<td><code>LIC</code></td>
+<td>License</td>
+<td><code>LIC-001</code></td>
+</tr>
+<tr>
+<td><code>CTC</code></td>
+<td>Contact</td>
+<td><code>CTC-001</code></td>
+</tr>
+<tr>
+<td><code>XML</code></td>
+<td>XML</td>
+<td><code>XML-001</code></td>
+</tr>
+<tr>
+<td><code>COMP</code></td>
+<td>Components</td>
+<td><code>COMP-001</code></td>
+</tr>
+<tr>
+<td><code>EX</code></td>
+<td>Example</td>
+<td><code>EX-001</code></td>
+</tr>
+<tr>
+<td><code>CHAN</code></td>
+<td>Channel (AsyncAPI)</td>
+<td><code>CHAN-001</code></td>
+</tr>
+<tr>
+<td><code>AAD</code>, <code>AAM</code>, <code>AAO</code></td>
+<td>AsyncAPI Document, Message, Operation</td>
+<td><code>AAD-001</code></td>
+</tr>
+<tr>
+<td><code>ORPC</code></td>
+<td>OpenRPC</td>
+<td><code>ORPC-001</code></td>
 </tr>
 </tbody>
 </table>
+<p>Codes with a <code>DEF</code> suffix (e.g., <code>SDEF</code>, <code>PDEF</code>, <code>RDEF</code>) apply to component definitions
+(the reusable entries under <code>components/</code>).</p>
 <hr />
 <h2 id="validating-a-subtree">Validating a Subtree</h2>
 <p>You can validate any node in the tree, not just the root document. This validates only that
