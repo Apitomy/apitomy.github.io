@@ -12,11 +12,13 @@
         <meta name="author" content="Apitomy">
       
       
-        <link rel="canonical" href="https://www.apitomy.io/projects/axiom/docs/user-guide/index.html">
+        <link rel="canonical" href="https://www.apitomy.io/projects/axiom/docs/user-guide/ai-assistant.html">
       
       
-        <link rel="prev" href="../getting-started/contributing.html">
+        <link rel="prev" href="usage-examples.html">
       
+      
+        <link rel="next" href="logging-and-debugging.html">
       
       
         
@@ -27,7 +29,7 @@
     
     
       
-        <title>User Guide - Apitomy Axiom</title>
+        <title>AI Assistant - Apitomy Axiom</title>
       
     
     
@@ -82,7 +84,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#user-guide" class="md-skip">
+        <a href="#ai-assistant" class="md-skip">
           Skip to content
         </a>
       
@@ -139,7 +141,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              User Guide
+              AI Assistant
             
           </span>
         </div>
@@ -286,7 +288,7 @@
     
     
       <li class="md-tabs__item md-tabs__item--active">
-        <a href="index.html" class="md-tabs__link">
+        <a href="concepts.html" class="md-tabs__link">
           
   
   
@@ -576,6 +578,90 @@
                 
   
   
+  
+  
+    <li class="md-nav__item">
+      <a href="concepts.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Concepts
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="navigating-the-ui.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Navigating the UI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="usage-examples.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Usage Examples
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
     
   
   
@@ -595,7 +681,7 @@
   <span class="md-ellipsis">
     
   
-    User Guide
+    AI Assistant
   
 
     
@@ -606,14 +692,14 @@
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <a href="index.html" class="md-nav__link md-nav__link--active">
+      <a href="ai-assistant.html" class="md-nav__link md-nav__link--active">
         
   
   
   <span class="md-ellipsis">
     
   
-    User Guide
+    AI Assistant
   
 
     
@@ -639,10 +725,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#table-of-contents" class="md-nav__link">
+  <a href="#accessing-the-assistant" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Table of Contents
+        Accessing the Assistant
       
     </span>
   </a>
@@ -650,22 +736,44 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#architecture" class="md-nav__link">
+  <a href="#creating-a-session" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Architecture
+        Creating a Session
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Architecture">
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-session-interface" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Session Interface
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="The Session Interface">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#api-first-design" class="md-nav__link">
+  <a href="#chat-panel-left" class="md-nav__link">
     <span class="md-ellipsis">
       
-        API-First Design
+        Chat Panel (left)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#generated-items-panel-right" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Generated Items Panel (right)
       
     </span>
   </a>
@@ -678,127 +786,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#event-pipeline" class="md-nav__link">
+  <a href="#what-the-assistant-can-create" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Event Pipeline
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Event Pipeline">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#event-sources" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Event Sources
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#ai-manager" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        AI Manager
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="AI Manager">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#decision-types" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Decision Types
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#confidence-threshold" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Confidence Threshold
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#actors" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Actors
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Actors">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#claude-code-actor" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Claude Code Actor
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#opencode-actor" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        OpenCode Actor
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#human-actor" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Human Actor
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#project-lifecycle" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Project Lifecycle
+        What the Assistant Can Create
       
     </span>
   </a>
@@ -806,41 +797,35 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#database-migrations" class="md-nav__link">
+  <a href="#applying-generated-items" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Database Migrations
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Database Migrations">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#adding-a-migration" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Adding a Migration
+        Applying Generated Items
       
     </span>
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
-  <a href="#example" class="md-nav__link">
+      
+        <li class="md-nav__item">
+  <a href="#example-conversation" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Example
+        Example Conversation
       
     </span>
   </a>
   
 </li>
-        
-      </ul>
-    </nav>
+      
+        <li class="md-nav__item">
+  <a href="#tips" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tips
+      
+    </span>
+  </a>
   
 </li>
       
@@ -848,6 +833,34 @@
   
 </nav>
       
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="logging-and-debugging.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Logging and Debugging
+  
+
+    
+  </span>
+  
+  
+
+      </a>
     </li>
   
 
@@ -887,10 +900,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#table-of-contents" class="md-nav__link">
+  <a href="#accessing-the-assistant" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Table of Contents
+        Accessing the Assistant
       
     </span>
   </a>
@@ -898,22 +911,44 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#architecture" class="md-nav__link">
+  <a href="#creating-a-session" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Architecture
+        Creating a Session
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Architecture">
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-session-interface" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Session Interface
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="The Session Interface">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#api-first-design" class="md-nav__link">
+  <a href="#chat-panel-left" class="md-nav__link">
     <span class="md-ellipsis">
       
-        API-First Design
+        Chat Panel (left)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#generated-items-panel-right" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Generated Items Panel (right)
       
     </span>
   </a>
@@ -926,127 +961,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#event-pipeline" class="md-nav__link">
+  <a href="#what-the-assistant-can-create" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Event Pipeline
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Event Pipeline">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#event-sources" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Event Sources
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#ai-manager" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        AI Manager
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="AI Manager">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#decision-types" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Decision Types
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#confidence-threshold" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Confidence Threshold
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#actors" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Actors
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Actors">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#claude-code-actor" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Claude Code Actor
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#opencode-actor" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        OpenCode Actor
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#human-actor" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Human Actor
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#project-lifecycle" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Project Lifecycle
+        What the Assistant Can Create
       
     </span>
   </a>
@@ -1054,41 +972,35 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#database-migrations" class="md-nav__link">
+  <a href="#applying-generated-items" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Database Migrations
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Database Migrations">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#adding-a-migration" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Adding a Migration
+        Applying Generated Items
       
     </span>
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
-  <a href="#example" class="md-nav__link">
+      
+        <li class="md-nav__item">
+  <a href="#example-conversation" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Example
+        Example Conversation
       
     </span>
   </a>
   
 </li>
-        
-      </ul>
-    </nav>
+      
+        <li class="md-nav__item">
+  <a href="#tips" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tips
+      
+    </span>
+  </a>
   
 </li>
       
@@ -1112,207 +1024,135 @@
   
 
 
-<h1 id="user-guide">User Guide</h1>
-<p>This guide covers the architecture, extensibility, and configuration of Apitomy Axiom.</p>
+<h1 id="ai-assistant">AI Assistant</h1>
+<p>The AI Assistant is an interactive, conversational interface for creating Axiom
+configuration items. Instead of manually filling out forms for each tool, action type,
+and report definition, you describe what you want in plain language and the assistant
+creates everything for you.</p>
+<p>This is especially useful when you need to create multiple related items at once — for
+example, a set of tools plus an action type that uses them, or a tool plus a report
+definition that depends on it.</p>
 <div class="admonition note">
-<p class="admonition-title">Under Development</p>
-<p>This user guide is under active development. New sections will be added over time.</p>
+<p class="admonition-title">Note</p>
+<p>The AI Assistant is available only when the AI engine is set to <strong>Claude Code</strong>.
+It uses the Claude Code CLI directly, so the <code>claude</code> binary must be installed and
+available on your PATH.</p>
 </div>
-<h2 id="table-of-contents">Table of Contents</h2>
-<ul>
-<li><a href="#architecture">Architecture</a></li>
-<li><a href="#event-pipeline">Event Pipeline</a></li>
-<li><a href="#ai-manager">AI Manager</a></li>
-<li><a href="#actors">Actors</a></li>
-<li><a href="#project-lifecycle">Project Lifecycle</a></li>
-<li><a href="#database-migrations">Database Migrations</a></li>
-</ul>
 <hr />
-<h2 id="architecture">Architecture</h2>
-<p>Axiom is built as a multi-module Quarkus application with clear separation of concerns:</p>
+<h2 id="accessing-the-assistant">Accessing the Assistant</h2>
+<p>Click the robot icon in the top-right corner of the Axiom masthead.  The icon might
+be pulsing if you have never clicked it before.</p>
+<p>This takes you to the <strong>Assistant Sessions</strong> page, where you can create a new session
+or resume an existing one.</p>
+<hr />
+<h2 id="creating-a-session">Creating a Session</h2>
+<p>Click <strong>New Session</strong> to start a conversation. Each session gets a randomly generated
+name (e.g. "rocket-penguin-galaxy"), which you can change before creating it.</p>
+<p>Axiom supports a limited number of concurrent sessions (default: 3). Idle sessions are
+automatically destroyed after one hour.</p>
+<hr />
+<h2 id="the-session-interface">The Session Interface</h2>
+<p>A session has two panels:</p>
+<h3 id="chat-panel-left">Chat Panel (left)</h3>
+<p>A conversation interface where you interact with the assistant. You can:</p>
+<ul>
+<li><strong>Describe what you want to create</strong> — e.g. "Create a tool that fetches open PRs from
+  a GitHub repository, then create a weekly report that summarizes them"</li>
+<li><strong>Refine generated items</strong> — e.g. "Add a <code>repository</code> parameter to that tool" or
+  "Change the schedule to daily"</li>
+<li><strong>Ask questions</strong> — e.g. "What tools do I already have configured?" or "What
+  placeholders can I use in a report prompt template?"</li>
+<li><strong>Approve tool usage</strong> — the assistant may ask permission to run tools (like querying
+  existing Axiom configuration). You can approve or deny each request.</li>
+</ul>
+<p>The assistant has access to an MCP server that lets it query your existing Axiom
+configuration — it can list your current tools, action types, event sources, and more
+to understand what's already set up before creating new items.</p>
+<h3 id="generated-items-panel-right">Generated Items Panel (right)</h3>
+<p>As the assistant creates items, they appear in the right panel. Each item shows:</p>
+<ul>
+<li><strong>Type</strong> — Tool, Action Type, or Report Definition</li>
+<li><strong>Name</strong> — the item's name</li>
+<li><strong>Validation status</strong> — a green checkmark if valid, or a warning/error icon if there
+  are problems</li>
+</ul>
+<p>Click any item to open a detail modal showing its full configuration, including any
+validation errors or warnings.</p>
+<hr />
+<h2 id="what-the-assistant-can-create">What the Assistant Can Create</h2>
+<p>The assistant creates three types of configuration items:</p>
 <table>
 <thead>
 <tr>
-<th>Module</th>
-<th>Purpose</th>
+<th>Type</th>
+<th>What it produces</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><code>common/api</code></td>
-<td>OpenAPI contract and generated JAX-RS interfaces</td>
+<td><strong>Tools</strong></td>
+<td>Script-based tools with parameters, descriptions, and bash script templates</td>
 </tr>
 <tr>
-<td><code>core</code></td>
-<td>Domain entities, lifecycle state machine, workspace management</td>
+<td><strong>Action Types</strong></td>
+<td>Actor or script-mode action types with prompt templates, allowed tools, and trigger settings</td>
 </tr>
 <tr>
-<td><code>engine/spi</code></td>
-<td>Pluggable AI engine abstraction (interface + registry)</td>
-</tr>
-<tr>
-<td><code>engine/opencode</code></td>
-<td>OpenCode engine implementation</td>
-</tr>
-<tr>
-<td><code>manager</code></td>
-<td>AI Manager — event triage and decision-making</td>
-</tr>
-<tr>
-<td><code>actors/spi</code></td>
-<td>Actor interface and context</td>
-</tr>
-<tr>
-<td><code>actors/claude-code</code></td>
-<td>Claude Code CLI subprocess actor + engine</td>
-</tr>
-<tr>
-<td><code>actors/human</code></td>
-<td>Human actor (notification-driven)</td>
-</tr>
-<tr>
-<td><code>events/core</code></td>
-<td>Event queue and pipeline orchestrator</td>
-</tr>
-<tr>
-<td><code>events/github</code></td>
-<td>GitHub webhooks and API polling</td>
-</tr>
-<tr>
-<td><code>events/jira</code></td>
-<td>Jira integration</td>
-</tr>
-<tr>
-<td><code>notifications/spi</code></td>
-<td>Notification channel interface</td>
-</tr>
-<tr>
-<td><code>notifications/slack</code></td>
-<td>Slack notifications</td>
-</tr>
-<tr>
-<td><code>notifications/telegram</code></td>
-<td>Telegram notifications</td>
-</tr>
-<tr>
-<td><code>app</code></td>
-<td>Quarkus application (assembles all modules)</td>
-</tr>
-<tr>
-<td><code>ui</code></td>
-<td>React frontend</td>
-</tr>
-<tr>
-<td><code>ui-bundle</code></td>
-<td>Bundles UI assets into backend JAR</td>
+<td><strong>Report Definitions</strong></td>
+<td>Scheduled or ad-hoc reports with prompt templates, allowed tools, and time windows</td>
 </tr>
 </tbody>
 </table>
-<h3 id="api-first-design">API-First Design</h3>
-<p>The REST API is defined in an OpenAPI specification at <code>common/api/src/main/resources/axiom.yaml</code>.
-JAX-RS interfaces are generated at build time using the
-<a href="https://www.apitomy.io/projects/codegen/">Apitomy Codegen</a> plugin. Resource implementations in
-the <code>app</code> module implement these generated interfaces.</p>
+<p>The assistant understands the relationships between these items. When it creates an
+action type that needs a custom tool, it creates the tool first and adds it to the
+action type's allowed tools list automatically.</p>
 <hr />
-<h2 id="event-pipeline">Event Pipeline</h2>
-<p>Events flow through a pipeline:</p>
+<h2 id="applying-generated-items">Applying Generated Items</h2>
+<p>Generated items exist only within the session until you apply them. Nothing is saved to
+your Axiom configuration until you explicitly choose to apply.</p>
+<p>When you're satisfied with the generated items, click the <strong>Apply All</strong> button in the
+session header. This imports all items into your Axiom configuration in one operation.
+A summary dialog shows what was imported (e.g. "3 tools, 1 action type").</p>
+<p>After applying, the session ends and you're returned to the sessions list. The imported
+items are now live in your Axiom configuration and can be viewed and edited through the
+normal configuration pages.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>If you end a session without applying, all generated items are discarded. This
+cannot be undone.</p>
+</div>
+<hr />
+<h2 id="example-conversation">Example Conversation</h2>
+<p>Here's an example of how you might use the assistant to create the auto-labeling
+configuration from the <a href="usage-examples.html#example-1-automatically-label-new-github-issues">Usage Examples</a>:</p>
+<blockquote>
+<p><strong>You:</strong> I want to automatically label new GitHub issues. Create three tools: one to
+fetch the available labels from a repo, one to fetch an issue's details, and one to
+apply labels. Then create an action type that uses them.</p>
+</blockquote>
+<p>The assistant will:</p>
 <ol>
-<li><strong>Event Sources</strong> poll external systems (GitHub, Jira) for activity</li>
-<li>New events are normalized and placed in an <strong>Event Queue</strong></li>
-<li>The <strong>Pipeline Orchestrator</strong> dequeues events and passes them to the <strong>AI Manager</strong></li>
-<li>The Manager produces a <strong>Decision</strong> (create project, assign task, ignore, etc.)</li>
-<li>The orchestrator executes the decision</li>
+<li>Create <code>fetch_github_labels</code>, <code>fetch_github_issue</code>, and <code>apply_github_labels</code> tools
+   with appropriate parameters and scripts</li>
+<li>Create an <code>Auto-Label Issue</code> action type with a prompt template referencing all three
+   tools</li>
+<li>Show all four items in the Generated Items panel with validation status</li>
 </ol>
-<h3 id="event-sources">Event Sources</h3>
-<p>Event sources are configured through the UI or API. Each source polls a specific repository
-at a configurable interval. Supported sources:</p>
+<p>You can then review each item, ask for changes, and apply them all at once.</p>
+<hr />
+<h2 id="tips">Tips</h2>
 <ul>
-<li><strong>GitHub</strong> — issues, pull requests, comments, reviews</li>
-<li><strong>Jira</strong> — issues and comments (planned)</li>
+<li><strong>Be specific about what you need.</strong> "Create a tool that lists GitHub labels for a
+  repository using the <code>gh</code> CLI" gives better results than "make a label tool."</li>
+<li><strong>Create related items together.</strong> The assistant shines when creating a group of items
+  that reference each other — tools plus the action type that uses them, for example.</li>
+<li><strong>Review before applying.</strong> Click each generated item in the right panel to inspect its
+  full configuration and check for validation warnings.</li>
+<li><strong>Iterate in conversation.</strong> If something isn't right, tell the assistant what to
+  change rather than starting over. It can read and update the items it already created.</li>
+<li><strong>Ask about existing configuration.</strong> The assistant can query your current tools,
+  action types, and other configuration to avoid duplicates and understand your setup.</li>
 </ul>
-<hr />
-<h2 id="ai-manager">AI Manager</h2>
-<p>The Manager receives events and produces structured decisions. It uses the configured AI
-engine to analyze the event context and determine the appropriate action.</p>
-<h3 id="decision-types">Decision Types</h3>
-<table>
-<thead>
-<tr>
-<th>Decision</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>create_project</code></td>
-<td>Create a new project for an issue</td>
-</tr>
-<tr>
-<td><code>assign_task</code></td>
-<td>Assign a task to an actor</td>
-</tr>
-<tr>
-<td><code>update_project</code></td>
-<td>Update an existing project's status</td>
-</tr>
-<tr>
-<td><code>ignore</code></td>
-<td>No action needed for this event</td>
-</tr>
-<tr>
-<td><code>request_info</code></td>
-<td>Need more information before deciding</td>
-</tr>
-</tbody>
-</table>
-<h3 id="confidence-threshold">Confidence Threshold</h3>
-<p>The Manager includes a confidence score (0.0 - 1.0) with each decision. Only decisions above
-the configured threshold (<code>axiom.manager.confidence-threshold</code>, default 0.7) are auto-executed.
-Lower-confidence decisions are flagged for human review in the UI.</p>
-<hr />
-<h2 id="actors">Actors</h2>
-<p>Actors execute tasks assigned by the Manager. Each actor implementation handles a specific
-type of work.</p>
-<h3 id="claude-code-actor">Claude Code Actor</h3>
-<p>The default actor uses the Claude Code CLI as a subprocess. It:</p>
-<ul>
-<li>Creates a workspace directory for each project</li>
-<li>Runs Claude Code with the task prompt and configured MCP tools</li>
-<li>Captures the execution output and result</li>
-<li>Reports back to the orchestrator</li>
-</ul>
-<h3 id="opencode-actor">OpenCode Actor</h3>
-<p>An alternative actor using the OpenCode CLI. Supports the same task execution model with
-a different underlying AI engine.</p>
-<h3 id="human-actor">Human Actor</h3>
-<p>Sends notifications (Slack, Telegram) to human team members. The task remains in a pending
-state until the human completes it and updates the status through the UI.</p>
-<hr />
-<h2 id="project-lifecycle">Project Lifecycle</h2>
-<p>Projects follow a state machine:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>CREATED → IN_PROGRESS → COMPLETED
-</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>                      → FAILED
-</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>         → BLOCKED    → IN_PROGRESS
-</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>         → CANCELLED
-</span></code></pre></div>
-<p>State transitions are enforced by the <code>ProjectLifecycle</code> class. Invalid transitions throw
-<code>InvalidStatusTransitionException</code>.</p>
-<hr />
-<h2 id="database-migrations">Database Migrations</h2>
-<p>Schema changes are managed by <a href="https://flywaydb.org/">Flyway</a> and run automatically on
-startup for persistent databases.</p>
-<h3 id="adding-a-migration">Adding a Migration</h3>
-<ol>
-<li>Create a SQL file in <code>app/src/main/resources/db/migration/</code></li>
-<li>Follow the naming convention: <code>V&lt;number&gt;__&lt;description&gt;.sql</code></li>
-<li>Use <code>IF NOT EXISTS</code> / <code>IF EXISTS</code> guards for safety</li>
-</ol>
-<h3 id="example">Example</h3>
-<div class="language-sql highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1">-- V3__add_priority_to_task.sql</span>
-</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="k">ALTER</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">task</span><span class="w"> </span><span class="k">ADD</span><span class="w"> </span><span class="k">COLUMN</span><span class="w"> </span><span class="k">IF</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">EXISTS</span><span class="w"> </span><span class="n">priority</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">255</span><span class="p">)</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="s1">&#39;normal&#39;</span><span class="p">;</span>
-</span></code></pre></div>
-<p>Flyway is configured with <code>baseline-on-migrate=true</code> and <code>baseline-version=1</code>, so existing
-databases are automatically baselined.</p>
 
 
 
