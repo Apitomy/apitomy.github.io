@@ -1423,16 +1423,16 @@ and package the resulting <code>dist/</code> folder into <code>META-INF/resource
 <tbody>
 <tr>
 <td>Backend (Quarkus dev mode)</td>
-<td>http://localhost:8080</td>
+<td>http://localhost:9090</td>
 </tr>
 <tr>
 <td>Frontend (Vite dev server)</td>
-<td>http://localhost:8888</td>
+<td>http://localhost:9191</td>
 </tr>
 </tbody>
 </table>
 <p>The Vite dev server proxies <code>/api</code> requests to the backend, so you access the UI at
-<code>http://localhost:8888</code> and API calls are forwarded automatically.</p>
+<code>http://localhost:9191</code> and API calls are forwarded automatically.</p>
 <p>Both processes run in the foreground — <strong>Ctrl+C</strong> stops everything.</p>
 <p><strong>Flags:</strong></p>
 <table>
@@ -1498,7 +1498,7 @@ needed.</p>
 <p>A typical development loop:</p>
 <ol>
 <li>Run <code>./dev.sh</code> to start both backend and frontend</li>
-<li>Open <code>http://localhost:8888</code> in your browser</li>
+<li>Open <code>http://localhost:9191</code> in your browser</li>
 <li>Edit backend Java code — Quarkus hot-reloads on the next request</li>
 <li>Edit frontend TypeScript/React code — Vite hot-reloads instantly</li>
 <li>Run <code>mvn test</code> in a module directory to run unit tests for that module</li>
@@ -1515,12 +1515,12 @@ needed.</p>
 </thead>
 <tbody>
 <tr>
-<td>8080</td>
+<td>9090</td>
 <td>Quarkus backend</td>
 <td>Development (<code>mvn quarkus:dev</code>)</td>
 </tr>
 <tr>
-<td>8888</td>
+<td>9191</td>
 <td>Vite UI dev server</td>
 <td>Development (<code>npm run dev</code>)</td>
 </tr>
