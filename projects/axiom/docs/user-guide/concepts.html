@@ -977,6 +977,78 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#traces" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Traces
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Traces">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#when-traces-are-created" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        When Traces Are Created
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#trace-nodes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Trace Nodes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#node-types" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Node Types
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tool-call-tracing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tool Call Tracing
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#viewing-traces" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Viewing Traces
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -1286,6 +1358,34 @@
     
   
     Database & Migrations
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../developer-guide/tracing.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tracing
   
 
     
@@ -1702,6 +1802,78 @@
       
     </span>
   </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#traces" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Traces
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Traces">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#when-traces-are-created" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        When Traces Are Created
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#trace-nodes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Trace Nodes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#node-types" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Node Types
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tool-call-tracing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tool Call Tracing
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#viewing-traces" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Viewing Traces
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -2353,6 +2525,130 @@ template and tools. No event sources, projects, or actors are required.</p>
 <p><strong>Event-driven automation</strong> uses the full pipeline — event sources feed events to the
 Manager, which creates projects and assigns tasks to actors using action types. The
 action types determine what tools and prompts the actors use.</p>
+<hr />
+<h2 id="traces">Traces</h2>
+<p>A <strong>Trace</strong> is a hierarchical record of every step that occurred during a single pipeline
+run or report generation. While the <a href="logging-and-debugging.html">Activity Log</a> shows a flat
+timeline of events across all runs, a trace shows the <em>tree structure</em> of one run — which
+steps led to which, how long each took, and whether each succeeded or failed.</p>
+<h3 id="when-traces-are-created">When Traces Are Created</h3>
+<p>Axiom creates a trace automatically whenever it processes an event or generates a report:</p>
+<table>
+<thead>
+<tr>
+<th>Trace Type</th>
+<th>Trigger</th>
+<th>Root Node</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>event-pipeline</code></td>
+<td>An event is dequeued for processing</td>
+<td><code>event-ingested</code></td>
+</tr>
+<tr>
+<td><code>report-generation</code></td>
+<td>A report definition runs (scheduled or ad hoc)</td>
+<td><code>report-triggered</code></td>
+</tr>
+</tbody>
+</table>
+<p>Each trace has a status (<code>in-progress</code>, <code>completed</code>, or <code>failed</code>), timestamps, and a
+human-readable summary. Traces with asynchronous tasks (e.g. AI agent execution) remain
+<code>in-progress</code> until all tasks complete.</p>
+<h3 id="trace-nodes">Trace Nodes</h3>
+<p>Each step in the pipeline creates a <strong>trace node</strong> — a lightweight breadcrumb that
+records what happened at that point. Nodes form a parent-child tree: the root node is the
+trigger (event received or report triggered), and child nodes represent subsequent steps
+like manager evaluation, decision processing, task creation, and tool execution.</p>
+<p>Every node has:</p>
+<ul>
+<li><strong>Node type</strong> — identifies the kind of step</li>
+<li><strong>Status</strong> — <code>in-progress</code>, <code>completed</code>, or <code>failed</code></li>
+<li><strong>Summary</strong> — a brief description of what happened</li>
+<li><strong>Duration</strong> — how long the step took (calculated at completion)</li>
+<li><strong>Entity reference</strong> — a pointer to a more detailed record elsewhere in the system
+  (an activity log entry, a task, an event, a tool execution record, etc.)</li>
+</ul>
+<p>The entity reference pattern keeps trace nodes small and fast to query. When you click a
+node in the UI, the detail is fetched from the referenced entity on demand.</p>
+<h3 id="node-types">Node Types</h3>
+<table>
+<thead>
+<tr>
+<th>Node Type</th>
+<th>Meaning</th>
+<th>Appears In</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>event-ingested</code></td>
+<td>An event was received and processing began</td>
+<td>Event pipeline (root)</td>
+</tr>
+<tr>
+<td><code>manager-evaluation</code></td>
+<td>The AI Manager was invoked to triage the event</td>
+<td>Event pipeline</td>
+</tr>
+<tr>
+<td><code>decision-processed</code></td>
+<td>A single decision from the Manager was executed</td>
+<td>Event pipeline</td>
+</tr>
+<tr>
+<td><code>task</code></td>
+<td>A task was created and assigned to an actor</td>
+<td>Event pipeline</td>
+</tr>
+<tr>
+<td><code>tool-execution</code></td>
+<td>An MCP tool was invoked during task or report execution</td>
+<td>Both</td>
+</tr>
+<tr>
+<td><code>escalation</code></td>
+<td>The Manager escalated a decision for human review</td>
+<td>Event pipeline</td>
+</tr>
+<tr>
+<td><code>event-ignored</code></td>
+<td>The Manager decided to ignore the event</td>
+<td>Event pipeline</td>
+</tr>
+<tr>
+<td><code>report-triggered</code></td>
+<td>A report generation was triggered</td>
+<td>Report (root)</td>
+</tr>
+<tr>
+<td><code>report-ai-invoked</code></td>
+<td>The AI agent was launched to generate the report</td>
+<td>Report</td>
+</tr>
+</tbody>
+</table>
+<h3 id="tool-call-tracing">Tool Call Tracing</h3>
+<p>When Axiom launches an AI agent to execute a task or generate a report, it passes trace
+correlation data to the subprocess via environment variables (<code>AXIOM_TRACE_ID</code> and
+<code>AXIOM_PARENT_NODE_ID</code>). MCP tool servers that Axiom generates for the agent read these
+variables and call back to Axiom's API to register each tool invocation as a trace node.
+This creates a detailed record of every tool the agent called, including the full JSON
+input and output.</p>
+<p>Tool call tracing is non-intrusive — if the callback fails, the tool execution continues
+normally. Tracing never interrupts the agent's work.</p>
+<h3 id="viewing-traces">Viewing Traces</h3>
+<p>Traces are accessible from several places in the UI:</p>
+<ul>
+<li><strong>Logs &gt; Traces</strong> — browse and filter all traces</li>
+<li><strong>Events page</strong> — click <strong>View Trace</strong> on an event row to jump to its pipeline trace</li>
+<li><strong>Report detail page</strong> — click <strong>View Execution Trace</strong> to see the report's trace</li>
+</ul>
+<p>The trace detail page renders the node tree as an interactive tree. Click any
+node to view its full detail, including referenced entity data. See
+<a href="logging-and-debugging.html">Logging and Debugging</a> for a full guide to reading traces.</p>
 
 
 

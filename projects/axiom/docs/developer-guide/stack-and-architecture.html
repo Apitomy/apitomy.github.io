@@ -1029,6 +1029,17 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#tracing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tracing
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#scheduled-pollers" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1152,6 +1163,34 @@
     
   
     Database & Migrations
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="tracing.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tracing
   
 
     
@@ -1422,6 +1461,17 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#tracing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tracing
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#scheduled-pollers" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1665,6 +1715,30 @@ static methods on the entity class:</p>
 <h3 id="async-execution">Async Execution</h3>
 <p>Actor execution and engine invocations return <code>CompletableFuture</code>, keeping the
 scheduled pollers non-blocking.</p>
+<h3 id="tracing">Tracing</h3>
+<p>Every event pipeline run and report generation produces a <strong>trace</strong> — a tree of
+lightweight nodes recording each step. The tracing subsystem follows several key
+design principles:</p>
+<ul>
+<li><strong><code>TraceService</code> lives in <code>core</code></strong> — both the <code>app</code> module (PipelineOrchestrator,
+  TaskExecutionService) and the <code>manager</code> module (ManagerService) inject it directly,
+  avoiding circular dependencies</li>
+<li><strong>Stack-based context</strong> — <code>TraceContext</code> maintains a mutable node stack. Call
+  <code>push(nodeId)</code> when descending into a child scope and <code>pop()</code> when returning. The
+  current top of the stack is the parent for new nodes.</li>
+<li><strong>Independent transactions</strong> — all trace writes use
+  <code>QuarkusTransaction.requiringNew()</code>, so trace data persists even if the caller's
+  transaction rolls back</li>
+<li><strong>Non-fatal</strong> — all trace operations are wrapped in try/catch. Tracing failures never
+  interrupt the main pipeline</li>
+<li><strong>SSE broadcast</strong> — every trace mutation fires <code>SseEvent.traceUpdated(traceId)</code> for
+  real-time UI updates</li>
+<li><strong>UUID primary key</strong> — <code>TraceEntity</code> uses a UUID PK (the only entity in the project
+  to do so). The trace ID doubles as the correlation identifier threaded through
+  environment variables and API callbacks.</li>
+</ul>
+<p>See the <a href="tracing.html">Tracing</a> developer guide for the full data model, service API, and
+REST endpoint reference.</p>
 <h3 id="scheduled-pollers">Scheduled Pollers</h3>
 <p>All background processing uses Quarkus <code>@Scheduled</code> with
 <code>concurrentExecution = SKIP</code> to prevent overlapping executions:</p>

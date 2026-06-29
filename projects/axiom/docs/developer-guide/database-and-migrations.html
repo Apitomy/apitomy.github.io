@@ -18,7 +18,7 @@
         <link rel="prev" href="api-first-development.html">
       
       
-        <link rel="next" href="ui-development.html">
+        <link rel="next" href="tracing.html">
       
       
         
@@ -1122,6 +1122,34 @@
   
   
     <li class="md-nav__item">
+      <a href="tracing.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tracing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="ui-development.html" class="md-nav__link">
         
   
@@ -1484,6 +1512,18 @@ record pattern.</p>
 <tr>
 <td><code>EventSourceLogEntity</code></td>
 <td>Per-poll-cycle log for event sources</td>
+</tr>
+<tr>
+<td><code>TraceEntity</code></td>
+<td>Root trace record (UUID PK) — one per pipeline run or report generation</td>
+</tr>
+<tr>
+<td><code>TraceNodeEntity</code></td>
+<td>A step/span in a trace tree — references a detail entity via <code>entityType</code> + <code>entityId</code></td>
+</tr>
+<tr>
+<td><code>ToolExecutionEntity</code></td>
+<td>Detailed MCP tool invocation record — stores full JSON input and output</td>
 </tr>
 </tbody>
 </table>

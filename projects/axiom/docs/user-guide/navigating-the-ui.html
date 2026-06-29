@@ -1094,6 +1094,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../developer-guide/tracing.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tracing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../developer-guide/ui-development.html" class="md-nav__link">
         
   
@@ -1386,9 +1414,26 @@ activity:</p>
 <td><strong>Tasks</strong></td>
 <td>Task execution history — which actor ran what action type, duration, cost, and outcome</td>
 </tr>
+<tr>
+<td><strong>Traces</strong></td>
+<td>Visual graph of pipeline execution — shows every step from event ingestion through manager evaluation, decision processing, and task execution</td>
+</tr>
 </tbody>
 </table>
 <p>Each log page supports filtering and pagination.</p>
+<p>The <strong>Traces</strong> page deserves special mention. While the other log pages show tabular data,
+traces render as an interactive directed graph. Each node in the graph represents a step
+in the pipeline (event received, manager evaluated, task created, tool executed, etc.).
+Nodes are color-coded by status — green for completed, blue for in-progress, red for
+failed. Click any node to open a detail modal showing the full data for that step,
+including tool input/output for tool executions and AI reasoning for manager evaluations.</p>
+<p>You can also navigate to a trace directly from:</p>
+<ul>
+<li>An <strong>event row</strong> on the Events page — click <strong>View Trace</strong> to see the full pipeline
+  trace for that event</li>
+<li>A <strong>report detail page</strong> — click <strong>View Execution Trace</strong> to see the report generation
+  trace</li>
+</ul>
 <h3 id="metrics">Metrics</h3>
 <p>The <strong>Metrics</strong> section has two sub-pages:</p>
 <table>
