@@ -967,6 +967,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#ai-assistant" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AI Assistant
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#how-it-all-fits-together" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1795,6 +1806,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#ai-assistant" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AI Assistant
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#how-it-all-fits-together" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1899,16 +1921,18 @@
 
 <h1 id="concepts">Concepts</h1>
 <p>Apitomy Axiom is an event-driven orchestration platform that uses AI to automate
-software development workflows. It has two primary use-cases:</p>
+software development workflows. It has three primary capabilities:</p>
 <ul>
 <li><strong>Reports</strong> — AI-generated reports about your repositories and projects, produced
   on a schedule or on demand</li>
 <li><strong>Event-driven automation</strong> — monitor GitHub and Jira for activity, triage incoming
   events with an AI Manager, and delegate work to AI or human actors</li>
+<li><strong>AI Assistant</strong> — an interactive conversational interface for arbitrary tasks, powered by
+  customizable session templates</li>
 </ul>
-<p>Both use-cases share a common set of configuration items — tools, secrets, MCP servers,
-and more — that give the AI agents the capabilities they need. This guide explains
-each concept and how they relate.</p>
+<p>All three capabilities share a common set of configuration items — tools, secrets, MCP
+servers, and more — that give the AI agents the capabilities they need. This guide
+explains each concept and how they relate.</p>
 <hr />
 <h2 id="reports">Reports</h2>
 <p>Reports are AI-generated documents that summarize activity, status, or analysis across
@@ -2485,6 +2509,17 @@ files. A pack can include any combination of:</p>
 </ul>
 <p>This is useful for sharing configurations between Axiom instances, backing up
 configuration, or distributing pre-built setups.</p>
+<hr />
+<h2 id="ai-assistant">AI Assistant</h2>
+<p>The AI Assistant is an interactive conversational interface built on top of Claude Code. You
+can use it for arbitrary tasks — from creating Axiom configuration items to general-purpose
+coding, analysis, or exploration.</p>
+<p>Sessions are created from <strong>Session Templates</strong>, which define the assistant's system prompt,
+available tools, MCP servers, and working directory. Axiom ships with built-in templates
+(including the Configuration Assistant for creating and updating tools, action types,
+report definitions, toolsets, and session templates), and you can create your own
+templates for custom workflows.</p>
+<p>For full details, see the <a href="ai-assistant.html">AI Assistant</a> guide.</p>
 <hr />
 <h2 id="how-it-all-fits-together">How It All Fits Together</h2>
 <p>The diagram below shows how the concepts relate:</p>
