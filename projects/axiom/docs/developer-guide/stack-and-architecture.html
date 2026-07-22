@@ -965,6 +965,23 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="AI Assistant Sessions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#init-script-security" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Init Script Security
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
           <li class="md-nav__item">
@@ -1408,6 +1425,23 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="AI Assistant Sessions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#init-script-security" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Init Script Security
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
           <li class="md-nav__item">
@@ -1721,6 +1755,29 @@ activity from the external API, normalizes it into events, and enqueues them.</p
 </span></code></pre></div>
 <p>Sessions are in-memory — they do not survive server restarts. Cost and token usage
 are accumulated per-session and persisted to <code>AiUsageEntity</code> on session destruction.</p>
+<h4 id="init-script-security">Init Script Security</h4>
+<p>Session templates support optional init scripts (bash or Node.js) that run once when a
+session is created. The <code>runInitScript</code> method in <code>AssistantSessionManager</code> executes
+these scripts via <code>ProcessBuilder</code> with <strong>no sandboxing</strong> — the script runs as the same
+OS user as the Axiom server process, with full filesystem and network access. The only
+safeguard is a 60-second timeout.</p>
+<p><strong>Trust model:</strong> The init script content comes from session templates stored in the
+database (user-defined) or in built-in JSON files under
+<code>resources/templates/assistant-templates/</code>. There are currently no authentication or
+role-based access controls on the template CRUD endpoints
+(<code>POST/PUT /assistant/templates</code>). Any user with network access to Axiom can create a
+template containing an arbitrary init script, which will execute with server privileges
+when a session is created from that template. Template authors are therefore implicitly
+trusted with server-level code execution.</p>
+<p><strong>Future hardening options</strong> (not currently implemented):</p>
+<ul>
+<li>Add role-based access control to the template CRUD endpoints so only administrators
+  can create or modify templates with init scripts</li>
+<li>Run init scripts in a container or as a restricted OS user to limit their blast
+  radius</li>
+<li>Validate or restrict init script content (e.g., command allowlists or static
+  analysis)</li>
+</ul>
 <h3 id="real-time-updates-sse">Real-Time Updates (SSE)</h3>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>Any service fires CDI event: Event&lt;SseEvent&gt;
 </span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>  │

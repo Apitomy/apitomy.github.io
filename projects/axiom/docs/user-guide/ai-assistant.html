@@ -1878,9 +1878,11 @@ Write the script body in the editor below it.</p>
 within 60 seconds, it is killed and the session continues without it. Keep scripts
 focused on quick setup tasks — long-running operations should be handled by the
 assistant itself during the conversation.</p>
-<p><strong>Environment:</strong> Init scripts inherit the environment variables defined on the template
-(including resolved <code>${secret:NAME}</code> references), so they can use credentials for git
-clones, API calls, or authenticated downloads.</p>
+<p><strong>Environment:</strong> Init scripts do <strong>not</strong> inherit the template's environment variables.
+Template environment variables (including resolved <code>${secret:NAME}</code> references) are
+injected into the Claude Code process, which starts after the init script finishes. If
+your init script needs credentials (e.g., for <code>git clone</code> or API calls), they must be
+available through the server's own environment or set up by other means.</p>
 <p><strong>Common use cases:</strong></p>
 <ul>
 <li><strong>Clone a repository</strong> — <code>git clone</code> a repo into the working directory so the
@@ -1907,6 +1909,22 @@ clones, API calls, or authenticated downloads.</p>
 </span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="kd">const</span><span class="w"> </span><span class="nx">issue</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">resp</span><span class="p">.</span><span class="nx">json</span><span class="p">();</span>
 </span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="nx">fs</span><span class="p">.</span><span class="nx">writeFileSync</span><span class="p">(</span><span class="s2">&quot;context.json&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">issue</span><span class="p">,</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w"> </span><span class="mf">2</span><span class="p">));</span>
 </span></code></pre></div>
+<div class="admonition warning">
+<p class="admonition-title">Security: Init scripts run unsandboxed</p>
+<p>Init scripts execute as the <strong>same OS user</strong> that runs the Axiom server process.
+There is no sandboxing, filesystem restriction, or network isolation — the only
+guard is the 60-second timeout. This means anyone who can create or edit a session
+template can run arbitrary code on the server with the server's full privileges.</p>
+<p><strong>Recommendations:</strong></p>
+<ul>
+<li>Restrict template creation to <strong>trusted administrators</strong>. Treat the ability to
+  create or edit session templates as equivalent to shell access on the server.</li>
+<li>If Axiom is deployed in a multi-tenant or untrusted environment, consider running
+  the server under a <strong>restricted service account</strong> with minimal filesystem and
+  network permissions, or use <strong>container-level isolation</strong> to limit the blast
+  radius of init scripts.</li>
+</ul>
+</div>
 <hr />
 <h2 id="creating-a-session">Creating a Session</h2>
 <ol>
