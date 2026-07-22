@@ -25,7 +25,7 @@
       
       
       <link rel="icon" href="../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
     
     
       
@@ -33,7 +33,7 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.ec1eaa64.min.css">
       
         
         <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
@@ -1757,10 +1757,11 @@ arbitrary tasks through configurable <strong>session templates</strong>. Each te
 persona, tools, MCP servers, and working directory — so you can create sessions
 tailored to specific workflows, from generating Axiom configuration to general-purpose
 coding assistance.</p>
-<p>Out of the box, Axiom ships two built-in templates: a <strong>Configuration Assistant</strong> for
+<p>Out of the box, Axiom ships three built-in templates: a <strong>Configuration Assistant</strong> for
 creating and updating tools, action types, report definitions, toolsets, and session
-templates, and a <strong>General Assistant</strong> for open-ended tasks. You can also create your
-own templates to define custom workflows.</p>
+templates, a <strong>General Assistant</strong> for open-ended tasks, and a <strong>Project Assistant</strong> for
+working within the context of a specific project. You can also create your own templates
+to define custom workflows.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>The AI Assistant requires <strong>Claude Code</strong> as the AI engine. The <code>claude</code> CLI must
@@ -1790,7 +1791,7 @@ Each template specifies:</p>
 </tr>
 <tr>
 <td><strong>System Prompt</strong></td>
-<td>Markdown instructions written to <code>CLAUDE.md</code> in the session working directory.</td>
+<td>Markdown instructions passed to Claude Code via <code>--append-system-prompt</code>.</td>
 </tr>
 <tr>
 <td><strong>Welcome Message</strong></td>
@@ -1798,7 +1799,11 @@ Each template specifies:</p>
 </tr>
 <tr>
 <td><strong>Working Directory</strong></td>
-<td>Absolute path for the session. If empty, Axiom creates a temporary directory under <code>~/.axiom/assistant-sessions/</code>.</td>
+<td>Absolute path for the session. If empty, Axiom creates a temporary directory under <code>~/.axiom/assistant/sessions/</code>. For project-scoped sessions, defaults to the project workspace.</td>
+</tr>
+<tr>
+<td><strong>Initial Message</strong></td>
+<td>Optional message automatically sent to the AI when a session starts. Supports <code>{{projectName}}</code> placeholder.</td>
 </tr>
 <tr>
 <td><strong>Model</strong></td>
@@ -1823,13 +1828,16 @@ Each template specifies:</p>
 </tbody>
 </table>
 <h3 id="built-in-templates">Built-in Templates</h3>
-<p>Axiom ships two immutable built-in templates:</p>
+<p>Axiom ships three immutable built-in templates:</p>
 <ul>
 <li><strong>Configuration Assistant</strong> (<code>axiom-config-assistant</code>) — purpose-built for creating
   and updating Axiom configuration items (tools, action types, report definitions,
   toolsets, and session templates) with a two-panel layout and Apply workflow.</li>
 <li><strong>General Assistant</strong> (<code>general-assistant</code>) — a minimal template for open-ended tasks
   with no sidebar or special behavior.</li>
+<li><strong>Project Assistant</strong> (<code>project-assistant</code>) — scoped to a specific Axiom project, with
+  the working directory set to the project workspace and access to project-specific MCP
+  tools for querying tasks, events, and the discussion thread.</li>
 </ul>
 <p>Built-in templates cannot be modified or deleted, but you can clone them to create
 editable copies.</p>
@@ -2197,7 +2205,7 @@ modal.</p>
       <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.tabs", "navigation.sections", "navigation.expand", "navigation.top", "search.highlight", "search.share", "search.suggest", "content.code.copy"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../assets/javascripts/bundle.d7400e89.min.js"></script>
       
     
   </body>
