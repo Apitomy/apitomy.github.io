@@ -2,70 +2,78 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://www.apitomy.io/projects/axiom/docs/index.html</loc>
-         <lastmod>2026-07-22</lastmod>
+         <lastmod>2026-08-07</lastmod>
     </url>
     <url>
          <loc>https://www.apitomy.io/projects/axiom/docs/developer-guide/api-first-development.html</loc>
-         <lastmod>2026-07-22</lastmod>
+         <lastmod>2026-08-07</lastmod>
     </url>
     <url>
          <loc>https://www.apitomy.io/projects/axiom/docs/developer-guide/building-axiom.html</loc>
-         <lastmod>2026-07-22</lastmod>
+         <lastmod>2026-08-07</lastmod>
     </url>
     <url>
          <loc>https://www.apitomy.io/projects/axiom/docs/developer-guide/database-and-migrations.html</loc>
-         <lastmod>2026-07-22</lastmod>
+         <lastmod>2026-08-07</lastmod>
     </url>
     <url>
          <loc>https://www.apitomy.io/projects/axiom/docs/developer-guide/extending-axiom.html</loc>
-         <lastmod>2026-07-22</lastmod>
+         <lastmod>2026-08-07</lastmod>
     </url>
     <url>
          <loc>https://www.apitomy.io/projects/axiom/docs/developer-guide/how-to-contribute.html</loc>
-         <lastmod>2026-07-22</lastmod>
+         <lastmod>2026-08-07</lastmod>
     </url>
     <url>
          <loc>https://www.apitomy.io/projects/axiom/docs/developer-guide/stack-and-architecture.html</loc>
-         <lastmod>2026-07-22</lastmod>
+         <lastmod>2026-08-07</lastmod>
     </url>
     <url>
          <loc>https://www.apitomy.io/projects/axiom/docs/developer-guide/tracing.html</loc>
-         <lastmod>2026-07-22</lastmod>
+         <lastmod>2026-08-07</lastmod>
     </url>
     <url>
          <loc>https://www.apitomy.io/projects/axiom/docs/developer-guide/ui-development.html</loc>
-         <lastmod>2026-07-22</lastmod>
+         <lastmod>2026-08-07</lastmod>
     </url>
     <url>
          <loc>https://www.apitomy.io/projects/axiom/docs/getting-started/configuring-axiom.html</loc>
-         <lastmod>2026-07-22</lastmod>
+         <lastmod>2026-08-07</lastmod>
     </url>
     <url>
          <loc>https://www.apitomy.io/projects/axiom/docs/getting-started/contributing.html</loc>
-         <lastmod>2026-07-22</lastmod>
+         <lastmod>2026-08-07</lastmod>
     </url>
     <url>
          <loc>https://www.apitomy.io/projects/axiom/docs/getting-started/running-axiom.html</loc>
-         <lastmod>2026-07-22</lastmod>
+         <lastmod>2026-08-07</lastmod>
+    </url>
+    <url>
+         <loc>https://www.apitomy.io/projects/axiom/docs/superpowers/plans/2026-08-07-event-source-filtering.html</loc>
+         <lastmod>2026-08-07</lastmod>
+    </url>
+    <url>
+         <loc>https://www.apitomy.io/projects/axiom/docs/superpowers/specs/2026-08-07-event-source-filtering-design.html</loc>
+         <lastmod>2026-08-07</lastmod>
     </url>
     <url>
          <loc>https://www.apitomy.io/projects/axiom/docs/user-guide/ai-assistant.html</loc>
-         <lastmod>2026-07-22</lastmod>
+         <lastmod>2026-08-07</lastmod>
     </url>
     <url>
          <loc>https://www.apitomy.io/projects/axiom/docs/user-guide/concepts.html</loc>
-         <lastmod>2026-07-22</lastmod>
+         <lastmod>2026-08-07</lastmod>
     </url>
     <url>
          <loc>https://www.apitomy.io/projects/axiom/docs/user-guide/logging-and-debugging.html</loc>
-         <lastmod>2026-07-22</lastmod>
+         <lastmod>2026-08-07</lastmod>
     </url>
     <url>
          <loc>https://www.apitomy.io/projects/axiom/docs/user-guide/navigating-the-ui.html</loc>
-         <lastmod>2026-07-22</lastmod>
+         <lastmod>2026-08-07</lastmod>
     </url>
     <url>
          <loc>https://www.apitomy.io/projects/axiom/docs/user-guide/usage-examples.html</loc>
-         <lastmod>2026-07-22</lastmod>
+         <lastmod>2026-08-07</lastmod>
     </url>
 </urlset>
