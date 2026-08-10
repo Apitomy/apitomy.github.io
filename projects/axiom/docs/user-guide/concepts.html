@@ -795,6 +795,17 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#label-based-action-type-filtering" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Label-Based Action Type Filtering
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -974,6 +985,56 @@
       
     </span>
   </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dashboards" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Dashboards
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Dashboards">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#widgets" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Widgets
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dashboard-labels-and-filtering" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Dashboard Labels and Filtering
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#default-dashboard" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Default Dashboard
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -1634,6 +1695,17 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#label-based-action-type-filtering" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Label-Based Action Type Filtering
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -1813,6 +1885,56 @@
       
     </span>
   </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dashboards" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Dashboards
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Dashboards">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#widgets" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Widgets
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dashboard-labels-and-filtering" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Dashboard Labels and Filtering
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#default-dashboard" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Default Dashboard
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -2096,6 +2218,10 @@ creating a project, assigning a task to an actor, or ignoring the event entirely
 <td>Which secret to use for API access (or auto-detect)</td>
 </tr>
 <tr>
+<td><strong>Labels</strong></td>
+<td>Free-form labels for categorization and action type scoping (see <a href="#label-based-action-type-filtering">Label-Based Action Type Filtering</a>)</td>
+</tr>
+<tr>
 <td><strong>Enabled</strong></td>
 <td>Whether polling is active</td>
 </tr>
@@ -2103,6 +2229,8 @@ creating a project, assigning a task to an actor, or ignoring the event entirely
 </table>
 <p>When enabled, a GitHub event source polls for new issues, pull requests, comments, and
 reviews. A Jira event source polls for new issues and comments.</p>
+<p>When the Manager creates a new project from an event, the event source's labels are
+automatically copied to the new project.</p>
 <h3 id="ai-manager">AI Manager</h3>
 <p>The Manager receives events and produces structured decisions. It uses the configured AI
 engine (Claude Code or OpenCode) to analyze each event in context.</p>
@@ -2123,7 +2251,7 @@ engine (Claude Code or OpenCode) to analyze each event in context.</p>
 <tbody>
 <tr>
 <td><code>{{actionTypes}}</code></td>
-<td>Formatted list of all configured action types</td>
+<td>Formatted list of action types available for this event (filtered by label compatibility — see <a href="#label-based-action-type-filtering">Label-Based Action Type Filtering</a>)</td>
 </tr>
 <tr>
 <td><code>{{actors}}</code></td>
@@ -2190,6 +2318,22 @@ engine (Claude Code or OpenCode) to analyze each event in context.</p>
 <p>Each decision includes a <strong>confidence score</strong> (0.0–1.0). Only decisions above the
 configured threshold (default 0.7) are auto-executed. Lower-confidence decisions are
 flagged for human review in the UI.</p>
+<h4 id="label-based-action-type-filtering">Label-Based Action Type Filtering</h4>
+<p>Before the Manager evaluates an event, Axiom filters the list of candidate action
+types based on <strong>label compatibility</strong> between the event's source and the action types:</p>
+<ul>
+<li><strong>Action types with no labels</strong> are always included. This is the default — existing
+  action types without labels continue to work for all event sources.</li>
+<li><strong>Action types with labels</strong> are included only if their labels are a <strong>subset</strong> of
+  the event source's labels.</li>
+</ul>
+<p>This lets you scope action types to specific teams, environments, or domains. For
+example, if you label an event source <code>"frontend"</code> and an action type <code>"frontend"</code>,
+that action type will only be offered to the Manager for events from that source. An
+action type labeled <code>"frontend", "security"</code> would require an event source with <em>both</em>
+labels to be included.</p>
+<p>Action types with no labels remain universally available, so existing configurations
+are unaffected.</p>
 <h3 id="projects">Projects</h3>
 <p>A Project is a long-lived entity that tracks all work related to an issue. When the
 Manager decides to create a project for a GitHub issue, Axiom:</p>
@@ -2251,6 +2395,10 @@ specifies:</p>
 <tr>
 <td><strong>Model / Engine</strong></td>
 <td>Override the global AI model or engine for this action type</td>
+</tr>
+<tr>
+<td><strong>Labels</strong></td>
+<td>Free-form labels that scope this action type to matching event sources (see <a href="#label-based-action-type-filtering">Label-Based Action Type Filtering</a>)</td>
 </tr>
 <tr>
 <td><strong>User triggerable</strong></td>
@@ -2520,6 +2668,57 @@ available tools, MCP servers, and working directory. Axiom ships with built-in t
 report definitions, toolsets, and session templates), and you can create your own
 templates for custom workflows.</p>
 <p>For full details, see the <a href="ai-assistant.html">AI Assistant</a> guide.</p>
+<hr />
+<h2 id="dashboards">Dashboards</h2>
+<p>Dashboards provide a customizable at-a-glance view of your Axiom instance. You can
+create multiple dashboards, each with a different set of <strong>widgets</strong> arranged on a
+drag-and-drop grid.</p>
+<h3 id="widgets">Widgets</h3>
+<p>Axiom ships with a catalog of built-in widgets organized by category:</p>
+<table>
+<thead>
+<tr>
+<th>Category</th>
+<th>Widgets</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Projects</strong></td>
+<td>Project Status Summary, Active Projects, Project Spotlight</td>
+</tr>
+<tr>
+<td><strong>Operations</strong></td>
+<td>Recent Activity, Inbox, Recent Events</td>
+</tr>
+<tr>
+<td><strong>AI &amp; Cost</strong></td>
+<td>AI Cost Summary, AI Cost by Project</td>
+</tr>
+<tr>
+<td><strong>Reports</strong></td>
+<td>Recent Reports</td>
+</tr>
+<tr>
+<td><strong>System</strong></td>
+<td>System Status, Event Source Health, Disk Usage Breakdown</td>
+</tr>
+</tbody>
+</table>
+<p>Each widget is self-contained — it fetches its own data and renders independently.
+Many widgets support per-widget configuration (e.g. time window, maximum rows, or
+which project to spotlight).</p>
+<h3 id="dashboard-labels-and-filtering">Dashboard Labels and Filtering</h3>
+<p>Dashboards support labels for organization. When a dashboard has labels, those labels
+are passed to all its widgets as <strong>data filters</strong>. Widgets use these labels to scope
+their data — for example, a dashboard labeled <code>"team-a"</code> would show only projects,
+events, and activity associated with that label.</p>
+<h3 id="default-dashboard">Default Dashboard</h3>
+<p>One dashboard can be designated as the <strong>default</strong>. The default dashboard is displayed
+when you navigate to the Dashboards page. If no default is set, the dashboards list
+is shown instead.</p>
+<p>For details on the dashboard UI, see
+<a href="navigating-the-ui.html#dashboards">Navigating the UI</a>.</p>
 <hr />
 <h2 id="how-it-all-fits-together">How It All Fits Together</h2>
 <p>The diagram below shows how the concepts relate:</p>

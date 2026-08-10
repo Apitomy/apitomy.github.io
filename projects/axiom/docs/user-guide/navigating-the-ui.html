@@ -700,13 +700,63 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#dashboard" class="md-nav__link">
+  <a href="#dashboards" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Dashboard
+        Dashboards
       
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="Dashboards">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#dashboard-list" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Dashboard List
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dashboard-view" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Dashboard View
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dashboard-labels" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Dashboard Labels
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#widget-catalog" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Widget Catalog
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -721,6 +771,28 @@
   
     <nav class="md-nav" aria-label="Sidebar Navigation">
       <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#dashboards_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Dashboards
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#inbox" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Inbox
+      
+    </span>
+  </a>
+  
+</li>
         
           <li class="md-nav__item">
   <a href="#reports" class="md-nav__link">
@@ -1216,13 +1288,63 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#dashboard" class="md-nav__link">
+  <a href="#dashboards" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Dashboard
+        Dashboards
       
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="Dashboards">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#dashboard-list" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Dashboard List
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dashboard-view" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Dashboard View
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dashboard-labels" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Dashboard Labels
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#widget-catalog" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Widget Catalog
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -1237,6 +1359,28 @@
   
     <nav class="md-nav" aria-label="Sidebar Navigation">
       <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#dashboards_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Dashboards
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#inbox" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Inbox
+      
+    </span>
+  </a>
+  
+</li>
         
           <li class="md-nav__item">
   <a href="#reports" class="md-nav__link">
@@ -1337,32 +1481,89 @@ find things.</p>
 <h2 id="masthead">Masthead</h2>
 <p>The masthead runs across the top of every page. It contains:</p>
 <ul>
-<li><strong>Apitomy Axiom</strong> — click the title to return to the Dashboard from any page</li>
+<li><strong>Apitomy Axiom</strong> — click the title to return to the Dashboards page from any page</li>
 <li><strong>Robot icon</strong> — opens the <a href="ai-assistant.html">AI Assistant</a> (visible only when the
   Claude Code engine is active)</li>
 <li><strong>Question mark icon</strong> — opens the About dialog showing the application version, active
   AI engine, and links to the source repository</li>
 </ul>
 <hr />
-<h2 id="dashboard">Dashboard</h2>
-<p>The Dashboard is the landing page. It gives you a snapshot of the system at a glance:</p>
+<h2 id="dashboards">Dashboards</h2>
+<p>Dashboards are the landing page. Rather than a single fixed view, Axiom supports
+multiple <strong>user-configurable dashboards</strong>, each populated with widgets chosen from a
+built-in catalog.</p>
+<h3 id="dashboard-list">Dashboard List</h3>
+<p>The <strong>Dashboards</strong> page shows all dashboards with their name, description, labels, and
+creation date. From here you can:</p>
 <ul>
-<li><strong>Project status cards</strong> — counts of total, in-progress, idle, created, and completed
-  projects</li>
-<li><strong>Active Projects</strong> — a table of projects that aren't completed, with links to their
-  detail pages</li>
-<li><strong>Recent Reports</strong> — reports generated in the last 24 hours, with status, duration,
-  and cost</li>
-<li><strong>Recent Activity</strong> — a chronological feed of system events (tasks created, projects
-  opened, reports generated, etc.)</li>
-<li><strong>Configuration summary</strong> — counts of event sources, actors, action types, tools, and
-  report definitions, each linking to its configuration page</li>
+<li><strong>Create</strong> a new dashboard with a name, description, and optional labels</li>
+<li><strong>Set as default</strong> — click the star icon to designate a dashboard as the default
+  landing page (only one dashboard can be default at a time)</li>
+<li><strong>Delete</strong> — remove a dashboard with a confirmation prompt</li>
 </ul>
-<p>If required configuration is missing (e.g. no actors or no action types), the Dashboard
-shows a <strong>Setup Incomplete</strong> warning with links to the relevant configuration pages.</p>
+<p>Click any dashboard to open its view page.</p>
+<h3 id="dashboard-view">Dashboard View</h3>
+<p>Each dashboard displays its widgets on a responsive grid. The view page has two modes:</p>
+<ul>
+<li><strong>Normal mode</strong> (default) — widgets are displayed read-only; the layout is locked</li>
+<li><strong>Edit mode</strong> — click <strong>Edit</strong> in the toolbar to enable drag-and-drop repositioning,
+  widget resizing, per-widget configuration (gear icon), and widget removal (X icon).
+  You can also edit the dashboard's name, description, and labels inline.</li>
+</ul>
+<p>Click <strong>Add Widget</strong> in edit mode to open the widget catalog, which lets you browse and
+search widgets organized by category.</p>
+<h3 id="dashboard-labels">Dashboard Labels</h3>
+<p>Dashboards support labels for organization. Dashboard labels also serve as <strong>data
+filters</strong> — when a dashboard has labels, its widgets filter their data to show only
+items matching those labels. For example, a dashboard labeled <code>"team-a"</code> would show
+only projects, events, and activity associated with that label.</p>
+<h3 id="widget-catalog">Widget Catalog</h3>
+<p>Axiom ships with 12 built-in widget types across four categories:</p>
+<table>
+<thead>
+<tr>
+<th>Category</th>
+<th>Widgets</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Projects</strong></td>
+<td>Project Status Summary, Active Projects, Project Spotlight</td>
+</tr>
+<tr>
+<td><strong>Operations</strong></td>
+<td>Recent Activity, Inbox, Recent Events</td>
+</tr>
+<tr>
+<td><strong>AI &amp; Cost</strong></td>
+<td>AI Cost Summary, AI Cost by Project</td>
+</tr>
+<tr>
+<td><strong>Reports</strong></td>
+<td>Recent Reports</td>
+</tr>
+<tr>
+<td><strong>System</strong></td>
+<td>System Status, Event Source Health, Disk Usage Breakdown</td>
+</tr>
+</tbody>
+</table>
+<p>Each widget has a default size but can be resized on the grid. Many widgets support
+per-widget configuration — for example, the Active Projects widget has a configurable
+maximum row count, and the AI Cost Summary widget lets you choose a time window
+(24 hours, 7 days, 30 days, or 90 days). Click the gear icon on a widget in edit mode
+to adjust its settings.</p>
 <hr />
 <h2 id="sidebar-navigation">Sidebar Navigation</h2>
-<p>The sidebar organizes the UI into four sections.</p>
+<p>The sidebar organizes the UI into six sections.</p>
+<h3 id="dashboards_1">Dashboards</h3>
+<p>See <a href="#dashboards">Dashboards</a> above.</p>
+<h3 id="inbox">Inbox</h3>
+<p>The <strong>Inbox</strong> page shows Manager decisions that require human review — typically
+low-confidence decisions that were not auto-executed. A badge on the sidebar shows
+the count of unreviewed items. Click any item to review the Manager's reasoning and
+approve or reject the proposed action.</p>
 <h3 id="reports">Reports</h3>
 <p>The <strong>Reports</strong> page lists all generated reports with their title, status, time range,
 labels, and generation date. You can filter by title, status, or labels and paginate
@@ -1471,7 +1672,7 @@ edit, and delete configuration items:</p>
 </tr>
 <tr>
 <td><strong>Action Types</strong></td>
-<td>Define kinds of work — prompt templates, allowed tools, execution mode</td>
+<td>Define kinds of work — prompt templates, allowed tools, execution mode, and labels for event source scoping</td>
 </tr>
 <tr>
 <td><strong>Actors</strong></td>
@@ -1491,7 +1692,7 @@ edit, and delete configuration items:</p>
 </tr>
 <tr>
 <td><strong>Event Sources</strong></td>
-<td>Connect to GitHub or Jira repositories for event polling</td>
+<td>Connect to GitHub or Jira repositories for event polling, with labels and event filters</td>
 </tr>
 <tr>
 <td><strong>Secrets</strong></td>
