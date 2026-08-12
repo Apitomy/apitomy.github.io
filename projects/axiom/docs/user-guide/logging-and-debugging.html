@@ -1764,9 +1764,10 @@
 
 
 <h1 id="logging-and-debugging">Logging and Debugging</h1>
-<p>When something isn't working as expected — a report fails, a task produces the wrong
-result, or an event seems to be ignored — Axiom provides several layers of logging
-to help you trace what happened and why. This guide explains how to use them.</p>
+<p>When something isn't working as expected — a report fails, a scheduled job produces
+the wrong result, a task goes sideways, or an event seems to be ignored — Axiom
+provides several layers of logging to help you trace what happened and why. This
+guide explains how to use them.</p>
 <hr />
 <h2 id="the-processing-pipeline">The Processing Pipeline</h2>
 <p>Understanding Axiom's processing pipeline is the key to effective debugging. Every
@@ -1776,6 +1777,9 @@ piece of work follows a traceable path through the system:</p>
 </span></code></pre></div>
 <p><strong>For reports:</strong></p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>Schedule triggers (or Run Now) → AI agent launched → Tools executed → Report generated
+</span></code></pre></div>
+<p><strong>For scheduled jobs:</strong></p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>Schedule triggers (or Run Now) → AI agent or script launched → Run recorded
 </span></code></pre></div>
 <p>At each stage, Axiom records what happened. Debugging is a matter of finding where in
 the pipeline things went wrong and examining the logs at that stage.</p>
@@ -1816,6 +1820,18 @@ the pipeline things went wrong and examining the logs at that stage.</p>
 <tr>
 <td>Report content is wrong or incomplete</td>
 <td>Report detail page &gt; <strong>View Log</strong> — check tool output</td>
+</tr>
+<tr>
+<td>Scheduled job failed</td>
+<td>Scheduled job detail page &gt; Runs tab &gt; <strong>View Log</strong></td>
+</tr>
+<tr>
+<td>Scheduled job produced wrong result</td>
+<td>Scheduled job detail page &gt; Runs tab &gt; <strong>View Log</strong></td>
+</tr>
+<tr>
+<td>Scheduled job never runs</td>
+<td>Scheduled job detail page — check <strong>Enabled</strong> and <strong>Schedule</strong> settings</td>
 </tr>
 <tr>
 <td>Want to see the full pipeline tree for one event</td>

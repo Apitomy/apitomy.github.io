@@ -1758,10 +1758,10 @@ persona, tools, MCP servers, and working directory — so you can create session
 tailored to specific workflows, from generating Axiom configuration to general-purpose
 coding assistance.</p>
 <p>Out of the box, Axiom ships three built-in templates: a <strong>Configuration Assistant</strong> for
-creating and updating tools, action types, report definitions, toolsets, and session
-templates, a <strong>General Assistant</strong> for open-ended tasks, and a <strong>Project Assistant</strong> for
-working within the context of a specific project. You can also create your own templates
-to define custom workflows.</p>
+creating and updating tools, action types, report definitions, scheduled jobs, toolsets,
+and session templates, a <strong>General Assistant</strong> for open-ended tasks, and a <strong>Project
+Assistant</strong> for working within the context of a specific project. You can also create
+your own templates to define custom workflows.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>The AI Assistant requires <strong>Claude Code</strong> as the AI engine. The <code>claude</code> CLI must
@@ -1832,7 +1832,8 @@ Each template specifies:</p>
 <ul>
 <li><strong>Configuration Assistant</strong> (<code>axiom-config-assistant</code>) — purpose-built for creating
   and updating Axiom configuration items (tools, action types, report definitions,
-  toolsets, and session templates) with a two-panel layout and Apply workflow.</li>
+  scheduled jobs, toolsets, and session templates) with a two-panel layout and Apply
+  workflow.</li>
 <li><strong>General Assistant</strong> (<code>general-assistant</code>) — a minimal template for open-ended tasks
   with no sidebar or special behavior.</li>
 <li><strong>Project Assistant</strong> (<code>project-assistant</code>) — scoped to a specific Axiom project, with
@@ -2023,7 +2024,7 @@ the standard session interface with a two-panel layout and an Apply workflow.</p
 </ul>
 <h3 id="generated-items">Generated Items</h3>
 <p>As the assistant creates or updates items, they appear in the sidebar. The assistant
-can work with five types of configuration items:</p>
+can work with six types of configuration items:</p>
 <table>
 <thead>
 <tr>
@@ -2043,6 +2044,10 @@ can work with five types of configuration items:</p>
 <tr>
 <td><strong>Report Definitions</strong></td>
 <td>Scheduled or ad-hoc reports with prompt templates, allowed tools, and time windows</td>
+</tr>
+<tr>
+<td><strong>Scheduled Jobs</strong></td>
+<td>CRON-style automation with prompt or script templates, allowed tools, and schedule settings</td>
 </tr>
 <tr>
 <td><strong>Toolsets</strong></td>
@@ -2081,9 +2086,9 @@ cannot be undone.</p>
 <h3 id="querying-existing-configuration">Querying Existing Configuration</h3>
 <p>The Configuration Assistant has access to an MCP server that lets it query your
 existing Axiom configuration — it can list your current tools, action types, event
-sources, and more to understand what is already set up. This is especially useful
-when updating existing items, as the assistant fetches the current definition before
-making changes.</p>
+sources, scheduled jobs, and more to understand what is already set up. This is
+especially useful when updating existing items, as the assistant fetches the current
+definition before making changes.</p>
 <h3 id="example-conversation">Example Conversation</h3>
 <p>Here is an example of how you might use the Configuration Assistant to create the
 auto-labeling configuration from the
@@ -2129,8 +2134,8 @@ modal.</p>
   and what to change. It will fetch the current definition, apply your changes, and
   write the updated JSON. When you apply, matching names are updated in place.</li>
 <li><strong>Ask about existing configuration.</strong> The assistant can query your current tools,
-  action types, toolsets, session templates, and other configuration to understand
-  your setup before creating or updating items.</li>
+  action types, scheduled jobs, toolsets, session templates, and other configuration
+  to understand your setup before creating or updating items.</li>
 </ul>
 <h3 id="general-tips">General Tips</h3>
 <ul>
