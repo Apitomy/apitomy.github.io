@@ -1313,7 +1313,7 @@
 </tr>
 <tr>
 <td>Introspection</td>
-<td><code>getHumanTaskInfo</code>, <code>getReceiveEventInfo</code></td>
+<td><code>getHumanTaskInfo</code>, <code>getReceiveEventInfo</code>, <code>getWaitInfo</code></td>
 </tr>
 <tr>
 <td>(Internal)</td>
@@ -1364,12 +1364,12 @@
 </table>
 <p>Null or blank conditions evaluate to <code>true</code> (unconditional edges always match).</p>
 <h3 id="validation">Validation</h3>
-<p>The <code>WorkflowValidator</code> runs 26 rules across four categories:</p>
+<p>The <code>WorkflowValidator</code> runs 27 rules across four categories:</p>
 <ol>
 <li><strong>Structural</strong> (10 rules) — graph integrity (start/end nodes, edge references, duplicates)</li>
 <li><strong>Connectivity</strong> (5 rules) — reachability, dead ends, isolated nodes</li>
 <li><strong>Edge/Condition</strong> (4 rules) — default edges, duplicate priorities, EL syntax</li>
-<li><strong>Semantic</strong> (7 rules) — event receivers, action types, input schemas, automated cycles</li>
+<li><strong>Semantic</strong> (8 rules) — event receivers, action types, input schemas, wait durations, automated cycles</li>
 </ol>
 <p><code>startWorkflow</code> runs the validator automatically and rejects definitions with ERROR-level problems.</p>
 <h2 id="ui-internals">UI Internals</h2>

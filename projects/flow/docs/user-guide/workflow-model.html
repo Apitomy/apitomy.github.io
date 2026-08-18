@@ -700,6 +700,17 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#wait" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Wait
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#end" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1233,6 +1244,17 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#wait" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Wait
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#end" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1421,6 +1443,12 @@
 <li><strong>Behavior</strong>: Completes when the consuming application calls <code>completeCurrentNode</code> after a matching event is detected via <code>matchesEvent</code></li>
 </ul>
 <p>See <a href="event-correlation.html">Event Correlation</a> for details.</p>
+<h3 id="wait">Wait</h3>
+<p>Blocks for a configured duration. The engine sets the instance to <code>WAITING</code> status.</p>
+<ul>
+<li><strong>Config</strong>: <code>duration</code> (String) — ISO 8601 duration (e.g. <code>PT30M</code>, <code>PT2H</code>, <code>P1D</code>). The validator emits <code>MISSING_WAIT_DURATION</code> if absent.</li>
+<li><strong>Behavior</strong>: The consuming application reads the duration via <code>getWaitInfo</code>, schedules a timer, and calls <code>completeCurrentNode</code> when it expires.</li>
+</ul>
 <h3 id="end">End</h3>
 <p>Terminal state. One or more per workflow.</p>
 <ul>
