@@ -1405,9 +1405,15 @@
 <h3 id="human-task">Human Task</h3>
 <p>Blocks until a human responds. The engine sets the instance to <code>WAITING</code> status.</p>
 <ul>
-<li><strong>Config</strong>: Pass-through — the engine does not interpret it. The consuming application defines the schema (e.g. title, description, form fields).</li>
-<li><strong>Behavior</strong>: Completes when the consuming application calls <code>completeCurrentNode</code> with the human's response.</li>
+<li><strong>Config</strong>: The engine interprets three keys:<ul>
+<li><code>description</code> (String) — instructions for the person completing the task</li>
+<li><code>inputs</code> (Map<String, String>) — map of display label to EL expression, resolved against the workflow context at render time (e.g. <code>{"Credit Score": "context.creditScore"}</code>)</li>
+<li><code>outputs</code> (List of <code>{name, type, required}</code>) — defines the form schema for task completion</li>
 </ul>
+</li>
+</ul>
+<p>The validator emits <code>MISSING_TASK_DESCRIPTION</code> and <code>MISSING_TASK_OUTPUTS</code> warnings when these are absent.
+- <strong>Behavior</strong>: Completes when the consuming application calls <code>completeCurrentNode</code> with the human's response.</p>
 <h3 id="receive-event">Receive Event</h3>
 <p>Blocks until a matching external event arrives.</p>
 <ul>

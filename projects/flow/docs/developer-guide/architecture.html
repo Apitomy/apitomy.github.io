@@ -1308,6 +1308,14 @@
 <td><code>matchesEvent</code></td>
 </tr>
 <tr>
+<td>Expression</td>
+<td><code>resolveExpression</code></td>
+</tr>
+<tr>
+<td>Introspection</td>
+<td><code>getHumanTaskInfo</code>, <code>getReceiveEventInfo</code></td>
+</tr>
+<tr>
 <td>(Internal)</td>
 <td><code>advance</code>, <code>executeActionNode</code>, <code>selectEdge</code></td>
 </tr>
@@ -1356,12 +1364,12 @@
 </table>
 <p>Null or blank conditions evaluate to <code>true</code> (unconditional edges always match).</p>
 <h3 id="validation">Validation</h3>
-<p>The <code>WorkflowValidator</code> runs 24 rules across four categories:</p>
+<p>The <code>WorkflowValidator</code> runs 26 rules across four categories:</p>
 <ol>
 <li><strong>Structural</strong> (10 rules) — graph integrity (start/end nodes, edge references, duplicates)</li>
 <li><strong>Connectivity</strong> (5 rules) — reachability, dead ends, isolated nodes</li>
 <li><strong>Edge/Condition</strong> (4 rules) — default edges, duplicate priorities, EL syntax</li>
-<li><strong>Semantic</strong> (5 rules) — event receivers, action types, input schemas, automated cycles</li>
+<li><strong>Semantic</strong> (7 rules) — event receivers, action types, input schemas, automated cycles</li>
 </ol>
 <p><code>startWorkflow</code> runs the validator automatically and rejects definitions with ERROR-level problems.</p>
 <h2 id="ui-internals">UI Internals</h2>
