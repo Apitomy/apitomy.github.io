@@ -1228,14 +1228,14 @@
 </span><span id="__span-3-18"><a id="__codelineno-3-18" name="__codelineno-3-18" href="#__codelineno-3-18"></a><span class="p">}</span>
 </span></code></pre></div>
 <h2 id="registration">Registration</h2>
-<p>Executors are passed to the <code>WorkflowEngine</code> constructor:</p>
+<p>Executors are provided to the <code>WorkflowEngine</code> via a <code>NodeExecutorProvider</code>:</p>
 <div class="language-java highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="n">WorkflowEngine</span><span class="w"> </span><span class="n">engine</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">WorkflowEngine</span><span class="p">(</span>
-</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">    </span><span class="n">List</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">AnalyzeCveExecutor</span><span class="p">(),</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">CreatePrExecutor</span><span class="p">()),</span>
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">    </span><span class="n">NodeExecutorProvider</span><span class="p">.</span><span class="na">fromList</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">AnalyzeCveExecutor</span><span class="p">(),</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">CreatePrExecutor</span><span class="p">()),</span>
 </span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">    </span><span class="n">List</span><span class="p">.</span><span class="na">of</span><span class="p">(),</span>
 </span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">    </span><span class="kc">null</span>
 </span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="p">);</span>
 </span></code></pre></div>
-<p>The engine matches executors to action nodes by comparing <code>NodeExecutor.actionType()</code> against the node's <code>config.actionType</code> field. If no matching executor is found, the workflow fails.</p>
+<p>The <code>NodeExecutorProvider</code> is a functional interface with a single method <code>getExecutor(String actionType)</code>. The <code>fromList</code> factory creates a provider from a list of executors, keyed by their <code>actionType()</code>. You can also implement <code>NodeExecutorProvider</code> directly for custom lookup logic (e.g. service registry, dependency injection). If no matching executor is found, the workflow fails.</p>
 <h2 id="action-node-config">Action Node Config</h2>
 <p>Action nodes must include an <code>actionType</code> field in their config:</p>
 <div class="language-json highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="p">{</span>
