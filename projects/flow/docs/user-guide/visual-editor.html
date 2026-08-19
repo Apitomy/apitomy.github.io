@@ -1280,13 +1280,14 @@
 </span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="w">    </span><span class="p">&lt;</span><span class="nt">WorkflowEditor</span>
 </span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="w">      </span><span class="na">workflow</span><span class="o">=</span><span class="p">{</span><span class="nx">workflow</span><span class="p">}</span>
 </span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="w">      </span><span class="na">onChange</span><span class="o">=</span><span class="p">{</span><span class="nx">setWorkflow</span><span class="p">}</span>
-</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="w">      </span><span class="na">onValidationChange</span><span class="o">=</span><span class="p">{(</span><span class="nx">problems</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="w">        </span><span class="kd">const</span><span class="w"> </span><span class="nx">hasErrors</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">problems</span><span class="p">.</span><span class="nx">some</span><span class="p">(</span><span class="nx">p</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">p</span><span class="p">.</span><span class="nx">severity</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="s1">'error'</span><span class="p">);</span>
-</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="w">        </span><span class="nx">setSaveDisabled</span><span class="p">(</span><span class="nx">hasErrors</span><span class="p">);</span>
-</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a><span class="w">      </span><span class="p">}}</span>
-</span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a><span class="w">    </span><span class="p">/&gt;</span>
-</span><span id="__span-0-16"><a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a><span class="w">  </span><span class="p">);</span>
-</span><span id="__span-0-17"><a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a><span class="p">}</span>
+</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="w">      </span><span class="na">theme</span><span class="o">=</span><span class="s">"light"</span>
+</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="w">      </span><span class="na">onValidationChange</span><span class="o">=</span><span class="p">{(</span><span class="nx">problems</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="w">        </span><span class="kd">const</span><span class="w"> </span><span class="nx">hasErrors</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">problems</span><span class="p">.</span><span class="nx">some</span><span class="p">(</span><span class="nx">p</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">p</span><span class="p">.</span><span class="nx">severity</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="s1">'error'</span><span class="p">);</span>
+</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a><span class="w">        </span><span class="nx">setSaveDisabled</span><span class="p">(</span><span class="nx">hasErrors</span><span class="p">);</span>
+</span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a><span class="w">      </span><span class="p">}}</span>
+</span><span id="__span-0-16"><a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a><span class="w">    </span><span class="p">/&gt;</span>
+</span><span id="__span-0-17"><a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a><span class="w">  </span><span class="p">);</span>
+</span><span id="__span-0-18"><a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a><span class="p">}</span>
 </span></code></pre></div>
 <h2 id="props">Props</h2>
 <table>
@@ -1310,6 +1311,18 @@
 <td><code>(workflow: Workflow) =&gt; void</code></td>
 <td>Yes</td>
 <td>Called on every change with the updated definition</td>
+</tr>
+<tr>
+<td><code>theme</code></td>
+<td><code>FlowTheme</code></td>
+<td>No</td>
+<td><code>'light'</code> or <code>'dark'</code> (default: <code>'light'</code>). Controls the color scheme of the editor and React Flow canvas</td>
+</tr>
+<tr>
+<td><code>validationProblems</code></td>
+<td><code>ValidationProblem[]</code></td>
+<td>No</td>
+<td>Externally-supplied validation problems to display alongside the editor's built-in validation</td>
 </tr>
 <tr>
 <td><code>onValidationChange</code></td>
