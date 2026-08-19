@@ -716,6 +716,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#handling-wait-states" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Handling Wait States
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#resolving-expressions" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1203,6 +1214,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#handling-wait-states" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Handling Wait States
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#resolving-expressions" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1325,7 +1347,7 @@
 <li>Enters the start node and evaluates outgoing edges</li>
 <li>Chains through action nodes until a wait state or end is reached</li>
 </ol>
-<p>The returned instance is in <code>WAITING</code> (hit a human-task or receive-event), <code>COMPLETED</code> (reached an end node), or <code>FAILED</code> (error during execution).</p>
+<p>The returned instance is in <code>WAITING</code> (hit a human-task, receive-event, or wait node), <code>COMPLETED</code> (reached an end node), or <code>FAILED</code> (error during execution).</p>
 <h2 id="completing-a-waiting-node">Completing a Waiting Node</h2>
 <div class="language-java highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">NodeResult</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">NodeResult</span><span class="p">(</span><span class="n">NodeResultStatus</span><span class="p">.</span><span class="na">COMPLETED</span><span class="p">,</span>
 </span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">    </span><span class="n">Map</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="s">"approved"</span><span class="p">,</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w"> </span><span class="s">"comment"</span><span class="p">,</span><span class="w"> </span><span class="s">"Looks good"</span><span class="p">));</span>
@@ -1348,12 +1370,44 @@
 <div class="language-java highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="kt">boolean</span><span class="w"> </span><span class="n">matches</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">engine</span><span class="p">.</span><span class="na">matchesEvent</span><span class="p">(</span><span class="n">definition</span><span class="p">,</span><span class="w"> </span><span class="n">instance</span><span class="p">,</span><span class="w"> </span><span class="n">eventPayload</span><span class="p">);</span>
 </span></code></pre></div>
 <p>See <a href="event-correlation.html">Event Correlation</a> for details.</p>
+<h2 id="handling-wait-states">Handling Wait States</h2>
+<p>The engine is stateless and synchronous — when it reaches a node that requires external input (Human Task, Receive Event, or Wait), it sets the instance to <code>WAITING</code> and returns. The consuming application is responsible for detecting the wait, handling it, and resuming the workflow. All three wait-state node types follow the same pattern:</p>
+<ol>
+<li><strong>Detect</strong> — after <code>startWorkflow</code> or <code>completeCurrentNode</code> returns, check <code>instance.status() == WAITING</code></li>
+<li><strong>Introspect</strong> — call the appropriate <code>get*Info</code> method to learn what the instance is waiting for</li>
+<li><strong>Handle</strong> — perform the external work (present a task inbox, listen for events, schedule a timer)</li>
+<li><strong>Resume</strong> — call <code>completeCurrentNode(workflow, instance, result)</code> with the outcome</li>
+</ol>
+<div class="language-java highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="n">WorkflowInstance</span><span class="w"> </span><span class="n">instance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">engine</span><span class="p">.</span><span class="na">startWorkflow</span><span class="p">(</span><span class="n">workflow</span><span class="p">,</span><span class="w"> </span><span class="n">inputs</span><span class="p">);</span>
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">instance</span><span class="p">.</span><span class="na">status</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">InstanceStatus</span><span class="p">.</span><span class="na">WAITING</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="w">    </span><span class="c1">// Try each introspection method — exactly one will return non-null</span>
+</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="w">    </span><span class="n">HumanTaskInfo</span><span class="w"> </span><span class="n">task</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">engine</span><span class="p">.</span><span class="na">getHumanTaskInfo</span><span class="p">(</span><span class="n">workflow</span><span class="p">,</span><span class="w"> </span><span class="n">instance</span><span class="p">);</span>
+</span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">task</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-5-7"><a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="w">        </span><span class="c1">// Create an inbox item with task.description(), task.inputs(), task.outputs()</span>
+</span><span id="__span-5-8"><a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="w">        </span><span class="c1">// When the human completes it, call completeCurrentNode with their response</span>
+</span><span id="__span-5-9"><a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-5-10"><a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a>
+</span><span id="__span-5-11"><a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a><span class="w">    </span><span class="n">ReceiveEventInfo</span><span class="w"> </span><span class="n">event</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">engine</span><span class="p">.</span><span class="na">getReceiveEventInfo</span><span class="p">(</span><span class="n">workflow</span><span class="p">,</span><span class="w"> </span><span class="n">instance</span><span class="p">);</span>
+</span><span id="__span-5-12"><a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">event</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-5-13"><a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a><span class="w">        </span><span class="c1">// Index the instance by event.eventType() for efficient matching</span>
+</span><span id="__span-5-14"><a id="__codelineno-5-14" name="__codelineno-5-14" href="#__codelineno-5-14"></a><span class="w">        </span><span class="c1">// When a matching event arrives, call completeCurrentNode with the event payload</span>
+</span><span id="__span-5-15"><a id="__codelineno-5-15" name="__codelineno-5-15" href="#__codelineno-5-15"></a><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-5-16"><a id="__codelineno-5-16" name="__codelineno-5-16" href="#__codelineno-5-16"></a>
+</span><span id="__span-5-17"><a id="__codelineno-5-17" name="__codelineno-5-17" href="#__codelineno-5-17"></a><span class="w">    </span><span class="n">WaitInfo</span><span class="w"> </span><span class="n">wait</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">engine</span><span class="p">.</span><span class="na">getWaitInfo</span><span class="p">(</span><span class="n">workflow</span><span class="p">,</span><span class="w"> </span><span class="n">instance</span><span class="p">);</span>
+</span><span id="__span-5-18"><a id="__codelineno-5-18" name="__codelineno-5-18" href="#__codelineno-5-18"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">wait</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-5-19"><a id="__codelineno-5-19" name="__codelineno-5-19" href="#__codelineno-5-19"></a><span class="w">        </span><span class="c1">// Schedule a timer for wait.duration()</span>
+</span><span id="__span-5-20"><a id="__codelineno-5-20" name="__codelineno-5-20" href="#__codelineno-5-20"></a><span class="w">        </span><span class="c1">// When it fires, call completeCurrentNode with an empty result</span>
+</span><span id="__span-5-21"><a id="__codelineno-5-21" name="__codelineno-5-21" href="#__codelineno-5-21"></a><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-5-22"><a id="__codelineno-5-22" name="__codelineno-5-22" href="#__codelineno-5-22"></a><span class="p">}</span>
+</span></code></pre></div>
+<p>The consuming application persists the instance and resumes it later when the external condition is met. The engine does not manage persistence, scheduling, or event subscriptions — those are the application's responsibility.</p>
 <h2 id="resolving-expressions">Resolving Expressions</h2>
-<div class="language-java highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="n">Object</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">engine</span><span class="p">.</span><span class="na">resolveExpression</span><span class="p">(</span><span class="s">"context.creditScore"</span><span class="p">,</span><span class="w"> </span><span class="n">instance</span><span class="p">.</span><span class="na">context</span><span class="p">());</span>
+<div class="language-java highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="n">Object</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">engine</span><span class="p">.</span><span class="na">resolveExpression</span><span class="p">(</span><span class="s">"context.creditScore"</span><span class="p">,</span><span class="w"> </span><span class="n">instance</span><span class="p">.</span><span class="na">context</span><span class="p">());</span>
 </span></code></pre></div>
 <p>Evaluates a Jakarta EL expression against a workflow context and returns the resolved value. Useful for rendering human task input values — for example, resolving display labels to their current context values. Supports nested map access and Jackson <code>JsonNode</code> navigation.</p>
 <h2 id="getting-human-task-info">Getting Human Task Info</h2>
-<div class="language-java highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="n">HumanTaskInfo</span><span class="w"> </span><span class="n">info</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">engine</span><span class="p">.</span><span class="na">getHumanTaskInfo</span><span class="p">(</span><span class="n">definition</span><span class="p">,</span><span class="w"> </span><span class="n">instance</span><span class="p">);</span>
+<div class="language-java highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="n">HumanTaskInfo</span><span class="w"> </span><span class="n">info</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">engine</span><span class="p">.</span><span class="na">getHumanTaskInfo</span><span class="p">(</span><span class="n">definition</span><span class="p">,</span><span class="w"> </span><span class="n">instance</span><span class="p">);</span>
 </span></code></pre></div>
 <p>Returns a <code>HumanTaskInfo</code> record when the instance is waiting at a human-task node, <code>null</code> otherwise. The record contains:</p>
 <table>
@@ -1394,7 +1448,7 @@
 </table>
 <p>Input EL expressions (from the node's config) are evaluated against the instance context automatically — the caller receives fully resolved values.</p>
 <h2 id="getting-receive-event-info">Getting Receive Event Info</h2>
-<div class="language-java highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="n">ReceiveEventInfo</span><span class="w"> </span><span class="n">info</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">engine</span><span class="p">.</span><span class="na">getReceiveEventInfo</span><span class="p">(</span><span class="n">definition</span><span class="p">,</span><span class="w"> </span><span class="n">instance</span><span class="p">);</span>
+<div class="language-java highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="n">ReceiveEventInfo</span><span class="w"> </span><span class="n">info</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">engine</span><span class="p">.</span><span class="na">getReceiveEventInfo</span><span class="p">(</span><span class="n">definition</span><span class="p">,</span><span class="w"> </span><span class="n">instance</span><span class="p">);</span>
 </span></code></pre></div>
 <p>Returns a <code>ReceiveEventInfo</code> record when the instance is waiting at a receive-event node, <code>null</code> otherwise. The record contains:</p>
 <table>
@@ -1430,7 +1484,7 @@
 </table>
 <p>The <code>eventType</code> can be used to index waiting instances for efficient event matching — only instances waiting for a given event type need to be checked when an event arrives.</p>
 <h2 id="getting-wait-info">Getting Wait Info</h2>
-<div class="language-java highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="n">WaitInfo</span><span class="w"> </span><span class="n">info</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">engine</span><span class="p">.</span><span class="na">getWaitInfo</span><span class="p">(</span><span class="n">definition</span><span class="p">,</span><span class="w"> </span><span class="n">instance</span><span class="p">);</span>
+<div class="language-java highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="n">WaitInfo</span><span class="w"> </span><span class="n">info</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">engine</span><span class="p">.</span><span class="na">getWaitInfo</span><span class="p">(</span><span class="n">definition</span><span class="p">,</span><span class="w"> </span><span class="n">instance</span><span class="p">);</span>
 </span></code></pre></div>
 <p>Returns a <code>WaitInfo</code> record when the instance is waiting at a wait node, <code>null</code> otherwise. The record contains:</p>
 <table>
@@ -1465,12 +1519,12 @@
 <p>A safety limit of 100 transitions per call prevents infinite loops from automated cycles. If the limit is reached, the workflow fails with a descriptive <code>failureReason</code>.</p>
 <h2 id="immutability">Immutability</h2>
 <p>All engine methods return a new <code>WorkflowInstance</code>. The input instance is never mutated:</p>
-<div class="language-java highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="n">WorkflowInstance</span><span class="w"> </span><span class="n">waiting</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">engine</span><span class="p">.</span><span class="na">startWorkflow</span><span class="p">(</span><span class="n">definition</span><span class="p">,</span><span class="w"> </span><span class="n">context</span><span class="p">);</span>
-</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="n">WorkflowInstance</span><span class="w"> </span><span class="n">completed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">engine</span><span class="p">.</span><span class="na">completeCurrentNode</span><span class="p">(</span><span class="n">definition</span><span class="p">,</span><span class="w"> </span><span class="n">waiting</span><span class="p">,</span><span class="w"> </span><span class="n">result</span><span class="p">);</span>
-</span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>
-</span><span id="__span-9-4"><a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="c1">// 'waiting' is unchanged</span>
-</span><span id="__span-9-5"><a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="k">assert</span><span class="w"> </span><span class="n">waiting</span><span class="p">.</span><span class="na">status</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">InstanceStatus</span><span class="p">.</span><span class="na">WAITING</span><span class="p">;</span>
-</span><span id="__span-9-6"><a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a><span class="k">assert</span><span class="w"> </span><span class="n">completed</span><span class="p">.</span><span class="na">status</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">InstanceStatus</span><span class="p">.</span><span class="na">COMPLETED</span><span class="p">;</span>
+<div class="language-java highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="n">WorkflowInstance</span><span class="w"> </span><span class="n">waiting</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">engine</span><span class="p">.</span><span class="na">startWorkflow</span><span class="p">(</span><span class="n">definition</span><span class="p">,</span><span class="w"> </span><span class="n">context</span><span class="p">);</span>
+</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="n">WorkflowInstance</span><span class="w"> </span><span class="n">completed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">engine</span><span class="p">.</span><span class="na">completeCurrentNode</span><span class="p">(</span><span class="n">definition</span><span class="p">,</span><span class="w"> </span><span class="n">waiting</span><span class="p">,</span><span class="w"> </span><span class="n">result</span><span class="p">);</span>
+</span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>
+</span><span id="__span-10-4"><a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="c1">// 'waiting' is unchanged</span>
+</span><span id="__span-10-5"><a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a><span class="k">assert</span><span class="w"> </span><span class="n">waiting</span><span class="p">.</span><span class="na">status</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">InstanceStatus</span><span class="p">.</span><span class="na">WAITING</span><span class="p">;</span>
+</span><span id="__span-10-6"><a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a><span class="k">assert</span><span class="w"> </span><span class="n">completed</span><span class="p">.</span><span class="na">status</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">InstanceStatus</span><span class="p">.</span><span class="na">COMPLETED</span><span class="p">;</span>
 </span></code></pre></div>
 <h2 id="threading">Threading</h2>
 <p>All engine methods are synchronous. When the engine invokes a <code>NodeExecutor</code>, it blocks until the executor returns. The consuming application can run engine calls on a background thread if async behavior is desired.</p>
