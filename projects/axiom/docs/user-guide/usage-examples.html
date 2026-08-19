@@ -1787,7 +1787,7 @@ it can choose from.</p>
 <p><strong>Script Template tab:</strong></p>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="ch">#!/bin/bash</span>
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="nb">set</span><span class="w"> </span>-euo<span class="w"> </span>pipefail
-</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>gh<span class="w"> </span>label<span class="w"> </span>list<span class="w"> </span>--repo<span class="w"> </span><span class="s2">&quot;{{repository}}&quot;</span><span class="w"> </span>--json<span class="w"> </span>name,description<span class="w"> </span>--limit<span class="w"> </span><span class="m">100</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>gh<span class="w"> </span>label<span class="w"> </span>list<span class="w"> </span>--repo<span class="w"> </span><span class="s2">"{{repository}}"</span><span class="w"> </span>--json<span class="w"> </span>name,description<span class="w"> </span>--limit<span class="w"> </span><span class="m">100</span>
 </span></code></pre></div>
 <hr />
 <h4 id="tool-fetch_github_issue">Tool: <code>fetch_github_issue</code></h4>
@@ -1834,7 +1834,7 @@ to understand what the issue is about.</p>
 <p><strong>Script Template tab:</strong></p>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="ch">#!/bin/bash</span>
 </span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="nb">set</span><span class="w"> </span>-euo<span class="w"> </span>pipefail
-</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>gh<span class="w"> </span>issue<span class="w"> </span>view<span class="w"> </span><span class="s2">&quot;{{issue_ref}}&quot;</span><span class="w"> </span>--json<span class="w"> </span>title,body,labels
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>gh<span class="w"> </span>issue<span class="w"> </span>view<span class="w"> </span><span class="s2">"{{issue_ref}}"</span><span class="w"> </span>--json<span class="w"> </span>title,body,labels
 </span></code></pre></div>
 <hr />
 <h4 id="tool-apply_github_labels">Tool: <code>apply_github_labels</code></h4>
@@ -1886,7 +1886,7 @@ to understand what the issue is about.</p>
 <p><strong>Script Template tab:</strong></p>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="ch">#!/bin/bash</span>
 </span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="nb">set</span><span class="w"> </span>-euo<span class="w"> </span>pipefail
-</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>gh<span class="w"> </span>issue<span class="w"> </span>edit<span class="w"> </span><span class="s2">&quot;{{issue_ref}}&quot;</span><span class="w"> </span>--add-label<span class="w"> </span><span class="s2">&quot;{{labels}}&quot;</span>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>gh<span class="w"> </span>issue<span class="w"> </span>edit<span class="w"> </span><span class="s2">"{{issue_ref}}"</span><span class="w"> </span>--add-label<span class="w"> </span><span class="s2">"{{labels}}"</span>
 </span></code></pre></div>
 <h3 id="step-4-create-the-action-type">Step 4: Create the Action Type</h3>
 <p>Navigate to <strong>Configuration &gt; Action Types</strong> and click <strong>Create Action Type</strong>:</p>
@@ -1943,7 +1943,7 @@ to understand what the issue is about.</p>
 </span></code></pre></div>
 <p><strong>Prompt Template tab:</strong></p>
 <div class="language-markdown highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>You are a GitHub issue labeling assistant. A new issue has been created and your job
-</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>is to apply the most relevant labels from the repository&#39;s existing label set.
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>is to apply the most relevant labels from the repository's existing label set.
 </span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>
 </span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="gu">## Instructions</span>
 </span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>
@@ -2112,14 +2112,14 @@ GitHub notifications API for @mentions.</p>
 </span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>gh<span class="w"> </span>api<span class="w"> </span>/notifications<span class="w"> </span><span class="se">\</span>
 </span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="w">  </span>-X<span class="w"> </span>GET<span class="w"> </span><span class="se">\</span>
 </span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="w">  </span>-f<span class="w"> </span><span class="nv">all</span><span class="o">=</span><span class="nb">true</span><span class="w"> </span><span class="se">\</span>
-</span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="w">  </span>-f<span class="w"> </span><span class="nv">since</span><span class="o">=</span><span class="s2">&quot;{{since}}&quot;</span><span class="w"> </span><span class="se">\</span>
-</span><span id="__span-5-7"><a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="w">  </span>--jq<span class="w"> </span><span class="s1">&#39;[.[] | select(.reason == &quot;mention&quot;) | {</span>
+</span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="w">  </span>-f<span class="w"> </span><span class="nv">since</span><span class="o">=</span><span class="s2">"{{since}}"</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-5-7"><a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="w">  </span>--jq<span class="w"> </span><span class="s1">'[.[] | select(.reason == "mention") | {</span>
 </span><span id="__span-5-8"><a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="s1">    repo: .repository.full_name,</span>
 </span><span id="__span-5-9"><a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a><span class="s1">    title: .subject.title,</span>
 </span><span id="__span-5-10"><a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a><span class="s1">    type: .subject.type,</span>
 </span><span id="__span-5-11"><a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a><span class="s1">    url: .subject.url,</span>
 </span><span id="__span-5-12"><a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a><span class="s1">    updated: .updated_at</span>
-</span><span id="__span-5-13"><a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a><span class="s1">  }]&#39;</span>
+</span><span id="__span-5-13"><a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a><span class="s1">  }]'</span>
 </span></code></pre></div>
 <p>This script uses the GitHub notifications API with <code>reason == "mention"</code> to filter for
 only @mentions. The <code>since</code> parameter limits results to the report's time window.</p>
@@ -2195,7 +2195,7 @@ only @mentions. The <code>since</code> parameter limits results to the report's 
 </span><span id="__span-7-10"><a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a>Produce a Markdown report with the following structure:
 </span><span id="__span-7-11"><a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a>
 </span><span id="__span-7-12"><a id="__codelineno-7-12" name="__codelineno-7-12" href="#__codelineno-7-12"></a><span class="gu">### Header</span>
-</span><span id="__span-7-13"><a id="__codelineno-7-13" name="__codelineno-7-13" href="#__codelineno-7-13"></a><span class="k">-</span><span class="w"> </span>Title: &quot;Weekly <span class="ni">@Mentions</span> Report&quot;
+</span><span id="__span-7-13"><a id="__codelineno-7-13" name="__codelineno-7-13" href="#__codelineno-7-13"></a><span class="k">-</span><span class="w"> </span>Title: "Weekly <span class="ni">@Mentions</span> Report"
 </span><span id="__span-7-14"><a id="__codelineno-7-14" name="__codelineno-7-14" href="#__codelineno-7-14"></a><span class="k">-</span><span class="w"> </span>Date range: {{timeRangeStart}} to {{timeRangeEnd}}
 </span><span id="__span-7-15"><a id="__codelineno-7-15" name="__codelineno-7-15" href="#__codelineno-7-15"></a>
 </span><span id="__span-7-16"><a id="__codelineno-7-16" name="__codelineno-7-16" href="#__codelineno-7-16"></a><span class="gu">### Summary</span>
