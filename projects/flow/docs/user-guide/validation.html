@@ -846,6 +846,17 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#structural-warning" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Structural (WARNING)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#connectivity-error-warning" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1222,6 +1233,17 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#structural-warning" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Structural (WARNING)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#connectivity-error-warning" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1302,7 +1324,9 @@
 
 
 <h1 id="validation">Validation</h1>
-<p>The engine provides a <code>WorkflowValidator</code> that checks workflow definitions for structural and semantic problems before execution. The same rules are implemented in TypeScript for real-time validation in the visual editor.</p>
+<p>The engine provides a <code>WorkflowValidator</code> that checks workflow definitions for structural and
+semantic problems before execution. The same rules are implemented in TypeScript for real-time
+validation in the visual editor.</p>
 <h2 id="usage">Usage</h2>
 <h3 id="java">Java</h3>
 <div class="language-java highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="n">WorkflowValidator</span><span class="w"> </span><span class="n">validator</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">WorkflowValidator</span><span class="p">();</span>
@@ -1335,7 +1359,8 @@
 </tr>
 </tbody>
 </table>
-<p><code>startWorkflow</code> automatically validates the definition and rejects workflows with ERROR-level problems.</p>
+<p><code>startWorkflow</code> automatically validates the definition and rejects workflows with ERROR-level
+problems.</p>
 <h2 id="validation-rules">Validation Rules</h2>
 <h3 id="structural-error">Structural (ERROR)</h3>
 <table>
@@ -1346,6 +1371,26 @@
 </tr>
 </thead>
 <tbody>
+<tr>
+<td><code>EMPTY_WORKFLOW</code></td>
+<td>Workflow has no nodes at all</td>
+</tr>
+<tr>
+<td><code>MISSING_WORKFLOW_ID</code></td>
+<td>Workflow has no ID (null or blank)</td>
+</tr>
+<tr>
+<td><code>MISSING_WORKFLOW_NAME</code></td>
+<td>Workflow has no name (null or blank)</td>
+</tr>
+<tr>
+<td><code>MISSING_NODE_ID</code></td>
+<td>Node has no ID (null or blank)</td>
+</tr>
+<tr>
+<td><code>MISSING_EDGE_ID</code></td>
+<td>Edge has no ID (null or blank)</td>
+</tr>
 <tr>
 <td><code>NO_START_NODE</code></td>
 <td>Exactly one start node is required</td>
@@ -1385,6 +1430,29 @@
 <tr>
 <td><code>MISSING_ACTION_TYPE</code></td>
 <td>Action node has no <code>actionType</code> in its config</td>
+</tr>
+<tr>
+<td><code>INVALID_ACTION_TYPE_VALUE</code></td>
+<td>Action node <code>actionType</code> is present but not a non-blank string</td>
+</tr>
+<tr>
+<td><code>INVALID_WAIT_DURATION</code></td>
+<td>Wait node <code>duration</code> is present but not a valid ISO 8601 duration</td>
+</tr>
+</tbody>
+</table>
+<h3 id="structural-warning">Structural (WARNING)</h3>
+<table>
+<thead>
+<tr>
+<th>Code</th>
+<th>Rule</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>MISSING_NODE_NAME</code></td>
+<td>Node has no name (null or blank)</td>
 </tr>
 </tbody>
 </table>
@@ -1435,6 +1503,22 @@
 </thead>
 <tbody>
 <tr>
+<td><code>SELF_LOOP_EDGE</code></td>
+<td>Edge connects a node to itself</td>
+</tr>
+<tr>
+<td><code>DUPLICATE_EDGE</code></td>
+<td>Multiple edges share the same source and target</td>
+</tr>
+<tr>
+<td><code>DEFAULT_EDGE_WITH_CONDITION</code></td>
+<td>Default edge has a condition that will never be evaluated</td>
+</tr>
+<tr>
+<td><code>SINGLE_CONDITIONAL_EDGE</code></td>
+<td>Node has a single outgoing edge with a condition but no fallback</td>
+</tr>
+<tr>
 <td><code>NO_DEFAULT_EDGE</code></td>
 <td>Node has multiple conditional edges but no default fallback</td>
 </tr>
@@ -1470,6 +1554,10 @@
 <td>Receive-event node has no <code>eventType</code> configured</td>
 </tr>
 <tr>
+<td><code>INVALID_EVENT_TYPE_VALUE</code></td>
+<td>Receive-event node <code>eventType</code> is not a non-blank string</td>
+</tr>
+<tr>
 <td><code>UNCONDITIONAL_MULTIPLE_EDGES</code></td>
 <td>Node has multiple outgoing edges with no conditions</td>
 </tr>
@@ -1482,12 +1570,48 @@
 <td>Start node has no inputs defined</td>
 </tr>
 <tr>
+<td><code>INVALID_INPUT_DEFINITION</code></td>
+<td>Start node input entry is missing a name</td>
+</tr>
+<tr>
+<td><code>DUPLICATE_INPUT_NAME</code></td>
+<td>Start node has multiple inputs with the same name</td>
+</tr>
+<tr>
+<td><code>MISSING_ACTION_INPUTS</code></td>
+<td>Action node has no inputs defined</td>
+</tr>
+<tr>
+<td><code>INVALID_INPUTS_TYPE</code></td>
+<td>Action node <code>inputs</code> is present but not a Map</td>
+</tr>
+<tr>
+<td><code>MISSING_ACTION_OUTPUTS</code></td>
+<td>Action node has no outputs defined</td>
+</tr>
+<tr>
+<td><code>INVALID_OUTPUTS_TYPE</code></td>
+<td>Action node <code>outputs</code> is present but not a List</td>
+</tr>
+<tr>
+<td><code>DUPLICATE_OUTPUT_NAME</code></td>
+<td>Action or human-task node has duplicate output names</td>
+</tr>
+<tr>
+<td><code>EMPTY_ACTION_INPUT_EXPRESSION</code></td>
+<td>Action node input has an empty or blank EL expression</td>
+</tr>
+<tr>
 <td><code>MISSING_TASK_DESCRIPTION</code></td>
 <td>Human task node has no description</td>
 </tr>
 <tr>
 <td><code>MISSING_TASK_OUTPUTS</code></td>
 <td>Human task node has no outputs defined</td>
+</tr>
+<tr>
+<td><code>EMPTY_TASK_INPUT_EXPRESSION</code></td>
+<td>Human task input has an empty or blank EL expression</td>
 </tr>
 <tr>
 <td><code>MISSING_WAIT_DURATION</code></td>
@@ -1505,7 +1629,9 @@
 </span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="p">)</span><span class="w"> </span><span class="p">{}</span>
 </span></code></pre></div>
 <h2 id="typescript-validator-notes">TypeScript Validator Notes</h2>
-<p>The TypeScript implementation covers all rules except <code>INVALID_CONDITION</code>, which requires parsing Jakarta EL expressions (a Java library). All other rules are structural or semantic checks that work identically in both languages.</p>
+<p>The TypeScript implementation covers all rules except <code>INVALID_CONDITION</code>, which requires parsing
+Jakarta EL expressions (a Java library). All other rules are structural or semantic checks that
+work identically in both languages.</p>
 
 
 
