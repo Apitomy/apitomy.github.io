@@ -48,6 +48,37 @@
         line-height: 1.6;
     }
 
+    .deprecated-hero-badge {
+        display: inline-block;
+        background: rgba(255, 255, 255, 0.2);
+        border: 1px solid rgba(255, 255, 255, 0.4);
+        color: #FFFFFF;
+        font-size: 0.85rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        padding: 4px 14px;
+        border-radius: 20px;
+        margin-bottom: 12px;
+    }
+
+    .deprecation-notice {
+        background: rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.25);
+        border-radius: 8px;
+        padding: 12px 20px;
+        margin: 20px auto 0;
+        max-width: 560px;
+        font-size: 0.95rem;
+        color: rgba(255, 255, 255, 0.9);
+
+        a {
+            color: #FFFFFF;
+            font-weight: 600;
+            text-decoration: underline;
+        }
+    }
+
     .project-hero-actions {
         display: flex;
         justify-content: center;

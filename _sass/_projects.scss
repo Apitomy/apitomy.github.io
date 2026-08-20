@@ -89,4 +89,26 @@ a.project-card {
             }
         }
     }
+
+    &.project-card--deprecated {
+        opacity: 0.6;
+
+        &:hover {
+            opacity: 0.8;
+        }
+    }
+
+    .deprecated-badge {
+        display: inline-block;
+        background: #78716C;
+        color: #FFFFFF;
+        font-size: 0.7rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        padding: 2px 8px;
+        border-radius: 4px;
+        margin-left: 8px;
+        vertical-align: middle;
+    }
 }
