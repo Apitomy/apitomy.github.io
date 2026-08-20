@@ -1711,7 +1711,7 @@ configuration.</p>
 <hr />
 <h2 id="adding-an-ai-engine">Adding an AI Engine</h2>
 <p>An AI engine provides the ability to invoke an LLM for manager evaluations and task
-execution. Axiom ships with two engines: Claude Code and OpenCode.</p>
+execution. Axiom ships with three engines: Claude Code, OpenCode, and GitHub Copilot CLI.</p>
 <h3 id="interface-aiengine">Interface: <code>AiEngine</code></h3>
 <p>Location: <code>engine/spi/src/main/java/io/apitomy/axiom/engine/spi/AiEngine.java</code></p>
 <table>
@@ -1724,7 +1724,7 @@ execution. Axiom ships with two engines: Claude Code and OpenCode.</p>
 <tbody>
 <tr>
 <td><code>String getType()</code></td>
-<td>Engine identifier (e.g. <code>"claude-code"</code>, <code>"opencode"</code>)</td>
+<td>Engine identifier (e.g. <code>"claude-code"</code>, <code>"opencode"</code>, <code>"copilot"</code>)</td>
 </tr>
 <tr>
 <td><code>CompletableFuture&lt;AiEngineResult&gt; prompt(AiEngineConfig config, String prompt)</code></td>
@@ -1801,6 +1801,8 @@ implementations.</p>
   subprocess-based, launches <code>claude</code> CLI</li>
 <li><strong>OpenCode</strong>: <code>engine/opencode/src/main/java/.../OpenCodeEngine.java</code> —
   HTTP client against a running OpenCode server</li>
+<li><strong>GitHub Copilot CLI</strong>: <code>engine/copilot/src/main/java/.../CopilotEngine.java</code> —
+  subprocess-based, launches <code>copilot</code> CLI</li>
 </ul>
 <hr />
 <h2 id="adding-an-actor">Adding an Actor</h2>
@@ -1888,6 +1890,8 @@ is resolved from the engine type via <code>AiEngineRegistry.getActorType()</code
   launches <code>claude</code> CLI as a subprocess</li>
 <li><strong>OpenCode</strong>: <code>engine/opencode/src/main/java/.../OpenCodeActor.java</code> — invokes
   OpenCode server via HTTP</li>
+<li><strong>GitHub Copilot CLI</strong>: <code>engine/copilot/src/main/java/.../CopilotActor.java</code> —
+  launches <code>copilot</code> CLI as a subprocess</li>
 <li><strong>Human</strong>: <code>actors/human/</code> — sends notifications, waits for human response</li>
 </ul>
 <hr />

@@ -2391,7 +2391,7 @@ reviews. A Jira event source polls for new issues and comments.</p>
 automatically copied to the new project.</p>
 <h3 id="ai-manager">AI Manager</h3>
 <p>The Manager receives events and produces structured decisions. It uses the configured AI
-engine (Claude Code or OpenCode) to analyze each event in context.</p>
+engine (Claude Code, OpenCode, or GitHub Copilot CLI) to analyze each event in context.</p>
 <p>The Manager's behavior is controlled by two editable templates:</p>
 <ul>
 <li><strong>System prompt</strong> — defines the Manager's role, personality, and output format. This
@@ -2677,7 +2677,7 @@ duration. Task statuses:</p>
 </table>
 <h3 id="actors">Actors</h3>
 <p>An Actor is an entity that performs tasks. Axiom supports two types:</p>
-<p><strong>AI Agent</strong> — uses the configured AI engine (Claude Code or OpenCode) as a subprocess.
+<p><strong>AI Agent</strong> — uses the configured AI engine (Claude Code, OpenCode, or GitHub Copilot CLI) as a subprocess.
 The agent receives the action type's prompt template, runs with the allowed tools, and
 reports back with results.</p>
 <p><strong>Human</strong> — sends notifications (via Slack or Telegram, when configured) to a team
@@ -2960,6 +2960,11 @@ for Manager evaluations and actor task execution:</p>
 <td><code>opencode</code></td>
 <td>OpenCode CLI with multi-provider support</td>
 </tr>
+<tr>
+<td><strong>GitHub Copilot CLI</strong></td>
+<td><code>copilot</code></td>
+<td>GitHub's Copilot CLI</td>
+</tr>
 </tbody>
 </table>
 <p>Individual action types can override the global engine and model selection, allowing you
@@ -3052,7 +3057,7 @@ is shown instead.</p>
 </span><span id="__span-5-7"><a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>│    ├─ allowed tools ────────┼──► Tools / @Toolsets / MCP Servers     │
 </span><span id="__span-5-8"><a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a>│    └─ environment ──────────┼──► Secrets                             │
 </span><span id="__span-5-9"><a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a>│                             │                                       │
-</span><span id="__span-5-10"><a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a>│                         AI Engine (Claude Code / OpenCode)           │
+</span><span id="__span-5-10"><a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a>│                    AI Engine (Claude Code / OpenCode / Copilot)      │
 </span><span id="__span-5-11"><a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a>│                                                                     │
 </span><span id="__span-5-12"><a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a>├─────────────────────────────────────────────────────────────────────┤
 </span><span id="__span-5-13"><a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a>│                   EVENT-DRIVEN AUTOMATION                            │
@@ -3069,7 +3074,7 @@ is shown instead.</p>
 </span><span id="__span-5-24"><a id="__codelineno-5-24" name="__codelineno-5-24" href="#__codelineno-5-24"></a>│                             Tools / @Toolsets / MCP Servers ◄──┘     │
 </span><span id="__span-5-25"><a id="__codelineno-5-25" name="__codelineno-5-25" href="#__codelineno-5-25"></a>│                             Secrets ◄──────────────────────────┘     │
 </span><span id="__span-5-26"><a id="__codelineno-5-26" name="__codelineno-5-26" href="#__codelineno-5-26"></a>│                                                                     │
-</span><span id="__span-5-27"><a id="__codelineno-5-27" name="__codelineno-5-27" href="#__codelineno-5-27"></a>│                         AI Engine (Claude Code / OpenCode)           │
+</span><span id="__span-5-27"><a id="__codelineno-5-27" name="__codelineno-5-27" href="#__codelineno-5-27"></a>│                    AI Engine (Claude Code / OpenCode / Copilot)      │
 </span><span id="__span-5-28"><a id="__codelineno-5-28" name="__codelineno-5-28" href="#__codelineno-5-28"></a>│                                                                     │
 </span><span id="__span-5-29"><a id="__codelineno-5-29" name="__codelineno-5-29" href="#__codelineno-5-29"></a>├─────────────────────────────────────────────────────────────────────┤
 </span><span id="__span-5-30"><a id="__codelineno-5-30" name="__codelineno-5-30" href="#__codelineno-5-30"></a>│                      SCHEDULED JOBS                                  │
@@ -3080,7 +3085,7 @@ is shown instead.</p>
 </span><span id="__span-5-35"><a id="__codelineno-5-35" name="__codelineno-5-35" href="#__codelineno-5-35"></a>│    ├─ allowed tools ───────┼──► Tools / @Toolsets / MCP Servers       │
 </span><span id="__span-5-36"><a id="__codelineno-5-36" name="__codelineno-5-36" href="#__codelineno-5-36"></a>│    └─ environment ─────────┼──► Secrets                               │
 </span><span id="__span-5-37"><a id="__codelineno-5-37" name="__codelineno-5-37" href="#__codelineno-5-37"></a>│                            │                                         │
-</span><span id="__span-5-38"><a id="__codelineno-5-38" name="__codelineno-5-38" href="#__codelineno-5-38"></a>│                        AI Engine (Claude Code / OpenCode)             │
+</span><span id="__span-5-38"><a id="__codelineno-5-38" name="__codelineno-5-38" href="#__codelineno-5-38"></a>│                   AI Engine (Claude Code / OpenCode / Copilot)        │
 </span><span id="__span-5-39"><a id="__codelineno-5-39" name="__codelineno-5-39" href="#__codelineno-5-39"></a>└─────────────────────────────────────────────────────────────────────┘
 </span></code></pre></div>
 <p><strong>Shared building blocks</strong>: Tools, Toolsets, MCP Servers, Secrets, and the AI Engine

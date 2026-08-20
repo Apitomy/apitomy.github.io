@@ -589,6 +589,17 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#github-copilot-cli-settings" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        GitHub Copilot CLI Settings
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -1256,6 +1267,17 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#github-copilot-cli-settings" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        GitHub Copilot CLI Settings
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -1400,7 +1422,7 @@ full details on property sources and precedence.</p>
 <tr>
 <td><code>axiom.ai-engine</code></td>
 <td><code>claude-code</code></td>
-<td>AI engine to use (<code>claude-code</code> or <code>opencode</code>)</td>
+<td>AI engine to use (<code>claude-code</code>, <code>opencode</code>, or <code>copilot</code>)</td>
 </tr>
 </tbody>
 </table>
@@ -1470,6 +1492,33 @@ full details on property sources and precedence.</p>
 <td><code>axiom.opencode.timeout-seconds</code></td>
 <td><code>600</code></td>
 <td>HTTP request timeout</td>
+</tr>
+</tbody>
+</table>
+<h4 id="github-copilot-cli-settings">GitHub Copilot CLI Settings</h4>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>axiom.copilot.executable</code></td>
+<td><code>copilot</code></td>
+<td>Path to the Copilot CLI binary</td>
+</tr>
+<tr>
+<td><code>axiom.copilot.model</code></td>
+<td><em>(engine default)</em></td>
+<td>AI model override</td>
+</tr>
+<tr>
+<td><code>axiom.copilot.timeout-seconds</code></td>
+<td><code>600</code></td>
+<td>Subprocess timeout</td>
 </tr>
 </tbody>
 </table>
