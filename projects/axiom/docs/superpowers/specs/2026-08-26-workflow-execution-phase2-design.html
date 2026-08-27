@@ -1,0 +1,2068 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Event-driven project orchestration platform">
+      
+      
+        <meta name="author" content="Apitomy">
+      
+      
+        <link rel="canonical" href="https://www.apitomy.io/projects/axiom/docs/superpowers/specs/2026-08-26-workflow-execution-phase2-design.html">
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>Workflow Execution — Phase 2 Design - Apitomy Axiom</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../theme/css/project-colors.css">
+    
+      <link rel="stylesheet" href="../../theme/css/apitomy-base.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#workflow-execution-phase-2-design" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+        <aside class="md-banner">
+          <div class="md-banner__inner md-grid md-typeset">
+            
+            
+<div class="apitomy-masthead">
+    <div class="apitomy-masthead-inner">
+        <a href="https://www.apitomy.io/" class="apitomy-masthead-logo">Apitomy</a>
+        <nav class="apitomy-masthead-nav">
+            <a href="https://www.apitomy.io/#projects">Projects</a>
+            <a href="https://www.apitomy.io/blog/">Blog</a>
+            <a href="https://github.com/Apitomy" class="apitomy-masthead-github" aria-label="GitHub">
+                <svg width="22" height="22" viewBox="0 0 16 16" fill="currentColor">
+                    <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/>
+                </svg>
+            </a>
+        </nav>
+    </div>
+</div>
+
+          </div>
+          
+        </aside>
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../index.html" title="Apitomy Axiom" class="md-header__button md-logo" aria-label="Apitomy Axiom" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Apitomy Axiom
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Workflow Execution — Phase 2 Design
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom"  aria-hidden="true"  type="radio" name="__palette" id="__palette_0">
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="Share" aria-label="Share" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/Apitomy/apitomy-axiom" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Apitomy/apitomy-axiom
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../index.html" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../getting-started/running-axiom.html" class="md-tabs__link">
+          
+  
+  
+  Getting Started
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../user-guide/concepts.html" class="md-tabs__link">
+          
+  
+  
+  User Guide
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../developer-guide/stack-and-architecture.html" class="md-tabs__link">
+          
+  
+  
+  Developer Guide
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../index.html" title="Apitomy Axiom" class="md-nav__button md-logo" aria-label="Apitomy Axiom" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Apitomy Axiom
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/Apitomy/apitomy-axiom" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Apitomy/apitomy-axiom
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Getting Started
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Getting Started
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../getting-started/running-axiom.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Running Axiom
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../getting-started/configuring-axiom.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Configuring Axiom
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../getting-started/contributing.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    How to Contribute
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    User Guide
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    User Guide
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../user-guide/concepts.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Concepts
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../user-guide/navigating-the-ui.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Navigating the UI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../user-guide/usage-examples.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Usage Examples
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../user-guide/ai-assistant.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AI Assistant
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../user-guide/logging-and-debugging.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Logging and Debugging
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Developer Guide
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Developer Guide
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../developer-guide/stack-and-architecture.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Stack & Architecture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../developer-guide/building-axiom.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Building Axiom
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../developer-guide/how-to-contribute.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    How to Contribute
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../developer-guide/api-first-development.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API-First Development
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../developer-guide/database-and-migrations.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Database & Migrations
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../developer-guide/tracing.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tracing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../developer-guide/ui-development.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UI Development
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../developer-guide/extending-axiom.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Extending Axiom
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Summary
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#data-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Data Model
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Data Model">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#workflow_instance-table" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        workflow_instance table
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modification-to-task-table" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Modification to task table
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#persistence-pattern" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Persistence pattern
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#api-design" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        API Design
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="API Design">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#workflow-instance-endpoints" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Workflow Instance endpoints
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#trigger-request" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Trigger request
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-instance" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Get instance
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cancel-instance" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cancel instance
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#response-schemas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Response schemas
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modification-to-existing-project-response" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Modification to existing Project response
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#backend-architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Backend Architecture
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Backend Architecture">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#workflowexecutionservice" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        WorkflowExecutionService
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#workflowengine-instantiation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        WorkflowEngine instantiation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#axiomworkfloweventlistener" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AxiomWorkflowEventListener
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#integration-with-existing-taskexecutionservice" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Integration with existing TaskExecutionService
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#task-completion-workflow-advancement-flow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Task completion → workflow advancement flow
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#node-type-validation-at-trigger-time" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Node type validation at trigger time
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#initial-context" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Initial context
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#rest-resource" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        REST Resource
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="REST Resource">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#workflowinstanceresourceimpl" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        WorkflowInstanceResourceImpl
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sse-event-type" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SSE event type
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ui-implementation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        UI Implementation
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="UI Implementation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#workflow-tab-on-projectdetailpage" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Workflow tab on ProjectDetailPage
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#trigger-modal" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Trigger modal
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#workflowviewer-integration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        WorkflowViewer integration
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#real-time-updates" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Real-time updates
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hasworkflowinstance-indicator" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        hasWorkflowInstance indicator
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#api-client-additions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        API client additions
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#testing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Testing
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Testing">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#backend-integration-tests" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Backend integration tests
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#manual-browser-testing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Manual browser testing
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#future-phases" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Future phases
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="workflow-execution-phase-2-design">Workflow Execution — Phase 2 Design</h1>
+<p><strong>Date:</strong> 2026-08-26
+<strong>Epic:</strong> Custom Workflow Feature for Axiom
+<strong>Prerequisite:</strong> Phase 1 (Workflow Definitions) — complete and merged</p>
+<h2 id="summary">Summary</h2>
+<p>Make workflow definitions runnable. Users trigger a published workflow on a project, and Axiom
+executes it — advancing through action nodes by creating Axiom tasks, tracking progress in a
+persisted workflow instance, and displaying real-time execution state in a <code>WorkflowViewer</code> on
+the project detail page.</p>
+<p>Phase 2 supports <strong>start</strong>, <strong>end</strong>, and <strong>action</strong> node types only. Human-task, receive-event,
+and wait nodes are deferred to later phases; workflows containing those node types are rejected
+at trigger time.</p>
+<p>Apitomy Flow provides:
+- <strong>Java engine</strong> (<code>io.apitomy:apitomy-flow-engine</code>) — stateless execution engine with async
+  support via <code>NodeResult(PENDING)</code>
+- <strong>React UI</strong> (<code>@apitomy/flow-ui</code>) — <code>WorkflowViewer</code> component for read-only instance
+  visualization with execution history</p>
+<h2 id="data-model">Data Model</h2>
+<h3 id="workflow_instance-table"><code>workflow_instance</code> table</h3>
+<p>Stores one workflow instance per project. The instance state is the serialized Flow
+<code>WorkflowInstance</code> record, with key fields denormalized for efficient queries.</p>
+<table>
+<thead>
+<tr>
+<th>Column</th>
+<th>Type</th>
+<th>Constraints</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>id</code></td>
+<td><code>bigint</code></td>
+<td>PK, auto</td>
+<td></td>
+</tr>
+<tr>
+<td><code>project_id</code></td>
+<td><code>bigint</code></td>
+<td>FK → project, NOT NULL, UNIQUE</td>
+<td>One instance per project</td>
+</tr>
+<tr>
+<td><code>definition_id</code></td>
+<td><code>bigint</code></td>
+<td>FK → workflow_definition, NOT NULL</td>
+<td>Which definition was used</td>
+</tr>
+<tr>
+<td><code>definition_version</code></td>
+<td><code>int</code></td>
+<td>NOT NULL</td>
+<td>Pinned version at trigger time</td>
+</tr>
+<tr>
+<td><code>instance_state</code></td>
+<td><code>text</code></td>
+<td>NOT NULL</td>
+<td>Serialized Flow <code>WorkflowInstance</code> JSON</td>
+</tr>
+<tr>
+<td><code>status</code></td>
+<td><code>varchar</code></td>
+<td>NOT NULL</td>
+<td>Denormalized: running, waiting, completed, failed, cancelled</td>
+</tr>
+<tr>
+<td><code>current_node_id</code></td>
+<td><code>varchar</code></td>
+<td></td>
+<td>Denormalized for queries</td>
+</tr>
+<tr>
+<td><code>failure_reason</code></td>
+<td><code>text</code></td>
+<td></td>
+<td>Set on failure</td>
+</tr>
+<tr>
+<td><code>started_on</code></td>
+<td><code>timestamp</code></td>
+<td>NOT NULL</td>
+<td></td>
+</tr>
+<tr>
+<td><code>completed_on</code></td>
+<td><code>timestamp</code></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Sequence:</strong> <code>workflow_instance_SEQ START WITH 1 INCREMENT BY 50</code></p>
+<p><strong>Constraints:</strong>
+- <code>UNIQUE (project_id)</code> — enforces one-instance-per-project
+- FK <code>project_id</code> → <code>project(id)</code>
+- FK <code>definition_id</code> → <code>workflow_definition(id)</code></p>
+<h3 id="modification-to-task-table">Modification to <code>task</code> table</h3>
+<p>Add a nullable column to link workflow-spawned tasks back to their instance:</p>
+<table>
+<thead>
+<tr>
+<th>Column</th>
+<th>Type</th>
+<th>Constraints</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>workflow_instance_id</code></td>
+<td><code>bigint</code></td>
+<td>FK → workflow_instance(id), nullable</td>
+<td>Links task to its workflow instance</td>
+</tr>
+</tbody>
+</table>
+<h3 id="persistence-pattern">Persistence pattern</h3>
+<p>After every engine call (<code>startWorkflow</code>, <code>completeCurrentNode</code>, <code>cancelWorkflow</code>), the
+returned <code>WorkflowInstance</code> is serialized to JSON via Jackson and saved to <code>instance_state</code>.
+The denormalized <code>status</code>, <code>current_node_id</code>, and <code>failure_reason</code> columns are updated at the
+same time.</p>
+<p>To retrieve the workflow definition content at runtime, join through
+<code>definition_id</code> + <code>definition_version</code> → <code>workflow_definition_version.content</code>.</p>
+<h2 id="api-design">API Design</h2>
+<h3 id="workflow-instance-endpoints">Workflow Instance endpoints</h3>
+<p>All scoped under projects since instances are one-per-project.</p>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Path</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>POST</code></td>
+<td><code>/api/v1/projects/{projectId}/workflow</code></td>
+<td>Trigger a workflow on this project</td>
+</tr>
+<tr>
+<td><code>GET</code></td>
+<td><code>/api/v1/projects/{projectId}/workflow</code></td>
+<td>Get the workflow instance for this project</td>
+</tr>
+<tr>
+<td><code>DELETE</code></td>
+<td><code>/api/v1/projects/{projectId}/workflow</code></td>
+<td>Cancel a running/waiting instance</td>
+</tr>
+</tbody>
+</table>
+<h3 id="trigger-request">Trigger request</h3>
+<p><code>POST /api/v1/projects/{projectId}/workflow</code></p>
+<p><strong>Request body</strong> (<code>TriggerWorkflow</code>):
+<div class="language-json highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="p">{</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">    </span><span class="nt">"workflowDefinitionId"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="p">}</span>
+</span></code></pre></div></p>
+<p><strong>Behavior:</strong>
+1. Check no instance already exists for this project → 409 Conflict if one does.
+2. Load the workflow definition and its current published version → 400 if never published.
+3. Deserialize the version content into a Flow <code>Workflow</code> object.
+4. Validate the workflow contains only supported node types (start, end, action) → 400 with
+   error message if it contains human-task, receive-event, or wait nodes.
+5. Build initial context from project data: <code>projectId</code>, <code>projectName</code>, <code>repository</code>, <code>ref</code>.
+6. Call <code>WorkflowEngine.startWorkflow(workflow, context)</code>.
+7. Persist the <code>WorkflowInstanceEntity</code>.
+8. If the engine advanced to an action node and returned WAITING, call
+   <code>createTaskForCurrentNode()</code> to enqueue the first Axiom task.
+9. Return the <code>WorkflowInstance</code> response.</p>
+<p><strong>Response:</strong> 200 with <code>WorkflowInstance</code>.</p>
+<p><strong>Error responses:</strong>
+- 404 — project not found
+- 400 — definition not published, or workflow contains unsupported node types
+- 400 — the workflow's Start node requires an input Axiom does not provide (input contract violation)
+- 409 — project already has a workflow instance</p>
+<h3 id="get-instance">Get instance</h3>
+<p><code>GET /api/v1/projects/{projectId}/workflow</code></p>
+<p><strong>Response:</strong> 200 with <code>WorkflowInstance</code>. 404 if no instance exists.</p>
+<h3 id="cancel-instance">Cancel instance</h3>
+<p><code>DELETE /api/v1/projects/{projectId}/workflow</code></p>
+<p><strong>Behavior:</strong>
+1. Load the instance → 404 if not found.
+2. If status is already completed, failed, or cancelled → 409.
+3. Call <code>WorkflowEngine.cancelWorkflow()</code>.
+4. Persist updated state.
+5. Cancel any in-progress Axiom task linked to the instance.</p>
+<p><strong>Response:</strong> 204 No Content.</p>
+<h3 id="response-schemas">Response schemas</h3>
+<p><strong>WorkflowInstance:</strong>
+<div class="language-json highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="p">{</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">    </span><span class="nt">"projectId"</span><span class="p">:</span><span class="w"> </span><span class="mi">42</span><span class="p">,</span>
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">    </span><span class="nt">"definitionId"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span>
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">    </span><span class="nt">"definitionVersion"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span>
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="w">    </span><span class="nt">"definitionName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CVE Triage"</span><span class="p">,</span>
+</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="w">    </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"waiting"</span><span class="p">,</span>
+</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="w">    </span><span class="nt">"currentNodeId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"action-1"</span><span class="p">,</span>
+</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="w">    </span><span class="nt">"currentNodeName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Analyze Issue"</span><span class="p">,</span>
+</span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="w">    </span><span class="nt">"failureReason"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
+</span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="w">    </span><span class="nt">"workflowContent"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-1-12"><a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a><span class="w">        </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"wf-1"</span><span class="p">,</span>
+</span><span id="__span-1-13"><a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a><span class="w">        </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CVE Triage"</span><span class="p">,</span>
+</span><span id="__span-1-14"><a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a><span class="w">        </span><span class="nt">"nodes"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span>
+</span><span id="__span-1-15"><a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a><span class="w">        </span><span class="nt">"edges"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span>
+</span><span id="__span-1-16"><a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a><span class="w">    </span><span class="p">},</span>
+</span><span id="__span-1-17"><a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a><span class="w">    </span><span class="nt">"context"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"projectName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"..."</span><span class="p">,</span><span class="w"> </span><span class="nt">"repository"</span><span class="p">:</span><span class="w"> </span><span class="s2">"..."</span><span class="w"> </span><span class="p">},</span>
+</span><span id="__span-1-18"><a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a><span class="w">    </span><span class="nt">"history"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+</span><span id="__span-1-19"><a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a><span class="w">        </span><span class="p">{</span>
+</span><span id="__span-1-20"><a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a><span class="w">            </span><span class="nt">"nodeId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"start-1"</span><span class="p">,</span>
+</span><span id="__span-1-21"><a id="__codelineno-1-21" name="__codelineno-1-21" href="#__codelineno-1-21"></a><span class="w">            </span><span class="nt">"nodeName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Start"</span><span class="p">,</span>
+</span><span id="__span-1-22"><a id="__codelineno-1-22" name="__codelineno-1-22" href="#__codelineno-1-22"></a><span class="w">            </span><span class="nt">"enteredOn"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2026-08-26T12:00:00Z"</span><span class="p">,</span>
+</span><span id="__span-1-23"><a id="__codelineno-1-23" name="__codelineno-1-23" href="#__codelineno-1-23"></a><span class="w">            </span><span class="nt">"completedOn"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2026-08-26T12:00:01Z"</span><span class="p">,</span>
+</span><span id="__span-1-24"><a id="__codelineno-1-24" name="__codelineno-1-24" href="#__codelineno-1-24"></a><span class="w">            </span><span class="nt">"output"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span>
+</span><span id="__span-1-25"><a id="__codelineno-1-25" name="__codelineno-1-25" href="#__codelineno-1-25"></a><span class="w">        </span><span class="p">}</span>
+</span><span id="__span-1-26"><a id="__codelineno-1-26" name="__codelineno-1-26" href="#__codelineno-1-26"></a><span class="w">    </span><span class="p">],</span>
+</span><span id="__span-1-27"><a id="__codelineno-1-27" name="__codelineno-1-27" href="#__codelineno-1-27"></a><span class="w">    </span><span class="nt">"startedOn"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2026-08-26T12:00:00Z"</span><span class="p">,</span>
+</span><span id="__span-1-28"><a id="__codelineno-1-28" name="__codelineno-1-28" href="#__codelineno-1-28"></a><span class="w">    </span><span class="nt">"completedOn"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span>
+</span><span id="__span-1-29"><a id="__codelineno-1-29" name="__codelineno-1-29" href="#__codelineno-1-29"></a><span class="p">}</span>
+</span></code></pre></div></p>
+<p>The <code>context</code> and <code>history</code> fields come directly from the deserialized Flow <code>WorkflowInstance</code>.
+The <code>workflowContent</code> is the frozen workflow definition from the pinned version — the UI needs
+this to render the <code>WorkflowViewer</code> graph alongside the instance state.
+The <code>definitionName</code> and <code>currentNodeName</code> are convenience fields resolved at response time.</p>
+<p><strong>TriggerWorkflow:</strong>
+<div class="language-json highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="p">{</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">    </span><span class="nt">"workflowDefinitionId"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="p">}</span>
+</span></code></pre></div></p>
+<h3 id="modification-to-existing-project-response">Modification to existing Project response</h3>
+<p>Add a boolean field <code>hasWorkflowInstance</code> to the existing <code>Project</code> bean so the UI knows
+whether to show workflow status on the project detail page without an extra API call.</p>
+<h2 id="backend-architecture">Backend Architecture</h2>
+<h3 id="workflowexecutionservice"><code>WorkflowExecutionService</code></h3>
+<p>New <code>@ApplicationScoped</code> service in the <code>app</code> module. Central orchestrator for all workflow
+execution.</p>
+<p><strong>Key methods:</strong></p>
+<ul>
+<li>
+<p><strong><code>triggerWorkflow(long projectId, long definitionId)</code></strong> — Full trigger flow as described in
+  the API section above. Loads the published version content, validates node types, builds
+  context, calls <code>WorkflowEngine.startWorkflow()</code>, persists the instance, and creates the
+  first task if the engine stopped at an action node.</p>
+</li>
+<li>
+<p><strong><code>onTaskCompleted(long taskId)</code></strong> — Called from <code>TaskExecutionService.onTaskCompleted()</code>
+  when a task with a non-null <code>workflowInstanceId</code> finishes. Deserializes the stored instance
+  state and the workflow content (from the version table), then builds a <code>NodeResult</code>:</p>
+</li>
+<li>If task status is "Completed": <code>NodeResult(COMPLETED, parsedOutputMap)</code> where the task's
+    output string is parsed as JSON into a <code>Map&lt;String, Object&gt;</code>.</li>
+<li>
+<p>If task status is "Failed": <code>NodeResult(FAILED, Map.of())</code>. The engine's
+    <code>DefaultErrorHandler</code> will set the workflow instance to FAILED with the error details.
+  Calls <code>WorkflowEngine.completeCurrentNode()</code>, persists the updated state, and if the engine
+  advanced to another action node, creates the next task via <code>createTaskForCurrentNode()</code>.
+  If the engine reached END, marks the instance completed. If the engine returned FAILED,
+  marks the instance failed with the failure reason.</p>
+</li>
+<li>
+<p><strong><code>cancelWorkflow(long projectId)</code></strong> — Loads the instance, calls
+  <code>WorkflowEngine.cancelWorkflow()</code>, updates instance status, and cancels any in-progress
+  task linked to the instance.</p>
+</li>
+<li>
+<p><strong><code>createTaskForCurrentNode(WorkflowInstanceEntity, Workflow, WorkflowInstance)</code></strong> — Uses
+  <code>WorkflowEngine.getActionInfo()</code> to get the action type name and resolved inputs from the
+  current node. Creates a <code>TaskEntity</code> with <code>workflowInstanceId</code> set, <code>actionType</code> from the
+  node config, and <code>input</code> from the resolved inputs. The task enters the normal Axiom task
+  queue and gets picked up by <code>TaskQueuePoller</code> like any other task.</p>
+</li>
+</ul>
+<h3 id="workflowengine-instantiation"><code>WorkflowEngine</code> instantiation</h3>
+<p>The engine requires a <code>NodeExecutorProvider</code>. We create a single <code>AxiomNodeExecutor</code> that
+handles all action types:
+- Uses a custom <code>NodeExecutorProvider</code> that returns the same executor for any action type
+- <code>execute()</code> always returns <code>NodeResult(PENDING, Map.of())</code> — all Axiom action execution
+  is async via the task system
+- Actual task creation happens in <code>WorkflowExecutionService</code> after the engine returns WAITING</p>
+<p>The engine also receives an <code>AxiomWorkflowEventListener</code> (see below).</p>
+<p>The <code>WorkflowEngine</code> instance is created as a CDI <code>@ApplicationScoped</code> bean so it can be
+injected into <code>WorkflowExecutionService</code>.</p>
+<h3 id="axiomworkfloweventlistener"><code>AxiomWorkflowEventListener</code></h3>
+<p>Implements <code>WorkflowEventListener</code> to fire SSE events and log activity on key lifecycle
+transitions:</p>
+<table>
+<thead>
+<tr>
+<th>Callback</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>onNodeEntered</code></td>
+<td>Fire SSE <code>workflowUpdated(projectId)</code></td>
+</tr>
+<tr>
+<td><code>onWorkflowCompleted</code></td>
+<td>Fire SSE <code>workflowUpdated(projectId)</code>, log activity</td>
+</tr>
+<tr>
+<td><code>onWorkflowFailed</code></td>
+<td>Fire SSE <code>workflowUpdated(projectId)</code>, log activity, fire notification</td>
+</tr>
+<tr>
+<td><code>onWorkflowCancelled</code></td>
+<td>Fire SSE <code>workflowUpdated(projectId)</code>, log activity</td>
+</tr>
+</tbody>
+</table>
+<h3 id="integration-with-existing-taskexecutionservice">Integration with existing <code>TaskExecutionService</code></h3>
+<p>The only modification to existing code is in <code>TaskExecutionService.onTaskCompleted()</code>. After
+the existing completion logic (AI usage recording, activity logging, thread entries, SSE
+events), add:</p>
+<div class="language-java highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">task</span><span class="p">.</span><span class="na">workflowInstanceId</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">    </span><span class="n">workflowExecutionService</span><span class="p">.</span><span class="na">onTaskCompleted</span><span class="p">(</span><span class="n">task</span><span class="p">.</span><span class="na">id</span><span class="p">);</span>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="p">}</span>
+</span></code></pre></div>
+<p>This is the sole touch point into existing code. Everything else is additive.</p>
+<h3 id="task-completion-workflow-advancement-flow">Task completion → workflow advancement flow</h3>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>TaskQueuePoller picks up task
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>  → TaskExecutionService.executeTask()
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>    → Agent/Script executes
+</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>      → TaskExecutionService.onTaskCompleted()
+</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>        → [existing logic: AI usage, activity, SSE, etc.]
+</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>        → if task.workflowInstanceId != null:
+</span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>          → WorkflowExecutionService.onTaskCompleted(taskId)
+</span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>            → Deserialize instance_state + workflow content
+</span><span id="__span-4-9"><a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>            → Build NodeResult from task output
+</span><span id="__span-4-10"><a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a>            → WorkflowEngine.completeCurrentNode()
+</span><span id="__span-4-11"><a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a>            → Persist updated instance_state
+</span><span id="__span-4-12"><a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a>            → If engine stopped at next action node:
+</span><span id="__span-4-13"><a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a>              → createTaskForCurrentNode() [queues next task]
+</span><span id="__span-4-14"><a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a>            → If engine reached END:
+</span><span id="__span-4-15"><a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a>              → Mark instance completed
+</span></code></pre></div>
+<h3 id="node-type-validation-at-trigger-time">Node type validation at trigger time</h3>
+<p>Before starting a workflow, iterate over <code>workflow.nodes()</code> and reject if any node has a type
+other than <code>START</code>, <code>END</code>, or <code>ACTION</code>. Return 400 with a message listing the unsupported
+node types found.</p>
+<h3 id="initial-context">Initial context</h3>
+<p>When triggering a workflow, the initial context map is populated from the project:</p>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Source</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>projectId</code></td>
+<td><code>project.id</code></td>
+</tr>
+<tr>
+<td><code>projectName</code></td>
+<td><code>project.name</code></td>
+</tr>
+<tr>
+<td><code>repository</code></td>
+<td><code>project.repository</code></td>
+</tr>
+<tr>
+<td><code>ref</code></td>
+<td><code>project.ref</code></td>
+</tr>
+</tbody>
+</table>
+<p>This context is available to action node input expressions (Jakarta EL), e.g.,
+<code>${context.repository}</code> in an action node's input mapping.</p>
+<h2 id="rest-resource">REST Resource</h2>
+<h3 id="workflowinstanceresourceimpl"><code>WorkflowInstanceResourceImpl</code></h3>
+<p>New REST resource implementing the generated <code>WorkflowInstanceResource</code> interface. Follows the
+existing pattern: <code>@ApplicationScoped</code>, no <code>@Path</code> annotations on the impl class.</p>
+<p>Delegates all logic to <code>WorkflowExecutionService</code>:</p>
+<ul>
+<li><code>triggerWorkflow(projectId, TriggerWorkflow)</code> → <code>workflowExecutionService.triggerWorkflow()</code></li>
+<li><code>getWorkflowInstance(projectId)</code> → query + <code>toBean()</code></li>
+<li><code>cancelWorkflow(projectId)</code> → <code>workflowExecutionService.cancelWorkflow()</code></li>
+</ul>
+<h3 id="sse-event-type">SSE event type</h3>
+<p>Add a new <code>workflowUpdated</code> factory method to <code>SseEvent</code>:</p>
+<div class="language-java highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="n">SseEvent</span><span class="w"> </span><span class="nf">workflowUpdated</span><span class="p">(</span><span class="kt">long</span><span class="w"> </span><span class="n">projectId</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">SseEvent</span><span class="p">(</span><span class="s">"workflow-updated"</span><span class="p">,</span>
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">        </span><span class="n">String</span><span class="p">.</span><span class="na">format</span><span class="p">(</span><span class="s">"{\"projectId\":%d}"</span><span class="p">,</span><span class="w"> </span><span class="n">projectId</span><span class="p">));</span>
+</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="p">}</span>
+</span></code></pre></div>
+<h2 id="ui-implementation">UI Implementation</h2>
+<h3 id="workflow-tab-on-projectdetailpage">Workflow tab on ProjectDetailPage</h3>
+<p>Add a new "Workflow" tab to <code>ProjectDetailPage.tsx</code>, alongside the existing tabs (Tasks,
+Thread, Events, Metrics, etc.).</p>
+<p><strong>Three states:</strong></p>
+<ol>
+<li>
+<p><strong>No instance</strong> — Empty state with a "Run Workflow" button. Button opens a trigger modal
+   (see below).</p>
+</li>
+<li>
+<p><strong>Active instance</strong> (running/waiting) — Embeds the <code>WorkflowViewer</code> component from
+   <code>@apitomy/flow-ui</code>. The viewer shows the workflow graph with nodes color-coded by execution
+   state (completed, current, unvisited). The right-side panel shows instance context and node
+   details when clicked. A "Cancel Workflow" button appears in the header area.</p>
+</li>
+<li>
+<p><strong>Terminal instance</strong> (completed/failed/cancelled) — Same <code>WorkflowViewer</code> but as a
+   historical view showing the full execution path. For failed instances, the failure reason
+   is displayed prominently. No cancel button.</p>
+</li>
+</ol>
+<h3 id="trigger-modal">Trigger modal</h3>
+<p>Follows the existing "Trigger Action" modal pattern on <code>ProjectDetailPage</code>:</p>
+<ul>
+<li><code>FormSelect</code> dropdown listing available workflow definitions (fetched from
+  <code>GET /api/v1/workflow-definitions</code>, filtered client-side to only those with
+  <code>currentVersion != null</code>)</li>
+<li>"Run Workflow" primary button</li>
+<li>Cancel link button</li>
+<li>On success, reload the workflow tab to show the new instance</li>
+</ul>
+<h3 id="workflowviewer-integration">WorkflowViewer integration</h3>
+<div class="language-tsx highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="p">&lt;</span><span class="nt">WorkflowViewer</span>
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="w">    </span><span class="na">workflow</span><span class="o">=</span><span class="p">{</span><span class="nx">workflowContent</span><span class="p">}</span>
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="w">    </span><span class="na">instance</span><span class="o">=</span><span class="p">{</span><span class="nx">instanceData</span><span class="p">}</span>
+</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="w">    </span><span class="na">theme</span><span class="o">=</span><span class="p">{</span><span class="nx">effectiveTheme</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="s2">"dark"</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="s2">"dark"</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="s2">"light"</span><span class="p">}</span>
+</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="p">/&gt;</span>
+</span></code></pre></div>
+<p>Where:
+- <code>workflowContent</code> is the <code>Workflow</code> object from the definition version's content
+- <code>instanceData</code> is the <code>WorkflowInstance</code> object from the instance's state, mapped to the
+  flow-ui <code>WorkflowInstance</code> type
+- Theme matches Axiom's current light/dark mode via <code>useEffectiveTheme()</code></p>
+<h3 id="real-time-updates">Real-time updates</h3>
+<p>The workflow tab subscribes to SSE <code>workflow-updated</code> events matching the current project ID.
+On receiving an event, it reloads the instance data from
+<code>GET /api/v1/projects/{projectId}/workflow</code>. This means the viewer automatically reflects
+progress as tasks complete and the workflow advances through nodes.</p>
+<h3 id="hasworkflowinstance-indicator"><code>hasWorkflowInstance</code> indicator</h3>
+<p>The existing project response gains a <code>hasWorkflowInstance</code> boolean. The project detail page
+uses this to show a status indicator on the Workflow tab label — a small badge or dot when an
+active instance exists.</p>
+<h3 id="api-client-additions">API client additions</h3>
+<p>Add to <code>ui/src/config/api.ts</code>:</p>
+<div class="language-typescript highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="k">export</span><span class="w"> </span><span class="kd">interface</span><span class="w"> </span><span class="nx">WorkflowInstanceInfo</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="w">    </span><span class="nx">id</span><span class="o">:</span><span class="w"> </span><span class="kt">number</span><span class="p">;</span>
+</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="w">    </span><span class="nx">projectId</span><span class="o">:</span><span class="w"> </span><span class="kt">number</span><span class="p">;</span>
+</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="w">    </span><span class="nx">definitionId</span><span class="o">:</span><span class="w"> </span><span class="kt">number</span><span class="p">;</span>
+</span><span id="__span-7-5"><a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="w">    </span><span class="nx">definitionVersion</span><span class="o">:</span><span class="w"> </span><span class="kt">number</span><span class="p">;</span>
+</span><span id="__span-7-6"><a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="w">    </span><span class="nx">definitionName</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
+</span><span id="__span-7-7"><a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a><span class="w">    </span><span class="nx">status</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
+</span><span id="__span-7-8"><a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a><span class="w">    </span><span class="nx">currentNodeId?</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
+</span><span id="__span-7-9"><a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a><span class="w">    </span><span class="nx">currentNodeName?</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
+</span><span id="__span-7-10"><a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a><span class="w">    </span><span class="nx">failureReason?</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
+</span><span id="__span-7-11"><a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a><span class="w">    </span><span class="nx">workflowContent</span><span class="o">:</span><span class="w"> </span><span class="kt">any</span><span class="p">;</span>
+</span><span id="__span-7-12"><a id="__codelineno-7-12" name="__codelineno-7-12" href="#__codelineno-7-12"></a><span class="w">    </span><span class="nx">context</span><span class="o">:</span><span class="w"> </span><span class="kt">Record</span><span class="o">&lt;</span><span class="kt">string</span><span class="p">,</span><span class="w"> </span><span class="nx">any</span><span class="o">&gt;</span><span class="p">;</span>
+</span><span id="__span-7-13"><a id="__codelineno-7-13" name="__codelineno-7-13" href="#__codelineno-7-13"></a><span class="w">    </span><span class="nx">history</span><span class="o">:</span><span class="w"> </span><span class="kt">HistoryEntryInfo</span><span class="p">[];</span>
+</span><span id="__span-7-14"><a id="__codelineno-7-14" name="__codelineno-7-14" href="#__codelineno-7-14"></a><span class="w">    </span><span class="nx">startedOn</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
+</span><span id="__span-7-15"><a id="__codelineno-7-15" name="__codelineno-7-15" href="#__codelineno-7-15"></a><span class="w">    </span><span class="nx">completedOn?</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
+</span><span id="__span-7-16"><a id="__codelineno-7-16" name="__codelineno-7-16" href="#__codelineno-7-16"></a><span class="p">}</span>
+</span><span id="__span-7-17"><a id="__codelineno-7-17" name="__codelineno-7-17" href="#__codelineno-7-17"></a>
+</span><span id="__span-7-18"><a id="__codelineno-7-18" name="__codelineno-7-18" href="#__codelineno-7-18"></a><span class="k">export</span><span class="w"> </span><span class="kd">interface</span><span class="w"> </span><span class="nx">HistoryEntryInfo</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-7-19"><a id="__codelineno-7-19" name="__codelineno-7-19" href="#__codelineno-7-19"></a><span class="w">    </span><span class="nx">nodeId</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
+</span><span id="__span-7-20"><a id="__codelineno-7-20" name="__codelineno-7-20" href="#__codelineno-7-20"></a><span class="w">    </span><span class="nx">nodeName</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
+</span><span id="__span-7-21"><a id="__codelineno-7-21" name="__codelineno-7-21" href="#__codelineno-7-21"></a><span class="w">    </span><span class="nx">enteredOn</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
+</span><span id="__span-7-22"><a id="__codelineno-7-22" name="__codelineno-7-22" href="#__codelineno-7-22"></a><span class="w">    </span><span class="nx">completedOn?</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
+</span><span id="__span-7-23"><a id="__codelineno-7-23" name="__codelineno-7-23" href="#__codelineno-7-23"></a><span class="w">    </span><span class="nx">output?</span><span class="o">:</span><span class="w"> </span><span class="kt">any</span><span class="p">;</span>
+</span><span id="__span-7-24"><a id="__codelineno-7-24" name="__codelineno-7-24" href="#__codelineno-7-24"></a><span class="p">}</span>
+</span><span id="__span-7-25"><a id="__codelineno-7-25" name="__codelineno-7-25" href="#__codelineno-7-25"></a>
+</span><span id="__span-7-26"><a id="__codelineno-7-26" name="__codelineno-7-26" href="#__codelineno-7-26"></a><span class="k">export</span><span class="w"> </span><span class="kd">interface</span><span class="w"> </span><span class="nx">TriggerWorkflow</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-7-27"><a id="__codelineno-7-27" name="__codelineno-7-27" href="#__codelineno-7-27"></a><span class="w">    </span><span class="nx">workflowDefinitionId</span><span class="o">:</span><span class="w"> </span><span class="kt">number</span><span class="p">;</span>
+</span><span id="__span-7-28"><a id="__codelineno-7-28" name="__codelineno-7-28" href="#__codelineno-7-28"></a><span class="p">}</span>
+</span></code></pre></div>
+<p>Functions: <code>triggerWorkflow(projectId, data)</code>, <code>getWorkflowInstance(projectId)</code>,
+<code>cancelWorkflow(projectId)</code>.</p>
+<h2 id="testing">Testing</h2>
+<h3 id="backend-integration-tests">Backend integration tests</h3>
+<p><strong><code>WorkflowInstanceResourceTest</code></strong> — REST integration test following the existing
+<code>WorkflowDefinitionsResourceTest</code> pattern:</p>
+<ul>
+<li>Trigger a workflow on a project — verify 200, instance fields populated, status is
+  running or waiting</li>
+<li>Get a workflow instance — verify fields match</li>
+<li>Trigger when instance already exists — verify 409</li>
+<li>Trigger with unpublished definition — verify 400</li>
+<li>Trigger with unsupported node types — verify 400</li>
+<li>Cancel a running workflow — verify 204, status becomes cancelled</li>
+<li>Cancel an already-completed workflow — verify 409</li>
+<li>Get instance for project with no instance — verify 404</li>
+</ul>
+<h3 id="manual-browser-testing">Manual browser testing</h3>
+<ul>
+<li>Navigate to a project, open the Workflow tab</li>
+<li>Verify empty state with "Run Workflow" button</li>
+<li>Trigger a workflow, verify the viewer appears with the graph</li>
+<li>Watch the workflow advance as tasks complete (real-time via SSE)</li>
+<li>Verify node colors update correctly (completed vs current vs unvisited)</li>
+<li>Click nodes to see details in the side panel</li>
+<li>Cancel a running workflow, verify status updates</li>
+<li>Verify light/dark theme consistency on the viewer</li>
+<li>Verify the trigger modal only shows published definitions</li>
+</ul>
+<h2 id="future-phases">Future phases</h2>
+<p>This spec covers Phase 2 only. Subsequent phases:</p>
+<ul>
+<li><strong>Phase 3:</strong> Human task nodes — inbox integration, task form rendering from workflow node
+  config</li>
+<li><strong>Phase 4:</strong> Event correlation — receive-event nodes (integrate with Axiom's event
+  pipeline + <code>matchesEvent()</code>), wait nodes (use Axiom's scheduled job mechanism)</li>
+<li><strong>Phase 5:</strong> Polish — audit/history view, error handling improvements, auto-triggering
+  from events</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/Apitomy/apitomy-axiom" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.expand", "navigation.top", "search.highlight", "search.share", "search.suggest", "content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+    
+  </body>
+</html>
