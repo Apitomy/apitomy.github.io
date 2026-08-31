@@ -900,6 +900,17 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#host-provided-validation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Host-provided validation
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -1231,6 +1242,17 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#host-provided-validation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Host-provided validation
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -1317,12 +1339,6 @@
 <td><code>FlowTheme</code></td>
 <td>No</td>
 <td><code>'light'</code> or <code>'dark'</code> (default: <code>'light'</code>). Controls the color scheme of the editor and React Flow canvas</td>
-</tr>
-<tr>
-<td><code>validationProblems</code></td>
-<td><code>ValidationProblem[]</code></td>
-<td>No</td>
-<td>Externally-supplied validation problems to display alongside the editor's built-in validation</td>
 </tr>
 <tr>
 <td><code>onValidationChange</code></td>
@@ -1425,11 +1441,35 @@
 <p>The editor runs the TypeScript workflow validator on every change. Validation feedback is displayed in two ways:</p>
 <p><strong>Inline indicators:</strong> Nodes with errors show a red border. Nodes with warnings show an amber border.</p>
 <p><strong>Problems panel:</strong> A collapsible panel at the bottom lists all validation problems grouped by severity (errors first). Click a problem to select and center the affected node or edge on the canvas.</p>
+<h3 id="host-provided-validation">Host-provided validation</h3>
+<p>In addition to the editor's built-in validation, a host application can contribute its own
+validations through the <code>validate</code> function on the editor SPI. Problems it returns are merged
+with the built-in problems and drive the same Problems panel, per-node error/warning
+highlighting, and <code>onValidationChange</code> callback.</p>
+<p>The validator may run synchronously or return a <code>Promise</code>, so it can perform server-backed
+checks. The editor debounces calls while the user types and ignores stale (out-of-order)
+results, so only the most recent run is ever shown. If the validator throws or rejects, its
+problems are cleared and a warning is logged; built-in validation is never affected.</p>
+<div class="language-ts highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="kr">type</span><span class="w"> </span><span class="nx">EditorSpi</span><span class="p">,</span><span class="w"> </span><span class="kr">type</span><span class="w"> </span><span class="nx">ValidationProblem</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">'@apitomy/flow-ui'</span><span class="p">;</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="kd">const</span><span class="w"> </span><span class="nx">spi</span><span class="o">:</span><span class="w"> </span><span class="kt">EditorSpi</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">  </span><span class="nx">validate</span><span class="o">:</span><span class="w"> </span><span class="kt">async</span><span class="w"> </span><span class="p">(</span><span class="nx">workflow</span><span class="p">)</span><span class="o">:</span><span class="w"> </span><span class="nb">Promise</span><span class="o">&lt;</span><span class="nx">ValidationProblem</span><span class="p">[]</span><span class="o">&gt;</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">problems</span><span class="o">:</span><span class="w"> </span><span class="kt">ValidationProblem</span><span class="p">[]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[];</span>
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="w">    </span><span class="c1">// ...host-specific rules, optionally awaiting backend calls...</span>
+</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">problems</span><span class="p">;</span>
+</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="w">  </span><span class="p">},</span>
+</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="p">};</span>
+</span></code></pre></div>
+<p>Host problems use the same shape as built-in ones (<code>severity</code>, <code>code</code>, <code>message</code>, and optional
+<code>nodeId</code> / <code>edgeId</code>). Namespace your <code>code</code> values (for example, prefix them with <code>HOST_</code>) to
+keep them distinguishable from the built-in codes.</p>
+<p>Pass a stable <code>validate</code> reference — wrap it in <code>useCallback</code> (or define it outside the component)
+— so the editor doesn't rebuild its debounced validator and restart the debounce on every render.</p>
 <h2 id="styling">Styling</h2>
 <p>The editor requires these CSS imports in your application:</p>
-<div class="language-typescript highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">import</span><span class="w"> </span><span class="s1">'@patternfly/patternfly/patternfly.css'</span><span class="p">;</span>
-</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="k">import</span><span class="w"> </span><span class="s1">'@xyflow/react/dist/style.css'</span><span class="p">;</span>
-</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="k">import</span><span class="w"> </span><span class="s1">'@apitomy/flow-ui/style.css'</span><span class="p">;</span>
+<div class="language-typescript highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">import</span><span class="w"> </span><span class="s1">'@patternfly/patternfly/patternfly.css'</span><span class="p">;</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="k">import</span><span class="w"> </span><span class="s1">'@xyflow/react/dist/style.css'</span><span class="p">;</span>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="k">import</span><span class="w"> </span><span class="s1">'@apitomy/flow-ui/style.css'</span><span class="p">;</span>
 </span></code></pre></div>
 <p>The editor fills its container — ensure the parent element has explicit dimensions (e.g. <code>height: 100%</code>).</p>
 
