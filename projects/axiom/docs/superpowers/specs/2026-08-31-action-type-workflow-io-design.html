@@ -1,0 +1,1547 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Event-driven project orchestration platform">
+      
+      
+        <meta name="author" content="Apitomy">
+      
+      
+        <link rel="canonical" href="https://www.apitomy.io/projects/axiom/docs/superpowers/specs/2026-08-31-action-type-workflow-io-design.html">
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>Action Type Inputs/Outputs for Flow Workflows — Design - Apitomy Axiom</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../theme/css/project-colors.css">
+    
+      <link rel="stylesheet" href="../../theme/css/apitomy-base.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#action-type-inputsoutputs-for-flow-workflows-design" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+        <aside class="md-banner">
+          <div class="md-banner__inner md-grid md-typeset">
+            
+            
+<div class="apitomy-masthead">
+    <div class="apitomy-masthead-inner">
+        <a href="https://www.apitomy.io/" class="apitomy-masthead-logo">Apitomy</a>
+        <nav class="apitomy-masthead-nav">
+            <a href="https://www.apitomy.io/#projects">Projects</a>
+            <a href="https://www.apitomy.io/blog/">Blog</a>
+            <a href="https://github.com/Apitomy" class="apitomy-masthead-github" aria-label="GitHub">
+                <svg width="22" height="22" viewBox="0 0 16 16" fill="currentColor">
+                    <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/>
+                </svg>
+            </a>
+        </nav>
+    </div>
+</div>
+
+          </div>
+          
+        </aside>
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../index.html" title="Apitomy Axiom" class="md-header__button md-logo" aria-label="Apitomy Axiom" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Apitomy Axiom
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Action Type Inputs/Outputs for Flow Workflows — Design
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom"  aria-hidden="true"  type="radio" name="__palette" id="__palette_0">
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="Share" aria-label="Share" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/Apitomy/apitomy-axiom" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Apitomy/apitomy-axiom
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../index.html" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../getting-started/running-axiom.html" class="md-tabs__link">
+          
+  
+  
+  Getting Started
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../user-guide/concepts.html" class="md-tabs__link">
+          
+  
+  
+  User Guide
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../developer-guide/stack-and-architecture.html" class="md-tabs__link">
+          
+  
+  
+  Developer Guide
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../index.html" title="Apitomy Axiom" class="md-nav__button md-logo" aria-label="Apitomy Axiom" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Apitomy Axiom
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/Apitomy/apitomy-axiom" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Apitomy/apitomy-axiom
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Getting Started
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Getting Started
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../getting-started/running-axiom.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Running Axiom
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../getting-started/configuring-axiom.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Configuring Axiom
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../getting-started/contributing.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    How to Contribute
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    User Guide
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    User Guide
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../user-guide/concepts.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Concepts
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../user-guide/navigating-the-ui.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Navigating the UI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../user-guide/usage-examples.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Usage Examples
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../user-guide/ai-assistant.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AI Assistant
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../user-guide/logging-and-debugging.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Logging and Debugging
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Developer Guide
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Developer Guide
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../developer-guide/stack-and-architecture.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Stack & Architecture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../developer-guide/building-axiom.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Building Axiom
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../developer-guide/how-to-contribute.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    How to Contribute
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../developer-guide/api-first-development.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API-First Development
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../developer-guide/database-and-migrations.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Database & Migrations
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../developer-guide/tracing.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tracing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../developer-guide/ui-development.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UI Development
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../developer-guide/extending-axiom.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Extending Axiom
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Summary
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#goals" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Goals
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#non-goals" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Non-Goals
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#background-current-state" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Background: current state
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#design" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Design
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Design">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-declaration-model-api" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Declaration model &amp; API
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-flow-editor-wiring-palette-curation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Flow editor wiring &amp; palette curation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-execution-inputs-in-outputs-out" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Execution: inputs in, outputs out
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-authoring-ui" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Authoring UI
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-migration-importexport-seed-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Migration, import/export, seed data
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#data-flow-end-to-end" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Data flow (end to end)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#backward-compatibility" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Backward compatibility
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#testing-strategy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Testing strategy
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#open-questions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Open questions
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="action-type-inputsoutputs-for-flow-workflows-design">Action Type Inputs/Outputs for Flow Workflows — Design</h1>
+<p><strong>Date:</strong> 2026-08-31
+<strong>Status:</strong> Approved (design); pending implementation plan
+<strong>Area:</strong> Action Types, Apitomy Flow workflow integration</p>
+<h2 id="summary">Summary</h2>
+<p>Axiom Action Types can be used as <strong>action nodes</strong> in an Apitomy Flow workflow, but a Flow action node
+is defined in terms of typed <strong>inputs</strong> and <strong>outputs</strong>, and an Action Type currently has no first-class
+way to declare either. Today the only machine-readable I/O contract on an Action Type is a single
+free-text <code>inputSchema</code> string that is stored and round-tripped but never parsed, validated, or
+enforced anywhere; there is no output concept at all. As a result Axiom's Flow SPI provider supplies
+only <code>value</code>/<code>label</code>/<code>description</code> to the editor, and workflow authors must hand-author each node's
+input bindings and output rows with no guidance.</p>
+<p>This design gives Action Types an optional, structured way to declare inputs and outputs that aligns
+1:1 with Flow's node contract, wires those declarations into the Flow editor, and plumbs them through
+execution end-to-end (named input template binding on the way in, a validated JSON output contract on
+the way out). It also adds a <code>workflowEnabled</code> opt-in flag so authors curate which Action Types appear
+in the Flow palette.</p>
+<h2 id="goals">Goals</h2>
+<ul>
+<li>Let an Action Type optionally declare typed <strong>inputs</strong> and <strong>outputs</strong>.</li>
+<li>Feed those declarations into the Flow editor so node input-binding and output rows are auto-generated.</li>
+<li>Enforce the declared contract at runtime: validate resolved inputs before running, validate produced
+  outputs after.</li>
+<li>Make each named input individually addressable in prompt/script templates.</li>
+<li>Auto-append the output contract to the agent prompt so authors do not hand-write "return JSON like…".</li>
+<li>Let authors curate which Action Types are eligible for use as workflow nodes.</li>
+<li>Preserve full backward compatibility: Action Types that declare nothing behave exactly as today.</li>
+</ul>
+<h2 id="non-goals">Non-Goals</h2>
+<ul>
+<li>No change to how Flow itself renders nodes, ports, or edges — we only supply data it already consumes.</li>
+<li>No dedicated MCP <code>set-output</code> tool; output capture uses a JSON result convention (see §3).</li>
+<li>No nested/complex schema language (enums, nested objects) beyond Flow's flat type union.</li>
+<li>No retroactive breaking of published workflow definitions when a flag is later toggled off.</li>
+</ul>
+<h2 id="background-current-state">Background: current state</h2>
+<p>Established during design exploration (file references current as of this date):</p>
+<ul>
+<li><strong>Action Type model</strong> — OpenAPI schemas <code>ActionType</code> / <code>NewActionType</code>
+  (<code>common/api/src/main/resources/openapi.json</code>), entity
+  <code>core/src/main/java/io/apitomy/axiom/core/entities/ActionTypeEntity.java</code> (<code>@Table("action_type")</code>),
+  validator <code>core/src/main/java/io/apitomy/axiom/core/services/ActionTypeValidator.java</code>, REST impl
+  <code>app/src/main/java/io/apitomy/axiom/app/rest/ActionResourceImpl.java</code>. The entity has <code>inputSchema</code>
+  (TEXT, <code>input_schema</code>) but no output field. <code>labels</code> are persisted via an <code>@ElementCollection</code>
+  child table <code>action_type_label</code> (migration <code>V35</code>) — the precedent this design follows.</li>
+<li><strong>Flow contract</strong> — <code>@apitomy/flow-ui</code> <code>ActionTypeDescriptor</code> carries optional
+  <code>inputs?: ActionTypeField[]</code> and <code>outputs?: ActionTypeField[]</code>, where
+  <code>ActionTypeField = { name, type: 'string'|'number'|'boolean'|'object', required?, description? }</code>.</li>
+<li><strong>SPI gap</strong> — <code>ui/src/pages/WorkflowDefinitionDetailPage.tsx</code> implements the <code>EditorSpi.actionTypes</code>
+  provider by mapping each Axiom Action Type to <code>{ value, label, description }</code> only; <code>inputs</code>/<code>outputs</code>
+  are left empty, so the editor falls back to free-form authoring.</li>
+<li><strong>Execution bridge</strong> — <code>app/src/main/java/io/apitomy/axiom/app/WorkflowExecutionService.java</code> turns a
+  waiting action node into a <code>TaskEntity</code> whose <code>actionType</code> is the node's action type name and whose
+  <code>input</code> is the JSON of the engine-resolved <code>config.inputs</code> map;
+  <code>app/src/main/java/io/apitomy/axiom/app/TaskExecutionService.java</code> runs the task against the matching
+  <code>ActionTypeEntity</code> (agent prompt via <code>promptTemplate</code> / <code>{{managerInput}}</code>, or script via
+  <code>scriptTemplate</code>). On completion <code>task.output</code> (a string) is parsed into a map and returned as
+  <code>NodeResult.output</code>, which the engine merges into workflow context for downstream nodes.</li>
+</ul>
+<h2 id="design">Design</h2>
+<h3 id="1-declaration-model-api">1. Declaration model &amp; API</h3>
+<p>Add two optional, ordered collections and one flag to the Action Type.</p>
+<p><strong>Fields</strong></p>
+<ul>
+<li><code>inputs: ActionTypeField[]</code> — ordered list of declared inputs.</li>
+<li><code>outputs: ActionTypeField[]</code> — ordered list of declared outputs.</li>
+<li><code>workflowEnabled: boolean</code> — opt-in eligibility as a Flow workflow node (default <code>false</code>).</li>
+</ul>
+<p><strong><code>ActionTypeField</code> shape</strong> (1:1 with Flow, so the SPI mapping is a passthrough):</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>name</code></td>
+<td>string (required)</td>
+<td>Must be a valid identifier (usable as a template key / EL identifier).</td>
+</tr>
+<tr>
+<td><code>type</code></td>
+<td>enum (required)</td>
+<td><code>string</code> | <code>number</code> | <code>boolean</code> | <code>object</code>. Mirrors Flow exactly.</td>
+</tr>
+<tr>
+<td><code>required</code></td>
+<td>boolean</td>
+<td>Defaults to <code>false</code>.</td>
+</tr>
+<tr>
+<td><code>description</code></td>
+<td>string</td>
+<td>Optional.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>OpenAPI first</strong> (per the repo's contract-first rule): define an <code>ActionTypeField</code> schema and add
+<code>inputs</code>, <code>outputs</code>, and <code>workflowEnabled</code> to both <code>ActionType</code> and <code>NewActionType</code>. Regenerate the
+JAX-RS interfaces and beans. Remove <code>inputSchema</code> from both schemas.</p>
+<p><strong>Persistence</strong> — follow the <code>action_type_label</code> precedent:</p>
+<ul>
+<li>Map <code>inputs</code> and <code>outputs</code> as <code>@ElementCollection</code> of an <code>@Embeddable</code> <code>ActionTypeField</code>, into child
+  tables <code>action_type_input</code> and <code>action_type_output</code>, each with columns
+  <code>(action_type_id, ordinal, name, type, required, description)</code>. Use <code>@OrderColumn(name = "ordinal")</code>
+  to preserve author order. <code>@JoinColumn(name = "action_type_id")</code> with <code>ON DELETE CASCADE</code>.</li>
+<li>Add <code>workflow_enabled BOOLEAN NOT NULL DEFAULT FALSE</code> to <code>action_type</code>.</li>
+<li>Drop the <code>input_schema</code> column.</li>
+</ul>
+<p>Child tables (rather than a JSON TEXT column like <code>environment</code>) were chosen because author order is
+meaningful and the fields benefit from being real, queryable rows; it also matches the existing label
+pattern.</p>
+<p><strong>Validation</strong> — extend <code>ActionTypeValidator</code>:</p>
+<ul>
+<li>Within each of <code>inputs</code> and <code>outputs</code>: field <code>name</code> required and a valid identifier; <code>name</code>s unique
+  within the list; <code>type</code> is one of the allowed values.</li>
+<li><code>inputSchema</code> validation (currently absent) is removed along with the field.</li>
+</ul>
+<h3 id="2-flow-editor-wiring-palette-curation">2. Flow editor wiring &amp; palette curation</h3>
+<p><strong>SPI provider</strong> (<code>WorkflowDefinitionDetailPage.tsx</code>): extend the <code>ActionTypeDescriptor</code> mapping to
+populate <code>inputs</code> and <code>outputs</code> from the Action Type's new fields. Because the Axiom <code>ActionTypeField</code>
+shape matches Flow's, this is a near-passthrough map (<code>{ name, type, required, description }</code>), not a
+parse. Update the frontend <code>ActionType</code> interface in <code>ui/src/config/api.ts</code> to add <code>inputs</code>,
+<code>outputs</code>, and <code>workflowEnabled</code>, and remove <code>inputSchema</code>.</p>
+<p><strong>Behavioral effect</strong>: once a node's <code>config.actionType</code> matches a descriptor that carries <code>inputs</code>,
+Flow's <code>PropertiesPanel</code> auto-generates the per-input EL-expression binding fields and renders the
+declared <code>outputs</code> read-only. Action Types that declare no inputs/outputs still fall back gracefully to
+the free-form panel, so existing definitions are unaffected.</p>
+<p><strong>Palette curation</strong> (<code>workflowEnabled</code>): add a <code>workflowEnabled</code> filter to the existing
+<code>listActionTypes</code> query (server-side, consistent with how <code>executionMode</code> and labels are already
+filtered in <code>ActionResourceImpl.listActionTypes</code>). The SPI provider requests only workflow-enabled
+Action Types, so the Flow palette shows only the curated subset.</p>
+<p><strong>Scope of the flag</strong>: <code>workflowEnabled</code> governs <strong>palette visibility only</strong>. A published workflow
+definition that already references an Action Type by name keeps working even if the flag is later
+turned off — the flag is not consulted at execution time and does not retroactively invalidate
+existing definitions.</p>
+<h3 id="3-execution-inputs-in-outputs-out">3. Execution: inputs in, outputs out</h3>
+<p>The data path already exists (<code>resolvedInputs</code> → <code>task.input</code> → prompt/script; <code>task.output</code> → map →
+<code>NodeResult</code>). This design makes it <strong>named and validated</strong>. All new behavior is gated on the Action
+Type actually declaring inputs/outputs; when it declares none, execution is byte-for-byte as today.</p>
+<p><strong>Inputs (into the action):</strong></p>
+<ul>
+<li>The engine resolves the node's <code>config.inputs</code> (name → EL expression) into a <code>resolvedInputs</code> map,
+  which Axiom serializes to <code>task.input</code>. This stays as-is on the wire.</li>
+<li>In <code>TaskExecutionService</code>, <strong>before running</strong>, validate <code>task.input</code> against the Action Type's
+  declared <code>inputs</code>: every <code>required</code> input must be present; values are best-effort checked/coerced
+  against the declared <code>type</code>. A missing required input (or type mismatch that cannot be coerced) fails
+  the task fast with a clear message, which surfaces as a <code>FAILED</code> node and fails the run.</li>
+<li><strong>Template binding</strong>: expose each named input to <code>promptTemplate</code> / <code>scriptTemplate</code> as
+  <code>{{inputs.NAME}}</code>. The legacy whole-payload <code>{{input}}</code> / <code>{{managerInput}}</code> placeholders remain
+  intact for user- and manager-triggered tasks that do not originate from a workflow.</li>
+</ul>
+<p><strong>Outputs (out of the action):</strong></p>
+<ul>
+<li>Axiom <strong>auto-appends the output contract</strong> to the run instructions: for agents, an
+  Axiom-generated section is appended to the prompt instructing the agent to emit, as its final result,
+  a JSON object keyed by the declared output names; for scripts, the <code>scriptTemplate</code> is expected to
+  print that JSON object to stdout (or a known result file). Authors do not hand-write these
+  instructions.</li>
+<li>On completion, Axiom parses <code>task.output</code> as that JSON object and <strong>validates</strong> it against the
+  declared <code>outputs</code>: required outputs present, types checked, extra keys allowed (lenient). A missing
+  required output or malformed JSON fails the task (fail fast).</li>
+<li>The validated map becomes <code>NodeResult.output</code> exactly as today, so the engine merges it into workflow
+  context and downstream nodes bind to it through the EL expressions Flow already supports.</li>
+</ul>
+<p><strong>Failure strictness</strong>: fail fast on a missing required input, an uncoercible input type, missing
+required output, or malformed output JSON. No warn-and-continue mode.</p>
+<p><strong>Backward compatibility</strong>: Action Types with no declared <code>inputs</code>/<code>outputs</code> skip both validation steps
+and behave exactly as today (whole-blob input, free-form string output). Non-workflow tasks are
+unaffected.</p>
+<h3 id="4-authoring-ui">4. Authoring UI</h3>
+<p>In the Action Type detail page (<code>ui/src/pages/ActionTypeDetailPage.tsx</code>, a PatternFly <code>&lt;Tabs&gt;</code>):</p>
+<ul>
+<li>Add the <code>workflowEnabled</code> checkbox on the <strong>Info</strong> tab, next to the existing <code>userTriggerable</code> /
+  <code>managerTriggerable</code> checkboxes.</li>
+<li>Add two new tabs, <strong>Inputs</strong> and <strong>Outputs</strong>, inserted in JSX order <em>after</em> Environment and <em>before</em>
+  the Prompt Template / Script tabs (PatternFly orders tabs by position; each gets its own <code>eventKey</code>).
+  Titles show counts for consistency with "Allowed Tools ({n})": <strong>Inputs ({n})</strong> / <strong>Outputs ({n})</strong>.</li>
+<li>Both tabs render <strong>only when <code>workflowEnabled</code> is checked</strong>, using the same conditional-rendering
+  pattern already applied to the mode-specific Prompt Template / Script / Allowed Tools tabs.
+  Unchecking <code>workflowEnabled</code> hides them.</li>
+<li>Each tab hosts a repeatable row editor: <code>name</code>, <code>type</code> (dropdown: string/number/boolean/object),
+  <code>required</code> (checkbox), <code>description</code>, with add / remove / reorder (order persisted via
+  <code>@OrderColumn</code>).</li>
+<li>Client-side mirrors of the validator rules (unique names, valid identifier) provide immediate
+  feedback; the server-side <code>ActionTypeValidator</code> remains the source of truth (HTTP 422 on violation,
+  matching the existing pattern).</li>
+<li>Remove the old <code>inputSchema</code> field from the form.</li>
+</ul>
+<h3 id="5-migration-importexport-seed-data">5. Migration, import/export, seed data</h3>
+<ul>
+<li><strong>Flyway migration</strong> (next <code>V</code> number, H2-compatible and idempotent per the repo's migration
+  constraints): create <code>action_type_input</code> and <code>action_type_output</code> child tables (with <code>ordinal</code>
+  order columns and cascading FKs to <code>action_type</code>), add <code>workflow_enabled BOOLEAN NOT NULL DEFAULT
+  FALSE</code>, and drop <code>input_schema</code>. No auto-conversion of <code>input_schema</code> data (it is unenforced,
+  H2-only/dev data); confirm no seed/import fixture depends on it before dropping.</li>
+<li><strong>Import/export</strong> (<code>ImportExportService</code>): replace <code>inputSchema</code> handling with <code>inputs</code>, <code>outputs</code>,
+  and <code>workflowEnabled</code> so round-tripping stays complete.</li>
+<li><strong>Seed data</strong> (<code>SeedDataInitializer</code>): audit for any Action Type that sets <code>inputSchema</code> and migrate
+  those to the structured fields; opportunistically mark obviously workflow-suited seed Action Types as
+  <code>workflowEnabled</code>.</li>
+</ul>
+<h2 id="data-flow-end-to-end">Data flow (end to end)</h2>
+<ol>
+<li>Author declares <code>inputs</code>/<code>outputs</code> on an Action Type and checks <code>workflowEnabled</code>.</li>
+<li>Flow editor requests workflow-enabled Action Types; the SPI provider returns descriptors carrying
+   the typed <code>inputs</code>/<code>outputs</code>; the editor auto-generates the node's input-binding fields and
+   read-only output rows.</li>
+<li>At runtime the engine resolves the node's input expressions to a <code>resolvedInputs</code> map → <code>task.input</code>.</li>
+<li><code>TaskExecutionService</code> validates <code>task.input</code> against declared inputs (fail fast), binds each named
+   input into the template as <code>{{inputs.NAME}}</code>, and auto-appends the output contract.</li>
+<li>The agent/script emits a JSON object keyed by declared output names → <code>task.output</code>.</li>
+<li>On completion, Axiom validates the output JSON against declared outputs (fail fast) and returns it as
+   <code>NodeResult.output</code>; the engine merges it into workflow context for downstream nodes.</li>
+</ol>
+<h2 id="backward-compatibility">Backward compatibility</h2>
+<ul>
+<li>Action Types with no declared inputs/outputs: unchanged execution and editor behavior.</li>
+<li><code>workflowEnabled</code> defaults to <code>false</code>; existing Action Types are simply absent from the Flow palette
+  until curated, and existing published workflows that reference them by name continue to run.</li>
+<li>Removal of <code>inputSchema</code> is safe because it was never enforced; import/export and seed paths are
+  updated in the same change.</li>
+</ul>
+<h2 id="testing-strategy">Testing strategy</h2>
+<ul>
+<li><strong>Validator</strong> (JUnit 5): unique/valid input &amp; output names, invalid <code>type</code> rejected, required-field
+  rules.</li>
+<li><strong>Persistence</strong>: round-trip an Action Type with ordered inputs/outputs; verify <code>@OrderColumn</code>
+  ordering and cascade delete of child rows.</li>
+<li><strong>REST</strong>: create/update/get an Action Type with the new fields; 422 on validation violations.</li>
+<li><strong>SPI mapping</strong> (frontend): descriptor carries mapped inputs/outputs; palette excludes
+  non-<code>workflowEnabled</code> types.</li>
+<li><strong>Execution</strong>: input validation fail-fast on missing required input; <code>{{inputs.NAME}}</code> binding;
+  auto-appended output contract present; output JSON validated; malformed/missing required output fails
+  the task; Action Types with no declared I/O bypass validation unchanged.</li>
+<li><strong>Migration</strong>: applies cleanly on H2; child tables and <code>workflow_enabled</code> present; <code>input_schema</code>
+  dropped.</li>
+</ul>
+<h2 id="open-questions">Open questions</h2>
+<p>None outstanding — all design decisions resolved during exploration.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/Apitomy/apitomy-axiom" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.expand", "navigation.top", "search.highlight", "search.share", "search.suggest", "content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+    
+  </body>
+</html>
