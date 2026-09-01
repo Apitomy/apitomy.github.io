@@ -2631,8 +2631,28 @@ placeholders plus additional ones:</p>
 <td><code>{{apiBaseUrl}}</code></td>
 <td>Axiom's own API base URL (for callbacks)</td>
 </tr>
+<tr>
+<td><code>{{inputs.NAME}}</code></td>
+<td>A named workflow input (workflow tasks only)</td>
+</tr>
 </tbody>
 </table>
+<blockquote>
+<p><strong>Placeholder values are treated as literal data.</strong> In script mode each
+placeholder is not inlined into the script text. Instead its value is passed to
+the script as an environment variable and the placeholder expands to a
+reference to that variable — for example <code>echo {{managerInput}}</code> becomes
+<code>echo "${AXIOM_MANAGER_INPUT}"</code>. This means a value containing shell
+metacharacters (<code>$(...)</code>, backticks, <code>;</code>, <code>&amp;&amp;</code>, newlines, etc.) is never
+executed as code. The expansion adapts to the surrounding quotes, so you can
+place a placeholder wherever you'd use a shell variable and values containing
+whitespace stay a single argument — whether it is unquoted (<code>{{managerInput}}</code>),
+inside double quotes (<code>"Fix: {{managerInput}}"</code>), or inside single quotes
+(<code>'{{managerInput}}'</code>). The matching environment variables — <code>AXIOM_PROJECT_ID</code>,
+<code>AXIOM_EVENT_ID</code>, <code>AXIOM_TASK_ID</code>, <code>AXIOM_REF</code>, <code>AXIOM_REPOSITORY</code>,
+<code>AXIOM_PROJECT_NAME</code>, <code>AXIOM_MANAGER_INPUT</code>, <code>AXIOM_API_URL</code>, <code>AXIOM_WORK_DIR</code>,
+and <code>AXIOM_INPUT_&lt;NAME&gt;</code> for workflow inputs — are also available directly.</p>
+</blockquote>
 <h3 id="tasks">Tasks</h3>
 <p>A Task is a single unit of work within a Project. Tasks are created when:</p>
 <ul>
