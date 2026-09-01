@@ -1625,6 +1625,22 @@ problems.</p>
 <td><code>MISSING_WAIT_DURATION</code></td>
 <td>Wait node has no duration configured</td>
 </tr>
+<tr>
+<td><code>WIDGET_TYPE_MISMATCH</code></td>
+<td>Human-task output declares a <code>widget</code> but its <code>type</code> is not <code>string</code> (widgets apply to string outputs)</td>
+</tr>
+<tr>
+<td><code>SELECT_MISSING_OPTIONS</code></td>
+<td>Human-task output uses <code>widget: select</code> but declares no options</td>
+</tr>
+<tr>
+<td><code>MALFORMED_OUTPUT_OPTION</code></td>
+<td>Human-task output has a <code>select</code> option with no value</td>
+</tr>
+<tr>
+<td><code>DEFAULT_VALUE_TYPE_MISMATCH</code></td>
+<td>Human-task output <code>defaultValue</code> does not match the declared <code>type</code></td>
+</tr>
 </tbody>
 </table>
 <h2 id="validationproblem">ValidationProblem</h2>
@@ -1637,8 +1653,8 @@ problems.</p>
 </span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="p">)</span><span class="w"> </span><span class="p">{}</span>
 </span></code></pre></div>
 <h2 id="rule-coverage">Rule Coverage</h2>
-<p>The engine's Java <code>WorkflowValidator</code> implements all <strong>51</strong> rules. The TypeScript validator used by
-the visual editor implements <strong>49</strong> of them — every rule except <code>MISSING_EDGE_SOURCE</code> and
+<p>The engine's Java <code>WorkflowValidator</code> implements all <strong>55</strong> rules. The TypeScript validator used by
+the visual editor implements <strong>53</strong> of them — every rule except <code>MISSING_EDGE_SOURCE</code> and
 <code>MISSING_EDGE_TARGET</code>, which cannot occur through the editor UI (it never produces an edge without a
 source and target).</p>
 <p><code>INVALID_CONDITION</code> is implemented in <strong>both</strong>. The Java engine parses the expression with Jakarta EL;

@@ -1509,7 +1509,13 @@
 <li>Name (all node types)</li>
 <li>Action Type (action nodes)</li>
 <li>Event Type (receive-event nodes)</li>
-<li>Description, Inputs (label/expression pairs), Outputs (name, type dropdown, required checkbox per field) (human task nodes)</li>
+<li>Description, Inputs (label/expression pairs), and Outputs (human task nodes). Each output is a
+  form field the assignee fills in to complete the task and supports rich authoring metadata: name,
+  type dropdown, required checkbox, label, help/description text, a widget (<code>text</code> / <code>textarea</code> /
+  <code>select</code>), a default value, and — for the <code>select</code> widget — an editable list of label/value
+  options. Only the name is required; the rest are optional and drive the runtime completion form
+  the host renders. See <a href="engine-usage.html#output-field-metadata">Engine Usage</a> for the full field
+  reference.</li>
 <li>Duration (ISO 8601 string) (wait nodes)</li>
 <li>Node ID (read-only)</li>
 </ul>

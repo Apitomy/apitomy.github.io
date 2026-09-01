@@ -1364,12 +1364,12 @@
 </table>
 <p>Null or blank conditions evaluate to <code>true</code> (unconditional edges always match).</p>
 <h3 id="validation">Validation</h3>
-<p>The <code>WorkflowValidator</code> runs 51 rules across four categories:</p>
+<p>The <code>WorkflowValidator</code> runs 55 rules across four categories:</p>
 <ol>
 <li><strong>Structural</strong> (26 rules) — graph integrity (start/end nodes, edge references, duplicates)</li>
 <li><strong>Connectivity</strong> (5 rules) — reachability, dead ends, isolated nodes</li>
 <li><strong>Edge/Condition</strong> (7 rules) — default edges, duplicate priorities, EL syntax</li>
-<li><strong>Semantic</strong> (13 rules) — event receivers, action types, input schemas, wait durations, automated cycles</li>
+<li><strong>Semantic</strong> (17 rules) — event receivers, action types, input schemas, wait durations, automated cycles, human-task output metadata</li>
 </ol>
 <p><code>startWorkflow</code> runs the validator automatically and rejects definitions with ERROR-level problems.</p>
 <h2 id="ui-internals">UI Internals</h2>
@@ -1396,7 +1396,7 @@
 </span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>                                         validateWorkflow → onValidationChange
 </span></code></pre></div>
 <h3 id="typescript-validator">TypeScript Validator</h3>
-<p>A port of the Java <code>WorkflowValidator</code> implementing 49 of the 51 rules — it omits only <code>MISSING_EDGE_SOURCE</code> and <code>MISSING_EDGE_TARGET</code>, which the editor UI cannot produce. <code>INVALID_CONDITION</code> is included, using a lightweight balanced-token syntax check rather than a full Jakarta EL parse. Runs synchronously on every edit via <code>useMemo</code>. Host applications can contribute additional problems asynchronously through the editor SPI (see <a href="../user-guide/visual-editor.html">Visual Editor</a>).</p>
+<p>A port of the Java <code>WorkflowValidator</code> implementing 53 of the 55 rules — it omits only <code>MISSING_EDGE_SOURCE</code> and <code>MISSING_EDGE_TARGET</code>, which the editor UI cannot produce. <code>INVALID_CONDITION</code> is included, using a lightweight balanced-token syntax check rather than a full Jakarta EL parse. Runs synchronously on every edit via <code>useMemo</code>. Host applications can contribute additional problems asynchronously through the editor SPI (see <a href="../user-guide/visual-editor.html">Visual Editor</a>).</p>
 
 
 
