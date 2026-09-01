@@ -906,6 +906,28 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#auto-layout" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Auto-Layout
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#node-context-menu" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Node Context Menu
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -1187,6 +1209,28 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#auto-layout" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Auto-Layout
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#node-context-menu" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Node Context Menu
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -1268,6 +1312,12 @@
 <td>No</td>
 <td><code>'light'</code> or <code>'dark'</code> (default: <code>'light'</code>). Controls the color scheme of the viewer and React Flow canvas</td>
 </tr>
+<tr>
+<td><code>nodeContextMenuItems</code></td>
+<td><code>WorkflowViewerNodeMenuItem[] \| ((nodeId: string) =&gt; WorkflowViewerNodeMenuItem[])</code></td>
+<td>No</td>
+<td>Host-contributed actions for a node's right-click menu. See <a href="#node-context-menu">Node Context Menu</a></td>
+</tr>
 </tbody>
 </table>
 <h2 id="features">Features</h2>
@@ -1280,7 +1330,36 @@
 <li>Pan and zoom are available for navigation</li>
 </ul>
 <h3 id="current-node-highlight">Current Node Highlight</h3>
-<p>The node where the instance is currently waiting is highlighted with a glowing amber border, making it immediately obvious where the workflow is paused.</p>
+<p>The node where the instance is currently positioned is highlighted so it is immediately obvious where
+the workflow is. While the instance is active (running or waiting), the current node also shows an
+animated "marching ants" ring around it.</p>
+<p>The current node's color reflects the instance's status:</p>
+<table>
+<thead>
+<tr>
+<th>Instance status</th>
+<th>Current node styling</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Running / Waiting</td>
+<td>Amber border with an animated ring</td>
+</tr>
+<tr>
+<td>Failed</td>
+<td>Red border (ring stops)</td>
+</tr>
+<tr>
+<td>Cancelled</td>
+<td>Muted/grey border (ring stops)</td>
+</tr>
+<tr>
+<td>Completed</td>
+<td>Styled as a normal visited node (no ring)</td>
+</tr>
+</tbody>
+</table>
 <h3 id="path-taken">Path Taken</h3>
 <p>The viewer styles nodes and edges based on the instance's execution history:</p>
 <table>
@@ -1312,11 +1391,44 @@
 <li>Which edges have been followed (<code>history[].edgeId</code>)</li>
 <li>Which node is current (<code>instance.currentNodeId</code>)</li>
 </ul>
+<h3 id="auto-layout">Auto-Layout</h3>
+<p>If the workflow's nodes have no positions (or all overlap at the same coordinates), the viewer
+arranges them automatically using the same layered layout as the editor, so a definition built
+without explicit <code>position</code> values still renders cleanly. Layout is computed from the graph
+structure only, so it does not re-run as the instance state changes.</p>
+<h3 id="node-context-menu">Node Context Menu</h3>
+<p>By default, right-clicking a node does nothing (the browser's own context menu is left untouched). A
+host can add its own actions to a node's right-click menu with the <code>nodeContextMenuItems</code> prop — for
+example "View logs" or "Open task in Jira".</p>
+<p>Provide either a static array (the same items for every node) or a function that receives the
+<code>nodeId</code> and returns items tailored to that node. Returning an empty array means no menu is shown for
+that node.</p>
+<div class="language-tsx highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">WorkflowViewer</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">'@apitomy/flow-ui'</span><span class="p">;</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="k">import</span><span class="w"> </span><span class="kr">type</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">WorkflowViewerNodeMenuItem</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">'@apitomy/flow-ui'</span><span class="p">;</span>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="p">&lt;</span><span class="nt">WorkflowViewer</span>
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">  </span><span class="na">workflow</span><span class="o">=</span><span class="p">{</span><span class="nx">workflow</span><span class="p">}</span>
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="w">  </span><span class="na">instance</span><span class="o">=</span><span class="p">{</span><span class="nx">instance</span><span class="p">}</span>
+</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="w">  </span><span class="na">nodeContextMenuItems</span><span class="o">=</span><span class="p">{(</span><span class="nx">nodeId</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">[</span>
+</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="w">    </span><span class="p">{</span><span class="w"> </span><span class="nx">id</span><span class="o">:</span><span class="w"> </span><span class="s1">'logs'</span><span class="p">,</span><span class="w"> </span><span class="nx">label</span><span class="o">:</span><span class="w"> </span><span class="s1">'View logs'</span><span class="p">,</span><span class="w"> </span><span class="nx">onSelect</span><span class="o">:</span><span class="w"> </span><span class="p">(</span><span class="nx">id</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">openLogs</span><span class="p">(</span><span class="nx">id</span><span class="p">)</span><span class="w"> </span><span class="p">},</span>
+</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="w">    </span><span class="p">{</span><span class="w"> </span><span class="nx">id</span><span class="o">:</span><span class="w"> </span><span class="s1">'cancel'</span><span class="p">,</span><span class="w"> </span><span class="nx">label</span><span class="o">:</span><span class="w"> </span><span class="s1">'Cancel task'</span><span class="p">,</span><span class="w"> </span><span class="nx">danger</span><span class="o">:</span><span class="w"> </span><span class="kt">true</span><span class="p">,</span><span class="w"> </span><span class="nx">onSelect</span><span class="o">:</span><span class="w"> </span><span class="p">(</span><span class="nx">id</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">cancelTask</span><span class="p">(</span><span class="nx">id</span><span class="p">)</span><span class="w"> </span><span class="p">},</span>
+</span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="w">  </span><span class="p">]}</span>
+</span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="p">/&gt;</span>
+</span></code></pre></div>
+<p>Each item has the following shape:</p>
+<div class="language-ts highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kd">interface</span><span class="w"> </span><span class="nx">WorkflowViewerNodeMenuItem</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">  </span><span class="nx">id</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span><span class="w">                              </span><span class="c1">// stable React key</span>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">  </span><span class="nx">label</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span><span class="w">                           </span><span class="c1">// menu text</span>
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">  </span><span class="nx">icon?</span><span class="o">:</span><span class="w"> </span><span class="kt">React.ReactNode</span><span class="p">;</span><span class="w">                  </span><span class="c1">// optional leading icon</span>
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="w">  </span><span class="nx">danger?</span><span class="o">:</span><span class="w"> </span><span class="kt">boolean</span><span class="p">;</span><span class="w">                        </span><span class="c1">// render as a destructive action</span>
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="w">  </span><span class="nx">onSelect</span><span class="o">:</span><span class="w"> </span><span class="p">(</span><span class="nx">nodeId</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="ow">void</span><span class="p">;</span><span class="w">      </span><span class="c1">// invoked with the right-clicked node's id</span>
+</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="p">}</span>
+</span></code></pre></div>
 <h2 id="styling">Styling</h2>
 <p>The viewer requires the same CSS imports as the editor:</p>
-<div class="language-typescript highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">import</span><span class="w"> </span><span class="s1">'@patternfly/patternfly/patternfly.css'</span><span class="p">;</span>
-</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="k">import</span><span class="w"> </span><span class="s1">'@xyflow/react/dist/style.css'</span><span class="p">;</span>
-</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="k">import</span><span class="w"> </span><span class="s1">'@apitomy/flow-ui/style.css'</span><span class="p">;</span>
+<div class="language-typescript highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">import</span><span class="w"> </span><span class="s1">'@patternfly/patternfly/patternfly.css'</span><span class="p">;</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="k">import</span><span class="w"> </span><span class="s1">'@xyflow/react/dist/style.css'</span><span class="p">;</span>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="k">import</span><span class="w"> </span><span class="s1">'@apitomy/flow-ui/style.css'</span><span class="p">;</span>
 </span></code></pre></div>
 <p>The viewer fills its container — ensure the parent element has explicit dimensions.</p>
 

@@ -906,10 +906,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#typescript-validator-notes" class="md-nav__link">
+  <a href="#rule-coverage" class="md-nav__link">
     <span class="md-ellipsis">
       
-        TypeScript Validator Notes
+        Rule Coverage
       
     </span>
   </a>
@@ -1293,10 +1293,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#typescript-validator-notes" class="md-nav__link">
+  <a href="#rule-coverage" class="md-nav__link">
     <span class="md-ellipsis">
       
-        TypeScript Validator Notes
+        Rule Coverage
       
     </span>
   </a>
@@ -1410,6 +1410,14 @@ problems.</p>
 <tr>
 <td><code>INVALID_EDGE_TARGET</code></td>
 <td>Edge references a target node ID that doesn't exist</td>
+</tr>
+<tr>
+<td><code>MISSING_EDGE_SOURCE</code></td>
+<td>Edge has no source node ID (null or blank) — <em>engine only</em></td>
+</tr>
+<tr>
+<td><code>MISSING_EDGE_TARGET</code></td>
+<td>Edge has no target node ID (null or blank) — <em>engine only</em></td>
 </tr>
 <tr>
 <td><code>DUPLICATE_NODE_ID</code></td>
@@ -1528,7 +1536,7 @@ problems.</p>
 </tr>
 <tr>
 <td><code>INVALID_CONDITION</code></td>
-<td>Edge condition is not syntactically valid EL (Java only)</td>
+<td>Edge condition is not syntactically valid EL</td>
 </tr>
 <tr>
 <td><code>DUPLICATE_EDGE_PRIORITY</code></td>
@@ -1628,10 +1636,15 @@ problems.</p>
 </span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="w">    </span><span class="n">String</span><span class="w"> </span><span class="n">edgeId</span><span class="w">                 </span><span class="c1">// affected edge (optional)</span>
 </span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="p">)</span><span class="w"> </span><span class="p">{}</span>
 </span></code></pre></div>
-<h2 id="typescript-validator-notes">TypeScript Validator Notes</h2>
-<p>The TypeScript implementation covers all rules except <code>INVALID_CONDITION</code>, which requires parsing
-Jakarta EL expressions (a Java library). All other rules are structural or semantic checks that
-work identically in both languages.</p>
+<h2 id="rule-coverage">Rule Coverage</h2>
+<p>The engine's Java <code>WorkflowValidator</code> implements all <strong>51</strong> rules. The TypeScript validator used by
+the visual editor implements <strong>49</strong> of them — every rule except <code>MISSING_EDGE_SOURCE</code> and
+<code>MISSING_EDGE_TARGET</code>, which cannot occur through the editor UI (it never produces an edge without a
+source and target).</p>
+<p><code>INVALID_CONDITION</code> is implemented in <strong>both</strong>. The Java engine parses the expression with Jakarta EL;
+the TypeScript validator applies a lightweight syntax check (balanced parentheses, brackets, and
+quotes) so obviously malformed conditions are caught at design time. A condition that passes the
+editor's check but is still invalid EL will be rejected by the engine at runtime.</p>
 
 
 
