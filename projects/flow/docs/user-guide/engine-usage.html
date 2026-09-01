@@ -746,6 +746,23 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Getting Human Task Info">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#output-field-metadata" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Output field metadata
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -1244,6 +1261,23 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Getting Human Task Info">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#output-field-metadata" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Output field metadata
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -1442,11 +1476,82 @@
 <tr>
 <td><code>outputs</code></td>
 <td>List<OutputDefinition></td>
-<td>Expected outputs, each with <code>name</code>, <code>type</code>, and <code>required</code></td>
+<td>The form fields to complete the task (see below)</td>
 </tr>
 </tbody>
 </table>
 <p>Input EL expressions (from the node's config) are evaluated against the instance context automatically — the caller receives fully resolved values.</p>
+<h3 id="output-field-metadata">Output field metadata</h3>
+<p>Each <code>OutputDefinition</code> describes one form field a person fills in to complete the task. Only <code>name</code>
+is required; every other attribute is optional and backward-compatible — an output that declares only
+<code>{name, type, required}</code> behaves exactly as before, and the engine derives sensible defaults for
+anything omitted. Hosts (such as Axiom) use this metadata to render the runtime completion form.</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Required</th>
+<th>Meaning</th>
+<th>Default when omitted</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>name</code></td>
+<td>yes</td>
+<td>context key the answer is stored under</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>type</code></td>
+<td>no</td>
+<td>semantic type: <code>string</code>/<code>number</code>/<code>boolean</code>/<code>object</code></td>
+<td><code>string</code></td>
+</tr>
+<tr>
+<td><code>required</code></td>
+<td>no</td>
+<td>must be provided to complete</td>
+<td><code>false</code></td>
+</tr>
+<tr>
+<td><code>label</code></td>
+<td>no</td>
+<td>human-readable field label</td>
+<td><code>name</code></td>
+</tr>
+<tr>
+<td><code>description</code></td>
+<td>no</td>
+<td>help/hint text shown under the field</td>
+<td>none</td>
+</tr>
+<tr>
+<td><code>widget</code></td>
+<td>no</td>
+<td>rendering hint: <code>text</code>/<code>textarea</code>/<code>select</code> (string types only)</td>
+<td>inferred from <code>type</code></td>
+</tr>
+<tr>
+<td><code>defaultValue</code></td>
+<td>no</td>
+<td>pre-filled value</td>
+<td>none</td>
+</tr>
+<tr>
+<td><code>options</code></td>
+<td>no</td>
+<td><code>List&lt;OutputOption&gt;</code> (<code>label</code>, <code>value</code>) — choices for <code>widget: select</code></td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Default widget inference</strong> (when <code>widget</code> is omitted): <code>string</code> → <code>text</code>, <code>number</code> → <code>number</code>,
+<code>boolean</code> → <code>checkbox</code>, <code>object</code> → <code>textarea</code>. <code>widget</code> only meaningfully applies to <code>string</code>-typed
+outputs, and <code>select</code> requires <code>options</code>. The values in <code>HumanTaskInfo.outputs</code> are fully resolved —
+<code>label</code> and <code>widget</code> are populated with their defaults so the caller never has to re-derive them.</p>
+<p>These attributes are authoring metadata only. As before, the engine does <strong>not</strong> validate submitted
+human answers against the declared outputs — hosts remain responsible for validating submissions.</p>
 <h2 id="getting-receive-event-info">Getting Receive Event Info</h2>
 <div class="language-java highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="n">ReceiveEventInfo</span><span class="w"> </span><span class="n">info</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">engine</span><span class="p">.</span><span class="na">getReceiveEventInfo</span><span class="p">(</span><span class="n">definition</span><span class="p">,</span><span class="w"> </span><span class="n">instance</span><span class="p">);</span>
 </span></code></pre></div>
