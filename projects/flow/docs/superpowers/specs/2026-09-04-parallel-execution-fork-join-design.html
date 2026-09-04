@@ -1,0 +1,1708 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Lightweight visual workflow engine for long-running project lifecycles">
+      
+      
+        <meta name="author" content="Apitomy">
+      
+      
+        <link rel="canonical" href="https://www.apitomy.io/projects/flow/docs/superpowers/specs/2026-09-04-parallel-execution-fork-join-design.html">
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>Parallel Execution: Fork/Join (Concurrent Branches) — Design - Apitomy Flow</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../theme/css/project-colors.css">
+    
+      <link rel="stylesheet" href="../../theme/css/apitomy-base.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#parallel-execution-forkjoin-concurrent-branches-design" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+        <aside class="md-banner">
+          <div class="md-banner__inner md-grid md-typeset">
+            
+            
+<div class="apitomy-masthead">
+    <div class="apitomy-masthead-inner">
+        <a href="https://www.apitomy.io/" class="apitomy-masthead-logo">Apitomy</a>
+        <nav class="apitomy-masthead-nav">
+            <a href="https://www.apitomy.io/#projects">Projects</a>
+            <a href="https://www.apitomy.io/blog/">Blog</a>
+            <a href="https://github.com/Apitomy" class="apitomy-masthead-github" aria-label="GitHub">
+                <svg width="22" height="22" viewBox="0 0 16 16" fill="currentColor">
+                    <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/>
+                </svg>
+            </a>
+        </nav>
+    </div>
+</div>
+
+          </div>
+          
+        </aside>
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../index.html" title="Apitomy Flow" class="md-header__button md-logo" aria-label="Apitomy Flow" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Apitomy Flow
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Parallel Execution: Fork/Join (Concurrent Branches) — Design
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom"  aria-hidden="true"  type="radio" name="__palette" id="__palette_0">
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="Share" aria-label="Share" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/Apitomy/apitomy-flow" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Apitomy/apitomy-flow
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../index.html" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../getting-started/installation.html" class="md-tabs__link">
+          
+  
+  
+  Getting Started
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../user-guide/workflow-model.html" class="md-tabs__link">
+          
+  
+  
+  User Guide
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../developer-guide/building.html" class="md-tabs__link">
+          
+  
+  
+  Developer Guide
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../index.html" title="Apitomy Flow" class="md-nav__button md-logo" aria-label="Apitomy Flow" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Apitomy Flow
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/Apitomy/apitomy-flow" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Apitomy/apitomy-flow
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Getting Started
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Getting Started
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../getting-started/installation.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Installation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../getting-started/quick-start.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Quick Start
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    User Guide
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    User Guide
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../user-guide/workflow-model.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Workflow Model
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../user-guide/engine-usage.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Engine Usage
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../user-guide/node-executors.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Node Executors
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../user-guide/event-correlation.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Event Correlation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../user-guide/error-handling.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Error Handling
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../user-guide/validation.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Validation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../user-guide/visual-editor.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Visual Editor
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../user-guide/workflow-viewer.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Workflow Viewer
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Developer Guide
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Developer Guide
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../developer-guide/building.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Building
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../developer-guide/architecture.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Architecture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../developer-guide/contributing.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Contributing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#problem" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Problem
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#goals" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Goals
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#non-goals" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Non-Goals
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#decisions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Decisions
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#model-inferring-fork-and-join-from-edge-shape" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Model: inferring fork and join from edge shape
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Model: inferring fork and join from edge shape">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fork-parallel-split" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fork (parallel split)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#join-synchronizing-merge" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Join (synchronizing merge)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#execution-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Execution model
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Execution model">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#active-branch-state-replaces-the-single-cursor" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Active-branch state (replaces the single cursor)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-advance-loop-token-based" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The advance loop (token-based)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#and-join-firing-rule" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AND-join firing rule
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#completion-failure-cancellation-and-waiting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Completion, failure, cancellation, and waiting
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#history-with-branch-attribution" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        History with branch attribution
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#concurrency-and-context" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Concurrency and context
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#validation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Validation
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ui-impact" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        UI impact
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="UI impact">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#workflowviewer-multi-active-highlighting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        WorkflowViewer (multi-active highlighting)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ts-simulation-uisrcsimulationsimulatets" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        TS simulation (ui/src/simulation/simulate.ts)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#workfloweditor-authoring-affordances" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        WorkflowEditor (authoring affordances)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#phased-delivery" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Phased delivery
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#migration-notes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Migration notes
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#testing-per-phase" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Testing (per phase)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#files-affected-across-future-phases-informational-no-code-in-this-deliverable" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Files affected across future phases (informational — no code in this deliverable)
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="parallel-execution-forkjoin-concurrent-branches-design">Parallel Execution: Fork/Join (Concurrent Branches) — Design</h1>
+<p><strong>Date:</strong> 2026-09-04
+<strong>Status:</strong> Approved (design)
+<strong>Component:</strong> <code>io.apitomy.flow</code> engine (Java) + <code>@apitomy/flow-ui</code> (<code>ui/</code>)
+<strong>Tracking:</strong> <a href="https://github.com/Apitomy/apitomy-flow/issues/88">Apitomy/apitomy-flow#88</a> (epic)</p>
+<h2 id="problem">Problem</h2>
+<p>Apitomy Flow can express only strictly sequential/branching flows: a <code>WorkflowInstance</code> tracks
+exactly one <code>currentNodeId</code>, <code>advance()</code> is a single-cursor loop, and <code>selectEdge</code> chooses exactly
+<strong>one</strong> outgoing edge per node. Real project lifecycles frequently need to do several things at once
+and wait for all of them:</p>
+<ul>
+<li>"When a CVE is confirmed, <strong>in parallel</strong> analyze impact <strong>and</strong> notify the security team, then
+  continue once both are done."</li>
+<li>"Kick off three independent remediation actions concurrently and wait for all before final
+  sign-off."</li>
+</ul>
+<p>Today authors must fake concurrency by serializing steps that have no ordering dependency (slower,
+misrepresents intent) or by hiding the parallelism inside a single host action (opaque to the
+workflow, invisible in the viewer, untestable as a graph). This is the single biggest structural
+limitation separating Flow from a general-purpose orchestrator.</p>
+<p>The single-active-node assumption is pervasive and must be lifted carefully. This document is the
+<strong>design spec only</strong> — no code changes accompany it. It defines the model, execution semantics, join
+semantics, validation, UI impact, and a phased implementation plan so that implementation can
+proceed in reviewable increments with Java/TypeScript parity maintained throughout.</p>
+<h2 id="goals">Goals</h2>
+<ul>
+<li>Let a workflow definition express that execution <strong>fans out into multiple concurrent branches</strong> and
+  later <strong>re-converges</strong>.</li>
+<li>Represent instance state that can have <strong>more than one active node at a time</strong>, with history that
+  records what happened on each branch.</li>
+<li>Define <strong>wait-for-all (AND-join)</strong> convergence semantics, including how failure/cancellation of one
+  branch affects its siblings.</li>
+<li>Add editor/viewer support for authoring and visualizing concurrent branches, including showing
+  multiple simultaneously-active nodes in a running instance.</li>
+<li>Keep <strong>Java engine, TypeScript types, both validators (Java + TS), the TS simulation, and both UI
+  components</strong> in parity throughout the phased delivery.</li>
+</ul>
+<h2 id="non-goals">Non-Goals</h2>
+<p>Restating and extending the issue's out-of-scope list, plus decisions made below:</p>
+<ul>
+<li><strong>No dedicated <code>FORK</code>/<code>JOIN</code> node types.</strong> Concurrency is inferred from edge shape (see Decisions).</li>
+<li><strong>No branch-scoped / namespaced context.</strong> The flat, last-write-wins <code>context</code> map is retained; the
+  concurrency hazard is documented, not engineered away.</li>
+<li><strong>No N-of-M / discriminator joins.</strong> Only wait-for-all (AND-join) is defined now.</li>
+<li><strong>No unstructured / overlapping / cross-cutting parallel regions.</strong> Parallelism must be
+  <em>structured</em> (well-nested, balanced): every fork has exactly one matching join, branches do not
+  cross region boundaries, and a branch may not reach <code>END</code> without first joining. Unstructured
+  concurrency is a potential later capability, not part of this design.</li>
+<li><strong>No distributed / multi-process execution.</strong> The engine remains a single, stateless component
+  operating on one instance document.</li>
+<li><strong>No dynamic fan-out over a runtime collection</strong> ("do this for each item in a list").</li>
+<li><strong>No sub-workflow / call-activity composition.</strong> Tracked separately.</li>
+</ul>
+<h2 id="decisions">Decisions</h2>
+<p>The following were decided for this design (see <a href="https://github.com/Apitomy/apitomy-flow/issues/88">#88</a>):</p>
+<table>
+<thead>
+<tr>
+<th>Decision</th>
+<th>Choice</th>
+<th>Rationale / alternatives rejected</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Graph modeling</strong></td>
+<td>Reinterpret multiple edges (no new node types)</td>
+<td>Minimal additions to <code>NodeType</code> and both node-component registries; a fork is just a node whose outgoing edges are all unconditional, a join is a multi-incoming convergence node. <em>Rejected:</em> dedicated <code>FORK</code>/<code>JOIN</code> types (more explicit but larger surface across enum, two <code>switch</code> blocks, palette, and node components) and a single <code>PARALLEL</code> gateway type.</td>
+</tr>
+<tr>
+<td><strong>Join semantics</strong></td>
+<td>Wait-for-all (AND-join)</td>
+<td>Covers the motivating examples with the simplest, most predictable rule: continue once <strong>all</strong> converging branches arrive. <em>Deferred:</em> N-of-M / discriminator joins.</td>
+</tr>
+<tr>
+<td><strong>Branch failure</strong></td>
+<td>Fail-fast</td>
+<td>Any branch that fails (or is cancelled) fails/cancels the whole workflow; remaining active branches are cancelled. Simplest deterministic policy consistent with wait-for-all.</td>
+</tr>
+<tr>
+<td><strong>Context under concurrency</strong></td>
+<td>Keep flat, last-write-wins; document the risk</td>
+<td>No scoping. Concurrent writes to the same key resolve by execution order (deterministic under the single-threaded engine, but order-dependent). <em>Deferred:</em> branch-scoped context with merge-on-join.</td>
+</tr>
+<tr>
+<td><strong>Structural discipline</strong></td>
+<td>Structured (well-nested, balanced) parallelism, enforced by validation</td>
+<td>Makes the AND-join firing rule simple and deterministic and keeps the blast radius bounded. Unstructured concurrency is a non-goal.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="model-inferring-fork-and-join-from-edge-shape">Model: inferring fork and join from edge shape</h2>
+<p>No changes to <code>NodeType</code>, <code>WorkflowNode</code>, or <code>WorkflowEdge</code> <strong>shape</strong>. Concurrency is derived from the
+existing graph:</p>
+<h3 id="fork-parallel-split">Fork (parallel split)</h3>
+<p>A node is a <strong>parallel fork</strong> when it has <strong>two or more outgoing edges and every outgoing edge is
+unconditional</strong> — i.e. no edge has a <code>condition</code>, and none is marked <code>isDefault</code>. Entering a fork node
+activates <strong>all</strong> of its outgoing edges concurrently.</p>
+<p>Disambiguation from the existing exclusive-choice behavior is purely by edge shape:</p>
+<table>
+<thead>
+<tr>
+<th>Outgoing edges of a node</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Exactly one edge</td>
+<td>Sequential transition (unchanged).</td>
+</tr>
+<tr>
+<td>≥2 edges, <strong>all</strong> unconditional, none default</td>
+<td><strong>Parallel fork</strong> — activate all (NEW).</td>
+</tr>
+<tr>
+<td>≥2 edges with at least one <code>condition</code> and/or an <code>isDefault</code></td>
+<td>Exclusive choice — <code>selectEdge</code> picks one (unchanged).</td>
+</tr>
+<tr>
+<td>≥2 edges mixing unconditional (non-default) edges with conditional/default edges</td>
+<td><strong>Invalid</strong> — ambiguous (<code>MIXED_FORK_EDGES</code>, see Validation).</td>
+</tr>
+</tbody>
+</table>
+<p>This is a deliberate <strong>behavior change</strong>: the "≥2 unconditional edges" shape was previously only a
+warning (<code>UNCONDITIONAL_MULTIPLE_EDGES</code>) because the engine silently took just one edge. That shape
+now has defined fork semantics. Existing workflows relying on the old accidental single-edge behavior
+were, by that warning, already flagged as suspect; the migration note and validator changes below
+call this out explicitly.</p>
+<h3 id="join-synchronizing-merge">Join (synchronizing merge)</h3>
+<p>A <strong>join</strong> is the node where a fork's branches re-converge. Under structured parallelism, each fork
+<code>F</code> has exactly one matching join <code>J</code>, determined statically as the nearest common convergence point
+(post-dominator) of <code>F</code>'s successor branches. <code>J</code> is a normal node (any <code>NodeType</code> except <code>START</code>);
+it simply has multiple incoming edges from the branches of <code>F</code>.</p>
+<ul>
+<li>A multi-incoming node that <strong>is</strong> the matching join of a fork behaves as an <strong>AND-join</strong>: it holds
+  arriving branches and executes/continues only once <strong>all</strong> of that region's branches have arrived.</li>
+<li>A multi-incoming node that is <strong>not</strong> a fork's join (e.g. two mutually-exclusive conditional
+  branches that merge) behaves as a <strong>simple merge</strong> — it executes on each arrival, exactly as today.</li>
+</ul>
+<p>The static fork→join pairing is computed once (by the validator and reused by the engine/simulation)
+so that runtime firing needs no whole-graph reasoning.</p>
+<h2 id="execution-model">Execution model</h2>
+<h3 id="active-branch-state-replaces-the-single-cursor">Active-branch state (replaces the single cursor)</h3>
+<p>The instance gains a set of concurrently <strong>active branches</strong> (tokens). Conceptually:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>Branch := { branchId: string, nodeId: string }   // a live position in the graph
+</span></code></pre></div>
+<ul>
+<li><strong>Java</strong> <code>WorkflowInstance</code> (<code>engine/.../model/WorkflowInstance.java</code>): add
+  <code>List&lt;ActiveBranch&gt; activeBranches</code> (each <code>record ActiveBranch(String branchId, String nodeId)</code>).
+  Retain <code>currentNodeId</code> as a <strong>derived, back-compat accessor</strong>: it returns the sole active node when
+  exactly one branch is active, otherwise <code>null</code>. Existing single-path consumers and tests continue
+  to work for non-parallel workflows.</li>
+<li><strong>TypeScript</strong> <code>WorkflowInstance</code> (<code>ui/src/types/instance.ts</code>): mirror with
+  <code>activeBranches: { branchId: string; nodeId: string }[]</code>; keep <code>currentNodeId</code> as the same derived
+  value for wire parity.</li>
+</ul>
+<p><code>branchId</code> is a stable, engine-assigned identifier. The initial branch (from the start node) has a
+well-known root id (e.g. <code>"root"</code>). A fork assigns child branch ids; a join collapses them back to a
+single continuing branch (conventionally the id of the branch that reaches the join last, or the
+matching fork's parent id — the exact scheme is an implementation detail fixed in Phase 1).</p>
+<h3 id="the-advance-loop-token-based">The advance loop (token-based)</h3>
+<p><code>WorkflowEngine.advance()</code> changes from a single <code>while(true)</code> cursor into a <strong>work-queue over
+runnable branches</strong>:</p>
+<ol>
+<li>Seed the queue with all currently-runnable branches (those at a node that can auto-advance).</li>
+<li>While the queue is non-empty, pop a branch and advance it <strong>one step</strong>, which resolves the node at
+   its position and its outgoing edges:</li>
+<li><strong>Sequential</strong> (one outgoing edge): move the branch to the edge target.</li>
+<li><strong>Fork</strong> (≥2 unconditional edges): retire this branch and enqueue one new child branch per
+     outgoing edge, each positioned at that edge's target.</li>
+<li><strong>Exclusive choice</strong>: <code>selectEdge</code> as today; move the branch to the chosen target.</li>
+<li><strong>Arriving at a join <code>J</code></strong>: <em>park</em> the branch at <code>J</code> against <code>J</code>'s incoming-edge set instead of
+     executing. When branches have arrived covering <strong>every</strong> incoming edge of <code>J</code> (guaranteed by the
+     structured-balance validation to be exactly the region's branches), collapse them into a single
+     continuing branch, execute/continue <code>J</code>, and enqueue it.</li>
+<li><strong>Blocking nodes</strong> (<code>HUMAN_TASK</code>, <code>RECEIVE_EVENT</code>, <code>WAIT</code>, or an <code>ACTION</code> executor returning
+     <code>PENDING</code>): the branch <strong>parks</strong> (see status) and is removed from the runnable queue; other
+     branches keep running.</li>
+<li><strong><code>END</code></strong>: completes the <strong>entire</strong> workflow immediately (see Completion).</li>
+<li>When no runnable branches remain, derive and persist the instance status.</li>
+</ol>
+<p>The <code>MAX_TRANSITIONS</code> loop guard is retained but counts total steps across all branches.</p>
+<p>The old invariant <em>"the last history entry is the current node"</em> (<code>hasEnteredCurrentNode</code>,
+<code>completeCurrentHistoryEntry</code>) is removed. Completion of a node's history entry is matched by
+<code>(branchId, nodeId)</code> against the open (not-yet-completed) entry for that branch, not by list position.</p>
+<h3 id="and-join-firing-rule">AND-join firing rule</h3>
+<p>For the matching join <code>J</code> of a fork region: <strong><code>J</code> fires once a branch token has arrived on every
+incoming edge of <code>J</code>.</strong> Structured-balance validation guarantees that all of <code>J</code>'s incoming edges
+belong to the one region, so "a token on every incoming edge" is exactly "all branches converged."
+Nested forks resolve recursively — an inner join fires first, producing a single token that flows on
+to the outer join. Arrived-but-waiting branches are held in instance state (a small per-join arrival
+record) so the wait survives persistence between <code>advance()</code> calls.</p>
+<h3 id="completion-failure-cancellation-and-waiting">Completion, failure, cancellation, and waiting</h3>
+<ul>
+<li><strong>COMPLETED:</strong> reaching an <code>END</code> node completes the entire workflow immediately; any other active or
+  parked branches are cancelled. Structured-balance validation guarantees a parallel branch cannot
+  reach <code>END</code> without first joining, so this only fires on the single post-join path.</li>
+<li><strong>FAILED (fail-fast):</strong> if any branch fails (executor failure with no recovering <code>TRANSITION</code>,
+  unmatched edge, etc.), the whole workflow transitions to <code>FAILED</code> and all other active/parked
+  branches are cancelled. <code>failureReason</code> records the failing branch.</li>
+<li><strong>CANCELLED:</strong> <code>cancelWorkflow</code> cancels all active/parked branches.</li>
+<li><strong>WAITING:</strong> when the runnable queue drains and at least one branch is parked on a blocking node,
+  the instance is <code>WAITING</code>. Resuming targets a specific parked node:
+  <code>completeNode(instance, nodeId, output)</code> (and event delivery) match the parked branch by <code>nodeId</code>
+  (disambiguated by <code>branchId</code> in the rare case the same node is parked in more than one branch).
+  Only that branch becomes runnable; siblings are unaffected.</li>
+</ul>
+<p>Instance status is <strong>derived</strong> each time <code>advance()</code> reaches quiescence, in priority order:
+<code>FAILED</code> → <code>CANCELLED</code> → <code>COMPLETED</code> → <code>WAITING</code> (≥1 parked branch) → otherwise <code>RUNNING</code> (transient
+during a step).</p>
+<h3 id="history-with-branch-attribution">History with branch attribution</h3>
+<p><code>HistoryEntry</code> gains an optional <code>branchId</code> (Java <code>record</code> field + TS type field). History remains a
+single, time-ordered, append-only <code>List&lt;HistoryEntry&gt;</code>; concurrent branches interleave and are
+distinguished by <code>branchId</code>. Consumers that group or replay history (viewer detail, <code>nodeHistory</code>
+util) use <code>branchId</code> to attribute and group visits. Absent/<code>null</code> <code>branchId</code> denotes the root
+(non-parallel) branch, preserving back-compat for existing linear histories.</p>
+<h2 id="concurrency-and-context">Concurrency and context</h2>
+<p>Per the decision above, <code>context</code> stays a single flat <code>Map&lt;String, Object&gt;</code> with last-write-wins
+<code>putAll</code> merge on each node completion — <strong>unchanged</strong>. Implications, to be documented for authors:</p>
+<ul>
+<li>Parallel branches share one global context. Two branches writing the <strong>same</strong> key resolve by
+  execution order. Under the single-threaded engine this is deterministic for a given definition and
+  inputs, but it <strong>is order-dependent</strong> and should not be relied upon as a synchronization mechanism.</li>
+<li><strong>Guidance:</strong> concurrent branches should write <strong>disjoint</strong> keys (e.g. namespate by branch purpose:
+  <code>impact.severity</code>, <code>notify.ticketId</code>). The AND-join is the correct place to read values produced by
+  all branches, since it runs only after every branch has completed and merged its output.</li>
+<li>Branch-scoped context with a defined merge-on-join conflict rule is a <strong>non-goal</strong> here and is the
+  natural follow-up if last-write-wins proves insufficient.</li>
+</ul>
+<h2 id="validation">Validation</h2>
+<p>Both validators — Java <code>WorkflowValidator</code> (<code>engine/.../validation/</code>) and TypeScript
+<code>validateWorkflow</code> (<code>ui/src/validation/validateWorkflow.ts</code>) — must change in parity. Problems keep
+the existing shape (<code>{ severity, code, message, nodeId?, edgeId? }</code>).</p>
+<p><strong>Changed:</strong></p>
+<ul>
+<li><code>UNCONDITIONAL_MULTIPLE_EDGES</code> — <strong>retired as a warning.</strong> The "≥2 unconditional edges" shape is now
+  the sanctioned way to author a fork and is valid. Remove the warning (and update the tests and
+  <code>docs/user-guide/validation.md</code> that reference it). The migration note below covers behavior
+  change for existing definitions.</li>
+</ul>
+<p><strong>New (structural discipline for parallelism):</strong></p>
+<table>
+<thead>
+<tr>
+<th>Code</th>
+<th>Severity</th>
+<th>Fires when</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>MIXED_FORK_EDGES</code></td>
+<td>error</td>
+<td>A node's outgoing edges mix unconditional (non-default) edges with conditional and/or default edges — fork vs. exclusive-choice is ambiguous.</td>
+</tr>
+<tr>
+<td><code>FORK_WITHOUT_JOIN</code></td>
+<td>error</td>
+<td>A fork's branches do not re-converge at a single common join before the workflow ends.</td>
+</tr>
+<tr>
+<td><code>UNBALANCED_PARALLEL</code></td>
+<td>error</td>
+<td>The branches of a fork do not all converge at the <em>same</em> join (e.g. one branch bypasses it) — structured balance violated.</td>
+</tr>
+<tr>
+<td><code>CROSSING_PARALLEL_REGIONS</code></td>
+<td>error</td>
+<td>An edge enters or leaves a parallel region other than through its fork/join (overlapping/unstructured regions).</td>
+</tr>
+<tr>
+<td><code>PARALLEL_BRANCH_REACHES_END</code></td>
+<td>error</td>
+<td>A parallel branch can reach an <code>END</code> node without first passing through its region's join.</td>
+</tr>
+<tr>
+<td><code>PARALLEL_REGION_CYCLE</code></td>
+<td>error</td>
+<td>A cycle exists entirely inside a parallel region (interacts with the existing <code>AUTOMATED_CYCLE</code> Tarjan SCC analysis).</td>
+</tr>
+</tbody>
+</table>
+<p>The fork→join pairing / structured-balance analysis is implemented once as a shared helper (per
+language) and reused by both the validator and the engine/simulation, so the runtime and the
+validator agree on what is a fork, what its join is, and what constitutes a well-formed region.</p>
+<h2 id="ui-impact">UI impact</h2>
+<p>No new palette entry (per the chosen model). Authoring a fork = drawing ≥2 unconditional edges from a
+node; the join is the node where they reconverge.</p>
+<h3 id="workflowviewer-multi-active-highlighting"><code>WorkflowViewer</code> (multi-active highlighting)</h3>
+<p><code>ui/src/components/WorkflowViewer.tsx</code> currently derives <code>isCurrent</code> from
+<code>node.id === instance.currentNodeId</code>. It must instead test membership in the <strong>set</strong> of active nodes
+(<code>instance.activeBranches.map(b =&gt; b.nodeId)</code>). Multiple nodes can carry <code>flow-node-current</code> and the
+animated marching-ants ring (<code>withCurrentRing</code>, driven by <code>data.isCurrent</code>) simultaneously. Edge
+highlighting likewise activates all currently-traversed edges. <code>NodeDetail</code> / <code>nodeHistory</code> become
+branch-aware (group visits by <code>branchId</code>).</p>
+<h3 id="ts-simulation-uisrcsimulationsimulatets">TS simulation (<code>ui/src/simulation/simulate.ts</code>)</h3>
+<p><code>SimState.currentNodeId: string</code> becomes an <strong>active-branch set</strong> mirroring the engine
+(<code>activeBranches</code>). <code>stepSimulation</code> advances runnable branches; <code>selectEdge</code> gains the fork case
+(return all edges when the node is a fork); joins hold until all branches arrive; blocking-kind nodes
+park per-branch. <code>SimulationPanel</code> (<code>ui/src/components/panels/SimulationPanel.tsx</code>) shows multiple
+active/blocked nodes and a branch-aware path instead of a single "at <node>" line, and the editor's
+per-node/per-edge simulation overlay classes (<code>flow-sim-node-*</code>, edge <code>data.simState</code>) are computed
+from the active-branch set.</p>
+<h3 id="workfloweditor-authoring-affordances"><code>WorkflowEditor</code> (authoring affordances)</h3>
+<p><code>ui/src/components/WorkflowEditor.tsx</code> needs no new node type, but should:</p>
+<ul>
+<li>Surface the new validation problems (they flow through the existing built-in + host merge and the
+  Problems panel automatically).</li>
+<li>Visually hint that a node forks when it has ≥2 unconditional outgoing edges (e.g. a small "parallel"
+  badge or handle affordance), so the reinterpreted-edge semantics are discoverable rather than
+  implicit.</li>
+</ul>
+<h2 id="phased-delivery">Phased delivery</h2>
+<p>This spec is Phase 0. Implementation is broken into reviewable phases; each maintains parity within
+its scope.</p>
+<ol>
+<li><strong>Phase 1 — Java engine + Java validator.</strong> <code>WorkflowInstance</code> active-branch state (+ derived
+   <code>currentNodeId</code>), token-based <code>advance()</code>, fork/AND-join/fail-fast/END semantics, <code>HistoryEntry</code>
+   <code>branchId</code>, resume-by-node API, the shared fork→join analysis helper, and the new/changed
+   validation rules. Full unit coverage (<code>WorkflowEngineTest</code>, <code>WorkflowValidatorTest</code>).</li>
+<li><strong>Phase 2 — TypeScript parity.</strong> <code>types/instance.ts</code> active branches, <code>simulate.ts</code> token model,
+   <code>validateWorkflow.ts</code> new/changed rules + shared analysis helper, and tests
+   (<code>simulate.test.ts</code>, <code>validateWorkflow.test.ts</code>).</li>
+<li><strong>Phase 3 — Viewer + simulation UI.</strong> Multi-active highlighting in <code>WorkflowViewer</code>, branch-aware
+   <code>NodeDetail</code>/<code>nodeHistory</code>, multi-branch <code>SimulationPanel</code>.</li>
+<li><strong>Phase 4 — Editor authoring affordances.</strong> Fork visual hint and validation surfacing.</li>
+<li><strong>Phase 5 — Documentation + examples.</strong> <code>docs/user-guide/workflow-model.md</code>,
+   <code>validation.md</code>, <code>engine-usage.md</code>, <code>workflow-viewer.md</code>, <code>visual-editor.md</code>, plus a worked
+   fork/join example (the CVE analyze-and-notify scenario) and this spec's companion plan in
+   <code>docs/superpowers/plans/</code>.</li>
+</ol>
+<h2 id="migration-notes">Migration notes</h2>
+<ul>
+<li>Definitions with a node that has ≥2 unconditional outgoing edges (previously flagged
+  <code>UNCONDITIONAL_MULTIPLE_EDGES</code> and executed as "take one") will, after Phase 1, <strong>fork and execute
+  all</strong> branches. This is the intended semantic upgrade; the retired warning becomes valid fork
+  authoring. Authors who intended exclusive choice must add conditions and/or a default edge.</li>
+<li>The derived <code>currentNodeId</code> remains populated for all non-parallel workflows, so existing
+  single-path consumers and serialized instances are unaffected until a workflow actually forks.</li>
+</ul>
+<h2 id="testing-per-phase">Testing (per phase)</h2>
+<p>Following the project convention (pure, testable logic; JUnit 5 on the engine, vitest on the UI with
+no jsdom):</p>
+<ul>
+<li><strong>Engine:</strong> fork activates all branches; AND-join waits for all and fires once; fail-fast cancels
+  siblings; a blocking node parks one branch while others proceed; <code>END</code> completes and cancels
+  siblings; nested fork/join; status derivation; resume-by-node. <code>MAX_TRANSITIONS</code> still bounds the
+  token loop.</li>
+<li><strong>Validators (both):</strong> each new code fires on its minimal offending graph and does not fire on a
+  well-formed structured fork/join; the retired <code>UNCONDITIONAL_MULTIPLE_EDGES</code> no longer appears.</li>
+<li><strong>Simulation:</strong> <code>simulate.ts</code> step/run over a fork/join graph matches the engine's branch set and
+  join behavior; <code>SimulationPanel</code> scaffolding driven by multiple active branches.</li>
+<li>Run <code>npx vitest run</code> for affected UI tests and <code>npx tsc --noEmit</code>; run the engine's Maven test
+  suite for Java changes.</li>
+</ul>
+<h2 id="files-affected-across-future-phases-informational-no-code-in-this-deliverable">Files affected across future phases (informational — no code in this deliverable)</h2>
+<p><strong>Engine (Java):</strong>
+- <code>engine/.../model/WorkflowInstance.java</code> — active branches + derived <code>currentNodeId</code>
+- <code>engine/.../model/HistoryEntry.java</code> — <code>branchId</code>
+- <code>engine/.../engine/WorkflowEngine.java</code> — token-based <code>advance()</code>, fork/join, resume-by-node
+- <code>engine/.../validation/WorkflowValidator.java</code> — retire/replace edge rules; add structural rules
+- <code>engine/.../validation/</code> — new shared fork→join analysis helper
+- <code>engine/src/test/.../engine/WorkflowEngineTest.java</code>, <code>.../validation/WorkflowValidatorTest.java</code></p>
+<p><strong>UI (TypeScript):</strong>
+- <code>ui/src/types/instance.ts</code> — active branches; <code>HistoryEntry.branchId</code>
+- <code>ui/src/simulation/simulate.ts</code> — token model, fork/join
+- <code>ui/src/validation/validateWorkflow.ts</code> — new/changed rules + shared analysis helper
+- <code>ui/src/components/WorkflowViewer.tsx</code>, <code>ui/src/utils/nodeHistory.ts</code> — multi-active + branch-aware
+- <code>ui/src/components/panels/SimulationPanel.tsx</code>, <code>ui/src/components/WorkflowEditor.tsx</code> — multi-branch
+  simulation + fork authoring hint
+- <code>ui/src/simulation/simulate.test.ts</code>, <code>ui/src/validation/validateWorkflow.test.ts</code></p>
+<p><strong>Docs:</strong>
+- <code>docs/user-guide/workflow-model.md</code>, <code>validation.md</code>, <code>engine-usage.md</code>, <code>workflow-viewer.md</code>,
+  <code>visual-editor.md</code>
+- <code>docs/superpowers/plans/2026-09-04-parallel-execution-fork-join-plan.md</code> (companion plan)</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/Apitomy/apitomy-flow" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.expand", "navigation.top", "search.highlight", "search.share", "search.suggest", "content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+    
+  </body>
+</html>
