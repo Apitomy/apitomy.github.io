@@ -18,7 +18,7 @@
         <link rel="prev" href="visual-editor.html">
       
       
-        <link rel="next" href="../developer-guide/building.html">
+        <link rel="next" href="parallel-fork-join.html">
       
       
         
@@ -896,6 +896,17 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#parallel-branches" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parallel Branches
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#history-based-rendering" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -948,6 +959,34 @@
   
 </nav>
       
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="parallel-fork-join.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Parallel Fork/Join
+  
+
+    
+  </span>
+  
+  
+
+      </a>
     </li>
   
 
@@ -1199,6 +1238,17 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#parallel-branches" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parallel Branches
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#history-based-rendering" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1384,6 +1434,13 @@ animated "marching ants" ring around it.</p>
 </tbody>
 </table>
 <p>The most recently followed edge is animated with a flowing dash pattern.</p>
+<h3 id="parallel-branches">Parallel Branches</h3>
+<p>For instances that fork, the viewer highlights <strong>every</strong> currently-active node at once rather than a
+single cursor. The arrival edge of each active branch is animated, while all previously-traversed edges
+keep their static "taken" styling. When you open a node's detail, its visit history is grouped by
+branch, and a <strong>Branch</strong> row identifies which branch a given visit belongs to (the <code>root</code> branch is not
+labeled). At a terminal state — completed, failed, or cancelled — no branches are active, so the viewer
+falls back to highlighting the final node.</p>
 <h3 id="history-based-rendering">History-Based Rendering</h3>
 <p>The viewer reads the instance's <code>history</code> array to determine:</p>
 <ul>

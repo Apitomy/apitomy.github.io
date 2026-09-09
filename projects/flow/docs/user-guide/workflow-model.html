@@ -750,6 +750,17 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#parallel-forkjoin" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parallel Fork/Join
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#cycles" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -985,6 +996,34 @@
     
   
     Workflow Viewer
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="parallel-fork-join.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Parallel Fork/Join
   
 
     
@@ -1294,6 +1333,17 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#parallel-forkjoin" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parallel Fork/Join
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#cycles" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1517,11 +1567,33 @@
 </span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>context.score &gt; 80
 </span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>context.approved &amp;&amp; context.reviewCount &gt;= 2
 </span></code></pre></div>
+<h3 id="parallel-forkjoin">Parallel Fork/Join</h3>
+<p>A node with <strong>two or more outgoing edges that are all unconditional</strong> (no <code>condition</code> and
+<code>isDefault: false</code>) is a <strong>fork</strong>: entering it activates every outgoing branch concurrently, rather
+than choosing one. This is the parallel counterpart to conditional routing, where exactly one edge is
+taken.</p>
+<div class="language-json highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="p">{</span><span class="w"> </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"e-analyze"</span><span class="p">,</span><span class="w"> </span><span class="nt">"source"</span><span class="p">:</span><span class="w"> </span><span class="s2">"fetch-cve"</span><span class="p">,</span><span class="w"> </span><span class="nt">"target"</span><span class="p">:</span><span class="w"> </span><span class="s2">"analyze-impact"</span><span class="p">,</span><span class="w"> </span><span class="nt">"priority"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="nt">"isDefault"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w"> </span><span class="p">}</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="p">{</span><span class="w"> </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"e-notify"</span><span class="p">,</span><span class="w">  </span><span class="nt">"source"</span><span class="p">:</span><span class="w"> </span><span class="s2">"fetch-cve"</span><span class="p">,</span><span class="w"> </span><span class="nt">"target"</span><span class="p">:</span><span class="w"> </span><span class="s2">"notify-team"</span><span class="p">,</span><span class="w">    </span><span class="nt">"priority"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="nt">"isDefault"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w"> </span><span class="p">}</span>
+</span></code></pre></div>
+<p>The branches re-converge at a <strong>join</strong> — the first node reachable from every branch. A join behaves as
+an <strong>AND-join</strong>: it waits for <em>all</em> incoming parallel branches to arrive before it fires, and it fires
+exactly once. No special node type or config marks a join; it is identified statically from the graph
+shape.</p>
+<p>Fork/join regions must be well-formed:</p>
+<ul>
+<li>Every fork must have exactly one matching join (otherwise <code>FORK_WITHOUT_JOIN</code>).</li>
+<li>A parallel branch must not reach an <code>end</code> node before joining (otherwise
+  <code>PARALLEL_BRANCH_REACHES_END</code>).</li>
+<li>A node's outgoing edges must be <em>all</em> unconditional (fork) or use conditions/a default (exclusive
+  choice) — never a mix (otherwise <code>MIXED_FORK_EDGES</code>).</li>
+</ul>
+<p>See <a href="validation.html#parallel-structure-error">Validation</a> for the rules and
+<a href="parallel-fork-join.html">the worked example</a> for a complete fork/join workflow.</p>
 <h3 id="cycles">Cycles</h3>
 <p>Edges can loop back to earlier nodes — this is intentional for retry/re-review patterns:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>Human Task (approve plan)
-</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>  → [approved] Action (implement)
-</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>  → [rejected] Action (revise plan) → Human Task (approve plan)  // loop back
+<div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>Human Task (approve plan)
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>  → [approved] Action (implement)
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>  → [rejected] Action (revise plan) → Human Task (approve plan)  // loop back
 </span></code></pre></div>
 <h2 id="workflow-instance">Workflow Instance</h2>
 <p>A workflow instance is the runtime state of a workflow execution. It is a single JSON document — the consuming application handles persistence.</p>
@@ -1546,8 +1618,18 @@
 </tr>
 <tr>
 <td><code>currentNodeId</code></td>
-<td>String</td>
-<td>The node the instance is currently at</td>
+<td>String | null</td>
+<td>The node the instance is currently at when exactly one branch is active; <code>null</code> when zero or multiple branches are active</td>
+</tr>
+<tr>
+<td><code>activeBranches</code></td>
+<td>Array</td>
+<td>The branches currently executing, each <code>{ branchId, nodeId }</code>. A non-parallel run has a single <code>root</code> branch.</td>
+</tr>
+<tr>
+<td><code>joinArrivals</code></td>
+<td>Object</td>
+<td>For each pending join node, the incoming edge ids that have already arrived and are waiting for the rest.</td>
 </tr>
 <tr>
 <td><code>status</code></td>
@@ -1581,26 +1663,29 @@
 </tr>
 </tbody>
 </table>
+<p>When multiple branches are active, <code>currentNodeId</code> is <code>null</code> (it is a convenience for the
+single-branch case). Each <code>HistoryEntry</code> carries an optional <code>branchId</code> tagging which branch made the
+visit; a missing <code>branchId</code> denotes the <code>root</code> branch.</p>
 <h3 id="status-lifecycle">Status Lifecycle</h3>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>          ┌─────────┐
-</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>          │ RUNNING  │ ← startWorkflow / completeCurrentNode
-</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>          └────┬─────┘
-</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>               │
-</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>    ┌──────────┼──────────┐
-</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>    ▼          ▼          ▼
-</span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>┌────────┐ ┌──────┐ ┌───────────┐
-</span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>│WAITING │ │ END  │ │  ERROR    │
-</span><span id="__span-4-9"><a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>│        │ │      │ │           │
-</span><span id="__span-4-10"><a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a>└───┬────┘ └──┬───┘ └─────┬─────┘
-</span><span id="__span-4-11"><a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a>    │         │           │
-</span><span id="__span-4-12"><a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a>    │    ┌────▼───┐  ┌────▼───┐
-</span><span id="__span-4-13"><a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a>    │    │COMPLETED│  │ FAILED │
-</span><span id="__span-4-14"><a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a>    │    └────────┘  └────────┘
-</span><span id="__span-4-15"><a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a>    │
-</span><span id="__span-4-16"><a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a>    ▼
-</span><span id="__span-4-17"><a id="__codelineno-4-17" name="__codelineno-4-17" href="#__codelineno-4-17"></a>┌──────────┐
-</span><span id="__span-4-18"><a id="__codelineno-4-18" name="__codelineno-4-18" href="#__codelineno-4-18"></a>│CANCELLED │ ← cancelWorkflow
-</span><span id="__span-4-19"><a id="__codelineno-4-19" name="__codelineno-4-19" href="#__codelineno-4-19"></a>└──────────┘
+<div class="language-text highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>          ┌─────────┐
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>          │ RUNNING  │ ← startWorkflow / completeCurrentNode
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>          └────┬─────┘
+</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>               │
+</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>    ┌──────────┼──────────┐
+</span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>    ▼          ▼          ▼
+</span><span id="__span-5-7"><a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>┌────────┐ ┌──────┐ ┌───────────┐
+</span><span id="__span-5-8"><a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a>│WAITING │ │ END  │ │  ERROR    │
+</span><span id="__span-5-9"><a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a>│        │ │      │ │           │
+</span><span id="__span-5-10"><a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a>└───┬────┘ └──┬───┘ └─────┬─────┘
+</span><span id="__span-5-11"><a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a>    │         │           │
+</span><span id="__span-5-12"><a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a>    │    ┌────▼───┐  ┌────▼───┐
+</span><span id="__span-5-13"><a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a>    │    │COMPLETED│  │ FAILED │
+</span><span id="__span-5-14"><a id="__codelineno-5-14" name="__codelineno-5-14" href="#__codelineno-5-14"></a>    │    └────────┘  └────────┘
+</span><span id="__span-5-15"><a id="__codelineno-5-15" name="__codelineno-5-15" href="#__codelineno-5-15"></a>    │
+</span><span id="__span-5-16"><a id="__codelineno-5-16" name="__codelineno-5-16" href="#__codelineno-5-16"></a>    ▼
+</span><span id="__span-5-17"><a id="__codelineno-5-17" name="__codelineno-5-17" href="#__codelineno-5-17"></a>┌──────────┐
+</span><span id="__span-5-18"><a id="__codelineno-5-18" name="__codelineno-5-18" href="#__codelineno-5-18"></a>│CANCELLED │ ← cancelWorkflow
+</span><span id="__span-5-19"><a id="__codelineno-5-19" name="__codelineno-5-19" href="#__codelineno-5-19"></a>└──────────┘
 </span></code></pre></div>
 
 

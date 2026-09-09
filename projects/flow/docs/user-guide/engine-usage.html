@@ -799,6 +799,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#parallel-execution" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parallel Execution
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#immutability" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -984,6 +995,34 @@
     
   
     Workflow Viewer
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="parallel-fork-join.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Parallel Fork/Join
   
 
     
@@ -1314,6 +1353,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#parallel-execution" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parallel Execution
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#immutability" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1622,14 +1672,40 @@ human answers against the declared outputs — hosts remain responsible for vali
 <h2 id="action-chaining">Action Chaining</h2>
 <p>When an action node completes, the engine immediately evaluates edges and transitions to the next node. If the next node is also an action, it executes that too — continuing until it reaches a wait state or end. A single call to <code>startWorkflow</code> or <code>completeCurrentNode</code> may execute multiple action nodes in sequence.</p>
 <p>A safety limit of 100 transitions per call prevents infinite loops from automated cycles. If the limit is reached, the workflow fails with a descriptive <code>failureReason</code>.</p>
+<h2 id="parallel-execution">Parallel Execution</h2>
+<p>When execution reaches a fork (a node whose outgoing edges are all unconditional), the engine activates
+every branch. <code>advance</code> progresses all runnable branches; the instance stays <code>RUNNING</code> while any branch
+can still make progress and <code>WAITING</code> when every remaining branch is parked on a human task, received
+event, or wait node.</p>
+<div class="language-java highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="n">WorkflowInstance</span><span class="w"> </span><span class="n">instance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">engine</span><span class="p">.</span><span class="na">startWorkflow</span><span class="p">(</span><span class="n">workflow</span><span class="p">,</span><span class="w"> </span><span class="n">context</span><span class="p">);</span>
+</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="c1">// After a fork, more than one branch may be active at once.</span>
+</span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="n">List</span><span class="o">&lt;</span><span class="n">ActiveBranch</span><span class="o">&gt;</span><span class="w"> </span><span class="n">active</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">instance</span><span class="p">.</span><span class="na">activeBranches</span><span class="p">();</span>
+</span></code></pre></div>
+<p>Key semantics:</p>
+<ul>
+<li><strong>AND-join (wait-for-all).</strong> A join node fires once, only after every parallel branch has arrived.
+  Arrivals accumulate in <code>joinArrivals</code> until the last one lands.</li>
+<li><strong>Fail-fast.</strong> If any branch fails and is not recovered by an error handler, the whole instance
+  transitions to <code>FAILED</code>; sibling branches stop.</li>
+<li><strong>END cancels siblings.</strong> An <code>end</code> node reached on any branch terminates the entire instance.</li>
+<li><strong><code>currentNodeId</code> is <code>null</code></strong> whenever zero or more than one branch is active. Use <code>activeBranches</code>
+  to inspect concurrent progress.</li>
+</ul>
+<p>Resume a specific parked branch by node id — sibling branches keep waiting:</p>
+<div class="language-java highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="c1">// Complete one waiting human-task/event/wait branch, addressed by node id:</span>
+</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="n">WorkflowInstance</span><span class="w"> </span><span class="n">next</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">engine</span><span class="p">.</span><span class="na">completeNode</span><span class="p">(</span><span class="n">workflow</span><span class="p">,</span><span class="w"> </span><span class="n">instance</span><span class="p">,</span><span class="w"> </span><span class="s">"notify-team"</span><span class="p">,</span><span class="w"> </span><span class="n">result</span><span class="p">);</span>
+</span></code></pre></div>
+<p><code>completeCurrentNode</code> remains available and delegates to <code>completeNode</code> for the single-branch case.
+The branch-addressable info accessors (<code>getHumanTaskInfo</code>, <code>getReceiveEventInfo</code>, <code>getWaitInfo</code>,
+<code>matchesEvent</code>) take a <code>nodeId</code> so concurrent waiting branches can be inspected independently.</p>
 <h2 id="immutability">Immutability</h2>
 <p>All engine methods return a new <code>WorkflowInstance</code>. The input instance is never mutated:</p>
-<div class="language-java highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="n">WorkflowInstance</span><span class="w"> </span><span class="n">waiting</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">engine</span><span class="p">.</span><span class="na">startWorkflow</span><span class="p">(</span><span class="n">definition</span><span class="p">,</span><span class="w"> </span><span class="n">context</span><span class="p">);</span>
-</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="n">WorkflowInstance</span><span class="w"> </span><span class="n">completed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">engine</span><span class="p">.</span><span class="na">completeCurrentNode</span><span class="p">(</span><span class="n">definition</span><span class="p">,</span><span class="w"> </span><span class="n">waiting</span><span class="p">,</span><span class="w"> </span><span class="n">result</span><span class="p">);</span>
-</span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>
-</span><span id="__span-10-4"><a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="c1">// 'waiting' is unchanged</span>
-</span><span id="__span-10-5"><a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a><span class="k">assert</span><span class="w"> </span><span class="n">waiting</span><span class="p">.</span><span class="na">status</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">InstanceStatus</span><span class="p">.</span><span class="na">WAITING</span><span class="p">;</span>
-</span><span id="__span-10-6"><a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a><span class="k">assert</span><span class="w"> </span><span class="n">completed</span><span class="p">.</span><span class="na">status</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">InstanceStatus</span><span class="p">.</span><span class="na">COMPLETED</span><span class="p">;</span>
+<div class="language-java highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="n">WorkflowInstance</span><span class="w"> </span><span class="n">waiting</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">engine</span><span class="p">.</span><span class="na">startWorkflow</span><span class="p">(</span><span class="n">definition</span><span class="p">,</span><span class="w"> </span><span class="n">context</span><span class="p">);</span>
+</span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="n">WorkflowInstance</span><span class="w"> </span><span class="n">completed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">engine</span><span class="p">.</span><span class="na">completeCurrentNode</span><span class="p">(</span><span class="n">definition</span><span class="p">,</span><span class="w"> </span><span class="n">waiting</span><span class="p">,</span><span class="w"> </span><span class="n">result</span><span class="p">);</span>
+</span><span id="__span-12-3"><a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>
+</span><span id="__span-12-4"><a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a><span class="c1">// 'waiting' is unchanged</span>
+</span><span id="__span-12-5"><a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a><span class="k">assert</span><span class="w"> </span><span class="n">waiting</span><span class="p">.</span><span class="na">status</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">InstanceStatus</span><span class="p">.</span><span class="na">WAITING</span><span class="p">;</span>
+</span><span id="__span-12-6"><a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a><span class="k">assert</span><span class="w"> </span><span class="n">completed</span><span class="p">.</span><span class="na">status</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">InstanceStatus</span><span class="p">.</span><span class="na">COMPLETED</span><span class="p">;</span>
 </span></code></pre></div>
 <h2 id="threading">Threading</h2>
 <p>All engine methods are synchronous. When the engine invokes a <code>NodeExecutor</code>, it blocks until the executor returns. The consuming application can run engine calls on a background thread if async behavior is desired.</p>
