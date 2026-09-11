@@ -1752,7 +1752,7 @@
 
 
 <h1 id="ai-assistant">AI Assistant</h1>
-<p>The AI Assistant is a conversational interface powered by Claude Code that supports
+<p>The AI Assistant is a conversational interface powered by interactive AI engines that supports
 arbitrary tasks through configurable <strong>session templates</strong>. Each template defines a
 persona, tools, MCP servers, and working directory — so you can create sessions
 tailored to specific workflows, from generating Axiom configuration to general-purpose
@@ -1764,8 +1764,9 @@ Assistant</strong> for working within the context of a specific project. You can
 your own templates to define custom workflows.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>The AI Assistant requires <strong>Claude Code</strong> as the AI engine. The <code>claude</code> CLI must
-be installed and available on your PATH.</p>
+<p>The AI Assistant requires an active AI engine that supports interactive sessions
+(<code>claude-code</code> or <code>opencode</code>). If OpenCode capability checks fail at startup,
+session creation is rejected with a compatibility error.</p>
 </div>
 <hr />
 <h2 id="accessing-the-assistant">Accessing the Assistant</h2>
@@ -1791,7 +1792,7 @@ Each template specifies:</p>
 </tr>
 <tr>
 <td><strong>System Prompt</strong></td>
-<td>Markdown instructions passed to Claude Code via <code>--append-system-prompt</code>.</td>
+<td>Markdown instructions passed to the active interactive engine.</td>
 </tr>
 <tr>
 <td><strong>Welcome Message</strong></td>
@@ -1823,7 +1824,7 @@ Each template specifies:</p>
 </tr>
 <tr>
 <td><strong>Environment</strong></td>
-<td>Optional key-value environment variables injected into the Claude process. Values support <code>${secret:NAME}</code> syntax.</td>
+<td>Optional key-value environment variables injected into the interactive engine process. Values support <code>${secret:NAME}</code> syntax.</td>
 </tr>
 </tbody>
 </table>
@@ -1847,7 +1848,7 @@ editable copies.</p>
 template supports all the fields listed above, giving you full control over the
 assistant's persona and capabilities.</p>
 <h3 id="init-scripts">Init Scripts</h3>
-<p>Init scripts run once when a session is created, <strong>before</strong> Claude Code starts. They
+<p>Init scripts run once when a session is created, <strong>before</strong> the interactive engine starts. They
 execute in the session's working directory and are useful for preparing the environment
 — cloning a repository, installing dependencies, fetching data, or writing config files
 that the assistant will need during the conversation.</p>
@@ -1881,7 +1882,7 @@ focused on quick setup tasks — long-running operations should be handled by th
 assistant itself during the conversation.</p>
 <p><strong>Environment:</strong> Init scripts do <strong>not</strong> inherit the template's environment variables.
 Template environment variables (including resolved <code>${secret:NAME}</code> references) are
-injected into the Claude Code process, which starts after the init script finishes. If
+injected into the interactive engine process, which starts after the init script finishes. If
 your init script needs credentials (e.g., for <code>git clone</code> or API calls), they must be
 available through the server's own environment or set up by other means.</p>
 <p><strong>Common use cases:</strong></p>
@@ -1972,7 +1973,7 @@ automatically destroyed after one hour.</p>
 <h4 id="slash-commands">Slash Commands</h4>
 <p>Type <code>/</code> in the chat input to see available slash commands. Use arrow keys to navigate
 the autocomplete list and Tab or Enter to select a command. The available commands are
-populated from the Claude Code session.</p>
+populated from the active interactive session runtime.</p>
 <h4 id="permission-prompts">Permission Prompts</h4>
 <p>When the assistant needs to use a tool, a permission prompt appears with <strong>Allow</strong> and
 <strong>Deny</strong> buttons. You can also click <strong>Allow Pattern...</strong> to create an auto-approval
@@ -2144,7 +2145,7 @@ modal.</p>
 <li><strong>Set up auto-approval rules early.</strong> If you know the assistant will need to read
   files or run commands repeatedly, create auto-approval rules at the start of the
   session to avoid repeated permission prompts.</li>
-<li><strong>Use slash commands.</strong> Type <code>/</code> to discover available Claude Code commands. These
+<li><strong>Use slash commands.</strong> Type <code>/</code> to discover available runtime commands. These
   give you direct control over the assistant's behavior without typing full
   instructions.</li>
 <li><strong>Monitor costs.</strong> Keep an eye on the running cost display in the toolbar, especially

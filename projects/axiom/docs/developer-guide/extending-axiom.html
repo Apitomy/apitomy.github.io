@@ -1144,6 +1144,17 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#interactive-assistant-session-drivers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Interactive Assistant Session Drivers
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -1468,6 +1479,17 @@
     <span class="md-ellipsis">
       
         Reference Implementations
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#interactive-assistant-session-drivers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Interactive Assistant Session Drivers
       
     </span>
   </a>
@@ -1804,6 +1826,13 @@ implementations.</p>
 <li><strong>GitHub Copilot CLI</strong>: <code>engine/copilot/src/main/java/.../CopilotEngine.java</code> —
   subprocess-based, launches <code>copilot</code> CLI</li>
 </ul>
+<h3 id="interactive-assistant-session-drivers">Interactive Assistant Session Drivers</h3>
+<p>The AI Assistant runtime uses <code>InteractiveSessionDriver</code> as an engine-neutral contract for
+session lifecycle, prompt submission, permission handling, and interrupt/teardown behavior.
+<code>InteractiveSessionDriverFactory.DefaultInteractiveSessionDriverFactory</code> selects the concrete
+driver per session (<code>ClaudeInteractiveSessionDriver</code> or
+<code>opencode/OpenCodeInteractiveSessionDriver</code>) and enforces fail-closed OpenCode compatibility
+checks before allowing session startup.</p>
 <hr />
 <h2 id="adding-an-actor">Adding an Actor</h2>
 <p>An actor executes tasks — typically by invoking an AI engine, but it can also send
