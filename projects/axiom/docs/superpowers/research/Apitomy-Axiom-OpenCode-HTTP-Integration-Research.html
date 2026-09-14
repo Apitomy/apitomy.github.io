@@ -1,0 +1,2484 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Event-driven project orchestration platform">
+      
+      
+        <meta name="author" content="Apitomy">
+      
+      
+        <link rel="canonical" href="https://www.apitomy.io/projects/axiom/docs/superpowers/research/Apitomy-Axiom-OpenCode-HTTP-Integration-Research.html">
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>Apitomy Axiom: OpenCode HTTP Backend Integration — Research & Implementation Planning Brief - Apitomy Axiom</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../theme/css/project-colors.css">
+    
+      <link rel="stylesheet" href="../../theme/css/apitomy-base.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#apitomy-axiom-opencode-http-backend-integration-research-implementation-planning-brief" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+        <aside class="md-banner">
+          <div class="md-banner__inner md-grid md-typeset">
+            
+            
+<div class="apitomy-masthead">
+    <div class="apitomy-masthead-inner">
+        <a href="https://www.apitomy.io/" class="apitomy-masthead-logo">Apitomy</a>
+        <nav class="apitomy-masthead-nav">
+            <a href="https://www.apitomy.io/#projects">Projects</a>
+            <a href="https://www.apitomy.io/blog/">Blog</a>
+            <a href="https://github.com/Apitomy" class="apitomy-masthead-github" aria-label="GitHub">
+                <svg width="22" height="22" viewBox="0 0 16 16" fill="currentColor">
+                    <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/>
+                </svg>
+            </a>
+        </nav>
+    </div>
+</div>
+
+          </div>
+          
+        </aside>
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../index.html" title="Apitomy Axiom" class="md-header__button md-logo" aria-label="Apitomy Axiom" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Apitomy Axiom
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Apitomy Axiom: OpenCode HTTP Backend Integration — Research &amp; Implementation Planning Brief
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom"  aria-hidden="true"  type="radio" name="__palette" id="__palette_0">
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="Share" aria-label="Share" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/Apitomy/apitomy-axiom" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Apitomy/apitomy-axiom
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../index.html" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../getting-started/running-axiom.html" class="md-tabs__link">
+          
+  
+  
+  Getting Started
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../user-guide/concepts.html" class="md-tabs__link">
+          
+  
+  
+  User Guide
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../developer-guide/stack-and-architecture.html" class="md-tabs__link">
+          
+  
+  
+  Developer Guide
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../index.html" title="Apitomy Axiom" class="md-nav__button md-logo" aria-label="Apitomy Axiom" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Apitomy Axiom
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/Apitomy/apitomy-axiom" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Apitomy/apitomy-axiom
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Getting Started
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Getting Started
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../getting-started/running-axiom.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Running Axiom
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../getting-started/configuring-axiom.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Configuring Axiom
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../getting-started/contributing.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    How to Contribute
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    User Guide
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    User Guide
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../user-guide/concepts.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Concepts
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../user-guide/navigating-the-ui.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Navigating the UI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../user-guide/usage-examples.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Usage Examples
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../user-guide/ai-assistant.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AI Assistant
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../user-guide/logging-and-debugging.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Logging and Debugging
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Developer Guide
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Developer Guide
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../developer-guide/stack-and-architecture.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Stack & Architecture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../developer-guide/building-axiom.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Building Axiom
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../developer-guide/how-to-contribute.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    How to Contribute
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../developer-guide/api-first-development.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API-First Development
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../developer-guide/database-and-migrations.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Database & Migrations
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../developer-guide/tracing.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tracing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../developer-guide/ui-development.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UI Development
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../developer-guide/extending-axiom.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Extending Axiom
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#purpose" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Purpose
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-key-conclusion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Key conclusion
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-recommended-axiom-architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Recommended Axiom architecture
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-opencode-server-lifecycle" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. OpenCode server lifecycle
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-health-and-capability-discovery" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Health and capability discovery
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-session-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Session model
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-creating-sessions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Creating sessions
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-sending-prompts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Sending prompts
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. Sending prompts">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#synchronous" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Synchronous
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#asynchronous" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Asynchronous
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-events-streaming" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Events / streaming
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-important-current-sseevent-stream-reliability-needs-verification" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. IMPORTANT: current SSE/event-stream reliability needs verification
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-event-routing-and-concurrency" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Event routing and concurrency
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-same-session-versus-cross-session-concurrency" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. Same-session versus cross-session concurrency
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="11. Same-session versus cross-session concurrency">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#different-sessions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Different sessions
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#same-session" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Same session
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12-session-status" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12. Session status
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#13-message-history" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13. Message history
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#14-permissions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14. Permissions
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#15-abortcancellation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15. Abort/cancellation
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#16-diffs-and-coding-agent-ui" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        16. Diffs and coding-agent UI
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#17-session-forking" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17. Session forking
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#18-workspaceproject-isolation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18. Workspace/project isolation
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#19-providermodel-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        19. Provider/model configuration
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#20-authentication-and-network-exposure" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        20. Authentication and network exposure
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#21-recommended-adapter-abstraction" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        21. Recommended adapter abstraction
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#22-suggested-event-abstraction" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        22. Suggested event abstraction
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#23-error-handling" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        23. Error handling
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#24-startup-design" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        24. Startup design
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#25-shutdown-design" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        25. Shutdown design
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#26-testing-plan" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        26. Testing plan
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="26. Testing plan">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#server" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Server
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#session" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Session
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prompt" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Prompt
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#events" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Events
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#concurrency" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Concurrency
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#same-session-serialization" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Same-session serialization
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#permissions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Permissions
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cancellation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cancellation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reconnection" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Reconnection
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#workspace-isolation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Workspace isolation
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#27-versioning-strategy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        27. Versioning strategy
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#28-important-current-state-caveat" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        28. Important current-state caveat
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#29-proposed-implementation-phases" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        29. Proposed implementation phases
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="29. Proposed implementation phases">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#phase-1-researchspike" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Phase 1 — Research/spike
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phase-2-runtime-abstraction" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Phase 2 — Runtime abstraction
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phase-3-opencode-server-manager" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Phase 3 — OpenCode server manager
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phase-4-opencode-session-adapter" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Phase 4 — OpenCode session adapter
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phase-5-event-normalization" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Phase 5 — Event normalization
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phase-6-ui-integration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Phase 6 — UI integration
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phase-7-reliability-hardening" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Phase 7 — Reliability hardening
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#30-questions-the-coding-agent-must-answer-before-finalizing-the-implementation-plan" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        30. Questions the coding agent must answer before finalizing the implementation plan
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#31-initial-recommendation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        31. Initial recommendation
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sources" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sources
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="apitomy-axiom-opencode-http-backend-integration-research-implementation-planning-brief">Apitomy Axiom: OpenCode HTTP Backend Integration — Research &amp; Implementation Planning Brief</h1>
+<h2 id="purpose">Purpose</h2>
+<p>This document is intended to be provided to a coding agent working on <strong>Apitomy Axiom</strong>. Its purpose is to capture the current findings about OpenCode's programmatic HTTP interface and establish a starting point for analyzing and planning support for OpenCode as an alternative agent runtime to the existing Claude Code CLI integration.</p>
+<p>The target architecture is:</p>
+<ul>
+<li>Axiom remains the application-facing web UI/backend.</li>
+<li>Axiom starts and owns <strong>one long-lived OpenCode server process</strong>.</li>
+<li>Axiom communicates with that server over HTTP.</li>
+<li>OpenCode sessions represent individual interactive coding conversations.</li>
+<li>Axiom translates OpenCode events/state into the existing Axiom session/event model.</li>
+<li>Axiom should not spawn one OpenCode process per conversation.</li>
+</ul>
+<p>This document is a planning/research artifact, not an implementation specification. The coding agent should inspect the current Axiom codebase and the installed/current OpenCode version before making final architectural decisions.</p>
+<h2 id="1-key-conclusion">1. Key conclusion</h2>
+<p>OpenCode has a first-class headless HTTP server intended for programmatic clients:</p>
+<div class="language-text highlight"><pre><span></span><code>opencode serve
+</code></pre></div>
+<p>By default it listens on <code>127.0.0.1:4096</code>. It exposes an OpenAPI 3.1 interface and is explicitly designed so that multiple clients can interact with the same OpenCode server. The official documentation states that the normal OpenCode TUI is itself a client of the server.</p>
+<p>The server therefore maps well to Axiom's existing "custom UI over an agent runtime" architecture.</p>
+<p>Relevant official documentation:</p>
+<ul>
+<li>Server: https://opencode.ai/docs/server/</li>
+<li>CLI: https://opencode.ai/docs/cli/</li>
+</ul>
+<p>The server's OpenAPI documentation is exposed at:</p>
+<div class="language-text highlight"><pre><span></span><code>http://&lt;host&gt;:&lt;port&gt;/doc
+</code></pre></div>
+<p>The exact API should be treated as version-dependent. Axiom should verify the API against the specific OpenCode version it launches rather than hard-coding assumptions based only on this document.</p>
+<h2 id="2-recommended-axiom-architecture">2. Recommended Axiom architecture</h2>
+<p>Recommended high-level architecture:</p>
+<div class="language-text highlight"><pre><span></span><code>Axiom Web UI
+      |
+      | Axiom's existing protocol
+      v
+Axiom backend
+      |
+      | HTTP
+      v
+One OpenCode server process
+      |
+      +-- OpenCode session A
+      +-- OpenCode session B
+      +-- OpenCode session C
+      |
+      v
+LLM providers / tools / filesystem / git
+</code></pre></div>
+<p>The important distinction is:</p>
+<ul>
+<li><strong>OpenCode server lifecycle</strong> = application/runtime lifecycle.</li>
+<li><strong>OpenCode session lifecycle</strong> = individual interactive conversation lifecycle.</li>
+</ul>
+<p>Axiom should maintain a mapping such as:</p>
+<div class="language-text highlight"><pre><span></span><code>Axiom conversation/session ID -&gt; OpenCode session ID
+</code></pre></div>
+<p>Axiom should not create a new OpenCode server for every Axiom conversation unless future isolation requirements force that design.</p>
+<h2 id="3-opencode-server-lifecycle">3. OpenCode server lifecycle</h2>
+<p>The documented command is:</p>
+<div class="language-text highlight"><pre><span></span><code>opencode serve
+</code></pre></div>
+<p>Relevant options include:</p>
+<div class="language-text highlight"><pre><span></span><code>--port &lt;number&gt;
+--hostname &lt;string&gt;
+--cors &lt;origin&gt;
+</code></pre></div>
+<p>Defaults are:</p>
+<div class="language-text highlight"><pre><span></span><code>hostname = 127.0.0.1
+port     = 4096
+</code></pre></div>
+<p>The server can be protected with HTTP Basic Authentication by setting:</p>
+<div class="language-text highlight"><pre><span></span><code>OPENCODE_SERVER_PASSWORD
+</code></pre></div>
+<p>The username defaults to <code>opencode</code>, or can be overridden with:</p>
+<div class="language-text highlight"><pre><span></span><code>OPENCODE_SERVER_USERNAME
+</code></pre></div>
+<p>For a local Axiom-managed server, binding to loopback is preferable unless there is a deliberate reason to expose it on another interface.</p>
+<p>Axiom should own the process lifecycle:</p>
+<ol>
+<li>Start OpenCode server when the Axiom runtime needs the OpenCode backend.</li>
+<li>Wait for <code>/global/health</code> to report healthy before accepting requests.</li>
+<li>Keep the process alive across individual conversations.</li>
+<li>Reuse the same server for multiple OpenCode sessions.</li>
+<li>Detect process exit and make Axiom sessions fail/reconnect gracefully.</li>
+<li>Shut the server down when the Axiom runtime/workspace is being disposed.</li>
+<li>Consider graceful shutdown and cleanup of child processes.</li>
+</ol>
+<p>The API also exposes:</p>
+<div class="language-text highlight"><pre><span></span><code>POST /instance/dispose
+</code></pre></div>
+<p>which disposes the current OpenCode instance. This should be investigated before deciding whether Axiom should use it during shutdown versus terminating the process directly.</p>
+<p>Official source:
+https://opencode.ai/docs/server/</p>
+<h2 id="4-health-and-capability-discovery">4. Health and capability discovery</h2>
+<p>The documented health endpoint is:</p>
+<div class="language-text highlight"><pre><span></span><code>GET /global/health
+</code></pre></div>
+<p>It returns information equivalent to:</p>
+<div class="language-text highlight"><pre><span></span><code>{
+  "healthy": true,
+  "version": "..."
+}
+</code></pre></div>
+<p>Axiom should use this as the readiness check after launching OpenCode.</p>
+<p>The server also exposes:</p>
+<div class="language-text highlight"><pre><span></span><code>GET /config
+PATCH /config
+GET /config/providers
+GET /provider
+GET /provider/auth
+</code></pre></div>
+<p>These may be useful for future Axiom functionality such as model/provider discovery and configuration, but they should not all be required for the initial interactive-session implementation.</p>
+<p>The <code>/doc</code> endpoint exposes OpenAPI documentation. The implementation should consider obtaining/inspecting the actual OpenAPI document from the running version during development rather than relying exclusively on manually reproduced request types.</p>
+<h2 id="5-session-model">5. Session model</h2>
+<p>OpenCode has first-class persistent sessions.</p>
+<p>Documented endpoints include:</p>
+<div class="language-text highlight"><pre><span></span><code>GET    /session
+POST   /session
+GET    /session/status
+GET    /session/:id
+PATCH  /session/:id
+DELETE /session/:id
+</code></pre></div>
+<p>There are also:</p>
+<div class="language-text highlight"><pre><span></span><code>GET    /session/:id/children
+POST   /session/:id/fork
+POST   /session/:id/abort
+GET    /session/:id/diff
+GET    /session/:id/todo
+POST   /session/:id/summarize
+POST   /session/:id/revert
+POST   /session/:id/unrevert
+POST   /session/:id/permissions/:permissionID
+</code></pre></div>
+<p>This provides most of the primitives expected from an interactive coding-agent session.</p>
+<p>Recommended initial Axiom mapping:</p>
+<div class="language-text highlight"><pre><span></span><code>Axiom Session
+    |
+    +-- openCodeSessionId
+    +-- workspace/project information
+    +-- Axiom-specific metadata
+    +-- connection/event state
+</code></pre></div>
+<p>Axiom should preserve its own session abstraction rather than leaking OpenCode's IDs throughout the application.</p>
+<h2 id="6-creating-sessions">6. Creating sessions</h2>
+<p>The documented endpoint is:</p>
+<div class="language-text highlight"><pre><span></span><code>POST /session
+</code></pre></div>
+<p>The request can include fields such as:</p>
+<div class="language-text highlight"><pre><span></span><code>{
+  "parentID": "...",
+  "title": "..."
+}
+</code></pre></div>
+<p>The response is an OpenCode Session object.</p>
+<p>For a new Axiom interactive session, the initial implementation should:</p>
+<ol>
+<li>Determine the correct Axiom workspace/repository.</li>
+<li>Ensure the OpenCode server is associated with the intended project/path.</li>
+<li>Create an OpenCode session.</li>
+<li>Store the OpenCode session ID against the Axiom session.</li>
+<li>Establish event handling before sending the first prompt, if possible.</li>
+</ol>
+<p>The exact relationship between an OpenCode server instance, current project/path, and multiple workspaces must be verified against the current OpenCode implementation. This is an important area for the coding agent to investigate rather than assume.</p>
+<h2 id="7-sending-prompts">7. Sending prompts</h2>
+<p>There are two important message APIs.</p>
+<h3 id="synchronous">Synchronous</h3>
+<div class="language-text highlight"><pre><span></span><code>POST /session/:id/message
+</code></pre></div>
+<p>This sends a message and waits for the response.</p>
+<h3 id="asynchronous">Asynchronous</h3>
+<div class="language-text highlight"><pre><span></span><code>POST /session/:id/prompt_async
+</code></pre></div>
+<p>This sends a message and returns <code>204 No Content</code> without waiting for completion.</p>
+<p>For Axiom's interactive web UI, the asynchronous API is the preferred conceptual model.</p>
+<p>Recommended flow:</p>
+<div class="language-text highlight"><pre><span></span><code>Axiom UI
+   |
+   | user prompt
+   v
+Axiom backend
+   |
+   | POST /session/{id}/prompt_async
+   v
+OpenCode
+   |
+   | events
+   v
+Axiom backend
+   |
+   | Axiom event stream
+   v
+Axiom UI
+</code></pre></div>
+<p>The message body is documented as being equivalent to the synchronous message endpoint and can contain items such as model, agent, system, tools, and message parts.</p>
+<h2 id="8-events-streaming">8. Events / streaming</h2>
+<p>OpenCode documents SSE event streams.</p>
+<p>The server documentation currently lists:</p>
+<div class="language-text highlight"><pre><span></span><code>GET /global/event
+</code></pre></div>
+<p>and also:</p>
+<div class="language-text highlight"><pre><span></span><code>GET /event
+</code></pre></div>
+<p>The <code>/event</code> endpoint is documented as an SSE stream whose first event is <code>server.connected</code>, followed by event-bus events.</p>
+<p>This is potentially the most important integration mechanism for Axiom because Axiom needs to provide a live interactive UI while an agent is:</p>
+<ul>
+<li>generating text,</li>
+<li>invoking tools,</li>
+<li>modifying files,</li>
+<li>asking for permission,</li>
+<li>changing status,</li>
+<li>encountering errors,</li>
+<li>finishing a turn.</li>
+</ul>
+<p>Events should therefore be treated as the primary mechanism for live UI updates, with session/message GET endpoints used for state reconciliation and recovery.</p>
+<h2 id="9-important-current-sseevent-stream-reliability-needs-verification">9. IMPORTANT: current SSE/event-stream reliability needs verification</h2>
+<p>This is a critical implementation-planning caveat.</p>
+<p>Current OpenCode documentation describes persistent SSE event streams, but recent GitHub issue reports indicate regressions and inconsistencies in event delivery in some OpenCode versions.</p>
+<p>For example, a September 2026 issue reports that on OpenCode 1.18.25:</p>
+<ul>
+<li><code>/event</code> and <code>/global/event</code> accepted connections and delivered connection/heartbeat events,</li>
+<li>but expected message/session events were not delivered.</li>
+</ul>
+<p>Another recent issue reports problems with <code>/api/event</code> connections closing during active turns.</p>
+<p>These are GitHub issue reports rather than official API guarantees, but they are sufficiently recent that Axiom should explicitly test the exact OpenCode version it supports.</p>
+<p>Therefore:</p>
+<p><strong>Do not design the Axiom event bridge on the assumption that the documented SSE behavior is currently bug-free.</strong></p>
+<p>The coding agent should build a small standalone integration test before committing to the final event architecture.</p>
+<p>At minimum test:</p>
+<ol>
+<li>Connect to the documented event endpoint.</li>
+<li>Create a session.</li>
+<li>Send an asynchronous prompt.</li>
+<li>Verify receipt of session/message/tool/status events.</li>
+<li>Run a multi-step tool-using prompt.</li>
+<li>Verify that the stream remains usable throughout the entire turn.</li>
+<li>Disconnect/reconnect during a turn.</li>
+<li>Determine whether events can be recovered after reconnection.</li>
+<li>Run two simultaneous sessions and verify events can be unambiguously associated with sessions.</li>
+<li>Test the exact OpenCode version Axiom will launch.</li>
+</ol>
+<p>Relevant reports:
+- https://github.com/anomalyco/opencode/issues/46733
+- https://github.com/anomalyco/opencode/issues/38458
+- https://github.com/anomalyco/opencode/issues/36441</p>
+<p>These reports should be treated as implementation-risk signals, not as proof that the behavior is universally broken in the target version.</p>
+<h2 id="10-event-routing-and-concurrency">10. Event routing and concurrency</h2>
+<p>The event stream is important because Axiom will likely have multiple active sessions sharing one OpenCode server.</p>
+<p>Conceptually:</p>
+<div class="language-text highlight"><pre><span></span><code>OpenCode server
+    |
+    | event stream
+    v
+Axiom OpenCode Event Dispatcher
+    |
+    +--&gt; session A events
+    |
+    +--&gt; session B events
+    |
+    +--&gt; session C events
+</code></pre></div>
+<p>Axiom should inspect each event for its session identifier and route it to the corresponding Axiom session.</p>
+<p>Do not assume that the event stream is already scoped to one session.</p>
+<p>Recent OpenCode discussions/issues explicitly describe event streams as process-global and discuss future/ongoing work around scoping event subscriptions by client interest. This means the Axiom event bridge should be designed as a multiplexing layer.</p>
+<p>Axiom should maintain:</p>
+<div class="language-text highlight"><pre><span></span><code>OpenCode session ID -&gt; Axiom session/event sink
+</code></pre></div>
+<p>and discard or separately handle events that do not belong to an active Axiom session.</p>
+<h2 id="11-same-session-versus-cross-session-concurrency">11. Same-session versus cross-session concurrency</h2>
+<p>The design should distinguish:</p>
+<h3 id="different-sessions">Different sessions</h3>
+<p>Multiple OpenCode sessions should be considered independently addressable and should be designed to run concurrently.</p>
+<p>Example:</p>
+<div class="language-text highlight"><pre><span></span><code>Session A -&gt; repository/workspace A
+Session B -&gt; repository/workspace B
+</code></pre></div>
+<p>Axiom should be able to receive events from both and route them independently.</p>
+<h3 id="same-session">Same session</h3>
+<p>Do not assume that multiple prompts submitted concurrently to the same OpenCode session are safe or meaningful.</p>
+<p>For the initial implementation, serialize user prompts per OpenCode session:</p>
+<div class="language-text highlight"><pre><span></span><code>Axiom Session Lock
+      |
+      +-- prompt 1
+      |
+      +-- prompt 2 (queued until prompt 1 completes)
+</code></pre></div>
+<p>If OpenCode's current API/source establishes stronger concurrency semantics, the implementation can later be relaxed.</p>
+<p>This avoids race conditions such as two user messages attempting to drive one agent turn simultaneously.</p>
+<h2 id="12-session-status">12. Session status</h2>
+<p>The server provides:</p>
+<div class="language-text highlight"><pre><span></span><code>GET /session/status
+</code></pre></div>
+<p>which returns status information for all sessions.</p>
+<p>There is also a per-session status concept exposed through events.</p>
+<p>Axiom should not use polling as the primary live-update mechanism if reliable events are available.</p>
+<p>However, status/message APIs should be used for reconciliation.</p>
+<p>A robust design should assume:</p>
+<div class="language-text highlight"><pre><span></span><code>Events = notification / streaming mechanism
+REST state endpoints = authoritative state / recovery mechanism
+</code></pre></div>
+<p>This is particularly important because browser connections and SSE connections can disappear.</p>
+<h2 id="13-message-history">13. Message history</h2>
+<p>The documented APIs include:</p>
+<div class="language-text highlight"><pre><span></span><code>GET /session/:id/message
+GET /session/:id/message/:messageID
+</code></pre></div>
+<p>Axiom can therefore recover/reconstruct a conversation from OpenCode state rather than depending entirely on having received every event live.</p>
+<p>This should be part of the design.</p>
+<p>Recommended recovery strategy:</p>
+<ol>
+<li>Maintain the OpenCode session ID.</li>
+<li>Maintain the last successfully processed event/message information in Axiom.</li>
+<li>If the event stream disconnects, reconnect.</li>
+<li>Query session messages/state.</li>
+<li>Reconcile any missing content/events.</li>
+<li>Resume live event processing.</li>
+</ol>
+<p>The exact event IDs/replay semantics must be investigated for the target OpenCode version. Do not assume a generic <code>Last-Event-ID</code> replay mechanism exists.</p>
+<h2 id="14-permissions">14. Permissions</h2>
+<p>OpenCode exposes:</p>
+<div class="language-text highlight"><pre><span></span><code>POST /session/:id/permissions/:permissionID
+</code></pre></div>
+<p>This is highly relevant to Axiom because an interactive web UI may need to present permission requests to the user.</p>
+<p>Axiom should investigate:</p>
+<ul>
+<li>Which actions generate permission requests.</li>
+<li>What event identifies a permission request.</li>
+<li>What response values are accepted.</li>
+<li>Whether permission state can be persisted/remembered.</li>
+<li>Whether Axiom's existing Claude Code permission UI can be mapped cleanly.</li>
+</ul>
+<p>This should be part of the first end-to-end prototype rather than deferred indefinitely.</p>
+<h2 id="15-abortcancellation">15. Abort/cancellation</h2>
+<p>OpenCode exposes:</p>
+<div class="language-text highlight"><pre><span></span><code>POST /session/:id/abort
+</code></pre></div>
+<p>Axiom should map its existing "Stop/Cancel" UI action to this endpoint.</p>
+<p>The implementation should define behavior for:</p>
+<ul>
+<li>user cancellation,</li>
+<li>browser disconnect,</li>
+<li>Axiom server shutdown,</li>
+<li>OpenCode process crash,</li>
+<li>duplicate abort requests.</li>
+</ul>
+<p>Cancellation should be idempotent from Axiom's perspective.</p>
+<h2 id="16-diffs-and-coding-agent-ui">16. Diffs and coding-agent UI</h2>
+<p>OpenCode exposes:</p>
+<div class="language-text highlight"><pre><span></span><code>GET /session/:id/diff
+</code></pre></div>
+<p>This is especially useful for Axiom.</p>
+<p>The existing Axiom UI may be able to use OpenCode's diff data directly or translate it into its existing diff model.</p>
+<p>Also investigate:</p>
+<div class="language-text highlight"><pre><span></span><code>GET /session/:id/todo
+</code></pre></div>
+<p>because coding-agent UIs commonly display the agent's current task plan/progress.</p>
+<p>These are good candidates for the initial OpenCode adapter if Axiom already has corresponding Claude Code concepts.</p>
+<h2 id="17-session-forking">17. Session forking</h2>
+<p>OpenCode supports:</p>
+<div class="language-text highlight"><pre><span></span><code>POST /session/:id/fork
+</code></pre></div>
+<p>with an optional message ID.</p>
+<p>This is a potentially valuable future feature for Axiom:</p>
+<div class="language-text highlight"><pre><span></span><code>"Fork conversation from here"
+</code></pre></div>
+<p>It should not be required for the first implementation, but the Axiom session abstraction should avoid making future support impossible.</p>
+<h2 id="18-workspaceproject-isolation">18. Workspace/project isolation</h2>
+<p>This is one of the most important architectural questions to resolve by inspecting the Axiom and OpenCode implementations.</p>
+<p>OpenCode exposes project/path/VCS APIs:</p>
+<div class="language-text highlight"><pre><span></span><code>GET /project
+GET /project/current
+GET /path
+GET /vcs
+</code></pre></div>
+<p>The key question is:</p>
+<p><strong>Can one long-lived OpenCode server safely service multiple independent Axiom workspaces/repositories, and how is the project/path associated with each session?</strong></p>
+<p>Do not infer the answer solely from the presence of multiple sessions.</p>
+<p>The coding agent should inspect the OpenCode source and run experiments with:</p>
+<ul>
+<li>two repositories,</li>
+<li>two sessions,</li>
+<li>simultaneous activity,</li>
+<li>separate working directories,</li>
+<li>tool execution,</li>
+<li>git operations.</li>
+</ul>
+<p>If OpenCode's server instance is effectively tied to one project/path, the "single server for all Axiom sessions" recommendation may need to be refined to "one server per Axiom workspace" rather than globally one server.</p>
+<p>This is a key validation item.</p>
+<h2 id="19-providermodel-configuration">19. Provider/model configuration</h2>
+<p>The server exposes provider and configuration APIs, including:</p>
+<div class="language-text highlight"><pre><span></span><code>GET /provider
+GET /config/providers
+GET /config
+</code></pre></div>
+<p>The initial Axiom implementation should probably avoid reproducing all OpenCode configuration functionality.</p>
+<p>Instead:</p>
+<ul>
+<li>let OpenCode handle provider/model configuration,</li>
+<li>allow Axiom to select a model/agent when submitting a prompt if required,</li>
+<li>expose provider/model information in Axiom only when needed by the existing UI.</li>
+</ul>
+<p>The message API supports model and agent fields, so model/agent selection can potentially be controlled per prompt.</p>
+<h2 id="20-authentication-and-network-exposure">20. Authentication and network exposure</h2>
+<p>For an Axiom deployment where OpenCode is local to the Axiom backend:</p>
+<ul>
+<li>Prefer binding OpenCode to <code>127.0.0.1</code>.</li>
+<li>Keep OpenCode inaccessible directly from the public network.</li>
+<li>Let Axiom own authentication/authorization.</li>
+<li>Use <code>OPENCODE_SERVER_PASSWORD</code> as defense-in-depth if appropriate.</li>
+</ul>
+<p>If Axiom ever needs to place OpenCode on another host, authentication, TLS, network isolation, and tenant/workspace isolation become much more important.</p>
+<p>Axiom's browser should generally communicate with Axiom, not directly with the OpenCode server. This avoids exposing OpenCode's API and credentials to browsers and lets Axiom enforce its own authorization model.</p>
+<h2 id="21-recommended-adapter-abstraction">21. Recommended adapter abstraction</h2>
+<p>Do not spread OpenCode-specific HTTP calls throughout Axiom.</p>
+<p>Instead, introduce an agent-runtime abstraction along the lines of:</p>
+<div class="language-text highlight"><pre><span></span><code>AgentRuntime
+   |
+   +-- ClaudeCodeRuntime
+   |
+   +-- OpenCodeRuntime
+</code></pre></div>
+<p>The abstraction should cover only the capabilities Axiom actually needs.</p>
+<p>Likely initial capability set:</p>
+<div class="language-text highlight"><pre><span></span><code>createSession()
+getSession()
+sendPrompt()
+abortSession()
+getMessages()
+getStatus()
+getDiff()
+respondToPermission()
+subscribeToEvents()
+deleteSession()
+</code></pre></div>
+<p>Potential future capabilities:</p>
+<div class="language-text highlight"><pre><span></span><code>forkSession()
+summarizeSession()
+revertSession()
+getTodo()
+listModels()
+listAgents()
+</code></pre></div>
+<p>OpenCode-specific request/response/event types should remain inside the OpenCode adapter.</p>
+<h2 id="22-suggested-event-abstraction">22. Suggested event abstraction</h2>
+<p>Axiom should normalize OpenCode events into Axiom's internal event model.</p>
+<p>Potential normalized events:</p>
+<div class="language-text highlight"><pre><span></span><code>session.created
+session.status
+assistant.message.delta
+assistant.message.completed
+tool.started
+tool.output
+tool.completed
+file.changed
+permission.requested
+permission.resolved
+session.error
+session.completed
+session.aborted
+</code></pre></div>
+<p>The exact OpenCode event types need to be derived from the target OpenCode version/source and experimentally verified.</p>
+<p>Avoid making the Axiom UI depend directly on OpenCode event names.</p>
+<p>This will make the existing Claude Code implementation and new OpenCode implementation interchangeable from the UI's perspective.</p>
+<h2 id="23-error-handling">23. Error handling</h2>
+<p>The OpenCode adapter should explicitly handle:</p>
+<ul>
+<li>HTTP connection failures</li>
+<li>server startup failure</li>
+<li>server health failure</li>
+<li>OpenCode process termination</li>
+<li>HTTP 4xx/5xx responses</li>
+<li>malformed/unexpected event payloads</li>
+<li>SSE disconnection</li>
+<li>permission failures</li>
+<li>model/provider failures</li>
+<li>session-not-found</li>
+<li>abort failures</li>
+<li>duplicate requests</li>
+<li>OpenCode version/API incompatibilities</li>
+</ul>
+<p>The adapter should expose errors in Axiom's own error model.</p>
+<p>Do not let raw OpenCode HTTP errors leak into the web UI.</p>
+<h2 id="24-startup-design">24. Startup design</h2>
+<p>A possible Axiom startup sequence:</p>
+<div class="language-text highlight"><pre><span></span><code>1. Start Axiom backend.
+2. Start OpenCode server child process.
+3. Poll /global/health.
+4. Verify expected OpenCode version/capabilities.
+5. Establish event subscription.
+6. Mark OpenCode runtime READY.
+7. Accept Axiom interactive sessions.
+</code></pre></div>
+<p>The coding agent should determine whether OpenCode needs a project directory specified at process startup or whether the relevant project context is established through the API.</p>
+<h2 id="25-shutdown-design">25. Shutdown design</h2>
+<p>On Axiom shutdown:</p>
+<div class="language-text highlight"><pre><span></span><code>1. Stop accepting new prompts.
+2. Notify/mark active Axiom sessions as shutting down.
+3. Optionally abort active OpenCode sessions.
+4. Close the event stream.
+5. Dispose/terminate OpenCode.
+6. Wait for child process exit.
+7. Force-kill only after a timeout.
+</code></pre></div>
+<p>The exact use of <code>/instance/dispose</code> should be verified against the target OpenCode version.</p>
+<h2 id="26-testing-plan">26. Testing plan</h2>
+<p>Before implementing the full UI integration, build a small OpenCode HTTP integration test.</p>
+<p>Test cases:</p>
+<h3 id="server">Server</h3>
+<ul>
+<li>Start <code>opencode serve</code>.</li>
+<li>Verify <code>/global/health</code>.</li>
+<li>Verify <code>/doc</code>.</li>
+<li>Verify authentication if enabled.</li>
+<li>Verify graceful shutdown.</li>
+</ul>
+<h3 id="session">Session</h3>
+<ul>
+<li>Create session.</li>
+<li>Retrieve session.</li>
+<li>List sessions.</li>
+<li>Delete session.</li>
+<li>Verify persistence across prompts.</li>
+</ul>
+<h3 id="prompt">Prompt</h3>
+<ul>
+<li>Send synchronous prompt.</li>
+<li>Send asynchronous prompt.</li>
+<li>Verify final message.</li>
+<li>Verify message history.</li>
+</ul>
+<h3 id="events">Events</h3>
+<ul>
+<li>Connect to event stream.</li>
+<li>Verify connection event.</li>
+<li>Send prompt.</li>
+<li>Verify assistant events.</li>
+<li>Verify tool events.</li>
+<li>Verify status transitions.</li>
+<li>Verify completion.</li>
+<li>Verify errors.</li>
+</ul>
+<h3 id="concurrency">Concurrency</h3>
+<ul>
+<li>Create two sessions.</li>
+<li>Run both simultaneously.</li>
+<li>Verify events remain distinguishable.</li>
+<li>Run different models if supported.</li>
+<li>Verify no cross-session transcript contamination.</li>
+</ul>
+<h3 id="same-session-serialization">Same-session serialization</h3>
+<ul>
+<li>Send two prompts rapidly.</li>
+<li>Determine actual OpenCode behavior.</li>
+<li>Implement Axiom-side serialization if needed.</li>
+</ul>
+<h3 id="permissions">Permissions</h3>
+<ul>
+<li>Trigger a permission request.</li>
+<li>Receive it.</li>
+<li>Display it through a test client.</li>
+<li>Respond.</li>
+<li>Verify agent continues.</li>
+</ul>
+<h3 id="cancellation">Cancellation</h3>
+<ul>
+<li>Start a long-running turn.</li>
+<li>Abort it.</li>
+<li>Verify status transitions.</li>
+<li>Verify Axiom receives completion/abort state.</li>
+</ul>
+<h3 id="reconnection">Reconnection</h3>
+<ul>
+<li>Disconnect event stream mid-turn.</li>
+<li>Reconnect.</li>
+<li>Determine what can be recovered.</li>
+<li>Reconcile with message/session state.</li>
+</ul>
+<h3 id="workspace-isolation">Workspace isolation</h3>
+<ul>
+<li>Run two repositories/projects.</li>
+<li>Create sessions for each.</li>
+<li>Perform file/tool operations.</li>
+<li>Verify operations cannot cross workspace boundaries.</li>
+</ul>
+<h2 id="27-versioning-strategy">27. Versioning strategy</h2>
+<p>OpenCode is evolving rapidly. Axiom should not treat the OpenCode API as an eternally stable external protocol.</p>
+<p>Recommended strategy:</p>
+<ul>
+<li>Pin/test against a known OpenCode version.</li>
+<li>Record the supported version in Axiom.</li>
+<li>Perform startup capability/version validation.</li>
+<li>Keep OpenCode API types isolated in one module/package.</li>
+<li>Have integration tests exercise a real OpenCode server.</li>
+<li>Avoid depending on undocumented internal APIs unless absolutely necessary.</li>
+<li>Re-run the integration suite when upgrading OpenCode.</li>
+</ul>
+<p>The OpenAPI document exposed by the running server should be considered a useful source of truth for the installed version.</p>
+<h2 id="28-important-current-state-caveat">28. Important current-state caveat</h2>
+<p>As of September 2026, the official server documentation says the HTTP server exposes OpenAPI and SSE APIs and is intended for programmatic clients.</p>
+<p>However, current GitHub issues indicate active development and recent event-stream regressions/issues. Therefore the most important unknown is not whether OpenCode has an HTTP API—it clearly does—but whether the event semantics required by Axiom are sufficiently reliable in the exact version Axiom will use.</p>
+<p>The implementation plan should therefore make <strong>event-stream validation the first technical spike</strong>, not an assumption.</p>
+<h2 id="29-proposed-implementation-phases">29. Proposed implementation phases</h2>
+<h3 id="phase-1-researchspike">Phase 1 — Research/spike</h3>
+<p>Build a tiny OpenCode HTTP client outside the main Axiom implementation.</p>
+<p>Goals:</p>
+<ul>
+<li>start server,</li>
+<li>health check,</li>
+<li>create session,</li>
+<li>send prompt,</li>
+<li>receive events,</li>
+<li>retrieve messages,</li>
+<li>abort,</li>
+<li>permissions,</li>
+<li>diff,</li>
+<li>concurrent sessions,</li>
+<li>workspace isolation.</li>
+</ul>
+<p>Deliverable: a verified list of endpoints/events and observed behavior for the selected OpenCode version.</p>
+<h3 id="phase-2-runtime-abstraction">Phase 2 — Runtime abstraction</h3>
+<p>Refactor/extend Axiom's agent-runtime architecture so Claude Code and OpenCode share an internal interface.</p>
+<p>Do not change the existing Claude Code behavior unnecessarily.</p>
+<h3 id="phase-3-opencode-server-manager">Phase 3 — OpenCode server manager</h3>
+<p>Implement:</p>
+<ul>
+<li>process startup,</li>
+<li>health/readiness,</li>
+<li>version checking,</li>
+<li>shutdown,</li>
+<li>failure detection,</li>
+<li>HTTP client,</li>
+<li>event subscription,</li>
+<li>reconnect/reconciliation.</li>
+</ul>
+<h3 id="phase-4-opencode-session-adapter">Phase 4 — OpenCode session adapter</h3>
+<p>Implement:</p>
+<ul>
+<li>session creation,</li>
+<li>prompt,</li>
+<li>message retrieval,</li>
+<li>abort,</li>
+<li>status,</li>
+<li>permission response,</li>
+<li>diff,</li>
+<li>session deletion.</li>
+</ul>
+<h3 id="phase-5-event-normalization">Phase 5 — Event normalization</h3>
+<p>Translate OpenCode events to Axiom's internal interactive-session event model.</p>
+<h3 id="phase-6-ui-integration">Phase 6 — UI integration</h3>
+<p>Make the existing Axiom UI work against the normalized runtime interface.</p>
+<p>The UI should ideally not know whether the backend is Claude Code or OpenCode.</p>
+<h3 id="phase-7-reliability-hardening">Phase 7 — Reliability hardening</h3>
+<p>Add:</p>
+<ul>
+<li>SSE reconnect/reconciliation,</li>
+<li>process restart handling,</li>
+<li>concurrent-session tests,</li>
+<li>workspace isolation tests,</li>
+<li>permission tests,</li>
+<li>cancellation tests,</li>
+<li>upgrade compatibility tests.</li>
+</ul>
+<h2 id="30-questions-the-coding-agent-must-answer-before-finalizing-the-implementation-plan">30. Questions the coding agent must answer before finalizing the implementation plan</h2>
+<ol>
+<li>What exact OpenCode version should Axiom support?</li>
+<li>Does one OpenCode server instance safely support multiple projects/workspaces, or does the server/project model require one server per workspace?</li>
+<li>Which event endpoint is reliable in that exact version?</li>
+<li>What exact event types are emitted for:</li>
+<li>assistant streaming,</li>
+<li>tool calls,</li>
+<li>tool output,</li>
+<li>file changes,</li>
+<li>permissions,</li>
+<li>status,</li>
+<li>errors,</li>
+<li>completion?</li>
+<li>Does every relevant event contain a session ID?</li>
+<li>Can events be replayed/recovered after SSE disconnection?</li>
+<li>Is there a reliable event sequence number or cursor?</li>
+<li>What is the exact behavior of concurrent prompts to one session?</li>
+<li>What is the exact behavior of simultaneous prompts in different sessions?</li>
+<li>How is the OpenCode server's project/current-directory context established?</li>
+<li>What state survives server restart?</li>
+<li>Which OpenCode state should Axiom persist independently?</li>
+<li>Can Axiom safely restart OpenCode without losing existing sessions?</li>
+<li>How are provider/model credentials configured?</li>
+<li>How are permission requests represented and resolved?</li>
+<li>What OpenCode features have no equivalent in the current Axiom/Claude Code abstraction?</li>
+<li>Which Claude Code features currently exposed by Axiom cannot be implemented through OpenCode?</li>
+<li>Which OpenCode capabilities are worth adding to Axiom beyond the existing Claude Code feature set?</li>
+</ol>
+<h2 id="31-initial-recommendation">31. Initial recommendation</h2>
+<p>Proceed with the OpenCode HTTP integration, but make the first implementation milestone a <strong>real-server protocol spike</strong> rather than immediately implementing the production adapter.</p>
+<p>The intended production architecture should be:</p>
+<div class="language-text highlight"><pre><span></span><code>Axiom
+  |
+  +-- AgentRuntime abstraction
+          |
+          +-- ClaudeCodeRuntime
+          |
+          +-- OpenCodeRuntime
+                    |
+                    | HTTP
+                    v
+              One long-lived
+              OpenCode server
+                    |
+         +----------+----------+
+         |          |          |
+      Session A  Session B  Session C
+</code></pre></div>
+<p>Use asynchronous prompts plus event streaming for interactive operation. Use session/message/status APIs as authoritative state and recovery mechanisms. Keep OpenCode-specific protocol details isolated behind the OpenCode runtime adapter.</p>
+<p>Most importantly, validate event streaming, concurrent-session behavior, and workspace isolation against the exact OpenCode version before treating this architecture as production-ready.</p>
+<h2 id="sources">Sources</h2>
+<p>Official OpenCode server documentation:
+https://opencode.ai/docs/server/</p>
+<p>Official OpenCode CLI documentation:
+https://opencode.ai/docs/cli/</p>
+<p>Recent OpenCode event-stream issue reports:
+https://github.com/anomalyco/opencode/issues/46733
+https://github.com/anomalyco/opencode/issues/38458
+https://github.com/anomalyco/opencode/issues/36441
+https://github.com/anomalyco/opencode/issues/36443</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/Apitomy/apitomy-axiom" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.expand", "navigation.top", "search.highlight", "search.share", "search.suggest", "content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+    
+  </body>
+</html>

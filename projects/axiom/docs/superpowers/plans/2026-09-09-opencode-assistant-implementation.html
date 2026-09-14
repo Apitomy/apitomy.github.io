@@ -1,0 +1,2020 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Event-driven project orchestration platform">
+      
+      
+        <meta name="author" content="Apitomy">
+      
+      
+        <link rel="canonical" href="https://www.apitomy.io/projects/axiom/docs/superpowers/plans/2026-09-09-opencode-assistant-implementation.html">
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>OpenCode Assistant Integration Implementation Plan - Apitomy Axiom</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../theme/css/project-colors.css">
+    
+      <link rel="stylesheet" href="../../theme/css/apitomy-base.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#opencode-assistant-integration-implementation-plan" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+        <aside class="md-banner">
+          <div class="md-banner__inner md-grid md-typeset">
+            
+            
+<div class="apitomy-masthead">
+    <div class="apitomy-masthead-inner">
+        <a href="https://www.apitomy.io/" class="apitomy-masthead-logo">Apitomy</a>
+        <nav class="apitomy-masthead-nav">
+            <a href="https://www.apitomy.io/#projects">Projects</a>
+            <a href="https://www.apitomy.io/blog/">Blog</a>
+            <a href="https://github.com/Apitomy" class="apitomy-masthead-github" aria-label="GitHub">
+                <svg width="22" height="22" viewBox="0 0 16 16" fill="currentColor">
+                    <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/>
+                </svg>
+            </a>
+        </nav>
+    </div>
+</div>
+
+          </div>
+          
+        </aside>
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../index.html" title="Apitomy Axiom" class="md-header__button md-logo" aria-label="Apitomy Axiom" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Apitomy Axiom
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              OpenCode Assistant Integration Implementation Plan
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom"  aria-hidden="true"  type="radio" name="__palette" id="__palette_0">
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="Share" aria-label="Share" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/Apitomy/apitomy-axiom" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Apitomy/apitomy-axiom
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../index.html" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../getting-started/running-axiom.html" class="md-tabs__link">
+          
+  
+  
+  Getting Started
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../user-guide/concepts.html" class="md-tabs__link">
+          
+  
+  
+  User Guide
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../developer-guide/stack-and-architecture.html" class="md-tabs__link">
+          
+  
+  
+  Developer Guide
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../index.html" title="Apitomy Axiom" class="md-nav__button md-logo" aria-label="Apitomy Axiom" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Apitomy Axiom
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/Apitomy/apitomy-axiom" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Apitomy/apitomy-axiom
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Getting Started
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Getting Started
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../getting-started/running-axiom.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Running Axiom
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../getting-started/configuring-axiom.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Configuring Axiom
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../getting-started/contributing.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    How to Contribute
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    User Guide
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    User Guide
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../user-guide/concepts.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Concepts
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../user-guide/navigating-the-ui.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Navigating the UI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../user-guide/usage-examples.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Usage Examples
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../user-guide/ai-assistant.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AI Assistant
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../user-guide/logging-and-debugging.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Logging and Debugging
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Developer Guide
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Developer Guide
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../developer-guide/stack-and-architecture.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Stack & Architecture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../developer-guide/building-axiom.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Building Axiom
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../developer-guide/how-to-contribute.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    How to Contribute
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../developer-guide/api-first-development.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API-First Development
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../developer-guide/database-and-migrations.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Database & Migrations
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../developer-guide/tracing.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tracing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../developer-guide/ui-development.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UI Development
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../developer-guide/extending-axiom.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Extending Axiom
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#global-constraints" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Global Constraints
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#file-structure" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        File Structure
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="File Structure">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#task-1-introduce-interactive-runtime-driver-contracts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Task 1: Introduce interactive runtime driver contracts
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#task-2-extract-existing-claude-runtime-into-claude-driver" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Task 2: Extract existing Claude runtime into Claude driver
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#task-3-add-opencode-event-normalization-and-unit-tests" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Task 3: Add OpenCode event normalization and unit tests
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#task-4-build-opencode-per-session-process-and-httpsse-client" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Task 4: Build OpenCode per-session process and HTTP/SSE client
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#task-5-implement-fail-closed-capability-probe" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Task 5: Implement fail-closed capability probe
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#task-6-implement-opencode-interactive-session-driver" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Task 6: Implement OpenCode interactive session driver
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#task-7-wire-session-manager-and-rest-layer-to-multi-engine-interactive-runtime" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Task 7: Wire session manager and REST layer to multi-engine interactive runtime
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#task-8-add-protocol-harness-for-real-opencode-runtime-verification" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Task 8: Add protocol harness for real OpenCode runtime verification
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#task-9-update-docs-and-configuration-guidance-for-opencode-interactive-sessions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Task 9: Update docs and configuration guidance for OpenCode interactive sessions
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#final-verification-checklist" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Final Verification Checklist
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#self-review" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Self-Review
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="opencode-assistant-integration-implementation-plan">OpenCode Assistant Integration Implementation Plan</h1>
+<blockquote>
+<p><strong>For agentic workers:</strong> REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended)
+or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (<code>- [ ]</code>)
+syntax for tracking.</p>
+</blockquote>
+<p><strong>Goal:</strong> Add OpenCode-backed interactive AI Assistant sessions with feature parity, using one
+<code>opencode serve</code> process per Axiom Assistant session and fail-closed compatibility checks.</p>
+<p><strong>Architecture:</strong> Keep the existing Assistant REST/SSE contract and frontend behavior unchanged.
+Refactor the backend Assistant runtime boundary so session orchestration remains in
+<code>AssistantSessionManager</code>, while runtime execution moves behind engine-specific interactive drivers
+(<code>Claude</code> and <code>OpenCode</code>). OpenCode sessions own a
+dedicated server process + HTTP/SSE client + capability probe, and emit normalized Assistant events.</p>
+<p><strong>Tech Stack:</strong> Java 25, Quarkus 3.x, JAX-RS, Jackson, JUnit 5, RestAssured,
+React/TypeScript frontend (no schema breaking changes expected).</p>
+<p><strong>Spec:</strong> <code>docs/superpowers/specs/2026-09-09-opencode-assistant-design.md</code></p>
+<h2 id="global-constraints">Global Constraints</h2>
+<ul>
+<li>Keep Assistant browser-visible event names stable (<code>assistant_text</code>, <code>tool_use</code>, <code>tool_result</code>,
+  <code>permission_request</code>, <code>turn_complete</code>, etc.).</li>
+<li>OpenCode Assistant runtime model is <strong>one OpenCode server process per Axiom interactive session</strong>.</li>
+<li>Version support is best-effort latest OpenCode, validated at runtime per session via capability probe.</li>
+<li>Compatibility is fail-closed: if required capabilities fail, reject session startup with
+  explicit diagnostics.</li>
+<li>Keep browser traffic routed through Axiom only; bind OpenCode servers to loopback.</li>
+<li>Preserve template-driven behavior in session startup (system prompt, model, working directory, init script,
+  environment, MCP config).</li>
+<li>Java style: 4-space indentation, explicit types when ambiguous, Javadoc on public methods.</li>
+<li>Tests: JUnit 5 for unit/integration backend validation.</li>
+</ul>
+<hr />
+<h2 id="file-structure">File Structure</h2>
+<p><strong>Create (backend runtime abstraction):</strong>
+- <code>app/src/main/java/io/apitomy/axiom/app/assistant/runtime/InteractiveSessionDriver.java</code> - runtime driver
+  contract.
+- <code>app/src/main/java/io/apitomy/axiom/app/assistant/runtime/InteractiveSessionDriverFactory.java</code>
+  - engine-based driver selector.
+- <code>app/src/main/java/io/apitomy/axiom/app/assistant/runtime/SessionCompatibilityException.java</code> - fail-closed
+  startup exception with typed reason.</p>
+<p><strong>Create (Claude driver extraction):</strong>
+- <code>app/src/main/java/io/apitomy/axiom/app/assistant/runtime/ClaudeInteractiveSessionDriver.java</code>
+  - current Claude subprocess behavior moved behind driver contract.</p>
+<p><strong>Create (OpenCode assistant runtime):</strong>
+- <code>app/src/main/java/io/apitomy/axiom/app/assistant/runtime/opencode/OpenCodeSessionServerProcess.java</code> -
+  per-session OpenCode process lifecycle.
+- <code>app/src/main/java/io/apitomy/axiom/app/assistant/runtime/opencode/OpenCodeAssistantClient.java</code> -
+  assistant-specific OpenCode HTTP/SSE client.
+- <code>app/src/main/java/io/apitomy/axiom/app/assistant/runtime/opencode/OpenCodeEventNormalizer.java</code>
+  - OpenCode raw event -&gt; Assistant normalized event mapping.
+- <code>app/src/main/java/io/apitomy/axiom/app/assistant/runtime/opencode/OpenCodeCapabilityProbe.java</code> - startup
+  capability validation.
+- <code>app/src/main/java/io/apitomy/axiom/app/assistant/runtime/opencode/OpenCodeInteractiveSessionDriver.java</code> -
+  OpenCode runtime driver implementation.</p>
+<p><strong>Modify (assistant orchestration):</strong>
+- <code>app/src/main/java/io/apitomy/axiom/app/assistant/AssistantSession.java</code>
+  - retain session state/event history/auto-approval behavior, delegate runtime IO to driver.
+- <code>app/src/main/java/io/apitomy/axiom/app/assistant/AssistantSessionManager.java</code> - create sessions via driver
+  factory, remove hard-coded Claude command bootstrapping.
+- <code>app/src/main/java/io/apitomy/axiom/app/rest/AssistantResourceImpl.java</code>
+  - update availability + error mapping messages for non-Claude interactive engines.</p>
+<p><strong>Modify (configuration):</strong>
+- <code>app/src/main/resources/application.properties</code> - add assistant-opencode runtime properties.</p>
+<p><strong>Create/modify tests:</strong>
+- <code>app/src/test/java/io/apitomy/axiom/app/assistant/runtime/opencode/OpenCodeEventNormalizerTest.java</code>
+- <code>app/src/test/java/io/apitomy/axiom/app/assistant/runtime/opencode/OpenCodeCapabilityProbeTest.java</code>
+- <code>app/src/test/java/io/apitomy/axiom/app/assistant/runtime/opencode/OpenCodeSessionServerProcessTest.java</code>
+- <code>app/src/test/java/io/apitomy/axiom/app/assistant/AssistantSessionManagerInteractiveEngineTest.java</code>
+- <code>app/src/test/java/io/apitomy/axiom/app/OpenCodeAssistantResourceIntegrationTest.java</code></p>
+<p><strong>Modify docs:</strong>
+- <code>docs/user-guide/ai-assistant.md</code>
+- <code>docs/getting-started/configuring-axiom.md</code>
+- <code>docs/developer-guide/extending-axiom.md</code></p>
+<hr />
+<h3 id="task-1-introduce-interactive-runtime-driver-contracts">Task 1: Introduce interactive runtime driver contracts</h3>
+<p><strong>Files:</strong>
+- Create: <code>app/src/main/java/io/apitomy/axiom/app/assistant/runtime/InteractiveSessionDriver.java</code>
+- Create: <code>app/src/main/java/io/apitomy/axiom/app/assistant/runtime/SessionCompatibilityException.java</code>
+- Create: <code>app/src/main/java/io/apitomy/axiom/app/assistant/runtime/InteractiveSessionDriverFactory.java</code>
+- Modify: <code>app/src/main/java/io/apitomy/axiom/app/assistant/AssistantSession.java</code></p>
+<p><strong>Interfaces:</strong>
+- Produces: <code>InteractiveSessionDriver</code> with methods:
+  - <code>void start() throws IOException</code>
+  - <code>void sendUserMessage(String message) throws IOException</code>
+  - <code>void respondToPermission(String permissionId, boolean allow, JsonNode toolInput) throws IOException</code>
+  - <code>void interrupt()</code>
+  - <code>void destroy()</code>
+  - <code>boolean isAlive()</code>
+  - <code>AssistantSession.Status getStatus()</code>
+  - <code>String getErrorMessage()</code>
+- Produces: <code>SessionCompatibilityException</code> with <code>code</code> and <code>details</code> fields consumed by
+  session manager/resource.</p>
+<ul>
+<li>[ ] <strong>Step 1: Write failing contract test around session delegation</strong></li>
+</ul>
+<p>Create <code>app/src/test/java/io/apitomy/axiom/app/assistant/AssistantSessionDriverDelegationTest.java</code>:</p>
+<div class="language-java highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">package</span><span class="w"> </span><span class="nn">io.apitomy.axiom.app.assistant</span><span class="p">;</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="kn">import</span><span class="w"> </span><span class="nn">com.fasterxml.jackson.databind.node.JsonNodeFactory</span><span class="p">;</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="kn">import</span><span class="w"> </span><span class="nn">io.apitomy.axiom.app.assistant.runtime.InteractiveSessionDriver</span><span class="p">;</span>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="kn">import</span><span class="w"> </span><span class="nn">org.junit.jupiter.api.Test</span><span class="p">;</span>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="kn">import</span><span class="w"> </span><span class="nn">java.io.IOException</span><span class="p">;</span>
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="kn">import</span><span class="w"> </span><span class="nn">java.nio.file.Path</span><span class="p">;</span>
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="kn">import</span><span class="w"> </span><span class="nn">java.util.List</span><span class="p">;</span>
+</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="kn">import</span><span class="w"> </span><span class="nn">java.util.Map</span><span class="p">;</span>
+</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>
+</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="kn">import static</span><span class="w"> </span><span class="nn">org.junit.jupiter.api.Assertions.assertEquals</span><span class="p">;</span>
+</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>
+</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a><span class="kd">class</span> <span class="nc">AssistantSessionDriverDelegationTest</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>
+</span><span id="__span-0-16"><a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a><span class="w">    </span><span class="nd">@Test</span>
+</span><span id="__span-0-17"><a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a><span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">sessionDelegatesRuntimeCallsToDriver</span><span class="p">()</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">Exception</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-0-18"><a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a><span class="w">        </span><span class="n">RecordingDriver</span><span class="w"> </span><span class="n">driver</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">RecordingDriver</span><span class="p">();</span>
+</span><span id="__span-0-19"><a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a><span class="w">        </span><span class="n">AssistantSession</span><span class="w"> </span><span class="n">session</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">AssistantSession</span><span class="p">(</span>
+</span><span id="__span-0-20"><a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a><span class="w">                </span><span class="s">"test"</span><span class="p">,</span><span class="w"> </span><span class="s">"general-assistant"</span><span class="p">,</span><span class="w"> </span><span class="n">Path</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="s">"/tmp/s"</span><span class="p">),</span><span class="w"> </span><span class="n">Path</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="s">"/tmp/w"</span><span class="p">),</span>
+</span><span id="__span-0-21"><a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a><span class="w">                </span><span class="n">List</span><span class="p">.</span><span class="na">of</span><span class="p">(),</span><span class="w"> </span><span class="n">Map</span><span class="p">.</span><span class="na">of</span><span class="p">(),</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w"> </span><span class="n">driver</span><span class="p">);</span>
+</span><span id="__span-0-22"><a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a>
+</span><span id="__span-0-23"><a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a><span class="w">        </span><span class="n">session</span><span class="p">.</span><span class="na">start</span><span class="p">();</span>
+</span><span id="__span-0-24"><a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a><span class="w">        </span><span class="n">session</span><span class="p">.</span><span class="na">sendMessage</span><span class="p">(</span><span class="s">"hello"</span><span class="p">);</span>
+</span><span id="__span-0-25"><a id="__codelineno-0-25" name="__codelineno-0-25" href="#__codelineno-0-25"></a><span class="w">        </span><span class="n">session</span><span class="p">.</span><span class="na">respondToPermission</span><span class="p">(</span><span class="s">"p1"</span><span class="p">,</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w"> </span><span class="n">JsonNodeFactory</span><span class="p">.</span><span class="na">instance</span><span class="p">.</span><span class="na">objectNode</span><span class="p">());</span>
+</span><span id="__span-0-26"><a id="__codelineno-0-26" name="__codelineno-0-26" href="#__codelineno-0-26"></a><span class="w">        </span><span class="n">session</span><span class="p">.</span><span class="na">interrupt</span><span class="p">();</span>
+</span><span id="__span-0-27"><a id="__codelineno-0-27" name="__codelineno-0-27" href="#__codelineno-0-27"></a><span class="w">        </span><span class="n">session</span><span class="p">.</span><span class="na">destroy</span><span class="p">();</span>
+</span><span id="__span-0-28"><a id="__codelineno-0-28" name="__codelineno-0-28" href="#__codelineno-0-28"></a>
+</span><span id="__span-0-29"><a id="__codelineno-0-29" name="__codelineno-0-29" href="#__codelineno-0-29"></a><span class="w">        </span><span class="n">assertEquals</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">driver</span><span class="p">.</span><span class="na">startCalls</span><span class="p">);</span>
+</span><span id="__span-0-30"><a id="__codelineno-0-30" name="__codelineno-0-30" href="#__codelineno-0-30"></a><span class="w">        </span><span class="n">assertEquals</span><span class="p">(</span><span class="s">"hello"</span><span class="p">,</span><span class="w"> </span><span class="n">driver</span><span class="p">.</span><span class="na">lastMessage</span><span class="p">);</span>
+</span><span id="__span-0-31"><a id="__codelineno-0-31" name="__codelineno-0-31" href="#__codelineno-0-31"></a><span class="w">        </span><span class="n">assertEquals</span><span class="p">(</span><span class="s">"p1"</span><span class="p">,</span><span class="w"> </span><span class="n">driver</span><span class="p">.</span><span class="na">lastPermissionId</span><span class="p">);</span>
+</span><span id="__span-0-32"><a id="__codelineno-0-32" name="__codelineno-0-32" href="#__codelineno-0-32"></a><span class="w">        </span><span class="n">assertEquals</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">driver</span><span class="p">.</span><span class="na">interruptCalls</span><span class="p">);</span>
+</span><span id="__span-0-33"><a id="__codelineno-0-33" name="__codelineno-0-33" href="#__codelineno-0-33"></a><span class="w">        </span><span class="n">assertEquals</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">driver</span><span class="p">.</span><span class="na">destroyCalls</span><span class="p">);</span>
+</span><span id="__span-0-34"><a id="__codelineno-0-34" name="__codelineno-0-34" href="#__codelineno-0-34"></a><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-0-35"><a id="__codelineno-0-35" name="__codelineno-0-35" href="#__codelineno-0-35"></a>
+</span><span id="__span-0-36"><a id="__codelineno-0-36" name="__codelineno-0-36" href="#__codelineno-0-36"></a><span class="w">    </span><span class="kd">static</span><span class="w"> </span><span class="kd">class</span> <span class="nc">RecordingDriver</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">InteractiveSessionDriver</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-0-37"><a id="__codelineno-0-37" name="__codelineno-0-37" href="#__codelineno-0-37"></a><span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">startCalls</span><span class="p">;</span>
+</span><span id="__span-0-38"><a id="__codelineno-0-38" name="__codelineno-0-38" href="#__codelineno-0-38"></a><span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">interruptCalls</span><span class="p">;</span>
+</span><span id="__span-0-39"><a id="__codelineno-0-39" name="__codelineno-0-39" href="#__codelineno-0-39"></a><span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">destroyCalls</span><span class="p">;</span>
+</span><span id="__span-0-40"><a id="__codelineno-0-40" name="__codelineno-0-40" href="#__codelineno-0-40"></a><span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">lastMessage</span><span class="p">;</span>
+</span><span id="__span-0-41"><a id="__codelineno-0-41" name="__codelineno-0-41" href="#__codelineno-0-41"></a><span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">lastPermissionId</span><span class="p">;</span>
+</span><span id="__span-0-42"><a id="__codelineno-0-42" name="__codelineno-0-42" href="#__codelineno-0-42"></a>
+</span><span id="__span-0-43"><a id="__codelineno-0-43" name="__codelineno-0-43" href="#__codelineno-0-43"></a><span class="w">        </span><span class="nd">@Override</span><span class="w"> </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">start</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">startCalls</span><span class="o">++</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+</span><span id="__span-0-44"><a id="__codelineno-0-44" name="__codelineno-0-44" href="#__codelineno-0-44"></a><span class="w">        </span><span class="nd">@Override</span><span class="w"> </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">sendUserMessage</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">message</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">lastMessage</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">message</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+</span><span id="__span-0-45"><a id="__codelineno-0-45" name="__codelineno-0-45" href="#__codelineno-0-45"></a><span class="w">        </span><span class="nd">@Override</span><span class="w"> </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">respondToPermission</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">permissionId</span><span class="p">,</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="n">allow</span><span class="p">,</span>
+</span><span id="__span-0-46"><a id="__codelineno-0-46" name="__codelineno-0-46" href="#__codelineno-0-46"></a><span class="w">                                                   </span><span class="n">com</span><span class="p">.</span><span class="na">fasterxml</span><span class="p">.</span><span class="na">jackson</span><span class="p">.</span><span class="na">databind</span><span class="p">.</span><span class="na">JsonNode</span><span class="w"> </span><span class="n">toolInput</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-0-47"><a id="__codelineno-0-47" name="__codelineno-0-47" href="#__codelineno-0-47"></a><span class="w">            </span><span class="n">lastPermissionId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">permissionId</span><span class="p">;</span>
+</span><span id="__span-0-48"><a id="__codelineno-0-48" name="__codelineno-0-48" href="#__codelineno-0-48"></a><span class="w">        </span><span class="p">}</span>
+</span><span id="__span-0-49"><a id="__codelineno-0-49" name="__codelineno-0-49" href="#__codelineno-0-49"></a><span class="w">        </span><span class="nd">@Override</span><span class="w"> </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">interrupt</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">interruptCalls</span><span class="o">++</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+</span><span id="__span-0-50"><a id="__codelineno-0-50" name="__codelineno-0-50" href="#__codelineno-0-50"></a><span class="w">        </span><span class="nd">@Override</span><span class="w"> </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">destroy</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">destroyCalls</span><span class="o">++</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+</span><span id="__span-0-51"><a id="__codelineno-0-51" name="__codelineno-0-51" href="#__codelineno-0-51"></a><span class="w">        </span><span class="nd">@Override</span><span class="w"> </span><span class="kd">public</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">isAlive</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+</span><span id="__span-0-52"><a id="__codelineno-0-52" name="__codelineno-0-52" href="#__codelineno-0-52"></a><span class="w">        </span><span class="nd">@Override</span><span class="w"> </span><span class="kd">public</span><span class="w"> </span><span class="n">AssistantSession</span><span class="p">.</span><span class="na">Status</span><span class="w"> </span><span class="nf">getStatus</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">AssistantSession</span><span class="p">.</span><span class="na">Status</span><span class="p">.</span><span class="na">RUNNING</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+</span><span id="__span-0-53"><a id="__codelineno-0-53" name="__codelineno-0-53" href="#__codelineno-0-53"></a><span class="w">        </span><span class="nd">@Override</span><span class="w"> </span><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">getErrorMessage</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+</span><span id="__span-0-54"><a id="__codelineno-0-54" name="__codelineno-0-54" href="#__codelineno-0-54"></a><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-0-55"><a id="__codelineno-0-55" name="__codelineno-0-55" href="#__codelineno-0-55"></a><span class="p">}</span>
+</span></code></pre></div>
+<ul>
+<li>[ ] <strong>Step 2: Run the new test and confirm failure</strong></li>
+</ul>
+<p>Run: <code>mvn -pl app -Dtest=AssistantSessionDriverDelegationTest test</code>
+Expected: FAIL because <code>AssistantSession</code> constructor and driver contract do not exist yet.</p>
+<ul>
+<li>[ ] <strong>Step 3: Add runtime contracts and adapt AssistantSession constructor</strong></li>
+</ul>
+<p>Create <code>InteractiveSessionDriver.java</code>:</p>
+<div class="language-java highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kn">package</span><span class="w"> </span><span class="nn">io.apitomy.axiom.app.assistant.runtime</span><span class="p">;</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="kn">import</span><span class="w"> </span><span class="nn">com.fasterxml.jackson.databind.JsonNode</span><span class="p">;</span>
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="kn">import</span><span class="w"> </span><span class="nn">io.apitomy.axiom.app.assistant.AssistantSession</span><span class="p">;</span>
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="kn">import</span><span class="w"> </span><span class="nn">java.io.IOException</span><span class="p">;</span>
+</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>
+</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="cm">/**</span>
+</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="cm"> * Runtime driver abstraction for interactive Assistant sessions.</span>
+</span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="cm"> */</span>
+</span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="kd">public</span><span class="w"> </span><span class="kd">interface</span> <span class="nc">InteractiveSessionDriver</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-1-12"><a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>
+</span><span id="__span-1-13"><a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a><span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">start</span><span class="p">()</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">IOException</span><span class="p">;</span>
+</span><span id="__span-1-14"><a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a>
+</span><span id="__span-1-15"><a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a><span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">sendUserMessage</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">message</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">IOException</span><span class="p">;</span>
+</span><span id="__span-1-16"><a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a>
+</span><span id="__span-1-17"><a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a><span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">respondToPermission</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">permissionId</span><span class="p">,</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="n">allow</span><span class="p">,</span><span class="w"> </span><span class="n">JsonNode</span><span class="w"> </span><span class="n">toolInput</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">IOException</span><span class="p">;</span>
+</span><span id="__span-1-18"><a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a>
+</span><span id="__span-1-19"><a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a><span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">interrupt</span><span class="p">();</span>
+</span><span id="__span-1-20"><a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a>
+</span><span id="__span-1-21"><a id="__codelineno-1-21" name="__codelineno-1-21" href="#__codelineno-1-21"></a><span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">destroy</span><span class="p">();</span>
+</span><span id="__span-1-22"><a id="__codelineno-1-22" name="__codelineno-1-22" href="#__codelineno-1-22"></a>
+</span><span id="__span-1-23"><a id="__codelineno-1-23" name="__codelineno-1-23" href="#__codelineno-1-23"></a><span class="w">    </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">isAlive</span><span class="p">();</span>
+</span><span id="__span-1-24"><a id="__codelineno-1-24" name="__codelineno-1-24" href="#__codelineno-1-24"></a>
+</span><span id="__span-1-25"><a id="__codelineno-1-25" name="__codelineno-1-25" href="#__codelineno-1-25"></a><span class="w">    </span><span class="n">AssistantSession</span><span class="p">.</span><span class="na">Status</span><span class="w"> </span><span class="nf">getStatus</span><span class="p">();</span>
+</span><span id="__span-1-26"><a id="__codelineno-1-26" name="__codelineno-1-26" href="#__codelineno-1-26"></a>
+</span><span id="__span-1-27"><a id="__codelineno-1-27" name="__codelineno-1-27" href="#__codelineno-1-27"></a><span class="w">    </span><span class="n">String</span><span class="w"> </span><span class="nf">getErrorMessage</span><span class="p">();</span>
+</span><span id="__span-1-28"><a id="__codelineno-1-28" name="__codelineno-1-28" href="#__codelineno-1-28"></a><span class="p">}</span>
+</span></code></pre></div>
+<p>Update <code>AssistantSession</code> constructor signature to accept <code>InteractiveSessionDriver driver</code> and make
+<code>start/sendMessage/respondToPermission/interrupt/destroy/isAlive/getStatus/getErrorMessage</code> delegate to driver
+while preserving event history, auto-approval, and usage accounting behavior.</p>
+<ul>
+<li>[ ] <strong>Step 4: Re-run delegation test</strong></li>
+</ul>
+<p>Run: <code>mvn -pl app -Dtest=AssistantSessionDriverDelegationTest test</code>
+Expected: PASS.</p>
+<ul>
+<li>[ ] <strong>Step 5: Commit</strong></li>
+</ul>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>git<span class="w"> </span>add<span class="w"> </span>app/src/main/java/io/apitomy/axiom/app/assistant/runtime/InteractiveSessionDriver.java<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">        </span>app/src/main/java/io/apitomy/axiom/app/assistant/runtime/SessionCompatibilityException.java<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">        </span>app/src/main/java/io/apitomy/axiom/app/assistant/runtime/InteractiveSessionDriverFactory.java<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">        </span>app/src/main/java/io/apitomy/axiom/app/assistant/AssistantSession.java<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="w">        </span>app/src/test/java/io/apitomy/axiom/app/assistant/AssistantSessionDriverDelegationTest.java
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">"refactor(assistant): introduce interactive runtime driver boundary"</span>
+</span></code></pre></div>
+<hr />
+<h3 id="task-2-extract-existing-claude-runtime-into-claude-driver">Task 2: Extract existing Claude runtime into Claude driver</h3>
+<p><strong>Files:</strong>
+- Create: <code>app/src/main/java/io/apitomy/axiom/app/assistant/runtime/ClaudeInteractiveSessionDriver.java</code>
+- Modify: <code>app/src/main/java/io/apitomy/axiom/app/assistant/AssistantSession.java</code>
+- Modify: <code>app/src/main/java/io/apitomy/axiom/app/assistant/AssistantEventParser.java</code></p>
+<p><strong>Interfaces:</strong>
+- Consumes: <code>InteractiveSessionDriver</code> from Task 1.
+- Produces: <code>ClaudeInteractiveSessionDriver</code> constructor:
+  <code>ClaudeInteractiveSessionDriver(Path workingDirectory, Path sessionDirectory, List&lt;String&gt; command,
+  Map&lt;String, String&gt; environment, AssistantEventParser parser, Consumer&lt;SseEvent&gt; eventSink,
+  Consumer&lt;SseEvent&gt; autoApprovalSink)</code>.</p>
+<ul>
+<li>[ ] <strong>Step 1: Add failing parser/driver integration test for Claude behavior parity</strong></li>
+</ul>
+<p>Create <code>app/src/test/java/io/apitomy/axiom/app/assistant/runtime/ClaudeInteractiveSessionDriverTest.java</code>
+with a test that feeds representative NDJSON lines to parser-driven driver path and asserts normalized events
+(<code>assistant_text</code>, <code>tool_use</code>, <code>permission_request</code>, <code>turn_complete</code>) are emitted unchanged.</p>
+<div class="language-java highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nd">@Test</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="kt">void</span><span class="w"> </span><span class="nf">parsesAssistantAndPermissionEventsWithoutRenaming</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">    </span><span class="n">AssistantEventParser</span><span class="w"> </span><span class="n">parser</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">AssistantEventParser</span><span class="p">();</span>
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">    </span><span class="n">List</span><span class="o">&lt;</span><span class="n">SseEvent</span><span class="o">&gt;</span><span class="w"> </span><span class="n">events</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">parser</span><span class="p">.</span><span class="na">parse</span><span class="p">(</span><span class="s">"""</span>
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="s">        {"type":"assistant","message":{"content":[{"type":"text","text":"hello"}]}}</span>
+</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="s">        """</span><span class="p">);</span>
+</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="w">    </span><span class="n">assertEquals</span><span class="p">(</span><span class="s">"assistant_text"</span><span class="p">,</span><span class="w"> </span><span class="n">events</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="mi">0</span><span class="p">).</span><span class="na">type</span><span class="p">());</span>
+</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="p">}</span>
+</span></code></pre></div>
+<ul>
+<li>[ ] <strong>Step 2: Run test and verify failure</strong></li>
+</ul>
+<p>Run: <code>mvn -pl app -Dtest=ClaudeInteractiveSessionDriverTest test</code>
+Expected: FAIL because driver class does not exist.</p>
+<ul>
+<li>[ ] <strong>Step 3: Move subprocess runtime logic from AssistantSession into Claude driver</strong></li>
+</ul>
+<p>Implement <code>ClaudeInteractiveSessionDriver</code> using the current <code>AssistantSession</code> internals:</p>
+<div class="language-java highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="kd">public</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kd">class</span> <span class="nc">ClaudeInteractiveSessionDriver</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">InteractiveSessionDriver</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">    </span><span class="c1">// process, stdin, parser, stdout/stderr readers, monitor thread</span>
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">    </span><span class="c1">// writes NDJSON user/control lines and emits parsed events via eventSink</span>
+</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="p">}</span>
+</span></code></pre></div>
+<p>Keep current event mapping and auto-approval semantics identical by preserving
+<code>AssistantEventParser</code> outputs and permission response payload structure.</p>
+<ul>
+<li>[ ] <strong>Step 4: Re-run focused assistant parser and Claude driver tests</strong></li>
+</ul>
+<p>Run:
+- <code>mvn -pl app -Dtest=AssistantEventParserTest test</code>
+- <code>mvn -pl app -Dtest=ClaudeInteractiveSessionDriverTest test</code></p>
+<p>Expected: PASS; no behavior drift in normalized Claude event handling.</p>
+<ul>
+<li>[ ] <strong>Step 5: Commit</strong></li>
+</ul>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>git<span class="w"> </span>add<span class="w"> </span>app/src/main/java/io/apitomy/axiom/app/assistant/runtime/ClaudeInteractiveSessionDriver.java<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">        </span>app/src/main/java/io/apitomy/axiom/app/assistant/AssistantSession.java<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">        </span>app/src/main/java/io/apitomy/axiom/app/assistant/AssistantEventParser.java<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="w">        </span>app/src/test/java/io/apitomy/axiom/app/assistant/runtime/ClaudeInteractiveSessionDriverTest.java
+</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">"refactor(assistant): move Claude interactive subprocess runtime behind driver"</span>
+</span></code></pre></div>
+<hr />
+<h3 id="task-3-add-opencode-event-normalization-and-unit-tests">Task 3: Add OpenCode event normalization and unit tests</h3>
+<p><strong>Files:</strong>
+- Create: <code>app/src/main/java/io/apitomy/axiom/app/assistant/runtime/opencode/OpenCodeEventNormalizer.java</code>
+- Create: <code>app/src/test/java/io/apitomy/axiom/app/assistant/runtime/opencode/OpenCodeEventNormalizerTest.java</code></p>
+<p><strong>Interfaces:</strong>
+- Produces: <code>List&lt;SseEvent&gt; normalize(String eventName, JsonNode payload)</code>.
+- Produces: mapping methods for OpenCode event fragments to Assistant events.</p>
+<ul>
+<li>[ ] <strong>Step 1: Write failing event mapping tests for required parity events</strong></li>
+</ul>
+<p>Create <code>OpenCodeEventNormalizerTest.java</code> with explicit coverage for:
+- assistant text chunk -&gt; <code>assistant_text</code>
+- tool invocation start -&gt; <code>tool_use</code>
+- tool output/result -&gt; <code>tool_result</code>
+- permission request -&gt; <code>permission_request</code>
+- turn completion -&gt; <code>turn_complete</code></p>
+<div class="language-java highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="nd">@Test</span>
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="kt">void</span><span class="w"> </span><span class="nf">mapsAssistantTextEvent</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="w">    </span><span class="n">JsonNode</span><span class="w"> </span><span class="n">payload</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mapper</span><span class="p">.</span><span class="na">readTree</span><span class="p">(</span><span class="s">"""</span>
+</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="s">        {"sessionID":"s1","part":{"type":"text","text":"hello"}}</span>
+</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="s">        """</span><span class="p">);</span>
+</span><span id="__span-6-6"><a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="w">    </span><span class="n">List</span><span class="o">&lt;</span><span class="n">SseEvent</span><span class="o">&gt;</span><span class="w"> </span><span class="n">out</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">normalizer</span><span class="p">.</span><span class="na">normalize</span><span class="p">(</span><span class="s">"session.message.part"</span><span class="p">,</span><span class="w"> </span><span class="n">payload</span><span class="p">);</span>
+</span><span id="__span-6-7"><a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="w">    </span><span class="n">assertEquals</span><span class="p">(</span><span class="s">"assistant_text"</span><span class="p">,</span><span class="w"> </span><span class="n">out</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="mi">0</span><span class="p">).</span><span class="na">type</span><span class="p">());</span>
+</span><span id="__span-6-8"><a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a><span class="w">    </span><span class="n">assertEquals</span><span class="p">(</span><span class="s">"hello"</span><span class="p">,</span><span class="w"> </span><span class="n">out</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="mi">0</span><span class="p">).</span><span class="na">data</span><span class="p">().</span><span class="na">path</span><span class="p">(</span><span class="s">"text"</span><span class="p">).</span><span class="na">asText</span><span class="p">());</span>
+</span><span id="__span-6-9"><a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a><span class="p">}</span>
+</span></code></pre></div>
+<ul>
+<li>[ ] <strong>Step 2: Run test and verify failure</strong></li>
+</ul>
+<p>Run: <code>mvn -pl app -Dtest=OpenCodeEventNormalizerTest test</code>
+Expected: FAIL because normalizer class does not exist.</p>
+<ul>
+<li>[ ] <strong>Step 3: Implement OpenCode -&gt; Assistant event normalization</strong></li>
+</ul>
+<p>Create <code>OpenCodeEventNormalizer</code> with deterministic mappings and ignored-event behavior:</p>
+<div class="language-java highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="kd">public</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">SseEvent</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">normalize</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">eventName</span><span class="p">,</span><span class="w"> </span><span class="n">JsonNode</span><span class="w"> </span><span class="n">payload</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="k">switch</span><span class="w"> </span><span class="p">(</span><span class="n">eventName</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="w">        </span><span class="k">case</span><span class="w"> </span><span class="s">"session.message.part"</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">mapMessagePart</span><span class="p">(</span><span class="n">payload</span><span class="p">);</span>
+</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="w">        </span><span class="k">case</span><span class="w"> </span><span class="s">"session.tool.started"</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">List</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="n">toolUse</span><span class="p">(</span><span class="n">payload</span><span class="p">));</span>
+</span><span id="__span-7-5"><a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="w">        </span><span class="k">case</span><span class="w"> </span><span class="s">"session.tool.completed"</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">List</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="n">toolResult</span><span class="p">(</span><span class="n">payload</span><span class="p">));</span>
+</span><span id="__span-7-6"><a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="w">        </span><span class="k">case</span><span class="w"> </span><span class="s">"session.permission.requested"</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">List</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="n">permission</span><span class="p">(</span><span class="n">payload</span><span class="p">));</span>
+</span><span id="__span-7-7"><a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a><span class="w">        </span><span class="k">case</span><span class="w"> </span><span class="s">"session.turn.completed"</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">List</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="n">turnComplete</span><span class="p">(</span><span class="n">payload</span><span class="p">));</span>
+</span><span id="__span-7-8"><a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a><span class="w">        </span><span class="k">default</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">List</span><span class="p">.</span><span class="na">of</span><span class="p">();</span>
+</span><span id="__span-7-9"><a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a><span class="w">    </span><span class="p">};</span>
+</span><span id="__span-7-10"><a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a><span class="p">}</span>
+</span></code></pre></div>
+<p>Ensure outputs use existing field names consumed in <code>AssistantChatPanel.tsx</code>.</p>
+<ul>
+<li>[ ] <strong>Step 4: Re-run normalizer tests</strong></li>
+</ul>
+<p>Run: <code>mvn -pl app -Dtest=OpenCodeEventNormalizerTest test</code>
+Expected: PASS.</p>
+<ul>
+<li>[ ] <strong>Step 5: Commit</strong></li>
+</ul>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>git<span class="w"> </span>add<span class="w"> </span>app/src/main/java/io/apitomy/axiom/app/assistant/runtime/opencode/OpenCodeEventNormalizer.java<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="w">        </span>app/src/test/java/io/apitomy/axiom/app/assistant/runtime/opencode/OpenCodeEventNormalizerTest.java
+</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">"feat(assistant-opencode): add OpenCode event normalization for assistant parity"</span>
+</span></code></pre></div>
+<hr />
+<h3 id="task-4-build-opencode-per-session-process-and-httpsse-client">Task 4: Build OpenCode per-session process and HTTP/SSE client</h3>
+<p><strong>Files:</strong>
+- Create:
+  <code>app/src/main/java/io/apitomy/axiom/app/assistant/runtime/opencode/OpenCodeSessionServerProcess.java</code>
+- Create: <code>app/src/main/java/io/apitomy/axiom/app/assistant/runtime/opencode/OpenCodeAssistantClient.java</code>
+- Create:
+  <code>app/src/test/java/io/apitomy/axiom/app/assistant/runtime/opencode/OpenCodeSessionServerProcessTest.java</code></p>
+<p><strong>Interfaces:</strong>
+- Produces: <code>OpenCodeSessionServerProcess.start()/stop()/baseUrl()/isAlive()</code>.
+- Produces: <code>OpenCodeAssistantClient</code> methods:
+  - <code>HealthStatus health()</code>
+  - <code>String createSession(String title)</code>
+  - <code>void sendPromptAsync(String sessionId, String prompt, String model, JsonNode tools)</code>
+  - <code>void abort(String sessionId)</code>
+  - <code>void respondPermission(String sessionId, String permissionId, boolean allow)</code>
+  - <code>void connectEvents(Consumer&lt;OpenCodeRawEvent&gt; onEvent)</code></p>
+<ul>
+<li>[ ] <strong>Step 1: Write failing process lifecycle test with OpenCode availability guard</strong></li>
+</ul>
+<p>Create <code>OpenCodeSessionServerProcessTest.java</code>:</p>
+<div class="language-java highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="nd">@Test</span>
+</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="kt">void</span><span class="w"> </span><span class="nf">startsAndStopsSessionScopedOpenCodeServer</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="w">    </span><span class="n">Assumptions</span><span class="p">.</span><span class="na">assumeTrue</span><span class="p">(</span><span class="n">OpenCodeServerManager</span><span class="p">.</span><span class="na">isOpenCodeAvailable</span><span class="p">());</span>
+</span><span id="__span-9-4"><a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="w">    </span><span class="n">OpenCodeSessionServerProcess</span><span class="w"> </span><span class="n">process</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">OpenCodeSessionServerProcess</span><span class="p">(</span><span class="s">"opencode"</span><span class="p">,</span><span class="w"> </span><span class="s">"127.0.0.1"</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">30</span><span class="p">);</span>
+</span><span id="__span-9-5"><a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="w">    </span><span class="n">process</span><span class="p">.</span><span class="na">start</span><span class="p">();</span>
+</span><span id="__span-9-6"><a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a><span class="w">    </span><span class="n">assertTrue</span><span class="p">(</span><span class="n">process</span><span class="p">.</span><span class="na">isAlive</span><span class="p">());</span>
+</span><span id="__span-9-7"><a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a><span class="w">    </span><span class="n">assertTrue</span><span class="p">(</span><span class="n">process</span><span class="p">.</span><span class="na">baseUrl</span><span class="p">().</span><span class="na">startsWith</span><span class="p">(</span><span class="s">"http://127.0.0.1:"</span><span class="p">));</span>
+</span><span id="__span-9-8"><a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a><span class="w">    </span><span class="n">process</span><span class="p">.</span><span class="na">stop</span><span class="p">();</span>
+</span><span id="__span-9-9"><a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a><span class="w">    </span><span class="n">assertFalse</span><span class="p">(</span><span class="n">process</span><span class="p">.</span><span class="na">isAlive</span><span class="p">());</span>
+</span><span id="__span-9-10"><a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a><span class="p">}</span>
+</span></code></pre></div>
+<ul>
+<li>[ ] <strong>Step 2: Run test and verify failure</strong></li>
+</ul>
+<p>Run: <code>mvn -pl app -Dtest=OpenCodeSessionServerProcessTest test</code>
+Expected: FAIL because class does not exist.</p>
+<ul>
+<li>[ ] <strong>Step 3: Implement process manager and assistant HTTP client</strong></li>
+</ul>
+<p>Implement ephemeral-port capable process manager and HTTP 1.1 client:</p>
+<div class="language-java highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="n">ProcessBuilder</span><span class="w"> </span><span class="n">pb</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ProcessBuilder</span><span class="p">(</span>
+</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="w">        </span><span class="n">executable</span><span class="p">,</span>
+</span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="w">        </span><span class="s">"serve"</span><span class="p">,</span>
+</span><span id="__span-10-4"><a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="w">        </span><span class="s">"--hostname"</span><span class="p">,</span><span class="w"> </span><span class="n">hostname</span><span class="p">,</span>
+</span><span id="__span-10-5"><a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a><span class="w">        </span><span class="s">"--port"</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="p">.</span><span class="na">valueOf</span><span class="p">(</span><span class="n">resolvedPort</span><span class="p">)</span>
+</span><span id="__span-10-6"><a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a><span class="p">);</span>
+</span></code></pre></div>
+<p>Implement health polling against <code>/global/health</code> and bounded startup timeout.</p>
+<ul>
+<li>[ ] <strong>Step 4: Re-run process test</strong></li>
+</ul>
+<p>Run: <code>mvn -pl app -Dtest=OpenCodeSessionServerProcessTest test</code>
+Expected: PASS when OpenCode CLI is installed; SKIPPED when unavailable.</p>
+<ul>
+<li>[ ] <strong>Step 5: Commit</strong></li>
+</ul>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>git<span class="w"> </span>add<span class="w"> </span>app/src/main/java/io/apitomy/axiom/app/assistant/runtime/opencode/OpenCodeSessionServerProcess.java<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="w">        </span>app/src/main/java/io/apitomy/axiom/app/assistant/runtime/opencode/OpenCodeAssistantClient.java<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="w">        </span>app/src/test/java/io/apitomy/axiom/app/assistant/runtime/opencode/
+</span><span id="__span-11-4"><a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>OpenCodeSessionServerProcessTest.java
+</span><span id="__span-11-5"><a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a>git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">"feat(assistant-opencode): add per-session OpenCode process and assistant HTTP client"</span>
+</span></code></pre></div>
+<hr />
+<h3 id="task-5-implement-fail-closed-capability-probe">Task 5: Implement fail-closed capability probe</h3>
+<p><strong>Files:</strong>
+- Create: <code>app/src/main/java/io/apitomy/axiom/app/assistant/runtime/opencode/OpenCodeCapabilityProbe.java</code>
+- Create: <code>app/src/test/java/io/apitomy/axiom/app/assistant/runtime/opencode/OpenCodeCapabilityProbeTest.java</code>
+- Modify: <code>app/src/main/java/io/apitomy/axiom/app/assistant/runtime/SessionCompatibilityException.java</code></p>
+<p><strong>Interfaces:</strong>
+- Produces: <code>OpenCodeCapabilityProbe.Result probe(OpenCodeAssistantClient client)</code>.
+- Produces: failure codes aligned to spec taxonomy.</p>
+<ul>
+<li>[ ] <strong>Step 1: Write failing probe tests with mock HTTP endpoints</strong></li>
+</ul>
+<p>In <code>OpenCodeCapabilityProbeTest</code>, use JDK <code>com.sun.net.httpserver.HttpServer</code> to simulate:
+- healthy + required endpoints present -&gt; probe passes
+- missing event endpoint -&gt; <code>EVENT_STREAM_UNRELIABLE</code>
+- missing permission endpoint -&gt; <code>PERMISSION_PROTOCOL_UNSUPPORTED</code></p>
+<div class="language-java highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="nd">@Test</span>
+</span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="kt">void</span><span class="w"> </span><span class="nf">failsWhenEventStreamEndpointMissing</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-12-3"><a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="w">    </span><span class="c1">// setup fake server without /event</span>
+</span><span id="__span-12-4"><a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a><span class="w">    </span><span class="n">Result</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">probe</span><span class="p">.</span><span class="na">probe</span><span class="p">(</span><span class="n">client</span><span class="p">);</span>
+</span><span id="__span-12-5"><a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a><span class="w">    </span><span class="n">assertFalse</span><span class="p">(</span><span class="n">result</span><span class="p">.</span><span class="na">compatible</span><span class="p">());</span>
+</span><span id="__span-12-6"><a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a><span class="w">    </span><span class="n">assertEquals</span><span class="p">(</span><span class="s">"EVENT_STREAM_UNRELIABLE"</span><span class="p">,</span><span class="w"> </span><span class="n">result</span><span class="p">.</span><span class="na">code</span><span class="p">());</span>
+</span><span id="__span-12-7"><a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a><span class="p">}</span>
+</span></code></pre></div>
+<ul>
+<li>[ ] <strong>Step 2: Run probe tests and verify failure</strong></li>
+</ul>
+<p>Run: <code>mvn -pl app -Dtest=OpenCodeCapabilityProbeTest test</code>
+Expected: FAIL because probe class does not exist.</p>
+<ul>
+<li>[ ] <strong>Step 3: Implement capability probe with strict required checks</strong></li>
+</ul>
+<p>Implement probe sequence:
+- GET <code>/global/health</code>
+- POST <code>/session</code> + capture session ID
+- check event stream endpoint availability (<code>/event</code> preferred, <code>/global/event</code> fallback only when mapped)
+- verify prompt path exists (<code>/session/{id}/prompt_async</code> preferred)
+- verify permission/abort paths needed by Assistant contract</p>
+<div class="language-java highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">eventSupported</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">Result</span><span class="p">.</span><span class="na">fail</span><span class="p">(</span><span class="s">"EVENT_STREAM_UNRELIABLE"</span><span class="p">,</span><span class="w"> </span><span class="s">"No supported SSE endpoint for assistant runtime"</span><span class="p">);</span>
+</span><span id="__span-13-3"><a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="p">}</span>
+</span></code></pre></div>
+<ul>
+<li>[ ] <strong>Step 4: Re-run probe tests</strong></li>
+</ul>
+<p>Run: <code>mvn -pl app -Dtest=OpenCodeCapabilityProbeTest test</code>
+Expected: PASS.</p>
+<ul>
+<li>[ ] <strong>Step 5: Commit</strong></li>
+</ul>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>git<span class="w"> </span>add<span class="w"> </span>app/src/main/java/io/apitomy/axiom/app/assistant/runtime/opencode/OpenCodeCapabilityProbe.java<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-14-2"><a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="w">        </span>app/src/main/java/io/apitomy/axiom/app/assistant/runtime/SessionCompatibilityException.java<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-14-3"><a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a><span class="w">        </span>app/src/test/java/io/apitomy/axiom/app/assistant/runtime/opencode/OpenCodeCapabilityProbeTest.java
+</span><span id="__span-14-4"><a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a>git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">"feat(assistant-opencode): add fail-closed capability probe for interactive sessions"</span>
+</span></code></pre></div>
+<hr />
+<h3 id="task-6-implement-opencode-interactive-session-driver">Task 6: Implement OpenCode interactive session driver</h3>
+<p><strong>Files:</strong>
+- Create:
+  <code>app/src/main/java/io/apitomy/axiom/app/assistant/runtime/opencode/OpenCodeInteractiveSessionDriver.java</code>
+- Modify: <code>app/src/main/java/io/apitomy/axiom/app/assistant/runtime/InteractiveSessionDriverFactory.java</code>
+- Modify: <code>app/src/main/resources/application.properties</code></p>
+<p><strong>Interfaces:</strong>
+- Consumes: Task 3 normalizer, Task 4 process/client, Task 5 probe.
+- Produces: concrete <code>InteractiveSessionDriver</code> implementation for OpenCode.</p>
+<ul>
+<li>[ ] <strong>Step 1: Write failing driver tests for lifecycle and prompt serialization</strong></li>
+</ul>
+<p>Create
+<code>app/src/test/java/io/apitomy/axiom/app/assistant/runtime/opencode/OpenCodeInteractiveSessionDriverTest.java</code>
+covering:
+- startup runs process + probe and transitions to RUNNING
+- second prompt while first in-flight is queued or rejected deterministically
+- <code>interrupt()</code> triggers <code>/abort</code></p>
+<div class="language-java highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="nd">@Test</span>
+</span><span id="__span-15-2"><a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a><span class="kt">void</span><span class="w"> </span><span class="nf">rejectsSecondPromptWhileTurnActive</span><span class="p">()</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">Exception</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-15-3"><a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a><span class="w">    </span><span class="n">driver</span><span class="p">.</span><span class="na">start</span><span class="p">();</span>
+</span><span id="__span-15-4"><a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a><span class="w">    </span><span class="n">driver</span><span class="p">.</span><span class="na">sendUserMessage</span><span class="p">(</span><span class="s">"first"</span><span class="p">);</span>
+</span><span id="__span-15-5"><a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a><span class="w">    </span><span class="n">assertThrows</span><span class="p">(</span><span class="n">IllegalStateException</span><span class="p">.</span><span class="na">class</span><span class="p">,</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">driver</span><span class="p">.</span><span class="na">sendUserMessage</span><span class="p">(</span><span class="s">"second"</span><span class="p">));</span>
+</span><span id="__span-15-6"><a id="__codelineno-15-6" name="__codelineno-15-6" href="#__codelineno-15-6"></a><span class="p">}</span>
+</span></code></pre></div>
+<ul>
+<li>[ ] <strong>Step 2: Run tests and verify failure</strong></li>
+</ul>
+<p>Run: <code>mvn -pl app -Dtest=OpenCodeInteractiveSessionDriverTest test</code>
+Expected: FAIL because driver class does not exist.</p>
+<ul>
+<li>[ ] <strong>Step 3: Implement OpenCode driver lifecycle, SSE handling, and permission bridge</strong></li>
+</ul>
+<p>Implement startup path:</p>
+<div class="language-java highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="n">serverProcess</span><span class="p">.</span><span class="na">start</span><span class="p">();</span>
+</span><span id="__span-16-2"><a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a><span class="n">OpenCodeAssistantClient</span><span class="w"> </span><span class="n">client</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">OpenCodeAssistantClient</span><span class="p">(</span><span class="n">serverProcess</span><span class="p">.</span><span class="na">baseUrl</span><span class="p">(),</span><span class="w"> </span><span class="n">timeoutSeconds</span><span class="p">);</span>
+</span><span id="__span-16-3"><a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a><span class="n">OpenCodeCapabilityProbe</span><span class="p">.</span><span class="na">Result</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">capabilityProbe</span><span class="p">.</span><span class="na">probe</span><span class="p">(</span><span class="n">client</span><span class="p">);</span>
+</span><span id="__span-16-4"><a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">result</span><span class="p">.</span><span class="na">compatible</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-16-5"><a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a><span class="w">    </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">SessionCompatibilityException</span><span class="p">(</span><span class="n">result</span><span class="p">.</span><span class="na">code</span><span class="p">(),</span><span class="w"> </span><span class="n">result</span><span class="p">.</span><span class="na">message</span><span class="p">(),</span><span class="w"> </span><span class="n">result</span><span class="p">.</span><span class="na">details</span><span class="p">());</span>
+</span><span id="__span-16-6"><a id="__codelineno-16-6" name="__codelineno-16-6" href="#__codelineno-16-6"></a><span class="p">}</span>
+</span><span id="__span-16-7"><a id="__codelineno-16-7" name="__codelineno-16-7" href="#__codelineno-16-7"></a><span class="k">this</span><span class="p">.</span><span class="na">openCodeSessionId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">client</span><span class="p">.</span><span class="na">createSession</span><span class="p">(</span><span class="n">sessionTitle</span><span class="p">);</span>
+</span><span id="__span-16-8"><a id="__codelineno-16-8" name="__codelineno-16-8" href="#__codelineno-16-8"></a><span class="n">client</span><span class="p">.</span><span class="na">connectEvents</span><span class="p">(</span><span class="n">raw</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">eventSink</span><span class="p">.</span><span class="na">acceptAll</span><span class="p">(</span><span class="n">normalizer</span><span class="p">.</span><span class="na">normalize</span><span class="p">(</span><span class="n">raw</span><span class="p">.</span><span class="na">name</span><span class="p">(),</span><span class="w"> </span><span class="n">raw</span><span class="p">.</span><span class="na">payload</span><span class="p">())));</span>
+</span></code></pre></div>
+<p>Implement:
+- strict single in-flight prompt guard
+- async prompt submit
+- permission response mapping
+- abort-on-interrupt
+- deterministic driver status/error tracking</p>
+<ul>
+<li>[ ] <strong>Step 4: Re-run OpenCode driver tests</strong></li>
+</ul>
+<p>Run: <code>mvn -pl app -Dtest=OpenCodeInteractiveSessionDriverTest test</code>
+Expected: PASS.</p>
+<ul>
+<li>[ ] <strong>Step 5: Commit</strong></li>
+</ul>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>git<span class="w"> </span>add<span class="w"> </span>app/src/main/java/io/apitomy/axiom/app/assistant/runtime/opencode/<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-17-2"><a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a>OpenCodeInteractiveSessionDriver.java<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-17-3"><a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a><span class="w">        </span>app/src/main/java/io/apitomy/axiom/app/assistant/runtime/InteractiveSessionDriverFactory.java<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-17-4"><a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a><span class="w">        </span>app/src/main/resources/application.properties<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-17-5"><a id="__codelineno-17-5" name="__codelineno-17-5" href="#__codelineno-17-5"></a><span class="w">        </span>app/src/test/java/io/apitomy/axiom/app/assistant/runtime/opencode/<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-17-6"><a id="__codelineno-17-6" name="__codelineno-17-6" href="#__codelineno-17-6"></a>OpenCodeInteractiveSessionDriverTest.java
+</span><span id="__span-17-7"><a id="__codelineno-17-7" name="__codelineno-17-7" href="#__codelineno-17-7"></a>git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">"feat(assistant-opencode): implement interactive OpenCode session driver"</span>
+</span></code></pre></div>
+<hr />
+<h3 id="task-7-wire-session-manager-and-rest-layer-to-multi-engine-interactive-runtime">Task 7: Wire session manager and REST layer to multi-engine interactive runtime</h3>
+<p><strong>Files:</strong>
+- Modify: <code>app/src/main/java/io/apitomy/axiom/app/assistant/AssistantSessionManager.java</code>
+- Modify: <code>app/src/main/java/io/apitomy/axiom/app/rest/AssistantResourceImpl.java</code>
+- Modify: <code>app/src/main/java/io/apitomy/axiom/agents/opencode/OpenCodeAgent.java</code></p>
+<p><strong>Interfaces:</strong>
+- Consumes: <code>InteractiveSessionDriverFactory</code> and <code>SessionCompatibilityException</code>.
+- Produces: Assistant session creation path that supports both Claude and OpenCode interactive engines.</p>
+<ul>
+<li>[ ] <strong>Step 1: Write failing manager/resource integration test</strong></li>
+</ul>
+<p>Create <code>app/src/test/java/io/apitomy/axiom/app/OpenCodeAssistantResourceIntegrationTest.java</code>:</p>
+<div class="language-java highlight"><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="nd">@QuarkusTest</span>
+</span><span id="__span-18-2"><a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a><span class="kd">class</span> <span class="nc">OpenCodeAssistantResourceIntegrationTest</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-18-3"><a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a>
+</span><span id="__span-18-4"><a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a><span class="w">    </span><span class="nd">@Test</span>
+</span><span id="__span-18-5"><a id="__codelineno-18-5" name="__codelineno-18-5" href="#__codelineno-18-5"></a><span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">createSessionReturnsCompatibilityErrorWhenProbeFails</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-18-6"><a id="__codelineno-18-6" name="__codelineno-18-6" href="#__codelineno-18-6"></a><span class="w">        </span><span class="n">given</span><span class="p">()</span>
+</span><span id="__span-18-7"><a id="__codelineno-18-7" name="__codelineno-18-7" href="#__codelineno-18-7"></a><span class="w">            </span><span class="p">.</span><span class="na">contentType</span><span class="p">(</span><span class="n">ContentType</span><span class="p">.</span><span class="na">JSON</span><span class="p">)</span>
+</span><span id="__span-18-8"><a id="__codelineno-18-8" name="__codelineno-18-8" href="#__codelineno-18-8"></a><span class="w">            </span><span class="p">.</span><span class="na">body</span><span class="p">(</span><span class="s">"""</span>
+</span><span id="__span-18-9"><a id="__codelineno-18-9" name="__codelineno-18-9" href="#__codelineno-18-9"></a><span class="s">                {"templateId":"general-assistant","name":"opencode-test"}</span>
+</span><span id="__span-18-10"><a id="__codelineno-18-10" name="__codelineno-18-10" href="#__codelineno-18-10"></a><span class="s">                """</span><span class="p">)</span>
+</span><span id="__span-18-11"><a id="__codelineno-18-11" name="__codelineno-18-11" href="#__codelineno-18-11"></a><span class="w">            </span><span class="p">.</span><span class="na">when</span><span class="p">()</span>
+</span><span id="__span-18-12"><a id="__codelineno-18-12" name="__codelineno-18-12" href="#__codelineno-18-12"></a><span class="w">                </span><span class="p">.</span><span class="na">post</span><span class="p">(</span><span class="s">"/api/v1/assistant/sessions"</span><span class="p">)</span>
+</span><span id="__span-18-13"><a id="__codelineno-18-13" name="__codelineno-18-13" href="#__codelineno-18-13"></a><span class="w">            </span><span class="p">.</span><span class="na">then</span><span class="p">()</span>
+</span><span id="__span-18-14"><a id="__codelineno-18-14" name="__codelineno-18-14" href="#__codelineno-18-14"></a><span class="w">                </span><span class="p">.</span><span class="na">statusCode</span><span class="p">(</span><span class="n">anyOf</span><span class="p">(</span><span class="n">is</span><span class="p">(</span><span class="mi">201</span><span class="p">),</span><span class="w"> </span><span class="n">is</span><span class="p">(</span><span class="mi">400</span><span class="p">),</span><span class="w"> </span><span class="n">is</span><span class="p">(</span><span class="mi">422</span><span class="p">),</span><span class="w"> </span><span class="n">is</span><span class="p">(</span><span class="mi">500</span><span class="p">)));</span>
+</span><span id="__span-18-15"><a id="__codelineno-18-15" name="__codelineno-18-15" href="#__codelineno-18-15"></a><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-18-16"><a id="__codelineno-18-16" name="__codelineno-18-16" href="#__codelineno-18-16"></a><span class="p">}</span>
+</span></code></pre></div>
+<p>Then refine expected status after implementation to exact fail-closed mapping (<code>422</code> recommended).</p>
+<ul>
+<li>[ ] <strong>Step 2: Run test and verify failure</strong></li>
+</ul>
+<p>Run: <code>mvn -pl app -Dtest=OpenCodeAssistantResourceIntegrationTest test</code>
+Expected: FAIL or nondeterministic status before explicit compatibility mapping exists.</p>
+<ul>
+<li>[ ] <strong>Step 3: Update session manager + resource for driver-based startup and error mapping</strong></li>
+</ul>
+<p>In <code>AssistantSessionManager.createSession(...)</code>:
+- remove Claude-only command assembly from direct session startup path
+- construct driver from factory using active engine type and resolved template context
+- catch <code>SessionCompatibilityException</code> and propagate typed failure</p>
+<p>In <code>AssistantResourceImpl.createAssistantSession(...)</code>:
+- change availability text from Claude-only to generic interactive-engine support
+- map compatibility failures to deterministic response (422 with message + code)</p>
+<p>In <code>OpenCodeAgent</code>, add:</p>
+<div class="language-java highlight"><pre><span></span><code><span id="__span-19-1"><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="nd">@Override</span>
+</span><span id="__span-19-2"><a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a><span class="kd">public</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">supportsInteractiveSessions</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-19-3"><a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span>
+</span><span id="__span-19-4"><a id="__codelineno-19-4" name="__codelineno-19-4" href="#__codelineno-19-4"></a><span class="p">}</span>
+</span></code></pre></div>
+<ul>
+<li>[ ] <strong>Step 4: Re-run integration and assistant tests</strong></li>
+</ul>
+<p>Run:
+- <code>mvn -pl app -Dtest=OpenCodeAssistantResourceIntegrationTest test</code>
+- <code>mvn -pl app -Dtest=AssistantEventParserTest,AssistantItemValidatorTest test</code></p>
+<p>Expected: PASS with deterministic assistant session creation behavior for
+supported/unsupported OpenCode runtime.</p>
+<ul>
+<li>[ ] <strong>Step 5: Commit</strong></li>
+</ul>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-20-1"><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>git<span class="w"> </span>add<span class="w"> </span>app/src/main/java/io/apitomy/axiom/app/assistant/AssistantSessionManager.java<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-20-2"><a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a><span class="w">        </span>app/src/main/java/io/apitomy/axiom/app/rest/AssistantResourceImpl.java<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-20-3"><a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a><span class="w">        </span>agents/opencode/src/main/java/io/apitomy/axiom/agents/opencode/OpenCodeAgent.java<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-20-4"><a id="__codelineno-20-4" name="__codelineno-20-4" href="#__codelineno-20-4"></a><span class="w">        </span>app/src/test/java/io/apitomy/axiom/app/OpenCodeAssistantResourceIntegrationTest.java
+</span><span id="__span-20-5"><a id="__codelineno-20-5" name="__codelineno-20-5" href="#__codelineno-20-5"></a>git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">"feat(assistant): enable OpenCode interactive engine via driver-based session startup"</span>
+</span></code></pre></div>
+<hr />
+<h3 id="task-8-add-protocol-harness-for-real-opencode-runtime-verification">Task 8: Add protocol harness for real OpenCode runtime verification</h3>
+<p><strong>Files:</strong>
+- Create:
+  <code>app/src/test/java/io/apitomy/axiom/app/assistant/runtime/opencode/
+  OpenCodeAssistantProtocolHarnessTest.java</code></p>
+<p><strong>Interfaces:</strong>
+- Produces: executable harness assertions for startup, prompt, events, permission, abort, and teardown.</p>
+<ul>
+<li>[ ] <strong>Step 1: Write failing harness test class with explicit scenario methods</strong></li>
+</ul>
+<p>Create test skeleton:</p>
+<div class="language-java highlight"><pre><span></span><code><span id="__span-21-1"><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="nd">@QuarkusTest</span>
+</span><span id="__span-21-2"><a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a><span class="kd">class</span> <span class="nc">OpenCodeAssistantProtocolHarnessTest</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-21-3"><a id="__codelineno-21-3" name="__codelineno-21-3" href="#__codelineno-21-3"></a>
+</span><span id="__span-21-4"><a id="__codelineno-21-4" name="__codelineno-21-4" href="#__codelineno-21-4"></a><span class="w">    </span><span class="nd">@Test</span>
+</span><span id="__span-21-5"><a id="__codelineno-21-5" name="__codelineno-21-5" href="#__codelineno-21-5"></a><span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">verifiesSessionPromptEventAndAbortFlow</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-21-6"><a id="__codelineno-21-6" name="__codelineno-21-6" href="#__codelineno-21-6"></a><span class="w">        </span><span class="n">Assumptions</span><span class="p">.</span><span class="na">assumeTrue</span><span class="p">(</span><span class="n">OpenCodeServerManager</span><span class="p">.</span><span class="na">isOpenCodeAvailable</span><span class="p">());</span>
+</span><span id="__span-21-7"><a id="__codelineno-21-7" name="__codelineno-21-7" href="#__codelineno-21-7"></a><span class="w">        </span><span class="n">fail</span><span class="p">(</span><span class="s">"Implement protocol harness"</span><span class="p">);</span>
+</span><span id="__span-21-8"><a id="__codelineno-21-8" name="__codelineno-21-8" href="#__codelineno-21-8"></a><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-21-9"><a id="__codelineno-21-9" name="__codelineno-21-9" href="#__codelineno-21-9"></a><span class="p">}</span>
+</span></code></pre></div>
+<ul>
+<li>[ ] <strong>Step 2: Run harness class to verify failure</strong></li>
+</ul>
+<p>Run: <code>mvn -pl app -Dtest=OpenCodeAssistantProtocolHarnessTest test</code>
+Expected: FAIL from <code>fail("Implement protocol harness")</code>.</p>
+<ul>
+<li>[ ] <strong>Step 3: Implement real harness assertions</strong></li>
+</ul>
+<p>Implement test flow:
+1. start per-session process
+2. verify <code>/global/health</code>
+3. create OpenCode session
+4. connect SSE and capture events
+5. send async prompt
+6. verify assistant + tool/status/turn completion events (minimum required subset)
+7. issue abort on long-running turn
+8. verify deterministic terminal behavior</p>
+<p>Use JUnit assumptions to skip when OpenCode CLI is not installed.</p>
+<ul>
+<li>[ ] <strong>Step 4: Re-run harness</strong></li>
+</ul>
+<p>Run: <code>mvn -pl app -Dtest=OpenCodeAssistantProtocolHarnessTest test</code>
+Expected: PASS when OpenCode runtime is installed and healthy; SKIPPED otherwise.</p>
+<ul>
+<li>[ ] <strong>Step 5: Commit</strong></li>
+</ul>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-22-1"><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a>git<span class="w"> </span>add<span class="w"> </span>app/src/test/java/io/apitomy/axiom/app/assistant/runtime/opencode/<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-22-2"><a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a>OpenCodeAssistantProtocolHarnessTest.java
+</span><span id="__span-22-3"><a id="__codelineno-22-3" name="__codelineno-22-3" href="#__codelineno-22-3"></a>git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">"test(assistant-opencode): add real-runtime protocol harness for interactive compatibility"</span>
+</span></code></pre></div>
+<hr />
+<h3 id="task-9-update-docs-and-configuration-guidance-for-opencode-interactive-sessions">Task 9: Update docs and configuration guidance for OpenCode interactive sessions</h3>
+<p><strong>Files:</strong>
+- Modify: <code>docs/user-guide/ai-assistant.md</code>
+- Modify: <code>docs/getting-started/configuring-axiom.md</code>
+- Modify: <code>docs/developer-guide/extending-axiom.md</code>
+- Modify: <code>app/src/main/resources/application.properties</code></p>
+<p><strong>Interfaces:</strong>
+- Produces: user/developer docs that reflect multi-engine Assistant support and fail-closed behavior.</p>
+<ul>
+<li>[ ] <strong>Step 1: Update AI Assistant user guide engine statement and behavior notes</strong></li>
+</ul>
+<p>Replace Claude-only requirement text with engine-agnostic interactive requirement and add OpenCode notes:</p>
+<div class="language-md highlight"><pre><span></span><code><span id="__span-23-1"><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a>The AI Assistant requires an active AI engine that supports interactive sessions
+</span><span id="__span-23-2"><a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a>(<span class="sb">`claude-code`</span> or <span class="sb">`opencode`</span>). If OpenCode capability checks fail at startup,
+</span><span id="__span-23-3"><a id="__codelineno-23-3" name="__codelineno-23-3" href="#__codelineno-23-3"></a>session creation is rejected with a compatibility error.
+</span></code></pre></div>
+<ul>
+<li>[ ] <strong>Step 2: Update configuration docs with assistant-opencode runtime properties</strong></li>
+</ul>
+<p>Add properties to <code>configuring-axiom.md</code> table:</p>
+<div class="language-md highlight"><pre><span></span><code><span id="__span-24-1"><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a>| <span class="sb">`axiom.assistant.opencode.executable`</span> | <span class="sb">`opencode`</span> | OpenCode CLI executable |
+</span><span id="__span-24-2"><a id="__codelineno-24-2" name="__codelineno-24-2" href="#__codelineno-24-2"></a>| <span class="sb">`axiom.assistant.opencode.startup-timeout-seconds`</span> | <span class="sb">`30`</span> | Per-session server startup timeout |
+</span><span id="__span-24-3"><a id="__codelineno-24-3" name="__codelineno-24-3" href="#__codelineno-24-3"></a>| <span class="sb">`axiom.assistant.opencode.probe-timeout-seconds`</span> | <span class="sb">`20`</span> | Capability probe timeout |
+</span><span id="__span-24-4"><a id="__codelineno-24-4" name="__codelineno-24-4" href="#__codelineno-24-4"></a>| <span class="sb">`axiom.assistant.opencode.port-range`</span> | <span class="ge">*(empty)*</span> | Optional dedicated port range for per-session servers |
+</span></code></pre></div>
+<ul>
+<li>[ ] <strong>Step 3: Update extending guide with interactive driver architecture</strong></li>
+</ul>
+<p>Document <code>InteractiveSessionDriver</code> and engine implementations with one paragraph and class references.</p>
+<ul>
+<li>[ ] <strong>Step 4: Validate markdown wrap and links</strong></li>
+</ul>
+<p>Run:</p>
+<p><div class="language-bash highlight"><pre><span></span><code><span id="__span-25-1"><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a>python<span class="w"> </span>-m<span class="w"> </span>scripts.check_markdown_wrap<span class="w"> </span>docs/user-guide/ai-assistant.md<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-25-2"><a id="__codelineno-25-2" name="__codelineno-25-2" href="#__codelineno-25-2"></a><span class="w">    </span>docs/getting-started/configuring-axiom.md<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-25-3"><a id="__codelineno-25-3" name="__codelineno-25-3" href="#__codelineno-25-3"></a><span class="w">    </span>docs/developer-guide/extending-axiom.md
+</span></code></pre></div>
+Expected: PASS (or no lines over wrap threshold per repo policy).</p>
+<ul>
+<li>[ ] <strong>Step 5: Commit</strong></li>
+</ul>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-26-1"><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a>git<span class="w"> </span>add<span class="w"> </span>docs/user-guide/ai-assistant.md<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-26-2"><a id="__codelineno-26-2" name="__codelineno-26-2" href="#__codelineno-26-2"></a><span class="w">        </span>docs/getting-started/configuring-axiom.md<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-26-3"><a id="__codelineno-26-3" name="__codelineno-26-3" href="#__codelineno-26-3"></a><span class="w">        </span>docs/developer-guide/extending-axiom.md<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-26-4"><a id="__codelineno-26-4" name="__codelineno-26-4" href="#__codelineno-26-4"></a><span class="w">        </span>app/src/main/resources/application.properties
+</span><span id="__span-26-5"><a id="__codelineno-26-5" name="__codelineno-26-5" href="#__codelineno-26-5"></a>git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">"docs(assistant): document OpenCode interactive runtime and fail-closed compatibility"</span>
+</span></code></pre></div>
+<hr />
+<h2 id="final-verification-checklist">Final Verification Checklist</h2>
+<ul>
+<li>[ ] Run backend focused tests:</li>
+</ul>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-27-1"><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a>mvn<span class="w"> </span>-pl<span class="w"> </span>app<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-27-2"><a id="__codelineno-27-2" name="__codelineno-27-2" href="#__codelineno-27-2"></a><span class="w">  </span>-Dtest<span class="o">=</span>AssistantEventParserTest,AssistantItemValidatorTest,AssistantSessionDriverDelegationTest,<span class="se">\</span>
+</span><span id="__span-27-3"><a id="__codelineno-27-3" name="__codelineno-27-3" href="#__codelineno-27-3"></a>ClaudeInteractiveSessionDriverTest,OpenCodeEventNormalizerTest,OpenCodeCapabilityProbeTest,<span class="se">\</span>
+</span><span id="__span-27-4"><a id="__codelineno-27-4" name="__codelineno-27-4" href="#__codelineno-27-4"></a>OpenCodeSessionServerProcessTest,OpenCodeInteractiveSessionDriverTest,<span class="se">\</span>
+</span><span id="__span-27-5"><a id="__codelineno-27-5" name="__codelineno-27-5" href="#__codelineno-27-5"></a>OpenCodeAssistantResourceIntegrationTest<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-27-6"><a id="__codelineno-27-6" name="__codelineno-27-6" href="#__codelineno-27-6"></a><span class="w">  </span><span class="nb">test</span>
+</span></code></pre></div>
+<p>Expected: PASS (with OpenCode runtime-dependent tests skipped only when OpenCode CLI is unavailable).</p>
+<ul>
+<li>[ ] Run OpenCode protocol harness:</li>
+</ul>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-28-1"><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a>mvn<span class="w"> </span>-pl<span class="w"> </span>app<span class="w"> </span>-Dtest<span class="o">=</span>OpenCodeAssistantProtocolHarnessTest<span class="w"> </span><span class="nb">test</span>
+</span></code></pre></div>
+<p>Expected: PASS on installed OpenCode runtime; SKIPPED otherwise.</p>
+<ul>
+<li>[ ] Manual smoke test in UI:</li>
+</ul>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-29-1"><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a>1) Set axiom.agent.default-type=opencode
+</span><span id="__span-29-2"><a id="__codelineno-29-2" name="__codelineno-29-2" href="#__codelineno-29-2"></a>2) Start Axiom
+</span><span id="__span-29-3"><a id="__codelineno-29-3" name="__codelineno-29-3" href="#__codelineno-29-3"></a>3) Create Assistant session from General template
+</span><span id="__span-29-4"><a id="__codelineno-29-4" name="__codelineno-29-4" href="#__codelineno-29-4"></a>4) Send prompt, approve permission, verify tool activity and completion
+</span><span id="__span-29-5"><a id="__codelineno-29-5" name="__codelineno-29-5" href="#__codelineno-29-5"></a>5) Click Stop and End Session, verify deterministic termination
+</span></code></pre></div>
+<p>Expected: behavior matches existing Assistant UX contract and session teardown removes the dedicated OpenCode
+process.</p>
+<hr />
+<h2 id="self-review">Self-Review</h2>
+<p><strong>Spec coverage:</strong>
+- Architecture boundary + manager ownership: Tasks 1, 2, 7.
+- One OpenCode process per Axiom session: Tasks 4, 6, 8.
+- Fail-closed capability validation: Tasks 5, 6, 7.
+- Event normalization and unchanged frontend contract: Tasks 3, 6.
+- Prompt/permission/abort/session lifecycle parity: Tasks 6, 7, 8.
+- Reliability verification and protocol spike first: Task 8 + final verification.
+- Docs/config updates: Task 9.</p>
+<p><strong>Placeholder scan:</strong>
+- No TBD/TODO placeholders remain.
+- Each code step includes concrete classes/methods and snippets.
+- Every task includes a concrete test cycle and commit step.</p>
+<p><strong>Type/interface consistency:</strong>
+- <code>InteractiveSessionDriver</code> signatures are defined in Task 1 and consumed consistently in Tasks 2, 6, 7.
+- OpenCode normalizer output event names match existing Assistant frontend consumers.
+- Compatibility failure types flow from probe -&gt; <code>SessionCompatibilityException</code> -&gt; REST response mapping.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/Apitomy/apitomy-axiom" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.expand", "navigation.top", "search.highlight", "search.share", "search.suggest", "content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+    
+  </body>
+</html>
