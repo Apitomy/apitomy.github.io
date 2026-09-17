@@ -1283,11 +1283,16 @@ the run proceeds with <code>trace_id = null</code>; node→log drill-down still 
 <p><strong>SSE:</strong> extend <code>workflow-updated</code> from <code>{projectId}</code> to <code>{projectId, runId, status}</code> (additive;
 existing <code>WorkflowTab</code> filter-by-<code>projectId</code> keeps working). <code>trace-updated</code> already fires from
 <code>TraceService</code>.</p>
-<p><strong>Known limitation (upstream):</strong> run <em>status</em> is derived from the engine instance, so until
-<a href="https://github.com/Apitomy/apitomy-flow/issues/38">apitomy-flow#38</a> is fixed and a new Flow released,
-a failed node yields a "completed" run badge. The failed task and its trace node are recorded
-truthfully regardless, so drill-down is honest even before the fix. We will inherit the corrected run
-status from the new Flow release rather than duplicate engine logic in Axiom.</p>
+<p><strong>Resolved (was an upstream known limitation):</strong> run <em>status</em> is derived from the engine
+instance. <a href="https://github.com/Apitomy/apitomy-flow/issues/38">apitomy-flow#38</a> — a bug where a
+failed async action node's result was silently converted into a normal advance, yielding a
+"completed" run badge for a run that actually failed — was fixed upstream in
+<code>apitomy-flow-engine</code> 1.0.2 (via apitomy-flow PR #39) and inherited automatically once Axiom
+upgraded past that version (Axiom is currently on 2.0.2). A regression test,
+<code>WorkflowExecutionServiceTest#failingActionTaskAdvancesLinearRunToFailed</code>, guards against this
+recurring. No Axiom-side change was needed — the run-status branching in
+<code>WorkflowExecutionService.advanceWorkflow</code> was already correct and only blocked on the engine
+bug.</p>
 <h2 id="api-surface-contract-first">API Surface (contract-first)</h2>
 <p>All operations are added to <code>openapi.json</code> first, then implemented against the generated interfaces.</p>
 <ol>
@@ -1366,7 +1371,8 @@ page is built in this pass.</p>
 <p>Compilation, bean regeneration, and test runs are handled manually by the developer.</p>
 <h2 id="out-of-scope">Out of Scope</h2>
 <ul>
-<li>Fixing the run-status-on-node-failure defect (upstream <a href="https://github.com/Apitomy/apitomy-flow/issues/38">apitomy-flow#38</a>).</li>
+<li>~~Fixing the run-status-on-node-failure defect (upstream <a href="https://github.com/Apitomy/apitomy-flow/issues/38">apitomy-flow#38</a>).~~
+  Resolved — see the "Resolved" note above.</li>
 <li>A per-definition runs UI page.</li>
 <li>Per-node retry semantics (multiple tasks per node) — the model is forward-compatible but retries are
   not built here.</li>
