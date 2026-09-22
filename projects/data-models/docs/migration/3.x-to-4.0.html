@@ -1052,6 +1052,17 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#union-types-moved-out-of-modelsunion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Union types moved out of models.union
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#new-json-schema-model-types" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1352,6 +1363,17 @@
     <span class="md-ellipsis">
       
         OpenRpcReferenceable was removed
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#union-types-moved-out-of-modelsunion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Union types moved out of models.union
       
     </span>
   </a>
@@ -1762,6 +1784,67 @@ that node's children:</p>
 <p>An empty marker interface that nothing but <code>OpenRpc1xReferenceable</code> referenced; that interface
 now extends <code>Referenceable</code> directly. Replace any reference to <code>OpenRpcReferenceable</code> with
 <code>OpenRpc1xReferenceable</code> or <code>Referenceable</code>.</p>
+<h3 id="union-types-moved-out-of-modelsunion">Union types moved out of <code>models.union</code></h3>
+<p>In 4.0 the <code>models.union</code> package keeps only the generic union machinery — <code>Union</code>, <code>UnionValue</code>
+and the primitive, list and map value types. Unions belonging to a particular specification moved
+to that specification's package, and the shared ones moved to the model root.</p>
+<table>
+<thead>
+<tr>
+<th>3.x — <code>…models.union</code></th>
+<th>4.0</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>MultiFormatSchemaSchemaUnion</code></td>
+<td><code>…models.asyncapi</code></td>
+</tr>
+<tr>
+<td><code>AnySchemaUnion</code></td>
+<td><code>…models</code></td>
+</tr>
+<tr>
+<td><code>BooleanSchemaUnion</code></td>
+<td><code>…models</code></td>
+</tr>
+<tr>
+<td><code>SchemaSchemaListUnion</code></td>
+<td><code>…models</code></td>
+</tr>
+<tr>
+<td><code>SchemaListUnionValue</code>, <code>…Impl</code></td>
+<td><code>…models</code></td>
+</tr>
+<tr>
+<td><code>ObjectUnionValue</code>, <code>…Impl</code></td>
+<td>renamed <code>AnyUnionValue</code>, <code>…Impl</code> (same package)</td>
+</tr>
+</tbody>
+</table>
+<p>The JSON Schema unions were reshaped by the rewrite rather than simply moved, following the
+<code>JSchema</code> → <code>JFullSchema</code> renaming:</p>
+<table>
+<thead>
+<tr>
+<th>3.x</th>
+<th>4.0</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>BooleanJSchemaJSchemaListUnion</code></td>
+<td><code>…models.jsonschema.BooleanFullSchemaFullSchemaListUnion</code></td>
+</tr>
+<tr>
+<td><code>JSchemaListUnionValue</code>, <code>…Impl</code></td>
+<td><code>…models.jsonschema.FullSchemaListUnionValue</code>, <code>…Impl</code></td>
+</tr>
+</tbody>
+</table>
+<p>These are import-only changes for most callers — the types themselves behave as before. They are
+easy to miss because they break at compile time in code that has nothing to do with JSON Schema:
+anything touching AsyncAPI multi-format schemas imports <code>MultiFormatSchemaSchemaUnion</code>.</p>
 <h3 id="new-json-schema-model-types">New JSON Schema model types</h3>
 <p>The rewrite added union types to the shared model namespace — <code>Any</code>, <code>AnySchemaUnion</code>,
 <code>BooleanSchemaUnion</code>, <code>SchemaListUnionValue</code>, <code>SchemaSchemaListUnion</code> — and
