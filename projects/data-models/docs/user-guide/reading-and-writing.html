@@ -25,7 +25,7 @@
       
       
       <link rel="icon" href="../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
     
     
       
@@ -33,7 +33,7 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.ec1eaa64.min.css">
       
         
         <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
@@ -292,6 +292,26 @@
   
   
   User Guide
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../migration/index.html" class="md-tabs__link">
+          
+  
+  
+  Migration
 
         </a>
       </li>
@@ -947,6 +967,123 @@
   
   
   
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Migration
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Migration
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../migration/index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Migration
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../migration/3.x-to-4.0.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3.x → 4.0
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
     <li class="md-nav__item">
       <a href="../examples/index.html" class="md-nav__link">
         
@@ -1187,14 +1324,14 @@ like <code>openapi</code>, <code>asyncapi</code>, <code>swagger</code>, <code>op
 <div class="language-java highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">io.apitomy.datamodels.Library</span><span class="p">;</span>
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="kn">import</span><span class="w"> </span><span class="nn">io.apitomy.datamodels.models.Document</span><span class="p">;</span>
 </span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
-</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="n">String</span><span class="w"> </span><span class="n">json</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;{ \&quot;openapi\&quot;: \&quot;3.0.3\&quot;, \&quot;info\&quot;: { \&quot;title\&quot;: \&quot;My API\&quot;, \&quot;version\&quot;: \&quot;1.0\&quot; } }&quot;</span><span class="p">;</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="n">String</span><span class="w"> </span><span class="n">json</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"{ \"openapi\": \"3.0.3\", \"info\": { \"title\": \"My API\", \"version\": \"1.0\" } }"</span><span class="p">;</span>
 </span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="n">Document</span><span class="w"> </span><span class="n">doc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Library</span><span class="p">.</span><span class="na">readDocumentFromJSONString</span><span class="p">(</span><span class="n">json</span><span class="p">);</span>
 </span></code></pre></div>
 </div>
 <div class="tabbed-block">
-<div class="language-typescript highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">Library</span><span class="p">,</span><span class="w"> </span><span class="nx">Document</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;@apitomy/data-models&#39;</span><span class="p">;</span>
+<div class="language-typescript highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">Library</span><span class="p">,</span><span class="w"> </span><span class="nx">Document</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">'@apitomy/data-models'</span><span class="p">;</span>
 </span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>
-</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="kd">const</span><span class="w"> </span><span class="nx">jsonString</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;{ &quot;openapi&quot;: &quot;3.0.3&quot;, &quot;info&quot;: { &quot;title&quot;: &quot;My API&quot;, &quot;version&quot;: &quot;1.0&quot; } }&#39;</span><span class="p">;</span>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="kd">const</span><span class="w"> </span><span class="nx">jsonString</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'{ "openapi": "3.0.3", "info": { "title": "My API", "version": "1.0" } }'</span><span class="p">;</span>
 </span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="kd">const</span><span class="w"> </span><span class="nx">doc</span><span class="o">:</span><span class="w"> </span><span class="kt">Document</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">Library</span><span class="p">.</span><span class="nx">readDocumentFromJSONString</span><span class="p">(</span><span class="nx">jsonString</span><span class="p">);</span>
 </span></code></pre></div>
 </div>
@@ -1215,7 +1352,7 @@ like <code>openapi</code>, <code>asyncapi</code>, <code>swagger</code>, <code>op
 </span></code></pre></div>
 </div>
 <div class="tabbed-block">
-<div class="language-typescript highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">Library</span><span class="p">,</span><span class="w"> </span><span class="nx">Document</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;@apitomy/data-models&#39;</span><span class="p">;</span>
+<div class="language-typescript highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">Library</span><span class="p">,</span><span class="w"> </span><span class="nx">Document</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">'@apitomy/data-models'</span><span class="p">;</span>
 </span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>
 </span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="kd">const</span><span class="w"> </span><span class="nx">json</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">jsonString</span><span class="p">);</span>
 </span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="kd">const</span><span class="w"> </span><span class="nx">doc</span><span class="o">:</span><span class="w"> </span><span class="kt">Document</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">Library</span><span class="p">.</span><span class="nx">readDocument</span><span class="p">(</span><span class="nx">json</span><span class="p">);</span>
@@ -1236,7 +1373,7 @@ like <code>openapi</code>, <code>asyncapi</code>, <code>swagger</code>, <code>op
 </span></code></pre></div>
 </div>
 <div class="tabbed-block">
-<div class="language-typescript highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">OpenApi30Document</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;@apitomy/data-models&#39;</span><span class="p">;</span>
+<div class="language-typescript highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">OpenApi30Document</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">'@apitomy/data-models'</span><span class="p">;</span>
 </span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>
 </span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="kd">const</span><span class="w"> </span><span class="nx">openApiDoc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">doc</span><span class="w"> </span><span class="kr">as</span><span class="w"> </span><span class="nx">OpenApi30Document</span><span class="p">;</span>
 </span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="kd">const</span><span class="w"> </span><span class="nx">title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">openApiDoc</span><span class="p">.</span><span class="nx">getInfo</span><span class="p">().</span><span class="nx">getTitle</span><span class="p">();</span>
@@ -1260,41 +1397,41 @@ populate it using typed setters and <code>createXxx()</code> factory methods.</p
 </span><span id="__span-6-6"><a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>
 </span><span id="__span-6-7"><a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="c1">// Set the info section</span>
 </span><span id="__span-6-8"><a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a><span class="n">doc</span><span class="p">.</span><span class="na">setInfo</span><span class="p">(</span><span class="n">doc</span><span class="p">.</span><span class="na">createInfo</span><span class="p">());</span>
-</span><span id="__span-6-9"><a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a><span class="n">doc</span><span class="p">.</span><span class="na">getInfo</span><span class="p">().</span><span class="na">setTitle</span><span class="p">(</span><span class="s">&quot;Pet Store&quot;</span><span class="p">);</span>
-</span><span id="__span-6-10"><a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a><span class="n">doc</span><span class="p">.</span><span class="na">getInfo</span><span class="p">().</span><span class="na">setVersion</span><span class="p">(</span><span class="s">&quot;1.0.0&quot;</span><span class="p">);</span>
-</span><span id="__span-6-11"><a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a><span class="n">doc</span><span class="p">.</span><span class="na">getInfo</span><span class="p">().</span><span class="na">setDescription</span><span class="p">(</span><span class="s">&quot;A sample API for pets&quot;</span><span class="p">);</span>
+</span><span id="__span-6-9"><a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a><span class="n">doc</span><span class="p">.</span><span class="na">getInfo</span><span class="p">().</span><span class="na">setTitle</span><span class="p">(</span><span class="s">"Pet Store"</span><span class="p">);</span>
+</span><span id="__span-6-10"><a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a><span class="n">doc</span><span class="p">.</span><span class="na">getInfo</span><span class="p">().</span><span class="na">setVersion</span><span class="p">(</span><span class="s">"1.0.0"</span><span class="p">);</span>
+</span><span id="__span-6-11"><a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a><span class="n">doc</span><span class="p">.</span><span class="na">getInfo</span><span class="p">().</span><span class="na">setDescription</span><span class="p">(</span><span class="s">"A sample API for pets"</span><span class="p">);</span>
 </span><span id="__span-6-12"><a id="__codelineno-6-12" name="__codelineno-6-12" href="#__codelineno-6-12"></a>
 </span><span id="__span-6-13"><a id="__codelineno-6-13" name="__codelineno-6-13" href="#__codelineno-6-13"></a><span class="c1">// Add a path</span>
 </span><span id="__span-6-14"><a id="__codelineno-6-14" name="__codelineno-6-14" href="#__codelineno-6-14"></a><span class="n">doc</span><span class="p">.</span><span class="na">setPaths</span><span class="p">(</span><span class="n">doc</span><span class="p">.</span><span class="na">createPaths</span><span class="p">());</span>
-</span><span id="__span-6-15"><a id="__codelineno-6-15" name="__codelineno-6-15" href="#__codelineno-6-15"></a><span class="n">doc</span><span class="p">.</span><span class="na">getPaths</span><span class="p">().</span><span class="na">addItem</span><span class="p">(</span><span class="s">&quot;/pets&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">doc</span><span class="p">.</span><span class="na">getPaths</span><span class="p">().</span><span class="na">createPathItem</span><span class="p">());</span>
+</span><span id="__span-6-15"><a id="__codelineno-6-15" name="__codelineno-6-15" href="#__codelineno-6-15"></a><span class="n">doc</span><span class="p">.</span><span class="na">getPaths</span><span class="p">().</span><span class="na">addItem</span><span class="p">(</span><span class="s">"/pets"</span><span class="p">,</span><span class="w"> </span><span class="n">doc</span><span class="p">.</span><span class="na">getPaths</span><span class="p">().</span><span class="na">createPathItem</span><span class="p">());</span>
 </span><span id="__span-6-16"><a id="__codelineno-6-16" name="__codelineno-6-16" href="#__codelineno-6-16"></a>
 </span><span id="__span-6-17"><a id="__codelineno-6-17" name="__codelineno-6-17" href="#__codelineno-6-17"></a><span class="c1">// Add a GET operation to the path</span>
-</span><span id="__span-6-18"><a id="__codelineno-6-18" name="__codelineno-6-18" href="#__codelineno-6-18"></a><span class="kd">var</span><span class="w"> </span><span class="n">pathItem</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">doc</span><span class="p">.</span><span class="na">getPaths</span><span class="p">().</span><span class="na">getItem</span><span class="p">(</span><span class="s">&quot;/pets&quot;</span><span class="p">);</span>
+</span><span id="__span-6-18"><a id="__codelineno-6-18" name="__codelineno-6-18" href="#__codelineno-6-18"></a><span class="kd">var</span><span class="w"> </span><span class="n">pathItem</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">doc</span><span class="p">.</span><span class="na">getPaths</span><span class="p">().</span><span class="na">getItem</span><span class="p">(</span><span class="s">"/pets"</span><span class="p">);</span>
 </span><span id="__span-6-19"><a id="__codelineno-6-19" name="__codelineno-6-19" href="#__codelineno-6-19"></a><span class="n">pathItem</span><span class="p">.</span><span class="na">setGet</span><span class="p">(</span><span class="n">pathItem</span><span class="p">.</span><span class="na">createOperation</span><span class="p">());</span>
-</span><span id="__span-6-20"><a id="__codelineno-6-20" name="__codelineno-6-20" href="#__codelineno-6-20"></a><span class="n">pathItem</span><span class="p">.</span><span class="na">getGet</span><span class="p">().</span><span class="na">setOperationId</span><span class="p">(</span><span class="s">&quot;listPets&quot;</span><span class="p">);</span>
-</span><span id="__span-6-21"><a id="__codelineno-6-21" name="__codelineno-6-21" href="#__codelineno-6-21"></a><span class="n">pathItem</span><span class="p">.</span><span class="na">getGet</span><span class="p">().</span><span class="na">setSummary</span><span class="p">(</span><span class="s">&quot;List all pets&quot;</span><span class="p">);</span>
+</span><span id="__span-6-20"><a id="__codelineno-6-20" name="__codelineno-6-20" href="#__codelineno-6-20"></a><span class="n">pathItem</span><span class="p">.</span><span class="na">getGet</span><span class="p">().</span><span class="na">setOperationId</span><span class="p">(</span><span class="s">"listPets"</span><span class="p">);</span>
+</span><span id="__span-6-21"><a id="__codelineno-6-21" name="__codelineno-6-21" href="#__codelineno-6-21"></a><span class="n">pathItem</span><span class="p">.</span><span class="na">getGet</span><span class="p">().</span><span class="na">setSummary</span><span class="p">(</span><span class="s">"List all pets"</span><span class="p">);</span>
 </span></code></pre></div>
 </div>
 <div class="tabbed-block">
-<div class="language-typescript highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">Library</span><span class="p">,</span><span class="w"> </span><span class="nx">ModelType</span><span class="p">,</span><span class="w"> </span><span class="nx">OpenApi30Document</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;@apitomy/data-models&#39;</span><span class="p">;</span>
+<div class="language-typescript highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">Library</span><span class="p">,</span><span class="w"> </span><span class="nx">ModelType</span><span class="p">,</span><span class="w"> </span><span class="nx">OpenApi30Document</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">'@apitomy/data-models'</span><span class="p">;</span>
 </span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>
 </span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="kd">const</span><span class="w"> </span><span class="nx">doc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">Library</span><span class="p">.</span><span class="nx">createDocument</span><span class="p">(</span><span class="nx">ModelType</span><span class="p">.</span><span class="nx">OPENAPI30</span><span class="p">)</span><span class="w"> </span><span class="kr">as</span><span class="w"> </span><span class="nx">OpenApi30Document</span><span class="p">;</span>
 </span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>
 </span><span id="__span-7-5"><a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="c1">// Set the info section</span>
 </span><span id="__span-7-6"><a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="nx">doc</span><span class="p">.</span><span class="nx">setInfo</span><span class="p">(</span><span class="nx">doc</span><span class="p">.</span><span class="nx">createInfo</span><span class="p">());</span>
-</span><span id="__span-7-7"><a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a><span class="nx">doc</span><span class="p">.</span><span class="nx">getInfo</span><span class="p">().</span><span class="nx">setTitle</span><span class="p">(</span><span class="s1">&#39;Pet Store&#39;</span><span class="p">);</span>
-</span><span id="__span-7-8"><a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a><span class="nx">doc</span><span class="p">.</span><span class="nx">getInfo</span><span class="p">().</span><span class="nx">setVersion</span><span class="p">(</span><span class="s1">&#39;1.0.0&#39;</span><span class="p">);</span>
-</span><span id="__span-7-9"><a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a><span class="nx">doc</span><span class="p">.</span><span class="nx">getInfo</span><span class="p">().</span><span class="nx">setDescription</span><span class="p">(</span><span class="s1">&#39;A sample API for pets&#39;</span><span class="p">);</span>
+</span><span id="__span-7-7"><a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a><span class="nx">doc</span><span class="p">.</span><span class="nx">getInfo</span><span class="p">().</span><span class="nx">setTitle</span><span class="p">(</span><span class="s1">'Pet Store'</span><span class="p">);</span>
+</span><span id="__span-7-8"><a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a><span class="nx">doc</span><span class="p">.</span><span class="nx">getInfo</span><span class="p">().</span><span class="nx">setVersion</span><span class="p">(</span><span class="s1">'1.0.0'</span><span class="p">);</span>
+</span><span id="__span-7-9"><a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a><span class="nx">doc</span><span class="p">.</span><span class="nx">getInfo</span><span class="p">().</span><span class="nx">setDescription</span><span class="p">(</span><span class="s1">'A sample API for pets'</span><span class="p">);</span>
 </span><span id="__span-7-10"><a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a>
 </span><span id="__span-7-11"><a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a><span class="c1">// Add a path</span>
 </span><span id="__span-7-12"><a id="__codelineno-7-12" name="__codelineno-7-12" href="#__codelineno-7-12"></a><span class="nx">doc</span><span class="p">.</span><span class="nx">setPaths</span><span class="p">(</span><span class="nx">doc</span><span class="p">.</span><span class="nx">createPaths</span><span class="p">());</span>
-</span><span id="__span-7-13"><a id="__codelineno-7-13" name="__codelineno-7-13" href="#__codelineno-7-13"></a><span class="nx">doc</span><span class="p">.</span><span class="nx">getPaths</span><span class="p">().</span><span class="nx">addItem</span><span class="p">(</span><span class="s1">&#39;/pets&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">doc</span><span class="p">.</span><span class="nx">getPaths</span><span class="p">().</span><span class="nx">createPathItem</span><span class="p">());</span>
+</span><span id="__span-7-13"><a id="__codelineno-7-13" name="__codelineno-7-13" href="#__codelineno-7-13"></a><span class="nx">doc</span><span class="p">.</span><span class="nx">getPaths</span><span class="p">().</span><span class="nx">addItem</span><span class="p">(</span><span class="s1">'/pets'</span><span class="p">,</span><span class="w"> </span><span class="nx">doc</span><span class="p">.</span><span class="nx">getPaths</span><span class="p">().</span><span class="nx">createPathItem</span><span class="p">());</span>
 </span><span id="__span-7-14"><a id="__codelineno-7-14" name="__codelineno-7-14" href="#__codelineno-7-14"></a>
 </span><span id="__span-7-15"><a id="__codelineno-7-15" name="__codelineno-7-15" href="#__codelineno-7-15"></a><span class="c1">// Add a GET operation to the path</span>
-</span><span id="__span-7-16"><a id="__codelineno-7-16" name="__codelineno-7-16" href="#__codelineno-7-16"></a><span class="kd">const</span><span class="w"> </span><span class="nx">pathItem</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">doc</span><span class="p">.</span><span class="nx">getPaths</span><span class="p">().</span><span class="nx">getItem</span><span class="p">(</span><span class="s1">&#39;/pets&#39;</span><span class="p">);</span>
+</span><span id="__span-7-16"><a id="__codelineno-7-16" name="__codelineno-7-16" href="#__codelineno-7-16"></a><span class="kd">const</span><span class="w"> </span><span class="nx">pathItem</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">doc</span><span class="p">.</span><span class="nx">getPaths</span><span class="p">().</span><span class="nx">getItem</span><span class="p">(</span><span class="s1">'/pets'</span><span class="p">);</span>
 </span><span id="__span-7-17"><a id="__codelineno-7-17" name="__codelineno-7-17" href="#__codelineno-7-17"></a><span class="nx">pathItem</span><span class="p">.</span><span class="nx">setGet</span><span class="p">(</span><span class="nx">pathItem</span><span class="p">.</span><span class="nx">createOperation</span><span class="p">());</span>
-</span><span id="__span-7-18"><a id="__codelineno-7-18" name="__codelineno-7-18" href="#__codelineno-7-18"></a><span class="nx">pathItem</span><span class="p">.</span><span class="nx">getGet</span><span class="p">().</span><span class="nx">setOperationId</span><span class="p">(</span><span class="s1">&#39;listPets&#39;</span><span class="p">);</span>
-</span><span id="__span-7-19"><a id="__codelineno-7-19" name="__codelineno-7-19" href="#__codelineno-7-19"></a><span class="nx">pathItem</span><span class="p">.</span><span class="nx">getGet</span><span class="p">().</span><span class="nx">setSummary</span><span class="p">(</span><span class="s1">&#39;List all pets&#39;</span><span class="p">);</span>
+</span><span id="__span-7-18"><a id="__codelineno-7-18" name="__codelineno-7-18" href="#__codelineno-7-18"></a><span class="nx">pathItem</span><span class="p">.</span><span class="nx">getGet</span><span class="p">().</span><span class="nx">setOperationId</span><span class="p">(</span><span class="s1">'listPets'</span><span class="p">);</span>
+</span><span id="__span-7-19"><a id="__codelineno-7-19" name="__codelineno-7-19" href="#__codelineno-7-19"></a><span class="nx">pathItem</span><span class="p">.</span><span class="nx">getGet</span><span class="p">().</span><span class="nx">setSummary</span><span class="p">(</span><span class="s1">'List all pets'</span><span class="p">);</span>
 </span></code></pre></div>
 </div>
 </div>
@@ -1420,7 +1557,7 @@ specification version, the library throws <code>UnsupportedModelTypeException</c
 </span><span id="__span-16-3"><a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a><span class="k">try</span><span class="w"> </span><span class="p">{</span>
 </span><span id="__span-16-4"><a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a><span class="w">    </span><span class="n">Document</span><span class="w"> </span><span class="n">doc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Library</span><span class="p">.</span><span class="na">readDocumentFromJSONString</span><span class="p">(</span><span class="n">json</span><span class="p">);</span>
 </span><span id="__span-16-5"><a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">UnsupportedModelTypeException</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-16-6"><a id="__codelineno-16-6" name="__codelineno-16-6" href="#__codelineno-16-6"></a><span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">err</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Unsupported spec version: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">e</span><span class="p">.</span><span class="na">getMessage</span><span class="p">());</span>
+</span><span id="__span-16-6"><a id="__codelineno-16-6" name="__codelineno-16-6" href="#__codelineno-16-6"></a><span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">err</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">"Unsupported spec version: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">e</span><span class="p">.</span><span class="na">getMessage</span><span class="p">());</span>
 </span><span id="__span-16-7"><a id="__codelineno-16-7" name="__codelineno-16-7" href="#__codelineno-16-7"></a><span class="p">}</span>
 </span></code></pre></div>
 </div>
@@ -1428,7 +1565,7 @@ specification version, the library throws <code>UnsupportedModelTypeException</c
 <div class="language-typescript highlight"><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="k">try</span><span class="w"> </span><span class="p">{</span>
 </span><span id="__span-17-2"><a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a><span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">doc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">Library</span><span class="p">.</span><span class="nx">readDocumentFromJSONString</span><span class="p">(</span><span class="nx">json</span><span class="p">);</span>
 </span><span id="__span-17-3"><a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="nx">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-17-4"><a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a><span class="w">    </span><span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="s1">&#39;Unsupported spec version:&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">e</span><span class="p">.</span><span class="nx">message</span><span class="p">);</span>
+</span><span id="__span-17-4"><a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a><span class="w">    </span><span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="s1">'Unsupported spec version:'</span><span class="p">,</span><span class="w"> </span><span class="nx">e</span><span class="p">.</span><span class="nx">message</span><span class="p">);</span>
 </span><span id="__span-17-5"><a id="__codelineno-17-5" name="__codelineno-17-5" href="#__codelineno-17-5"></a><span class="p">}</span>
 </span></code></pre></div>
 </div>
@@ -1470,10 +1607,10 @@ preserved as "extra properties" on each node.</p>
 <div class="language-java highlight"><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">com.fasterxml.jackson.databind.node.TextNode</span><span class="p">;</span>
 </span><span id="__span-18-2"><a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a>
 </span><span id="__span-18-3"><a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a><span class="c1">// Add a custom extension</span>
-</span><span id="__span-18-4"><a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a><span class="n">doc</span><span class="p">.</span><span class="na">getInfo</span><span class="p">().</span><span class="na">addExtraProperty</span><span class="p">(</span><span class="s">&quot;x-api-owner&quot;</span><span class="p">,</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">TextNode</span><span class="p">(</span><span class="s">&quot;platform-team&quot;</span><span class="p">));</span>
+</span><span id="__span-18-4"><a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a><span class="n">doc</span><span class="p">.</span><span class="na">getInfo</span><span class="p">().</span><span class="na">addExtraProperty</span><span class="p">(</span><span class="s">"x-api-owner"</span><span class="p">,</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">TextNode</span><span class="p">(</span><span class="s">"platform-team"</span><span class="p">));</span>
 </span><span id="__span-18-5"><a id="__codelineno-18-5" name="__codelineno-18-5" href="#__codelineno-18-5"></a>
 </span><span id="__span-18-6"><a id="__codelineno-18-6" name="__codelineno-18-6" href="#__codelineno-18-6"></a><span class="c1">// Read it back</span>
-</span><span id="__span-18-7"><a id="__codelineno-18-7" name="__codelineno-18-7" href="#__codelineno-18-7"></a><span class="n">String</span><span class="w"> </span><span class="n">owner</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">doc</span><span class="p">.</span><span class="na">getInfo</span><span class="p">().</span><span class="na">getExtraProperty</span><span class="p">(</span><span class="s">&quot;x-api-owner&quot;</span><span class="p">).</span><span class="na">asText</span><span class="p">();</span>
+</span><span id="__span-18-7"><a id="__codelineno-18-7" name="__codelineno-18-7" href="#__codelineno-18-7"></a><span class="n">String</span><span class="w"> </span><span class="n">owner</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">doc</span><span class="p">.</span><span class="na">getInfo</span><span class="p">().</span><span class="na">getExtraProperty</span><span class="p">(</span><span class="s">"x-api-owner"</span><span class="p">).</span><span class="na">asText</span><span class="p">();</span>
 </span><span id="__span-18-8"><a id="__codelineno-18-8" name="__codelineno-18-8" href="#__codelineno-18-8"></a>
 </span><span id="__span-18-9"><a id="__codelineno-18-9" name="__codelineno-18-9" href="#__codelineno-18-9"></a><span class="c1">// List all extensions on a node</span>
 </span><span id="__span-18-10"><a id="__codelineno-18-10" name="__codelineno-18-10" href="#__codelineno-18-10"></a><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">extensions</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">doc</span><span class="p">.</span><span class="na">getInfo</span><span class="p">().</span><span class="na">getExtraPropertyNames</span><span class="p">();</span>
@@ -1481,10 +1618,10 @@ preserved as "extra properties" on each node.</p>
 </div>
 <div class="tabbed-block">
 <div class="language-typescript highlight"><pre><span></span><code><span id="__span-19-1"><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="c1">// Add a custom extension</span>
-</span><span id="__span-19-2"><a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a><span class="nx">doc</span><span class="p">.</span><span class="nx">getInfo</span><span class="p">().</span><span class="nx">addExtraProperty</span><span class="p">(</span><span class="s1">&#39;x-api-owner&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;platform-team&#39;</span><span class="p">);</span>
+</span><span id="__span-19-2"><a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a><span class="nx">doc</span><span class="p">.</span><span class="nx">getInfo</span><span class="p">().</span><span class="nx">addExtraProperty</span><span class="p">(</span><span class="s1">'x-api-owner'</span><span class="p">,</span><span class="w"> </span><span class="s1">'platform-team'</span><span class="p">);</span>
 </span><span id="__span-19-3"><a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a>
 </span><span id="__span-19-4"><a id="__codelineno-19-4" name="__codelineno-19-4" href="#__codelineno-19-4"></a><span class="c1">// Read it back</span>
-</span><span id="__span-19-5"><a id="__codelineno-19-5" name="__codelineno-19-5" href="#__codelineno-19-5"></a><span class="kd">const</span><span class="w"> </span><span class="nx">owner</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">doc</span><span class="p">.</span><span class="nx">getInfo</span><span class="p">().</span><span class="nx">getExtraProperty</span><span class="p">(</span><span class="s1">&#39;x-api-owner&#39;</span><span class="p">);</span>
+</span><span id="__span-19-5"><a id="__codelineno-19-5" name="__codelineno-19-5" href="#__codelineno-19-5"></a><span class="kd">const</span><span class="w"> </span><span class="nx">owner</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">doc</span><span class="p">.</span><span class="nx">getInfo</span><span class="p">().</span><span class="nx">getExtraProperty</span><span class="p">(</span><span class="s1">'x-api-owner'</span><span class="p">);</span>
 </span><span id="__span-19-6"><a id="__codelineno-19-6" name="__codelineno-19-6" href="#__codelineno-19-6"></a>
 </span><span id="__span-19-7"><a id="__codelineno-19-7" name="__codelineno-19-7" href="#__codelineno-19-7"></a><span class="c1">// List all extensions on a node</span>
 </span><span id="__span-19-8"><a id="__codelineno-19-8" name="__codelineno-19-8" href="#__codelineno-19-8"></a><span class="kd">const</span><span class="w"> </span><span class="nx">extensions</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">[]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">doc</span><span class="p">.</span><span class="nx">getInfo</span><span class="p">().</span><span class="nx">getExtraPropertyNames</span><span class="p">();</span>
@@ -1566,7 +1703,7 @@ preserved as "extra properties" on each node.</p>
       <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.tabs", "navigation.sections", "navigation.expand", "navigation.top", "search.highlight", "search.share", "search.suggest", "content.code.copy"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../assets/javascripts/bundle.d7400e89.min.js"></script>
       
     
   </body>
