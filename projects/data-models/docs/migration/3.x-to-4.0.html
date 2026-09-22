@@ -1567,10 +1567,12 @@ and the results are now typed objects rather than booleans and a diff context.</
 <code>CompatibilityCheckResult</code> objects.</p>
 <div class="admonition warning">
 <p class="admonition-title">Check <code>hasUnsupportedFeatures()</code></p>
-<p>A schema using a keyword the checker does not yet model produces a result that is
-<code>isCompatible() == true</code> with <code>hasUnsupportedFeatures() == true</code>. Treating the verdict alone
-as authoritative will silently pass schemas that were never actually compared. The 3.x API
-had no way to surface this.</p>
+<p>A result can be <code>isCompatible() == true</code> while <code>hasUnsupportedFeatures()</code> is also true, so
+treating the verdict alone as authoritative accepts comparisons that were never completed.
+Gate on both. The 3.x API had no way to surface this.</p>
+<p>The list is populated only when a dereferencer is configured, and holds the references it
+could not resolve — the sub-schemas behind those were never compared. See
+<a href="../user-guide/schema-compatibility.html#unsupported-features">Schema Compatibility</a>.</p>
 </div>
 <p>Cross-version checking is off by default and opt-in:</p>
 <div class="language-java highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="n">JsonSchemaCompatibilityChecker</span><span class="w"> </span><span class="n">checker</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">JsonSchemaCompatibilityChecker</span><span class="p">.</span><span class="na">builder</span><span class="p">()</span>

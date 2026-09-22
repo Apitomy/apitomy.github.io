@@ -796,6 +796,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#creating-a-checker" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Creating a Checker
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#quick-checks" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -811,6 +822,45 @@
     <span class="md-ellipsis">
       
         Detailed Diff
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Detailed Diff">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#explaining-a-difference" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Explaining a difference
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#unsupported-features" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Unsupported Features
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resolving-references" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resolving References
       
     </span>
   </a>
@@ -1037,6 +1087,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#creating-a-checker" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Creating a Checker
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#quick-checks" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1052,6 +1113,45 @@
     <span class="md-ellipsis">
       
         Detailed Diff
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Detailed Diff">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#explaining-a-difference" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Explaining a difference
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#unsupported-features" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Unsupported Features
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resolving-references" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resolving References
       
     </span>
   </a>
@@ -1132,138 +1232,248 @@ remain compatible with existing data.</p>
 </tbody>
 </table>
 <hr />
-<h2 id="quick-checks">Quick Checks</h2>
-<p>Use the boolean convenience methods for simple pass/fail checks.</p>
+<h2 id="creating-a-checker">Creating a Checker</h2>
+<p>Build a checker with <code>JsonSchemaCompatibilityChecker.builder()</code>. Instances are immutable and
+safe to reuse across any number of checks, so build one and keep it.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Java</label><label for="__tabbed_1_2">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="language-java highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">io.apitomy.datamodels.jsonschema.compat.JsonSchemaCompatibilityChecker</span><span class="p">;</span>
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
-</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="n">String</span><span class="w"> </span><span class="n">original</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"""</span>
-</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="s">    {</span>
-</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="s">      "type": "object",</span>
-</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="s">      "properties": {</span>
-</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="s">        "name": { "type": "string" },</span>
-</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="s">        "age": { "type": "integer" }</span>
-</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="s">      },</span>
-</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="s">      "required": ["name"]</span>
-</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="s">    }</span>
-</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="s">    """</span><span class="p">;</span>
-</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>
-</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a><span class="n">String</span><span class="w"> </span><span class="n">updated</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"""</span>
-</span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a><span class="s">    {</span>
-</span><span id="__span-0-16"><a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a><span class="s">      "type": "object",</span>
-</span><span id="__span-0-17"><a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a><span class="s">      "properties": {</span>
-</span><span id="__span-0-18"><a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a><span class="s">        "name": { "type": "string" },</span>
-</span><span id="__span-0-19"><a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a><span class="s">        "age": { "type": "integer" },</span>
-</span><span id="__span-0-20"><a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a><span class="s">        "email": { "type": "string" }</span>
-</span><span id="__span-0-21"><a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a><span class="s">      },</span>
-</span><span id="__span-0-22"><a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a><span class="s">      "required": ["name"]</span>
-</span><span id="__span-0-23"><a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a><span class="s">    }</span>
-</span><span id="__span-0-24"><a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a><span class="s">    """</span><span class="p">;</span>
-</span><span id="__span-0-25"><a id="__codelineno-0-25" name="__codelineno-0-25" href="#__codelineno-0-25"></a>
-</span><span id="__span-0-26"><a id="__codelineno-0-26" name="__codelineno-0-26" href="#__codelineno-0-26"></a><span class="c1">// Adding an optional property is backward compatible</span>
-</span><span id="__span-0-27"><a id="__codelineno-0-27" name="__codelineno-0-27" href="#__codelineno-0-27"></a><span class="kt">boolean</span><span class="w"> </span><span class="n">backwardOk</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">JsonSchemaCompatibilityChecker</span><span class="p">.</span><span class="na">isBackwardCompatible</span><span class="p">(</span><span class="n">original</span><span class="p">,</span><span class="w"> </span><span class="n">updated</span><span class="p">);</span>
-</span><span id="__span-0-28"><a id="__codelineno-0-28" name="__codelineno-0-28" href="#__codelineno-0-28"></a><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">"Backward compatible: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">backwardOk</span><span class="p">);</span><span class="w"> </span><span class="c1">// true</span>
-</span><span id="__span-0-29"><a id="__codelineno-0-29" name="__codelineno-0-29" href="#__codelineno-0-29"></a>
-</span><span id="__span-0-30"><a id="__codelineno-0-30" name="__codelineno-0-30" href="#__codelineno-0-30"></a><span class="c1">// Check forward compatibility</span>
-</span><span id="__span-0-31"><a id="__codelineno-0-31" name="__codelineno-0-31" href="#__codelineno-0-31"></a><span class="kt">boolean</span><span class="w"> </span><span class="n">forwardOk</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">JsonSchemaCompatibilityChecker</span><span class="p">.</span><span class="na">isForwardCompatible</span><span class="p">(</span><span class="n">original</span><span class="p">,</span><span class="w"> </span><span class="n">updated</span><span class="p">);</span>
-</span><span id="__span-0-32"><a id="__codelineno-0-32" name="__codelineno-0-32" href="#__codelineno-0-32"></a>
-</span><span id="__span-0-33"><a id="__codelineno-0-33" name="__codelineno-0-33" href="#__codelineno-0-33"></a><span class="c1">// Check full compatibility (both directions)</span>
-</span><span id="__span-0-34"><a id="__codelineno-0-34" name="__codelineno-0-34" href="#__codelineno-0-34"></a><span class="kt">boolean</span><span class="w"> </span><span class="n">fullyOk</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">JsonSchemaCompatibilityChecker</span><span class="p">.</span><span class="na">isFullyCompatible</span><span class="p">(</span><span class="n">original</span><span class="p">,</span><span class="w"> </span><span class="n">updated</span><span class="p">);</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="n">JsonSchemaCompatibilityChecker</span><span class="w"> </span><span class="n">checker</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">JsonSchemaCompatibilityChecker</span><span class="p">.</span><span class="na">builder</span><span class="p">().</span><span class="na">build</span><span class="p">();</span>
 </span></code></pre></div>
 </div>
 <div class="tabbed-block">
 <div class="language-typescript highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">JsonSchemaCompatibilityChecker</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">'@apitomy/data-models'</span><span class="p">;</span>
 </span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>
-</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="kd">const</span><span class="w"> </span><span class="nx">original</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">({</span>
-</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">    </span><span class="kr">type</span><span class="o">:</span><span class="w"> </span><span class="s1">'object'</span><span class="p">,</span>
-</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">    </span><span class="nx">properties</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="w">        </span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="kr">type</span><span class="o">:</span><span class="w"> </span><span class="s1">'string'</span><span class="w"> </span><span class="p">},</span>
-</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="w">        </span><span class="nx">age</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="kr">type</span><span class="o">:</span><span class="w"> </span><span class="s1">'integer'</span><span class="w"> </span><span class="p">},</span>
-</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="w">    </span><span class="p">},</span>
-</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="w">    </span><span class="nx">required</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="s1">'name'</span><span class="p">],</span>
-</span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="p">});</span>
-</span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>
-</span><span id="__span-1-12"><a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a><span class="kd">const</span><span class="w"> </span><span class="nx">updated</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">({</span>
-</span><span id="__span-1-13"><a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a><span class="w">    </span><span class="kr">type</span><span class="o">:</span><span class="w"> </span><span class="s1">'object'</span><span class="p">,</span>
-</span><span id="__span-1-14"><a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a><span class="w">    </span><span class="nx">properties</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-1-15"><a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a><span class="w">        </span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="kr">type</span><span class="o">:</span><span class="w"> </span><span class="s1">'string'</span><span class="w"> </span><span class="p">},</span>
-</span><span id="__span-1-16"><a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a><span class="w">        </span><span class="nx">age</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="kr">type</span><span class="o">:</span><span class="w"> </span><span class="s1">'integer'</span><span class="w"> </span><span class="p">},</span>
-</span><span id="__span-1-17"><a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a><span class="w">        </span><span class="nx">email</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="kr">type</span><span class="o">:</span><span class="w"> </span><span class="s1">'string'</span><span class="w"> </span><span class="p">},</span>
-</span><span id="__span-1-18"><a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a><span class="w">    </span><span class="p">},</span>
-</span><span id="__span-1-19"><a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a><span class="w">    </span><span class="nx">required</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="s1">'name'</span><span class="p">],</span>
-</span><span id="__span-1-20"><a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a><span class="p">});</span>
-</span><span id="__span-1-21"><a id="__codelineno-1-21" name="__codelineno-1-21" href="#__codelineno-1-21"></a>
-</span><span id="__span-1-22"><a id="__codelineno-1-22" name="__codelineno-1-22" href="#__codelineno-1-22"></a><span class="c1">// Adding an optional property is backward compatible</span>
-</span><span id="__span-1-23"><a id="__codelineno-1-23" name="__codelineno-1-23" href="#__codelineno-1-23"></a><span class="kd">const</span><span class="w"> </span><span class="nx">backwardOk</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">JsonSchemaCompatibilityChecker</span><span class="p">.</span><span class="nx">isBackwardCompatible</span><span class="p">(</span><span class="nx">original</span><span class="p">,</span><span class="w"> </span><span class="nx">updated</span><span class="p">);</span>
-</span><span id="__span-1-24"><a id="__codelineno-1-24" name="__codelineno-1-24" href="#__codelineno-1-24"></a><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'Backward compatible:'</span><span class="p">,</span><span class="w"> </span><span class="nx">backwardOk</span><span class="p">);</span><span class="w"> </span><span class="c1">// true</span>
-</span><span id="__span-1-25"><a id="__codelineno-1-25" name="__codelineno-1-25" href="#__codelineno-1-25"></a>
-</span><span id="__span-1-26"><a id="__codelineno-1-26" name="__codelineno-1-26" href="#__codelineno-1-26"></a><span class="c1">// Check forward compatibility</span>
-</span><span id="__span-1-27"><a id="__codelineno-1-27" name="__codelineno-1-27" href="#__codelineno-1-27"></a><span class="kd">const</span><span class="w"> </span><span class="nx">forwardOk</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">JsonSchemaCompatibilityChecker</span><span class="p">.</span><span class="nx">isForwardCompatible</span><span class="p">(</span><span class="nx">original</span><span class="p">,</span><span class="w"> </span><span class="nx">updated</span><span class="p">);</span>
-</span><span id="__span-1-28"><a id="__codelineno-1-28" name="__codelineno-1-28" href="#__codelineno-1-28"></a>
-</span><span id="__span-1-29"><a id="__codelineno-1-29" name="__codelineno-1-29" href="#__codelineno-1-29"></a><span class="c1">// Check full compatibility (both directions)</span>
-</span><span id="__span-1-30"><a id="__codelineno-1-30" name="__codelineno-1-30" href="#__codelineno-1-30"></a><span class="kd">const</span><span class="w"> </span><span class="nx">fullyOk</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">JsonSchemaCompatibilityChecker</span><span class="p">.</span><span class="nx">isFullyCompatible</span><span class="p">(</span><span class="nx">original</span><span class="p">,</span><span class="w"> </span><span class="nx">updated</span><span class="p">);</span>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="kd">const</span><span class="w"> </span><span class="nx">checker</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">JsonSchemaCompatibilityChecker</span><span class="p">.</span><span class="nx">builder</span><span class="p">().</span><span class="nx">build</span><span class="p">();</span>
 </span></code></pre></div>
 </div>
 </div>
 </div>
+<p>The checker parses its own copies of the input JSON strings — the schemas you pass in are never
+modified.</p>
 <hr />
-<h2 id="detailed-diff">Detailed Diff</h2>
-<p>Use <code>checkBackwardCompatibility()</code> to get a <code>DiffContext</code> with all detected differences,
-including which are compatible and which are not.</p>
+<h2 id="quick-checks">Quick Checks</h2>
+<p>Each check returns a result object; <code>isCompatible()</code> is the pass/fail answer.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Java</label><label for="__tabbed_2_2">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<div class="language-java highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">io.apitomy.datamodels.jsonschema.compat.DiffContext</span><span class="p">;</span>
-</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="kn">import</span><span class="w"> </span><span class="nn">io.apitomy.datamodels.jsonschema.compat.Difference</span><span class="p">;</span>
-</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>
-</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="n">DiffContext</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">JsonSchemaCompatibilityChecker</span><span class="p">.</span><span class="na">checkBackwardCompatibility</span><span class="p">(</span>
-</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="w">        </span><span class="n">original</span><span class="p">,</span><span class="w"> </span><span class="n">updated</span><span class="p">);</span>
-</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>
-</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">result</span><span class="p">.</span><span class="na">foundAllDifferencesAreCompatible</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">"All changes are backward compatible."</span><span class="p">);</span>
-</span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-2-10"><a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">"Incompatible changes found:"</span><span class="p">);</span>
-</span><span id="__span-2-11"><a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a><span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">Difference</span><span class="w"> </span><span class="n">diff</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">result</span><span class="p">.</span><span class="na">getIncompatibleDifferences</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-2-12"><a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a><span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">"  "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">diff</span><span class="p">.</span><span class="na">getDiffType</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">" at "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">diff</span><span class="p">.</span><span class="na">getPathUpdated</span><span class="p">());</span>
-</span><span id="__span-2-13"><a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a><span class="w">    </span><span class="p">}</span>
-</span><span id="__span-2-14"><a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a><span class="p">}</span>
+<div class="language-java highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">String</span><span class="w"> </span><span class="n">original</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"""</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="s">    {</span>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="s">      "type": "object",</span>
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="s">      "properties": {</span>
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="s">        "name": { "type": "string" },</span>
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="s">        "age": { "type": "integer" }</span>
+</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="s">      },</span>
+</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="s">      "required": ["name"]</span>
+</span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="s">    }</span>
+</span><span id="__span-2-10"><a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="s">    """</span><span class="p">;</span>
+</span><span id="__span-2-11"><a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>
+</span><span id="__span-2-12"><a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a><span class="n">String</span><span class="w"> </span><span class="n">updated</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"""</span>
+</span><span id="__span-2-13"><a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a><span class="s">    {</span>
+</span><span id="__span-2-14"><a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a><span class="s">      "type": "object",</span>
+</span><span id="__span-2-15"><a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a><span class="s">      "properties": {</span>
+</span><span id="__span-2-16"><a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a><span class="s">        "name": { "type": "string" },</span>
+</span><span id="__span-2-17"><a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a><span class="s">        "age": { "type": "integer" },</span>
+</span><span id="__span-2-18"><a id="__codelineno-2-18" name="__codelineno-2-18" href="#__codelineno-2-18"></a><span class="s">        "email": { "type": "string" }</span>
+</span><span id="__span-2-19"><a id="__codelineno-2-19" name="__codelineno-2-19" href="#__codelineno-2-19"></a><span class="s">      },</span>
+</span><span id="__span-2-20"><a id="__codelineno-2-20" name="__codelineno-2-20" href="#__codelineno-2-20"></a><span class="s">      "required": ["name"]</span>
+</span><span id="__span-2-21"><a id="__codelineno-2-21" name="__codelineno-2-21" href="#__codelineno-2-21"></a><span class="s">    }</span>
+</span><span id="__span-2-22"><a id="__codelineno-2-22" name="__codelineno-2-22" href="#__codelineno-2-22"></a><span class="s">    """</span><span class="p">;</span>
+</span><span id="__span-2-23"><a id="__codelineno-2-23" name="__codelineno-2-23" href="#__codelineno-2-23"></a>
+</span><span id="__span-2-24"><a id="__codelineno-2-24" name="__codelineno-2-24" href="#__codelineno-2-24"></a><span class="c1">// Adding an optional property is backward compatible</span>
+</span><span id="__span-2-25"><a id="__codelineno-2-25" name="__codelineno-2-25" href="#__codelineno-2-25"></a><span class="kt">boolean</span><span class="w"> </span><span class="n">backwardOk</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">checker</span><span class="p">.</span><span class="na">checkBackward</span><span class="p">(</span><span class="n">original</span><span class="p">,</span><span class="w"> </span><span class="n">updated</span><span class="p">).</span><span class="na">isCompatible</span><span class="p">();</span>
+</span><span id="__span-2-26"><a id="__codelineno-2-26" name="__codelineno-2-26" href="#__codelineno-2-26"></a><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">"Backward compatible: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">backwardOk</span><span class="p">);</span><span class="w"> </span><span class="c1">// true</span>
+</span><span id="__span-2-27"><a id="__codelineno-2-27" name="__codelineno-2-27" href="#__codelineno-2-27"></a>
+</span><span id="__span-2-28"><a id="__codelineno-2-28" name="__codelineno-2-28" href="#__codelineno-2-28"></a><span class="c1">// Check forward compatibility</span>
+</span><span id="__span-2-29"><a id="__codelineno-2-29" name="__codelineno-2-29" href="#__codelineno-2-29"></a><span class="kt">boolean</span><span class="w"> </span><span class="n">forwardOk</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">checker</span><span class="p">.</span><span class="na">checkForward</span><span class="p">(</span><span class="n">original</span><span class="p">,</span><span class="w"> </span><span class="n">updated</span><span class="p">).</span><span class="na">isCompatible</span><span class="p">();</span>
+</span><span id="__span-2-30"><a id="__codelineno-2-30" name="__codelineno-2-30" href="#__codelineno-2-30"></a>
+</span><span id="__span-2-31"><a id="__codelineno-2-31" name="__codelineno-2-31" href="#__codelineno-2-31"></a><span class="c1">// Check full compatibility (both directions)</span>
+</span><span id="__span-2-32"><a id="__codelineno-2-32" name="__codelineno-2-32" href="#__codelineno-2-32"></a><span class="kt">boolean</span><span class="w"> </span><span class="n">fullyOk</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">checker</span><span class="p">.</span><span class="na">checkFull</span><span class="p">(</span><span class="n">original</span><span class="p">,</span><span class="w"> </span><span class="n">updated</span><span class="p">).</span><span class="na">isFullyCompatible</span><span class="p">();</span>
 </span></code></pre></div>
 </div>
 <div class="tabbed-block">
-<div class="language-typescript highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">JsonSchemaCompatibilityChecker</span><span class="p">,</span><span class="w"> </span><span class="nx">DiffContext</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">'@apitomy/data-models'</span><span class="p">;</span>
-</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>
-</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="kd">const</span><span class="w"> </span><span class="nx">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">JsonSchemaCompatibilityChecker</span><span class="p">.</span><span class="nx">checkBackwardCompatibility</span><span class="p">(</span>
-</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">    </span><span class="nx">original</span><span class="p">,</span><span class="w"> </span><span class="nx">updated</span><span class="p">);</span>
-</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>
-</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">result</span><span class="p">.</span><span class="nx">foundAllDifferencesAreCompatible</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="w">    </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'All changes are backward compatible.'</span><span class="p">);</span>
-</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-3-9"><a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="w">    </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'Incompatible changes found:'</span><span class="p">);</span>
-</span><span id="__span-3-10"><a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="w">    </span><span class="nx">result</span><span class="p">.</span><span class="nx">getIncompatibleDifferences</span><span class="p">().</span><span class="nx">forEach</span><span class="p">(</span><span class="nx">diff</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-3-11"><a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="w">        </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`  </span><span class="si">${</span><span class="nx">diff</span><span class="p">.</span><span class="nx">getDiffType</span><span class="p">()</span><span class="si">}</span><span class="sb"> at </span><span class="si">${</span><span class="nx">diff</span><span class="p">.</span><span class="nx">getPathUpdated</span><span class="p">()</span><span class="si">}</span><span class="sb">`</span><span class="p">);</span>
-</span><span id="__span-3-12"><a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a><span class="w">    </span><span class="p">});</span>
-</span><span id="__span-3-13"><a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a><span class="p">}</span>
+<div class="language-typescript highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kd">const</span><span class="w"> </span><span class="nx">original</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">({</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">    </span><span class="kr">type</span><span class="o">:</span><span class="w"> </span><span class="s1">'object'</span><span class="p">,</span>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">    </span><span class="nx">properties</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">        </span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="kr">type</span><span class="o">:</span><span class="w"> </span><span class="s1">'string'</span><span class="w"> </span><span class="p">},</span>
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">        </span><span class="nx">age</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="kr">type</span><span class="o">:</span><span class="w"> </span><span class="s1">'integer'</span><span class="w"> </span><span class="p">},</span>
+</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="w">    </span><span class="p">},</span>
+</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="w">    </span><span class="nx">required</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="s1">'name'</span><span class="p">],</span>
+</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="p">});</span>
+</span><span id="__span-3-9"><a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>
+</span><span id="__span-3-10"><a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="kd">const</span><span class="w"> </span><span class="nx">updated</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">({</span>
+</span><span id="__span-3-11"><a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="w">    </span><span class="kr">type</span><span class="o">:</span><span class="w"> </span><span class="s1">'object'</span><span class="p">,</span>
+</span><span id="__span-3-12"><a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a><span class="w">    </span><span class="nx">properties</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-3-13"><a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a><span class="w">        </span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="kr">type</span><span class="o">:</span><span class="w"> </span><span class="s1">'string'</span><span class="w"> </span><span class="p">},</span>
+</span><span id="__span-3-14"><a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a><span class="w">        </span><span class="nx">age</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="kr">type</span><span class="o">:</span><span class="w"> </span><span class="s1">'integer'</span><span class="w"> </span><span class="p">},</span>
+</span><span id="__span-3-15"><a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a><span class="w">        </span><span class="nx">email</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="kr">type</span><span class="o">:</span><span class="w"> </span><span class="s1">'string'</span><span class="w"> </span><span class="p">},</span>
+</span><span id="__span-3-16"><a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a><span class="w">    </span><span class="p">},</span>
+</span><span id="__span-3-17"><a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a><span class="w">    </span><span class="nx">required</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="s1">'name'</span><span class="p">],</span>
+</span><span id="__span-3-18"><a id="__codelineno-3-18" name="__codelineno-3-18" href="#__codelineno-3-18"></a><span class="p">});</span>
+</span><span id="__span-3-19"><a id="__codelineno-3-19" name="__codelineno-3-19" href="#__codelineno-3-19"></a>
+</span><span id="__span-3-20"><a id="__codelineno-3-20" name="__codelineno-3-20" href="#__codelineno-3-20"></a><span class="c1">// Adding an optional property is backward compatible</span>
+</span><span id="__span-3-21"><a id="__codelineno-3-21" name="__codelineno-3-21" href="#__codelineno-3-21"></a><span class="kd">const</span><span class="w"> </span><span class="nx">backwardOk</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">checker</span><span class="p">.</span><span class="nx">checkBackward</span><span class="p">(</span><span class="nx">original</span><span class="p">,</span><span class="w"> </span><span class="nx">updated</span><span class="p">).</span><span class="nx">isCompatible</span><span class="p">();</span>
+</span><span id="__span-3-22"><a id="__codelineno-3-22" name="__codelineno-3-22" href="#__codelineno-3-22"></a><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'Backward compatible:'</span><span class="p">,</span><span class="w"> </span><span class="nx">backwardOk</span><span class="p">);</span><span class="w"> </span><span class="c1">// true</span>
+</span><span id="__span-3-23"><a id="__codelineno-3-23" name="__codelineno-3-23" href="#__codelineno-3-23"></a>
+</span><span id="__span-3-24"><a id="__codelineno-3-24" name="__codelineno-3-24" href="#__codelineno-3-24"></a><span class="c1">// Check forward compatibility</span>
+</span><span id="__span-3-25"><a id="__codelineno-3-25" name="__codelineno-3-25" href="#__codelineno-3-25"></a><span class="kd">const</span><span class="w"> </span><span class="nx">forwardOk</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">checker</span><span class="p">.</span><span class="nx">checkForward</span><span class="p">(</span><span class="nx">original</span><span class="p">,</span><span class="w"> </span><span class="nx">updated</span><span class="p">).</span><span class="nx">isCompatible</span><span class="p">();</span>
+</span><span id="__span-3-26"><a id="__codelineno-3-26" name="__codelineno-3-26" href="#__codelineno-3-26"></a>
+</span><span id="__span-3-27"><a id="__codelineno-3-27" name="__codelineno-3-27" href="#__codelineno-3-27"></a><span class="c1">// Check full compatibility (both directions)</span>
+</span><span id="__span-3-28"><a id="__codelineno-3-28" name="__codelineno-3-28" href="#__codelineno-3-28"></a><span class="kd">const</span><span class="w"> </span><span class="nx">fullyOk</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">checker</span><span class="p">.</span><span class="nx">checkFull</span><span class="p">(</span><span class="nx">original</span><span class="p">,</span><span class="w"> </span><span class="nx">updated</span><span class="p">).</span><span class="nx">isFullyCompatible</span><span class="p">();</span>
 </span></code></pre></div>
 </div>
 </div>
 </div>
-<p>You can also get just the incompatible differences directly:</p>
+<p><code>checkFull</code> returns a <code>FullCompatibilityCheckResult</code>, which also exposes
+<code>isBackwardCompatible()</code>, <code>isForwardCompatible()</code>, and the two underlying results via
+<code>getBackwardResult()</code> and <code>getForwardResult()</code>.</p>
+<hr />
+<h2 id="detailed-diff">Detailed Diff</h2>
+<p>The result carries every difference found, and separately those that break compatibility.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="3:2"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">Java</label><label for="__tabbed_3_2">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<div class="language-java highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="n">Set</span><span class="o">&lt;</span><span class="n">Difference</span><span class="o">&gt;</span><span class="w"> </span><span class="n">breaking</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">JsonSchemaCompatibilityChecker</span><span class="p">.</span><span class="na">getIncompatibleDifferences</span><span class="p">(</span>
-</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">        </span><span class="n">original</span><span class="p">,</span><span class="w"> </span><span class="n">updated</span><span class="p">);</span>
+<div class="language-java highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">io.apitomy.datamodels.jsonschema.compat.CompatibilityCheckResult</span><span class="p">;</span>
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="kn">import</span><span class="w"> </span><span class="nn">io.apitomy.datamodels.jsonschema.compat.Difference</span><span class="p">;</span>
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>
+</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="n">CompatibilityCheckResult</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">checker</span><span class="p">.</span><span class="na">checkBackward</span><span class="p">(</span><span class="n">original</span><span class="p">,</span><span class="w"> </span><span class="n">updated</span><span class="p">);</span>
+</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>
+</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">result</span><span class="p">.</span><span class="na">isCompatible</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">"All changes are backward compatible."</span><span class="p">);</span>
+</span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-4-9"><a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">"Incompatible changes found:"</span><span class="p">);</span>
+</span><span id="__span-4-10"><a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a><span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">Difference</span><span class="w"> </span><span class="n">diff</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">result</span><span class="p">.</span><span class="na">getIncompatibleDifferences</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-4-11"><a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a><span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">"  "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">diff</span><span class="p">.</span><span class="na">getDiffType</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">" at "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">diff</span><span class="p">.</span><span class="na">getPathUpdated</span><span class="p">());</span>
+</span><span id="__span-4-12"><a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-4-13"><a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a><span class="p">}</span>
 </span></code></pre></div>
 </div>
 <div class="tabbed-block">
-<div class="language-typescript highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="kd">const</span><span class="w"> </span><span class="nx">breaking</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">JsonSchemaCompatibilityChecker</span><span class="p">.</span><span class="nx">getIncompatibleDifferences</span><span class="p">(</span>
-</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">    </span><span class="nx">original</span><span class="p">,</span><span class="w"> </span><span class="nx">updated</span><span class="p">);</span>
+<div class="language-typescript highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="kd">const</span><span class="w"> </span><span class="nx">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">checker</span><span class="p">.</span><span class="nx">checkBackward</span><span class="p">(</span><span class="nx">original</span><span class="p">,</span><span class="w"> </span><span class="nx">updated</span><span class="p">);</span>
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">result</span><span class="p">.</span><span class="nx">isCompatible</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="w">    </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'All changes are backward compatible.'</span><span class="p">);</span>
+</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="w">    </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'Incompatible changes found:'</span><span class="p">);</span>
+</span><span id="__span-5-7"><a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="w">    </span><span class="nx">result</span><span class="p">.</span><span class="nx">getIncompatibleDifferences</span><span class="p">().</span><span class="nx">forEach</span><span class="p">(</span><span class="nx">diff</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-5-8"><a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="w">        </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`  </span><span class="si">${</span><span class="nx">diff</span><span class="p">.</span><span class="nx">getDiffType</span><span class="p">()</span><span class="si">}</span><span class="sb"> at </span><span class="si">${</span><span class="nx">diff</span><span class="p">.</span><span class="nx">getPathUpdated</span><span class="p">()</span><span class="si">}</span><span class="sb">`</span><span class="p">);</span>
+</span><span id="__span-5-9"><a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a><span class="w">    </span><span class="p">});</span>
+</span><span id="__span-5-10"><a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a><span class="p">}</span>
 </span></code></pre></div>
 </div>
 </div>
 </div>
+<p><code>getDifferences()</code> returns everything detected, compatible or not — useful for change logs
+rather than gates.</p>
+<h3 id="explaining-a-difference">Explaining a difference</h3>
+<p>Each <code>Difference</code> can describe itself, which is handy when surfacing results to a user rather
+than failing a build.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="4:2"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><input id="__tabbed_4_2" name="__tabbed_4" type="radio" /><div class="tabbed-labels"><label for="__tabbed_4_1">Java</label><label for="__tabbed_4_2">TypeScript</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="language-java highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">Difference</span><span class="w"> </span><span class="n">diff</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">result</span><span class="p">.</span><span class="na">getIncompatibleDifferences</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">diff</span><span class="p">.</span><span class="na">getShortDescription</span><span class="p">());</span>
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="w">    </span><span class="n">diff</span><span class="p">.</span><span class="na">getHelp</span><span class="p">().</span><span class="na">ifPresent</span><span class="p">(</span><span class="n">help</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">"  "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">help</span><span class="p">));</span>
+</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>
+</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="w">    </span><span class="c1">// Worked examples of this kind of change</span>
+</span><span id="__span-6-6"><a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="w">    </span><span class="n">diff</span><span class="p">.</span><span class="na">getExamples</span><span class="p">().</span><span class="na">forEach</span><span class="p">(</span><span class="n">example</span><span class="w"> </span><span class="o">-&gt;</span>
+</span><span id="__span-6-7"><a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="w">            </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">"  e.g. "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">example</span><span class="p">.</span><span class="na">getId</span><span class="p">()));</span>
+</span><span id="__span-6-8"><a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a><span class="p">}</span>
+</span></code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="language-typescript highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="nx">result</span><span class="p">.</span><span class="nx">getIncompatibleDifferences</span><span class="p">().</span><span class="nx">forEach</span><span class="p">(</span><span class="nx">diff</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="w">    </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">diff</span><span class="p">.</span><span class="nx">getShortDescription</span><span class="p">());</span>
+</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>
+</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">help</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">diff</span><span class="p">.</span><span class="nx">getHelp</span><span class="p">();</span>
+</span><span id="__span-7-5"><a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">help</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-7-6"><a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="w">        </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`  </span><span class="si">${</span><span class="nx">help</span><span class="si">}</span><span class="sb">`</span><span class="p">);</span>
+</span><span id="__span-7-7"><a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-7-8"><a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a>
+</span><span id="__span-7-9"><a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a><span class="w">    </span><span class="c1">// Worked examples of this kind of change</span>
+</span><span id="__span-7-10"><a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a><span class="w">    </span><span class="nx">diff</span><span class="p">.</span><span class="nx">getExamples</span><span class="p">().</span><span class="nx">forEach</span><span class="p">(</span><span class="nx">example</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`  e.g. </span><span class="si">${</span><span class="nx">example</span><span class="p">.</span><span class="nx">getId</span><span class="p">()</span><span class="si">}</span><span class="sb">`</span><span class="p">));</span>
+</span><span id="__span-7-11"><a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a><span class="p">});</span>
+</span></code></pre></div>
+</div>
+</div>
+</div>
+<div class="admonition note">
+<p class="admonition-title"><code>getHelp()</code> differs by language</p>
+<p>In Java it returns <code>Optional&lt;String&gt;</code>; in TypeScript it returns the string directly, which
+may be absent. The examples above reflect that.</p>
+</div>
+<p><code>getPathOriginal()</code> and <code>getPathUpdated()</code> locate the change in each schema, and
+<code>getSubSchemaOriginal()</code> / <code>getSubSchemaUpdated()</code> give the sub-schema on each side.</p>
+<hr />
+<h2 id="unsupported-features">Unsupported Features</h2>
+<p><code>getUnsupportedFeatures()</code> lists the parts of the comparison that could not be fully carried
+out. Today that means exactly one thing: <strong>references the dereferencer could not resolve</strong>.</p>
+<p>It is therefore only ever populated when you have <a href="#resolving-references">configured a
+dereferencer</a>. Without one, the list is always empty.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="5:2"><input checked="checked" id="__tabbed_5_1" name="__tabbed_5" type="radio" /><input id="__tabbed_5_2" name="__tabbed_5" type="radio" /><div class="tabbed-labels"><label for="__tabbed_5_1">Java</label><label for="__tabbed_5_2">TypeScript</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="language-java highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="n">CompatibilityCheckResult</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">checker</span><span class="p">.</span><span class="na">checkBackward</span><span class="p">(</span><span class="n">original</span><span class="p">,</span><span class="w"> </span><span class="n">updated</span><span class="p">);</span>
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>
+</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">result</span><span class="p">.</span><span class="na">hasUnsupportedFeatures</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">"Not fully compared: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">result</span><span class="p">.</span><span class="na">getUnsupportedFeatures</span><span class="p">());</span>
+</span><span id="__span-8-5"><a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="p">}</span>
+</span></code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="language-typescript highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="kd">const</span><span class="w"> </span><span class="nx">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">checker</span><span class="p">.</span><span class="nx">checkBackward</span><span class="p">(</span><span class="nx">original</span><span class="p">,</span><span class="w"> </span><span class="nx">updated</span><span class="p">);</span>
+</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>
+</span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">result</span><span class="p">.</span><span class="nx">hasUnsupportedFeatures</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-9-4"><a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="w">    </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'Not fully compared:'</span><span class="p">,</span><span class="w"> </span><span class="nx">result</span><span class="p">.</span><span class="nx">getUnsupportedFeatures</span><span class="p">());</span>
+</span><span id="__span-9-5"><a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="p">}</span>
+</span></code></pre></div>
+</div>
+</div>
+</div>
+<p>Each entry names the reference that failed to resolve:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>Unresolvable $ref: http://schemas.example.com/address.json
+</span></code></pre></div>
+<p>Both schemas are dereferenced, so the same reference can appear twice — once per side — and the
+entry does not say which side it came from.</p>
+<div class="admonition warning">
+<p class="admonition-title">Check this before trusting a pass</p>
+<p>A result can be <code>isCompatible() == true</code> while <code>hasUnsupportedFeatures()</code> is also true. The
+sub-schemas behind an unresolved reference were never compared, so the verdict covers less
+than it appears to. Gate on both:</p>
+<div class="language-java highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="kt">boolean</span><span class="w"> </span><span class="n">safe</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">result</span><span class="p">.</span><span class="na">isCompatible</span><span class="p">()</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="o">!</span><span class="n">result</span><span class="p">.</span><span class="na">hasUnsupportedFeatures</span><span class="p">();</span>
+</span></code></pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Without a dereferencer, <code>$ref</code>s are compared as strings</p>
+<p>The checker does not silently ignore them: two schemas whose <code>$ref</code> strings differ are
+reported as different. But two schemas sharing a <code>$ref</code> string are treated as equal at that
+point, even if the document it points to has changed underneath them. Configure a
+dereferencer whenever the referenced content itself might move.</p>
+</div>
+<hr />
+<h2 id="resolving-references">Resolving References</h2>
+<p>By default a <code>$ref</code> that the checker cannot resolve is reported as an unsupported feature.
+Supplying a dereferencer inlines references first, so the comparison runs against complete
+schemas.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="6:2"><input checked="checked" id="__tabbed_6_1" name="__tabbed_6" type="radio" /><input id="__tabbed_6_2" name="__tabbed_6" type="radio" /><div class="tabbed-labels"><label for="__tabbed_6_1">Java</label><label for="__tabbed_6_2">TypeScript</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="language-java highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="n">JsonSchemaCompatibilityChecker</span><span class="w"> </span><span class="n">checker</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">JsonSchemaCompatibilityChecker</span><span class="p">.</span><span class="na">builder</span><span class="p">()</span>
+</span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="w">        </span><span class="p">.</span><span class="na">dereferencer</span><span class="p">(</span><span class="n">myDereferencer</span><span class="p">)</span>
+</span><span id="__span-12-3"><a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="w">        </span><span class="p">.</span><span class="na">build</span><span class="p">();</span>
+</span></code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="language-typescript highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="kd">const</span><span class="w"> </span><span class="nx">checker</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">JsonSchemaCompatibilityChecker</span><span class="p">.</span><span class="nx">builder</span><span class="p">()</span>
+</span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="w">    </span><span class="p">.</span><span class="nx">dereferencer</span><span class="p">(</span><span class="nx">myDereferencer</span><span class="p">)</span>
+</span><span id="__span-13-3"><a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="w">    </span><span class="p">.</span><span class="nx">build</span><span class="p">();</span>
+</span></code></pre></div>
+</div>
+</div>
+</div>
+<p>See <a href="dereferencing.html">Dereferencing</a> for building a <code>JsonSchemaRefDereferencer</code>.</p>
 <hr />
 <h2 id="common-breaking-changes">Common Breaking Changes</h2>
 <p>The checker detects a wide range of schema differences. Here are some common examples:</p>
@@ -1276,8 +1486,8 @@ including which are compatible and which are not.</p>
 </thead>
 <tbody>
 <tr>
-<td>Adding an optional property</td>
-<td>Yes</td>
+<td>Adding a property to <code>properties</code></td>
+<td><strong>No</strong> — see note below</td>
 </tr>
 <tr>
 <td>Adding a required property</td>
@@ -1325,11 +1535,45 @@ including which are compatible and which are not.</p>
 </tr>
 </tbody>
 </table>
+<div class="admonition note">
+<p class="admonition-title">Adding a property is not a safe change in JSON Schema</p>
+<p>This is the row that most often surprises people, because the equivalent change <em>is</em> safe in
+Avro and Protobuf. In JSON Schema, a name absent from <code>properties</code> is unconstrained, so
+adding <code>"m": {"type": "string"}</code> starts rejecting <code>{"m": 42}</code>, which the original schema
+accepted. The checker reports it as <code>OBJECT_TYPE_PROPERTY_SCHEMAS_NARROWED</code>.</p>
+<p>Adding the name to <code>required</code> as well is a second, separate incompatibility.</p>
+</div>
 <hr />
 <h2 id="supported-versions">Supported Versions</h2>
-<p>The compatibility checker currently supports JSON Schema Draft 4, Draft 6, and Draft 7.
-Modern versions (2019-09, 2020-12) are detected but flagged as unsupported in the diff
-context via <code>hasUnsupportedFeatures()</code>.</p>
+<p>All supported drafts can be compared: <strong>Draft 4, Draft 6, Draft 7, 2019-09 and 2020-12</strong>. Each
+schema is converted to a compound representation that merges the draft-specific properties, and
+the comparison runs against that, so the draft a schema is written in does not change which
+differences are detected.</p>
+<p>By default both schemas must use the <strong>same</strong> draft; comparing across drafts throws
+<code>IllegalArgumentException</code>. Opt in when that is what you want:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="7:2"><input checked="checked" id="__tabbed_7_1" name="__tabbed_7" type="radio" /><input id="__tabbed_7_2" name="__tabbed_7" type="radio" /><div class="tabbed-labels"><label for="__tabbed_7_1">Java</label><label for="__tabbed_7_2">TypeScript</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="language-java highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="n">JsonSchemaCompatibilityChecker</span><span class="w"> </span><span class="n">checker</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">JsonSchemaCompatibilityChecker</span><span class="p">.</span><span class="na">builder</span><span class="p">()</span>
+</span><span id="__span-14-2"><a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="w">        </span><span class="p">.</span><span class="na">allowCrossVersionChecking</span><span class="p">(</span><span class="kc">true</span><span class="p">)</span>
+</span><span id="__span-14-3"><a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a><span class="w">        </span><span class="p">.</span><span class="na">build</span><span class="p">();</span>
+</span></code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="language-typescript highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="kd">const</span><span class="w"> </span><span class="nx">checker</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">JsonSchemaCompatibilityChecker</span><span class="p">.</span><span class="nx">builder</span><span class="p">()</span>
+</span><span id="__span-15-2"><a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a><span class="w">    </span><span class="p">.</span><span class="nx">allowCrossVersionChecking</span><span class="p">(</span><span class="kc">true</span><span class="p">)</span>
+</span><span id="__span-15-3"><a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a><span class="w">    </span><span class="p">.</span><span class="nx">build</span><span class="p">();</span>
+</span></code></pre></div>
+</div>
+</div>
+</div>
+<div class="admonition info">
+<p class="admonition-title">Changed in 4.0</p>
+<p>The 3.x checker supported only Draft 4, 6 and 7, and exposed static methods
+(<code>isBackwardCompatible</code>, <code>checkBackwardCompatibility</code>) that no longer exist. See the
+<a href="../migration/3.x-to-4.0.html#json-schema-compatibility-checking">3.x → 4.0 migration guide</a>
+for the mapping.</p>
+</div>
 
 
 
