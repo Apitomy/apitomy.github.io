@@ -1834,17 +1834,21 @@ to that specification's package, and the shared ones moved to the model root.</p
 <tbody>
 <tr>
 <td><code>BooleanJSchemaJSchemaListUnion</code></td>
-<td><code>…models.jsonschema.BooleanFullSchemaFullSchemaListUnion</code></td>
+<td><code>…models.jsonschema.BooleanFullSchemaJsonSchemaListUnion</code></td>
 </tr>
 <tr>
 <td><code>JSchemaListUnionValue</code>, <code>…Impl</code></td>
-<td><code>…models.jsonschema.FullSchemaListUnionValue</code>, <code>…Impl</code></td>
+<td><code>…models.jsonschema.JsonSchemaListUnionValue</code>, <code>…Impl</code></td>
 </tr>
 </tbody>
 </table>
 <p>These are import-only changes for most callers — the types themselves behave as before. They are
 easy to miss because they break at compile time in code that has nothing to do with JSON Schema:
 anything touching AsyncAPI multi-format schemas imports <code>MultiFormatSchemaSchemaUnion</code>.</p>
+<p>The tuple form of <code>items</code> (drafts 4 to 2019-09) is the exception: its elements may be boolean
+schemas, as the specifications allow, so the list is a list of <code>JsonSchema</code> rather than of full
+schemas. Its accessors are <code>isJsonSchemaList()</code> / <code>asJsonSchemaList()</code>, returning
+<code>List&lt;JsonSchema&gt;</code>; check each element with <code>isFullSchema()</code> / <code>isBoolean()</code> before using it.</p>
 <h3 id="new-json-schema-model-types">New JSON Schema model types</h3>
 <p>The rewrite added union types to the shared model namespace — <code>Any</code>, <code>AnySchemaUnion</code>,
 <code>BooleanSchemaUnion</code>, <code>SchemaListUnionValue</code>, <code>SchemaSchemaListUnion</code> — and
