@@ -1319,7 +1319,10 @@
 like <code>openapi</code>, <code>asyncapi</code>, <code>swagger</code>, <code>openrpc</code>, and <code>$schema</code>.</p>
 <p><code>readRoot</code> and <code>readRootFromJSONString</code> return a <code>RootCapable</code> — the supertype of everything
 that can sit at the root of a document. For OpenAPI, AsyncAPI and OpenRPC that is a <code>Document</code>;
-for JSON Schema it is a schema, which is not a <code>Document</code>.</p>
+for JSON Schema it is a schema, which is not a <code>Document</code>. A JSON Schema document may also be
+the literal <code>true</code> or <code>false</code>: it is read as a <code>BooleanUnionValue</code>, which is a <code>JsonSchema</code> and a
+<code>RootCapable</code> but not a <code>Node</code>, and written with <code>writeRoot</code> (see below). It carries no
+<code>$schema</code>, so it is read as draft 7.</p>
 <h3 id="from-a-json-string">From a JSON String</h3>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Java</label><label for="__tabbed_1_2">TypeScript</label></div>
 <div class="tabbed-content">
@@ -1528,8 +1531,9 @@ Schema model types.</p>
 </table>
 <hr />
 <h2 id="writing-a-document">Writing a Document</h2>
-<p><code>writeNode</code> serializes any node, including a document or schema root, so it is the one method
-that works across every specification.</p>
+<p><code>writeNode</code> serializes any node, including a document or schema root. The one root it cannot
+take is a boolean JSON Schema, which is not a node; <code>writeRoot</code> and <code>writeRootToJSONString</code> write
+any root, as returned by <code>readRoot</code>, including that one.</p>
 <h3 id="to-a-json-object">To a JSON Object</h3>
 <div class="tabbed-set tabbed-alternate" data-tabs="6:2"><input checked="checked" id="__tabbed_6_1" name="__tabbed_6" type="radio" /><input id="__tabbed_6_2" name="__tabbed_6" type="radio" /><div class="tabbed-labels"><label for="__tabbed_6_1">Java</label><label for="__tabbed_6_2">TypeScript</label></div>
 <div class="tabbed-content">

@@ -1649,12 +1649,19 @@ transpiled and exported from <code>@apitomy/data-models</code>, so <code>JsonSch
 <code>JsonSchemaRefDereferencer</code> and <code>CompoundSchemaConverter</code> are available to TypeScript callers
 with the same shape as in Java.</p>
 <h3 id="root-document-helpers">Root document helpers</h3>
-<p><code>Library</code> gained three methods for working with documents whose root need not be an object —
-a JSON Schema root may be a boolean:</p>
+<p><code>Library</code> gained methods for working with documents whose root need not be an object — a JSON
+Schema root may be the literal <code>true</code> or <code>false</code>:</p>
 <div class="language-java highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="n">RootCapable</span><span class="w"> </span><span class="n">root</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Library</span><span class="p">.</span><span class="na">createRoot</span><span class="p">(</span><span class="n">modelType</span><span class="p">);</span>
-</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="n">RootCapable</span><span class="w"> </span><span class="n">root</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Library</span><span class="p">.</span><span class="na">readRoot</span><span class="p">(</span><span class="n">objectNode</span><span class="p">);</span>
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="n">RootCapable</span><span class="w"> </span><span class="n">root</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Library</span><span class="p">.</span><span class="na">readRoot</span><span class="p">(</span><span class="n">jsonNode</span><span class="p">);</span>
 </span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="n">RootCapable</span><span class="w"> </span><span class="n">root</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Library</span><span class="p">.</span><span class="na">readRootFromJSONString</span><span class="p">(</span><span class="n">jsonString</span><span class="p">);</span>
+</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="n">JsonNode</span><span class="w"> </span><span class="n">json</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Library</span><span class="p">.</span><span class="na">writeRoot</span><span class="p">(</span><span class="n">root</span><span class="p">);</span>
+</span><span id="__span-7-5"><a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="n">String</span><span class="w"> </span><span class="n">jsonString</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Library</span><span class="p">.</span><span class="na">writeRootToJSONString</span><span class="p">(</span><span class="n">root</span><span class="p">);</span>
 </span></code></pre></div>
+<p>A boolean root is a <code>RootCapable</code> but not a <code>Node</code>, so <code>writeNode</code> cannot take it; <code>writeRoot</code>
+writes any root. JSON Schema reference resolution returns <code>Optional&lt;JsonSchema&gt;</code> rather than
+<code>Optional&lt;Node&gt;</code> for the same reason: <code>FragmentResolver</code>, <code>ResourceResolver</code>,
+<code>JsonSchemaRefResolver</code> and <code>JsonSchemaRefTraversal.resolveRef</code> changed accordingly, so a custom
+<code>ResourceResolver</code> returns <code>Optional.of((JsonSchema) root)</code> instead of a <code>Node</code>.</p>
 <h3 id="libraryresolvenodepath"><code>Library.resolveNodePath</code></h3>
 <p>The second parameter widened from <code>Document</code> to <code>Node</code>, so a path can be resolved against any
 node rather than only a document root:</p>

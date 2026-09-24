@@ -1616,8 +1616,9 @@ structurally — pass a function that delegates to the instance, as above. In Ja
 implement the interfaces directly and can be passed as they are.</p>
 </div>
 <p>To fetch schemas from somewhere else — a registry, the filesystem, the network — implement
-<code>JsonSchemaRefResolver</code> (in Java, a functional interface returning <code>Optional&lt;Node&gt;</code>; in
-TypeScript, a plain function) and pass it to <code>refResolver</code>.</p>
+<code>JsonSchemaRefResolver</code> (in Java, a functional interface returning <code>Optional&lt;JsonSchema&gt;</code>; in
+TypeScript, a plain function) and pass it to <code>refResolver</code>. The result may be a boolean schema:
+a reference to <code>true</code> or <code>false</code> is inlined like any other target.</p>
 <p><code>JsonSchemaRefResolverChain.withDefaults()</code> builds a chain with the pointer and anchor fragment
 resolvers and no resource resolvers, which is what the dereferencer uses when you configure none.</p>
 <p>A dereferencer can also be handed to the compatibility checker so that comparison runs against
