@@ -12,6 +12,7 @@ npm_package: "@apitomy/data-models"
 docs_url: /projects/data-models/docs/
 data_key: datamodels
 ---
+{% assign stable = site.data.datamodels.latestRelease.tag_name | remove_first: "v" %}
 
 <div class="project-section">
     <h2>Installation</h2>
@@ -24,11 +25,11 @@ data_key: datamodels
         <pre class="install-code"><code>&lt;dependency&gt;
     &lt;groupId&gt;io.apitomy&lt;/groupId&gt;
     &lt;artifactId&gt;apitomy-data-models&lt;/artifactId&gt;
-    &lt;version&gt;3.1.0&lt;/version&gt;
+    &lt;version&gt;{{ stable }}&lt;/version&gt;
 &lt;/dependency&gt;</code></pre>
     </div>
     <div class="install-panel" id="install-gradle">
-        <pre class="install-code"><code>implementation 'io.apitomy:apitomy-data-models:3.1.0'</code></pre>
+        <pre class="install-code"><code>implementation 'io.apitomy:apitomy-data-models:{{ stable }}'</code></pre>
     </div>
     <div class="install-panel" id="install-npm">
         <pre class="install-code"><code>npm install @apitomy/data-models</code></pre>
@@ -81,6 +82,7 @@ Library.visitTree(doc, new CombinedVisitorAdapter() {
     <h2>Links</h2>
     <div class="project-links-section">
         <a href="/projects/data-models/docs/" class="project-link">Documentation</a>
+        <a href="/projects/data-models/docs/4.x/" class="project-link">Documentation (4.x beta)</a>
         <a href="https://github.com/Apitomy/apitomy-data-models" class="project-link">
             GitHub Repository
         </a>
