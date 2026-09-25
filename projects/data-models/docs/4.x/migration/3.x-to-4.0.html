@@ -1,0 +1,2031 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="A library for reading, writing, and manipulating OpenAPI, AsyncAPI, OpenRPC, and JSON Schema documents">
+      
+      
+        <meta name="author" content="Apitomy">
+      
+      
+        <link rel="canonical" href="https://www.apitomy.io/projects/data-models/docs/4.x/migration/3.x-to-4.0.html">
+      
+      
+        <link rel="prev" href="index.html">
+      
+      
+        <link rel="next" href="../examples/index.html">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>3.x → 4.0 - Apitomy Data Models</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../theme/css/project-colors.css">
+    
+      <link rel="stylesheet" href="../theme/css/apitomy-base.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#migrating-from-3x-to-40" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+        <aside class="md-banner">
+          <div class="md-banner__inner md-grid md-typeset">
+            
+            
+<div class="apitomy-masthead">
+    <div class="apitomy-masthead-inner">
+        <a href="https://www.apitomy.io/" class="apitomy-masthead-logo">Apitomy</a>
+        <nav class="apitomy-masthead-nav">
+            <a href="https://www.apitomy.io/#projects">Projects</a>
+            <a href="https://www.apitomy.io/blog/">Blog</a>
+            <a href="https://github.com/Apitomy" class="apitomy-masthead-github" aria-label="GitHub">
+                <svg width="22" height="22" viewBox="0 0 16 16" fill="currentColor">
+                    <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/>
+                </svg>
+            </a>
+        </nav>
+    </div>
+</div>
+
+          </div>
+          
+        </aside>
+      
+    </div>
+    
+      <div data-md-color-scheme="default" data-md-component="outdated" hidden>
+        
+          <aside class="md-banner md-banner--warning">
+            <div class="md-banner__inner md-grid md-typeset">
+              
+You are viewing the documentation of the 4.x line, which is in beta.
+<a href="../../">Go to the documentation of the current stable release.</a>
+
+            </div>
+            <script>var el=document.querySelector("[data-md-component=outdated]"),base=new URL(".."),outdated=__md_get("__outdated",sessionStorage,base);!0===outdated&&el&&(el.hidden=!1)</script>
+          </aside>
+        
+      </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../index.html" title="Apitomy Data Models" class="md-header__button md-logo" aria-label="Apitomy Data Models" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Apitomy Data Models
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              3.x → 4.0
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom"  aria-hidden="true"  type="radio" name="__palette" id="__palette_0">
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="Share" aria-label="Share" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/Apitomy/apitomy-data-models" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Apitomy/apitomy-data-models
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../index.html" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../getting-started.html" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Getting Started
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../user-guide/index.html" class="md-tabs__link">
+          
+  
+  
+  User Guide
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="index.html" class="md-tabs__link">
+          
+  
+  
+  Migration
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../examples/index.html" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Examples
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../index.html" title="Apitomy Data Models" class="md-nav__button md-logo" aria-label="Apitomy Data Models" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Apitomy Data Models
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/Apitomy/apitomy-data-models" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Apitomy/apitomy-data-models
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../getting-started.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Getting Started
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    User Guide
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    User Guide
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../user-guide/index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    User Guide
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../user-guide/reading-and-writing.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Reading & Writing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../user-guide/visitor-pattern.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Visitor Pattern
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../user-guide/validation.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Validation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../user-guide/commands.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Commands
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../user-guide/node-paths.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Node Paths
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../user-guide/dereferencing.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Dereferencing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../user-guide/document-transformation.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Document Transformation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../user-guide/schema-compatibility.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Schema Compatibility
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Migration
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Migration
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Migration
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3.x → 4.0
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="3.x-to-4.0.html" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3.x → 4.0
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#library-api" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Library API
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Library API">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#json-schema-compatibility-checking" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        JSON Schema compatibility checking
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#json-schema-reference-dereferencing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        JSON Schema reference dereferencing
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#compound-schema-conversion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Compound schema conversion
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#json-schema-in-typescript" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        JSON Schema in TypeScript
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#root-document-helpers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Root document helpers
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#libraryresolvenodepath" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Library.resolveNodePath
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#model-changes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Model changes
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Model changes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#documentgetinfo-returns-the-base-info-type" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Document.getInfo returns the base Info type
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rootnode-is-now-rootcapable" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        RootNode is now RootCapable
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#node-split-into-any-and-node" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Node split into Any and Node
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#visitors-gained-aftervisit-methods" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Visitors gained afterVisit methods
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#openrpcreferenceable-was-removed" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        OpenRpcReferenceable was removed
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#union-types-moved-out-of-modelsunion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Union types moved out of models.union
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#new-json-schema-model-types" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        New JSON Schema model types
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#maintainer-changes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Maintainer changes
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Maintainer changes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#specifications-declare-their-root-type" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Specifications declare their root type
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#base-classes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Base classes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#typescript-transpilation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        TypeScript transpilation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#generator-snapshot" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Generator snapshot
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#branches" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Branches
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../examples/index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Examples
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#library-api" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Library API
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Library API">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#json-schema-compatibility-checking" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        JSON Schema compatibility checking
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#json-schema-reference-dereferencing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        JSON Schema reference dereferencing
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#compound-schema-conversion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Compound schema conversion
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#json-schema-in-typescript" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        JSON Schema in TypeScript
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#root-document-helpers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Root document helpers
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#libraryresolvenodepath" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Library.resolveNodePath
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#model-changes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Model changes
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Model changes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#documentgetinfo-returns-the-base-info-type" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Document.getInfo returns the base Info type
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rootnode-is-now-rootcapable" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        RootNode is now RootCapable
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#node-split-into-any-and-node" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Node split into Any and Node
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#visitors-gained-aftervisit-methods" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Visitors gained afterVisit methods
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#openrpcreferenceable-was-removed" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        OpenRpcReferenceable was removed
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#union-types-moved-out-of-modelsunion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Union types moved out of models.union
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#new-json-schema-model-types" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        New JSON Schema model types
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#maintainer-changes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Maintainer changes
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Maintainer changes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#specifications-declare-their-root-type" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Specifications declare their root type
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#base-classes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Base classes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#typescript-transpilation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        TypeScript transpilation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#generator-snapshot" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Generator snapshot
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#branches" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Branches
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="migrating-from-3x-to-40">Migrating from 3.x to 4.0</h1>
+<p>Version 4.0 rewrites JSON Schema support. Drafts 2019-09 and 2020-12 are supported alongside
+the older drafts, schemas from any draft can be converted to a single compound representation,
+and the compatibility checker and reference dereferencer were rebuilt around it. The entire
+JSON Schema API is now available in TypeScript as well as Java.</p>
+<p>Most of the breaking changes below are in the JSON Schema API and were deliberate. A smaller
+set reached the OpenAPI, AsyncAPI and OpenRPC models as a consequence of the same work; those
+are called out in <a href="#model-changes">Model changes</a>.</p>
+<div class="admonition note">
+<p class="admonition-title">Staying on 3.x</p>
+<p>The <code>3.1.x</code> line remains under maintenance for fixes. Pinning to the latest 3.1.x release
+is a supported option if you are not ready to upgrade.</p>
+</div>
+<p>This guide is organised by who is affected:</p>
+<table>
+<thead>
+<tr>
+<th>Section</th>
+<th>Read it if you…</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="#library-api">Library API</a></td>
+<td>call the library from application code</td>
+</tr>
+<tr>
+<td><a href="#model-changes">Model changes</a></td>
+<td>hold model types in your own API, or implement visitors</td>
+</tr>
+<tr>
+<td><a href="#maintainer-changes">Maintainer changes</a></td>
+<td>work on Apitomy Data Models itself</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="library-api">Library API</h2>
+<p>Changes to the API you call directly.</p>
+<h3 id="json-schema-compatibility-checking">JSON Schema compatibility checking</h3>
+<p><code>JsonSchemaCompatibilityChecker</code> moved from static methods to a builder and instance methods,
+and the results are now typed objects rather than booleans and a diff context.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">3.x</label><label for="__tabbed_1_2">4.0</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="language-java highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kt">boolean</span><span class="w"> </span><span class="n">ok</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">JsonSchemaCompatibilityChecker</span><span class="p">.</span><span class="na">isBackwardCompatible</span><span class="p">(</span><span class="n">originalJson</span><span class="p">,</span><span class="w"> </span><span class="n">updatedJson</span><span class="p">);</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="n">DiffContext</span><span class="w"> </span><span class="n">ctx</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">JsonSchemaCompatibilityChecker</span><span class="p">.</span><span class="na">checkBackwardCompatibility</span><span class="p">(</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">        </span><span class="n">originalJson</span><span class="p">,</span><span class="w"> </span><span class="n">updatedJson</span><span class="p">);</span>
+</span></code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="language-java highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">JsonSchemaCompatibilityChecker</span><span class="w"> </span><span class="n">checker</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">JsonSchemaCompatibilityChecker</span><span class="p">.</span><span class="na">builder</span><span class="p">().</span><span class="na">build</span><span class="p">();</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="n">CompatibilityCheckResult</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">checker</span><span class="p">.</span><span class="na">checkBackward</span><span class="p">(</span><span class="n">originalJson</span><span class="p">,</span><span class="w"> </span><span class="n">updatedJson</span><span class="p">);</span>
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="kt">boolean</span><span class="w"> </span><span class="n">ok</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">result</span><span class="p">.</span><span class="na">isCompatible</span><span class="p">();</span>
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="n">Set</span><span class="o">&lt;</span><span class="n">Difference</span><span class="o">&gt;</span><span class="w"> </span><span class="n">blocking</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">result</span><span class="p">.</span><span class="na">getIncompatibleDifferences</span><span class="p">();</span>
+</span></code></pre></div>
+</div>
+</div>
+</div>
+<p>The mapping is direct:</p>
+<table>
+<thead>
+<tr>
+<th>3.x</th>
+<th>4.0</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>isBackwardCompatible(a, b)</code></td>
+<td><code>checkBackward(a, b).isCompatible()</code></td>
+</tr>
+<tr>
+<td><code>isForwardCompatible(a, b)</code></td>
+<td><code>checkForward(a, b).isCompatible()</code></td>
+</tr>
+<tr>
+<td><code>isFullyCompatible(a, b)</code></td>
+<td><code>checkFull(a, b).isFullyCompatible()</code></td>
+</tr>
+<tr>
+<td><code>checkBackwardCompatibility(a, b)</code></td>
+<td><code>checkBackward(a, b)</code></td>
+</tr>
+</tbody>
+</table>
+<p>Build the checker once and reuse it; it holds no per-check state.</p>
+<p><code>CompatibilityCheckResult</code> carries more than the old boolean:</p>
+<div class="language-java highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">result</span><span class="p">.</span><span class="na">isCompatible</span><span class="p">();</span><span class="w">               </span><span class="c1">// the verdict</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="n">result</span><span class="p">.</span><span class="na">getDifferences</span><span class="p">();</span><span class="w">             </span><span class="c1">// every difference found</span>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="n">result</span><span class="p">.</span><span class="na">getIncompatibleDifferences</span><span class="p">();</span><span class="w"> </span><span class="c1">// only those that break compatibility</span>
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="n">result</span><span class="p">.</span><span class="na">hasUnsupportedFeatures</span><span class="p">();</span><span class="w">     </span><span class="c1">// true if the schema used something not yet modelled</span>
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="n">result</span><span class="p">.</span><span class="na">getUnsupportedFeatures</span><span class="p">();</span><span class="w">     </span><span class="c1">// and which keywords those were</span>
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="n">result</span><span class="p">.</span><span class="na">getRoot</span><span class="p">();</span><span class="w">                    </span><span class="c1">// the differences as a tree of schema locations</span>
+</span></code></pre></div>
+<p>The differences themselves changed shape too:</p>
+<ul>
+<li><strong>A nested change is reported where it is.</strong> Tightening <code>maxLength</code> on property <code>a</code> used to
+  report <code>OBJECT_TYPE_PROPERTY_SCHEMAS_CHANGED</code> at <code>/a</code>; it now reports
+  <code>STRING_TYPE_MAX_LENGTH_DECREASED</code> at <code>/properties/a/maxLength</code>. The container types
+  (<code>OBJECT_TYPE_PROPERTY_SCHEMAS_CHANGED</code>, <code>ARRAY_TYPE_ITEM_SCHEMAS_CHANGED</code>, and similar) remain
+  only for a nested schema replaced as a whole, e.g. with <code>false</code>. Compatible nested changes,
+  which were not reported at all, are reported too. Code matching on the container types should
+  match on the leaf types or on the path instead.</li>
+<li><strong>Paths are <code>JsonPointer</code>s.</strong> <code>Difference.getPathOriginal()</code> and <code>getPathUpdated()</code> return a
+  <code>JsonPointer</code> ending in the keyword that changed, rather than a <code>String</code> without keywords
+  (<code>/a</code>); call <code>toString()</code> for the string form. <code>getPathOriginal()</code> is now filled in, and each
+  path names keywords as its own schema does (<code>/items/0</code> for a draft-7 tuple, <code>/prefixItems/0</code>
+  for 2020-12). A member added to or removed from a list or map, such as <code>required</code>, points at
+  the member (<code>/required/1</code>).</li>
+<li><strong><code>getSubSchemaOriginal()</code> / <code>getSubSchemaUpdated()</code> are gone.</strong> They held <code>toString()</code> of
+  whatever was compared — a number for a bound, an object identity string such as
+  <code>JCFullSchemaImpl@4e5ed836</code> for a schema. The paths lead to the same place in each schema.</li>
+</ul>
+<p><code>checkFull</code> returns a <code>FullCompatibilityCheckResult</code>, which exposes
+<code>isBackwardCompatible()</code>, <code>isForwardCompatible()</code>, <code>isFullyCompatible()</code> and the two underlying
+<code>CompatibilityCheckResult</code> objects.</p>
+<div class="admonition warning">
+<p class="admonition-title">Check <code>hasUnsupportedFeatures()</code></p>
+<p>A result can be <code>isCompatible() == true</code> while <code>hasUnsupportedFeatures()</code> is also true, so
+treating the verdict alone as authoritative accepts comparisons that were never completed.
+Gate on both. The 3.x API had no way to surface this.</p>
+<p>The list is populated only when a dereferencer is configured, and holds the references it
+could not resolve — the sub-schemas behind those were never compared. See
+<a href="../user-guide/schema-compatibility.html#unsupported-features">Schema Compatibility</a>.</p>
+</div>
+<p>Cross-version checking is off by default and opt-in:</p>
+<div class="language-java highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="n">JsonSchemaCompatibilityChecker</span><span class="w"> </span><span class="n">checker</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">JsonSchemaCompatibilityChecker</span><span class="p">.</span><span class="na">builder</span><span class="p">()</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">        </span><span class="p">.</span><span class="na">allowCrossVersionChecking</span><span class="p">(</span><span class="kc">true</span><span class="p">)</span>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">        </span><span class="p">.</span><span class="na">build</span><span class="p">();</span>
+</span></code></pre></div>
+<p>These classes were removed as part of the rewrite; they were internals of the old checker and
+have no direct replacement: <code>ArraySchemaDiff</code>, <code>NumberSchemaDiff</code>, <code>ObjectSchemaDiff</code>,
+<code>StringSchemaDiff</code>, <code>SchemaAccessor</code>, <code>SchemaDiffVisitor</code>.</p>
+<h3 id="json-schema-reference-dereferencing">JSON Schema reference dereferencing</h3>
+<p>New in 4.0. <code>JsonSchemaRefDereferencer</code> inlines <code>$ref</code> within a JSON Schema document, with
+explicit control over depth and unresolvable references.</p>
+<div class="language-java highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="n">JsonSchemaRefDereferencer</span><span class="w"> </span><span class="n">dereferencer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">JsonSchemaRefDereferencer</span><span class="p">.</span><span class="na">builder</span><span class="p">()</span>
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">        </span><span class="p">.</span><span class="na">refResolver</span><span class="p">(</span><span class="n">myResolver</span><span class="p">)</span>
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">        </span><span class="p">.</span><span class="na">maxDepth</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span>
+</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">        </span><span class="p">.</span><span class="na">onUnresolvableRef</span><span class="p">(</span><span class="n">UnresolvableRefStrategy</span><span class="p">.</span><span class="na">COLLECT</span><span class="p">)</span>
+</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="w">        </span><span class="p">.</span><span class="na">build</span><span class="p">();</span>
+</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>
+</span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="n">DereferenceResult</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dereferencer</span><span class="p">.</span><span class="na">dereference</span><span class="p">(</span><span class="n">schema</span><span class="p">);</span>
+</span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>
+</span><span id="__span-4-9"><a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="n">JFullSchema</span><span class="w"> </span><span class="n">inlined</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">result</span><span class="p">.</span><span class="na">schema</span><span class="p">();</span>
+</span><span id="__span-4-10"><a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">unresolved</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">result</span><span class="p">.</span><span class="na">unresolvedRefs</span><span class="p">();</span>
+</span><span id="__span-4-11"><a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a><span class="kt">boolean</span><span class="w"> </span><span class="n">cyclic</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">result</span><span class="p">.</span><span class="na">hasCycles</span><span class="p">();</span>
+</span></code></pre></div>
+<p><code>UnresolvableRefStrategy.COLLECT</code> gathers unresolvable references into the result;
+<code>UnresolvableRefStrategy.FAIL</code> throws instead. Cycles are detected rather than followed — check
+<code>hasCycles()</code> before consuming the schema, since <code>cyclicRefs()</code> names the participants.</p>
+<p>The dereferencer can be handed to the compatibility checker so that comparison runs against
+fully inlined schemas:</p>
+<div class="language-java highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="n">JsonSchemaCompatibilityChecker</span><span class="p">.</span><span class="na">builder</span><span class="p">().</span><span class="na">dereferencer</span><span class="p">(</span><span class="n">dereferencer</span><span class="p">).</span><span class="na">build</span><span class="p">();</span>
+</span></code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Distinct from document dereferencing</p>
+<p>This is separate from the document-level dereferencing described in
+<a href="../user-guide/dereferencing.html">Dereferencing</a>, which operates on OpenAPI and AsyncAPI
+documents through <code>Library</code>. The two do not share an API.</p>
+</div>
+<h3 id="compound-schema-conversion">Compound schema conversion</h3>
+<p>New in 4.0. A schema from any supported draft can be converted to a single compound
+representation (<code>ModelType.JC</code>), so that code consuming schemas does not have to branch per
+draft:</p>
+<div class="language-java highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="n">JsonSchema</span><span class="w"> </span><span class="n">source</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">JsonSchema</span><span class="p">)</span><span class="w"> </span><span class="n">Library</span><span class="p">.</span><span class="na">readRootFromJSONString</span><span class="p">(</span><span class="n">schemaJson</span><span class="p">);</span>
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="n">JsonSchema</span><span class="w"> </span><span class="n">compound</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CompoundSchemaConverter</span><span class="p">.</span><span class="na">toCompound</span><span class="p">(</span><span class="n">source</span><span class="p">,</span><span class="w"> </span><span class="n">ModelType</span><span class="p">.</span><span class="na">JD7</span><span class="p">);</span>
+</span></code></pre></div>
+<p>The second argument is the draft the source schema is written in — <code>ModelType.JD4</code>, <code>JD6</code>,
+<code>JD7</code>, <code>JM201909</code> or <code>JM202012</code>.</p>
+<p>The per-draft classes (<code>JD4ToCompoundConverter</code> and friends) implement the conversion for each
+draft and are dispatched to by <code>toCompound</code>. They are not intended as entry points.</p>
+<h3 id="json-schema-in-typescript">JSON Schema in TypeScript</h3>
+<p>The JSON Schema packages were excluded from the TypeScript build in 3.x. In 4.0 they are
+transpiled and exported from <code>@apitomy/data-models</code>, so <code>JsonSchemaCompatibilityChecker</code>,
+<code>JsonSchemaRefDereferencer</code> and <code>CompoundSchemaConverter</code> are available to TypeScript callers
+with the same shape as in Java.</p>
+<h3 id="root-document-helpers">Root document helpers</h3>
+<p><code>Library</code> gained methods for working with documents whose root need not be an object — a JSON
+Schema root may be the literal <code>true</code> or <code>false</code>:</p>
+<div class="language-java highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="n">RootCapable</span><span class="w"> </span><span class="n">root</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Library</span><span class="p">.</span><span class="na">createRoot</span><span class="p">(</span><span class="n">modelType</span><span class="p">);</span>
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="n">RootCapable</span><span class="w"> </span><span class="n">root</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Library</span><span class="p">.</span><span class="na">readRoot</span><span class="p">(</span><span class="n">jsonNode</span><span class="p">);</span>
+</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="n">RootCapable</span><span class="w"> </span><span class="n">root</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Library</span><span class="p">.</span><span class="na">readRootFromJSONString</span><span class="p">(</span><span class="n">jsonString</span><span class="p">);</span>
+</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="n">JsonNode</span><span class="w"> </span><span class="n">json</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Library</span><span class="p">.</span><span class="na">writeRoot</span><span class="p">(</span><span class="n">root</span><span class="p">);</span>
+</span><span id="__span-7-5"><a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="n">String</span><span class="w"> </span><span class="n">jsonString</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Library</span><span class="p">.</span><span class="na">writeRootToJSONString</span><span class="p">(</span><span class="n">root</span><span class="p">);</span>
+</span></code></pre></div>
+<p>A boolean root is a <code>RootCapable</code> but not a <code>Node</code>, so <code>writeNode</code> cannot take it; <code>writeRoot</code>
+writes any root. JSON Schema reference resolution returns <code>Optional&lt;JsonSchema&gt;</code> rather than
+<code>Optional&lt;Node&gt;</code> for the same reason: <code>FragmentResolver</code>, <code>ResourceResolver</code>,
+<code>JsonSchemaRefResolver</code> and <code>JsonSchemaRefTraversal.resolveRef</code> changed accordingly, so a custom
+<code>ResourceResolver</code> returns <code>Optional.of((JsonSchema) root)</code> instead of a <code>Node</code>.</p>
+<h3 id="libraryresolvenodepath"><code>Library.resolveNodePath</code></h3>
+<p>The second parameter widened from <code>Document</code> to <code>Node</code>, so a path can be resolved against any
+node rather than only a document root:</p>
+<div class="language-diff highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="gd">- public static Node resolveNodePath(NodePath nodePath, Document doc)</span>
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="gi">+ public static Node resolveNodePath(NodePath nodePath, Node doc)</span>
+</span></code></pre></div>
+<p>Existing calls passing a <code>Document</code> continue to compile unchanged.</p>
+<hr />
+<h2 id="model-changes">Model changes</h2>
+<p>Changes to the generated model types. These matter if you hold model types in your own API
+signatures, or implement visitor interfaces directly.</p>
+<h3 id="documentgetinfo-returns-the-base-info-type"><code>Document.getInfo</code> returns the base <code>Info</code> type</h3>
+<p>In 3.x each family narrowed the <code>info</code> accessors; in 4.0 they are declared once on the shared
+<code>Document</code> interface:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">3.x</label><label for="__tabbed_2_2">4.0</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="language-java highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="kd">public</span><span class="w"> </span><span class="kd">interface</span> <span class="nc">Document</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">Node</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span>
+</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>
+</span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="kd">public</span><span class="w"> </span><span class="kd">interface</span> <span class="nc">OpenApiDocument</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">Document</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-9-4"><a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="w">    </span><span class="n">OpenApiInfo</span><span class="w"> </span><span class="nf">getInfo</span><span class="p">();</span>
+</span><span id="__span-9-5"><a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">setInfo</span><span class="p">(</span><span class="n">OpenApiInfo</span><span class="w"> </span><span class="n">value</span><span class="p">);</span>
+</span><span id="__span-9-6"><a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a><span class="w">    </span><span class="n">OpenApiInfo</span><span class="w"> </span><span class="nf">createInfo</span><span class="p">();</span>
+</span><span id="__span-9-7"><a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a><span class="p">}</span>
+</span></code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="language-java highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="kd">public</span><span class="w"> </span><span class="kd">interface</span> <span class="nc">Document</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">Node</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="w">    </span><span class="n">Info</span><span class="w"> </span><span class="nf">getInfo</span><span class="p">();</span>
+</span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">setInfo</span><span class="p">(</span><span class="n">Info</span><span class="w"> </span><span class="n">value</span><span class="p">);</span>
+</span><span id="__span-10-4"><a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="w">    </span><span class="n">Info</span><span class="w"> </span><span class="nf">createInfo</span><span class="p">();</span>
+</span><span id="__span-10-5"><a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a><span class="p">}</span>
+</span><span id="__span-10-6"><a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a>
+</span><span id="__span-10-7"><a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a><span class="kd">public</span><span class="w"> </span><span class="kd">interface</span> <span class="nc">OpenApiDocument</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">Document</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="cm">/* declares none of them */</span><span class="w"> </span><span class="p">}</span>
+</span></code></pre></div>
+</div>
+</div>
+</div>
+<p>Assignments that relied on the narrowed return type need a cast:</p>
+<div class="language-diff highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="gd">- OpenApiInfo info = doc.getInfo();</span>
+</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="gi">+ Info info = doc.getInfo();                      // preferred</span>
+</span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="gi">+ OpenApiInfo info = (OpenApiInfo) doc.getInfo(); // if the family type is genuinely needed</span>
+</span></code></pre></div>
+<p>In practice the first form is almost always right. <code>OpenApiInfo</code>, <code>AsyncApiInfo</code> and
+<code>OpenRpcInfo</code> are empty marker interfaces that add no members over <code>Info</code> — in 3.x as well as
+4.0 — so the cast recovers a marker and nothing else.</p>
+<div class="admonition warning">
+<p class="admonition-title"><code>setInfo</code> no longer enforces the document family</p>
+<p><code>setInfo</code> accepts any <code>Info</code> on every document type, so
+<code>openApiDoc.setInfo(someAsyncApiInfo)</code> now compiles where it previously did not. Nothing in
+the library depends on this being rejected, but the compiler will no longer catch it for
+you.</p>
+</div>
+<p><code>createInfo()</code> is unaffected in practice: the implementation classes still return the
+version-specific type (<code>OpenApi31Info</code>, <code>AsyncApi30Info</code>, and so on), so document construction
+remains type-safe.</p>
+<p>This change is a consequence of the root-declaration change described under
+<a href="#specifications-declare-their-root-type">Maintainer changes</a>. It applies only to <code>info</code>, the
+one property common to all three document families. JSON Schema is unaffected.</p>
+<h3 id="rootnode-is-now-rootcapable"><code>RootNode</code> is now <code>RootCapable</code></h3>
+<p>A document root is no longer necessarily a node — a JSON Schema root may be a boolean. The
+<code>RootNode</code> interface and <code>RootNodeImpl</code> class were replaced by <code>RootCapable</code> and
+<code>RootCapableImpl</code>.</p>
+<div class="language-diff highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="gd">- RootNode root = node.root();</span>
+</span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="gi">+ RootCapable root = node.root();</span>
+</span></code></pre></div>
+<p>The reader and writer interfaces changed with it, on all OpenAPI, AsyncAPI and OpenRPC
+versions:</p>
+<div class="language-diff highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="gd">- RootNode readRoot(ObjectNode json)          - ObjectNode writeRoot(RootNode node)</span>
+</span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="gi">+ RootCapable readRoot(JsonNode json)         + JsonNode writeRoot(RootCapable node)</span>
+</span></code></pre></div>
+<p>This affects you only if you implement or call a <code>*ModelReader</code> / <code>*ModelWriter</code> directly.
+Reading and writing through <code>Library</code> is unchanged.</p>
+<h3 id="node-split-into-any-and-node"><code>Node</code> split into <code>Any</code> and <code>Node</code></h3>
+<p>Parent, root and attachment members moved from <code>Node</code> to a new <code>Any</code> supertype. Since
+<code>Node extends Any</code>, code holding a <code>Node</code> sees no difference:</p>
+<div class="language-java highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="kd">public</span><span class="w"> </span><span class="kd">interface</span> <span class="nc">Any</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-14-2"><a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="w">    </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">isNode</span><span class="p">();</span>
+</span><span id="__span-14-3"><a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a><span class="w">    </span><span class="n">Node</span><span class="w"> </span><span class="nf">parent</span><span class="p">();</span>
+</span><span id="__span-14-4"><a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a><span class="w">    </span><span class="n">String</span><span class="w"> </span><span class="nf">parentPropertyName</span><span class="p">();</span>
+</span><span id="__span-14-5"><a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a><span class="w">    </span><span class="n">ParentPropertyType</span><span class="w"> </span><span class="nf">parentPropertyType</span><span class="p">();</span>
+</span><span id="__span-14-6"><a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a><span class="w">    </span><span class="n">String</span><span class="w"> </span><span class="nf">mapPropertyName</span><span class="p">();</span>
+</span><span id="__span-14-7"><a id="__codelineno-14-7" name="__codelineno-14-7" href="#__codelineno-14-7"></a><span class="w">    </span><span class="n">RootCapable</span><span class="w"> </span><span class="nf">root</span><span class="p">();</span>
+</span><span id="__span-14-8"><a id="__codelineno-14-8" name="__codelineno-14-8" href="#__codelineno-14-8"></a><span class="w">    </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">isAttached</span><span class="p">();</span>
+</span><span id="__span-14-9"><a id="__codelineno-14-9" name="__codelineno-14-9" href="#__codelineno-14-9"></a><span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">detach</span><span class="p">();</span>
+</span><span id="__span-14-10"><a id="__codelineno-14-10" name="__codelineno-14-10" href="#__codelineno-14-10"></a><span class="p">}</span>
+</span></code></pre></div>
+<p>Two members did change:</p>
+<ul>
+<li><strong><code>attach(Node parent)</code> was removed.</strong> Attachment is managed by the generated setters and
+  collection methods; a node becomes attached when you set it onto a parent. Use <code>detach()</code> to
+  remove a node from its parent.</li>
+<li><strong><code>setParent</code> became <code>_setParent</code></strong> on <code>NodeImpl</code>, alongside <code>_setParentPropertyName</code> and
+  <code>_setParentPropertyType</code>. The underscore marks these as internal — they are called by
+  generated code and should not be called from application code.</li>
+</ul>
+<h3 id="visitors-gained-aftervisit-methods">Visitors gained <code>afterVisit</code> methods</h3>
+<p>Every visitor interface now declares an <code>afterVisit&lt;Type&gt;</code> method alongside each <code>visit&lt;Type&gt;</code>,
+so a visitor can act on a node both before and after its children are traversed.</p>
+<div class="admonition success">
+<p class="admonition-title">Adapters are unaffected</p>
+<p><code>CombinedVisitorAdapter</code> and the per-spec adapters provide empty implementations of every
+method, old and new. If you extend an adapter — the documented approach in
+<a href="../user-guide/visitor-pattern.html">Visitor Pattern</a> — nothing changes.</p>
+</div>
+<p>If you implement a visitor <strong>interface</strong> directly, you must now implement roughly twice as many
+methods. Extending the adapter instead is the straightforward fix.</p>
+<p>Traversal also gained subtree skipping. A visitor that implements <code>TraversingVisitor</code> is handed
+a <code>TraversalContext</code>; calling <code>skip()</code> on it during a visit stops the traverser descending into
+that node's children:</p>
+<div class="language-java highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">MyVisitor</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">CombinedVisitorAdapter</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">TraversingVisitor</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-15-2"><a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>
+</span><span id="__span-15-3"><a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">TraversalContext</span><span class="w"> </span><span class="n">context</span><span class="p">;</span>
+</span><span id="__span-15-4"><a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a>
+</span><span id="__span-15-5"><a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a><span class="w">    </span><span class="nd">@Override</span>
+</span><span id="__span-15-6"><a id="__codelineno-15-6" name="__codelineno-15-6" href="#__codelineno-15-6"></a><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">setTraversalContext</span><span class="p">(</span><span class="n">TraversalContext</span><span class="w"> </span><span class="n">context</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-15-7"><a id="__codelineno-15-7" name="__codelineno-15-7" href="#__codelineno-15-7"></a><span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">context</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">context</span><span class="p">;</span>
+</span><span id="__span-15-8"><a id="__codelineno-15-8" name="__codelineno-15-8" href="#__codelineno-15-8"></a><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-15-9"><a id="__codelineno-15-9" name="__codelineno-15-9" href="#__codelineno-15-9"></a>
+</span><span id="__span-15-10"><a id="__codelineno-15-10" name="__codelineno-15-10" href="#__codelineno-15-10"></a><span class="w">    </span><span class="nd">@Override</span>
+</span><span id="__span-15-11"><a id="__codelineno-15-11" name="__codelineno-15-11" href="#__codelineno-15-11"></a><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">visitComponents</span><span class="p">(</span><span class="n">Components</span><span class="w"> </span><span class="n">node</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-15-12"><a id="__codelineno-15-12" name="__codelineno-15-12" href="#__codelineno-15-12"></a><span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">context</span><span class="p">.</span><span class="na">skip</span><span class="p">();</span><span class="w"> </span><span class="c1">// do not descend into this node's children</span>
+</span><span id="__span-15-13"><a id="__codelineno-15-13" name="__codelineno-15-13" href="#__codelineno-15-13"></a><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-15-14"><a id="__codelineno-15-14" name="__codelineno-15-14" href="#__codelineno-15-14"></a><span class="p">}</span>
+</span></code></pre></div>
+<h3 id="openrpcreferenceable-was-removed"><code>OpenRpcReferenceable</code> was removed</h3>
+<p>An empty marker interface that nothing but <code>OpenRpc1xReferenceable</code> referenced; that interface
+now extends <code>Referenceable</code> directly. Replace any reference to <code>OpenRpcReferenceable</code> with
+<code>OpenRpc1xReferenceable</code> or <code>Referenceable</code>.</p>
+<h3 id="union-types-moved-out-of-modelsunion">Union types moved out of <code>models.union</code></h3>
+<p>In 4.0 the <code>models.union</code> package keeps only the generic union machinery — <code>Union</code>, <code>UnionValue</code>
+and the primitive, list and map value types. Unions belonging to a particular specification moved
+to that specification's package, and the shared ones moved to the model root.</p>
+<table>
+<thead>
+<tr>
+<th>3.x — <code>…models.union</code></th>
+<th>4.0</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>MultiFormatSchemaSchemaUnion</code></td>
+<td><code>…models.asyncapi</code></td>
+</tr>
+<tr>
+<td><code>AnySchemaUnion</code></td>
+<td><code>…models</code></td>
+</tr>
+<tr>
+<td><code>BooleanSchemaUnion</code></td>
+<td><code>…models</code></td>
+</tr>
+<tr>
+<td><code>SchemaSchemaListUnion</code></td>
+<td><code>…models</code></td>
+</tr>
+<tr>
+<td><code>SchemaListUnionValue</code>, <code>…Impl</code></td>
+<td><code>…models</code></td>
+</tr>
+<tr>
+<td><code>ObjectUnionValue</code>, <code>…Impl</code></td>
+<td>renamed <code>AnyUnionValue</code>, <code>…Impl</code> (same package)</td>
+</tr>
+</tbody>
+</table>
+<p>The JSON Schema unions were reshaped by the rewrite rather than simply moved, following the
+<code>JSchema</code> → <code>JFullSchema</code> renaming:</p>
+<table>
+<thead>
+<tr>
+<th>3.x</th>
+<th>4.0</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>BooleanJSchemaJSchemaListUnion</code></td>
+<td><code>…models.jsonschema.BooleanFullSchemaJsonSchemaListUnion</code></td>
+</tr>
+<tr>
+<td><code>JSchemaListUnionValue</code>, <code>…Impl</code></td>
+<td><code>…models.jsonschema.JsonSchemaListUnionValue</code>, <code>…Impl</code></td>
+</tr>
+</tbody>
+</table>
+<p>These are import-only changes for most callers — the types themselves behave as before. They are
+easy to miss because they break at compile time in code that has nothing to do with JSON Schema:
+anything touching AsyncAPI multi-format schemas imports <code>MultiFormatSchemaSchemaUnion</code>.</p>
+<p>The tuple form of <code>items</code> (drafts 4 to 2019-09) is the exception: its elements may be boolean
+schemas, as the specifications allow, so the list is a list of <code>JsonSchema</code> rather than of full
+schemas. Its accessors are <code>isJsonSchemaList()</code> / <code>asJsonSchemaList()</code>, returning
+<code>List&lt;JsonSchema&gt;</code>; check each element with <code>isFullSchema()</code> / <code>isBoolean()</code> before using it.</p>
+<h3 id="new-json-schema-model-types">New JSON Schema model types</h3>
+<p>The rewrite added union types to the shared model namespace — <code>Any</code>, <code>AnySchemaUnion</code>,
+<code>BooleanSchemaUnion</code>, <code>SchemaListUnionValue</code>, <code>SchemaSchemaListUnion</code> — and
+<code>MultiFormatSchemaSchemaUnion</code> to AsyncAPI, which is how AsyncAPI 3.x multi-format schemas are
+now represented. These are additions; nothing was removed to make room for them.</p>
+<p>Per-version <code>*DiffTraverser</code> and <code>*DiffVisitor</code> types were also generated for every
+specification version, supporting structural comparison of two documents of the same type.</p>
+<hr />
+<h2 id="maintainer-changes">Maintainer changes</h2>
+<p>Internal changes. Not needed to use the library, but worth knowing if you work on it.</p>
+<h3 id="specifications-declare-their-root-type">Specifications declare their root type</h3>
+<p>The per-entity <code>root: true</code> flag was replaced by a top-level <code>root:</code> declaration in each
+specification version file:</p>
+<div class="language-diff highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="gi">+ root:</span>
+</span><span id="__span-16-2"><a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a><span class="gi">+   type: Document</span>
+</span><span id="__span-16-3"><a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a><span class="gi">+</span>
+</span><span id="__span-16-4"><a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a><span class="w"> </span> entities:
+</span><span id="__span-16-5"><a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a><span class="w"> </span>   - name: Document
+</span><span id="__span-16-6"><a id="__codelineno-16-6" name="__codelineno-16-6" href="#__codelineno-16-6"></a><span class="gd">-     root: true</span>
+</span></code></pre></div>
+<p>This is what enables a non-object root (JSON Schema declares <code>type: JsonSchema</code>, whose root may
+be a boolean). It also has a side effect worth remembering: <code>Document</code> is now an ordinary
+entity and so participates in cross-specification property hoisting like any other, which is
+what moved <code>getInfo</code> onto the base <code>Document</code> interface.</p>
+<h3 id="base-classes">Base classes</h3>
+<p><code>RootNode</code> / <code>RootNodeImpl</code> were replaced by <code>RootCapable</code> / <code>RootCapableImpl</code>, and <code>Any</code> was
+extracted from <code>Node</code>. New under <code>visitors/</code>: <code>TraversalAction</code>,
+<code>convert/AbstractConversionTraverser</code>, and a <code>diff/</code> package holding <code>AbstractDiffTraverser</code>,
+<code>CollectionDiff</code>, <code>PairingKey</code>, <code>PairingStrategyProvider</code> and the default pairing strategies
+that drive document diffing.</p>
+<h3 id="typescript-transpilation">TypeScript transpilation</h3>
+<p>The JSON Schema packages are no longer excluded from the JSweet build. Bringing them in
+required removing constructs that compile under <code>javac</code> but not JSweet, and added three
+helpers that exist specifically to keep those workarounds in one place:</p>
+<ul>
+<li><code>CollectionUtil</code> — <code>copyOfList</code> / <code>copyOfSet</code> / <code>copyOfMap</code>, replacing <code>List.copyOf</code> and
+  <code>java.util.Collections</code>. Distinct names because JSweet cannot overload by parameter type.</li>
+<li><code>NumberUtil.compare</code> — replacing <code>BigDecimal</code> comparison.</li>
+<li><code>ResourceUtil.readResourceAsString</code> — replacing classpath resource loading. Calls are
+  substituted at transpile time with the file contents inlined, so <strong>the argument must be a
+  string literal</strong>.</li>
+</ul>
+<p>The full constraint list is in <code>.claude/rules/jsweet-transpilation.md</code>.</p>
+<div class="admonition danger">
+<p class="admonition-title">Verify on JDK 17 or 21</p>
+<p><code>var</code> crashes the transpiler on the JDKs CI builds with, but transpiles cleanly on JDK 25.
+A green local build on a newer JDK proves nothing:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>JAVA_HOME=/usr/lib/jvm/java-21-temurin-jdk mvn clean install -Ptranspilation
+</span></code></pre></div>
+</div>
+<h3 id="generator-snapshot">Generator snapshot</h3>
+<p>Templates under <code>generator/src/main/resources/base/</code> are copied into generated output, so every
+transpilation constraint applies to them. After changing one, regenerate the committed
+snapshot and review the diff:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>rm -rf generator/src/test/resources/io/apitomy/umg/synthetic/expected/
+</span><span id="__span-18-2"><a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a>mvn -pl generator test -Dtest=SyntheticSnapshotTest
+</span></code></pre></div>
+<h3 id="branches">Branches</h3>
+<p><code>main</code> is the 4.0 line. The <code>3.1.x</code> branch carries the 3.1.x maintenance line and has its own
+release workflow; fixes that apply to both must be landed on each.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/Apitomy/apitomy-data-models" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.tabs", "navigation.sections", "navigation.expand", "navigation.top", "search.highlight", "search.share", "search.suggest", "content.code.copy"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"default": "latest", "provider": "mike"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+    
+  </body>
+</html>
