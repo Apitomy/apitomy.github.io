@@ -15,6 +15,10 @@
         <link rel="canonical" href="https://www.apitomy.io/projects/axiom/docs/developer-guide/event-sourcing-design.html">
       
       
+        <link rel="prev" href="upgrading-and-backups.html">
+      
+      
+        <link rel="next" href="workflow-input-contract.html">
       
       
         
@@ -25,7 +29,7 @@
     
     
       
-        <title>Event System — Design Document - Apitomy Axiom</title>
+        <title>Event System Design - Apitomy Axiom</title>
       
     
     
@@ -137,7 +141,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Event System — Design Document
+              Event System Design
             
           </span>
         </div>
@@ -298,10 +302,12 @@
   
   
   
+    
+  
   
     
     
-      <li class="md-tabs__item">
+      <li class="md-tabs__item md-tabs__item--active">
         <a href="stack-and-architecture.html" class="md-tabs__link">
           
   
@@ -676,6 +682,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../user-guide/workflows.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Workflows
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../user-guide/ai-assistant.html" class="md-nav__link">
         
   
@@ -736,28 +770,31 @@
       
   
   
+    
   
   
+  
     
     
     
     
+      
+        
+        
       
       
         
       
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
       
         
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
         
           
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
-        
-          
-          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
             
   
   
@@ -775,7 +812,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_4">
             <span class="md-nav__icon md-icon"></span>
             
@@ -913,6 +950,320 @@
     
   
     Database & Migrations
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="upgrading-and-backups.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Upgrading and Backups
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Event System Design
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="event-sourcing-design.html" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Event System Design
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Overview
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Architecture
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Architecture">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#connections-eventsourceconnection" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Connections (EventSourceConnection)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#event-stream" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Event Stream
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#subscriptions-eventsubscription" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Subscriptions (EventSubscription)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#routing-rules" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Routing Rules
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#processing-ledger" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Processing Ledger
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#rest-api" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        REST API
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="REST API">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#connections" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Connections
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#event-stream_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Event Stream
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#subscriptions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Subscriptions
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#retention" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Retention
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configuration-packs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configuration Packs
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="workflow-input-contract.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Workflow Input Contract
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="workflow-human-task-nodes.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Workflow Human-Task Nodes
   
 
     
@@ -1177,17 +1528,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#database-tables" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Database Tables
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#retention" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1370,7 +1710,12 @@ Each <code>(event_id, subscription_id)</code> pair gets a ledger entry with one 
 </table>
 <p><strong>Key behaviors:</strong>
 - <strong>Restart-safe:</strong> No in-memory state. The ledger is the complete record.
-- <strong>Retroactive:</strong> Enabling a new subscription evaluates all existing events against it.
+- <strong>Cutoff-scoped, not fully retroactive:</strong> Each subscription has a
+  <code>processEventsFrom</code> timestamp, defaulted to the moment the subscription is created
+  (it can be set to an earlier or later time explicitly, e.g. via the API). Only
+  events whose <code>timestamp</code> is at or after that cutoff are ever evaluated against the
+  subscription. Enabling a subscription does not retroactively evaluate events that
+  occurred before its cutoff.
 - <strong>Retry:</strong> Failed entries are re-attempted every tick (5-second interval).
 - <strong>Dedup:</strong> Unique constraint on <code>(event_id, subscription_id)</code> prevents duplicate processing.
 - <strong>Startup recovery:</strong> Orphaned <code>pending</code> entries from a previous crash are bulk-updated
@@ -1484,41 +1829,6 @@ Each <code>(event_id, subscription_id)</code> pair gets a ledger entry with one 
 <td>POST</td>
 <td><code>/subscriptions/preview</code></td>
 <td>Preview filter expression against existing events</td>
-</tr>
-</tbody>
-</table>
-<h2 id="database-tables">Database Tables</h2>
-<table>
-<thead>
-<tr>
-<th>Table</th>
-<th>Purpose</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>event_source_connection</code></td>
-<td>Connection definitions (VARCHAR slug PK)</td>
-</tr>
-<tr>
-<td><code>stream_event</code></td>
-<td>Normalized event stream (UUID PK, unique on <code>source_event_id</code>)</td>
-</tr>
-<tr>
-<td><code>event_subscription</code></td>
-<td>Subscription definitions (BIGINT PK)</td>
-</tr>
-<tr>
-<td><code>event_subscription_label</code></td>
-<td>Subscription labels (join table)</td>
-</tr>
-<tr>
-<td><code>event_processing_ledger</code></td>
-<td>Processing state per (event, subscription) pair</td>
-</tr>
-<tr>
-<td><code>connection_poll_log</code></td>
-<td>Poll cycle audit log per connection (3-day retention)</td>
 </tr>
 </tbody>
 </table>
@@ -2176,102 +2486,6 @@ in <code>sourceData</code>.</p>
 <p><strong><code>ref</code> construction:</strong> <code>{baseUrl}/browse/{issueKey}</code></p>
 <p><strong>Deduplication:</strong> Stable <code>sourceEventId</code> from <code>{issueKey}-{changelogEntryId}</code>,
 <code>{issueKey}-created</code>, or <code>{issueKey}-comment-{commentId}</code>.</p>
-<hr />
-<h1 id="key-implementation-classes">Key Implementation Classes</h1>
-<table>
-<thead>
-<tr>
-<th>Component</th>
-<th>Path</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Event envelope + payloads</td>
-<td><code>core/.../events/model/</code> (NormalizedEvent, EventType, 26 payload records)</td>
-</tr>
-<tr>
-<td>Connection entity</td>
-<td><code>core/.../entities/EventSourceConnectionEntity.java</code></td>
-</tr>
-<tr>
-<td>Stream event entity</td>
-<td><code>core/.../entities/StreamEventEntity.java</code></td>
-</tr>
-<tr>
-<td>Subscription entity</td>
-<td><code>core/.../entities/EventSubscriptionEntity.java</code></td>
-</tr>
-<tr>
-<td>Processing ledger entity</td>
-<td><code>core/.../entities/EventProcessingLedgerEntity.java</code></td>
-</tr>
-<tr>
-<td>Poll log entity</td>
-<td><code>core/.../entities/ConnectionPollLogEntity.java</code></td>
-</tr>
-<tr>
-<td>Routing rule model</td>
-<td><code>core/.../events/model/RoutingRule.java</code></td>
-</tr>
-<tr>
-<td>Filter evaluator</td>
-<td><code>core/.../filters/SubscriptionFilterEvaluator.java</code></td>
-</tr>
-<tr>
-<td>GitHub poller</td>
-<td><code>events/github/.../v2/GitHubConnectionPoller.java</code></td>
-</tr>
-<tr>
-<td>GitHub normalizer</td>
-<td><code>events/github/.../v2/GitHubEventNormalizerV2.java</code></td>
-</tr>
-<tr>
-<td>GitHub API client</td>
-<td><code>events/github/.../v2/GitHubEventsApiClient.java</code></td>
-</tr>
-<tr>
-<td>Jira poller</td>
-<td><code>events/jira/.../v2/JiraConnectionPoller.java</code></td>
-</tr>
-<tr>
-<td>Jira normalizer</td>
-<td><code>events/jira/.../v2/JiraEventNormalizerV2.java</code></td>
-</tr>
-<tr>
-<td>Jira API client</td>
-<td><code>events/jira/.../v2/JiraEventsApiClient.java</code></td>
-</tr>
-<tr>
-<td>Event stream service</td>
-<td><code>events/core/.../EventStreamService.java</code></td>
-</tr>
-<tr>
-<td>Stream orchestrator</td>
-<td><code>app/.../EventStreamOrchestrator.java</code></td>
-</tr>
-<tr>
-<td>Workflow dispatcher</td>
-<td><code>app/.../WorkflowEventDispatcher.java</code></td>
-</tr>
-<tr>
-<td>Stream event cleanup</td>
-<td><code>app/.../StreamEventCleanup.java</code></td>
-</tr>
-<tr>
-<td>Connections REST</td>
-<td><code>app/.../rest/ConnectionsResourceImpl.java</code></td>
-</tr>
-<tr>
-<td>Stream events REST</td>
-<td><code>app/.../rest/StreamEventsResourceImpl.java</code></td>
-</tr>
-<tr>
-<td>Subscriptions REST</td>
-<td><code>app/.../rest/SubscriptionsResourceImpl.java</code></td>
-</tr>
-</tbody>
-</table>
 
 
 

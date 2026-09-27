@@ -817,6 +817,17 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#events" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Events
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#logs" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -839,10 +850,21 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#configuration" class="md-nav__link">
+  <a href="#components" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Configuration
+        Components
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#settings" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Settings
       
     </span>
   </a>
@@ -889,6 +911,34 @@
     
   
     Usage Examples
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="workflows.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Workflows
   
 
     
@@ -1166,6 +1216,118 @@
   
   
     <li class="md-nav__item">
+      <a href="../developer-guide/upgrading-and-backups.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Upgrading and Backups
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../developer-guide/event-sourcing-design.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Event System Design
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../developer-guide/workflow-input-contract.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Workflow Input Contract
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../developer-guide/workflow-human-task-nodes.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Workflow Human-Task Nodes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../developer-guide/tracing.html" class="md-nav__link">
         
   
@@ -1405,6 +1567,17 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#events" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Events
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#logs" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1427,10 +1600,21 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#configuration" class="md-nav__link">
+  <a href="#components" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Configuration
+        Components
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#settings" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Settings
       
     </span>
   </a>
@@ -1482,8 +1666,9 @@ find things.</p>
 <p>The masthead runs across the top of every page. It contains:</p>
 <ul>
 <li><strong>Apitomy Axiom</strong> — click the title to return to the Dashboards page from any page</li>
-<li><strong>Robot icon</strong> — opens the <a href="ai-assistant.html">AI Assistant</a> (visible only when the
-  Claude Code engine is active)</li>
+<li><strong>Robot icon</strong> — opens the <a href="ai-assistant.html">AI Assistant</a> (visible only when at
+  least one registered agent supports interactive sessions)</li>
+<li><strong>Theme toggle</strong> — cycles between light, dark, and system theme</li>
 <li><strong>Question mark icon</strong> — opens the About dialog showing the application version, active
   AI engine, and links to the source repository</li>
 </ul>
@@ -1518,7 +1703,7 @@ filters</strong> — when a dashboard has labels, its widgets filter their data 
 items matching those labels. For example, a dashboard labeled <code>"team-a"</code> would show
 only projects, events, and activity associated with that label.</p>
 <h3 id="widget-catalog">Widget Catalog</h3>
-<p>Axiom ships with 12 built-in widget types across four categories:</p>
+<p>Axiom ships with built-in widget types across several categories:</p>
 <table>
 <thead>
 <tr>
@@ -1556,14 +1741,16 @@ maximum row count, and the AI Cost Summary widget lets you choose a time window
 to adjust its settings.</p>
 <hr />
 <h2 id="sidebar-navigation">Sidebar Navigation</h2>
-<p>The sidebar organizes the UI into six sections.</p>
+<p>The sidebar organizes the UI into these sections: Dashboards, Inbox, Reports, Projects,
+Events, Logs, Metrics, Components, and Settings.</p>
 <h3 id="dashboards_1">Dashboards</h3>
 <p>See <a href="#dashboards">Dashboards</a> above.</p>
 <h3 id="inbox">Inbox</h3>
-<p>The <strong>Inbox</strong> page shows Manager decisions that require human review — typically
-low-confidence decisions that were not auto-executed. A badge on the sidebar shows
-the count of unreviewed items. Click any item to review the Manager's reasoning and
-approve or reject the proposed action.</p>
+<p>The <strong>Inbox</strong> page shows tasks with status <strong>AwaitingInput</strong> — human tasks routed
+directly to a person, low-confidence Manager decisions escalated for review, tasks
+where an AI agent asked a question, and workflow runs parked at a human-task node. A
+badge on the sidebar shows the count of unreviewed items. Click any item to review its
+context and respond.</p>
 <h3 id="reports">Reports</h3>
 <p>The <strong>Reports</strong> page lists all generated reports with their title, status, time range,
 labels, and generation date. You can filter by title, status, or labels and paginate
@@ -1571,25 +1758,52 @@ through results.</p>
 <p>Click any report to view its full rendered content, metadata (cost, duration, time
 range), and execution log.</p>
 <h3 id="projects">Projects</h3>
-<p>The <strong>Projects</strong> page lists all projects with their name, status, issue reference,
-labels, and last update. You can filter by name, status, or labels.</p>
+<p>The <strong>Projects</strong> page lists all projects with their name, status, ref, labels, and last
+update. You can filter by name, status, or labels.</p>
 <p>Click any project to open its detail page, which has several tabs:</p>
 <ul>
-<li><strong>Summary</strong> — project status, issue reference, repository, labels, and key metrics</li>
+<li><strong>Summary</strong> — project status, ref, repository, labels, and key metrics</li>
 <li><strong>Tasks</strong> — all tasks assigned within this project, with status and execution details</li>
 <li><strong>Thread</strong> — a chronological log of everything that happened in the project (events
   received, manager decisions, task results)</li>
-<li><strong>Events</strong> — raw events from external sources associated with this project</li>
+<li><strong>Events</strong> — raw stream events from connections associated with this project</li>
 </ul>
 <p>From the project detail page you can also:</p>
 <ul>
 <li><strong>Trigger an action</strong> — manually run a user-triggerable action type against this
   project</li>
+<li><strong>Run a workflow</strong> — start a workflow definition on this project (if none is already
+  running)</li>
 <li><strong>Edit labels</strong> — add or remove labels for organization and filtering</li>
 <li><strong>Delete</strong> — remove a completed project and all its data</li>
 </ul>
+<h3 id="events">Events</h3>
+<p>The <strong>Events</strong> section covers the connection-based event pipeline described in
+<a href="concepts.html#event-driven-automation">Event-Driven Automation</a>:</p>
+<table>
+<thead>
+<tr>
+<th>Page</th>
+<th>What it shows</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Event Stream</strong></td>
+<td>Every normalized event Axiom has recorded from its connections, browsable and filterable. Click a row to view the full typed payload.</td>
+</tr>
+<tr>
+<td><strong>Connections</strong></td>
+<td>Configured links to GitHub/Jira, their poll status, and poll log history</td>
+</tr>
+<tr>
+<td><strong>Subscriptions</strong></td>
+<td>Filtered, routed views over the event stream — create, edit, and preview filter expressions here</td>
+</tr>
+</tbody>
+</table>
 <h3 id="logs">Logs</h3>
-<p>The <strong>Logs</strong> section has four sub-pages, each showing a different slice of system
+<p>The <strong>Logs</strong> section has several sub-pages, each showing a different slice of system
 activity:</p>
 <table>
 <thead>
@@ -1604,37 +1818,36 @@ activity:</p>
 <td>Unified feed of all system events — project creation, task execution, report generation, manager decisions</td>
 </tr>
 <tr>
-<td><strong>Events</strong></td>
-<td>Raw events received from event sources (GitHub issues, PRs, comments)</td>
-</tr>
-<tr>
 <td><strong>Manager Decisions</strong></td>
 <td>The AI Manager's triage results — what action it chose for each event and its confidence score</td>
 </tr>
 <tr>
 <td><strong>Tasks</strong></td>
-<td>Task execution history — which actor ran what action type, duration, cost, and outcome</td>
+<td>Task execution history — which agent ran what action type, duration, cost, and outcome</td>
+</tr>
+<tr>
+<td><strong>Job Runs</strong></td>
+<td>Scheduled job execution history</td>
 </tr>
 <tr>
 <td><strong>Traces</strong></td>
-<td>Visual graph of pipeline execution — shows every step from event ingestion through manager evaluation, decision processing, and task execution</td>
+<td>Browse and filter execution traces across manager evaluations, workflow runs, scheduled job runs, and report generation</td>
+</tr>
+<tr>
+<td><strong>Workflow Runs</strong></td>
+<td>All workflow instances across all projects, with status and current node</td>
 </tr>
 </tbody>
 </table>
 <p>Each log page supports filtering and pagination.</p>
-<p>The <strong>Traces</strong> page deserves special mention. While the other log pages show tabular data,
-traces render as an interactive directed graph. Each node in the graph represents a step
-in the pipeline (event received, manager evaluated, task created, tool executed, etc.).
-Nodes are color-coded by status — green for completed, blue for in-progress, red for
-failed. Click any node to open a detail modal showing the full data for that step,
-including tool input/output for tool executions and AI reasoning for manager evaluations.</p>
-<p>You can also navigate to a trace directly from:</p>
-<ul>
-<li>An <strong>event row</strong> on the Events page — click <strong>View Trace</strong> to see the full pipeline
-  trace for that event</li>
-<li>A <strong>report detail page</strong> — click <strong>View Execution Trace</strong> to see the report generation
-  trace</li>
-</ul>
+<p>The <strong>Traces</strong> page deserves special mention. While the other log pages show tabular
+data, a trace detail page renders the node tree as an interactive tree. Each node
+represents a step in the run (event received, decision processed, task created, tool
+executed, etc.) and is color-coded by status. Click any node to open a detail view
+showing the full data for that step, including tool input/output for tool executions
+and AI reasoning for manager evaluations.</p>
+<p>You can also navigate to a trace directly from a <strong>report detail page</strong> — click
+<strong>View Execution Trace</strong> — or from a project's tasks and workflow runs.</p>
 <h3 id="metrics">Metrics</h3>
 <p>The <strong>Metrics</strong> section has two sub-pages:</p>
 <table>
@@ -1647,7 +1860,7 @@ including tool input/output for tool executions and AI reasoning for manager eva
 <tbody>
 <tr>
 <td><strong>AI Usage</strong></td>
-<td>Token costs broken down by invocation type (task vs. manager), action type, and date range. Shows summary totals at the top.</td>
+<td>Token costs broken down by invocation type (task, manager, report, scheduled job), action type, and date range. Shows summary totals at the top.</td>
 </tr>
 <tr>
 <td><strong>Disk Usage</strong></td>
@@ -1655,9 +1868,9 @@ including tool input/output for tool executions and AI reasoning for manager eva
 </tr>
 </tbody>
 </table>
-<h3 id="configuration">Configuration</h3>
-<p>The <strong>Configuration</strong> section contains all the setup pages. Each page lets you create,
-edit, and delete configuration items:</p>
+<h3 id="components">Components</h3>
+<p>The <strong>Components</strong> section contains configuration for the units of work Axiom can
+execute:</p>
 <table>
 <thead>
 <tr>
@@ -1667,20 +1880,16 @@ edit, and delete configuration items:</p>
 </thead>
 <tbody>
 <tr>
-<td><strong>AI Engine</strong></td>
-<td>View the active engine, health checks, and available models</td>
-</tr>
-<tr>
 <td><strong>Action Types</strong></td>
-<td>Define kinds of work — prompt templates, allowed tools, execution mode, and labels for event source scoping</td>
+<td>Define kinds of work — prompt templates, allowed tools, execution mode, and manager/user triggerability</td>
 </tr>
 <tr>
-<td><strong>Actors</strong></td>
-<td>Register AI agents and human actors with capabilities</td>
+<td><strong>Agents</strong></td>
+<td>Register AI agent slots with capabilities that determine which work they're eligible for</td>
 </tr>
 <tr>
-<td><strong>Manager</strong></td>
-<td>Edit the Manager's system prompt and prompt template</td>
+<td><strong>AI Assistant</strong> (Session Templates)</td>
+<td>Define AI Assistant session templates with system prompts, agent type, tools, and MCP servers</td>
 </tr>
 <tr>
 <td><strong>MCP Servers</strong></td>
@@ -1695,10 +1904,6 @@ edit, and delete configuration items:</p>
 <td>Define CRON-style automation with schedules, prompt or script templates, and allowed tools</td>
 </tr>
 <tr>
-<td><strong>Event Sources</strong></td>
-<td>Connect to GitHub or Jira repositories for event polling, with labels and event filters</td>
-</tr>
-<tr>
 <td><strong>Secrets</strong></td>
 <td>Store encrypted credentials injected into subprocesses</td>
 </tr>
@@ -1711,8 +1916,32 @@ edit, and delete configuration items:</p>
 <td>Group tools into named collections for reuse</td>
 </tr>
 <tr>
-<td><strong>Session Templates</strong></td>
-<td>Define AI Assistant session templates with system prompts, tools, and MCP servers</td>
+<td><strong>Workflows</strong></td>
+<td>Author, version, and publish workflow definitions</td>
+</tr>
+</tbody>
+</table>
+<h3 id="settings">Settings</h3>
+<p>The <strong>Settings</strong> section contains instance-wide configuration:</p>
+<table>
+<thead>
+<tr>
+<th>Page</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>AI Engine</strong></td>
+<td>View and change the default agent type, health checks, and available models per registered agent</td>
+</tr>
+<tr>
+<td><strong>Manager</strong></td>
+<td>Edit the Manager's system prompt and prompt template</td>
+</tr>
+<tr>
+<td><strong>Data Retention</strong></td>
+<td>Configure how long closed projects, traces, and events are kept before automatic cleanup</td>
 </tr>
 <tr>
 <td><strong>Configuration Packs</strong></td>

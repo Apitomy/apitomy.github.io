@@ -754,6 +754,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../user-guide/workflows.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Workflows
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../user-guide/ai-assistant.html" class="md-nav__link">
         
   
@@ -1011,6 +1039,118 @@
   
   
     <li class="md-nav__item">
+      <a href="../developer-guide/upgrading-and-backups.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Upgrading and Backups
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../developer-guide/event-sourcing-design.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Event System Design
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../developer-guide/workflow-input-contract.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Workflow Input Contract
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../developer-guide/workflow-human-task-nodes.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Workflow Human-Task Nodes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../developer-guide/tracing.html" class="md-nav__link">
         
   
@@ -1180,16 +1320,16 @@ kinds — bug reports, feature requests, documentation improvements, and code co
 <h2 id="building-from-source">Building from Source</h2>
 <p>To build and run Axiom for development, you'll need:</p>
 <ul>
-<li><strong>Java</strong> 25+</li>
-<li><strong>Maven</strong> 3.9+</li>
-<li><strong>Node.js</strong> 20+ (for the UI)</li>
+<li><strong>Java</strong></li>
+<li><strong>Maven</strong></li>
+<li><strong>Node.js</strong> and <strong>npm</strong> (for the UI)</li>
 </ul>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/Apitomy/apitomy-axiom.git
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="nb">cd</span><span class="w"> </span>apitomy-axiom
 </span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>./dev.sh
 </span></code></pre></div>
-<p>This starts the Quarkus backend on <code>http://localhost:9090</code> and the Vite UI dev server on
-<code>http://localhost:9191</code>. See the
+<p>This builds the backend, then starts it together with the Vite UI dev server on
+<code>http://localhost:9191</code> (backend on <code>http://localhost:9090</code>). See the
 <a href="https://github.com/Apitomy/apitomy-axiom/blob/main/README.md">README</a> for full build
 instructions and development workflow details.</p>
 

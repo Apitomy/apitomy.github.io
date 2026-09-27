@@ -15,7 +15,7 @@
         <link rel="canonical" href="https://www.apitomy.io/projects/axiom/docs/developer-guide/tracing.html">
       
       
-        <link rel="prev" href="database-and-migrations.html">
+        <link rel="prev" href="workflow-human-task-nodes.html">
       
       
         <link rel="next" href="ui-development.html">
@@ -682,6 +682,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../user-guide/workflows.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Workflows
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../user-guide/ai-assistant.html" class="md-nav__link">
         
   
@@ -922,6 +950,118 @@
     
   
     Database & Migrations
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="upgrading-and-backups.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Upgrading and Backups
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="event-sourcing-design.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Event System Design
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="workflow-input-contract.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Workflow Input Contract
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="workflow-human-task-nodes.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Workflow Human-Task Nodes
   
 
     
@@ -1851,159 +1991,57 @@ new pipeline stages with tracing.</p>
 </ul>
 <hr />
 <h2 id="data-model">Data Model</h2>
-<p>All trace entities live in <code>core/src/main/java/io/apitomy/axiom/core/entities/</code>.</p>
+<p>Trace entities live in <code>core/src/main/java/io/apitomy/axiom/core/entities/</code>. Read
+<code>TraceEntity.java</code>, <code>TraceNodeEntity.java</code>, and <code>ToolExecutionEntity.java</code> directly for
+the exact field list — the concepts below are what you need to work with the API and
+build new instrumentation.</p>
 <h3 id="traceentity">TraceEntity</h3>
-<p>Root of a complete execution trace. Extends <code>PanacheEntityBase</code> (not <code>PanacheEntity</code>)
-because it uses a UUID primary key instead of the standard auto-increment Long.</p>
-<p><strong>Table:</strong> <code>trace</code></p>
+<p>The root of a complete execution trace (table <code>trace</code>). It uses a UUID primary key
+(<code>traceId</code>) instead of the standard auto-increment <code>Long</code> used elsewhere, because that
+ID doubles as the correlation identifier threaded through subprocess environment
+variables and API callbacks. Each trace has a <code>traceType</code> (see below), a status
+(<code>in-progress</code>, <code>completed</code>, or <code>failed</code>), a human-readable summary, optional
+<code>eventId</code>/<code>projectId</code>/<code>reportId</code> associations, and start/completion timestamps.</p>
+<p>Current trace types:</p>
 <table>
 <thead>
 <tr>
-<th>Field</th>
-<th>Type</th>
-<th>Nullable</th>
-<th>Description</th>
+<th>Trace Type</th>
+<th>Trigger</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><code>traceId</code></td>
-<td><code>UUID</code></td>
-<td>No (PK)</td>
-<td>Unique trace identifier</td>
+<td><code>manager</code></td>
+<td>A subscription routes an event to the Manager for evaluation</td>
 </tr>
 <tr>
-<td><code>traceType</code></td>
-<td><code>String</code></td>
-<td>No</td>
-<td>Trace category: <code>"event-pipeline"</code> or <code>"report-generation"</code></td>
+<td><code>workflow</code></td>
+<td>A workflow instance is triggered</td>
 </tr>
 <tr>
-<td><code>status</code></td>
-<td><code>String</code></td>
-<td>No</td>
-<td>Current status: <code>"in-progress"</code>, <code>"completed"</code>, or <code>"failed"</code></td>
+<td><code>scheduled-job-execution</code></td>
+<td>A scheduled job run starts</td>
 </tr>
 <tr>
-<td><code>summary</code></td>
-<td><code>String(1024)</code></td>
-<td>No</td>
-<td>Human-readable description (truncated to 1024 chars)</td>
+<td><code>report-generation</code></td>
+<td>A report definition runs (scheduled or ad hoc)</td>
 </tr>
 <tr>
-<td><code>eventId</code></td>
-<td><code>Long</code></td>
-<td>Yes</td>
-<td>Associated event ID (for event pipeline traces)</td>
-</tr>
-<tr>
-<td><code>projectId</code></td>
-<td><code>Long</code></td>
-<td>Yes</td>
-<td>Associated project ID</td>
-</tr>
-<tr>
-<td><code>reportId</code></td>
-<td><code>Long</code></td>
-<td>Yes</td>
-<td>Associated report ID (for report generation traces)</td>
-</tr>
-<tr>
-<td><code>startedOn</code></td>
-<td><code>Instant</code></td>
-<td>No</td>
-<td>Trace start timestamp</td>
-</tr>
-<tr>
-<td><code>completedOn</code></td>
-<td><code>Instant</code></td>
-<td>Yes</td>
-<td>Trace completion timestamp</td>
+<td><code>user-action</code></td>
+<td>A user manually triggers an action type from the project detail page</td>
 </tr>
 </tbody>
 </table>
 <h3 id="tracenodeentity">TraceNodeEntity</h3>
-<p>A single step/span within a trace tree. Extends <code>PanacheEntity</code> (auto-increment Long PK).</p>
-<p><strong>Table:</strong> <code>trace_node</code></p>
-<table>
-<thead>
-<tr>
-<th>Field</th>
-<th>Type</th>
-<th>Nullable</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>id</code></td>
-<td><code>Long</code></td>
-<td>No (PK)</td>
-<td>Auto-generated node ID</td>
-</tr>
-<tr>
-<td><code>traceId</code></td>
-<td><code>UUID</code></td>
-<td>No</td>
-<td>Parent trace UUID</td>
-</tr>
-<tr>
-<td><code>parentNodeId</code></td>
-<td><code>Long</code></td>
-<td>Yes</td>
-<td>Parent node ID (<code>null</code> for root nodes)</td>
-</tr>
-<tr>
-<td><code>nodeType</code></td>
-<td><code>String</code></td>
-<td>No</td>
-<td>Step type identifier (see Node Types below)</td>
-</tr>
-<tr>
-<td><code>status</code></td>
-<td><code>String</code></td>
-<td>No</td>
-<td>Current status: <code>"in-progress"</code>, <code>"completed"</code>, or <code>"failed"</code></td>
-</tr>
-<tr>
-<td><code>summary</code></td>
-<td><code>String(1024)</code></td>
-<td>No</td>
-<td>Human-readable description</td>
-</tr>
-<tr>
-<td><code>startedOn</code></td>
-<td><code>Instant</code></td>
-<td>No</td>
-<td>Node start timestamp</td>
-</tr>
-<tr>
-<td><code>completedOn</code></td>
-<td><code>Instant</code></td>
-<td>Yes</td>
-<td>Node completion timestamp</td>
-</tr>
-<tr>
-<td><code>durationMs</code></td>
-<td><code>Long</code></td>
-<td>Yes</td>
-<td>Elapsed time in milliseconds (set at completion)</td>
-</tr>
-<tr>
-<td><code>entityType</code></td>
-<td><code>String</code></td>
-<td>Yes</td>
-<td>Type of the referenced detail entity</td>
-</tr>
-<tr>
-<td><code>entityId</code></td>
-<td><code>Long</code></td>
-<td>Yes</td>
-<td>ID of the referenced detail entity</td>
-</tr>
-</tbody>
-</table>
+<p>A single step/span within a trace tree (table <code>trace_node</code>). Nodes form a parent-child
+tree via <code>parentNodeId</code> (null for the root node). Each node has a <code>nodeType</code>, a status,
+a summary, start/completion timestamps with a computed <code>durationMs</code>, and an optional
+<code>entityType</code> + <code>entityId</code> pair that points to a more detailed record elsewhere in the
+system.</p>
 <h4 id="node-types">Node Types</h4>
+<p>Node type strings are chosen by whichever service creates the node — there is no
+enum, so treat this as the currently observed set rather than an exhaustive contract:</p>
 <table>
 <thead>
 <tr>
@@ -2014,19 +2052,9 @@ because it uses a UUID primary key instead of the standard auto-increment Long.<
 </thead>
 <tbody>
 <tr>
-<td><code>event-ingested</code></td>
-<td>Event received, processing began</td>
-<td><code>event</code></td>
-</tr>
-<tr>
 <td><code>manager-evaluation</code></td>
-<td>AI Manager was invoked</td>
-<td><code>activity-log</code></td>
-</tr>
-<tr>
-<td><code>decision-processed</code></td>
-<td>A Manager decision was executed</td>
-<td><code>activity-log</code></td>
+<td>AI Manager was invoked (root node of a <code>manager</code> trace)</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>task</code></td>
@@ -2034,29 +2062,39 @@ because it uses a UUID primary key instead of the standard auto-increment Long.<
 <td><code>task</code></td>
 </tr>
 <tr>
-<td><code>tool-execution</code></td>
-<td>An MCP tool was invoked</td>
-<td><code>tool-execution</code></td>
-</tr>
-<tr>
-<td><code>escalation</code></td>
-<td>Decision escalated for human review</td>
-<td><code>activity-log</code></td>
-</tr>
-<tr>
-<td><code>event-ignored</code></td>
-<td>Manager decided to ignore the event</td>
-<td><code>activity-log</code></td>
-</tr>
-<tr>
 <td><code>report-triggered</code></td>
-<td>Report generation started</td>
+<td>Report generation started (root node of a <code>report-generation</code> trace)</td>
 <td><code>report</code></td>
 </tr>
 <tr>
 <td><code>report-ai-invoked</code></td>
-<td>AI agent launched for report</td>
+<td>AI agent launched for the report</td>
 <td><code>report</code></td>
+</tr>
+<tr>
+<td><code>scheduled-job-triggered</code></td>
+<td>Scheduled job run started (root node of a <code>scheduled-job-execution</code> trace)</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>scheduled-job-ai-invoked</code></td>
+<td>AI agent launched for the job run</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>workflow</code></td>
+<td>Workflow instance started (root node of a <code>workflow</code> trace)</td>
+<td><code>workflow-run</code></td>
+</tr>
+<tr>
+<td><code>workflow-wait</code></td>
+<td>Workflow parked at a <code>wait</code> or <code>receive-event</code> node</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>tool-execution</code></td>
+<td>An MCP tool was invoked</td>
+<td><code>tool-execution</code></td>
 </tr>
 </tbody>
 </table>
@@ -2073,8 +2111,8 @@ because it uses a UUID primary key instead of the standard auto-increment Long.<
 <tbody>
 <tr>
 <td><code>event</code></td>
-<td><code>EventEntity</code></td>
-<td>Raw event payload</td>
+<td><code>StreamEventEntity</code></td>
+<td>Raw normalized event payload</td>
 </tr>
 <tr>
 <td><code>activity-log</code></td>
@@ -2084,7 +2122,7 @@ because it uses a UUID primary key instead of the standard auto-increment Long.<
 <tr>
 <td><code>task</code></td>
 <td><code>TaskEntity</code></td>
-<td>Task details — action type, actor, status, output</td>
+<td>Task details — action type, agent, status, output</td>
 </tr>
 <tr>
 <td><code>tool-execution</code></td>
@@ -2101,72 +2139,18 @@ because it uses a UUID primary key instead of the standard auto-increment Long.<
 <td><code>ReportEntity</code></td>
 <td>Report metadata and content</td>
 </tr>
+<tr>
+<td><code>workflow-run</code></td>
+<td><code>WorkflowRunEntity</code></td>
+<td>Workflow run state and current node</td>
+</tr>
 </tbody>
 </table>
 <h3 id="toolexecutionentity">ToolExecutionEntity</h3>
-<p>Detailed record of an MCP tool invocation. Stores the full JSON input and output for
-debugging. Referenced by trace nodes via <code>entityType="tool-execution"</code>.</p>
-<p><strong>Table:</strong> <code>tool_execution</code></p>
-<table>
-<thead>
-<tr>
-<th>Field</th>
-<th>Type</th>
-<th>Nullable</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>id</code></td>
-<td><code>Long</code></td>
-<td>No (PK)</td>
-<td>Auto-generated ID</td>
-</tr>
-<tr>
-<td><code>traceId</code></td>
-<td><code>UUID</code></td>
-<td>No</td>
-<td>Associated trace UUID</td>
-</tr>
-<tr>
-<td><code>toolName</code></td>
-<td><code>String</code></td>
-<td>No</td>
-<td>Name of the MCP tool</td>
-</tr>
-<tr>
-<td><code>toolInput</code></td>
-<td><code>String (TEXT)</code></td>
-<td>Yes</td>
-<td>Tool input as JSON</td>
-</tr>
-<tr>
-<td><code>toolOutput</code></td>
-<td><code>String (TEXT)</code></td>
-<td>Yes</td>
-<td>Tool output as JSON</td>
-</tr>
-<tr>
-<td><code>status</code></td>
-<td><code>String</code></td>
-<td>No</td>
-<td>Execution status: <code>"in-progress"</code>, <code>"completed"</code>, or <code>"failed"</code></td>
-</tr>
-<tr>
-<td><code>durationMs</code></td>
-<td><code>Long</code></td>
-<td>Yes</td>
-<td>Tool execution time in milliseconds</td>
-</tr>
-<tr>
-<td><code>createdOn</code></td>
-<td><code>Instant</code></td>
-<td>No</td>
-<td>Creation timestamp</td>
-</tr>
-</tbody>
-</table>
+<p>Detailed record of an MCP tool invocation (table <code>tool_execution</code>), storing the full
+JSON input and output for debugging. Referenced by trace nodes via
+<code>entityType="tool-execution"</code>. Each record carries the associated <code>traceId</code>, the tool
+name, its JSON input/output, a status, and a duration.</p>
 <hr />
 <h2 id="traceservice-api">TraceService API</h2>
 <p><code>TraceService</code> is the central service for creating and managing traces. It lives in
@@ -2175,7 +2159,7 @@ the <code>core</code> module so both <code>app</code> and <code>manager</code> c
 <h3 id="createtrace">createTrace()</h3>
 <p>Creates a new trace and its root node in a single transaction, then fires an SSE event.</p>
 <div class="language-java highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kd">public</span><span class="w"> </span><span class="n">TraceContext</span><span class="w"> </span><span class="nf">createTrace</span><span class="p">(</span>
-</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">    </span><span class="n">String</span><span class="w"> </span><span class="n">traceType</span><span class="p">,</span><span class="w">        </span><span class="c1">// e.g. "event-pipeline", "report-generation"</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">    </span><span class="n">String</span><span class="w"> </span><span class="n">traceType</span><span class="p">,</span><span class="w">        </span><span class="c1">// e.g. "manager", "workflow", "scheduled-job-execution", "report-generation"</span>
 </span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">    </span><span class="n">String</span><span class="w"> </span><span class="n">summary</span><span class="p">,</span><span class="w">          </span><span class="c1">// human-readable trace description</span>
 </span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">    </span><span class="n">Long</span><span class="w"> </span><span class="n">eventId</span><span class="p">,</span><span class="w">            </span><span class="c1">// associated event ID (nullable)</span>
 </span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">    </span><span class="n">Long</span><span class="w"> </span><span class="n">projectId</span><span class="p">,</span><span class="w">          </span><span class="c1">// associated project ID (nullable)</span>
@@ -2296,7 +2280,7 @@ created within that scope become its children. Pop when returning to the parent 
 <td><code>filterTraceType</code></td>
 <td>string</td>
 <td>—</td>
-<td>Filter by trace type (e.g. <code>"event-pipeline"</code>)</td>
+<td>Filter by trace type (e.g. <code>"manager"</code>, <code>"workflow"</code>, <code>"scheduled-job-execution"</code>, <code>"report-generation"</code>)</td>
 </tr>
 <tr>
 <td><code>filterStatus</code></td>
@@ -2329,11 +2313,11 @@ created within that scope become its children. Pop when returning to the parent 
 </span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="w">  </span><span class="nt">"items"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
 </span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="w">    </span><span class="p">{</span>
 </span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="w">      </span><span class="nt">"traceId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"a1b2c3d4-..."</span><span class="p">,</span>
-</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="w">      </span><span class="nt">"traceType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"event-pipeline"</span><span class="p">,</span>
+</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="w">      </span><span class="nt">"traceType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"manager"</span><span class="p">,</span>
 </span><span id="__span-6-6"><a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="w">      </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"completed"</span><span class="p">,</span>
-</span><span id="__span-6-7"><a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="w">      </span><span class="nt">"summary"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Processing event #42: issue-created"</span><span class="p">,</span>
-</span><span id="__span-6-8"><a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a><span class="w">      </span><span class="nt">"eventId"</span><span class="p">:</span><span class="w"> </span><span class="mi">42</span><span class="p">,</span>
-</span><span id="__span-6-9"><a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a><span class="w">      </span><span class="nt">"projectId"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
+</span><span id="__span-6-7"><a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="w">      </span><span class="nt">"summary"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Manager evaluation: issue.created — https://github.com/owner/repo/issues/42"</span><span class="p">,</span>
+</span><span id="__span-6-8"><a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a><span class="w">      </span><span class="nt">"eventId"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
+</span><span id="__span-6-9"><a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a><span class="w">      </span><span class="nt">"projectId"</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span>
 </span><span id="__span-6-10"><a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a><span class="w">      </span><span class="nt">"reportId"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
 </span><span id="__span-6-11"><a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a><span class="w">      </span><span class="nt">"startedOn"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2026-06-29T10:00:00Z"</span><span class="p">,</span>
 </span><span id="__span-6-12"><a id="__codelineno-6-12" name="__codelineno-6-12" href="#__codelineno-6-12"></a><span class="w">      </span><span class="nt">"completedOn"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2026-06-29T10:00:05Z"</span>
@@ -2345,11 +2329,10 @@ created within that scope become its children. Pop when returning to the parent 
 </span><span id="__span-6-18"><a id="__codelineno-6-18" name="__codelineno-6-18" href="#__codelineno-6-18"></a><span class="p">}</span>
 </span></code></pre></div>
 <h3 id="convenience-list-traces-by-entity">Convenience: List Traces by Entity</h3>
-<p>The API also provides convenience endpoints that return traces for a specific event,
-project, or report. These return a JSON array of <code>Trace</code> objects (not paginated).</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>GET /api/v1/events/{eventId}/traces
-</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>GET /api/v1/projects/{projectId}/traces
-</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>GET /api/v1/reports/{reportId}/traces
+<p>The API also provides convenience endpoints that return traces for a specific project
+or report. These return a JSON array of <code>Trace</code> objects (not paginated).</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>GET /api/v1/projects/{projectId}/traces
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>GET /api/v1/reports/{reportId}/traces
 </span></code></pre></div>
 <table>
 <thead>
@@ -2360,11 +2343,6 @@ project, or report. These return a JSON array of <code>Trace</code> objects (not
 </tr>
 </thead>
 <tbody>
-<tr>
-<td><code>GET /events/{eventId}/traces</code></td>
-<td><code>eventId</code> (integer)</td>
-<td>All traces associated with the given event</td>
-</tr>
 <tr>
 <td><code>GET /projects/{projectId}/traces</code></td>
 <td><code>projectId</code> (integer)</td>
@@ -2404,10 +2382,10 @@ but are more convenient when you already have the entity ID.</p>
 <div class="language-json highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="p">{</span>
 </span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="w">  </span><span class="nt">"trace"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
 </span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="w">    </span><span class="nt">"traceId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"a1b2c3d4-..."</span><span class="p">,</span>
-</span><span id="__span-9-4"><a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="w">    </span><span class="nt">"traceType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"event-pipeline"</span><span class="p">,</span>
+</span><span id="__span-9-4"><a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="w">    </span><span class="nt">"traceType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"manager"</span><span class="p">,</span>
 </span><span id="__span-9-5"><a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="w">    </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"completed"</span><span class="p">,</span>
-</span><span id="__span-9-6"><a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a><span class="w">    </span><span class="nt">"summary"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Processing event #42: issue-created"</span><span class="p">,</span>
-</span><span id="__span-9-7"><a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a><span class="w">    </span><span class="nt">"eventId"</span><span class="p">:</span><span class="w"> </span><span class="mi">42</span><span class="p">,</span>
+</span><span id="__span-9-6"><a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a><span class="w">    </span><span class="nt">"summary"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Manager evaluation: issue.created — https://github.com/owner/repo/issues/42"</span><span class="p">,</span>
+</span><span id="__span-9-7"><a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a><span class="w">    </span><span class="nt">"projectId"</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span>
 </span><span id="__span-9-8"><a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a><span class="w">    </span><span class="nt">"startedOn"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2026-06-29T10:00:00Z"</span><span class="p">,</span>
 </span><span id="__span-9-9"><a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a><span class="w">    </span><span class="nt">"completedOn"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2026-06-29T10:00:05Z"</span>
 </span><span id="__span-9-10"><a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a><span class="w">  </span><span class="p">},</span>
@@ -2416,26 +2394,26 @@ but are more convenient when you already have the entity ID.</p>
 </span><span id="__span-9-13"><a id="__codelineno-9-13" name="__codelineno-9-13" href="#__codelineno-9-13"></a><span class="w">      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
 </span><span id="__span-9-14"><a id="__codelineno-9-14" name="__codelineno-9-14" href="#__codelineno-9-14"></a><span class="w">      </span><span class="nt">"traceId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"a1b2c3d4-..."</span><span class="p">,</span>
 </span><span id="__span-9-15"><a id="__codelineno-9-15" name="__codelineno-9-15" href="#__codelineno-9-15"></a><span class="w">      </span><span class="nt">"parentNodeId"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
-</span><span id="__span-9-16"><a id="__codelineno-9-16" name="__codelineno-9-16" href="#__codelineno-9-16"></a><span class="w">      </span><span class="nt">"nodeType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"event-ingested"</span><span class="p">,</span>
+</span><span id="__span-9-16"><a id="__codelineno-9-16" name="__codelineno-9-16" href="#__codelineno-9-16"></a><span class="w">      </span><span class="nt">"nodeType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"manager-evaluation"</span><span class="p">,</span>
 </span><span id="__span-9-17"><a id="__codelineno-9-17" name="__codelineno-9-17" href="#__codelineno-9-17"></a><span class="w">      </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"completed"</span><span class="p">,</span>
-</span><span id="__span-9-18"><a id="__codelineno-9-18" name="__codelineno-9-18" href="#__codelineno-9-18"></a><span class="w">      </span><span class="nt">"summary"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Event received: issue-created"</span><span class="p">,</span>
+</span><span id="__span-9-18"><a id="__codelineno-9-18" name="__codelineno-9-18" href="#__codelineno-9-18"></a><span class="w">      </span><span class="nt">"summary"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Manager evaluation: issue.created"</span><span class="p">,</span>
 </span><span id="__span-9-19"><a id="__codelineno-9-19" name="__codelineno-9-19" href="#__codelineno-9-19"></a><span class="w">      </span><span class="nt">"startedOn"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2026-06-29T10:00:00Z"</span><span class="p">,</span>
 </span><span id="__span-9-20"><a id="__codelineno-9-20" name="__codelineno-9-20" href="#__codelineno-9-20"></a><span class="w">      </span><span class="nt">"completedOn"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2026-06-29T10:00:00Z"</span><span class="p">,</span>
 </span><span id="__span-9-21"><a id="__codelineno-9-21" name="__codelineno-9-21" href="#__codelineno-9-21"></a><span class="w">      </span><span class="nt">"durationMs"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
-</span><span id="__span-9-22"><a id="__codelineno-9-22" name="__codelineno-9-22" href="#__codelineno-9-22"></a><span class="w">      </span><span class="nt">"entityType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"event"</span><span class="p">,</span>
-</span><span id="__span-9-23"><a id="__codelineno-9-23" name="__codelineno-9-23" href="#__codelineno-9-23"></a><span class="w">      </span><span class="nt">"entityId"</span><span class="p">:</span><span class="w"> </span><span class="mi">42</span>
+</span><span id="__span-9-22"><a id="__codelineno-9-22" name="__codelineno-9-22" href="#__codelineno-9-22"></a><span class="w">      </span><span class="nt">"entityType"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
+</span><span id="__span-9-23"><a id="__codelineno-9-23" name="__codelineno-9-23" href="#__codelineno-9-23"></a><span class="w">      </span><span class="nt">"entityId"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span>
 </span><span id="__span-9-24"><a id="__codelineno-9-24" name="__codelineno-9-24" href="#__codelineno-9-24"></a><span class="w">    </span><span class="p">},</span>
 </span><span id="__span-9-25"><a id="__codelineno-9-25" name="__codelineno-9-25" href="#__codelineno-9-25"></a><span class="w">    </span><span class="p">{</span>
 </span><span id="__span-9-26"><a id="__codelineno-9-26" name="__codelineno-9-26" href="#__codelineno-9-26"></a><span class="w">      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span>
 </span><span id="__span-9-27"><a id="__codelineno-9-27" name="__codelineno-9-27" href="#__codelineno-9-27"></a><span class="w">      </span><span class="nt">"traceId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"a1b2c3d4-..."</span><span class="p">,</span>
 </span><span id="__span-9-28"><a id="__codelineno-9-28" name="__codelineno-9-28" href="#__codelineno-9-28"></a><span class="w">      </span><span class="nt">"parentNodeId"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
-</span><span id="__span-9-29"><a id="__codelineno-9-29" name="__codelineno-9-29" href="#__codelineno-9-29"></a><span class="w">      </span><span class="nt">"nodeType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"manager-evaluation"</span><span class="p">,</span>
+</span><span id="__span-9-29"><a id="__codelineno-9-29" name="__codelineno-9-29" href="#__codelineno-9-29"></a><span class="w">      </span><span class="nt">"nodeType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"task"</span><span class="p">,</span>
 </span><span id="__span-9-30"><a id="__codelineno-9-30" name="__codelineno-9-30" href="#__codelineno-9-30"></a><span class="w">      </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"completed"</span><span class="p">,</span>
-</span><span id="__span-9-31"><a id="__codelineno-9-31" name="__codelineno-9-31" href="#__codelineno-9-31"></a><span class="w">      </span><span class="nt">"summary"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Manager evaluation: issue-created"</span><span class="p">,</span>
-</span><span id="__span-9-32"><a id="__codelineno-9-32" name="__codelineno-9-32" href="#__codelineno-9-32"></a><span class="w">      </span><span class="nt">"startedOn"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2026-06-29T10:00:00Z"</span><span class="p">,</span>
-</span><span id="__span-9-33"><a id="__codelineno-9-33" name="__codelineno-9-33" href="#__codelineno-9-33"></a><span class="w">      </span><span class="nt">"completedOn"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2026-06-29T10:00:03Z"</span><span class="p">,</span>
-</span><span id="__span-9-34"><a id="__codelineno-9-34" name="__codelineno-9-34" href="#__codelineno-9-34"></a><span class="w">      </span><span class="nt">"durationMs"</span><span class="p">:</span><span class="w"> </span><span class="mi">3000</span><span class="p">,</span>
-</span><span id="__span-9-35"><a id="__codelineno-9-35" name="__codelineno-9-35" href="#__codelineno-9-35"></a><span class="w">      </span><span class="nt">"entityType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"activity-log"</span><span class="p">,</span>
+</span><span id="__span-9-31"><a id="__codelineno-9-31" name="__codelineno-9-31" href="#__codelineno-9-31"></a><span class="w">      </span><span class="nt">"summary"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Task: Auto-Label Issue"</span><span class="p">,</span>
+</span><span id="__span-9-32"><a id="__codelineno-9-32" name="__codelineno-9-32" href="#__codelineno-9-32"></a><span class="w">      </span><span class="nt">"startedOn"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2026-06-29T10:00:03Z"</span><span class="p">,</span>
+</span><span id="__span-9-33"><a id="__codelineno-9-33" name="__codelineno-9-33" href="#__codelineno-9-33"></a><span class="w">      </span><span class="nt">"completedOn"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2026-06-29T10:00:05Z"</span><span class="p">,</span>
+</span><span id="__span-9-34"><a id="__codelineno-9-34" name="__codelineno-9-34" href="#__codelineno-9-34"></a><span class="w">      </span><span class="nt">"durationMs"</span><span class="p">:</span><span class="w"> </span><span class="mi">2000</span><span class="p">,</span>
+</span><span id="__span-9-35"><a id="__codelineno-9-35" name="__codelineno-9-35" href="#__codelineno-9-35"></a><span class="w">      </span><span class="nt">"entityType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"task"</span><span class="p">,</span>
 </span><span id="__span-9-36"><a id="__codelineno-9-36" name="__codelineno-9-36" href="#__codelineno-9-36"></a><span class="w">      </span><span class="nt">"entityId"</span><span class="p">:</span><span class="w"> </span><span class="mi">15</span>
 </span><span id="__span-9-37"><a id="__codelineno-9-37" name="__codelineno-9-37" href="#__codelineno-9-37"></a><span class="w">    </span><span class="p">}</span>
 </span><span id="__span-9-38"><a id="__codelineno-9-38" name="__codelineno-9-38" href="#__codelineno-9-38"></a><span class="w">  </span><span class="p">]</span>
@@ -2610,7 +2588,7 @@ MCP tool wrappers during task or report execution.</p>
 </span><span id="__span-17-2"><a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a><span class="n">TraceService</span><span class="w"> </span><span class="n">traceService</span><span class="p">;</span>
 </span></code></pre></div>
 <h3 id="step-2-create-a-trace-or-add-a-node">Step 2: Create a Trace or Add a Node</h3>
-<p>If your code is the entry point for a new pipeline (like <code>PipelineOrchestrator</code> or
+<p>If your code is the entry point for a new pipeline (like <code>EventStreamOrchestrator</code> or
 <code>ReportExecutionService</code>), create a new trace:</p>
 <div class="language-java highlight"><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="n">TraceContext</span><span class="w"> </span><span class="n">traceCtx</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">traceService</span><span class="p">.</span><span class="na">createTrace</span><span class="p">(</span>
 </span><span id="__span-18-2"><a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a><span class="w">    </span><span class="s">"my-pipeline"</span><span class="p">,</span>

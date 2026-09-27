@@ -15,7 +15,7 @@
         <link rel="canonical" href="https://www.apitomy.io/projects/axiom/docs/user-guide/ai-assistant.html">
       
       
-        <link rel="prev" href="usage-examples.html">
+        <link rel="prev" href="workflows.html">
       
       
         <link rel="next" href="logging-and-debugging.html">
@@ -682,6 +682,34 @@
                 
   
   
+  
+  
+    <li class="md-nav__item">
+      <a href="workflows.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Workflows
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
     
   
   
@@ -1305,6 +1333,118 @@
   
   
     <li class="md-nav__item">
+      <a href="../developer-guide/upgrading-and-backups.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Upgrading and Backups
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../developer-guide/event-sourcing-design.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Event System Design
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../developer-guide/workflow-input-contract.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Workflow Input Contract
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../developer-guide/workflow-human-task-nodes.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Workflow Human-Task Nodes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../developer-guide/tracing.html" class="md-nav__link">
         
   
@@ -1759,14 +1899,17 @@ tailored to specific workflows, from generating Axiom configuration to general-p
 coding assistance.</p>
 <p>Out of the box, Axiom ships three built-in templates: a <strong>Configuration Assistant</strong> for
 creating and updating tools, action types, report definitions, scheduled jobs, toolsets,
-and session templates, a <strong>General Assistant</strong> for open-ended tasks, and a <strong>Project
-Assistant</strong> for working within the context of a specific project. You can also create
-your own templates to define custom workflows.</p>
+connections, subscriptions, workflows, and session templates, a <strong>General Assistant</strong> for
+open-ended tasks, and a <strong>Project Assistant</strong> for working within the context of a
+specific project. You can also create your own templates to define custom workflows.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>The AI Assistant requires an active AI engine that supports interactive sessions
-(<code>claude-code</code> or <code>opencode</code>). If OpenCode capability checks fail at startup,
-session creation is rejected with a compatibility error.</p>
+<p>The AI Assistant requires at least one registered agent that supports interactive
+sessions (currently <code>claude-code</code> or <code>opencode</code>). A session template can select
+which agent type to use; if none is specified, the template falls back to the
+instance's default agent type. If OpenCode capability checks fail at startup,
+session creation using an OpenCode-backed template is rejected with a compatibility
+error.</p>
 </div>
 <hr />
 <h2 id="accessing-the-assistant">Accessing the Assistant</h2>
@@ -1797,6 +1940,10 @@ Each template specifies:</p>
 <tr>
 <td><strong>Welcome Message</strong></td>
 <td>First message shown in the chat, attributed to the assistant.</td>
+</tr>
+<tr>
+<td><strong>Agent Type</strong></td>
+<td>Optional override selecting which registered agent type (<code>claude-code</code>, <code>opencode</code>) drives sessions created from this template. Falls back to the instance's default agent type when unset.</td>
 </tr>
 <tr>
 <td><strong>Working Directory</strong></td>
@@ -1877,9 +2024,9 @@ that the assistant will need during the conversation.</p>
 <p>Select the script type from the <strong>Init Script</strong> tab dropdown when editing a template.
 Write the script body in the editor below it.</p>
 <p><strong>Timeout:</strong> Init scripts have a <strong>60-second timeout</strong>. If the script does not exit
-within 60 seconds, it is killed and the session continues without it. Keep scripts
-focused on quick setup tasks — long-running operations should be handled by the
-assistant itself during the conversation.</p>
+within 60 seconds, or exits with a non-zero status, session creation fails and an
+error is shown. Keep scripts focused on quick setup tasks — long-running operations
+should be handled by the assistant itself during the conversation.</p>
 <p><strong>Environment:</strong> Init scripts do <strong>not</strong> inherit the template's environment variables.
 Template environment variables (including resolved <code>${secret:NAME}</code> references) are
 injected into the interactive engine process, which starts after the init script finishes. If
@@ -1938,8 +2085,8 @@ template can run arbitrary code on the server with the server's full privileges.
    "rocket-penguin-waffle"). You can accept or change it.</li>
 <li>Click <strong>Create</strong> to start the session.</li>
 </ol>
-<p>Axiom supports a limited number of concurrent sessions (default: 3). Idle sessions are
-automatically destroyed after one hour.</p>
+<p>Axiom supports a limited number of concurrent sessions (default: 3, configurable via
+<code>axiom.assistant.max-sessions</code>).</p>
 <hr />
 <h2 id="the-session-interface">The Session Interface</h2>
 <h3 id="header-toolbar">Header Toolbar</h3>
@@ -2025,7 +2172,7 @@ the standard session interface with a two-panel layout and an Apply workflow.</p
 </ul>
 <h3 id="generated-items">Generated Items</h3>
 <p>As the assistant creates or updates items, they appear in the sidebar. The assistant
-can work with six types of configuration items:</p>
+can work with these types of configuration items:</p>
 <table>
 <thead>
 <tr>
@@ -2040,7 +2187,7 @@ can work with six types of configuration items:</p>
 </tr>
 <tr>
 <td><strong>Action Types</strong></td>
-<td>Actor or script-mode action types with prompt templates, allowed tools, and trigger settings</td>
+<td>Agent or script-mode action types with prompt templates, allowed tools, and trigger settings</td>
 </tr>
 <tr>
 <td><strong>Report Definitions</strong></td>
@@ -2057,6 +2204,18 @@ can work with six types of configuration items:</p>
 <tr>
 <td><strong>Session Templates</strong></td>
 <td>Custom AI Assistant session configurations with a persona, system prompt, MCP servers, and allowed tools</td>
+</tr>
+<tr>
+<td><strong>Connections</strong></td>
+<td>Links to GitHub or Jira for the event stream pipeline</td>
+</tr>
+<tr>
+<td><strong>Subscriptions</strong></td>
+<td>Filter expressions and routing rules over the event stream</td>
+</tr>
+<tr>
+<td><strong>Workflows</strong></td>
+<td>Versioned, multi-step automation definitions</td>
 </tr>
 </tbody>
 </table>

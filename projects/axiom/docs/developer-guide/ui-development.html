@@ -682,6 +682,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../user-guide/workflows.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Workflows
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../user-guide/ai-assistant.html" class="md-nav__link">
         
   
@@ -922,6 +950,118 @@
     
   
     Database & Migrations
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="upgrading-and-backups.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Upgrading and Backups
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="event-sourcing-design.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Event System Design
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="workflow-input-contract.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Workflow Input Contract
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="workflow-human-task-nodes.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Workflow Human-Task Nodes
   
 
     
@@ -1616,49 +1756,36 @@ in the Axiom React UI.</p>
 <thead>
 <tr>
 <th>Technology</th>
-<th>Version</th>
 <th>Purpose</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>React</td>
-<td>19</td>
 <td>UI framework</td>
 </tr>
 <tr>
 <td>PatternFly</td>
-<td>6</td>
 <td>Component library (Red Hat's design system)</td>
 </tr>
 <tr>
 <td>TypeScript</td>
-<td>5.9</td>
 <td>Type-safe JavaScript</td>
 </tr>
 <tr>
 <td>Vite</td>
-<td>6.4</td>
 <td>Build tool and dev server</td>
 </tr>
 <tr>
 <td>Monaco Editor</td>
-<td>0.55</td>
 <td>Code editors (prompt templates, scripts, logs)</td>
 </tr>
 <tr>
 <td>react-markdown</td>
-<td>10</td>
 <td>Markdown rendering (reports, thread entries)</td>
 </tr>
 <tr>
-<td>Biome</td>
-<td>—</td>
-<td>Linter and formatter</td>
-</tr>
-<tr>
 <td><code>@apitomy/common-ui-components</code></td>
-<td>4.1</td>
 <td>Shared filtering components</td>
 </tr>
 </tbody>
@@ -1853,7 +1980,7 @@ activity log entries, report progress, etc.).</p>
 <li>The Vite dev server runs on port 9191 and proxies <code>/api</code> requests to the backend
    on port 9090</li>
 <li>Hot module replacement (HMR) updates the browser instantly when you save a file</li>
-<li>Run <code>npm run lint</code> to check code quality before committing</li>
+<li>Run <code>npm run build</code> (which runs <code>tsc -b &amp;&amp; vite build</code>) to type-check before committing</li>
 </ol>
 
 

@@ -682,6 +682,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../user-guide/workflows.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Workflows
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../user-guide/ai-assistant.html" class="md-nav__link">
         
   
@@ -1116,6 +1144,118 @@
   
   
     <li class="md-nav__item">
+      <a href="upgrading-and-backups.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Upgrading and Backups
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="event-sourcing-design.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Event System Design
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="workflow-input-contract.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Workflow Input Contract
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="workflow-human-task-nodes.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Workflow Human-Task Nodes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="tracing.html" class="md-nav__link">
         
   
@@ -1381,34 +1521,28 @@
 <thead>
 <tr>
 <th>Requirement</th>
-<th>Version</th>
 <th>Purpose</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>Java</td>
-<td>25+</td>
 <td>Backend compilation and runtime</td>
 </tr>
 <tr>
 <td>Maven</td>
-<td>3.9+</td>
 <td>Build system</td>
 </tr>
 <tr>
-<td>Node.js</td>
-<td>22+</td>
-<td>UI build (auto-installed by Maven in release builds)</td>
+<td>Node.js and npm</td>
+<td>UI build (auto-installed by Maven in release builds) and runtime support for custom MCP tool servers and the AI Assistant's MCP server</td>
 </tr>
 <tr>
-<td>AI engine CLI</td>
-<td>Latest</td>
+<td>AI agent CLI</td>
 <td>One of <code>claude</code>, <code>opencode</code>, or <code>copilot</code> for AI features</td>
 </tr>
 <tr>
 <td>API key</td>
-<td>—</td>
 <td><code>ANTHROPIC_API_KEY</code> or provider-specific key</td>
 </tr>
 </tbody>
@@ -1422,7 +1556,7 @@
 </span></code></pre></div>
 <p>Runs: <code>mvn clean package</code></p>
 <h3 id="build-releasesh-release-build"><code>build-release.sh</code> — Release Build</h3>
-<p>Builds the complete application with the React UI bundled into an uber-jar.</p>
+<p>Builds the complete application with the React UI bundled into a single runnable JAR.</p>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>./build-release.sh
 </span></code></pre></div>
 <p>Runs: <code>mvn clean package -Pui,prod</code></p>
@@ -1430,16 +1564,21 @@
 <code>frontend-maven-plugin</code> to install Node.js, run <code>npm install</code> and <code>npm run build</code>,
 and package the resulting <code>dist/</code> folder into <code>META-INF/resources/</code> inside the JAR.</p>
 <p>The <code>-Pprod</code> profile configures Quarkus to produce an uber-jar.</p>
-<p>Output: <code>app/target/quarkus-app/quarkus-run.jar</code></p>
+<p>Output: <code>app/target/quarkus-app/quarkus-run.jar</code> (the release workflow republishes
+this as <code>app/target/apitomy-axiom-app-&lt;version&gt;-runner.jar</code>)</p>
+<p>The resulting application can be started with:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>java<span class="w"> </span>-jar<span class="w"> </span>app/target/quarkus-app/quarkus-run.jar
+</span></code></pre></div>
 <h3 id="build-allsh-full-build-with-integration-tests"><code>build-all.sh</code> — Full Build with Integration Tests</h3>
 <p>Includes integration tests that require the Claude Code CLI to be installed and an
 <code>ANTHROPIC_API_KEY</code> set.</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>./build-all.sh
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>./build-all.sh
 </span></code></pre></div>
 <p>Runs: <code>AXIOM_CLAUDE_TESTS=true mvn clean package</code></p>
 <h3 id="devsh-development-mode"><code>dev.sh</code> — Development Mode</h3>
-<p>Starts the Quarkus backend (with hot reload) and the Vite UI dev server side by side.</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>./dev.sh
+<p>Builds all Maven modules, then launches the packaged backend JAR together with the
+Vite UI dev server side by side.</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>./dev.sh
 </span></code></pre></div>
 <table>
 <thead>
@@ -1450,7 +1589,7 @@ and package the resulting <code>dist/</code> folder into <code>META-INF/resource
 </thead>
 <tbody>
 <tr>
-<td>Backend (Quarkus dev mode)</td>
+<td>Backend</td>
 <td>http://localhost:9090</td>
 </tr>
 <tr>
@@ -1462,6 +1601,13 @@ and package the resulting <code>dist/</code> folder into <code>META-INF/resource
 <p>The Vite dev server proxies <code>/api</code> requests to the backend, so you access the UI at
 <code>http://localhost:9191</code> and API calls are forwarded automatically.</p>
 <p>Both processes run in the foreground — <strong>Ctrl+C</strong> stops everything.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><code>dev.sh</code> runs the backend as a packaged application (<code>mvn clean install</code> followed
+by <code>java -jar</code>), not Quarkus's live-reload dev mode. Backend Java changes require
+re-running <code>dev.sh</code> to take effect. To get Quarkus hot reload while iterating on
+backend code, run <code>mvn quarkus:dev</code> directly from the <code>app</code> module instead.</p>
+</div>
 <p><strong>Flags:</strong></p>
 <table>
 <thead>
@@ -1479,11 +1625,16 @@ and package the resulting <code>dist/</code> folder into <code>META-INF/resource
 <td><code>--persist</code></td>
 <td>Use file-based H2 database (survives restarts)</td>
 </tr>
+<tr>
+<td><code>--portOffset=N</code></td>
+<td>Offset both the backend and UI dev server ports by <code>N</code></td>
+</tr>
 </tbody>
 </table>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>./dev.sh<span class="w"> </span>--skip-ui<span class="w">              </span><span class="c1"># Backend only</span>
-</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>./dev.sh<span class="w"> </span>--persist<span class="w">              </span><span class="c1"># Persistent database</span>
-</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>./dev.sh<span class="w"> </span>--persist<span class="w"> </span>--skip-ui<span class="w">    </span><span class="c1"># Both flags</span>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>./dev.sh<span class="w"> </span>--skip-ui<span class="w">              </span><span class="c1"># Backend only</span>
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>./dev.sh<span class="w"> </span>--persist<span class="w">              </span><span class="c1"># Persistent database</span>
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>./dev.sh<span class="w"> </span>--persist<span class="w"> </span>--skip-ui<span class="w">    </span><span class="c1"># Both flags</span>
+</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>./dev.sh<span class="w"> </span>--portOffset<span class="o">=</span><span class="m">100</span><span class="w">       </span><span class="c1"># Backend on 9190, UI on 9291</span>
 </span></code></pre></div>
 <hr />
 <h2 id="maven-profiles">Maven Profiles</h2>
@@ -1512,7 +1663,7 @@ and package the resulting <code>dist/</code> folder into <code>META-INF/resource
 <h2 id="ui-build-pipeline">UI Build Pipeline</h2>
 <p>When the <code>ui</code> profile is active, the <code>ui-bundle</code> module runs these steps:</p>
 <ol>
-<li><strong>Install Node.js</strong> — <code>frontend-maven-plugin</code> downloads Node.js 22 to
+<li><strong>Install Node.js</strong> — <code>frontend-maven-plugin</code> downloads Node.js to
    <code>ui-bundle/target/node-install/</code></li>
 <li><strong>Install dependencies</strong> — runs <code>npm install</code> in the <code>ui/</code> directory</li>
 <li><strong>Build UI</strong> — runs <code>npm run build</code>, producing optimized assets in <code>ui/dist/</code></li>
@@ -1527,8 +1678,9 @@ needed.</p>
 <ol>
 <li>Run <code>./dev.sh</code> to start both backend and frontend</li>
 <li>Open <code>http://localhost:9191</code> in your browser</li>
-<li>Edit backend Java code — Quarkus hot-reloads on the next request</li>
 <li>Edit frontend TypeScript/React code — Vite hot-reloads instantly</li>
+<li>Edit backend Java code — re-run <code>./dev.sh</code> (or use <code>mvn quarkus:dev</code> from the <code>app</code>
+   module for hot reload)</li>
 <li>Run <code>mvn test</code> in a module directory to run unit tests for that module</li>
 </ol>
 <hr />
@@ -1544,8 +1696,8 @@ needed.</p>
 <tbody>
 <tr>
 <td>9090</td>
-<td>Quarkus backend</td>
-<td>Development (<code>mvn quarkus:dev</code>)</td>
+<td>Backend</td>
+<td>Development (<code>./dev.sh</code> or <code>mvn quarkus:dev</code>)</td>
 </tr>
 <tr>
 <td>9191</td>
@@ -1554,8 +1706,8 @@ needed.</p>
 </tr>
 <tr>
 <td>9191</td>
-<td>Quarkus backend</td>
-<td>Production (uber-jar)</td>
+<td>Backend</td>
+<td>Production (release JAR)</td>
 </tr>
 </tbody>
 </table>
@@ -1590,7 +1742,8 @@ needed.</p>
 <p>Use <code>--persist</code> with <code>dev.sh</code> or <code>-Dquarkus.profile=persist</code> with Maven to keep data
 between restarts during development.</p>
 <p>See the <a href="database-and-migrations.html">Database &amp; Migrations</a> guide for details on
-schema management.</p>
+schema management, and <a href="upgrading-and-backups.html">Upgrading and Backups</a> for what to
+back up alongside the database.</p>
 
 
 

@@ -682,6 +682,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../user-guide/workflows.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Workflows
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../user-guide/ai-assistant.html" class="md-nav__link">
         
   
@@ -1051,17 +1079,6 @@
   
 </li>
         
-          <li class="md-nav__item">
-  <a href="#frontend-linting" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Frontend Linting
-      
-    </span>
-  </a>
-  
-</li>
-        
       </ul>
     </nav>
   
@@ -1158,6 +1175,118 @@
     
   
     Database & Migrations
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="upgrading-and-backups.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Upgrading and Backups
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="event-sourcing-design.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Event System Design
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="workflow-input-contract.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Workflow Input Contract
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="workflow-human-task-nodes.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Workflow Human-Task Nodes
   
 
     
@@ -1422,17 +1551,6 @@
   
 </li>
         
-          <li class="md-nav__item">
-  <a href="#frontend-linting" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Frontend Linting
-      
-    </span>
-  </a>
-  
-</li>
-        
       </ul>
     </nav>
   
@@ -1540,16 +1658,16 @@ process for contributing to Axiom.</p>
 <td><code>manager/</code></td>
 </tr>
 <tr>
-<td>Claude Code engine/actor</td>
-<td><code>actors/claude-code/</code></td>
+<td>Claude Code agent</td>
+<td><code>agents/claude-code/</code></td>
 </tr>
 <tr>
-<td>OpenCode engine/actor</td>
-<td><code>engine/opencode/</code></td>
+<td>OpenCode agent</td>
+<td><code>agents/opencode/</code></td>
 </tr>
 <tr>
-<td>GitHub Copilot CLI engine/actor</td>
-<td><code>engine/copilot/</code></td>
+<td>GitHub Copilot CLI agent</td>
+<td><code>agents/copilot/</code></td>
 </tr>
 <tr>
 <td>GitHub polling</td>
@@ -1560,8 +1678,8 @@ process for contributing to Axiom.</p>
 <td><code>events/jira/</code></td>
 </tr>
 <tr>
-<td>Pipeline orchestration</td>
-<td><code>app/</code> (PipelineOrchestrator, TaskExecutionService, etc.)</td>
+<td>Event stream routing, workflow, and pipeline orchestration</td>
+<td><code>app/</code> (<code>EventStreamOrchestrator</code>, <code>TaskExecutionService</code>, <code>WorkflowExecutionService</code>, etc.)</td>
 </tr>
 <tr>
 <td>UI page or component</td>
@@ -1584,18 +1702,17 @@ process for contributing to Axiom.</p>
 <li>Follow existing Quarkus patterns: <code>@ApplicationScoped</code>, <code>@Inject</code>,
   <code>@ConfigProperty</code>, <code>@Scheduled</code></li>
 <li>Use Panache active record for entities (no separate DAO/repository layer)</li>
-<li>Use builders for configuration objects (<code>AiEngineConfig.Builder</code>, etc.)</li>
+<li>Use builders for configuration objects (<code>AgentRequest.Builder</code>, etc.)</li>
 <li>Async work returns <code>CompletableFuture</code></li>
 <li>Keep transactional boundaries small — one <code>@Transactional</code> method per database
   operation</li>
 </ul>
 <h3 id="typescript-frontend">TypeScript (Frontend)</h3>
 <ul>
-<li>Code is formatted and linted with <a href="https://biomejs.dev/">Biome</a></li>
-<li>Run <code>npm run lint</code> before committing</li>
-<li>Use PatternFly 6 components — don't introduce other UI libraries</li>
+<li>Use PatternFly components — don't introduce other UI libraries</li>
 <li>API calls go in <code>ui/src/config/api.ts</code></li>
 <li>Pages go in <code>ui/src/pages/</code>, reusable components in <code>ui/src/components/</code></li>
+<li>Run <code>npm run build</code> (<code>tsc -b &amp;&amp; vite build</code>) to catch type errors before committing</li>
 </ul>
 <hr />
 <h2 id="commit-message-format">Commit Message Format</h2>
@@ -1635,7 +1752,7 @@ process for contributing to Axiom.</p>
 </tbody>
 </table>
 <p>Examples:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>feat: add Jira event source polling
+<div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>feat: add Jira connection polling
 </span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>fix: resolve timeout in Claude Code subprocess
 </span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>docs: add extending-axiom developer guide
 </span></code></pre></div>
@@ -1648,7 +1765,7 @@ process for contributing to Axiom.</p>
 <li><strong>Make your changes</strong> following the conventions above</li>
 <li><strong>Test locally</strong>:</li>
 <li><code>mvn test</code> — run backend unit tests</li>
-<li><code>npm run lint</code> — check frontend code quality</li>
+<li><code>cd ui &amp;&amp; npm run build</code> — type-check the frontend</li>
 <li><code>./dev.sh</code> — verify the change works end-to-end</li>
 <li><strong>Commit</strong> with a conventional commit message</li>
 <li><strong>Push</strong> and open a pull request against <code>main</code></li>
@@ -1659,7 +1776,7 @@ process for contributing to Axiom.</p>
 <ul>
 <li>Keep PRs focused on a single feature or fix</li>
 <li>Update documentation if the change affects user-facing behavior</li>
-<li>Ensure CI checks pass (build, lint)</li>
+<li>Ensure CI checks pass</li>
 <li>Be responsive to review feedback</li>
 </ul>
 <p>All submissions require code review before merging.</p>
@@ -1669,22 +1786,17 @@ process for contributing to Axiom.</p>
 <p>Standard Maven tests — run with <code>mvn test</code> from the project root or a specific module
 directory.</p>
 <h3 id="integration-tests">Integration Tests</h3>
-<p>Some tests require a running AI engine CLI. These are gated behind an environment
+<p>Some tests require a running AI agent CLI. These are gated behind an environment
 variable:</p>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="nv">AXIOM_CLAUDE_TESTS</span><span class="o">=</span><span class="nb">true</span><span class="w"> </span>mvn<span class="w"> </span><span class="nb">test</span>
 </span></code></pre></div>
 <p>This requires the <code>claude</code> CLI on your PATH and a valid <code>ANTHROPIC_API_KEY</code>.</p>
-<h3 id="frontend-linting">Frontend Linting</h3>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="nb">cd</span><span class="w"> </span>ui
-</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>npm<span class="w"> </span>run<span class="w"> </span>lint<span class="w">          </span><span class="c1"># Check for issues</span>
-</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>npm<span class="w"> </span>run<span class="w"> </span>lint:fix<span class="w">      </span><span class="c1"># Auto-fix what Biome can</span>
-</span></code></pre></div>
 <hr />
 <h2 id="documentation">Documentation</h2>
 <p>The documentation site uses <a href="https://www.mkdocs.org/">MkDocs</a> with the
 <a href="https://squidfunk.github.io/mkdocs-material/">Material for MkDocs</a> theme.</p>
 <h3 id="local-preview">Local Preview</h3>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>./serve-docs.sh
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>./serve-docs.sh
 </span></code></pre></div>
 <p>This starts a local server at <code>http://localhost:8000</code> with live reload.</p>
 <h3 id="adding-a-page">Adding a Page</h3>

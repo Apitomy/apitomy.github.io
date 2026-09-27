@@ -18,7 +18,7 @@
         <link rel="prev" href="api-first-development.html">
       
       
-        <link rel="next" href="tracing.html">
+        <link rel="next" href="upgrading-and-backups.html">
       
       
         
@@ -682,6 +682,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../user-guide/workflows.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Workflows
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../user-guide/ai-assistant.html" class="md-nav__link">
         
   
@@ -997,17 +1025,6 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#key-entities" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Key Entities
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#active-record-pattern" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1110,6 +1127,118 @@
   
 </nav>
       
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="upgrading-and-backups.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Upgrading and Backups
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="event-sourcing-design.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Event System Design
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="workflow-input-contract.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Workflow Input Contract
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="workflow-human-task-nodes.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Workflow Human-Task Nodes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
     </li>
   
 
@@ -1254,17 +1383,6 @@
   
     <nav class="md-nav" aria-label="Entity Model">
       <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#key-entities" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Key Entities
-      
-    </span>
-  </a>
-  
-</li>
         
           <li class="md-nav__item">
   <a href="#active-record-pattern" class="md-nav__link">
@@ -1430,103 +1548,10 @@ migrations.</p>
 <hr />
 <h2 id="entity-model">Entity Model</h2>
 <p>All entities are in <code>core/src/main/java/io/apitomy/axiom/core/entities/</code> and extend
-Quarkus <code>PanacheEntity</code>, which provides an auto-generated <code>id</code> field and the active
-record pattern.</p>
-<h3 id="key-entities">Key Entities</h3>
-<table>
-<thead>
-<tr>
-<th>Entity</th>
-<th>Purpose</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>ProjectEntity</code></td>
-<td>Long-lived project tracking work for an issue</td>
-</tr>
-<tr>
-<td><code>TaskEntity</code></td>
-<td>A unit of work assigned to an actor within a project</td>
-</tr>
-<tr>
-<td><code>EventEntity</code></td>
-<td>A normalized event from an external source</td>
-</tr>
-<tr>
-<td><code>EventQueueEntity</code></td>
-<td>Processing queue entry for pending events</td>
-</tr>
-<tr>
-<td><code>EventSourceEntity</code></td>
-<td>Configuration for a GitHub/Jira event source</td>
-</tr>
-<tr>
-<td><code>ActionTypeEntity</code></td>
-<td>Defines a type of work (prompt, tools, mode)</td>
-</tr>
-<tr>
-<td><code>ActorEntity</code></td>
-<td>A registered AI agent or human actor</td>
-</tr>
-<tr>
-<td><code>ToolDefinitionEntity</code></td>
-<td>A script-based tool definition</td>
-</tr>
-<tr>
-<td><code>ToolsetEntity</code></td>
-<td>A named collection of tools</td>
-</tr>
-<tr>
-<td><code>McpServerEntity</code></td>
-<td>An external MCP server configuration</td>
-</tr>
-<tr>
-<td><code>ReportDefinitionEntity</code></td>
-<td>A report template with schedule and prompt</td>
-</tr>
-<tr>
-<td><code>ReportEntity</code></td>
-<td>A generated report instance</td>
-</tr>
-<tr>
-<td><code>SecretEntity</code></td>
-<td>An encrypted secret (env var for subprocesses)</td>
-</tr>
-<tr>
-<td><code>ManagerConfigEntity</code></td>
-<td>Manager system prompt and prompt template</td>
-</tr>
-<tr>
-<td><code>AiUsageEntity</code></td>
-<td>Token cost and usage tracking per invocation</td>
-</tr>
-<tr>
-<td><code>ActivityLogEntity</code></td>
-<td>Unified activity log entries</td>
-</tr>
-<tr>
-<td><code>ThreadEntryEntity</code></td>
-<td>Chronological project thread entries</td>
-</tr>
-<tr>
-<td><code>EventSourceLogEntity</code></td>
-<td>Per-poll-cycle log for event sources</td>
-</tr>
-<tr>
-<td><code>TraceEntity</code></td>
-<td>Root trace record (UUID PK) — one per pipeline run or report generation</td>
-</tr>
-<tr>
-<td><code>TraceNodeEntity</code></td>
-<td>A step/span in a trace tree — references a detail entity via <code>entityType</code> + <code>entityId</code></td>
-</tr>
-<tr>
-<td><code>ToolExecutionEntity</code></td>
-<td>Detailed MCP tool invocation record — stores full JSON input and output</td>
-</tr>
-</tbody>
-</table>
+Quarkus <code>PanacheEntity</code> (or <code>PanacheEntityBase</code> for entities with non-<code>Long</code> primary
+keys, such as <code>TraceEntity</code>'s UUID key), which provides the active record pattern.
+Read the entity classes directly for the current field list — that is the
+authoritative reference, not this guide.</p>
 <h3 id="active-record-pattern">Active Record Pattern</h3>
 <p>Entities use the Panache active record style — queries are static methods on the
 entity class:</p>
@@ -1541,7 +1566,7 @@ entity class:</p>
 </span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="n">entity</span><span class="p">.</span><span class="na">persist</span><span class="p">();</span>
 </span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>
 </span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="c1">// Count</span>
-</span><span id="__span-1-12"><a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a><span class="kt">long</span><span class="w"> </span><span class="n">count</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">EventEntity</span><span class="p">.</span><span class="na">count</span><span class="p">(</span><span class="s">"repository"</span><span class="p">,</span><span class="w"> </span><span class="s">"owner/repo"</span><span class="p">);</span>
+</span><span id="__span-1-12"><a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a><span class="kt">long</span><span class="w"> </span><span class="n">count</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">StreamEventEntity</span><span class="p">.</span><span class="na">count</span><span class="p">(</span><span class="s">"source"</span><span class="p">,</span><span class="w"> </span><span class="s">"github"</span><span class="p">);</span>
 </span></code></pre></div>
 <p>No separate DAO or repository classes are needed.</p>
 <hr />
@@ -1644,6 +1669,8 @@ the version and the description.</p>
 <li>The H2 console is available at <code>http://localhost:9090/q/h2</code> during development
   (Quarkus dev mode only).</li>
 </ul>
+<p>See <a href="upgrading-and-backups.html">Upgrading and Backups</a> for what a production upgrade
+can change and what needs to be backed up alongside the database.</p>
 
 
 
