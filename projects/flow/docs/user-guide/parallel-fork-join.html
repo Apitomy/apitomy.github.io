@@ -879,6 +879,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#supported-join-topology" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Supported join topology
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#running-it" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1110,6 +1121,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#supported-join-topology" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Supported join topology
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#running-it" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1231,6 +1253,26 @@ in parallel). Both branches converge on <code>create-report</code>, which waits 
 <li><strong>The region is balanced:</strong> neither branch reaches <code>end</code> before <code>create-report</code>, so it validates with
   no <code>FORK_WITHOUT_JOIN</code> or <code>PARALLEL_BRANCH_REACHES_END</code> problems.</li>
 </ul>
+<h2 id="supported-join-topology">Supported join topology</h2>
+<p>Join arrivals are tracked by incoming edge ID. Before Java calls any executor, validation checks that
+each fork branch reaches its join through <strong>one distinct incoming edge</strong>. The editor validator and
+simulator apply the same rules; unsupported topology fails simulation before any node is entered.</p>
+<ul>
+<li>Exclusive choices inside a branch are supported when their paths merge <strong>before</strong> the parallel join,
+  so either choice reaches the same arrival edge. Separate conditional/default edges directly into the
+  join are also separate arrival edges and are rejected (<code>UNBALANCED_PARALLEL</code>).</li>
+<li>Nested forks must finish at their own join before reaching the enclosing join. Forks sharing a join,
+  or sibling branches sharing an arrival edge, are rejected (<code>UNBALANCED_PARALLEL</code>).</li>
+<li>Edges from outside the region into its branch interiors or join are rejected
+  (<code>CROSSING_PARALLEL_REGIONS</code>), including conditional paths that bypass the fork.</li>
+<li>A completed region may loop back to its fork, and an inner region may repeat while its outer sibling
+  waits. A branch returning to its own fork <strong>before</strong> joining is rejected (<code>PARALLEL_REGION_CYCLE</code>).</li>
+<li>A join may also fork into the next balanced region. Ordinary sequential exclusive choices remain
+  supported.</li>
+</ul>
+<p>These checks are structural: conditions are not assumed to be always true or mutually exhaustive.
+Runtime condition failures, missing matching edges, and loops exceeding the transition limit still fail
+at execution time. Persisted branch and join-arrival fields retain their existing format.</p>
 <h2 id="running-it">Running it</h2>
 <p>Starting the workflow activates both branches after <code>fetch-cve</code>. The instance's <code>activeBranches</code> holds
 one entry per running branch; <code>currentNodeId</code> is <code>null</code> while both run. <code>create-report</code> fires once both
