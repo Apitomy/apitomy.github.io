@@ -1915,6 +1915,16 @@ OpenCode, Axiom writes them to an <code>opencode.json</code> file in the session
 session's <code>opencode serve</code> process with <code>OPENCODE_CONFIG</code> pointing at it. MCP servers from your global
 OpenCode configuration are also loaded. If a configured MCP server fails to connect, the session shows a
 warning message with the error reported by OpenCode.</p>
+<p>OpenCode sessions run in the same working directory as Claude Code sessions: the template's working
+directory if set, otherwise the project workspace for project sessions, otherwise a directory created
+inside the session directory. The template's environment variables and, for project sessions only,
+<code>AXIOM_PROJECT_ID</code>, <code>AXIOM_PROJECT_NAME</code>, <code>AXIOM_REF</code>, and <code>AXIOM_REPOSITORY</code> are passed to the
+session's <code>opencode serve</code> process, so they are available to OpenCode's tools and MCP servers.
+Environment variables (including template secrets) are visible to the agent's tools, for example its
+shell tool. Like Claude Code with <code>CLAUDE.md</code>, OpenCode also loads project-level configuration
+(<code>opencode.json</code>, <code>.opencode/</code>, <code>AGENTS.md</code>) from the working directory and its git repository;
+project-level <code>opencode.json</code> settings are applied after Axiom's generated config and can override
+them (for example MCP servers or permissions).</p>
 </div>
 <hr />
 <h2 id="accessing-the-assistant">Accessing the Assistant</h2>
