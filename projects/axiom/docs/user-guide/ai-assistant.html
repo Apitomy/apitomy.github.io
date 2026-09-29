@@ -1925,6 +1925,9 @@ shell tool. Like Claude Code with <code>CLAUDE.md</code>, OpenCode also loads pr
 (<code>opencode.json</code>, <code>.opencode/</code>, <code>AGENTS.md</code>) from the working directory and its git repository;
 project-level <code>opencode.json</code> settings are applied after Axiom's generated config and can override
 them (for example MCP servers or permissions).</p>
+<p>The template's system prompt, including project context for project sessions, is applied to both engines.
+Claude Code receives it with <code>--append-system-prompt</code>; OpenCode receives it as the system prompt of every
+message, added to OpenCode's own system prompt.</p>
 </div>
 <hr />
 <h2 id="accessing-the-assistant">Accessing the Assistant</h2>
