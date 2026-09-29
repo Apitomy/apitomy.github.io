@@ -1910,6 +1910,11 @@ which agent type to use; if none is specified, the template falls back to the
 instance's default agent type. If OpenCode capability checks fail at startup,
 session creation using an OpenCode-backed template is rejected with a compatibility
 error.</p>
+<p>MCP servers configured on a template are available to both Claude Code and OpenCode sessions. For
+OpenCode, Axiom writes them to an <code>opencode.json</code> file in the session directory and starts the
+session's <code>opencode serve</code> process with <code>OPENCODE_CONFIG</code> pointing at it. MCP servers from your global
+OpenCode configuration are also loaded. If a configured MCP server fails to connect, the session shows a
+warning message with the error reported by OpenCode.</p>
 </div>
 <hr />
 <h2 id="accessing-the-assistant">Accessing the Assistant</h2>
