@@ -15,10 +15,10 @@
         <link rel="canonical" href="https://www.apitomy.io/projects/flow/docs/user-guide/workflow-model.html">
       
       
-        <link rel="prev" href="../getting-started/quick-start.html">
+        <link rel="prev" href="current-contracts.html">
       
       
-        <link rel="next" href="engine-usage.html">
+        <link rel="next" href="typed-configuration.html">
       
       
         
@@ -288,7 +288,7 @@
     
     
       <li class="md-tabs__item md-tabs__item--active">
-        <a href="workflow-model.html" class="md-tabs__link">
+        <a href="current-contracts.html" class="md-tabs__link">
           
   
   
@@ -570,6 +570,34 @@
                 
   
   
+  
+  
+    <li class="md-nav__item">
+      <a href="current-contracts.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Current Contracts
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
     
   
   
@@ -820,6 +848,34 @@
   
   
     <li class="md-nav__item">
+      <a href="typed-configuration.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Typed Configuration
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="engine-usage.html" class="md-nav__link">
         
   
@@ -1016,6 +1072,34 @@
   
   
     <li class="md-nav__item">
+      <a href="workflow-diff.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Workflow Diff Viewer
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="parallel-fork-join.html" class="md-nav__link">
         
   
@@ -1141,6 +1225,90 @@
     
   
     Architecture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../developer-guide/engine-errors.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Engine Errors
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../developer-guide/indexed-architecture.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Indexed Architecture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../developer-guide/documentation-checks.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Documentation Checks
   
 
     
@@ -1408,7 +1576,8 @@
 
 
 <h1 id="workflow-model">Workflow Model</h1>
-<p>A workflow is a directed graph of <strong>nodes</strong> connected by <strong>edges</strong>. The graph defines the steps a process follows and the conditions that determine which path to take.</p>
+<p>A workflow is a directed graph of <strong>nodes</strong> connected by <strong>edges</strong>. It defines process steps and the
+conditions that determine routing.</p>
 <h2 id="workflow-definition">Workflow Definition</h2>
 <table>
 <thead>
@@ -1435,6 +1604,11 @@
 <td>Optional description</td>
 </tr>
 <tr>
+<td><code>version</code></td>
+<td>Integer</td>
+<td>Optional host-managed revision; instances are not automatically pinned to it</td>
+</tr>
+<tr>
 <td><code>nodes</code></td>
 <td>List</td>
 <td>The nodes in the graph</td>
@@ -1447,8 +1621,11 @@
 </tbody>
 </table>
 <p>Workflow definitions are JSON-serializable. The consuming application stores them however it chooses.</p>
+<p>See <a href="typed-configuration.html">typed configuration and wire contract v1</a> for the shared schema, per-node
+TypeScript/Java APIs, host extension fields, defaults, and source-compatibility guidance.</p>
 <h2 id="node-types">Node Types</h2>
-<p>Every node has an <code>id</code>, <code>type</code>, <code>name</code>, <code>config</code> (type-specific configuration), and <code>position</code> (visual coordinates).</p>
+<p>Every node has an <code>id</code>, <code>type</code>, <code>name</code>, and <code>config</code> (type-specific configuration). <code>position</code> (visual
+coordinates) is optional and nullable; the browser can lay out definitions that omit it.</p>
 <h3 id="start">Start</h3>
 <p>Entry point for the workflow. One per workflow.</p>
 <ul>
@@ -1467,7 +1644,8 @@
 <p>Automated work delegated to a <code>NodeExecutor</code> provided by the host application.</p>
 <ul>
 <li><strong>Config</strong>: Must include an <code>actionType</code> field matching a registered executor</li>
-<li><strong>Behavior</strong>: Invokes the executor synchronously. Output merges into the workflow context.</li>
+<li><strong>Behavior</strong>: Invokes the executor synchronously. COMPLETED output is checked/mapped into context;
+  PENDING parks the action for host completion. FAILED enters error recovery.</li>
 </ul>
 <div class="language-json highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="p">{</span>
 </span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">  </span><span class="nt">"actionType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"analyze-cve"</span><span class="p">,</span>
@@ -1479,25 +1657,29 @@
 <ul>
 <li><strong>Config</strong>: The engine interprets three keys:<ul>
 <li><code>description</code> (String) — instructions for the person completing the task</li>
-<li><code>inputs</code> (Map<String, String>) — map of display label to EL expression, resolved against the workflow context at render time (e.g. <code>{"Credit Score": "context.creditScore"}</code>)</li>
+<li><code>inputs</code> (Map<String, Object>) — expression strings or JSON literals, resolved on entry and info reads
+  (e.g. <code>{"Credit Score": "context.creditScore"}</code>)</li>
 <li><code>outputs</code> (List of <code>{name, type, required}</code>) — defines the form schema for task completion</li>
 </ul>
 </li>
 </ul>
 <p>The validator emits <code>MISSING_TASK_DESCRIPTION</code> and <code>MISSING_TASK_OUTPUTS</code> warnings when these are absent.
-- <strong>Behavior</strong>: Completes when the consuming application calls <code>completeCurrentNode</code> with the human's response.</p>
+- <strong>Behavior</strong>: Completes when the host calls <code>completeNode</code> with the response (<code>completeCurrentNode</code> for
+  one parked branch). The host validates the submitted form values.</p>
 <h3 id="receive-event">Receive Event</h3>
 <p>Blocks until a matching external event arrives.</p>
 <ul>
 <li><strong>Config</strong>: <code>eventType</code> (required) and <code>match</code> expressions (optional) for event correlation</li>
-<li><strong>Behavior</strong>: Completes when the consuming application calls <code>completeCurrentNode</code> after a matching event is detected via <code>matchesEvent</code></li>
+<li><strong>Behavior</strong>: The host uses <code>matchesEvent</code> to correlate, then <code>completeNode</code> to deliver a matching event.
+  Optional <code>outputs</code> expressions map selected event values into context.</li>
 </ul>
 <p>See <a href="event-correlation.html">Event Correlation</a> for details.</p>
 <h3 id="wait">Wait</h3>
 <p>Blocks for a configured duration. The engine sets the instance to <code>WAITING</code> status.</p>
 <ul>
-<li><strong>Config</strong>: <code>duration</code> (String) — ISO 8601 duration (e.g. <code>PT30M</code>, <code>PT2H</code>, <code>P1D</code>). The validator emits <code>MISSING_WAIT_DURATION</code> if absent.</li>
-<li><strong>Behavior</strong>: The consuming application reads the duration via <code>getWaitInfo</code>, schedules a timer, and calls <code>completeCurrentNode</code> when it expires.</li>
+<li><strong>Config</strong>: <code>duration</code> (String) — ISO 8601, e.g. <code>PT30M</code>, <code>PT2H</code>, <code>P1D</code>.
+  The validator emits <code>MISSING_WAIT_DURATION</code> if absent.</li>
+<li><strong>Behavior</strong>: The host reads <code>getWaitInfo</code>, schedules a timer, then calls <code>completeNode</code> when it expires.</li>
 </ul>
 <h3 id="end">End</h3>
 <p>Terminal state. One or more per workflow.</p>
@@ -1569,7 +1751,7 @@
 </span></code></pre></div>
 <h3 id="parallel-forkjoin">Parallel Fork/Join</h3>
 <p>A node with <strong>two or more outgoing edges that are all unconditional</strong> (no <code>condition</code> and
-<code>isDefault: false</code>) is a <strong>fork</strong>: entering it activates every outgoing branch concurrently, rather
+<code>isDefault: false</code>) is a <strong>fork</strong>: completing it activates every outgoing branch, rather
 than choosing one. This is the parallel counterpart to conditional routing, where exactly one edge is
 taken.</p>
 <div class="language-json highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="p">{</span><span class="w"> </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"e-analyze"</span><span class="p">,</span><span class="w"> </span><span class="nt">"source"</span><span class="p">:</span><span class="w"> </span><span class="s2">"fetch-cve"</span><span class="p">,</span><span class="w"> </span><span class="nt">"target"</span><span class="p">:</span><span class="w"> </span><span class="s2">"analyze-impact"</span><span class="p">,</span><span class="w"> </span><span class="nt">"priority"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="nt">"isDefault"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w"> </span><span class="p">}</span>
@@ -1596,7 +1778,8 @@ shape.</p>
 </span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>  → [rejected] Action (revise plan) → Human Task (approve plan)  // loop back
 </span></code></pre></div>
 <h2 id="workflow-instance">Workflow Instance</h2>
-<p>A workflow instance is the runtime state of a workflow execution. It is a single JSON document — the consuming application handles persistence.</p>
+<p>A workflow instance is the execution's runtime state, held in a single JSON document. The host handles
+persistence.</p>
 <table>
 <thead>
 <tr>
@@ -1619,12 +1802,12 @@ shape.</p>
 <tr>
 <td><code>currentNodeId</code></td>
 <td>String | null</td>
-<td>The node the instance is currently at when exactly one branch is active; <code>null</code> when zero or multiple branches are active</td>
+<td>Convenience cursor for one branch; null during parallel waits. Terminal snapshots may retain a final/failing cursor.</td>
 </tr>
 <tr>
 <td><code>activeBranches</code></td>
 <td>Array</td>
-<td>The branches currently executing, each <code>{ branchId, nodeId }</code>. A non-parallel run has a single <code>root</code> branch.</td>
+<td>Branch records <code>{ branchId, nodeId }</code>. Interpret activity together with status; failed/cancelled snapshots may retain records. A sequential run uses <code>root</code>.</td>
 </tr>
 <tr>
 <td><code>joinArrivals</code></td>
@@ -1639,7 +1822,7 @@ shape.</p>
 <tr>
 <td><code>context</code></td>
 <td>Map</td>
-<td>Accumulated data from completed nodes</td>
+<td>Initial data plus mapped completed and partial pending outputs</td>
 </tr>
 <tr>
 <td><code>history</code></td>
@@ -1663,9 +1846,12 @@ shape.</p>
 </tr>
 </tbody>
 </table>
-<p>When multiple branches are active, <code>currentNodeId</code> is <code>null</code> (it is a convenience for the
-single-branch case). Each <code>HistoryEntry</code> carries an optional <code>branchId</code> tagging which branch made the
-visit; a missing <code>branchId</code> denotes the <code>root</code> branch.</p>
+<p>At a parallel wait, <code>currentNodeId</code> is null; it is a convenience for the single-branch case, not a
+substitute for status and branch records. Each <code>HistoryEntry</code> has an optional <code>branchId</code> tagging its visit;
+a missing history branch ID denotes <code>root</code>. Java timestamps serialize as ISO strings with the Jackson
+Java Time module. Old instances missing branch collections normalize to empty collections in Java; that
+alone does not synthesize parked branches for safe resume. Hosts must migrate legacy runtime state and
+retain the correct definition. See <a href="current-contracts.html">current contracts</a>.</p>
 <h3 id="status-lifecycle">Status Lifecycle</h3>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>          ┌─────────┐
 </span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>          │ RUNNING  │ ← startWorkflow / completeCurrentNode

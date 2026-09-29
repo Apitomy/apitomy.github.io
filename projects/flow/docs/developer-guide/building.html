@@ -286,7 +286,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../user-guide/workflow-model.html" class="md-tabs__link">
+        <a href="../user-guide/current-contracts.html" class="md-tabs__link">
           
   
   
@@ -570,6 +570,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../user-guide/current-contracts.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Current Contracts
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../user-guide/workflow-model.html" class="md-nav__link">
         
   
@@ -578,6 +606,34 @@
     
   
     Workflow Model
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../user-guide/typed-configuration.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Typed Configuration
   
 
     
@@ -774,6 +830,34 @@
     
   
     Workflow Viewer
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../user-guide/workflow-diff.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Workflow Diff Viewer
   
 
     
@@ -1061,6 +1145,90 @@
   
   
     <li class="md-nav__item">
+      <a href="engine-errors.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Engine Errors
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="indexed-architecture.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Indexed Architecture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="documentation-checks.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Documentation Checks
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="contributing.html" class="md-nav__link">
         
   
@@ -1220,30 +1388,36 @@
 <p>This builds both the engine and the UI in sequence:</p>
 <ol>
 <li><strong>Engine</strong>: <code>mvn clean install</code> — compiles, runs tests, installs to local Maven repo</li>
-<li><strong>UI</strong>: <code>npm install</code>, <code>npm run lint</code>, <code>npm run build</code> — installs deps, lints, runs vitest, builds the library</li>
+<li><strong>UI</strong>: <code>npm install</code>, <code>npm run lint</code>, <code>npm run build</code> — installs deps, lints, builds the library</li>
 </ol>
+<p>The script does not run Vitest or Playwright. Run those explicitly as shown below.</p>
 <p>The script exits immediately on any failure (<code>set -euo pipefail</code>).</p>
 <h2 id="engine-only">Engine Only</h2>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nb">cd</span><span class="w"> </span>engine
 </span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>mvn<span class="w"> </span>clean<span class="w"> </span>install
 </span></code></pre></div>
-<p>Runs all 83 JUnit 5 tests covering workflow execution, validation, error handling, and event correlation.</p>
+<p>Runs the JUnit 5 suite covering execution, validation, ownership, errors, and event correlation.</p>
 <h2 id="ui-only">UI Only</h2>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nb">cd</span><span class="w"> </span>ui
 </span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>npm<span class="w"> </span>install
 </span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>npm<span class="w"> </span>run<span class="w"> </span>lint<span class="w">       </span><span class="c1"># ESLint with typescript-eslint + react-hooks</span>
-</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>npm<span class="w"> </span><span class="nb">test</span><span class="w">           </span><span class="c1"># Vitest — 17 validation module tests</span>
-</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>npm<span class="w"> </span>run<span class="w"> </span>build<span class="w">      </span><span class="c1"># TypeScript type checking + Vite library build</span>
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>npm<span class="w"> </span><span class="nb">test</span><span class="w">           </span><span class="c1"># Vitest pure-logic and shared conformance suites</span>
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>npx<span class="w"> </span>tsc<span class="w"> </span>--noEmit<span class="w">    </span><span class="c1"># Application/test source typecheck</span>
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>npm<span class="w"> </span>run<span class="w"> </span>build<span class="w">      </span><span class="c1"># TypeScript type checking + Vite library build</span>
 </span></code></pre></div>
 <h3 id="ui-dev-server">UI Dev Server</h3>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nb">cd</span><span class="w"> </span>ui
 </span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>npm<span class="w"> </span>run<span class="w"> </span>dev
 </span></code></pre></div>
-<p>Starts the Vite dev server at <strong>http://localhost:5173</strong> with a sample CVE triage workflow. The dev app has two tabs:</p>
+<p>Starts the Vite dev server at <strong>http://localhost:5173</strong> with selectable sample scenarios:</p>
 <ul>
 <li><strong>Editor</strong> — renders <code>WorkflowEditor</code> with drag-and-drop editing</li>
 <li><strong>Viewer</strong> — renders <code>WorkflowViewer</code> with a sample workflow instance</li>
+<li><strong>Diff</strong> — renders <code>WorkflowDiffViewer</code> with before/after definitions</li>
 </ul>
+<p>See <a href="documentation-checks.html">Documentation Checks</a> for focused executable examples, strict MkDocs/link
+checks, and the real-browser packed-consumer suite. Test counts come from runner output rather than this
+guide.</p>
 <h2 id="project-structure">Project Structure</h2>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>apitomy-flow/
 </span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>  build.sh                     Full build script

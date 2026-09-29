@@ -18,7 +18,7 @@
         <link rel="prev" href="visual-editor.html">
       
       
-        <link rel="next" href="parallel-fork-join.html">
+        <link rel="next" href="workflow-diff.html">
       
       
         
@@ -288,7 +288,7 @@
     
     
       <li class="md-tabs__item md-tabs__item--active">
-        <a href="workflow-model.html" class="md-tabs__link">
+        <a href="current-contracts.html" class="md-tabs__link">
           
   
   
@@ -573,6 +573,34 @@
   
   
     <li class="md-nav__item">
+      <a href="current-contracts.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Current Contracts
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="workflow-model.html" class="md-nav__link">
         
   
@@ -581,6 +609,34 @@
     
   
     Workflow Model
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="typed-configuration.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Typed Configuration
   
 
     
@@ -896,6 +952,17 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#node-details-and-repeat-visits" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Node details and repeat visits
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#parallel-branches" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -959,6 +1026,34 @@
   
 </nav>
       
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="workflow-diff.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Workflow Diff Viewer
+  
+
+    
+  </span>
+  
+  
+
+      </a>
     </li>
   
 
@@ -1116,6 +1211,90 @@
   
   
     <li class="md-nav__item">
+      <a href="../developer-guide/engine-errors.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Engine Errors
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../developer-guide/indexed-architecture.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Indexed Architecture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../developer-guide/documentation-checks.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Documentation Checks
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../developer-guide/contributing.html" class="md-nav__link">
         
   
@@ -1231,6 +1410,17 @@
     <span class="md-ellipsis">
       
         Path Taken
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#node-details-and-repeat-visits" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Node details and repeat visits
       
     </span>
   </a>
@@ -1376,7 +1566,7 @@
 <ul>
 <li>Nodes are not draggable</li>
 <li>Edges cannot be created or removed</li>
-<li>Nodes are not selectable</li>
+<li>Nodes can be selected for inspection; selection does not edit the definition</li>
 <li>Pan and zoom are available for navigation</li>
 </ul>
 <h3 id="current-node-highlight">Current Node Highlight</h3>
@@ -1433,20 +1623,29 @@ animated "marching ants" ring around it.</p>
 </tr>
 </tbody>
 </table>
-<p>The most recently followed edge is animated with a flowing dash pattern.</p>
+<p>Arrival edges for active branches animate with a flowing dash pattern. Terminal instances have no animated
+edges, even if their serialized snapshot still retains branch records.</p>
+<h3 id="node-details-and-repeat-visits">Node details and repeat visits</h3>
+<p>Click a node to inspect its <strong>State</strong> or <strong>Definition</strong> in the resizable side panel. The default state
+view follows the latest visit as new history arrives; a visit picker lets you inspect earlier loop visits.
+Parallel history is grouped by branch. Clicking the canvas clears selection. Host right-click actions
+are independent of this built-in inspection.</p>
+<p>The viewer responds to new <code>workflow</code> and <code>instance</code> props. Replace changed objects/arrays rather than
+mutating them in place. Supply the definition that belongs to the instance: automatic version pinning is
+not implemented (see <a href="current-contracts.html">current contracts</a>).</p>
 <h3 id="parallel-branches">Parallel Branches</h3>
 <p>For instances that fork, the viewer highlights <strong>every</strong> currently-active node at once rather than a
 single cursor. The arrival edge of each active branch is animated, while all previously-traversed edges
 keep their static "taken" styling. When you open a node's detail, its visit history is grouped by
 branch, and a <strong>Branch</strong> row identifies which branch a given visit belongs to (the <code>root</code> branch is not
-labeled). At a terminal state — completed, failed, or cancelled — no branches are active, so the viewer
-falls back to highlighting the final node.</p>
+labeled). At a terminal state — completed, failed, or cancelled — the viewer ignores branch activity and
+uses <code>currentNodeId</code> if present. A cancelled multi-branch instance may have no single cursor to highlight.</p>
 <h3 id="history-based-rendering">History-Based Rendering</h3>
 <p>The viewer reads the instance's <code>history</code> array to determine:</p>
 <ul>
 <li>Which nodes have been visited (<code>history[].nodeId</code>)</li>
 <li>Which edges have been followed (<code>history[].edgeId</code>)</li>
-<li>Which node is current (<code>instance.currentNodeId</code>)</li>
+<li>Which nodes are active (<code>instance.activeBranches</code>, gated by status; terminal fallback uses <code>currentNodeId</code>)</li>
 </ul>
 <h3 id="auto-layout">Auto-Layout</h3>
 <p>If the workflow's nodes have no positions (or all overlap at the same coordinates), the viewer
@@ -1488,6 +1687,9 @@ that node.</p>
 </span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="k">import</span><span class="w"> </span><span class="s1">'@apitomy/flow-ui/style.css'</span><span class="p">;</span>
 </span></code></pre></div>
 <p>The viewer fills its container — ensure the parent element has explicit dimensions.</p>
+<p>See <a href="workflow-diff.html">Workflow Diff Viewer</a> for definition comparisons and
+<a href="../developer-guide/documentation-checks.html#browser-verification">browser verification</a> for live-update
+checks.</p>
 
 
 

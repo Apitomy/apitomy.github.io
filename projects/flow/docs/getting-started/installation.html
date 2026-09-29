@@ -288,7 +288,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../user-guide/workflow-model.html" class="md-tabs__link">
+        <a href="../user-guide/current-contracts.html" class="md-tabs__link">
           
   
   
@@ -687,6 +687,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../user-guide/current-contracts.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Current Contracts
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../user-guide/workflow-model.html" class="md-nav__link">
         
   
@@ -695,6 +723,34 @@
     
   
     Workflow Model
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../user-guide/typed-configuration.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Typed Configuration
   
 
     
@@ -911,6 +967,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../user-guide/workflow-diff.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Workflow Diff Viewer
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../user-guide/parallel-fork-join.html" class="md-nav__link">
         
   
@@ -1036,6 +1120,90 @@
     
   
     Architecture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../developer-guide/engine-errors.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Engine Errors
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../developer-guide/indexed-architecture.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Indexed Architecture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../developer-guide/documentation-checks.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Documentation Checks
   
 
     
@@ -1203,15 +1371,19 @@
 <div class="language-xml highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nt">&lt;dependency&gt;</span>
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">    </span><span class="nt">&lt;groupId&gt;</span>io.apitomy<span class="nt">&lt;/groupId&gt;</span>
 </span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">    </span><span class="nt">&lt;artifactId&gt;</span>apitomy-flow-engine<span class="nt">&lt;/artifactId&gt;</span>
-</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">    </span><span class="nt">&lt;version&gt;</span>1.0.2<span class="nt">&lt;/version&gt;</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">    </span><span class="nt">&lt;version&gt;</span>${apitomy-flow.version}<span class="nt">&lt;/version&gt;</span>
 </span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="nt">&lt;/dependency&gt;</span>
 </span></code></pre></div>
+<p>Set <code>apitomy-flow.version</code> to your selected artifact version. These guides describe the combined source
+branch, not a guarantee that pending changes are in the latest release. See
+<a href="../user-guide/current-contracts.html">current contracts</a>; build/install the branch for its exact behavior.</p>
 <h3 id="requirements">Requirements</h3>
 <ul>
 <li>Java 21+</li>
 <li>No additional framework dependencies required</li>
 </ul>
-<p>The engine is a pure Java library. It works in any Java application — Quarkus, Spring, standalone, or otherwise.</p>
+<p>The engine is a pure Java library. It works in any Java application — Quarkus, Spring, standalone,
+or otherwise.</p>
 <h2 id="visual-editor-react">Visual Editor (React)</h2>
 <p>Install the UI component library:</p>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>npm<span class="w"> </span>install<span class="w"> </span>@apitomy/flow-ui
@@ -1220,9 +1392,11 @@
 <p>The visual editor requires:</p>
 <ul>
 <li>React 19+</li>
+<li>React DOM 19+</li>
 <li><a href="https://reactflow.dev/">@xyflow/react</a> 12+</li>
 <li><a href="https://www.patternfly.org/">@patternfly/react-core</a> 6+</li>
 <li><a href="https://www.patternfly.org/">@patternfly/react-icons</a> 6+</li>
+<li><code>@patternfly/patternfly</code> 6+</li>
 </ul>
 <p>Import the required CSS in your application entry point:</p>
 <div class="language-typescript highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">import</span><span class="w"> </span><span class="s1">'@patternfly/patternfly/patternfly.css'</span><span class="p">;</span>
@@ -1230,11 +1404,12 @@
 </span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="k">import</span><span class="w"> </span><span class="s1">'@apitomy/flow-ui/style.css'</span><span class="p">;</span>
 </span></code></pre></div>
 <h2 id="building-from-source">Building from Source</h2>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/Apitomy/apitomy-flow.git
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>git<span class="w"> </span>clone<span class="w"> </span>git@github.com:Apitomy/apitomy-flow.git
 </span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="nb">cd</span><span class="w"> </span>apitomy-flow
 </span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>./build.sh
 </span></code></pre></div>
-<p>This builds both the engine (<code>engine/</code>) and the UI (<code>ui/</code>). See <a href="../developer-guide/building.html">Building</a> for details.</p>
+<p>This builds both the engine (<code>engine/</code>) and the UI (<code>ui/</code>). See
+<a href="../developer-guide/building.html">Building</a> for details.</p>
 
 
 

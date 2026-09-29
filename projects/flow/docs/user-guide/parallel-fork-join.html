@@ -15,7 +15,7 @@
         <link rel="canonical" href="https://www.apitomy.io/projects/flow/docs/user-guide/parallel-fork-join.html">
       
       
-        <link rel="prev" href="workflow-viewer.html">
+        <link rel="prev" href="workflow-diff.html">
       
       
         <link rel="next" href="../developer-guide/building.html">
@@ -288,7 +288,7 @@
     
     
       <li class="md-tabs__item md-tabs__item--active">
-        <a href="workflow-model.html" class="md-tabs__link">
+        <a href="current-contracts.html" class="md-tabs__link">
           
   
   
@@ -573,6 +573,34 @@
   
   
     <li class="md-nav__item">
+      <a href="current-contracts.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Current Contracts
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="workflow-model.html" class="md-nav__link">
         
   
@@ -581,6 +609,34 @@
     
   
     Workflow Model
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="typed-configuration.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Typed Configuration
   
 
     
@@ -777,6 +833,34 @@
     
   
     Workflow Viewer
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="workflow-diff.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Workflow Diff Viewer
   
 
     
@@ -1044,6 +1128,90 @@
   
   
     <li class="md-nav__item">
+      <a href="../developer-guide/engine-errors.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Engine Errors
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../developer-guide/indexed-architecture.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Indexed Architecture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../developer-guide/documentation-checks.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Documentation Checks
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../developer-guide/contributing.html" class="md-nav__link">
         
   
@@ -1246,7 +1414,7 @@ in parallel). Both branches converge on <code>create-report</code>, which waits 
 <h2 id="why-this-is-a-valid-forkjoin">Why this is a valid fork/join</h2>
 <ul>
 <li><strong><code>fetch-cve</code> is a fork:</strong> it has two outgoing edges (<code>e2</code>, <code>e3</code>), both unconditional
-  (<code>isDefault: false</code>, no <code>condition</code>). Entering <code>fetch-cve</code> activates both branches.</li>
+  (<code>isDefault: false</code>, no <code>condition</code>). Completing <code>fetch-cve</code> activates both branches.</li>
 <li><strong><code>create-report</code> is the join:</strong> it is the first node reachable from both branches and has two
   incoming edges (<code>e4</code>, <code>e5</code>). As an AND-join it runs only after both <code>analyze-impact</code> and <code>notify-team</code>
   complete.</li>

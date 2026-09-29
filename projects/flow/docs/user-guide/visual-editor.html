@@ -288,7 +288,7 @@
     
     
       <li class="md-tabs__item md-tabs__item--active">
-        <a href="workflow-model.html" class="md-tabs__link">
+        <a href="current-contracts.html" class="md-tabs__link">
           
   
   
@@ -573,6 +573,34 @@
   
   
     <li class="md-nav__item">
+      <a href="current-contracts.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Current Contracts
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="workflow-model.html" class="md-nav__link">
         
   
@@ -581,6 +609,34 @@
     
   
     Workflow Model
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="typed-configuration.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Typed Configuration
   
 
     
@@ -835,6 +891,28 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#document-ownership-and-synchronization" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Document ownership and synchronization
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#undo-drafts-and-interaction-modes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Undo, drafts, and interaction modes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#node-palette" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -999,6 +1077,17 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#verification" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Verification
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -1023,6 +1112,34 @@
     
   
     Workflow Viewer
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="workflow-diff.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Workflow Diff Viewer
   
 
     
@@ -1188,6 +1305,90 @@
   
   
     <li class="md-nav__item">
+      <a href="../developer-guide/engine-errors.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Engine Errors
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../developer-guide/indexed-architecture.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Indexed Architecture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../developer-guide/documentation-checks.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Documentation Checks
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../developer-guide/contributing.html" class="md-nav__link">
         
   
@@ -1275,6 +1476,28 @@
   
     <nav class="md-nav" aria-label="Features">
       <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#document-ownership-and-synchronization" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Document ownership and synchronization
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#undo-drafts-and-interaction-modes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Undo, drafts, and interaction modes
+      
+    </span>
+  </a>
+  
+</li>
         
           <li class="md-nav__item">
   <a href="#node-palette" class="md-nav__link">
@@ -1441,6 +1664,17 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#verification" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Verification
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -1465,23 +1699,17 @@
 <p>The <code>WorkflowEditor</code> component provides a drag-and-drop workflow builder with real-time validation.</p>
 <h2 id="usage">Usage</h2>
 <div class="language-tsx highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">WorkflowEditor</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">'@apitomy/flow-ui'</span><span class="p">;</span>
-</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="k">import</span><span class="w"> </span><span class="kr">type</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">Workflow</span><span class="p">,</span><span class="w"> </span><span class="nx">ValidationProblem</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">'@apitomy/flow-ui'</span><span class="p">;</span>
-</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
-</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="kd">function</span><span class="w"> </span><span class="nx">MyWorkflowEditor</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="p">[</span><span class="nx">workflow</span><span class="p">,</span><span class="w"> </span><span class="nx">setWorkflow</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">useState</span><span class="p">&lt;</span><span class="nt">Workflow</span><span class="p">&gt;(</span><span class="nx">initialWorkflow</span><span class="p">);</span>
-</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>
-</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="p">(</span>
-</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="w">    </span><span class="p">&lt;</span><span class="nt">WorkflowEditor</span>
-</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="w">      </span><span class="na">workflow</span><span class="o">=</span><span class="p">{</span><span class="nx">workflow</span><span class="p">}</span>
-</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="w">      </span><span class="na">onChange</span><span class="o">=</span><span class="p">{</span><span class="nx">setWorkflow</span><span class="p">}</span>
-</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="w">      </span><span class="na">theme</span><span class="o">=</span><span class="s">"light"</span>
-</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="w">      </span><span class="na">onValidationChange</span><span class="o">=</span><span class="p">{(</span><span class="nx">problems</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="w">        </span><span class="kd">const</span><span class="w"> </span><span class="nx">hasErrors</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">problems</span><span class="p">.</span><span class="nx">some</span><span class="p">(</span><span class="nx">p</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">p</span><span class="p">.</span><span class="nx">severity</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="s1">'error'</span><span class="p">);</span>
-</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a><span class="w">        </span><span class="nx">setSaveDisabled</span><span class="p">(</span><span class="nx">hasErrors</span><span class="p">);</span>
-</span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a><span class="w">      </span><span class="p">}}</span>
-</span><span id="__span-0-16"><a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a><span class="w">    </span><span class="p">/&gt;</span>
-</span><span id="__span-0-17"><a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a><span class="w">  </span><span class="p">);</span>
-</span><span id="__span-0-18"><a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a><span class="p">}</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">useState</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">'react'</span><span class="p">;</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="k">import</span><span class="w"> </span><span class="kr">type</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">Workflow</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">'@apitomy/flow-ui'</span><span class="p">;</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="kd">function</span><span class="w"> </span><span class="nx">MyWorkflowEditor</span><span class="p">({</span><span class="w"> </span><span class="nx">initialWorkflow</span><span class="w"> </span><span class="p">}</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">initialWorkflow</span><span class="o">:</span><span class="w"> </span><span class="kt">Workflow</span><span class="w"> </span><span class="p">})</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="p">[</span><span class="nx">workflow</span><span class="p">,</span><span class="w"> </span><span class="nx">setWorkflow</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">useState</span><span class="p">&lt;</span><span class="nt">Workflow</span><span class="p">&gt;(</span><span class="nx">initialWorkflow</span><span class="p">);</span>
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="p">(</span>
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="w">        </span><span class="p">&lt;</span><span class="nt">div</span><span class="w"> </span><span class="na">style</span><span class="o">=</span><span class="p">{{</span><span class="w"> </span><span class="nx">height</span><span class="o">:</span><span class="w"> </span><span class="kt">700</span><span class="w"> </span><span class="p">}}&gt;</span>
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="w">            </span><span class="p">&lt;</span><span class="nt">WorkflowEditor</span><span class="w"> </span><span class="na">workflow</span><span class="o">=</span><span class="p">{</span><span class="nx">workflow</span><span class="p">}</span><span class="w"> </span><span class="na">onChange</span><span class="o">=</span><span class="p">{</span><span class="nx">setWorkflow</span><span class="p">}</span><span class="w"> </span><span class="na">theme</span><span class="o">=</span><span class="s">"light"</span><span class="w"> </span><span class="p">/&gt;</span>
+</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="w">        </span><span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="w">    </span><span class="p">);</span>
+</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="p">}</span>
 </span></code></pre></div>
 <h2 id="props">Props</h2>
 <table>
@@ -1498,13 +1726,13 @@
 <td><code>workflow</code></td>
 <td><code>Workflow</code></td>
 <td>Yes</td>
-<td>The workflow definition to edit</td>
+<td>Mount-time graph and live host metadata; see synchronization below</td>
 </tr>
 <tr>
 <td><code>onChange</code></td>
 <td><code>(workflow: Workflow) =&gt; void</code></td>
 <td>Yes</td>
-<td>Called on every change with the updated definition</td>
+<td>Publishes committed document revisions, including undo/redo and import</td>
 </tr>
 <tr>
 <td><code>theme</code></td>
@@ -1527,11 +1755,38 @@
 </tbody>
 </table>
 <h2 id="features">Features</h2>
+<h3 id="document-ownership-and-synchronization">Document ownership and synchronization</h3>
+<p>The graph is <strong>mount-initialized</strong>, not a controlled value. Parent <code>id</code>, <code>name</code>, <code>description</code>, and
+<code>version</code> changes apply to the current graph as document edits. Replacing prop nodes/edges does not
+replace an in-progress canvas. To open a different document or accept a remote full replacement, remount:</p>
+<div class="language-tsx highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="p">&lt;</span><span class="nt">WorkflowEditor</span><span class="w"> </span><span class="na">key</span><span class="o">=</span><span class="p">{</span><span class="nx">documentSessionId</span><span class="p">}</span><span class="w"> </span><span class="na">workflow</span><span class="o">=</span><span class="p">{</span><span class="nx">workflow</span><span class="p">}</span><span class="w"> </span><span class="na">onChange</span><span class="o">=</span><span class="p">{</span><span class="nx">setWorkflow</span><span class="p">}</span><span class="w"> </span><span class="p">/&gt;</span>
+</span></code></pre></div>
+<p><code>documentSessionId</code> is a host-managed replacement key, not a counter incremented on each local edit.
+Remounting resets local history, selection, drafts, and simulation. Stable <code>onChange</code> echoes are supported;
+the API does not reconcile remote edits or distinguish asynchronous replay of old metadata. Broader host
+synchronization is tracked in <a href="https://github.com/Apitomy/apitomy-flow/issues/121">#121</a>.</p>
+<p>A positioned mount emits no <code>onChange</code>. Fallback layout emits its computed positions once and establishes
+the initial history baseline. Selection, measurements, and in-progress drag frames do not publish edits.
+Imports commit metadata and graph together and are undoable. Pass new immutable values from the host.</p>
+<h3 id="undo-drafts-and-interaction-modes">Undo, drafts, and interaction modes</h3>
+<p>Node/edge properties, IDs, add/delete/connect/clone, completed drags, tidy, imports, and metadata edits
+participate in document history. A typing session in one field coalesces; changing focus/field ends that
+group. Discrete controls form separate edits. Node deletion removes incident edges atomically.</p>
+<p>Undo/redo restores panel selection and canvas node/edge selection together with the document snapshot;
+selection-only actions still create no history entry and emit no document change.</p>
+<p>Keyboard undo/delete belongs to the focused editor; text controls retain native shortcuts and IME input.
+Simulation blocks document mutations and history commands. Manual canvas lock blocks structural canvas
+edits but still allows property edits, import, and history. Inspection remains available.</p>
+<p>Input-map rows retain stable local identities, including separate rows with empty or duplicate keys.
+The persisted map includes the empty-string key (<code>''</code>); repeated keys, including empty keys, serialize
+last-entry-wins even though their separate rows remain in the local draft. Empty and duplicate keys show
+warnings. Untouched JSON literals retain their types; editing a value field makes it an expression string.
+Drafts reset on selection, import, or history travel.</p>
 <h3 id="node-palette">Node Palette</h3>
 <p>A toolbar at the top lists all six node types. Drag a node type from the palette onto the canvas to add it.</p>
 <p>The toolbar also has a <strong>Tidy up</strong> button that runs auto-layout (see <a href="#auto-layout">Auto-Layout</a>
 below), <strong>Import</strong> / <strong>Export</strong> / <strong>Image</strong> buttons for moving definitions in and out of the editor
-(see <a href="#import-and-export">Import and Export</a> below), and a <strong>Simulate</strong> button that opens interactive
+(see <a href="#import-and-export">Import and Export</a> below), and a <strong>Simulate</strong> switch that opens interactive
 routing simulation (see <a href="#simulation-and-condition-testing">Simulation and Condition Testing</a> below).</p>
 <h3 id="canvas">Canvas</h3>
 <p>The canvas uses <a href="https://reactflow.dev/">React Flow</a> for rendering and interaction:</p>
@@ -1614,7 +1869,8 @@ routing simulation (see <a href="#simulation-and-condition-testing">Simulation a
   the host renders. See <a href="engine-usage.html#output-field-metadata">Engine Usage</a> for the full field
   reference.</li>
 <li>Duration (ISO 8601 string) (wait nodes)</li>
-<li>Node ID (read-only)</li>
+<li>Node ID (editable). Nonblank unique IDs update connected edge endpoints and selection atomically;
+  blank/duplicate IDs are not committed. Renaming does not rewrite arbitrary host metadata or expressions.</li>
 </ul>
 <p><strong>Edge properties:</strong></p>
 <ul>
@@ -1627,11 +1883,13 @@ routing simulation (see <a href="#simulation-and-condition-testing">Simulation a
 </ul>
 <p>Click the canvas background to deselect and hide the properties panel.</p>
 <h3 id="live-validation">Live Validation</h3>
-<p>The editor runs the TypeScript workflow validator on every change. Validation feedback is displayed in two ways:</p>
+<p>The editor validates semantic document revisions. Selection and layout-only edits reuse the prior semantic
+revision; built-in and host validation do not rerun just to move a node. Feedback is displayed in two ways:</p>
 <p><strong>Inline indicators:</strong> Nodes with errors show a red border. Nodes with warnings show an amber border.
 Each affected node also shows a small corner badge in the top-right — red for errors, amber for
 warnings — carrying the highest-severity problem for that node, with the message available on hover.</p>
-<p><strong>Problems panel:</strong> A collapsible panel at the bottom lists all validation problems grouped by severity (errors first). Click a problem to select and center the affected node or edge on the canvas.</p>
+<p><strong>Problems panel:</strong> A collapsible panel groups problems by severity, errors first. Click a problem to
+select and center its affected node or edge.</p>
 <h3 id="forkjoin-hint">Fork/Join Hint</h3>
 <p>The editor tags nodes with a small corner badge showing their role in a parallel region: <strong>Fork</strong> on a
 node whose outgoing edges all run in parallel, and <strong>Join</strong> on the node where those branches
@@ -1669,32 +1927,52 @@ affordances for this:</p>
   documentation, PR descriptions, and design discussions.</li>
 </ul>
 <p>The JSON helpers are also exported for host reuse:</p>
-<div class="language-ts highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">serializeWorkflow</span><span class="p">,</span><span class="w"> </span><span class="nx">parseWorkflow</span><span class="p">,</span><span class="w"> </span><span class="nx">downloadWorkflowJson</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">'@apitomy/flow-ui'</span><span class="p">;</span>
-</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>
-</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="kd">const</span><span class="w"> </span><span class="nx">json</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">serializeWorkflow</span><span class="p">(</span><span class="nx">workflow</span><span class="p">);</span><span class="w">        </span><span class="c1">// pretty-printed, portable JSON</span>
-</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="kd">const</span><span class="w"> </span><span class="nx">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">parseWorkflow</span><span class="p">(</span><span class="nx">json</span><span class="p">);</span><span class="w">              </span><span class="c1">// { workflow?, problems, error? }</span>
-</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">result</span><span class="p">.</span><span class="nx">workflow</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="w">  </span><span class="c1">// accepted: no fatal error and no error-severity validation problems</span>
-</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="p">}</span>
+<div class="language-ts highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">serializeWorkflow</span><span class="p">,</span><span class="w"> </span><span class="nx">parseWorkflow</span><span class="p">,</span><span class="w"> </span><span class="nx">downloadWorkflowJson</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">'@apitomy/flow-ui'</span><span class="p">;</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="kd">const</span><span class="w"> </span><span class="nx">json</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">serializeWorkflow</span><span class="p">(</span><span class="nx">workflow</span><span class="p">);</span><span class="w">        </span><span class="c1">// pretty-printed, portable JSON</span>
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="kd">const</span><span class="w"> </span><span class="nx">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">parseWorkflow</span><span class="p">(</span><span class="nx">json</span><span class="p">);</span><span class="w">              </span><span class="c1">// { workflow?, problems, error? }</span>
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">result</span><span class="p">.</span><span class="nx">workflow</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="w">  </span><span class="c1">// accepted: no fatal error and no error-severity validation problems</span>
+</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="p">}</span>
 </span></code></pre></div>
 <h3 id="simulation-and-condition-testing">Simulation and Condition Testing</h3>
-<p>The <strong>Simulate</strong> button in the toolbar opens an interactive simulation of the workflow's routing
+<p>The <strong>Simulate</strong> switch in the toolbar opens an interactive simulation of the workflow's routing
 logic against a sample context — without deploying or running a real instance. It answers "which
 branch does this input take?" and "does my condition evaluate the way I think?" entirely at
-authoring time. The routing and condition semantics match the Java engine exactly (priority-ordered
-edge selection, <code>isDefault</code> fallback, and Jakarta EL condition evaluation), so the path you see in
-the editor is the path a real instance would take.</p>
+authoring time. Shared Java/TypeScript fixtures verify priority-ordered edge selection, <code>isDefault</code>
+fallback, structured fork/join routing, and a browser subset of Jakarta EL. Simulation is an authoring
+aid; host execution and full Jakarta EL behavior require verification with the Java engine.</p>
 <p><strong>Running a simulation:</strong></p>
 <ol>
-<li>Click <strong>Simulate</strong> to open the simulation panel on the right.</li>
+<li>Turn on <strong>Simulate</strong> to open the simulation panel on the right.</li>
 <li>Enter a <strong>sample start context</strong> as JSON.</li>
-<li>Click <strong>Start</strong>, then <strong>Step</strong> (advance one transition) or <strong>Run</strong> (run to the next block or a
-   terminal state). <strong>Reset</strong> clears the run.</li>
+<li>Click <strong>Start</strong>, then <strong>Step</strong> (advance one runnable branch, dispatching all children at a fork) or
+   <strong>Run</strong> (repeat advancement until blocked or terminal). A Step can consume several budget units at a
+   fork; it is not necessarily one transition-budget unit. <strong>Reset</strong> clears the run.</li>
 <li>Where a node would block for real work — <code>action</code>, <code>human-task</code>, or <code>receive-event</code> — the
    simulation pauses so you can supply a <strong>mock output</strong> (JSON). The output is merged into the
-   context, exactly as a real node's output would be, and the run continues. <code>wait</code> nodes route
-   through immediately (no input needed).</li>
+   context using declared output aliases and receive-event mappings, and the run continues. <code>wait</code>
+   nodes route through immediately (no input needed); real engine waits pause for external completion.</li>
 </ol>
+<p><strong>Expression support:</strong> the browser supports JSON property/index access, literals, arithmetic,
+comparisons, logical operators, <code>empty</code>, and lazy ternary expressions (<code>condition ? yes : no</code>).
+Conditions select an edge only when the result is boolean <code>true</code>. Method/function calls, collection
+literals, lambdas, assignments, sequences and concatenation require the engine's full Jakarta EL.
+The editor retains such expressions and reports <code>UNSUPPORTED_EXPRESSION_DIALECT</code>, rather than calling
+them malformed. This warning means the browser cannot validate them; Java validation remains authoritative.
+Trying to simulate them produces an explicit unsupported-dialect error. Edge conditions and event-output
+mappings use the same parser; malformed supported syntax such as <code>1e</code> or <code>1 +</code> is diagnosed in both.
+Unquoted Unicode identifiers such as <code>context.café</code> also receive the advisory unsupported warning and
+remain importable. Use quoted keys such as <code>context['café']</code> for browser evaluation.</p>
+<p><strong>Loop guard:</strong> each advancement allows 100 edge moves across runnable branches. Successful fork selection
+has no extra charge; each dispatched child edge consumes one unit. Exactly 100 moves can park all children;
+an additional move fails before entering that child, retaining prior branch arrivals, order, context, and
+history. Moves before the fork reduce its remaining budget. Resuming a blocked node starts a fresh budget;
+repeated Step/Run calls do not. Actions always pause in the simulator, while real synchronous actions can
+run uninterrupted, so budget placement can differ from a real run. Shared <code>conformance/fork-budgets.json</code>
+fixtures exercise exact/excess initial and partial-budget forks through both Step and Run.
+Simulation does not exercise event correlation, timers, required-output enforcement or error-handler
+retries. Numeric extremes and Java-specific coercions are outside the verified browser contract.</p>
 <p><strong>What the canvas shows:</strong></p>
 <ul>
 <li><strong>Path taken</strong> — visited nodes stay fully opaque; unvisited nodes dim; the current node is ringed.
@@ -1721,58 +1999,67 @@ and simulation state is transient — it is never persisted into the saved workf
 will produce a sensible layout on first render.</p>
 <h3 id="host-extension-spi">Host Extension (SPI)</h3>
 <p>A host application can extend the editor by passing an <code>EditorSpi</code> object to the <code>spi</code> prop:</p>
-<div class="language-ts highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="kr">type</span><span class="w"> </span><span class="nx">EditorSpi</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">'@apitomy/flow-ui'</span><span class="p">;</span>
-</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>
-</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="kd">const</span><span class="w"> </span><span class="nx">spi</span><span class="o">:</span><span class="w"> </span><span class="kt">EditorSpi</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">  </span><span class="nx">actionTypes</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="cm">/* ... */</span><span class="w"> </span><span class="p">],</span>
-</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="w">  </span><span class="nx">validate</span><span class="o">:</span><span class="w"> </span><span class="kt">async</span><span class="w"> </span><span class="p">(</span><span class="nx">workflow</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="cm">/* ... */</span><span class="w"> </span><span class="p">],</span>
-</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="p">};</span>
+<div class="language-ts highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="kr">type</span><span class="w"> </span><span class="nx">EditorSpi</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">'@apitomy/flow-ui'</span><span class="p">;</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="kd">const</span><span class="w"> </span><span class="nx">spi</span><span class="o">:</span><span class="w"> </span><span class="kt">EditorSpi</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">  </span><span class="nx">actionTypes</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="cm">/* ... */</span><span class="w"> </span><span class="p">],</span>
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">  </span><span class="nx">validate</span><span class="o">:</span><span class="w"> </span><span class="kt">async</span><span class="w"> </span><span class="p">(</span><span class="nx">workflow</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="cm">/* ... */</span><span class="w"> </span><span class="p">],</span>
+</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="p">};</span>
 </span></code></pre></div>
-<div class="language-ts highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kd">interface</span><span class="w"> </span><span class="nx">EditorSpi</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">  </span><span class="nx">actionTypes?</span><span class="o">:</span><span class="w"> </span><span class="kt">ActionTypeProvider</span><span class="p">;</span><span class="w">   </span><span class="c1">// action-type descriptors for the properties panel</span>
-</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">  </span><span class="nx">validate?</span><span class="o">:</span><span class="w"> </span><span class="kt">WorkflowValidator</span><span class="p">;</span><span class="w">       </span><span class="c1">// host-contributed validation</span>
-</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="p">}</span>
+<div class="language-ts highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="kd">interface</span><span class="w"> </span><span class="nx">EditorSpi</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">  </span><span class="nx">actionTypes?</span><span class="o">:</span><span class="w"> </span><span class="kt">ActionTypeProvider</span><span class="p">;</span><span class="w">   </span><span class="c1">// action-type descriptors for the properties panel</span>
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">  </span><span class="nx">validate?</span><span class="o">:</span><span class="w"> </span><span class="kt">WorkflowValidator</span><span class="p">;</span><span class="w">       </span><span class="c1">// host-contributed validation</span>
+</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="p">}</span>
 </span></code></pre></div>
 <p>Both fields are optional; provide either or both.</p>
 <h4 id="action-type-descriptors">Action-type descriptors</h4>
 <p><code>actionTypes</code> supplies the set of action types a host understands, so the properties panel can offer
 them as choices and render typed input/output fields. It is either an array of descriptors or a
 function returning a <code>Promise</code> of them (so the list can be fetched from a backend):</p>
-<div class="language-ts highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="kr">type</span><span class="w"> </span><span class="nx">ActionTypeProvider</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">ActionTypeDescriptor</span><span class="p">[]</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="p">(()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nb">Promise</span><span class="o">&lt;</span><span class="nx">ActionTypeDescriptor</span><span class="p">[]</span><span class="o">&gt;</span><span class="p">);</span>
-</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>
-</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="kd">interface</span><span class="w"> </span><span class="nx">ActionTypeDescriptor</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">  </span><span class="nx">value</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span><span class="w">                 </span><span class="c1">// stored in the node's actionType config</span>
-</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="w">  </span><span class="nx">label</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span><span class="w">                 </span><span class="c1">// shown in the dropdown</span>
-</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="w">  </span><span class="nx">description?</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
-</span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="w">  </span><span class="nx">inputs?</span><span class="o">:</span><span class="w"> </span><span class="kt">ActionTypeField</span><span class="p">[];</span>
-</span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="w">  </span><span class="nx">outputs?</span><span class="o">:</span><span class="w"> </span><span class="kt">ActionTypeField</span><span class="p">[];</span>
-</span><span id="__span-4-9"><a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="p">}</span>
-</span><span id="__span-4-10"><a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a>
-</span><span id="__span-4-11"><a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a><span class="kd">interface</span><span class="w"> </span><span class="nx">ActionTypeField</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-4-12"><a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a><span class="w">  </span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
-</span><span id="__span-4-13"><a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a><span class="w">  </span><span class="kr">type</span><span class="o">:</span><span class="w"> </span><span class="s1">'string'</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="s1">'number'</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="s1">'boolean'</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="s1">'object'</span><span class="p">;</span>
-</span><span id="__span-4-14"><a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a><span class="w">  </span><span class="nx">required?</span><span class="o">:</span><span class="w"> </span><span class="kt">boolean</span><span class="p">;</span>
-</span><span id="__span-4-15"><a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a><span class="w">  </span><span class="nx">description?</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
-</span><span id="__span-4-16"><a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a><span class="p">}</span>
+<div class="language-ts highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="kr">type</span><span class="w"> </span><span class="nx">ActionTypeProvider</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">ActionTypeDescriptor</span><span class="p">[]</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="p">(()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nb">Promise</span><span class="o">&lt;</span><span class="nx">ActionTypeDescriptor</span><span class="p">[]</span><span class="o">&gt;</span><span class="p">);</span>
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="kd">interface</span><span class="w"> </span><span class="nx">ActionTypeDescriptor</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="w">  </span><span class="nx">value</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span><span class="w">                 </span><span class="c1">// stored in the node's actionType config</span>
+</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="w">  </span><span class="nx">label</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span><span class="w">                 </span><span class="c1">// shown in the dropdown</span>
+</span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="w">  </span><span class="nx">description?</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
+</span><span id="__span-5-7"><a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="w">  </span><span class="nx">inputs?</span><span class="o">:</span><span class="w"> </span><span class="kt">ActionTypeField</span><span class="p">[];</span>
+</span><span id="__span-5-8"><a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="w">  </span><span class="nx">outputs?</span><span class="o">:</span><span class="w"> </span><span class="kt">ActionTypeField</span><span class="p">[];</span>
+</span><span id="__span-5-9"><a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a><span class="p">}</span>
+</span><span id="__span-5-10"><a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a>
+</span><span id="__span-5-11"><a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a><span class="kd">interface</span><span class="w"> </span><span class="nx">ActionTypeField</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-5-12"><a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a><span class="w">  </span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
+</span><span id="__span-5-13"><a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a><span class="w">  </span><span class="kr">type</span><span class="o">:</span><span class="w"> </span><span class="s1">'string'</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="s1">'number'</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="s1">'boolean'</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="s1">'object'</span><span class="p">;</span>
+</span><span id="__span-5-14"><a id="__codelineno-5-14" name="__codelineno-5-14" href="#__codelineno-5-14"></a><span class="w">  </span><span class="nx">required?</span><span class="o">:</span><span class="w"> </span><span class="kt">boolean</span><span class="p">;</span>
+</span><span id="__span-5-15"><a id="__codelineno-5-15" name="__codelineno-5-15" href="#__codelineno-5-15"></a><span class="w">  </span><span class="nx">description?</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
+</span><span id="__span-5-16"><a id="__codelineno-5-16" name="__codelineno-5-16" href="#__codelineno-5-16"></a><span class="p">}</span>
 </span></code></pre></div>
 <h4 id="host-provided-validation">Host-provided validation</h4>
 <p>In addition to the editor's built-in validation, a host application can contribute its own
 validations through the <code>validate</code> function on the editor SPI. Problems it returns are merged
 with the built-in problems and drive the same Problems panel, per-node error/warning
 highlighting, and <code>onValidationChange</code> callback.</p>
+<p>The callback receives a <strong>semantic snapshot</strong>, not necessarily the full current document. A stable
+<code>spi.validate</code> runs on semantic revisions; selection, dragging, layout-only edits, and layout-only
+undo/redo do not invoke it again. Its coordinates remain those captured at the last semantic revision;
+the next semantic edit captures current coordinates. Replacing the callback reference can schedule a
+new run, but that run still receives the retained semantic snapshot, not refreshed layout coordinates.</p>
+<p>Treat the supplied workflow as read-only and keep validation pure: do not mutate the workflow or editor
+state. Position-sensitive work must use the full current document received through <code>onChange</code>. Keep that
+latest document/reference in the host rather than using a saved semantic-validator input as current state.
+Selection-only changes do not alter that document and do not emit <code>onChange</code>.</p>
 <p>The validator may run synchronously or return a <code>Promise</code>, so it can perform server-backed
 checks. The editor debounces calls while the user types and ignores stale (out-of-order)
 results, so only the most recent run is ever shown. If the validator throws or rejects, its
 problems are cleared and a warning is logged; built-in validation is never affected.</p>
-<div class="language-ts highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="kr">type</span><span class="w"> </span><span class="nx">EditorSpi</span><span class="p">,</span><span class="w"> </span><span class="kr">type</span><span class="w"> </span><span class="nx">ValidationProblem</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">'@apitomy/flow-ui'</span><span class="p">;</span>
-</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>
-</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="kd">const</span><span class="w"> </span><span class="nx">spi</span><span class="o">:</span><span class="w"> </span><span class="kt">EditorSpi</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="w">  </span><span class="nx">validate</span><span class="o">:</span><span class="w"> </span><span class="kt">async</span><span class="w"> </span><span class="p">(</span><span class="nx">workflow</span><span class="p">)</span><span class="o">:</span><span class="w"> </span><span class="nb">Promise</span><span class="o">&lt;</span><span class="nx">ValidationProblem</span><span class="p">[]</span><span class="o">&gt;</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">problems</span><span class="o">:</span><span class="w"> </span><span class="kt">ValidationProblem</span><span class="p">[]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[];</span>
-</span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="w">    </span><span class="c1">// ...host-specific rules, optionally awaiting backend calls...</span>
-</span><span id="__span-5-7"><a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">problems</span><span class="p">;</span>
-</span><span id="__span-5-8"><a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="w">  </span><span class="p">},</span>
-</span><span id="__span-5-9"><a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a><span class="p">};</span>
+<div class="language-ts highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="kr">type</span><span class="w"> </span><span class="nx">EditorSpi</span><span class="p">,</span><span class="w"> </span><span class="kr">type</span><span class="w"> </span><span class="nx">ValidationProblem</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">'@apitomy/flow-ui'</span><span class="p">;</span>
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="kd">const</span><span class="w"> </span><span class="nx">spi</span><span class="o">:</span><span class="w"> </span><span class="kt">EditorSpi</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="w">  </span><span class="nx">validate</span><span class="o">:</span><span class="w"> </span><span class="kt">async</span><span class="w"> </span><span class="p">(</span><span class="nx">workflow</span><span class="p">)</span><span class="o">:</span><span class="w"> </span><span class="nb">Promise</span><span class="o">&lt;</span><span class="nx">ValidationProblem</span><span class="p">[]</span><span class="o">&gt;</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">problems</span><span class="o">:</span><span class="w"> </span><span class="kt">ValidationProblem</span><span class="p">[]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[];</span>
+</span><span id="__span-6-6"><a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="w">    </span><span class="c1">// ...host-specific rules, optionally awaiting backend calls...</span>
+</span><span id="__span-6-7"><a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">problems</span><span class="p">;</span>
+</span><span id="__span-6-8"><a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a><span class="w">  </span><span class="p">},</span>
+</span><span id="__span-6-9"><a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a><span class="p">};</span>
 </span></code></pre></div>
 <p>Host problems use the same shape as built-in ones (<code>severity</code>, <code>code</code>, <code>message</code>, and optional
 <code>nodeId</code> / <code>edgeId</code>). Namespace your <code>code</code> values (for example, prefix them with <code>HOST_</code>) to
@@ -1781,11 +2068,15 @@ keep them distinguishable from the built-in codes.</p>
 — so the editor doesn't rebuild its debounced validator and restart the debounce on every render.</p>
 <h2 id="styling">Styling</h2>
 <p>The editor requires these CSS imports in your application:</p>
-<div class="language-typescript highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="k">import</span><span class="w"> </span><span class="s1">'@patternfly/patternfly/patternfly.css'</span><span class="p">;</span>
-</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="k">import</span><span class="w"> </span><span class="s1">'@xyflow/react/dist/style.css'</span><span class="p">;</span>
-</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="k">import</span><span class="w"> </span><span class="s1">'@apitomy/flow-ui/style.css'</span><span class="p">;</span>
+<div class="language-typescript highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="k">import</span><span class="w"> </span><span class="s1">'@patternfly/patternfly/patternfly.css'</span><span class="p">;</span>
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="k">import</span><span class="w"> </span><span class="s1">'@xyflow/react/dist/style.css'</span><span class="p">;</span>
+</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="k">import</span><span class="w"> </span><span class="s1">'@apitomy/flow-ui/style.css'</span><span class="p">;</span>
 </span></code></pre></div>
 <p>The editor fills its container — ensure the parent element has explicit dimensions (e.g. <code>height: 100%</code>).</p>
+<h2 id="verification">Verification</h2>
+<p><a href="../developer-guide/documentation-checks.html#browser-verification">Browser verification</a> exercises actual
+ReactFlow interactions, focus-owned shortcuts, delayed imports, async SPI responses, and the built npm
+package. These checks cover Chromium; they are not a full accessibility or cross-browser certification.</p>
 
 
 

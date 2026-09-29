@@ -12,9 +12,13 @@
         <meta name="author" content="Apitomy">
       
       
-        <link rel="canonical" href="https://www.apitomy.io/projects/flow/docs/superpowers/PLAN.html">
+        <link rel="canonical" href="https://www.apitomy.io/projects/flow/docs/user-guide/typed-configuration.html">
       
       
+        <link rel="prev" href="workflow-model.html">
+      
+      
+        <link rel="next" href="engine-usage.html">
       
       
         
@@ -25,7 +29,7 @@
     
     
       
-        <title>Apitomy Flow - Apitomy Flow</title>
+        <title>Typed Configuration - Apitomy Flow</title>
       
     
     
@@ -80,7 +84,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#apitomy-flow" class="md-skip">
+        <a href="#typed-configuration-and-wire-contract-v1" class="md-skip">
           Skip to content
         </a>
       
@@ -137,7 +141,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Apitomy Flow
+              Typed Configuration
             
           </span>
         </div>
@@ -278,11 +282,13 @@
   
   
   
+    
+  
   
     
     
-      <li class="md-tabs__item">
-        <a href="../user-guide/current-contracts.html" class="md-tabs__link">
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="current-contracts.html" class="md-tabs__link">
           
   
   
@@ -507,28 +513,31 @@
       
   
   
+    
   
   
+  
     
     
     
     
+      
+        
+        
       
       
         
       
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
       
         
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
         
           
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
-        
-          
-          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
             
   
   
@@ -546,7 +555,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_3">
             <span class="md-nav__icon md-icon"></span>
             
@@ -564,7 +573,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../user-guide/current-contracts.html" class="md-nav__link">
+      <a href="current-contracts.html" class="md-nav__link">
         
   
   
@@ -592,7 +601,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../user-guide/workflow-model.html" class="md-nav__link">
+      <a href="workflow-model.html" class="md-nav__link">
         
   
   
@@ -617,10 +626,37 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../user-guide/typed-configuration.html" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Typed Configuration
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="typed-configuration.html" class="md-nav__link md-nav__link--active">
         
   
   
@@ -636,6 +672,87 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#typescript-authoring" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        TypeScript authoring
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="TypeScript authoring">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#source-compatibility-and-migration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Source compatibility and migration
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#host-extensions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Host extensions
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#java-adapters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Java adapters
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#verification" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Verification
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -648,7 +765,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../user-guide/engine-usage.html" class="md-nav__link">
+      <a href="engine-usage.html" class="md-nav__link">
         
   
   
@@ -676,7 +793,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../user-guide/node-executors.html" class="md-nav__link">
+      <a href="node-executors.html" class="md-nav__link">
         
   
   
@@ -704,7 +821,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../user-guide/event-correlation.html" class="md-nav__link">
+      <a href="event-correlation.html" class="md-nav__link">
         
   
   
@@ -732,7 +849,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../user-guide/error-handling.html" class="md-nav__link">
+      <a href="error-handling.html" class="md-nav__link">
         
   
   
@@ -760,7 +877,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../user-guide/validation.html" class="md-nav__link">
+      <a href="validation.html" class="md-nav__link">
         
   
   
@@ -788,7 +905,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../user-guide/visual-editor.html" class="md-nav__link">
+      <a href="visual-editor.html" class="md-nav__link">
         
   
   
@@ -816,7 +933,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../user-guide/workflow-viewer.html" class="md-nav__link">
+      <a href="workflow-viewer.html" class="md-nav__link">
         
   
   
@@ -844,7 +961,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../user-guide/workflow-diff.html" class="md-nav__link">
+      <a href="workflow-diff.html" class="md-nav__link">
         
   
   
@@ -872,7 +989,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../user-guide/parallel-fork-join.html" class="md-nav__link">
+      <a href="parallel-fork-join.html" class="md-nav__link">
         
   
   
@@ -1156,121 +1273,22 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#motivation" class="md-nav__link">
+  <a href="#typescript-authoring" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Motivation
+        TypeScript authoring
       
     </span>
   </a>
   
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#architecture" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Architecture
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Architecture">
+    <nav class="md-nav" aria-label="TypeScript authoring">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#two-deliverables" class="md-nav__link">
+  <a href="#source-compatibility-and-migration" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Two deliverables
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#core-model-state-machine-with-conditional-edges" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Core Model: State Machine with Conditional Edges
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#node-types-5" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Node Types (5)
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#branching-conditions-on-edges" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Branching: Conditions on Edges
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#condition-expression-language" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Condition Expression Language
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#execution-engine" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Execution Engine
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#persistence" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Persistence
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#visual-editor-react" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Visual Editor (React)
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#spi-nodeexecutor" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        SPI: NodeExecutor
+        Source compatibility and migration
       
     </span>
   </a>
@@ -1283,60 +1301,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#axiom-integration-plan" class="md-nav__link">
+  <a href="#host-extensions" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Axiom Integration Plan
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Axiom Integration Plan">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#node-type-implementations" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Node Type Implementations
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#ui-integration" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        UI Integration
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#relationship-to-lifecycle-hooks-197" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Relationship to Lifecycle Hooks (#197)
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#design-decisions-still-needed" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Design Decisions Still Needed
+        Host extensions
       
     </span>
   </a>
@@ -1344,49 +1312,21 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#example-workflows" class="md-nav__link">
+  <a href="#java-adapters" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Example Workflows
+        Java adapters
       
     </span>
   </a>
-  
-    <nav class="md-nav" aria-label="Example Workflows">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#cve-triage" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        CVE Triage
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#github-issue-sdlc" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        GitHub Issue SDLC
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#influenced-by" class="md-nav__link">
+  <a href="#verification" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Influenced By
+        Verification
       
     </span>
   </a>
@@ -1413,222 +1353,116 @@
   
 
 
-<h1 id="apitomy-flow">Apitomy Flow</h1>
-<p>A lightweight, visual workflow engine for orchestrating long-running project lifecycles. Designed as a standalone library/Quarkus extension that integrates into Apitomy products (starting with Axiom).</p>
-<h2 id="motivation">Motivation</h2>
-<p>Axiom needs workflow support to model project lifecycles — e.g. CVE triage (analyze → triage → mitigate or close) and SDLC for GitHub issues (plan → implement → PR → merge). Existing engines like Kogito/BPMN are too heavyweight. Apitomy Flow provides a streamlined alternative with visual definition and execution, purpose-built for Axiom's needs but generic enough to reuse.</p>
-<h2 id="architecture">Architecture</h2>
-<h3 id="two-deliverables">Two deliverables</h3>
-<ol>
-<li>
-<p><strong>apitomy-flow</strong> (engine library) — Graph model, execution engine, state persistence, condition evaluation. Defines a <code>NodeExecutor</code> SPI that the host application implements for each node type. Ships as a Quarkus extension or plain JAR. Includes the React visual editor component.</p>
-</li>
-<li>
-<p><strong>Axiom integration</strong> (in apitomy-axiom) — Implements <code>NodeExecutor</code> for each Axiom-specific node type. Integrates the visual editor into the Axiom UI. Wires workflow state to the project model.</p>
-</li>
-</ol>
-<h3 id="core-model-state-machine-with-conditional-edges">Core Model: State Machine with Conditional Edges</h3>
-<p>A directed graph (not strictly a DAG — cycles are allowed for re-review/retry loops).</p>
-<p><strong>Workflow Definition</strong> (serializable as JSON):
-<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>Workflow {
-</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>  id: string
-</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>  name: string
-</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>  description?: string
-</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>  nodes: WorkflowNode[]
-</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>  edges: WorkflowEdge[]
-</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>}
-</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>
-</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>WorkflowNode {
-</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>  id: string
-</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>  type: "start" | "end" | "action" | "human-task" | "receive-event"
-</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>  name: string
-</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>  config: Record&lt;string, any&gt;   // type-specific configuration
-</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>  position: { x: number, y: number }  // visual editor coordinates
-</span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>}
-</span><span id="__span-0-16"><a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>
-</span><span id="__span-0-17"><a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>WorkflowEdge {
-</span><span id="__span-0-18"><a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a>  id: string
-</span><span id="__span-0-19"><a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a>  source: string       // source node id
-</span><span id="__span-0-20"><a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a>  target: string       // target node id
-</span><span id="__span-0-21"><a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a>  condition?: string   // expression evaluated against workflow context
-</span><span id="__span-0-22"><a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a>  priority: number     // for ordering when multiple edges leave a node
-</span><span id="__span-0-23"><a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a>  isDefault: boolean   // fallback when no conditions match
-</span><span id="__span-0-24"><a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a>  label?: string       // display label for the edge
-</span><span id="__span-0-25"><a id="__codelineno-0-25" name="__codelineno-0-25" href="#__codelineno-0-25"></a>}
-</span></code></pre></div></p>
-<p><strong>Workflow Instance</strong> (runtime state):
-<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>WorkflowInstance {
-</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>  id: string
-</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>  workflowId: string          // reference to the definition
-</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>  currentNodeId: string       // which node the instance is at
-</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>  status: "running" | "waiting" | "completed" | "failed"
-</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>  context: Record&lt;string, any&gt;  // accumulated data from completed nodes
-</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>  history: HistoryEntry[]      // path taken through the graph
-</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>  createdOn: timestamp
-</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>  updatedOn: timestamp
-</span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>}
-</span></code></pre></div></p>
-<h3 id="node-types-5">Node Types (5)</h3>
-<table>
-<thead>
-<tr>
-<th>Node Type</th>
-<th>Purpose</th>
-<th>Behavior</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>Start</strong></td>
-<td>Entry point</td>
-<td>One per workflow. Immediately transitions to the next node.</td>
-</tr>
-<tr>
-<td><strong>Action</strong></td>
-<td>Automated work</td>
-<td>Invokes a <code>NodeExecutor</code>. Blocks until executor returns a result. Result merges into context.</td>
-</tr>
-<tr>
-<td><strong>Human Task</strong></td>
-<td>Human approval/input</td>
-<td>Blocks until a human responds. Has config for title, description, references, output schema (form fields).</td>
-</tr>
-<tr>
-<td><strong>Receive Event</strong></td>
-<td>Wait for external event</td>
-<td>Blocks until a matching event arrives. Has config for event type filter and optional field matching.</td>
-</tr>
-<tr>
-<td><strong>End</strong></td>
-<td>Terminal state</td>
-<td>Marks the instance as completed. Has config for outcome metadata (success, failure, reason).</td>
-</tr>
-</tbody>
-</table>
-<h3 id="branching-conditions-on-edges">Branching: Conditions on Edges</h3>
-<ul>
-<li>Each node can have multiple outgoing edges</li>
-<li>Each edge has an optional condition expression evaluated against the workflow context</li>
-<li>Edges are evaluated in priority order — first match wins</li>
-<li>One edge per node can be marked as default (fallback)</li>
-<li>Visually, edges display a small condition badge</li>
-</ul>
-<h3 id="condition-expression-language">Condition Expression Language</h3>
-<p>TBD — options:
-- Simple property comparison (e.g. <code>result.status == "not-affected"</code>)
-- JSONPath or JMESPath expressions
-- A minimal custom DSL
-- SpEL (Spring Expression Language) — though not ideal for Quarkus</p>
-<h3 id="execution-engine">Execution Engine</h3>
-<p>When a node completes:
-1. Retrieve the node's outgoing edges, sorted by priority
-2. Evaluate each edge's condition against the workflow context
-3. Transition to the first matching edge's target node (or the default edge)
-4. Execute the target node (or enter a wait state for Human Task / Receive Event)</p>
-<p>The engine must:
-- Persist state after each transition (survives server restarts)
-- Support long-running waits (days/weeks for human tasks and events)
-- Resume from persisted state on application startup
-- Track execution history (which nodes were visited, when, with what context)</p>
-<h3 id="persistence">Persistence</h3>
-<ul>
-<li>Workflow definitions stored as JSON (single column, like Axiom's dashboard widgets)</li>
-<li>Workflow instances stored as rows with JSON context/history columns</li>
-<li>Uses the host application's existing database (PostgreSQL via Panache/Hibernate)</li>
-<li>The engine provides JPA entities; the host app includes them in its persistence unit</li>
-</ul>
-<h3 id="visual-editor-react">Visual Editor (React)</h3>
-<ul>
-<li>Drag-and-drop node placement on a canvas</li>
-<li>Connect nodes with edges (click source → click target)</li>
-<li>Configure nodes via a properties panel</li>
-<li>Add conditions to edges via the properties panel</li>
-<li>Read-only visualization mode showing the current node highlighted and path taken</li>
-<li>Library: evaluate React Flow (reactflow.dev) as the canvas library</li>
-</ul>
-<h3 id="spi-nodeexecutor">SPI: NodeExecutor</h3>
-<div class="language-java highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kd">public</span><span class="w"> </span><span class="kd">interface</span> <span class="nc">NodeExecutor</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">    </span><span class="n">String</span><span class="w"> </span><span class="nf">nodeType</span><span class="p">();</span><span class="w">  </span><span class="c1">// e.g. "action", "human-task", "receive-event"</span>
-</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">    </span><span class="n">CompletableFuture</span><span class="o">&lt;</span><span class="n">NodeResult</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">execute</span><span class="p">(</span><span class="n">NodeExecutionContext</span><span class="w"> </span><span class="n">context</span><span class="p">);</span>
-</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="p">}</span>
-</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>
-</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="kd">public</span><span class="w"> </span><span class="kd">interface</span> <span class="nc">NodeExecutionContext</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="w">    </span><span class="n">WorkflowNode</span><span class="w"> </span><span class="nf">node</span><span class="p">();</span>
-</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="w">    </span><span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">Object</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">workflowContext</span><span class="p">();</span>
-</span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="w">    </span><span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">Object</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">nodeConfig</span><span class="p">();</span>
-</span><span id="__span-2-10"><a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="p">}</span>
-</span><span id="__span-2-11"><a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>
-</span><span id="__span-2-12"><a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a><span class="kd">public</span><span class="w"> </span><span class="kd">record</span> <span class="nc">NodeResult</span><span class="p">(</span>
-</span><span id="__span-2-13"><a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a><span class="w">    </span><span class="n">Status</span><span class="w"> </span><span class="n">status</span><span class="p">,</span><span class="w">   </span><span class="c1">// COMPLETED, FAILED</span>
-</span><span id="__span-2-14"><a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a><span class="w">    </span><span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">Object</span><span class="o">&gt;</span><span class="w"> </span><span class="n">output</span><span class="w">  </span><span class="c1">// merged into workflow context</span>
-</span><span id="__span-2-15"><a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a><span class="p">)</span><span class="w"> </span><span class="p">{}</span>
+<h1 id="typed-configuration-and-wire-contract-v1">Typed configuration and wire contract v1</h1>
+<p>This is the combined branch contract, including pending
+<a href="https://github.com/Apitomy/apitomy-flow/issues/131">#131</a>. See <a href="current-contracts.html">current contracts</a>
+for artifact selection, host workflow revisions, instance-version limits, and related pending proposals.</p>
+<p>The structural JSON contract is <code>conformance/workflow-v1.schema.json</code> (JSON Schema draft 7). Its <code>$id</code>
+ends in <code>workflow-v1.schema.json</code>; this contract version is independent of <code>Workflow.version</code>, which
+remains a host-managed workflow revision. Compatible additions retain v1; incompatible wire changes
+require a new schema version and migration guidance. Existing definitions need no new version field.</p>
+<p><code>conformance/config-v1.json</code> exercises all six node kinds, literal JSON, omitted/defaulted fields, nulls,
+and host extensions. Maven and Vitest consume this same file; Vitest also executes the schema with Ajv.
+<code>config-invalid-v1.json</code> checks the same structural failures in both validators and the schema.
+Semantic validation (graph topology, expressions, durations, and missing required configuration) remains
+the responsibility of the existing validators. Passing the schema alone does not imply executability.</p>
+<h2 id="typescript-authoring">TypeScript authoring</h2>
+<p>The package root exports <code>WorkflowNode</code>, <code>NodeConfigMap</code>, <code>NodeConfig</code>, <code>StartConfig</code>, <code>EndConfig</code>,
+<code>ActionConfig</code>, <code>HumanTaskConfig</code>, <code>ReceiveEventConfig</code>, <code>WaitConfig</code>, <code>WorkflowInput</code>,
+<code>ActionOutputConfig</code>, <code>HumanTaskOutput</code>, <code>OutputOption</code>, <code>OutputWidget</code>, <code>EventOutputMapping</code>,
+<code>JsonValue</code>, <code>JsonObject</code>, <code>ConfigExtensions</code>, and <code>DeclarationMetadata</code>.</p>
+<p>All input/output declarations reserve <code>description</code>, <code>label</code>, <code>widget</code>, <code>contextKey</code>, <code>options</code>, and
+<code>defaultValue</code> through <code>DeclarationMetadata</code>, including start/action declarations where presentation
+metadata is advisory. Those keys retain their structural types rather than falling through to the
+extension index signature. Unknown keys still accept recursive JSON values.</p>
+<p><code>WorkflowNode</code> is a discriminated union. Narrow <code>node.type</code> before interpreting built-in configuration:</p>
+<div class="language-typescript highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">import</span><span class="w"> </span><span class="kr">type</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">WorkflowNode</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">'@apitomy/flow-ui'</span><span class="p">;</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="kd">const</span><span class="w"> </span><span class="nx">node</span><span class="o">:</span><span class="w"> </span><span class="kt">WorkflowNode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">    </span><span class="nx">id</span><span class="o">:</span><span class="w"> </span><span class="s1">'send'</span><span class="p">,</span><span class="w"> </span><span class="kr">type</span><span class="o">:</span><span class="w"> </span><span class="s1">'action'</span><span class="p">,</span><span class="w"> </span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="s1">'Send'</span><span class="p">,</span>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">    </span><span class="nx">config</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="w">        </span><span class="nx">actionType</span><span class="o">:</span><span class="w"> </span><span class="s1">'send-email'</span><span class="p">,</span>
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="w">        </span><span class="nx">inputs</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">recipients</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="s1">'owner@example.org'</span><span class="p">],</span><span class="w"> </span><span class="nx">enabled</span><span class="o">:</span><span class="w"> </span><span class="kt">true</span><span class="p">,</span><span class="w"> </span><span class="nx">extra</span><span class="o">:</span><span class="w"> </span><span class="kt">null</span><span class="w"> </span><span class="p">},</span>
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="w">        </span><span class="nx">outputs</span><span class="o">:</span><span class="w"> </span><span class="p">[{</span><span class="w"> </span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="s1">'messageId'</span><span class="p">,</span><span class="w"> </span><span class="nx">contextKey</span><span class="o">:</span><span class="w"> </span><span class="s1">'sentMessageId'</span><span class="w"> </span><span class="p">}],</span>
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="w">        </span><span class="s1">'x-acme'</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">tracing</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">enabled</span><span class="o">:</span><span class="w"> </span><span class="kt">true</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">},</span>
+</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="w">    </span><span class="p">},</span>
+</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="p">};</span>
+</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>
+</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">node</span><span class="p">.</span><span class="kr">type</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="s1">'action'</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a><span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">outputs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">node</span><span class="p">.</span><span class="nx">config</span><span class="p">.</span><span class="nx">outputs</span><span class="w"> </span><span class="o">??</span><span class="w"> </span><span class="p">[];</span>
+</span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a><span class="w">    </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">outputs</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="nx">output</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">output</span><span class="p">.</span><span class="nx">contextKey</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nx">output</span><span class="p">.</span><span class="nx">name</span><span class="p">));</span>
+</span><span id="__span-0-16"><a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a><span class="p">}</span>
 </span></code></pre></div>
-<p>The host application provides <code>NodeExecutor</code> implementations for each node type. The engine discovers them via CDI.</p>
-<h2 id="axiom-integration-plan">Axiom Integration Plan</h2>
-<h3 id="node-type-implementations">Node Type Implementations</h3>
-<table>
-<thead>
-<tr>
-<th>Flow Node Type</th>
-<th>Axiom Implementation</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>Action</strong></td>
-<td>Creates an Axiom task with the configured action type on the project. Completes when the task completes. Task output becomes node output.</td>
-</tr>
-<tr>
-<td><strong>Human Task</strong></td>
-<td>Creates an Axiom inbox item with the configured humanContext and outputSchema. Completes when the user responds. Response becomes node output.</td>
-</tr>
-<tr>
-<td><strong>Receive Event</strong></td>
-<td>Registers an event listener. Completes when a matching Axiom event arrives for the project. Event payload becomes node output.</td>
-</tr>
-</tbody>
-</table>
-<h3 id="ui-integration">UI Integration</h3>
+<p>JSON inputs may contain nested objects, arrays, strings, numbers, booleans, and null. String inputs
+retain their existing expression semantics; other JSON values are literals. Undefined object properties
+represent omitted fields in authored TypeScript; functions, symbols, and opaque class instances are not
+JSON. Finite numbers are required by JSON even though TypeScript's <code>number</code> also represents nonfinite values.</p>
+<p>Built-in optional config fields accept explicit null. Missing/null declaration <code>type</code> defaults to
+<code>string</code>, and missing/null <code>required</code> defaults to false. Empty/missing/null event output lists preserve
+legacy flat event merging. Field presentation defaults remain in the runtime info/display consumers;
+reading configuration never writes defaults into the original config.</p>
+<p><code>position</code> is optional and nullable, matching Java and the import validators. Layout produces guaranteed
+positions; canvas conversion uses origin for a missing position. Browser import still performs its
+existing normalization/layout of absent positions, names, configs, and edge defaults. It does not promise
+byte-identical JSON, preservation of omitted-versus-null outer record fields, or stable property order.</p>
+<h3 id="source-compatibility-and-migration">Source compatibility and migration</h3>
+<p>This strengthens the TypeScript source contract while retaining supported JSON:</p>
 <ul>
-<li>Project detail page gets a "Workflow" tab showing the read-only visualization of the current workflow state</li>
-<li>Workflow definitions are managed in a new Settings section (alongside Action Types, Scheduled Jobs, etc.)</li>
-<li>Workflow definition editor uses the visual drag-and-drop editor</li>
-<li>A project can have one workflow assigned (optional). When assigned, the workflow starts on project creation.</li>
+<li>Replace <code>Record&lt;string, any&gt;</code> configs with the appropriate config type or a narrowed <code>WorkflowNode</code>.</li>
+<li>Use <code>satisfies WorkflowNode</code> for literals and narrow by <code>type</code> before editing a config. Spreading a
+  union and replacing its config independently can lose the correlation; narrow before spreading.</li>
+<li>Use <code>parseWorkflow</code> for untrusted JSON rather than asserting it is a valid workflow.</li>
+<li>Handle absent/null positions, output metadata, and optional declaration types explicitly (<code>??</code>).</li>
+<li><code>WorkflowNode</code> is now a type alias; host-specific nodes should use intersections or discriminated
+  aliases instead of interfaces extending the whole union. Built-in node kinds remain unchanged.</li>
+<li>Instance context/history payloads use <code>unknown</code> instead of <code>any</code>, since hosts may supply runtime
+  values; narrow them before use. Persisted config/default values use the recursive JSON contract.</li>
 </ul>
-<h3 id="relationship-to-lifecycle-hooks-197">Relationship to Lifecycle Hooks (#197)</h3>
-<p>Lifecycle hooks (issue #197) trigger individual action types on project events. Workflows are a more structured alternative — when a project has a workflow, the workflow controls the sequence of actions rather than individual hooks. Both can coexist: hooks for simple one-shot triggers, workflows for multi-step lifecycles.</p>
-<h2 id="design-decisions-still-needed">Design Decisions Still Needed</h2>
-<ul>
-<li>[ ] Condition expression language</li>
-<li>[ ] How to handle node execution failures (retry? error edges? fail the workflow?)</li>
-<li>[ ] Versioning: what happens to running instances when a workflow definition is updated?</li>
-<li>[ ] Can a workflow be restarted or reset to a specific node?</li>
-<li>[ ] Should the visual editor be a shared npm package or built into Axiom's UI directly?</li>
-<li>[ ] React Flow vs. other canvas libraries for the visual editor</li>
-<li>[ ] Should workflow definitions be shareable/exportable (JSON import/export)?</li>
-</ul>
-<h2 id="example-workflows">Example Workflows</h2>
-<h3 id="cve-triage">CVE Triage</h3>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>Start → Action(analyze-cve) → Human Task(triage: affected?)
-</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>  → [affected] Action(plan-mitigation) → Human Task(approve plan)
-</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>    → [approved] Action(implement-fix) → Action(verify-fix) → End(mitigated)
-</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>    → [rejected] → Action(analyze-cve)  // loop back
-</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>  → [not-affected] Action(close-tracker) → End(not-affected)
+<p>The schema intentionally accepts arbitrary strings for advisory type/widget metadata, as the existing
+validators did. The authoring types suggest supported semantic types/widgets; legacy host-specific
+metadata remains accepted by import and retained on export. No new rejection is introduced for that data.</p>
+<h2 id="host-extensions">Host extensions</h2>
+<p>Unknown keys inside config, field declarations, options, and event mappings are host-owned JSON and
+round-trip in both runtimes. Prefer namespaced keys (<code>x-acme</code>, for example) to avoid future built-in name
+collisions. Existing unprefixed extension keys remain supported. Preserve extensions by spreading the
+original config/declaration when changing a built-in field. Built-in keys keep their per-kind meaning;
+an extension cannot change the required shape of a built-in key on that node kind.</p>
+<p>Browser imports also retain unknown workflow/node/edge fields. Java records have never accepted arbitrary
+unknown fields at those outer levels; this change preserves that existing boundary. Put portable host
+metadata in config rather than assuming arbitrary outer fields will deserialize in Java.</p>
+<h2 id="java-adapters">Java adapters</h2>
+<p><code>WorkflowNode</code> retains its public record components, constructor, <code>Map&lt;String, Object&gt; config()</code>, and
+Jackson representation. <code>node.typedConfig()</code> (or <code>NodeConfig.from(node)</code>) returns a sealed per-kind view:</p>
+<div class="language-java highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">node</span><span class="p">.</span><span class="na">typedConfig</span><span class="p">()</span><span class="w"> </span><span class="k">instanceof</span><span class="w"> </span><span class="n">NodeConfig</span><span class="p">.</span><span class="na">Action</span><span class="w"> </span><span class="n">action</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">    </span><span class="n">String</span><span class="w"> </span><span class="n">executorType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">action</span><span class="p">.</span><span class="na">actionType</span><span class="p">();</span>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">    </span><span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">Object</span><span class="o">&gt;</span><span class="w"> </span><span class="n">inputs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">action</span><span class="p">.</span><span class="na">inputs</span><span class="p">();</span>
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">    </span><span class="n">List</span><span class="o">&lt;</span><span class="n">NodeConfig</span><span class="p">.</span><span class="na">Field</span><span class="o">&gt;</span><span class="w"> </span><span class="n">outputs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">action</span><span class="p">.</span><span class="na">outputs</span><span class="p">();</span>
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="p">}</span>
 </span></code></pre></div>
-<h3 id="github-issue-sdlc">GitHub Issue SDLC</h3>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>Start → Action(analyze-and-plan) → Human Task(approve plan)
-</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>  → [approved] Action(implement) → Action(create-pr) → Receive Event(pr-merged) → End(completed)
-</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>  → [rejected] → Action(analyze-and-plan)  // loop back
-</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>  → [wont-fix] End(wont-fix)
-</span></code></pre></div>
-<h2 id="influenced-by">Influenced By</h2>
-<ul>
-<li><strong>AWS Step Functions</strong> — state machine model, Choice state, callback pattern for human tasks</li>
-<li><strong>BPMN 2.0</strong> — user task concept, gateway branching, event catch</li>
-<li><strong>n8n</strong> — visual editor UX, conditions on edges rather than gateway nodes</li>
-<li><strong>Temporal</strong> — durable execution, long-running wait states</li>
-</ul>
-<p>Deliberately avoided full BPMN complexity (parallel gateways, sub-processes, compensation, complex event correlation).</p>
+<p>The nested <code>Start</code>, <code>End</code>, <code>Action</code>, <code>HumanTask</code>, <code>ReceiveEvent</code>, and <code>Wait</code> records expose typed
+accessors. <code>Field</code> exposes declaration and presentation metadata plus <code>effectiveContextKey()</code>;
+<code>Option</code> exposes select options; <code>Mapping</code> exposes event <code>contextKey()</code> and <code>expression()</code>.
+<code>wire()</code> on every adapter returns the immutable original map. Jackson serializes adapters directly as
+that map, without wrapper fields, and concrete adapter records can be deserialized from the same shape.
+No Jackson module or custom mapper registration is required. Deserialize workflows through the existing
+records and dispatch with <code>typedConfig()</code> rather than deserializing the sealed interface without a kind.</p>
+<p>Absent/null collections return empty typed collections; absent/null scalar values remain null except
+the documented declaration defaults. <code>wire()</code> retains explicit nulls and omission inside config exactly.
+Accessors reject incorrect structural types with <code>IllegalArgumentException</code>, rather than silently
+coercing them. Run <code>WorkflowValidator</code> before interpreting untrusted definitions; its structural preflight
+returns diagnostics before any typed semantic access. Engine start already performs this validation.
+Info calls on directly constructed malformed definitions may now fail at the offending typed accessor.</p>
+<p>Ownership follows <code>JsonSnapshots</code>: nested maps/lists are read-only, Jackson trees are detached, and
+non-JSON opaque Java extension values remain host-owned immutable references. The portable schema
+covers JSON only. Existing executor config maps and SPI signatures remain available.</p>
+<h2 id="verification">Verification</h2>
+<p><a href="../developer-guide/documentation-checks.html">Executable documentation examples</a> include the actual shared
+config fixture and focused Java/TypeScript runners, plus the built-package browser consumer.</p>
+<p>Run <code>mvn test</code> in <code>engine/</code>; run <code>npm test</code>, <code>npx tsc --noEmit</code>, <code>npm run lint</code>, and <code>npm run build</code> in
+<code>ui/</code>. Compile-only consumer assertions check discrimination, recursive extensions, nullable/defaulted
+fields, optional positions, and package-root exports. ESLint's <code>no-explicit-any</code> rule is enabled globally;
+the implementation currently needs no exceptions. Deliberately malformed test fixtures use documented
+boundary assertions rather than weakening production model types.</p>
 
 
 

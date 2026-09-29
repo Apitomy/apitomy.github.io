@@ -12,9 +12,13 @@
         <meta name="author" content="Apitomy">
       
       
-        <link rel="canonical" href="https://www.apitomy.io/projects/flow/docs/superpowers/PLAN.html">
+        <link rel="canonical" href="https://www.apitomy.io/projects/flow/docs/developer-guide/indexed-architecture.html">
       
       
+        <link rel="prev" href="engine-errors.html">
+      
+      
+        <link rel="next" href="documentation-checks.html">
       
       
         
@@ -25,7 +29,7 @@
     
     
       
-        <title>Apitomy Flow - Apitomy Flow</title>
+        <title>Indexed Architecture - Apitomy Flow</title>
       
     
     
@@ -80,7 +84,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#apitomy-flow" class="md-skip">
+        <a href="#indexed-execution-and-semantic-editor-revisions" class="md-skip">
           Skip to content
         </a>
       
@@ -137,7 +141,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Apitomy Flow
+              Indexed Architecture
             
           </span>
         </div>
@@ -298,11 +302,13 @@
   
   
   
+    
+  
   
     
     
-      <li class="md-tabs__item">
-        <a href="../developer-guide/building.html" class="md-tabs__link">
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="building.html" class="md-tabs__link">
           
   
   
@@ -904,28 +910,31 @@
       
   
   
+    
   
   
+  
     
     
     
     
+      
+        
+        
       
       
         
       
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
       
         
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
         
           
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
-        
-          
-          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
             
   
   
@@ -943,7 +952,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_4">
             <span class="md-nav__icon md-icon"></span>
             
@@ -961,7 +970,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../developer-guide/building.html" class="md-nav__link">
+      <a href="building.html" class="md-nav__link">
         
   
   
@@ -989,7 +998,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../developer-guide/architecture.html" class="md-nav__link">
+      <a href="architecture.html" class="md-nav__link">
         
   
   
@@ -1017,7 +1026,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../developer-guide/engine-errors.html" class="md-nav__link">
+      <a href="engine-errors.html" class="md-nav__link">
         
   
   
@@ -1042,10 +1051,37 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../developer-guide/indexed-architecture.html" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Indexed Architecture
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="indexed-architecture.html" class="md-nav__link md-nav__link--active">
         
   
   
@@ -1061,6 +1097,70 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#ownership-and-boundaries" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ownership and boundaries
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#editor-validation-invalidation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Editor validation invalidation
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#repeatable-measurements" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Repeatable measurements
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#regression-evidence" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Regression evidence
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -1073,7 +1173,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../developer-guide/documentation-checks.html" class="md-nav__link">
+      <a href="documentation-checks.html" class="md-nav__link">
         
   
   
@@ -1101,7 +1201,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../developer-guide/contributing.html" class="md-nav__link">
+      <a href="contributing.html" class="md-nav__link">
         
   
   
@@ -1156,10 +1256,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#motivation" class="md-nav__link">
+  <a href="#ownership-and-boundaries" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Motivation
+        Ownership and boundaries
       
     </span>
   </a>
@@ -1167,176 +1267,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#architecture" class="md-nav__link">
+  <a href="#editor-validation-invalidation" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Architecture
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Architecture">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#two-deliverables" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Two deliverables
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#core-model-state-machine-with-conditional-edges" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Core Model: State Machine with Conditional Edges
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#node-types-5" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Node Types (5)
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#branching-conditions-on-edges" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Branching: Conditions on Edges
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#condition-expression-language" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Condition Expression Language
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#execution-engine" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Execution Engine
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#persistence" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Persistence
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#visual-editor-react" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Visual Editor (React)
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#spi-nodeexecutor" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        SPI: NodeExecutor
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#axiom-integration-plan" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Axiom Integration Plan
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Axiom Integration Plan">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#node-type-implementations" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Node Type Implementations
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#ui-integration" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        UI Integration
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#relationship-to-lifecycle-hooks-197" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Relationship to Lifecycle Hooks (#197)
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#design-decisions-still-needed" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Design Decisions Still Needed
+        Editor validation invalidation
       
     </span>
   </a>
@@ -1344,49 +1278,21 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#example-workflows" class="md-nav__link">
+  <a href="#repeatable-measurements" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Example Workflows
+        Repeatable measurements
       
     </span>
   </a>
-  
-    <nav class="md-nav" aria-label="Example Workflows">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#cve-triage" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        CVE Triage
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#github-issue-sdlc" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        GitHub Issue SDLC
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#influenced-by" class="md-nav__link">
+  <a href="#regression-evidence" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Influenced By
+        Regression evidence
       
     </span>
   </a>
@@ -1413,222 +1319,103 @@
   
 
 
-<h1 id="apitomy-flow">Apitomy Flow</h1>
-<p>A lightweight, visual workflow engine for orchestrating long-running project lifecycles. Designed as a standalone library/Quarkus extension that integrates into Apitomy products (starting with Axiom).</p>
-<h2 id="motivation">Motivation</h2>
-<p>Axiom needs workflow support to model project lifecycles — e.g. CVE triage (analyze → triage → mitigate or close) and SDLC for GitHub issues (plan → implement → PR → merge). Existing engines like Kogito/BPMN are too heavyweight. Apitomy Flow provides a streamlined alternative with visual definition and execution, purpose-built for Axiom's needs but generic enough to reuse.</p>
-<h2 id="architecture">Architecture</h2>
-<h3 id="two-deliverables">Two deliverables</h3>
-<ol>
-<li>
-<p><strong>apitomy-flow</strong> (engine library) — Graph model, execution engine, state persistence, condition evaluation. Defines a <code>NodeExecutor</code> SPI that the host application implements for each node type. Ships as a Quarkus extension or plain JAR. Includes the React visual editor component.</p>
-</li>
-<li>
-<p><strong>Axiom integration</strong> (in apitomy-axiom) — Implements <code>NodeExecutor</code> for each Axiom-specific node type. Integrates the visual editor into the Axiom UI. Wires workflow state to the project model.</p>
-</li>
-</ol>
-<h3 id="core-model-state-machine-with-conditional-edges">Core Model: State Machine with Conditional Edges</h3>
-<p>A directed graph (not strictly a DAG — cycles are allowed for re-review/retry loops).</p>
-<p><strong>Workflow Definition</strong> (serializable as JSON):
-<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>Workflow {
-</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>  id: string
-</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>  name: string
-</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>  description?: string
-</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>  nodes: WorkflowNode[]
-</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>  edges: WorkflowEdge[]
-</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>}
-</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>
-</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>WorkflowNode {
-</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>  id: string
-</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>  type: "start" | "end" | "action" | "human-task" | "receive-event"
-</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>  name: string
-</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>  config: Record&lt;string, any&gt;   // type-specific configuration
-</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>  position: { x: number, y: number }  // visual editor coordinates
-</span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>}
-</span><span id="__span-0-16"><a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>
-</span><span id="__span-0-17"><a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>WorkflowEdge {
-</span><span id="__span-0-18"><a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a>  id: string
-</span><span id="__span-0-19"><a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a>  source: string       // source node id
-</span><span id="__span-0-20"><a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a>  target: string       // target node id
-</span><span id="__span-0-21"><a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a>  condition?: string   // expression evaluated against workflow context
-</span><span id="__span-0-22"><a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a>  priority: number     // for ordering when multiple edges leave a node
-</span><span id="__span-0-23"><a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a>  isDefault: boolean   // fallback when no conditions match
-</span><span id="__span-0-24"><a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a>  label?: string       // display label for the edge
-</span><span id="__span-0-25"><a id="__codelineno-0-25" name="__codelineno-0-25" href="#__codelineno-0-25"></a>}
-</span></code></pre></div></p>
-<p><strong>Workflow Instance</strong> (runtime state):
-<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>WorkflowInstance {
-</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>  id: string
-</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>  workflowId: string          // reference to the definition
-</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>  currentNodeId: string       // which node the instance is at
-</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>  status: "running" | "waiting" | "completed" | "failed"
-</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>  context: Record&lt;string, any&gt;  // accumulated data from completed nodes
-</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>  history: HistoryEntry[]      // path taken through the graph
-</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>  createdOn: timestamp
-</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>  updatedOn: timestamp
-</span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>}
-</span></code></pre></div></p>
-<h3 id="node-types-5">Node Types (5)</h3>
+<h1 id="indexed-execution-and-semantic-editor-revisions">Indexed execution and semantic editor revisions</h1>
+<p>C13 (#136) builds on the C1–C12 fixes. The public workflow record and wire fields remain unchanged.</p>
+<h2 id="ownership-and-boundaries">Ownership and boundaries</h2>
+<ul>
+<li><code>WorkflowGraphIndex</code> owns node lookup and adjacency. Outgoing edges are sorted once by priority,
+  stably preserving declaration order for ties. Incoming edges retain declaration order, matching
+  existing join/introspection behavior. Missing lookups return empty results.</li>
+<li>Graph indexes and <code>ParallelRegions</code> use weak <strong>identity</strong> keys. They do not hash nested config,
+  retain the owning workflow, or use workflow IDs/versions as cache keys. Definition lists and
+  topology records are immutable; constructing a replacement definition creates a fresh cache entry,
+  even with identical ID/version. Analysis consults topology only, never opaque host config values.
+  Access/publication is synchronized. Collected owners are evicted through a reference queue on access.</li>
+<li><code>NodeValueResolver</code> owns typed input interpretation, result/required-output validation, event
+  mappings, context-key remapping and human-task output defaults. Both synchronous execution and
+  external completion use it. It produces values/structured errors and cannot drive branches,
+  change instance status, publish callbacks or invoke recovery.</li>
+<li><code>RecoveryPolicy</code> invokes and validates host recovery decisions, contextualizes diagnostics, retains
+  original and handler causes, and identifies retries that await another external delivery. This is an
+  internal extraction, not a public SPI or wire change. <code>WorkflowEngine</code> still owns branch queues,
+  budgets, history, callbacks, state application, and recovery sequencing.</li>
+<li><code>MapInputsEditor</code> owns the shared action/human-task row draft lifecycle; its existing pure
+  <code>mapInputDraft</code> protocol owns reconciliation. <code>HumanTaskOutputFields</code> owns typed default and
+  option controls. <code>ActionTypeSelect</code> owns menu filtering, custom values, open/clear state and focus.
+  <code>PropertiesPanel</code> coordinates selection and dispatches document updates.</li>
+</ul>
+<h2 id="editor-validation-invalidation">Editor validation invalidation</h2>
+<p>The reducer stores an owned <code>semanticDocument</code> alongside the full document and in undo snapshots.
+Selection, measurements and drag frames retain it. Committed positions and tidy operations retain
+it explicitly. Imports compare all fields except node coordinates; config, routing, names, metadata
+and host extension changes invalidate it. Undo/redo restore the corresponding semantic input.</p>
+<p>Built-in validation, parallel-role analysis and debounced host validation depend on that stable
+input. A stable host semantic validator therefore does not run for coordinates alone; positions in its
+input are those captured at the last semantic revision, including when replacing the callback schedules
+a new run. The next semantic edit captures current coordinates. Validation must be pure and treat this
+input as read-only. Position-sensitive work uses the latest full <code>onChange</code> document; export and simulation
+also receive the current document. No cache is keyed by mutable caller-owned TypeScript definitions.</p>
+<p>Document snapshots retain panel selection and canvas selected-node/edge IDs, restoring them together on
+undo/redo. Selection-only actions still do not create history or publish document changes. Live measurements
+are preserved independently from restored selection.</p>
+<h2 id="repeatable-measurements">Repeatable measurements</h2>
+<p>Baseline: <code>0159ee0</code>, containing dependency merges <code>88737f5</code> and <code>5c8342b</code> plus benchmark sources,
+before production optimizations. The recorded indexed samples below are from <code>0966e0e</code>, before the later
+recovery/selection corrections. Run the same commands on a selected revision for a fresh measurement:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># From engine/</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>mvn<span class="w"> </span>-Dtest<span class="o">=</span>ArchitectureBenchmarkTest<span class="w"> </span>-Dflow.benchmark<span class="o">=</span><span class="nb">true</span><span class="w"> </span><span class="nb">test</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="c1"># From ui/, after npm ci</span>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="nv">FLOW_BENCHMARK</span><span class="o">=</span><span class="m">1</span><span class="w"> </span>npx<span class="w"> </span>vitest<span class="w"> </span>run<span class="w"> </span>src/hooks/editorBenchmark.test.ts
+</span></code></pre></div>
+<p>Java uses a 1,000-node/999-edge sequential graph: 20 full node/incoming/outgoing lookup passes and
+parallel analyses per sample. A separate workload resolves a parked wait in a 10,001-entry history with
+one parked entry followed by 10,000 completed entries, 1,000 times. The reverse lookup scans those completed
+entries to reach the parked entry; this workload does not alternate active branches.
+Three warmups precede five samples; checksum 60,960 is asserted.</p>
+<p>The editor uses 300 nodes/299 edges, 60 position commits and the actual 50-entry undo history cap.
+It executes real validation/parallel analysis whenever the editor's semantic memo input changes.
+Two warmups precede five samples. Validation results and history size are asserted.</p>
+<p>Local observations on September 21, 2026 (milliseconds; five measured samples):</p>
 <table>
 <thead>
 <tr>
-<th>Node Type</th>
-<th>Purpose</th>
-<th>Behavior</th>
+<th>Workload</th>
+<th>Baseline samples</th>
+<th>Indexed samples</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><strong>Start</strong></td>
-<td>Entry point</td>
-<td>One per workflow. Immediately transitions to the next node.</td>
+<td>Java graph</td>
+<td>348.496, 371.384, 358.059, 370.802, 365.033</td>
+<td>2.291, 2.324, 2.641, 2.227, 2.010</td>
 </tr>
 <tr>
-<td><strong>Action</strong></td>
-<td>Automated work</td>
-<td>Invokes a <code>NodeExecutor</code>. Blocks until executor returns a result. Result merges into context.</td>
+<td>Java history</td>
+<td>39.976, 38.373, 35.917, 40.168, 34.487</td>
+<td>38.762, 45.956, 43.848, 40.644, 59.013</td>
 </tr>
 <tr>
-<td><strong>Human Task</strong></td>
-<td>Human approval/input</td>
-<td>Blocks until a human responds. Has config for title, description, references, output schema (form fields).</td>
-</tr>
-<tr>
-<td><strong>Receive Event</strong></td>
-<td>Wait for external event</td>
-<td>Blocks until a matching event arrives. Has config for event type filter and optional field matching.</td>
-</tr>
-<tr>
-<td><strong>End</strong></td>
-<td>Terminal state</td>
-<td>Marks the instance as completed. Has config for outcome metadata (success, failure, reason).</td>
+<td>Editor layout/history</td>
+<td>178.029, 169.998, 168.274, 169.293, 168.855</td>
+<td>60.048, 66.026, 60.473, 60.169, 60.250</td>
 </tr>
 </tbody>
 </table>
-<h3 id="branching-conditions-on-edges">Branching: Conditions on Edges</h3>
-<ul>
-<li>Each node can have multiple outgoing edges</li>
-<li>Each edge has an optional condition expression evaluated against the workflow context</li>
-<li>Edges are evaluated in priority order — first match wins</li>
-<li>One edge per node can be marked as default (fallback)</li>
-<li>Visually, edges display a small condition badge</li>
-</ul>
-<h3 id="condition-expression-language">Condition Expression Language</h3>
-<p>TBD — options:
-- Simple property comparison (e.g. <code>result.status == "not-affected"</code>)
-- JSONPath or JMESPath expressions
-- A minimal custom DSL
-- SpEL (Spring Expression Language) — though not ideal for Quarkus</p>
-<h3 id="execution-engine">Execution Engine</h3>
-<p>When a node completes:
-1. Retrieve the node's outgoing edges, sorted by priority
-2. Evaluate each edge's condition against the workflow context
-3. Transition to the first matching edge's target node (or the default edge)
-4. Execute the target node (or enter a wait state for Human Task / Receive Event)</p>
-<p>The engine must:
-- Persist state after each transition (survives server restarts)
-- Support long-running waits (days/weeks for human tasks and events)
-- Resume from persisted state on application startup
-- Track execution history (which nodes were visited, when, with what context)</p>
-<h3 id="persistence">Persistence</h3>
-<ul>
-<li>Workflow definitions stored as JSON (single column, like Axiom's dashboard widgets)</li>
-<li>Workflow instances stored as rows with JSON context/history columns</li>
-<li>Uses the host application's existing database (PostgreSQL via Panache/Hibernate)</li>
-<li>The engine provides JPA entities; the host app includes them in its persistence unit</li>
-</ul>
-<h3 id="visual-editor-react">Visual Editor (React)</h3>
-<ul>
-<li>Drag-and-drop node placement on a canvas</li>
-<li>Connect nodes with edges (click source → click target)</li>
-<li>Configure nodes via a properties panel</li>
-<li>Add conditions to edges via the properties panel</li>
-<li>Read-only visualization mode showing the current node highlighted and path taken</li>
-<li>Library: evaluate React Flow (reactflow.dev) as the canvas library</li>
-</ul>
-<h3 id="spi-nodeexecutor">SPI: NodeExecutor</h3>
-<div class="language-java highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kd">public</span><span class="w"> </span><span class="kd">interface</span> <span class="nc">NodeExecutor</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">    </span><span class="n">String</span><span class="w"> </span><span class="nf">nodeType</span><span class="p">();</span><span class="w">  </span><span class="c1">// e.g. "action", "human-task", "receive-event"</span>
-</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">    </span><span class="n">CompletableFuture</span><span class="o">&lt;</span><span class="n">NodeResult</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">execute</span><span class="p">(</span><span class="n">NodeExecutionContext</span><span class="w"> </span><span class="n">context</span><span class="p">);</span>
-</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="p">}</span>
-</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>
-</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="kd">public</span><span class="w"> </span><span class="kd">interface</span> <span class="nc">NodeExecutionContext</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="w">    </span><span class="n">WorkflowNode</span><span class="w"> </span><span class="nf">node</span><span class="p">();</span>
-</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="w">    </span><span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">Object</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">workflowContext</span><span class="p">();</span>
-</span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="w">    </span><span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">Object</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">nodeConfig</span><span class="p">();</span>
-</span><span id="__span-2-10"><a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="p">}</span>
-</span><span id="__span-2-11"><a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>
-</span><span id="__span-2-12"><a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a><span class="kd">public</span><span class="w"> </span><span class="kd">record</span> <span class="nc">NodeResult</span><span class="p">(</span>
-</span><span id="__span-2-13"><a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a><span class="w">    </span><span class="n">Status</span><span class="w"> </span><span class="n">status</span><span class="p">,</span><span class="w">   </span><span class="c1">// COMPLETED, FAILED</span>
-</span><span id="__span-2-14"><a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a><span class="w">    </span><span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">Object</span><span class="o">&gt;</span><span class="w"> </span><span class="n">output</span><span class="w">  </span><span class="c1">// merged into workflow context</span>
-</span><span id="__span-2-15"><a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a><span class="p">)</span><span class="w"> </span><span class="p">{}</span>
-</span></code></pre></div>
-<p>The host application provides <code>NodeExecutor</code> implementations for each node type. The engine discovers them via CDI.</p>
-<h2 id="axiom-integration-plan">Axiom Integration Plan</h2>
-<h3 id="node-type-implementations">Node Type Implementations</h3>
-<table>
-<thead>
-<tr>
-<th>Flow Node Type</th>
-<th>Axiom Implementation</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>Action</strong></td>
-<td>Creates an Axiom task with the configured action type on the project. Completes when the task completes. Task output becomes node output.</td>
-</tr>
-<tr>
-<td><strong>Human Task</strong></td>
-<td>Creates an Axiom inbox item with the configured humanContext and outputSchema. Completes when the user responds. Response becomes node output.</td>
-</tr>
-<tr>
-<td><strong>Receive Event</strong></td>
-<td>Registers an event listener. Completes when a matching Axiom event arrives for the project. Event payload becomes node output.</td>
-</tr>
-</tbody>
-</table>
-<h3 id="ui-integration">UI Integration</h3>
-<ul>
-<li>Project detail page gets a "Workflow" tab showing the read-only visualization of the current workflow state</li>
-<li>Workflow definitions are managed in a new Settings section (alongside Action Types, Scheduled Jobs, etc.)</li>
-<li>Workflow definition editor uses the visual drag-and-drop editor</li>
-<li>A project can have one workflow assigned (optional). When assigned, the workflow starts on project creation.</li>
-</ul>
-<h3 id="relationship-to-lifecycle-hooks-197">Relationship to Lifecycle Hooks (#197)</h3>
-<p>Lifecycle hooks (issue #197) trigger individual action types on project events. Workflows are a more structured alternative — when a project has a workflow, the workflow controls the sequence of actions rather than individual hooks. Both can coexist: hooks for simple one-shot triggers, workflows for multi-step lifecycles.</p>
-<h2 id="design-decisions-still-needed">Design Decisions Still Needed</h2>
-<ul>
-<li>[ ] Condition expression language</li>
-<li>[ ] How to handle node execution failures (retry? error edges? fail the workflow?)</li>
-<li>[ ] Versioning: what happens to running instances when a workflow definition is updated?</li>
-<li>[ ] Can a workflow be restarted or reset to a specific node?</li>
-<li>[ ] Should the visual editor be a shared npm package or built into Axiom's UI directly?</li>
-<li>[ ] React Flow vs. other canvas libraries for the visual editor</li>
-<li>[ ] Should workflow definitions be shareable/exportable (JSON import/export)?</li>
-</ul>
-<h2 id="example-workflows">Example Workflows</h2>
-<h3 id="cve-triage">CVE Triage</h3>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>Start → Action(analyze-cve) → Human Task(triage: affected?)
-</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>  → [affected] Action(plan-mitigation) → Human Task(approve plan)
-</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>    → [approved] Action(implement-fix) → Action(verify-fix) → End(mitigated)
-</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>    → [rejected] → Action(analyze-cve)  // loop back
-</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>  → [not-affected] Action(close-tracker) → End(not-affected)
-</span></code></pre></div>
-<h3 id="github-issue-sdlc">GitHub Issue SDLC</h3>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>Start → Action(analyze-and-plan) → Human Task(approve plan)
-</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>  → [approved] Action(implement) → Action(create-pr) → Receive Event(pr-merged) → End(completed)
-</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>  → [rejected] → Action(analyze-and-plan)  // loop back
-</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>  → [wont-fix] End(wont-fix)
-</span></code></pre></div>
-<h2 id="influenced-by">Influenced By</h2>
-<ul>
-<li><strong>AWS Step Functions</strong> — state machine model, Choice state, callback pattern for human tasks</li>
-<li><strong>BPMN 2.0</strong> — user task concept, gateway branching, event catch</li>
-<li><strong>n8n</strong> — visual editor UX, conditions on edges rather than gateway nodes</li>
-<li><strong>Temporal</strong> — durable execution, long-running wait states</li>
-</ul>
-<p>Deliberately avoided full BPMN complexity (parallel gateways, sub-processes, compensation, complex event correlation).</p>
+<p>Graph median: 365.033 → 2.291 ms. Editor median: 169.293 → 60.250 ms; validation/analysis runs:
+60 → 1. These are warmed diagnostic workloads, not end-to-end throughput guarantees or CI timing
+gates. History scanning was not optimized and shows no speedup; its remaining cost is explicit.
+The optional benchmarks are skipped in normal suites and run separately with the flags above.</p>
+<h2 id="regression-evidence">Regression evidence</h2>
+<p><code>GraphReuseTest</code> covers same-ID revisions, caller-list mutation isolation, immutable adjacency,
+priority ties, incoming order and concurrent analysis publication. Editor semantic tests cover
+layout history reuse and semantic invalidation. Browser tests exercise host-validation call counts
+with a controlled clock, typed defaults/options with undo, shared drafts/literals/focus, async menus
+and the independently packed consumer. Existing execution/conformance/ownership suites protect
+the extracted resolver's error phases, pending/completed contracts and recovery ordering.</p>
+<p>Clock/identity injection was unnecessary: the public start API already accepts an instance ID,
+and the execution invariants do not depend on exact wall-clock timestamps.</p>
 
 
 

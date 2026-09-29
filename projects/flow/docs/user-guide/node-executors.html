@@ -288,7 +288,7 @@
     
     
       <li class="md-tabs__item md-tabs__item--active">
-        <a href="workflow-model.html" class="md-tabs__link">
+        <a href="current-contracts.html" class="md-tabs__link">
           
   
   
@@ -573,6 +573,34 @@
   
   
     <li class="md-nav__item">
+      <a href="current-contracts.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Current Contracts
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="workflow-model.html" class="md-nav__link">
         
   
@@ -581,6 +609,34 @@
     
   
     Workflow Model
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="typed-configuration.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Typed Configuration
   
 
     
@@ -910,6 +966,34 @@
   
   
     <li class="md-nav__item">
+      <a href="workflow-diff.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Workflow Diff Viewer
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="parallel-fork-join.html" class="md-nav__link">
         
   
@@ -1035,6 +1119,90 @@
     
   
     Architecture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../developer-guide/engine-errors.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Engine Errors
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../developer-guide/indexed-architecture.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Indexed Architecture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../developer-guide/documentation-checks.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Documentation Checks
   
 
     
@@ -1196,7 +1364,7 @@
 
 
 <h1 id="node-executors">Node Executors</h1>
-<p>The <code>NodeExecutor</code> interface is the SPI that the host application implements to handle action nodes. Each executor handles one action type.</p>
+<p>The host implements the <code>NodeExecutor</code> SPI to handle action nodes. Each executor handles one action type.</p>
 <h2 id="interface">Interface</h2>
 <div class="language-java highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kd">public</span><span class="w"> </span><span class="kd">interface</span> <span class="nc">NodeExecutor</span><span class="w"> </span><span class="p">{</span>
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">    </span><span class="n">String</span><span class="w"> </span><span class="nf">actionType</span><span class="p">();</span>
@@ -1228,14 +1396,19 @@
 </span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">    </span><span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">Object</span><span class="o">&gt;</span><span class="w"> </span><span class="n">nodeConfig</span><span class="w">   </span><span class="c1">// the node's config map (includes actionType)</span>
 </span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="p">)</span><span class="w"> </span><span class="p">{}</span>
 </span></code></pre></div>
-<p>The <code>inputs</code> map contains values resolved from the action node's input EL expressions. The executor receives only the declared inputs — it does not have access to the full workflow context.</p>
+<p><code>inputs</code> contains resolved input expressions and literal values. The executor receives only declared
+inputs, not the full workflow context.</p>
 <h2 id="result">Result</h2>
 <div class="language-java highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kd">public</span><span class="w"> </span><span class="kd">record</span> <span class="nc">NodeResult</span><span class="p">(</span>
-</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">    </span><span class="n">NodeResultStatus</span><span class="w"> </span><span class="n">status</span><span class="p">,</span><span class="w">       </span><span class="c1">// COMPLETED or FAILED</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">    </span><span class="n">NodeResultStatus</span><span class="w"> </span><span class="n">status</span><span class="p">,</span><span class="w">       </span><span class="c1">// COMPLETED, FAILED, or PENDING</span>
 </span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">    </span><span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">Object</span><span class="o">&gt;</span><span class="w"> </span><span class="n">output</span><span class="w">     </span><span class="c1">// merged into workflow context on success</span>
 </span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="p">)</span><span class="w"> </span><span class="p">{}</span>
 </span></code></pre></div>
-<p>On <code>COMPLETED</code>, the engine validates the output against the node's declared output schema (required fields must be present and non-null), then merges the output map into the workflow context. On <code>FAILED</code>, the error handler is invoked (see <a href="error-handling.html">Error Handling</a>).</p>
+<p>On <code>COMPLETED</code>, required declared outputs must be present and non-null before merging into context.
+On <code>FAILED</code>, the error handler is invoked (see <a href="error-handling.html">Error Handling</a>).</p>
+<p>This is a required-presence check, not full value/type validation. <code>contextKey</code> aliases apply after that
+check. <code>PENDING</code> parks the action and can merge partial output; the host completes it later through
+<code>completeNode</code>. See <a href="engine-usage.html#pending-actions">pending actions</a> for the complete contract.</p>
 <h2 id="example">Example</h2>
 <div class="language-java highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">AnalyzeCveExecutor</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">NodeExecutor</span><span class="w"> </span><span class="p">{</span>
 </span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>
@@ -1264,7 +1437,9 @@
 </span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">    </span><span class="kc">null</span>
 </span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="p">);</span>
 </span></code></pre></div>
-<p>The <code>NodeExecutorProvider</code> is a functional interface with a single method <code>getExecutor(String actionType)</code>. The <code>fromList</code> factory creates a provider from a list of executors, keyed by their <code>actionType()</code>. You can also implement <code>NodeExecutorProvider</code> directly for custom lookup logic (e.g. service registry, dependency injection). If no matching executor is found, the workflow fails.</p>
+<p>The provider's functional method is <code>getExecutor(String actionType)</code>. <code>fromList</code> snapshots registrations
+and rejects null entries, blank/null action types, and duplicates. Implement the provider directly for
+custom lookup. A missing/throwing provider enters structured recovery and fails by default.</p>
 <h2 id="action-node-config">Action Node Config</h2>
 <p>Action nodes must include an <code>actionType</code> field and should declare <code>inputs</code> and <code>outputs</code>:</p>
 <div class="language-json highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="p">{</span>
@@ -1280,10 +1455,14 @@
 </span><span id="__span-5-11"><a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a><span class="p">}</span>
 </span></code></pre></div>
 <ul>
-<li><strong><code>inputs</code></strong> — map of label to EL expression. Resolved against the workflow context before execution and passed to the executor as <code>context.inputs()</code>.</li>
-<li><strong><code>outputs</code></strong> — list of <code>{name, type, required}</code>. After execution, the engine validates that required outputs are present and non-null in the result. Missing required outputs are routed through the error handler.</li>
+<li><strong><code>inputs</code></strong> — map of label to expression string or JSON literal. Strings resolve against context;
+  non-string values remain literals. Use an EL quoted string such as <code>'hello'</code> for a constant string.
+  The executor receives the resolved values as <code>context.inputs()</code>.</li>
+<li><strong><code>outputs</code></strong> — list of <code>{name, type, required}</code> with optional <code>contextKey</code>. Missing/null required
+  outputs enter error recovery before any output is merged.</li>
 </ul>
-<p>The validator emits <code>MISSING_ACTION_INPUTS</code> and <code>MISSING_ACTION_OUTPUTS</code> warnings when these are absent. The full config map is also available to the executor as <code>nodeConfig</code>.</p>
+<p>Absent declarations produce <code>MISSING_ACTION_INPUTS</code> / <code>MISSING_ACTION_OUTPUTS</code> warnings. The executor also
+receives the full config map as <code>nodeConfig</code>.</p>
 
 
 
