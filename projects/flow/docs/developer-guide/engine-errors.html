@@ -12,13 +12,9 @@
         <meta name="author" content="Apitomy">
       
       
-        <link rel="canonical" href="https://www.apitomy.io/projects/flow/docs/developer-guide/architecture.html">
+        <link rel="canonical" href="https://www.apitomy.io/projects/flow/docs/developer-guide/engine-errors.html">
       
       
-        <link rel="prev" href="building.html">
-      
-      
-        <link rel="next" href="contributing.html">
       
       
         
@@ -29,7 +25,7 @@
     
     
       
-        <title>Architecture - Apitomy Flow</title>
+        <title>Engine errors and host extension contracts - Apitomy Flow</title>
       
     
     
@@ -84,7 +80,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#architecture" class="md-skip">
+        <a href="#engine-errors-and-host-extension-contracts" class="md-skip">
           Skip to content
         </a>
       
@@ -141,7 +137,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Architecture
+              Engine errors and host extension contracts
             
           </span>
         </div>
@@ -302,12 +298,10 @@
   
   
   
-    
-  
   
     
     
-      <li class="md-tabs__item md-tabs__item--active">
+      <li class="md-tabs__item">
         <a href="building.html" class="md-tabs__link">
           
   
@@ -826,31 +820,28 @@
       
   
   
-    
   
   
-  
     
     
     
     
-      
-        
-        
       
       
         
       
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
         
           
-          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
             
   
   
@@ -868,7 +859,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_4">
             <span class="md-nav__icon md-icon"></span>
             
@@ -911,37 +902,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Architecture
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="architecture.html" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="architecture.html" class="md-nav__link">
         
   
   
@@ -957,148 +921,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#design-principles" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Design Principles
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#engine-internals" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Engine Internals
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Engine Internals">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#workflowengine" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        WorkflowEngine
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#transition-loop" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Transition Loop
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#condition-evaluation" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Condition Evaluation
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#validation" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Validation
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#ui-internals" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        UI Internals
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="UI Internals">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#component-hierarchy" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Component Hierarchy
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#data-flow" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Data Flow
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#typescript-validator" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        TypeScript Validator
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -1166,10 +988,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#design-principles" class="md-nav__link">
+  <a href="#structured-diagnostics-without-a-wire-migration" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Design Principles
+        Structured diagnostics without a wire migration
       
     </span>
   </a>
@@ -1177,113 +999,46 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#engine-internals" class="md-nav__link">
+  <a href="#input-policy-and-recovery" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Engine Internals
+        Input policy and recovery
       
     </span>
   </a>
-  
-    <nav class="md-nav" aria-label="Engine Internals">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#workflowengine" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        WorkflowEngine
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#transition-loop" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Transition Loop
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#condition-evaluation" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Condition Evaluation
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#validation" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Validation
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#ui-internals" class="md-nav__link">
+  <a href="#extension-response-and-registration-rules" class="md-nav__link">
     <span class="md-ellipsis">
       
-        UI Internals
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="UI Internals">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#component-hierarchy" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Component Hierarchy
+        Extension response and registration rules
       
     </span>
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
-  <a href="#data-flow" class="md-nav__link">
+      
+        <li class="md-nav__item">
+  <a href="#ordering-and-durability" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Data Flow
+        Ordering and durability
       
     </span>
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
-  <a href="#typescript-validator" class="md-nav__link">
+      
+        <li class="md-nav__item">
+  <a href="#compatibility-checklist-for-existing-hosts" class="md-nav__link">
     <span class="md-ellipsis">
       
-        TypeScript Validator
+        Compatibility checklist for existing hosts
       
     </span>
   </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -1307,126 +1062,105 @@
   
 
 
-<h1 id="architecture">Architecture</h1>
-<h2 id="design-principles">Design Principles</h2>
+<h1 id="engine-errors-and-host-extension-contracts">Engine errors and host extension contracts</h1>
+<p>The engine is synchronous and stateless. The host persists the instance returned by each call and owns
+delivery concurrency, durable scheduling, correlation, and deduplication. Error recovery does not undo
+executor side effects. Executors must tolerate retries or use host-managed idempotency.</p>
+<h2 id="structured-diagnostics-without-a-wire-migration">Structured diagnostics without a wire migration</h2>
+<p><code>WorkflowErrorHandler.handleError(instance, node, result, error)</code> receives a <code>WorkflowError</code> with:</p>
 <ul>
-<li><strong>Stateless engine</strong> — the engine takes a workflow definition and instance state as input, returns updated state as output. No persistence, no background threads, no framework dependencies.</li>
-<li><strong>Consumer handles persistence</strong> — the workflow instance is a single JSON document. The consuming application stores it however it chooses (database column, file, etc.).</li>
-<li><strong>Explicit wiring</strong> — all dependencies (executors, listeners, error handler) are passed via constructor. No CDI, no service discovery, no classpath scanning.</li>
-<li><strong>Immutable state</strong> — all engine methods return new <code>WorkflowInstance</code> objects. Input instances are never mutated.</li>
-<li><strong>One expression language</strong> — Jakarta EL is used consistently for edge conditions and event correlation.</li>
+<li><code>phase()</code>: input resolution, executor lookup/execution, result/output validation, output mapping,
+  edge condition/selection, or error-handler failure;</li>
+<li><code>nodeId()</code>, <code>edgeId()</code>, <code>expression()</code>, and <code>field()</code>, with null for identities that do not apply;</li>
+<li>the original message and <code>getCause()</code> when an exception caused the failure.</li>
 </ul>
-<h2 id="engine-internals">Engine Internals</h2>
-<h3 id="workflowengine">WorkflowEngine</h3>
-<p>See <a href="engine-errors.html">Engine errors and host extension contracts</a> for structured diagnostics,
-input-failure recovery, callback ordering, nullability, compatibility, and host durability responsibilities.</p>
-<p>The central class. Three categories of methods:</p>
+<p>The callback is an additive default method. Existing handlers continue implementing <code>handleNodeError</code>
+and <code>handleNoMatchingEdge</code>; no replacement SPI is required. The default adapter retains the original
+exception object for executor, edge-condition, and event-mapping failures. Explicit <code>FAILED</code> results
+still reach legacy handlers with their result and a null exception. Newly diagnosed input, missing-output,
+and malformed-result failures supply a <code>WorkflowError</code> through the existing exception parameter.
+Handlers needing all identities can override <code>handleError</code> (or extend <code>DefaultErrorHandler</code> and override it).</p>
+<p><code>FAIL</code> preserves the diagnostic in the existing string <code>WorkflowInstance.failureReason</code>; no JSON field
+names or result/resolution record shapes change. <code>onWorkflowFailed</code> receives the structured error. A
+throwing or malformed handler fails once with phase <code>ERROR_HANDLER</code>, retaining the handler exception as
+cause and the original <code>WorkflowError</code> as a suppressed exception; both appear in the failure reason.
+Failure text is for operators, not a stable parser format. Expressions, exception messages, and explicit
+FAILED output diagnostics can contain host data; apply the host's normal access and retention policies.</p>
+<h2 id="input-policy-and-recovery">Input policy and recovery</h2>
+<p>Action inputs are resolved before provider lookup or executor side effects. Human-task inputs are checked
+on entry before parking. Evaluation exceptions default to workflow failure, not a substituted null input.
+The handler can choose <code>RETRY</code> or <code>TRANSITION</code> to a repair node. A retry re-resolves inputs; immutable
+invalid configuration will fail again, so transition to a repair path is usually the useful choice.</p>
+<p>Null literal values, blank expressions, and expressions that legitimately resolve to null remain null.
+Non-string input values remain literals. Required start inputs retain their existing pre-execution
+validation and throw to the caller. Read-only <code>getActionInfo</code>/<code>getHumanTaskInfo</code> calls throw <code>WorkflowError</code>
+if input evaluation fails: they cannot update state or apply recovery. Their ineligible-node null contract
+is unchanged. <code>matchesEvent</code> retains its false-on-evaluation-error policy, and <code>resolveExpression</code> retains
+its <code>ConditionEvaluationException</code> contract.</p>
+<p>Action retries allow ten retries after the initial attempt. Recovery transitions and human input retries
+use the shared 100-unit call-local driver budget alongside ordinary moves and unsuccessful edge selections.
+Budget failures retain the triggering/last recovery diagnostic when available. Parked sibling branches are
+never selected as runnable just because another branch recovers. These limits are not durable retry policy.</p>
+<p>On external ACTION completion, <code>RETRY</code> re-executes the action. For non-action completion failures and event
+output-mapping failures, <code>RETRY</code> leaves the instance parked for another delivery. No invalid completion
+output is merged. A completed action must supply each required output as non-null before context-key
+remapping; pending output may be partial.</p>
+<h2 id="extension-response-and-registration-rules">Extension response and registration rules</h2>
 <table>
 <thead>
 <tr>
-<th>Category</th>
-<th>Methods</th>
+<th>Boundary</th>
+<th>Contract</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>Lifecycle</td>
-<td><code>startWorkflow</code>, <code>completeCurrentNode</code>, <code>cancelWorkflow</code></td>
+<td>Provider</td>
+<td>Return an executor or null for unavailable. Null and thrown Exceptions enter recoverable <code>EXECUTOR_LOOKUP</code> failure.</td>
 </tr>
 <tr>
-<td>Correlation</td>
-<td><code>matchesEvent</code></td>
+<td><code>fromList</code> registry</td>
+<td>Snapshot registrations; reject null list/elements, null/blank action types, and duplicates at the second registration. <code>actionType()</code> exceptions propagate at construction.</td>
 </tr>
 <tr>
-<td>Expression</td>
-<td><code>resolveExpression</code></td>
+<td>Executor/result</td>
+<td>Result and status must be non-null; null output means no values. Output keys must be non-null strings; values may be null. Invalid results enter recovery before merging.</td>
 </tr>
 <tr>
-<td>Introspection</td>
-<td><code>getHumanTaskInfo</code>, <code>getReceiveEventInfo</code>, <code>getWaitInfo</code></td>
+<td>Error handler</td>
+<td>Return a non-null resolution/action. Only TRANSITION accepts a target, which must be nonblank and identify an existing non-START node. Invalid decisions fail without recursively invoking the handler.</td>
 </tr>
 <tr>
-<td>(Internal)</td>
-<td><code>advance</code>, <code>executeActionNode</code>, <code>selectEdge</code></td>
+<td>Listener registration</td>
+<td>Null list means no listeners; otherwise the engine copies registrations in order and rejects null elements.</td>
 </tr>
 </tbody>
 </table>
-<h3 id="transition-loop">Transition Loop</h3>
-<p>The <code>advance()</code> method is the core execution loop:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>Node completes
-</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>  → fire onNodeCompleted
-</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>  → merge output into context
-</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>  → get outgoing edges (sorted by priority)
-</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>  → evaluate each condition (Jakarta EL)
-</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>  → select first match (or default)
-</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>  → fire onEdgeFollowed
-</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>  → record in history
-</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>  → fire onNodeEntered
-</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>  → execute target node:
-</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>      ACTION     → invoke executor, loop back
-</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>      HUMAN_TASK → set WAITING, return
-</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>      RECEIVE    → set WAITING, return
-</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>      END        → set COMPLETED, return
-</span></code></pre></div>
-<p>A safety limit of 100 transitions per call prevents infinite loops.</p>
-<h3 id="condition-evaluation">Condition Evaluation</h3>
-<p>The <code>ConditionEvaluator</code> wraps Jakarta EL. Two modes:</p>
-<table>
-<thead>
-<tr>
-<th>Context</th>
-<th>Root Variables</th>
-<th>Used For</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Edge conditions</td>
-<td><code>context</code></td>
-<td>Routing decisions after node completion</td>
-</tr>
-<tr>
-<td>Event matching</td>
-<td><code>context</code>, <code>event</code></td>
-<td>Correlating external events to waiting nodes</td>
-</tr>
-</tbody>
-</table>
-<p>Null or blank conditions evaluate to <code>true</code> (unconditional edges always match).</p>
-<h3 id="validation">Validation</h3>
-<p>The <code>WorkflowValidator</code> runs 55 rules across four categories:</p>
+<p><code>NodeResult</code> and <code>ErrorResolution</code> constructors remain permissive for compatibility; validation happens
+at the engine boundary. Output values remain host-defined; this change does not introduce recursive JSON
+schema validation or promise deep immutability. Callers/extensions must not mutate supplied data.
+Host <code>Exception</code>s are handled according to these contracts; JVM <code>Error</code>s propagate.</p>
+<h2 id="ordering-and-durability">Ordering and durability</h2>
+<p>Listeners run synchronously in registration order. One listener's exception is logged/swallowed and does
+not prevent later listeners or workflow execution. Registration changes after construction have no effect.
+Concurrent host calls may invoke the same listener or executor concurrently; the host controls serialization.</p>
+<p>The normal sequence is workflow-started, node-entered, action-completed, edge-followed, next-node-entered,
+and eventually workflow-completed/failed. Edge-followed precedes target entry or join-arrival accounting.
+Node-completed follows successful output validation/history/context update; pending and failed results
+do not emit it. Start entry is notified before its history record; other entries follow their history
+record. Recovery entry does not fabricate an edge-followed event. Completion and cancellation callbacks
+observe terminal state, but the host still has to persist the returned instance.</p>
+<p>Listeners are observational, not persistence hooks with delivery guarantees. They provide no transaction,
+rollback, veto, durable ordering, replay, or exactly-once guarantee. Use host-owned transactions/outboxes
+and idempotent work dispatch for durable integration; throwing from a callback does not make it durable.</p>
+<h2 id="compatibility-checklist-for-existing-hosts">Compatibility checklist for existing hosts</h2>
 <ol>
-<li><strong>Structural</strong> (26 rules) — graph integrity (start/end nodes, edge references, duplicates)</li>
-<li><strong>Connectivity</strong> (5 rules) — reachability, dead ends, isolated nodes</li>
-<li><strong>Edge/Condition</strong> (7 rules) — default edges, duplicate priorities, EL syntax</li>
-<li><strong>Semantic</strong> (17 rules) — event receivers, action types, input schemas, wait durations, automated cycles, human-task output metadata</li>
+<li>Existing executor/provider/handler implementations continue to compile; structured handling is opt-in.</li>
+<li>Fix invalid input expressions previously masked as null, or select a repair transition in the handler.</li>
+<li>Allow non-null exceptions alongside completed results rejected by output validation.</li>
+<li>Remove duplicate registrations and malformed results/resolutions that previously escaped or were accepted.</li>
+<li>Treat failureReason as diagnostic text; retain existing JSON readers and persisted instance shapes.</li>
 </ol>
-<p><code>startWorkflow</code> runs the validator automatically and rejects definitions with ERROR-level problems.</p>
-<h2 id="ui-internals">UI Internals</h2>
-<h3 id="component-hierarchy">Component Hierarchy</h3>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>WorkflowEditor (ReactFlowProvider wrapper)
-</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>  └─ WorkflowEditorInner
-</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>       ├─ NodePalette (drag source for new nodes)
-</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>       ├─ ReactFlow canvas
-</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>       │    ├─ Custom node components (6 types)
-</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>       │    └─ ConditionalEdge component
-</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>       ├─ PropertiesPanel (node/edge config form)
-</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>       └─ ProblemsPanel (validation results)
-</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>
-</span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>WorkflowViewer (ReactFlowProvider wrapper)
-</span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>  └─ WorkflowViewerInner
-</span><span id="__span-1-12"><a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>       └─ ReactFlow canvas (read-only, styled by instance state)
-</span></code></pre></div>
-<h3 id="data-flow">Data Flow</h3>
-<p>The editor maintains internal React Flow state (<code>useNodesState</code>, <code>useEdgesState</code>) and converts between the <code>Workflow</code> model and React Flow's <code>Node[]</code>/<code>Edge[]</code> model using adapter functions in <code>utils/conversion.ts</code>.</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>Workflow (prop) → toReactFlowNodes/Edges → React Flow state
-</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>                                              ↓ (on change)
-</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>                                         toWorkflow → onChange callback
-</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>                                              ↓
-</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>                                         validateWorkflow → onValidationChange
-</span></code></pre></div>
-<h3 id="typescript-validator">TypeScript Validator</h3>
-<p>A port of the Java <code>WorkflowValidator</code> implementing 53 of the 55 rules — it omits only <code>MISSING_EDGE_SOURCE</code> and <code>MISSING_EDGE_TARGET</code>, which the editor UI cannot produce. <code>INVALID_CONDITION</code> is included, using a lightweight balanced-token syntax check rather than a full Jakarta EL parse. Runs synchronously on every edit via <code>useMemo</code>. Host applications can contribute additional problems asynchronously through the editor SPI (see <a href="../user-guide/visual-editor.html">Visual Editor</a>).</p>
 
 
 
