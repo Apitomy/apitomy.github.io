@@ -1936,6 +1936,11 @@ the session working directory; this prompt appears on the same tool block.</p>
 <p>The template's system prompt, including project context for project sessions, is applied to both engines.
 Claude Code receives it with <code>--append-system-prompt</code>; OpenCode receives it as the system prompt of every
 message, added to OpenCode's own system prompt.</p>
+<p>OpenCode sessions use the template's model (in <code>provider/model</code> form, for example
+<code>github-copilot/claude-sonnet-5</code>), or <code>axiom.agent.opencode.model</code> when the template has none. The model is
+checked against the providers OpenCode has configured; if it is not available, the chat shows a warning and
+the session falls back to <code>axiom.agent.opencode.model</code>, or to OpenCode's own default model if that is also
+unavailable (in which case the session header shows no model).</p>
 </div>
 <hr />
 <h2 id="accessing-the-assistant">Accessing the Assistant</h2>
