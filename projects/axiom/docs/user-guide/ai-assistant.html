@@ -1925,6 +1925,14 @@ shell tool. Like Claude Code with <code>CLAUDE.md</code>, OpenCode also loads pr
 (<code>opencode.json</code>, <code>.opencode/</code>, <code>AGENTS.md</code>) from the working directory and its git repository;
 project-level <code>opencode.json</code> settings are applied after Axiom's generated config and can override
 them (for example MCP servers or permissions).</p>
+<p>For OpenCode sessions, the template's <strong>Allowed Tools</strong> are written as OpenCode permission rules:
+listed tools (for example <code>Read(*)</code>, <code>Bash(ls *)</code> or <code>mcp__axiom__axiom_list_tools</code>) run without
+asking, and any other tool asks for approval in the chat. Auto-approval rules apply to these
+requests. Denying a request makes that tool call fail and ends the current reply; send a new
+message to continue. When a template has no allowed tools, OpenCode's default permissions apply.
+With <code>Read(*)</code> allowed, <code>.env</code> files are read without prompting (the same as Claude Code).
+OpenCode may ask a second time for the same tool call, for example to access a directory outside
+the session working directory; this prompt appears on the same tool block.</p>
 <p>The template's system prompt, including project context for project sessions, is applied to both engines.
 Claude Code receives it with <code>--append-system-prompt</code>; OpenCode receives it as the system prompt of every
 message, added to OpenCode's own system prompt.</p>
