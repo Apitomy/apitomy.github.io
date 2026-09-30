@@ -1941,6 +1941,10 @@ message, added to OpenCode's own system prompt.</p>
 checked against the providers OpenCode has configured; if it is not available, the chat shows a warning and
 the session falls back to <code>axiom.agent.opencode.model</code>, or to OpenCode's own default model if that is also
 unavailable (in which case the session header shows no model).</p>
+<p>Each OpenCode session's local server is protected with a generated password (a template value for
+<code>OPENCODE_SERVER_PASSWORD</code> is ignored). If the connection to OpenCode drops, Axiom reconnects and shows a
+notice that some updates may be missing. If stopping a reply fails, a notice is shown and the session keeps
+running.</p>
 </div>
 <hr />
 <h2 id="accessing-the-assistant">Accessing the Assistant</h2>
