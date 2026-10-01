@@ -1945,6 +1945,12 @@ unavailable (in which case the session header shows no model).</p>
 <code>OPENCODE_SERVER_PASSWORD</code> is ignored). If the connection to OpenCode drops, Axiom reconnects and shows a
 notice that some updates may be missing. If stopping a reply fails, a notice is shown and the session keeps
 running.</p>
+<p>OpenCode sessions support slash commands: type <code>/</code> to list OpenCode's commands (for example <code>/init</code>).
+Commands run without the template's system prompt, because OpenCode's command endpoint cannot carry one.
+An unknown <code>/name</code> is sent to the model as ordinary text.
+<code>/clear</code> starts a fresh OpenCode conversation in the same session. When OpenCode runs a subagent (its
+<code>task</code> tool), the subagent appears as a subagent card with its progress, and its permission requests
+appear on that card.</p>
 </div>
 <hr />
 <h2 id="accessing-the-assistant">Accessing the Assistant</h2>
