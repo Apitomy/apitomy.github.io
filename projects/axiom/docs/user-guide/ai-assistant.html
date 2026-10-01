@@ -2171,6 +2171,11 @@ populated from the active interactive session runtime.</p>
 <p>When the assistant needs to use a tool, a permission prompt appears with <strong>Allow</strong> and
 <strong>Deny</strong> buttons. You can also click <strong>Allow Pattern...</strong> to create an auto-approval
 rule so similar requests are approved automatically in the future.</p>
+<p>With the OpenCode engine, an <strong>Always Allow</strong> button also appears when OpenCode provides
+"always" patterns for the request (for example <code>echo *</code> for a bash command). It approves
+the request and tells OpenCode to approve matching requests for the rest of the session.
+Hover over the button to see the patterns. Claude Code does not offer this, so the button
+does not appear there.</p>
 <p>Special permission types have dedicated UX:</p>
 <ul>
 <li><strong>AskUserQuestion</strong> — renders structured multi-choice options</li>
