@@ -2153,8 +2153,10 @@ template can run arbitrary code on the server with the server's full privileges.
 </li>
 </ul>
 <p>You can send another message while the assistant is still working; it is queued and answered after the current
-reply. If a message cannot be delivered, the chat shows a "Message was not delivered" notice. Stopping or
-interrupting the assistant also discards any messages that are still queued.</p>
+reply. If a message cannot be delivered, the chat shows a "Message was not delivered" notice. When you stop the
+assistant, OpenCode discards messages that are still queued, while Claude Code answers them after stopping.</p>
+<p>While the assistant is working, a <strong>Stop</strong> button appears next to <strong>Send</strong>. It stops the current reply without
+ending the session, so you can continue the conversation. If the reply can't be stopped, the chat shows a notice.</p>
 <h4 id="slash-commands">Slash Commands</h4>
 <p>Type <code>/</code> in the chat input to see available slash commands. Use arrow keys to navigate
 the autocomplete list and Tab or Enter to select a command. The available commands are
