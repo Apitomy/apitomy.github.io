@@ -1309,6 +1309,17 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#workflow-traces-and-events" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Workflow traces and events
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#manager-dry-run-trace-structure" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1827,6 +1838,17 @@
     <span class="md-ellipsis">
       
         Manager trace structure
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#workflow-traces-and-events" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Workflow traces and events
       
     </span>
   </a>
@@ -2416,6 +2438,16 @@ to the stream event. The tree is:</p>
   was posted to), the trace's <code>projectId</code> is set, so it appears in <code>GET /projects/{id}/traces</code>.</li>
 <li>Evaluation and decision nodes are always completed before <code>routeToManager</code> returns, so only <code>task</code>
   nodes can keep the trace open (see the lifecycle rules above).</li>
+</ul>
+<h3 id="workflow-traces-and-events">Workflow traces and events</h3>
+<ul>
+<li>A run started by a <code>create-workflow</code> routing rule gets a <code>workflow</code> trace with <code>eventId</code> set to the
+  stream event, so the trace appears in <code>GET /traces?filterEventId=...</code> next to the event's Manager
+  traces. The routing outcome's <code>traceId</code> is the run's trace. Runs started manually have no <code>eventId</code>.</li>
+<li>When a stream event resumes a run parked at a receive-event step, the receive-event <code>task</code> node
+  (entity type <code>workflow-event-subscription</code>) is completed and its summary gets
+  "— resumed by event <id>". The <code>workflow-resumed</code> routing outcome item's <code>trace_node_id</code> points to that
+  node, and a <code>workflow_run_resume</code> row records the event (see the event sourcing design).</li>
 </ul>
 <h3 id="manager-dry-run-trace-structure">Manager dry-run trace structure</h3>
 <p>The debug endpoint <code>POST /manager/evaluate/{eventId}</code> (<code>ManagerResourceImpl.evaluateEvent</code>) runs the

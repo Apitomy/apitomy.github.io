@@ -1152,6 +1152,17 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#links-between-events-and-workflow-runs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Links between events and workflow runs
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -1534,6 +1545,17 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#links-between-events-and-workflow-runs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Links between events and workflow runs
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -1821,6 +1843,16 @@ explicitly):</p>
 <td><code>workflow_run_id</code>, <code>project_id</code></td>
 </tr>
 <tr>
+<td><code>workflow-resumed</code></td>
+<td><code>workflow-dispatch</code> rule, one per run the event resumed</td>
+<td><code>workflow_run_id</code>, <code>project_id</code>, <code>trace_node_id</code> (the receive-event node)</td>
+</tr>
+<tr>
+<td><code>no-match</code></td>
+<td><code>workflow-dispatch</code> rule that resumed no run</td>
+<td>—</td>
+</tr>
+<tr>
 <td><code>ignored</code></td>
 <td>Manager <code>ignore</code> decision</td>
 <td>—</td>
@@ -1839,10 +1871,34 @@ explicitly):</p>
 </table>
 <p>Each item has a <code>status</code> (<code>completed</code> or <code>failed</code>), a <code>summary</code> and, when failed, an <code>error_message</code>.
 Manager items have one row per decision, including decisions that failed, and <code>trace_node_id</code> points to
-the decision's <code>manager-decision</code> trace node. <code>workflow-dispatch</code> rules write no items yet (#421).</p>
+the decision's <code>manager-decision</code> trace node. A <code>workflow-dispatch</code> rule writes one <code>workflow-resumed</code>
+item per resumed run, or a single <code>no-match</code> item (outcome summary "No waiting workflow run matched the
+event") when nothing matched, so "nothing happened" is recorded explicitly. A run that matched but
+failed to resume gets a <code>failed</code> <code>workflow-resumed</code> item with the error; the outcome stays <code>completed</code>
+so the rule is not retried (a retry would re-dispatch the event to every run). The processing API adds the
+run's <code>traceId</code> to <code>workflow-run</code> and <code>workflow-resumed</code> items, so the event page links to the run and its
+trace.</p>
 <p>The outcome's own <code>project_id</code> and <code>task_id</code> columns are kept for backward compatibility. They still hold
 only the <strong>first</strong> project and task; readers should use the items. Outcomes recorded before V67 have no
 items.</p>
+<h3 id="links-between-events-and-workflow-runs">Links between events and workflow runs</h3>
+<p>Events and workflow runs are linked both ways (V68, #420, #421). None of these links are foreign keys:
+event retention deletes events and ledger entries while runs are kept.</p>
+<ul>
+<li><strong>Started runs (<code>create-workflow</code>).</strong> The run stores <code>trigger_event_id</code> and <code>trigger_ledger_id</code>; the
+  run's <code>workflow</code> trace has <code>eventId</code> set to the event; the run's context has the event ID as
+  <code>event.id</code>; and the outcome's <code>trace_id</code> is the run's trace. Runs started any other way (e.g.
+  <code>POST /projects/{id}/workflow</code>) have null trigger fields.</li>
+<li><strong>Resumed runs (<code>workflow-dispatch</code>).</strong> <code>WorkflowEventDispatcher.dispatchStreamEvent</code> returns the
+  runs it resumed (run, node, trace and receive-event trace node). The <code>workflow_event_subscription</code> row
+  is deleted when it is consumed, so each resumption is recorded as a <code>workflow_run_resume</code> row (run,
+  node, event, ledger entry, trace node; deleted with the run), and the receive-event trace node's
+  summary gets "resumed by event <id>". The event map passed to the run (<code>event</code> in its context)
+  includes the event ID as <code>id</code>.</li>
+<li><strong>API.</strong> <code>WorkflowInstance</code> and <code>WorkflowRunSummary</code> expose <code>triggerEventId</code> and <code>triggerLedgerId</code>;
+  <code>WorkflowInstance.resumedBy</code> lists the resuming events. The workflow run page shows "Triggered by"
+  and "Resumed by" links to <code>/events/stream/:id</code>.</li>
+</ul>
 <p>Items never affect retries: the attempt cap and the skip-on-retry rule count <code>routing_outcome</code> rows by
 status and routing type, not items. Each attempt persists its own outcome together with its items, so the
 items of an attempt stay on that attempt's outcome and never appear on a later attempt's outcome.</p>
