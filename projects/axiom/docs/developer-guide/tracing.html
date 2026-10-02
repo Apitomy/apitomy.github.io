@@ -1286,6 +1286,17 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#trace-lifecycle-rules" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Trace lifecycle rules
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -1733,6 +1744,17 @@
     <span class="md-ellipsis">
       
         completeTrace()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#trace-lifecycle-rules" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Trace lifecycle rules
       
     </span>
   </a>
@@ -2204,6 +2226,48 @@ the <code>core</code> module so both <code>app</code> and <code>manager</code> c
 <p>Marks the trace itself as completed or failed.</p>
 <div class="language-java highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">completeTrace</span><span class="p">(</span><span class="n">UUID</span><span class="w"> </span><span class="n">traceId</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">status</span><span class="p">)</span>
 </span></code></pre></div>
+<h3 id="trace-lifecycle-rules">Trace lifecycle rules</h3>
+<p>Every unit of work ends with exactly one trace in a final state (<code>completed</code> or <code>failed</code>). No trace or
+<code>task</code> node may stay <code>in-progress</code> once its work item is final, and a trace is never completed twice.</p>
+<table>
+<thead>
+<tr>
+<th>Work item</th>
+<th>Who completes the trace</th>
+<th>Early-exit behaviour</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Scheduled job run</td>
+<td><code>ScheduledJobExecutionService</code> when the agent finishes</td>
+<td>No agent / startup error: run is <code>Failed</code>, trace and AI node closed as <code>failed</code>, <code>run.traceId</code> still set</td>
+</tr>
+<tr>
+<td>Report</td>
+<td><code>ReportExecutionService</code> when the agent finishes</td>
+<td>No agent / startup error: report is <code>Failed</code> (not left <code>Pending</code>), trace closed as <code>failed</code>, <code>report.traceId</code> still set</td>
+</tr>
+<tr>
+<td>Invoke-action task</td>
+<td><code>TaskTraceFinalizer</code> when the task reaches a final state</td>
+<td>Error before the task is created: trace closed as <code>failed</code></td>
+</tr>
+<tr>
+<td>Manager evaluation</td>
+<td>Last task created by the evaluation (<code>TaskTraceFinalizer</code>); the orchestrator only completes it when no task node is open</td>
+<td>Manager error: trace closed as <code>failed</code></td>
+</tr>
+<tr>
+<td>Workflow run</td>
+<td><code>WorkflowExecutionService</code> when the run is terminal (including runs that finish synchronously on start)</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<p><code>TaskTraceFinalizer</code> is used by both the agent and script task paths (including <code>failTask</code>). It always
+completes the task's <code>task</code> node, never completes a workflow-owned trace, and completes any other trace only
+once no other <code>task</code> node in it is still <code>in-progress</code> — <code>failed</code> if any task node failed.</p>
 <hr />
 <h2 id="tracecontext">TraceContext</h2>
 <p><code>TraceContext</code> is a mutable context object threaded through pipeline and report
