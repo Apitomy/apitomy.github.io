@@ -1454,6 +1454,10 @@ deletes a trace, it clears <code>trace_id</code> on <code>activity_log</code>, <
 <p>In the UI, the Activity log and AI usage pages show a <strong>Trace</strong> column that links to <code>/logs/traces/:traceId</code>,
 and a <strong>Trace ID</strong> filter. Both pages accept a <code>?traceId=</code> query parameter as a deep link, for example
 <code>/logs/activity?traceId=...</code>.</p>
+<p>The Manager Decisions page links each evaluation to its event and its trace. Expanding a <code>manager-evaluated</code>
+row shows the decisions recorded in the trace (with their reasoning) and the tasks each decision created.
+The Manager's <code>manager-evaluated</code> / <code>manager-error</code> activity row and its <code>ai_usage</code> row carry both the event
+ID and the trace ID, so the AI cost of an evaluation can be found from either.</p>
 <h2 id="agent-calls-joining-the-callers-trace">Agent Calls: Joining the Caller's Trace</h2>
 <p>When an agent calls Axiom APIs through the Axiom MCP server, <code>sdk-server.js</code> sends two headers on every
 request when the matching environment variables are set:</p>

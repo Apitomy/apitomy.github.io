@@ -1744,7 +1744,21 @@ Each <code>(event_id, subscription_id)</code> pair gets a ledger entry with one 
   events whose <code>timestamp</code> is at or after that cutoff are ever evaluated against the
   subscription. Enabling a subscription does not retroactively evaluate events that
   occurred before its cutoff.
-- <strong>Retry:</strong> Failed entries are re-attempted every tick (5-second interval).
+- <strong>Retry:</strong> Failed entries are re-attempted every tick (5-second interval), up to
+  <code>axiom.stream-pipeline.max-attempts</code> attempts in total (default 3). Attempts are counted as the
+  failed <code>routing_outcome</code> rows for the entry; the retry query excludes entries at the cap. When the
+  last attempt fails, a WARN is logged once and "(giving up after N attempts)" is appended to the
+  entry's error message. There is no backoff yet (#422).
+- <strong>No replay on retry:</strong> A retry skips routing rules that already have a <code>completed</code> outcome for the
+  ledger entry, so a later rule's failure does not re-create tasks or workflows, or re-dispatch the
+  event. Outcomes do not store the rule's position, so the k-th rule of a routing type is matched to the
+  k-th completed outcome of that type. Rules run in order and stop at the first failure, so this is exact
+  while the subscription's rules are unchanged; editing the rules between attempts can skip or replay
+  the wrong rule.
+- <strong>Processing failures count:</strong> A failure outside the routing rules (building the event context) is
+  recorded as a failed outcome with routing type <code>processing</code>, so it counts toward the attempt cap. An
+  unparseable payload is not a failure: it is routed with an empty payload map, on the first pass and on
+  retries alike.
 - <strong>Dedup:</strong> Unique constraint on <code>(event_id, subscription_id)</code> prevents duplicate processing.
 - <strong>Startup recovery:</strong> Orphaned <code>pending</code> entries from a previous crash are bulk-updated
   to <code>failed</code> on the first tick, then retried normally.</p>

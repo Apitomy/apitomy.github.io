@@ -1856,6 +1856,11 @@ rather than executed automatically.</p>
 <td><code>5s</code></td>
 <td>How often the event stream orchestrator evaluates unprocessed (event, subscription) pairs</td>
 </tr>
+<tr>
+<td><code>axiom.stream-pipeline.max-attempts</code></td>
+<td><code>3</code></td>
+<td>Maximum routing attempts (first try plus retries) for an (event, subscription) pair; after that the ledger entry stays <code>failed</code> and is no longer retried. Each Manager retry is a full AI call, so a higher value multiplies the cost of a failing Manager</td>
+</tr>
 </tbody>
 </table>
 <h3 id="scheduled-jobs">Scheduled Jobs</h3>
