@@ -2369,12 +2369,12 @@ to the stream event. The tree is:</p>
 <li>Each decision node's summary records the decision, action type, confidence and reasoning. Decisions
   below the confidence threshold are labelled <code>Escalated (low confidence)</code>. Tasks created by a decision
   carry the event ID and trace ID, and their <code>task</code> node is a child of the decision node.</li>
-<li>If processing one decision fails (for example an unknown decision type), its node is closed as
-  <code>failed</code> with the error prefixed to the summary, any <code>task</code> node left open under it is closed as
-  <code>failed</code>, and the error is appended to the routing outcome summary. Other decisions still run, and the
-  ledger entry is not failed, so the decisions that succeeded are not repeated by a retry. The trace
-  therefore ends <code>completed</code> even though that decision node is <code>failed</code>. This is intended: failing the
-  trace and retrying would create duplicate tasks for the decisions that succeeded.</li>
+<li>If processing one decision fails (for example an unknown decision type), its node is closed as <code>failed</code> with
+  the error prefixed to the summary, any <code>task</code> node left open under it is closed as <code>failed</code>, the error is
+  appended to the routing outcome summary, and the decision's routing outcome item is <code>failed</code> with the error.
+  Other decisions still run, and the ledger entry is not failed, so the decisions that succeeded are not
+  repeated by a retry. The trace therefore ends <code>completed</code> even though that decision node is <code>failed</code>. This
+  is intended: failing the trace and retrying would create duplicate tasks for the decisions that succeeded.</li>
 <li>When the evaluation fails, the <code>manager-evaluation</code> node and the trace are closed as <code>failed</code>, the
   routing outcome is <code>failed</code> with the error (and keeps the trace ID), and the ledger entry is <code>failed</code>
   so <code>retryFailedEntries</code> retries it. Each retry creates a new trace. Retries are capped by
@@ -2382,6 +2382,10 @@ to the stream event. The tree is:</p>
   failed <code>routing_outcome</code> rows linked to the ledger entry, and once the cap is reached the entry stays
   <code>failed</code> with "(giving up after N attempts)" appended to its error message.</li>
 <li>An empty decision list is a success: outcome <code>completed</code> with summary <code>No decisions</code>, trace <code>completed</code>.</li>
+<li>Each decision is recorded as a <code>routing_outcome_item</code> (task, ignored, escalated, or decision for an
+  unknown type) whose <code>trace_node_id</code> is the decision's <code>manager-decision</code> node, so the event detail page
+  lists every result of the evaluation (see the event sourcing design). An empty decision list or a failed
+  evaluation records no items.</li>
 <li>When the decisions involve exactly one project (a created task's project, or the project an escalation
   was posted to), the trace's <code>projectId</code> is set, so it appears in <code>GET /projects/{id}/traces</code>.</li>
 <li>Evaluation and decision nodes are always completed before <code>routeToManager</code> returns, so only <code>task</code>

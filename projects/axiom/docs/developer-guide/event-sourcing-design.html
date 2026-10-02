@@ -1138,6 +1138,23 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Processing Ledger">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#routing-outcomes-and-items" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Routing outcomes and items
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -1503,6 +1520,23 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Processing Ledger">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#routing-outcomes-and-items" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Routing outcomes and items
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -1762,6 +1796,56 @@ Each <code>(event_id, subscription_id)</code> pair gets a ledger entry with one 
 - <strong>Dedup:</strong> Unique constraint on <code>(event_id, subscription_id)</code> prevents duplicate processing.
 - <strong>Startup recovery:</strong> Orphaned <code>pending</code> entries from a previous crash are bulk-updated
   to <code>failed</code> on the first tick, then retried normally.</p>
+<h3 id="routing-outcomes-and-items">Routing outcomes and items</h3>
+<p>Each routing rule run records one <code>routing_outcome</code> row per attempt (routing type, status, summary,
+trace ID, error). Everything the rule produced is recorded as <code>routing_outcome_item</code> rows (V67, #418),
+children of the outcome deleted with it (<code>ON DELETE CASCADE</code>; <code>StreamEventCleanup</code> also deletes them
+explicitly):</p>
+<table>
+<thead>
+<tr>
+<th>Item type</th>
+<th>Written by</th>
+<th>Links</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>task</code></td>
+<td>Manager <code>create_task</code> / <code>script_action</code> decision; <code>invoke-action</code> rule</td>
+<td><code>task_id</code>, <code>project_id</code></td>
+</tr>
+<tr>
+<td><code>workflow-run</code></td>
+<td><code>create-workflow</code> rule</td>
+<td><code>workflow_run_id</code>, <code>project_id</code></td>
+</tr>
+<tr>
+<td><code>ignored</code></td>
+<td>Manager <code>ignore</code> decision</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>escalated</code></td>
+<td>Manager <code>escalate</code> decision, or any decision below the confidence threshold</td>
+<td><code>project_id</code> if the escalation was posted to a project</td>
+</tr>
+<tr>
+<td><code>decision</code></td>
+<td>Manager decision of an unknown type (always <code>failed</code>)</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<p>Each item has a <code>status</code> (<code>completed</code> or <code>failed</code>), a <code>summary</code> and, when failed, an <code>error_message</code>.
+Manager items have one row per decision, including decisions that failed, and <code>trace_node_id</code> points to
+the decision's <code>manager-decision</code> trace node. <code>workflow-dispatch</code> rules write no items yet (#421).</p>
+<p>The outcome's own <code>project_id</code> and <code>task_id</code> columns are kept for backward compatibility. They still hold
+only the <strong>first</strong> project and task; readers should use the items. Outcomes recorded before V67 have no
+items.</p>
+<p>Items never affect retries: the attempt cap and the skip-on-retry rule count <code>routing_outcome</code> rows by
+status and routing type, not items. Each attempt persists its own outcome together with its items, so the
+items of an attempt stay on that attempt's outcome and never appear on a later attempt's outcome.</p>
 <h2 id="rest-api">REST API</h2>
 <h3 id="connections">Connections</h3>
 <table>
