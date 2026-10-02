@@ -2297,10 +2297,32 @@ enum, so treat this as the currently observed set rather than an exhaustive cont
 <tr>
 <td><code>workflow-run</code></td>
 <td><code>WorkflowRunEntity</code></td>
-<td>Workflow run state and current node</td>
+<td>Run status, current node, times, definition and project names</td>
+</tr>
+<tr>
+<td><code>workflow-wait</code></td>
+<td><code>WorkflowWaitEntity</code></td>
+<td>Wait type, resume time, status (<code>waiting</code>/<code>resolved</code>/<code>cancelled</code>), run</td>
+</tr>
+<tr>
+<td><code>workflow-event-subscription</code></td>
+<td><code>WorkflowEventSubscriptionEntity</code></td>
+<td>Awaited event type, status, run, project</td>
+</tr>
+<tr>
+<td><code>scheduled-job-run</code></td>
+<td><code>ScheduledJobRunEntity</code></td>
+<td>Run status, trigger, execution log, job name</td>
 </tr>
 </tbody>
 </table>
+<p><code>GET /traces/{traceId}/nodes/{nodeId}</code> resolves these into the node's <code>detail</code> object (see
+<code>TraceResourceImpl.resolveDetail</code>). An unknown entity type, a malformed ID or a deleted record yields the
+node with a null <code>detail</code>. The one exception is workflow waits and event subscriptions: their rows are
+deleted when the parked node resumes, so the detail is rebuilt from the trace node and its workflow run,
+with status <code>resolved</code> (node completed) or <code>cancelled</code>. The event that satisfied a subscription is not
+recorded, so <code>matchedEventId</code> is always null. The <code>workflow-run</code> detail omits the engine's
+<code>instanceState</code>. Scheduled job traces reference their <code>scheduled-job-run</code> from the root node.</p>
 <h3 id="toolexecutionentity">ToolExecutionEntity</h3>
 <p>Detailed record of an MCP tool invocation (table <code>tool_execution</code>), storing the full
 JSON input and output for debugging. Referenced by trace nodes via
