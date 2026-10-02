@@ -1772,8 +1772,8 @@ Each <code>(event_id, subscription_id)</code> pair gets a ledger entry with one 
 <tbody>
 <tr>
 <td><code>pending</code></td>
-<td>Filter matched, routing in progress</td>
-<td>Transitions to <code>completed</code> or <code>failed</code>. On startup, orphaned <code>pending</code> entries are recovered to <code>failed</code>.</td>
+<td>An attempt is in progress</td>
+<td>Transitions to <code>completed</code>, <code>failed</code>, <code>exhausted</code> (or <code>skipped</code> when a retry re-evaluates the filter). On startup, orphaned <code>pending</code> entries are recovered to <code>failed</code> and due immediately (<code>exhausted</code> if it was the last attempt).</td>
 </tr>
 <tr>
 <td><code>completed</code></td>
@@ -1787,8 +1787,13 @@ Each <code>(event_id, subscription_id)</code> pair gets a ledger entry with one 
 </tr>
 <tr>
 <td><code>failed</code></td>
-<td>Routing threw an exception</td>
-<td>Retried automatically on each tick until success or event retention.</td>
+<td>The last attempt failed</td>
+<td>Retried automatically once <code>next_attempt_at</code> has passed (exponential backoff).</td>
+</tr>
+<tr>
+<td><code>exhausted</code></td>
+<td>The last allowed attempt failed</td>
+<td>Terminal unless retried manually (one more attempt).</td>
 </tr>
 </tbody>
 </table>
@@ -1800,21 +1805,52 @@ Each <code>(event_id, subscription_id)</code> pair gets a ledger entry with one 
   events whose <code>timestamp</code> is at or after that cutoff are ever evaluated against the
   subscription. Enabling a subscription does not retroactively evaluate events that
   occurred before its cutoff.
-- <strong>Retry:</strong> Failed entries are re-attempted every tick (5-second interval), up to
-  <code>axiom.stream-pipeline.max-attempts</code> attempts in total (default 3). Attempts are counted as the
-  failed <code>routing_outcome</code> rows for the entry; the retry query excludes entries at the cap. When the
-  last attempt fails, a WARN is logged once and "(giving up after N attempts)" is appended to the
-  entry's error message. There is no backoff yet (#422).
+- <strong>Retry:</strong> Each ledger entry tracks its attempts (V69, #422): <code>attempt_count</code> (the first try
+  included), <code>last_attempt_at</code> and, while it is <code>failed</code>, <code>next_attempt_at</code>. A failed attempt sets
+  <code>next_attempt_at = now + min(retry-initial-delay * 2^(n-1), retry-max-delay)</code> where <code>n</code> is the number of
+  the attempt that failed (defaults 30s and 1h: 30s, 1m, 2m, ... capped at 1h). The retry pass selects
+  only <code>failed</code> entries whose <code>next_attempt_at</code> has passed (index on <code>(status, next_attempt_at)</code>), and
+  never an entry attempted since the tick started, so the first pass and the retry pass cannot both run
+  an entry in one tick. A retry marks the entry <code>pending</code>, increments <code>attempt_count</code> and sets
+  <code>last_attempt_at</code> before routing, in one conditional update (<code>... where id = ? and status =
+  'failed'</code>). If it changes no row, a manual retry or another node got the entry first and it is skipped,
+  so two nodes can never start the same attempt. A retry that re-evaluates the filter (see below) and
+  marks the entry <code>skipped</code> still counts as an attempt. When the attempt that reaches
+  <code>axiom.stream-pipeline.max-attempts</code> (default 3) fails, the entry becomes <code>exhausted</code> (a distinct status rather than <code>failed</code> with a null
+  <code>next_attempt_at</code>, so lists, filters and the UI can tell "will retry" from "gave up" by status alone),
+  "(giving up after N attempts)" is appended to its error message and a WARN is logged once.
+- <strong>Manual retry:</strong> <code>POST /stream/events/{eventId}/processing/{ledgerId}/retry</code> (the retry button on the
+  event detail page) makes a <code>failed</code> or <code>exhausted</code> entry <code>failed</code> and due immediately, with one
+  conditional update (<code>... where status in ('failed', 'exhausted')</code>); it returns 409 for any other status,
+  including an attempt in progress (<code>pending</code>), so it can never make a running attempt due again or roll
+  back its attempt count. It does not reset
+  <code>attempt_count</code>, so attempt numbers keep increasing and an exhausted entry gets exactly one more attempt:
+  if it fails it is exhausted again.
+- <strong>Attempt history:</strong> Every <code>routing_outcome</code> records its <code>attempt_number</code>, so the outcomes of an entry
+  group into attempts; the processing API returns them all with the entry's attempt fields and the
+  configured maximum. V69 backfills <code>attempt_number</code> (1 + failed outcomes recorded before it) and
+  <code>attempt_count</code> (failed outcomes, plus one for a <code>completed</code> entry), marks failed entries with 3 or more
+  attempts (the old default cap) <code>exhausted</code> and makes the other failed entries due immediately.
+- <strong>Upgrade:</strong> the V69 backfill assumes the old default cap of 3, since a migration cannot read the
+  configuration. Failed entries with 3 or more attempts therefore become <code>exhausted</code> even when
+  <code>axiom.stream-pipeline.max-attempts</code> is set higher; retry them manually if needed.
+- <strong>Configuration validation:</strong> startup fails with a message naming the property when
+  <code>max-attempts</code> &lt; 1, <code>retry-initial-delay</code> &lt;= 0 or <code>retry-max-delay</code> &lt; <code>retry-initial-delay</code>. Invalid
+  values are rejected rather than clamped, so a misconfiguration is never silently replaced.
 - <strong>No replay on retry:</strong> A retry skips routing rules that already have a <code>completed</code> outcome for the
   ledger entry, so a later rule's failure does not re-create tasks or workflows, or re-dispatch the
   event. Outcomes do not store the rule's position, so the k-th rule of a routing type is matched to the
   k-th completed outcome of that type. Rules run in order and stop at the first failure, so this is exact
   while the subscription's rules are unchanged; editing the rules between attempts can skip or replay
   the wrong rule.
-- <strong>Processing failures count:</strong> A failure outside the routing rules (building the event context) is
-  recorded as a failed outcome with routing type <code>processing</code>, so it counts toward the attempt cap. An
-  unparseable payload is not a failure: it is routed with an empty payload map, on the first pass and on
-  retries alike.
+- <strong>Processing failures count:</strong> A failure outside the routing rules (building the event context or
+  evaluating the filter) is recorded as a failed outcome with routing type <code>processing</code>, so it counts
+  toward the attempt cap. On the first pass such a failure happens before the ledger entry exists, so it
+  creates a <code>failed</code> entry (attempt 1); the pair then leaves the unledgered <code>NOT IN</code> query and is only
+  retried by the retry pass, with backoff and the cap. A retry of an entry without any routing-rule
+  outcome re-evaluates the filter, since it may never have matched, and marks the entry <code>skipped</code> if it
+  does not match. An unparseable payload is not a failure: it is routed with an empty payload map, on the
+  first pass and on retries alike.
 - <strong>Dedup:</strong> Unique constraint on <code>(event_id, subscription_id)</code> prevents duplicate processing.
 - <strong>Startup recovery:</strong> Orphaned <code>pending</code> entries from a previous crash are bulk-updated
   to <code>failed</code> on the first tick, then retried normally.</p>

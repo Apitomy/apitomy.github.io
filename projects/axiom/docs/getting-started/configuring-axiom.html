@@ -1859,10 +1859,26 @@ rather than executed automatically.</p>
 <tr>
 <td><code>axiom.stream-pipeline.max-attempts</code></td>
 <td><code>3</code></td>
-<td>Maximum routing attempts (first try plus retries) for an (event, subscription) pair; after that the ledger entry stays <code>failed</code> and is no longer retried. Each Manager retry is a full AI call, so a higher value multiplies the cost of a failing Manager</td>
+<td>Maximum routing attempts (first try plus retries) for an (event, subscription) pair; when the last allowed attempt fails the ledger entry becomes <code>exhausted</code> and is no longer retried automatically (it can be retried manually, which allows one more attempt). Each Manager retry is a full AI call, so a higher value multiplies the cost of a failing Manager</td>
+</tr>
+<tr>
+<td><code>axiom.stream-pipeline.retry-initial-delay</code></td>
+<td><code>30s</code></td>
+<td>Delay before the first retry of a failed entry; each later retry doubles it (exponential backoff). Quarkus duration format (<code>30s</code>, <code>5m</code>, <code>PT30S</code>)</td>
+</tr>
+<tr>
+<td><code>axiom.stream-pipeline.retry-max-delay</code></td>
+<td><code>1h</code></td>
+<td>Upper bound of the delay between two attempts</td>
 </tr>
 </tbody>
 </table>
+<p>Startup fails with an error naming the property if <code>max-attempts</code> is less than 1, <code>retry-initial-delay</code> is
+not greater than zero, or <code>retry-max-delay</code> is less than <code>retry-initial-delay</code> (values are not clamped).</p>
+<p><strong>Upgrading:</strong> the V69 migration cannot read the configuration, so it assumes the old default cap of 3:
+ledger entries that had already failed 3 or more times become <code>exhausted</code>, even if <code>max-attempts</code> is
+higher. They can be retried manually from the event detail page (one more attempt each) or with
+<code>POST /api/v1/stream/events/{eventId}/processing/{ledgerId}/retry</code>.</p>
 <h3 id="scheduled-jobs">Scheduled Jobs</h3>
 <p>Scheduled Jobs run on a configurable CRON-style schedule.</p>
 <table>

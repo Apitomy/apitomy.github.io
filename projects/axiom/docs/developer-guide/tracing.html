@@ -2408,7 +2408,7 @@ the <code>core</code> module so both <code>app</code> and <code>manager</code> c
 <tr>
 <td>Manager evaluation</td>
 <td>Last task created by the evaluation (<code>TaskTraceFinalizer</code>); the orchestrator only completes it when no task node is open</td>
-<td>Manager failure (AI error or unparseable output): trace and <code>manager-evaluation</code> node closed as <code>failed</code>, outcome and ledger entry <code>failed</code> (retried up to <code>axiom.stream-pipeline.max-attempts</code>)</td>
+<td>Manager failure (AI error or unparseable output): trace and <code>manager-evaluation</code> node closed as <code>failed</code>, outcome and ledger entry <code>failed</code> (retried with backoff up to <code>axiom.stream-pipeline.max-attempts</code>, then <code>exhausted</code>)</td>
 </tr>
 <tr>
 <td>Workflow run</td>
@@ -2447,10 +2447,11 @@ to the stream event. The tree is:</p>
   is intended: failing the trace and retrying would create duplicate tasks for the decisions that succeeded.</li>
 <li>When the evaluation fails, the <code>manager-evaluation</code> node and the trace are closed as <code>failed</code>, the
   routing outcome is <code>failed</code> with the error (and keeps the trace ID), and the ledger entry is <code>failed</code>
-  so <code>retryFailedEntries</code> retries it. Each retry creates a new trace. Retries are capped by
-  <code>axiom.stream-pipeline.max-attempts</code> (default 3, counting the first try): attempts are counted as the
-  failed <code>routing_outcome</code> rows linked to the ledger entry, and once the cap is reached the entry stays
-  <code>failed</code> with "(giving up after N attempts)" appended to its error message.</li>
+  so <code>retryFailedEntries</code> retries it once its backoff delay has passed. Each retry creates a new trace,
+  and its routing outcome records the attempt number. Retries are capped by
+  <code>axiom.stream-pipeline.max-attempts</code> (default 3, counting the first try, tracked in the ledger's
+  <code>attempt_count</code>): when the last attempt fails the entry becomes <code>exhausted</code> with "(giving up after N
+  attempts)" appended to its error message. See the event sourcing design for the backoff.</li>
 <li>An empty decision list is a success: outcome <code>completed</code> with summary <code>No decisions</code>, trace <code>completed</code>.</li>
 <li>Each decision is recorded as a <code>routing_outcome_item</code> (task, ignored, escalated, or decision for an
   unknown type) whose <code>trace_node_id</code> is the decision's <code>manager-decision</code> node, so the event detail page
