@@ -18,7 +18,7 @@
         <link rel="prev" href="workflow-human-task-nodes.html">
       
       
-        <link rel="next" href="ui-development.html">
+        <link rel="next" href="correlation.html">
       
       
         
@@ -1507,10 +1507,49 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#correlation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Correlation
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
       
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="correlation.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Correlation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
     </li>
   
 
@@ -1965,6 +2004,17 @@
     <span class="md-ellipsis">
       
         MCP Tool Call Integration
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#correlation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Correlation
       
     </span>
   </a>
@@ -2750,6 +2800,10 @@ task or report AI invocation and inject it as <code>AXIOM_PARENT_NODE_ID</code> 
 become children of the correct node in the tree.</p>
 <p>If the trace callback fails (network error, missing trace, etc.), the tool execution
 continues normally — tracing is best-effort and never blocks work.</p>
+<h2 id="correlation">Correlation</h2>
+<p>The trace ID is also Axiom's correlation ID. Activity log rows, AI usage rows, tasks, runs and reports store
+the trace ID of the work that produced them, and agents can join their caller's trace through the
+<code>X-Axiom-Trace-Id</code> and <code>X-Axiom-Parent-Node-Id</code> headers. See <a href="correlation.html">Correlation by Trace ID</a>.</p>
 
 
 

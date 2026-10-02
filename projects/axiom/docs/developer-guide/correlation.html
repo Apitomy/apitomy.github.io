@@ -12,13 +12,13 @@
         <meta name="author" content="Apitomy">
       
       
-        <link rel="canonical" href="https://www.apitomy.io/projects/axiom/docs/developer-guide/api-first-development.html">
+        <link rel="canonical" href="https://www.apitomy.io/projects/axiom/docs/developer-guide/correlation.html">
       
       
-        <link rel="prev" href="how-to-contribute.html">
+        <link rel="prev" href="tracing.html">
       
       
-        <link rel="next" href="database-and-migrations.html">
+        <link rel="next" href="ui-development.html">
       
       
         
@@ -29,7 +29,7 @@
     
     
       
-        <title>API-First Development - Apitomy Axiom</title>
+        <title>Correlation - Apitomy Axiom</title>
       
     
     
@@ -84,7 +84,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#api-first-development" class="md-skip">
+        <a href="#correlation-by-trace-id" class="md-skip">
           Skip to content
         </a>
       
@@ -141,7 +141,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              API-First Development
+              Correlation
             
           </span>
         </div>
@@ -911,37 +911,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    API-First Development
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="api-first-development.html" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="api-first-development.html" class="md-nav__link">
         
   
   
@@ -957,142 +930,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#the-openapi-contract" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        The OpenAPI Contract
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#code-generation" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Code Generation
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#implementing-endpoints" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Implementing Endpoints
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#adding-a-new-endpoint" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Adding a New Endpoint
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Adding a New Endpoint">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#step-1-edit-the-openapi-spec" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Step 1: Edit the OpenAPI Spec
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#step-2-regenerate-interfaces" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Step 2: Regenerate Interfaces
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#step-3-implement-the-endpoint" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Step 3: Implement the Endpoint
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#step-4-add-ui-api-functions" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Step 4: Add UI API Functions
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#api-base-url" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        API Base URL
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#spa-routing" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        SPA Routing
-      
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -1270,10 +1107,37 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="correlation.html" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Correlation
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="correlation.html" class="md-nav__link md-nav__link--active">
         
   
   
@@ -1289,6 +1153,81 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#tables-that-carry-trace_id" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tables That Carry trace_id
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#finding-all-records-for-a-trace" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Finding All Records for a Trace
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#agent-calls-joining-the-callers-trace" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Agent Calls: Joining the Caller's Trace
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#accepted-risk" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Accepted Risk
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#known-limitations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Known Limitations
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -1384,10 +1323,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#the-openapi-contract" class="md-nav__link">
+  <a href="#tables-that-carry-trace_id" class="md-nav__link">
     <span class="md-ellipsis">
       
-        The OpenAPI Contract
+        Tables That Carry trace_id
       
     </span>
   </a>
@@ -1395,10 +1334,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#code-generation" class="md-nav__link">
+  <a href="#finding-all-records-for-a-trace" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Code Generation
+        Finding All Records for a Trace
       
     </span>
   </a>
@@ -1406,10 +1345,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#implementing-endpoints" class="md-nav__link">
+  <a href="#agent-calls-joining-the-callers-trace" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Implementing Endpoints
+        Agent Calls: Joining the Caller's Trace
       
     </span>
   </a>
@@ -1417,71 +1356,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#adding-a-new-endpoint" class="md-nav__link">
+  <a href="#accepted-risk" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Adding a New Endpoint
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Adding a New Endpoint">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#step-1-edit-the-openapi-spec" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Step 1: Edit the OpenAPI Spec
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#step-2-regenerate-interfaces" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Step 2: Regenerate Interfaces
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#step-3-implement-the-endpoint" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Step 3: Implement the Endpoint
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#step-4-add-ui-api-functions" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Step 4: Add UI API Functions
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#api-base-url" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        API Base URL
+        Accepted Risk
       
     </span>
   </a>
@@ -1489,10 +1367,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#spa-routing" class="md-nav__link">
+  <a href="#known-limitations" class="md-nav__link">
     <span class="md-ellipsis">
       
-        SPA Routing
+        Known Limitations
       
     </span>
   </a>
@@ -1519,124 +1397,111 @@
   
 
 
-<h1 id="api-first-development">API-First Development</h1>
-<p>Axiom follows a contract-first API design. The OpenAPI specification is the source of
-truth — JAX-RS interfaces are generated from it at build time, and backend resource
-classes implement those generated interfaces.</p>
-<hr />
-<h2 id="the-openapi-contract">The OpenAPI Contract</h2>
-<p>The API specification lives at:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>common/api/src/main/resources/openapi.json
-</span></code></pre></div>
-<p>All REST endpoints, request/response schemas, and path parameters are defined here.
-This file is the starting point for any API change.</p>
-<hr />
-<h2 id="code-generation">Code Generation</h2>
-<p>The <code>common/api</code> module uses the
-<a href="https://www.apitomy.io/projects/codegen/">Apitomy Codegen</a> Maven plugin to generate
-JAX-RS interfaces from the OpenAPI spec at compile time.</p>
-<p>Generated output goes to:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>common/api/target/generated-sources/jaxrs/io/apitomy/axiom/api/
-</span></code></pre></div>
-<p>The generated code includes:</p>
-<ul>
-<li><strong>Resource interfaces</strong> — one per API tag/group, with JAX-RS annotations
-  (<code>@Path</code>, <code>@GET</code>, <code>@POST</code>, etc.)</li>
-<li><strong>Model classes</strong> — POJOs with Jackson <code>@JsonProperty</code> annotations for
-  request/response bodies</li>
-</ul>
-<p>The plugin is configured in <code>common/api/pom.xml</code>:</p>
-<div class="language-xml highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nt">&lt;plugin&gt;</span>
-</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">    </span><span class="nt">&lt;groupId&gt;</span>io.apitomy<span class="nt">&lt;/groupId&gt;</span>
-</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">    </span><span class="nt">&lt;artifactId&gt;</span>apitomy-codegen-maven-plugin<span class="nt">&lt;/artifactId&gt;</span>
-</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">    </span><span class="nt">&lt;configuration&gt;</span>
-</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="w">        </span><span class="nt">&lt;javaPackage&gt;</span>io.apitomy.axiom.api<span class="nt">&lt;/javaPackage&gt;</span>
-</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="w">    </span><span class="nt">&lt;/configuration&gt;</span>
-</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="nt">&lt;/plugin&gt;</span>
-</span></code></pre></div>
-<hr />
-<h2 id="implementing-endpoints">Implementing Endpoints</h2>
-<p>Backend implementations live in:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>app/src/main/java/io/apitomy/axiom/app/rest/
-</span></code></pre></div>
-<p>Each resource class implements the corresponding generated interface:</p>
-<div class="language-java highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="nd">@ApplicationScoped</span>
-</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">ProjectsResourceImpl</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">ProjectsResource</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>
-</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">    </span><span class="nd">@Override</span>
-</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">Response</span><span class="w"> </span><span class="nf">getProjects</span><span class="p">(</span><span class="cm">/* params */</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="w">        </span><span class="c1">// implementation</span>
-</span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="w">    </span><span class="p">}</span>
-</span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="p">}</span>
-</span></code></pre></div>
-<p>The generated interface provides the JAX-RS annotations — the implementation class
-only needs to provide the business logic.</p>
-<hr />
-<h2 id="adding-a-new-endpoint">Adding a New Endpoint</h2>
-<h3 id="step-1-edit-the-openapi-spec">Step 1: Edit the OpenAPI Spec</h3>
-<p>Add the path, operation, and any new schemas to <code>common/api/src/main/resources/openapi.json</code>.</p>
-<h3 id="step-2-regenerate-interfaces">Step 2: Regenerate Interfaces</h3>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="nb">cd</span><span class="w"> </span>common/api
-</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>mvn<span class="w"> </span>compile
-</span></code></pre></div>
-<p>This regenerates the JAX-RS interfaces. Check
-<code>target/generated-sources/jaxrs/io/apitomy/axiom/api/</code> to see the new interface
-method.</p>
-<h3 id="step-3-implement-the-endpoint">Step 3: Implement the Endpoint</h3>
-<p>In <code>app/src/main/java/io/apitomy/axiom/app/rest/</code>, either update an existing
-<code>*ResourceImpl.java</code> or create a new one implementing the generated interface.</p>
-<h3 id="step-4-add-ui-api-functions">Step 4: Add UI API Functions</h3>
-<p>In <code>ui/src/config/api.ts</code>, add:</p>
-<ol>
-<li>TypeScript interfaces matching the request/response schemas</li>
-<li>A <code>fetch()</code> function calling the new endpoint</li>
-</ol>
-<p>All API functions follow the same pattern:</p>
-<div class="language-typescript highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="kd">const</span><span class="w"> </span><span class="nx">API_BASE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="sb">`</span><span class="si">${</span><span class="nx">getApiBaseUrl</span><span class="p">()</span><span class="si">}</span><span class="sb">/api/v1`</span><span class="p">;</span>
-</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>
-</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="k">export</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="nx">fetchWidgets</span><span class="p">()</span><span class="o">:</span><span class="w"> </span><span class="nb">Promise</span><span class="o">&lt;</span><span class="nx">Widget</span><span class="p">[]</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">resp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">fetch</span><span class="p">(</span><span class="sb">`</span><span class="si">${</span><span class="nx">API_BASE</span><span class="si">}</span><span class="sb">/widgets`</span><span class="p">);</span>
-</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="nx">resp</span><span class="p">.</span><span class="nx">ok</span><span class="p">)</span><span class="w"> </span><span class="k">throw</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="ne">Error</span><span class="p">(</span><span class="s2">"Failed to fetch widgets"</span><span class="p">);</span>
-</span><span id="__span-6-6"><a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">resp</span><span class="p">.</span><span class="nx">json</span><span class="p">();</span>
-</span><span id="__span-6-7"><a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="p">}</span>
-</span></code></pre></div>
-<hr />
-<h2 id="api-base-url">API Base URL</h2>
-<p>The API base URL is resolved differently in development and production:</p>
+<h1 id="correlation-by-trace-id">Correlation by Trace ID</h1>
+<p>Axiom uses the <strong>trace ID</strong> as its correlation ID. Every unit of work (event processing, a task, a workflow
+run, a scheduled job run or a report) is identified by its trace ID. Every record produced by that work stores
+the trace ID, so given one trace ID you can find everything that belongs to that unit of work. See
+<a href="tracing.html">Tracing</a> for the trace model itself.</p>
+<h2 id="tables-that-carry-trace_id">Tables That Carry <code>trace_id</code></h2>
 <table>
 <thead>
 <tr>
-<th>Mode</th>
-<th>Base URL</th>
-<th>Mechanism</th>
+<th>Table</th>
+<th>Notes</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>Development</td>
-<td>(empty string)</td>
-<td>Vite proxy forwards <code>/api</code> to <code>localhost:9090</code></td>
+<td><code>task</code></td>
+<td>Trace the task runs in</td>
 </tr>
 <tr>
-<td>Production</td>
-<td>From <code>window.AXIOM_API_URL</code></td>
-<td>Injected by the backend at runtime</td>
+<td><code>report</code></td>
+<td>Trace of the report generation</td>
+</tr>
+<tr>
+<td><code>workflow_run</code></td>
+<td>Trace of the workflow run</td>
+</tr>
+<tr>
+<td><code>scheduled_job_run</code></td>
+<td>Trace of the scheduled job run</td>
+</tr>
+<tr>
+<td><code>routing_outcome</code></td>
+<td>Trace of the event that was routed</td>
+</tr>
+<tr>
+<td><code>activity_log</code></td>
+<td>Added in migration <code>V66</code></td>
+</tr>
+<tr>
+<td><code>ai_usage</code></td>
+<td>Added in migration <code>V66</code></td>
 </tr>
 </tbody>
 </table>
-<p>This is handled by <code>getApiBaseUrl()</code> in <code>api.ts</code>.</p>
-<hr />
-<h2 id="spa-routing">SPA Routing</h2>
-<p><code>SpaRoutingFilter.java</code> in the <code>app</code> module catches all non-API routes and forwards
-them to <code>index.html</code>, allowing React Router to handle client-side navigation.</p>
-<p>Routes that are <strong>not</strong> forwarded:</p>
+<p>All columns are nullable UUIDs with no foreign key. Trace data has a bounded lifetime: when <code>TraceCleanup</code>
+deletes a trace, it clears <code>trace_id</code> on <code>activity_log</code>, <code>ai_usage</code>, <code>task</code>, <code>scheduled_job_run</code> and <code>report</code>.</p>
+<h2 id="finding-all-records-for-a-trace">Finding All Records for a Trace</h2>
 <ul>
-<li><code>/api/*</code> — REST API endpoints</li>
-<li><code>/q/*</code> — Quarkus dev UI and health endpoints</li>
-<li>Paths with file extensions (e.g. <code>.js</code>, <code>.css</code>, <code>.png</code>)</li>
+<li><code>GET /traces/{id}</code> returns the trace tree (nodes, tool calls).</li>
+<li><code>GET /activity?filterTraceId={id}</code> returns the activity rows for the trace.</li>
+<li><code>GET /usage/ai?filterTraceId={id}</code> returns the AI usage rows for the trace.</li>
+<li>Tasks, workflow runs, scheduled job runs and reports expose a <code>traceId</code> field.</li>
 </ul>
-<p>Everything else returns <code>index.html</code>, and React Router renders the correct page based
-on the URL.</p>
+<p>For both filters, a malformed <code>filterTraceId</code> returns <code>400 Bad Request</code>.</p>
+<p>In the UI, the Activity log and AI usage pages show a <strong>Trace</strong> column that links to <code>/logs/traces/:traceId</code>,
+and a <strong>Trace ID</strong> filter. Both pages accept a <code>?traceId=</code> query parameter as a deep link, for example
+<code>/logs/activity?traceId=...</code>.</p>
+<h2 id="agent-calls-joining-the-callers-trace">Agent Calls: Joining the Caller's Trace</h2>
+<p>When an agent calls Axiom APIs through the Axiom MCP server, <code>sdk-server.js</code> sends two headers on every
+request when the matching environment variables are set:</p>
+<table>
+<thead>
+<tr>
+<th>Header</th>
+<th>Source variable</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>X-Axiom-Trace-Id</code></td>
+<td><code>AXIOM_TRACE_ID</code></td>
+</tr>
+<tr>
+<td><code>X-Axiom-Parent-Node-Id</code></td>
+<td><code>AXIOM_PARENT_NODE_ID</code></td>
+</tr>
+</tbody>
+</table>
+<p><code>CallerTraceFilter</code> validates the headers in this order:</p>
+<ol>
+<li>The trace ID is a valid UUID.</li>
+<li>The trace exists.</li>
+<li>The trace status is <code>in-progress</code>.</li>
+<li>The parent node belongs to that trace. If the parent node header is missing, the trace's root node is used.</li>
+</ol>
+<p>If any check fails, the headers are removed and ignored, and a debug log is written. A request never fails
+because of these headers.</p>
+<p>Only <code>POST /projects/{id}/tasks</code> acts on a valid caller trace: the new task joins the caller's trace and its
+task node is added under the caller's parent node, instead of a new <code>user-action</code> trace being created. The
+task's <code>createdBy</code> stays <code>user</code>. Other endpoints ignore the caller trace.</p>
+<h2 id="accepted-risk">Accepted Risk</h2>
+<p>An agent can keep its trace open by creating tasks that join it, because <code>TaskTraceFinalizer</code> keeps a trace
+open while any task node is in progress. This is accepted: agent-created tasks are deliberate work that
+belongs to the trace.</p>
+<h2 id="known-limitations">Known Limitations</h2>
+<ul>
+<li>Any in-progress trace can be joined. There is no check that the caller belongs to the same project.</li>
+<li>AI editor and assistant sessions (<code>ActionTypeAiService</code>, <code>ReportAiService</code>, <code>ScriptAiService</code>,
+  <code>ToolAiService</code>, <code>AssistantSessionManager</code>) are not traced. Their AI usage rows have no trace ID.</li>
+<li>Tasks that join a report, scheduled-job or workflow trace never complete it; the owning service does. If
+  the owner finishes first, its trace is marked complete while the joined task may still be running. The
+  task's own node still completes when the task finishes.</li>
+<li>Out of scope for now: MDC log correlation (#428), run and report ID columns (#424, #425), and the lineage
+  view (#430).</li>
+</ul>
 
 
 

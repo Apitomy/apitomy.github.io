@@ -12,31 +12,27 @@
         <meta name="author" content="Apitomy">
       
       
-        <link rel="canonical" href="https://www.apitomy.io/projects/axiom/docs/developer-guide/api-first-development.html">
+        <link rel="canonical" href="https://www.apitomy.io/projects/axiom/docs/superpowers/specs/2026-10-02-correlation-id-design.html">
       
       
-        <link rel="prev" href="how-to-contribute.html">
-      
-      
-        <link rel="next" href="database-and-migrations.html">
       
       
         
       
       
-      <link rel="icon" href="../assets/images/favicon.png">
+      <link rel="icon" href="../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
     
     
       
-        <title>API-First Development - Apitomy Axiom</title>
+        <title>Design: Trace ID as the Correlation ID (#427) - Apitomy Axiom</title>
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.ec1eaa64.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
       
         
-        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
       
       
 
@@ -55,11 +51,11 @@
       
     
     
-      <link rel="stylesheet" href="../theme/css/project-colors.css">
+      <link rel="stylesheet" href="../../theme/css/project-colors.css">
     
-      <link rel="stylesheet" href="../theme/css/apitomy-base.css">
+      <link rel="stylesheet" href="../../theme/css/apitomy-base.css">
     
-    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -84,7 +80,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#api-first-development" class="md-skip">
+        <a href="#design-trace-id-as-the-correlation-id-427" class="md-skip">
           Skip to content
         </a>
       
@@ -121,7 +117,7 @@
 
 <header class="md-header" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="../index.html" title="Apitomy Axiom" class="md-header__button md-logo" aria-label="Apitomy Axiom" data-md-component="logo">
+    <a href="../../index.html" title="Apitomy Axiom" class="md-header__button md-logo" aria-label="Apitomy Axiom" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -141,7 +137,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              API-First Development
+              Design: Trace ID as the Correlation ID (#427)
             
           </span>
         </div>
@@ -245,7 +241,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../index.html" class="md-tabs__link">
+      <a href="../../index.html" class="md-tabs__link">
         
   
   
@@ -266,7 +262,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../getting-started/running-axiom.html" class="md-tabs__link">
+        <a href="../../getting-started/running-axiom.html" class="md-tabs__link">
           
   
   
@@ -286,7 +282,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../user-guide/concepts.html" class="md-tabs__link">
+        <a href="../../user-guide/concepts.html" class="md-tabs__link">
           
   
   
@@ -302,13 +298,11 @@
   
   
   
-    
-  
   
     
     
-      <li class="md-tabs__item md-tabs__item--active">
-        <a href="stack-and-architecture.html" class="md-tabs__link">
+      <li class="md-tabs__item">
+        <a href="../../developer-guide/stack-and-architecture.html" class="md-tabs__link">
           
   
   
@@ -342,7 +336,7 @@
 
 <nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="../index.html" title="Apitomy Axiom" class="md-nav__button md-logo" aria-label="Apitomy Axiom" data-md-component="logo">
+    <a href="../../index.html" title="Apitomy Axiom" class="md-nav__button md-logo" aria-label="Apitomy Axiom" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -372,7 +366,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../index.html" class="md-nav__link">
+      <a href="../../index.html" class="md-nav__link">
         
   
   
@@ -453,7 +447,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../getting-started/running-axiom.html" class="md-nav__link">
+      <a href="../../getting-started/running-axiom.html" class="md-nav__link">
         
   
   
@@ -481,7 +475,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../getting-started/configuring-axiom.html" class="md-nav__link">
+      <a href="../../getting-started/configuring-axiom.html" class="md-nav__link">
         
   
   
@@ -509,7 +503,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../getting-started/contributing.html" class="md-nav__link">
+      <a href="../../getting-started/contributing.html" class="md-nav__link">
         
   
   
@@ -598,7 +592,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../user-guide/concepts.html" class="md-nav__link">
+      <a href="../../user-guide/concepts.html" class="md-nav__link">
         
   
   
@@ -626,7 +620,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../user-guide/navigating-the-ui.html" class="md-nav__link">
+      <a href="../../user-guide/navigating-the-ui.html" class="md-nav__link">
         
   
   
@@ -654,7 +648,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../user-guide/usage-examples.html" class="md-nav__link">
+      <a href="../../user-guide/usage-examples.html" class="md-nav__link">
         
   
   
@@ -682,7 +676,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../user-guide/workflows.html" class="md-nav__link">
+      <a href="../../user-guide/workflows.html" class="md-nav__link">
         
   
   
@@ -710,7 +704,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../user-guide/ai-assistant.html" class="md-nav__link">
+      <a href="../../user-guide/ai-assistant.html" class="md-nav__link">
         
   
   
@@ -738,7 +732,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../user-guide/logging-and-debugging.html" class="md-nav__link">
+      <a href="../../user-guide/logging-and-debugging.html" class="md-nav__link">
         
   
   
@@ -770,31 +764,28 @@
       
   
   
-    
   
   
-  
     
     
     
     
-      
-        
-        
       
       
         
       
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
         
           
-          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
             
   
   
@@ -812,7 +803,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_4">
             <span class="md-nav__icon md-icon"></span>
             
@@ -830,7 +821,7 @@
   
   
     <li class="md-nav__item">
-      <a href="stack-and-architecture.html" class="md-nav__link">
+      <a href="../../developer-guide/stack-and-architecture.html" class="md-nav__link">
         
   
   
@@ -858,7 +849,7 @@
   
   
     <li class="md-nav__item">
-      <a href="building-axiom.html" class="md-nav__link">
+      <a href="../../developer-guide/building-axiom.html" class="md-nav__link">
         
   
   
@@ -886,7 +877,7 @@
   
   
     <li class="md-nav__item">
-      <a href="how-to-contribute.html" class="md-nav__link">
+      <a href="../../developer-guide/how-to-contribute.html" class="md-nav__link">
         
   
   
@@ -911,37 +902,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    API-First Development
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="api-first-development.html" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../../developer-guide/api-first-development.html" class="md-nav__link">
         
   
   
@@ -957,142 +921,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#the-openapi-contract" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        The OpenAPI Contract
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#code-generation" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Code Generation
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#implementing-endpoints" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Implementing Endpoints
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#adding-a-new-endpoint" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Adding a New Endpoint
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Adding a New Endpoint">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#step-1-edit-the-openapi-spec" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Step 1: Edit the OpenAPI Spec
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#step-2-regenerate-interfaces" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Step 2: Regenerate Interfaces
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#step-3-implement-the-endpoint" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Step 3: Implement the Endpoint
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#step-4-add-ui-api-functions" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Step 4: Add UI API Functions
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#api-base-url" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        API Base URL
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#spa-routing" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        SPA Routing
-      
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -1105,7 +933,7 @@
   
   
     <li class="md-nav__item">
-      <a href="database-and-migrations.html" class="md-nav__link">
+      <a href="../../developer-guide/database-and-migrations.html" class="md-nav__link">
         
   
   
@@ -1133,7 +961,7 @@
   
   
     <li class="md-nav__item">
-      <a href="upgrading-and-backups.html" class="md-nav__link">
+      <a href="../../developer-guide/upgrading-and-backups.html" class="md-nav__link">
         
   
   
@@ -1161,7 +989,7 @@
   
   
     <li class="md-nav__item">
-      <a href="event-sourcing-design.html" class="md-nav__link">
+      <a href="../../developer-guide/event-sourcing-design.html" class="md-nav__link">
         
   
   
@@ -1189,7 +1017,7 @@
   
   
     <li class="md-nav__item">
-      <a href="workflow-input-contract.html" class="md-nav__link">
+      <a href="../../developer-guide/workflow-input-contract.html" class="md-nav__link">
         
   
   
@@ -1217,7 +1045,7 @@
   
   
     <li class="md-nav__item">
-      <a href="workflow-human-task-nodes.html" class="md-nav__link">
+      <a href="../../developer-guide/workflow-human-task-nodes.html" class="md-nav__link">
         
   
   
@@ -1245,7 +1073,7 @@
   
   
     <li class="md-nav__item">
-      <a href="tracing.html" class="md-nav__link">
+      <a href="../../developer-guide/tracing.html" class="md-nav__link">
         
   
   
@@ -1273,7 +1101,7 @@
   
   
     <li class="md-nav__item">
-      <a href="correlation.html" class="md-nav__link">
+      <a href="../../developer-guide/correlation.html" class="md-nav__link">
         
   
   
@@ -1301,7 +1129,7 @@
   
   
     <li class="md-nav__item">
-      <a href="ui-development.html" class="md-nav__link">
+      <a href="../../developer-guide/ui-development.html" class="md-nav__link">
         
   
   
@@ -1329,7 +1157,7 @@
   
   
     <li class="md-nav__item">
-      <a href="extending-axiom.html" class="md-nav__link">
+      <a href="../../developer-guide/extending-axiom.html" class="md-nav__link">
         
   
   
@@ -1384,10 +1212,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#the-openapi-contract" class="md-nav__link">
+  <a href="#goal" class="md-nav__link">
     <span class="md-ellipsis">
       
-        The OpenAPI Contract
+        Goal
       
     </span>
   </a>
@@ -1395,10 +1223,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#code-generation" class="md-nav__link">
+  <a href="#model" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Code Generation
+        Model
       
     </span>
   </a>
@@ -1406,10 +1234,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#implementing-endpoints" class="md-nav__link">
+  <a href="#database-and-api" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Implementing Endpoints
+        Database and API
       
     </span>
   </a>
@@ -1417,71 +1245,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#adding-a-new-endpoint" class="md-nav__link">
+  <a href="#populating-trace-ids" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Adding a New Endpoint
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Adding a New Endpoint">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#step-1-edit-the-openapi-spec" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Step 1: Edit the OpenAPI Spec
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#step-2-regenerate-interfaces" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Step 2: Regenerate Interfaces
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#step-3-implement-the-endpoint" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Step 3: Implement the Endpoint
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#step-4-add-ui-api-functions" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Step 4: Add UI API Functions
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#api-base-url" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        API Base URL
+        Populating trace IDs
       
     </span>
   </a>
@@ -1489,10 +1256,65 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#spa-routing" class="md-nav__link">
+  <a href="#agent-to-axiom-api-propagation" class="md-nav__link">
     <span class="md-ellipsis">
       
-        SPA Routing
+        Agent to Axiom API propagation
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#out-of-scope" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Out of scope
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#accepted-risk" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Accepted risk
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ui" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        UI
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#testing-junit-5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Testing (JUnit 5)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#documentation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Documentation
       
     </span>
   </a>
@@ -1519,124 +1341,90 @@
   
 
 
-<h1 id="api-first-development">API-First Development</h1>
-<p>Axiom follows a contract-first API design. The OpenAPI specification is the source of
-truth — JAX-RS interfaces are generated from it at build time, and backend resource
-classes implement those generated interfaces.</p>
-<hr />
-<h2 id="the-openapi-contract">The OpenAPI Contract</h2>
-<p>The API specification lives at:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>common/api/src/main/resources/openapi.json
-</span></code></pre></div>
-<p>All REST endpoints, request/response schemas, and path parameters are defined here.
-This file is the starting point for any API change.</p>
-<hr />
-<h2 id="code-generation">Code Generation</h2>
-<p>The <code>common/api</code> module uses the
-<a href="https://www.apitomy.io/projects/codegen/">Apitomy Codegen</a> Maven plugin to generate
-JAX-RS interfaces from the OpenAPI spec at compile time.</p>
-<p>Generated output goes to:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>common/api/target/generated-sources/jaxrs/io/apitomy/axiom/api/
-</span></code></pre></div>
-<p>The generated code includes:</p>
+<h1 id="design-trace-id-as-the-correlation-id-427">Design: Trace ID as the Correlation ID (#427)</h1>
+<p>Part of epic #431 (traceability). Builds on #414 (UUID event IDs) and #415 (trace lifecycle).</p>
+<h2 id="goal">Goal</h2>
+<p>Given a trace ID, a user can find every activity row, AI usage row, task and run that belongs to that unit of
+work, including records that agents create through Axiom APIs.</p>
+<h2 id="model">Model</h2>
 <ul>
-<li><strong>Resource interfaces</strong> — one per API tag/group, with JAX-RS annotations
-  (<code>@Path</code>, <code>@GET</code>, <code>@POST</code>, etc.)</li>
-<li><strong>Model classes</strong> — POJOs with Jackson <code>@JsonProperty</code> annotations for
-  request/response bodies</li>
+<li>Every unit of work (event processing, task, workflow run, scheduled job run, report) is identified by its
+  <strong>trace ID</strong>. No new correlation concept is introduced.</li>
+<li>Every record produced by that work stores the trace ID in a <code>trace_id</code> column.</li>
+<li>Trace data has a bounded lifetime. When <code>TraceCleanup</code> deletes a trace, it clears <code>trace_id</code> on all records
+  that reference it (it already does this for tasks, scheduled job runs and reports).</li>
 </ul>
-<p>The plugin is configured in <code>common/api/pom.xml</code>:</p>
-<div class="language-xml highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nt">&lt;plugin&gt;</span>
-</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">    </span><span class="nt">&lt;groupId&gt;</span>io.apitomy<span class="nt">&lt;/groupId&gt;</span>
-</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">    </span><span class="nt">&lt;artifactId&gt;</span>apitomy-codegen-maven-plugin<span class="nt">&lt;/artifactId&gt;</span>
-</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">    </span><span class="nt">&lt;configuration&gt;</span>
-</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="w">        </span><span class="nt">&lt;javaPackage&gt;</span>io.apitomy.axiom.api<span class="nt">&lt;/javaPackage&gt;</span>
-</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="w">    </span><span class="nt">&lt;/configuration&gt;</span>
-</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="nt">&lt;/plugin&gt;</span>
-</span></code></pre></div>
-<hr />
-<h2 id="implementing-endpoints">Implementing Endpoints</h2>
-<p>Backend implementations live in:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>app/src/main/java/io/apitomy/axiom/app/rest/
-</span></code></pre></div>
-<p>Each resource class implements the corresponding generated interface:</p>
-<div class="language-java highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="nd">@ApplicationScoped</span>
-</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">ProjectsResourceImpl</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">ProjectsResource</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>
-</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">    </span><span class="nd">@Override</span>
-</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">Response</span><span class="w"> </span><span class="nf">getProjects</span><span class="p">(</span><span class="cm">/* params */</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="w">        </span><span class="c1">// implementation</span>
-</span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="w">    </span><span class="p">}</span>
-</span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="p">}</span>
-</span></code></pre></div>
-<p>The generated interface provides the JAX-RS annotations — the implementation class
-only needs to provide the business logic.</p>
-<hr />
-<h2 id="adding-a-new-endpoint">Adding a New Endpoint</h2>
-<h3 id="step-1-edit-the-openapi-spec">Step 1: Edit the OpenAPI Spec</h3>
-<p>Add the path, operation, and any new schemas to <code>common/api/src/main/resources/openapi.json</code>.</p>
-<h3 id="step-2-regenerate-interfaces">Step 2: Regenerate Interfaces</h3>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="nb">cd</span><span class="w"> </span>common/api
-</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>mvn<span class="w"> </span>compile
-</span></code></pre></div>
-<p>This regenerates the JAX-RS interfaces. Check
-<code>target/generated-sources/jaxrs/io/apitomy/axiom/api/</code> to see the new interface
-method.</p>
-<h3 id="step-3-implement-the-endpoint">Step 3: Implement the Endpoint</h3>
-<p>In <code>app/src/main/java/io/apitomy/axiom/app/rest/</code>, either update an existing
-<code>*ResourceImpl.java</code> or create a new one implementing the generated interface.</p>
-<h3 id="step-4-add-ui-api-functions">Step 4: Add UI API Functions</h3>
-<p>In <code>ui/src/config/api.ts</code>, add:</p>
-<ol>
-<li>TypeScript interfaces matching the request/response schemas</li>
-<li>A <code>fetch()</code> function calling the new endpoint</li>
-</ol>
-<p>All API functions follow the same pattern:</p>
-<div class="language-typescript highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="kd">const</span><span class="w"> </span><span class="nx">API_BASE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="sb">`</span><span class="si">${</span><span class="nx">getApiBaseUrl</span><span class="p">()</span><span class="si">}</span><span class="sb">/api/v1`</span><span class="p">;</span>
-</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>
-</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="k">export</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="nx">fetchWidgets</span><span class="p">()</span><span class="o">:</span><span class="w"> </span><span class="nb">Promise</span><span class="o">&lt;</span><span class="nx">Widget</span><span class="p">[]</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">resp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">fetch</span><span class="p">(</span><span class="sb">`</span><span class="si">${</span><span class="nx">API_BASE</span><span class="si">}</span><span class="sb">/widgets`</span><span class="p">);</span>
-</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="nx">resp</span><span class="p">.</span><span class="nx">ok</span><span class="p">)</span><span class="w"> </span><span class="k">throw</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="ne">Error</span><span class="p">(</span><span class="s2">"Failed to fetch widgets"</span><span class="p">);</span>
-</span><span id="__span-6-6"><a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">resp</span><span class="p">.</span><span class="nx">json</span><span class="p">();</span>
-</span><span id="__span-6-7"><a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="p">}</span>
-</span></code></pre></div>
-<hr />
-<h2 id="api-base-url">API Base URL</h2>
-<p>The API base URL is resolved differently in development and production:</p>
-<table>
-<thead>
-<tr>
-<th>Mode</th>
-<th>Base URL</th>
-<th>Mechanism</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Development</td>
-<td>(empty string)</td>
-<td>Vite proxy forwards <code>/api</code> to <code>localhost:9090</code></td>
-</tr>
-<tr>
-<td>Production</td>
-<td>From <code>window.AXIOM_API_URL</code></td>
-<td>Injected by the backend at runtime</td>
-</tr>
-</tbody>
-</table>
-<p>This is handled by <code>getApiBaseUrl()</code> in <code>api.ts</code>.</p>
-<hr />
-<h2 id="spa-routing">SPA Routing</h2>
-<p><code>SpaRoutingFilter.java</code> in the <code>app</code> module catches all non-API routes and forwards
-them to <code>index.html</code>, allowing React Router to handle client-side navigation.</p>
-<p>Routes that are <strong>not</strong> forwarded:</p>
+<h2 id="database-and-api">Database and API</h2>
 <ul>
-<li><code>/api/*</code> — REST API endpoints</li>
-<li><code>/q/*</code> — Quarkus dev UI and health endpoints</li>
-<li>Paths with file extensions (e.g. <code>.js</code>, <code>.css</code>, <code>.png</code>)</li>
+<li>Migration <code>V66</code>: add nullable <code>trace_id UUID</code> plus an index to <code>activity_log</code> and <code>ai_usage</code>. No foreign key,
+  consistent with the other <code>trace_id</code> columns, since cleanup clears references explicitly.</li>
+<li><code>openapi.json</code>:</li>
+<li>Add <code>traceId</code> (<code>string</code>, <code>format: uuid</code>) to the <code>ActivityLogEntry</code> and <code>AiUsage</code> beans.</li>
+<li>Add a <code>filterTraceId</code> query parameter to <code>GET /activity</code> and <code>GET /usage/ai</code>. A malformed UUID returns 400,
+    matching <code>filterEventId</code>.</li>
+<li>Document the optional <code>X-Axiom-Trace-Id</code> and <code>X-Axiom-Parent-Node-Id</code> request headers on the agent-callable
+    write endpoints listed below.</li>
 </ul>
-<p>Everything else returns <code>index.html</code>, and React Router renders the correct page based
-on the URL.</p>
+<h2 id="populating-trace-ids">Populating trace IDs</h2>
+<ul>
+<li><code>logActivity</code> helpers in <code>EventStreamOrchestrator</code>, <code>TaskExecutionService</code>, <code>ScriptExecutionService</code>,
+  <code>WorkflowExecutionService</code>, <code>ReportExecutionService</code> and <code>ScheduledJobExecutionService</code> gain a <code>traceId</code>
+  parameter. Each call site passes the trace already in scope (<code>task.traceId</code>, <code>run.traceId</code>, <code>report.traceId</code>,
+  or <code>traceCtx.traceId()</code>).</li>
+<li><code>handleIgnore</code> and <code>handleEscalation</code> in <code>EventStreamOrchestrator</code> receive the trace context so their activity
+  rows carry the trace ID.</li>
+<li>AI usage written by <code>TaskExecutionService</code>, <code>ReportExecutionService</code> and <code>ScheduledJobExecutionService</code> stores
+  the trace ID.</li>
+<li>Report and scheduled-job activity rows set existing ID columns (e.g. <code>projectId</code>) where they apply. Run and
+  report ID columns are out of scope (#424, #425).</li>
+</ul>
+<h2 id="agent-to-axiom-api-propagation">Agent to Axiom API propagation</h2>
+<ul>
+<li><code>templates/axiom-mcp-server/sdk-server.js</code> (<code>axiomApi</code>) sends <code>X-Axiom-Trace-Id</code> and <code>X-Axiom-Parent-Node-Id</code>,
+  read from <code>AXIOM_TRACE_ID</code> and <code>AXIOM_PARENT_NODE_ID</code>, on every request when those variables are set.</li>
+<li>A new JAX-RS <code>ContainerRequestFilter</code> reads the headers into a <code>@RequestScoped</code> <code>CallerTraceContext</code> bean.
+  The context is used only if the trace ID is a valid UUID, the trace exists, its status is <code>in-progress</code>,
+  and the parent node (if given) belongs to that trace. Otherwise the headers are ignored, and a debug log is
+  written.</li>
+<li><code>POST /projects/{id}/tasks</code>: when a caller trace is present, the new task joins it. The task's <code>traceId</code> is
+  set to the caller's trace and its task node is added under the caller's parent node, instead of a new
+  <code>user-action</code> trace being created. <code>TaskTraceFinalizer</code> (#415) already keeps the trace open while that node is
+  in progress.</li>
+<li>The other agent write endpoints (<code>POST /projects/{id}/thread</code>, <code>PUT /projects/{id}</code>, <code>PUT /projects/{id}/body</code>,
+  <code>POST /projects/{id}/close</code>, <code>POST /projects/{id}/reopen</code>, <code>POST /projects/{id}/tasks/{taskId}/respond</code>,
+  <code>POST /projects</code>, <code>POST /events</code>, <code>PUT /reports/{id}/labels</code>) store the caller's trace ID on any activity row
+  they write. They do not add trace nodes.</li>
+</ul>
+<h2 id="out-of-scope">Out of scope</h2>
+<ul>
+<li>AI editor and assistant sessions (<code>ActionTypeAiService</code>, <code>ReportAiService</code>, <code>ScriptAiService</code>,
+  <code>ToolAiService</code>, <code>AssistantSessionManager</code>) have no trace today. Their AI usage rows stay unlinked.</li>
+<li>MDC log correlation (#428), run and report ID columns (#424, #425), lineage view (#430).</li>
+</ul>
+<h2 id="accepted-risk">Accepted risk</h2>
+<p>An agent can keep its trace open by creating tasks that join it. This is accepted because agent-created tasks
+are deliberate work that belongs to the trace.</p>
+<h2 id="ui">UI</h2>
+<ul>
+<li>Activity log and AI usage pages show the trace ID as a link to <code>/logs/traces/:traceId</code> and offer a trace ID
+  filter.</li>
+</ul>
+<h2 id="testing-junit-5">Testing (JUnit 5)</h2>
+<ul>
+<li>Activity and AI usage filtered by trace ID return the expected rows. A malformed trace ID returns 400.</li>
+<li>Activity and AI usage written by the task, report and scheduled job paths carry the trace ID.</li>
+<li>A task created with valid headers joins the caller's trace under the parent node, and the trace stays open
+  until that task finishes.</li>
+<li>Headers with an unknown, finished or malformed trace are ignored, and a new <code>user-action</code> trace is created.</li>
+<li><code>TraceCleanup</code> clears <code>trace_id</code> on <code>activity_log</code> and <code>ai_usage</code>.</li>
+<li>UI type-check passes.</li>
+</ul>
+<h2 id="documentation">Documentation</h2>
+<ul>
+<li>New <code>docs/developer-guide/correlation.md</code> describing the model, the headers and how to find all records for
+  a unit of work.</li>
+<li>Update <code>docs/developer-guide/tracing.md</code> to reference it.</li>
+</ul>
 
 
 
@@ -1708,10 +1496,10 @@ on the URL.</p>
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.tabs", "navigation.sections", "navigation.expand", "navigation.top", "search.highlight", "search.share", "search.suggest", "content.code.copy"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.expand", "navigation.top", "search.highlight", "search.share", "search.suggest", "content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="../assets/javascripts/bundle.d7400e89.min.js"></script>
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
       
     
   </body>
