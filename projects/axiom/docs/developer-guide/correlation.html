@@ -1457,7 +1457,9 @@ and a <strong>Trace ID</strong> filter. Both pages accept a <code>?traceId=</cod
 <p>The Manager Decisions page links each evaluation to its event and its trace. Expanding a <code>manager-evaluated</code>
 row shows the decisions recorded in the trace (with their reasoning) and the tasks each decision created.
 The Manager's <code>manager-evaluated</code> / <code>manager-error</code> activity row and its <code>ai_usage</code> row carry both the event
-ID and the trace ID, so the AI cost of an evaluation can be found from either.</p>
+ID and the trace ID, so the AI cost of an evaluation can be found from either. This includes manual
+evaluations through <code>POST /manager/evaluate/{eventId}</code>: their rows carry the ID of the <code>manager-dry-run</code>
+trace, which the endpoint returns in the <code>X-Axiom-Trace-Id</code> response header.</p>
 <h2 id="agent-calls-joining-the-callers-trace">Agent Calls: Joining the Caller's Trace</h2>
 <p>When an agent calls Axiom APIs through the Axiom MCP server, <code>sdk-server.js</code> sends two headers on every
 request when the matching environment variables are set:</p>
