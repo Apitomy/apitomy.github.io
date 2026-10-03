@@ -1606,6 +1606,34 @@
   
   
     <li class="md-nav__item">
+      <a href="data-retention.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data Retention
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="ui-development.html" class="md-nav__link">
         
   
@@ -3025,6 +3053,8 @@ continues normally — tracing is best-effort and never blocks work.</p>
 <p>The trace ID is also Axiom's correlation ID. Activity log rows, AI usage rows, tasks, runs and reports store
 the trace ID of the work that produced them, and agents can join their caller's trace through the
 <code>X-Axiom-Trace-Id</code> and <code>X-Axiom-Parent-Node-Id</code> headers. See <a href="correlation.html">Correlation by Trace ID</a>.</p>
+<p>Server log lines also carry the trace ID (MDC key <code>traceId</code>), so a trace can be followed in the logs with
+<code>grep traceId=&lt;uuid&gt;</code>. See <a href="correlation.html#server-logs-correlation-ids-in-the-mdc">Correlation by Trace ID</a>.</p>
 
 
 
