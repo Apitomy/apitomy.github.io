@@ -1340,34 +1340,6 @@
   
   
     <li class="md-nav__item">
-      <a href="../developer-guide/data-retention.html" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Data Retention
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
       <a href="../developer-guide/ui-development.html" class="md-nav__link">
         
   
@@ -1974,8 +1946,9 @@ sessions — see <a href="../user-guide/ai-assistant.html">AI Assistant</a>.</p>
 </tbody>
 </table>
 <h2 id="data-retention">Data Retention</h2>
-<p>Retention periods are stored in the database (not as static properties) and can be changed at any time from
-<strong>Settings &gt; Data Retention</strong> in the UI or with <code>PUT /api/v1/system/retention</code>. Defaults are:</p>
+<p>Retention periods for closed projects, execution traces, and stream events are stored
+in the database (not as static properties) and can be changed at any time from
+<strong>Settings &gt; Data Retention</strong> in the UI. Defaults are:</p>
 <table>
 <thead>
 <tr>
@@ -1988,7 +1961,7 @@ sessions — see <a href="../user-guide/ai-assistant.html">AI Assistant</a>.</p>
 <tr>
 <td>Closed projects</td>
 <td>90 days</td>
-<td>How long a <code>Completed</code> project (and its tasks, thread, workflow runs, activity and AI usage) is kept before automatic deletion. Traces and event routing outcomes of the project are kept.</td>
+<td>How long a <code>Completed</code> project (and its tasks, events, and thread) is kept before automatic deletion</td>
 </tr>
 <tr>
 <td>Traces</td>
@@ -1998,38 +1971,10 @@ sessions — see <a href="../user-guide/ai-assistant.html">AI Assistant</a>.</p>
 <tr>
 <td>Events</td>
 <td>90 days</td>
-<td>How long stream events, their subscription processing ledger entries and routing outcomes are kept. Events that a running or waiting workflow run depends on are kept until the run finishes.</td>
-</tr>
-<tr>
-<td>Scheduled job runs</td>
-<td>0 (forever)</td>
-<td>How long finished (<code>Completed</code> or <code>Failed</code>) scheduled job runs are kept</td>
-</tr>
-<tr>
-<td>Reports</td>
-<td>0 (forever)</td>
-<td>How long finished (<code>Completed</code> or <code>Failed</code>) reports are kept</td>
-</tr>
-<tr>
-<td>Workflow runs</td>
-<td>0 (forever)</td>
-<td>How long finished workflow runs are kept, measured from when they finished. Running and waiting runs are never deleted.</td>
-</tr>
-<tr>
-<td>Activity log</td>
-<td>0 (forever)</td>
-<td>How long activity log entries are kept</td>
-</tr>
-<tr>
-<td>AI usage</td>
-<td>0 (forever)</td>
-<td>How long AI usage (cost) records are kept</td>
+<td>How long stream events and their subscription processing ledger entries are kept</td>
 </tr>
 </tbody>
 </table>
-<p>Closed projects, traces and events must be kept for at least 1 day. For the history settings, <code>0</code> means
-"keep forever". They default to <code>0</code> so that upgrading Axiom never deletes
-data you did not ask it to delete.</p>
 <p>Cleanup runs hourly in the background. Connection poll logs are always retained for a
 fixed 3 days and are not configurable.</p>
 <h2 id="database-profiles">Database Profiles</h2>

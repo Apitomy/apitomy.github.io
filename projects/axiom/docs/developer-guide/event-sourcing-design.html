@@ -1368,34 +1368,6 @@
   
   
     <li class="md-nav__item">
-      <a href="data-retention.html" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Data Retention
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
       <a href="ui-development.html" class="md-nav__link">
         
   
@@ -1947,8 +1919,7 @@ only the <strong>first</strong> project and task; readers should use the items. 
 items.</p>
 <h3 id="links-between-events-and-workflow-runs">Links between events and workflow runs</h3>
 <p>Events and workflow runs are linked both ways (V68, #420, #421). None of these links are foreign keys:
-event retention deletes events and ledger entries while runs are kept (but never while the run is still
-running or waiting).</p>
+event retention deletes events and ledger entries while runs are kept.</p>
 <ul>
 <li><strong>Started runs (<code>create-workflow</code>).</strong> The run stores <code>trigger_event_id</code> and <code>trigger_ledger_id</code>; the
   run's <code>workflow</code> trace has <code>eventId</code> set to the event; the run's context has the event ID as
@@ -2082,10 +2053,7 @@ items of an attempt stay on that attempt's outcome and never appear on a later a
 <h2 id="retention">Retention</h2>
 <ul>
 <li><strong>Stream events and ledger entries:</strong> Cleaned up hourly based on <code>eventRetentionDays</code>
-  setting (default 90 days), in batches of 500. Routing outcomes and ledger entries are deleted first (FK),
-  then events. Events that a <code>running</code> or <code>waiting</code> workflow run was started by (<code>trigger_event_id</code>) or
-  resumed by (<code>workflow_run_resume.event_id</code>) are kept until the run finishes. See
-  <a href="data-retention.html">Data Retention</a>.</li>
+  setting (default 90 days). Ledger entries are deleted first (FK), then events.</li>
 <li><strong>Connection poll logs:</strong> Cleaned up hourly with a 3-day fixed retention.</li>
 </ul>
 <h2 id="configuration-packs">Configuration Packs</h2>
