@@ -923,6 +923,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#configuration-used-by-a-run-or-report" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configuration Used by a Run or Report
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#tracing-reports" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1695,6 +1706,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#configuration-used-by-a-run-or-report" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configuration Used by a Run or Report
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#tracing-reports" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1971,6 +1993,10 @@ the pipeline things went wrong and examining the logs at that stage.</p>
 <td>Scheduled job detail page &gt; Runs tab &gt; <strong>View Log</strong></td>
 </tr>
 <tr>
+<td>A run or report behaves differently from the current definition</td>
+<td>Run or report detail &gt; <strong>Configuration used</strong></td>
+</tr>
+<tr>
 <td>Scheduled job never runs</td>
 <td>Scheduled job detail page — check <strong>Enabled</strong> and <strong>Schedule</strong> settings</td>
 </tr>
@@ -2176,6 +2202,46 @@ did (or tried to do).</p>
   project's Tasks tab to respond.</li>
 </ul>
 <hr />
+<h2 id="configuration-used-by-a-run-or-report">Configuration Used by a Run or Report</h2>
+<p>Scheduled job and report definitions can be edited at any time, so a run or report may have used a different
+prompt, model, tool list or script than the definition has now. Axiom records the execution configuration each
+scheduled job run and report was created with, both for scheduled and <strong>Run Now</strong> triggers.</p>
+<ul>
+<li><strong>Scheduled jobs:</strong> open the job, go to the <strong>Runs</strong> tab and expand a run.</li>
+<li><strong>Reports:</strong> open the report detail page.</li>
+</ul>
+<p>The <strong>Configuration used</strong> section shows a label: <strong>Matches current definition</strong>, or <strong>Changed since this
+run/report</strong>. Expand it to see each field. When the definition has changed, a second column shows the current
+value, changed fields are marked, and <strong>Only changed fields</strong> hides the rest.</p>
+<p>Recorded fields:</p>
+<table>
+<thead>
+<tr>
+<th>Definition</th>
+<th>Fields</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Scheduled job</td>
+<td>execution mode, prompt template, script template, engine, model, allowed tools, max steps, max budget, timeout, environment</td>
+</tr>
+<tr>
+<td>Report</td>
+<td>prompt template, title template, time window, engine, model, allowed tools, max steps, max budget, timeout, environment</td>
+</tr>
+</tbody>
+</table>
+<p>Names, descriptions, schedules, the enabled flag and labels are not recorded: they do not change what a run
+does. In the <strong>environment</strong>, a value that is exactly a <code>${secret:NAME}</code> reference is stored as is; every
+other value is stored as <code>[redacted]</code>, so a change to a literal environment value is not detected. <strong>Prompt
+and script templates are stored verbatim.</strong> Anything hard-coded in a template, such as a token, stays in the
+configuration history until the job or report definition is deleted, even after you remove it from the
+template. Use <code>${secret:NAME}</code> environment references for credentials instead.</p>
+<p>Runs and reports created before this feature have no recorded configuration; their detail view says so.
+If a snapshot cannot be recorded (for example because of a database error), the run or report is still
+created, without a recorded configuration, and a warning is logged.</p>
+<hr />
 <h2 id="tracing-reports">Tracing Reports</h2>
 <h3 id="step-1-check-the-report-status">Step 1: Check the Report Status</h3>
 <p>Navigate to <strong>Reports</strong> in the sidebar. Find your report and check its status:</p>
@@ -2203,6 +2269,8 @@ This shows:</p>
 <li><strong>Wrong data in the report</strong> — check the tool output in the execution log. The tool
   may be returning unexpected data, or the prompt template may need to be more specific
   about how to interpret the data.</li>
+<li><strong>Definition edited since the report ran</strong> — see
+  <a href="#configuration-used-by-a-run-or-report">Configuration Used by a Run or Report</a>.</li>
 <li><strong>Report stuck Pending</strong> — check <strong>Configuration &gt; Agents</strong> for an enabled agent whose
   capabilities match <code>report:&lt;definition-slug&gt;</code>.</li>
 <li><strong>Report never runs</strong> — check the report definition: is it <strong>Enabled</strong>? Is the

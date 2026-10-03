@@ -1113,6 +1113,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#configuration-versions-of-jobs-and-reports" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configuration Versions of Jobs and Reports
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#development-tips" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1501,6 +1512,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#configuration-versions-of-jobs-and-reports" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configuration Versions of Jobs and Reports
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#development-tips" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1685,6 +1707,35 @@ the version and the description.</p>
 </span></code></pre></div>
 </li>
 </ol>
+<hr />
+<h2 id="configuration-versions-of-jobs-and-reports">Configuration Versions of Jobs and Reports</h2>
+<p>Scheduled job and report definitions are edited in place. To keep the configuration each run used (#426),
+<code>V71</code> adds <code>scheduled_job_version</code> and <code>report_definition_version</code>. Each row stores a canonical JSON snapshot
+(<code>config_snapshot</code>, sorted keys, unset fields omitted) of a definition's execution-relevant fields and its
+SHA-256 <code>config_hash</code>. A row is unique per <code>(definition, config_hash)</code>, so runs with identical configuration
+share one version. <code>scheduled_job_run.config_version_id</code> and <code>report.config_version_id</code> point at the version.</p>
+<ul>
+<li><code>ConfigSnapshotService</code> builds the snapshot and finds or creates the version. <code>ScheduledJobScheduler</code> and
+  <code>ReportScheduler</code> call it when they create the run or report row (scheduled and manual paths), because
+  both paths load the definition there. The find-or-insert runs in its own transaction
+  (<code>QuarkusTransaction.requiringNew()</code>); a unique violation from a concurrent insert is resolved by
+  re-reading the version. The schedulers catch any failure, log a warning and leave <code>config_version_id</code>
+  null, so a snapshot problem never blocks run or report creation.</li>
+<li>Snapshots are serialized with a private, fixed-configuration <code>ObjectMapper</code> (sorted keys) so application
+  ObjectMapper customizers cannot change hashes; <code>maxBudgetUsd</code> is stored as stripped decimal text.</li>
+<li>Prompt and script templates are stored verbatim; only environment values are redacted.</li>
+<li>Environment values are redacted unless they are exactly a <code>${secret:NAME}</code> reference. Never add a field
+  that can hold a secret value without redacting it.</li>
+<li><code>GET /scheduled-jobs/runs/{runId}/config</code> and <code>GET /reports/{reportId}/config</code> return the snapshot,
+  compared field by field with the current definition; <code>changed</code> compares the hashes. They return 404 with
+  an <code>Error</code> body; the message starts with "No configuration was recorded" when the run or report exists but
+  has no snapshot (rows created before V71, or a failed recording).</li>
+<li>Retention: versions belong to their definition. The delete endpoints remove runs/reports, then versions,
+  then the definition. In Flyway-managed databases the FKs also cascade from the definition and set
+  <code>config_version_id</code> to null if a version is removed. Deleting a single report keeps its version.</li>
+<li>Adding a field to the snapshot changes the hash of every definition, so the next run gets a new version
+  and older runs show as changed.</li>
+</ul>
 <hr />
 <h2 id="development-tips">Development Tips</h2>
 <ul>
