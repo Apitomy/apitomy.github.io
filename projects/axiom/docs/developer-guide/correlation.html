@@ -1181,6 +1181,28 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#scheduled-job-run-and-report-columns" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Scheduled Job Run and Report Columns
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#who-triggered-a-run-or-report" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Who Triggered a Run or Report
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#finding-all-records-for-a-trace" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1334,6 +1356,28 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#scheduled-job-run-and-report-columns" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Scheduled Job Run and Report Columns
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#who-triggered-a-run-or-report" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Who Triggered a Run or Report
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#finding-all-records-for-a-trace" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1442,7 +1486,100 @@ the trace ID, so given one trace ID you can find everything that belongs to that
 </tbody>
 </table>
 <p>All columns are nullable UUIDs with no foreign key. Trace data has a bounded lifetime: when <code>TraceCleanup</code>
-deletes a trace, it clears <code>trace_id</code> on <code>activity_log</code>, <code>ai_usage</code>, <code>task</code>, <code>scheduled_job_run</code> and <code>report</code>.</p>
+deletes a trace, it clears <code>trace_id</code> on <code>activity_log</code>, <code>ai_usage</code>, <code>task</code>, <code>scheduled_job_run</code> and <code>report</code>,
+and <code>triggered_by_trace_id</code> on <code>scheduled_job_run</code> and <code>report</code>.</p>
+<h2 id="scheduled-job-run-and-report-columns">Scheduled Job Run and Report Columns</h2>
+<p>Traces are deleted after the retention period, so scheduled job runs and reports are also linked to their AI
+usage and activity rows by ID (migration <code>V70</code>, #424 and #425). These links remain after the trace is
+deleted.</p>
+<table>
+<thead>
+<tr>
+<th>Table</th>
+<th>Column</th>
+<th>Written by</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ai_usage</code></td>
+<td><code>scheduled_job_run_id</code></td>
+<td><code>ScheduledJobExecutionService</code> (agent mode)</td>
+</tr>
+<tr>
+<td><code>ai_usage</code></td>
+<td><code>report_id</code></td>
+<td><code>ReportExecutionService</code></td>
+</tr>
+<tr>
+<td><code>activity_log</code></td>
+<td><code>scheduled_job_run_id</code></td>
+<td><code>ScheduledJobExecutionService</code> (agent and script)</td>
+</tr>
+<tr>
+<td><code>activity_log</code></td>
+<td><code>report_id</code></td>
+<td><code>ReportExecutionService</code></td>
+</tr>
+<tr>
+<td><code>activity_log</code></td>
+<td><code>report_definition_id</code></td>
+<td><code>ReportExecutionService</code></td>
+</tr>
+</tbody>
+</table>
+<p>All are nullable <code>BIGINT</code> columns with no foreign key. Rows written before <code>V70</code> have no value.</p>
+<p>Deleting a scheduled job, a report or a report definition intentionally keeps its <code>ai_usage</code> and
+<code>activity_log</code> rows, so cost and activity history survive. Their <code>scheduled_job_run_id</code>, <code>report_id</code> and
+<code>report_definition_id</code> values may then refer to rows that no longer exist; consumers must treat these IDs as
+possibly dangling.</p>
+<p>In the UI, the Activity log and AI usage pages have a <strong>Source</strong> column that links a row to its report
+(<code>/reports/:id</code>) or, for job runs, to the job runs page (<code>/logs/job-runs</code>). The rows carry only the run ID,
+not the job ID, and that page cannot yet be filtered or anchored to a single run.</p>
+<ul>
+<li><code>GET /activity?filterScheduledJobRunId={id}</code> and <code>GET /usage/ai?filterScheduledJobRunId={id}</code> return the
+  rows of one run. <code>filterReportId</code> does the same for a report.</li>
+<li><code>GET /traces?filterScheduledJobRunId={id}</code> returns the run's trace. Reports already had
+  <code>GET /traces?filterReportId={id}</code>.</li>
+<li>A malformed (non-numeric) value for any of these filters returns <code>400 Bad Request</code>. These filters are
+  typed as strings in OpenAPI for this reason. Integer-typed query parameters such as <code>filterProjectId</code>
+  return <code>404</code> for malformed values, which is standard JAX-RS behaviour.</li>
+</ul>
+<p>In the UI, each row of the Scheduled Job Runs page links to the run's trace, AI usage
+(<code>/metrics/ai-usage?scheduledJobRunId=</code>) and activity (<code>/logs/activity?scheduledJobRunId=</code>). The report
+detail page shows the report's AI cost with links to <code>/metrics/ai-usage?reportId=</code> and
+<code>/logs/activity?reportId=</code>. Both pages accept these query parameters as deep links, as with <code>?traceId=</code>.</p>
+<h2 id="who-triggered-a-run-or-report">Who Triggered a Run or Report</h2>
+<p><code>scheduled_job_run</code> and <code>report</code> record how and by whom they were triggered:</p>
+<table>
+<thead>
+<tr>
+<th>Column</th>
+<th>Values</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>run_trigger</code> / <code>report_trigger</code></td>
+<td><code>scheduled</code> or <code>manual</code></td>
+</tr>
+<tr>
+<td><code>triggered_by</code></td>
+<td><code>scheduler</code> for scheduled runs, <code>manual</code> for runs started through the REST API</td>
+</tr>
+<tr>
+<td><code>triggered_by_trace_id</code></td>
+<td>For manual runs, the caller's trace if the request carried a valid caller trace</td>
+</tr>
+</tbody>
+</table>
+<p>Axiom has no authentication, so <code>triggered_by</code> cannot hold a user identity. If authentication is added later,
+<code>triggered_by</code> is where the user should be recorded. <code>triggered_by_trace_id</code> is set when an agent triggers a
+run through <code>POST /scheduled-jobs/{id}/run</code> or <code>POST /reports/definitions/{id}/run</code> and its request carries
+the caller trace headers (see below). The new run still gets its own trace; it does not join the caller's.</p>
+<p><code>V70</code> sets <code>triggered_by</code> on existing scheduled job runs from <code>run_trigger</code>. Existing reports keep <code>NULL</code> for
+all three columns, because their trigger was never recorded. The API exposes these as <code>trigger</code>,
+<code>triggeredBy</code> and <code>triggeredByTraceId</code> on <code>ScheduledJobRun</code> and <code>Report</code>.</p>
 <h2 id="finding-all-records-for-a-trace">Finding All Records for a Trace</h2>
 <ul>
 <li><code>GET /traces/{id}</code> returns the trace tree (nodes, tool calls).</li>
@@ -1490,9 +1627,10 @@ request when the matching environment variables are set:</p>
 </ol>
 <p>If any check fails, the headers are removed and ignored, and a debug log is written. A request never fails
 because of these headers.</p>
-<p>Only <code>POST /projects/{id}/tasks</code> acts on a valid caller trace: the new task joins the caller's trace and its
-task node is added under the caller's parent node, instead of a new <code>user-action</code> trace being created. The
-task's <code>createdBy</code> stays <code>user</code>. Other endpoints ignore the caller trace.</p>
+<p><code>POST /projects/{id}/tasks</code> joins a valid caller trace: the new task joins the caller's trace and its task
+node is added under the caller's parent node, instead of a new <code>user-action</code> trace being created. The task's
+<code>createdBy</code> stays <code>user</code>. <code>POST /scheduled-jobs/{id}/run</code> and <code>POST /reports/definitions/{id}/run</code> only
+record the caller trace in <code>triggered_by_trace_id</code>. Other endpoints ignore the caller trace.</p>
 <h2 id="accepted-risk">Accepted Risk</h2>
 <p>An agent can keep its trace open by creating tasks that join it, because <code>TaskTraceFinalizer</code> keeps a trace
 open while any task node is in progress. This is accepted: agent-created tasks are deliberate work that
@@ -1505,8 +1643,8 @@ belongs to the trace.</p>
 <li>Tasks that join a report, scheduled-job or workflow trace never complete it; the owning service does. If
   the owner finishes first, its trace is marked complete while the joined task may still be running. The
   task's own node still completes when the task finishes.</li>
-<li>Out of scope for now: MDC log correlation (#428), run and report ID columns (#424, #425), and the lineage
-  view (#430).</li>
+<li>Script-mode scheduled job runs have no <code>ai_usage</code> row, because no AI is invoked.</li>
+<li>Out of scope for now: MDC log correlation (#428) and the lineage view (#430).</li>
 </ul>
 
 
