@@ -12,13 +12,13 @@
         <meta name="author" content="Apitomy">
       
       
-        <link rel="canonical" href="https://www.apitomy.io/projects/axiom/docs/developer-guide/workflow-human-task-nodes.html">
+        <link rel="canonical" href="https://www.apitomy.io/projects/axiom/docs/developer-guide/lineage.html">
       
       
-        <link rel="prev" href="workflow-input-contract.html">
+        <link rel="prev" href="correlation.html">
       
       
-        <link rel="next" href="tracing.html">
+        <link rel="next" href="data-retention.html">
       
       
         
@@ -29,7 +29,7 @@
     
     
       
-        <title>Workflow Human-Task Nodes - Apitomy Axiom</title>
+        <title>Lineage - Apitomy Axiom</title>
       
     
     
@@ -84,7 +84,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#workflow-human-task-nodes" class="md-skip">
+        <a href="#lineage" class="md-skip">
           Skip to content
         </a>
       
@@ -141,7 +141,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Workflow Human-Task Nodes
+              Lineage
             
           </span>
         </div>
@@ -1051,37 +1051,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Workflow Human-Task Nodes
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="workflow-human-task-nodes.html" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="workflow-human-task-nodes.html" class="md-nav__link">
         
   
   
@@ -1097,126 +1070,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#authoring-a-human-task-node" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Authoring a Human-Task Node
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Authoring a Human-Task Node">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#inputs-display-context" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Inputs (Display Context)
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#outputs-completion-form" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Outputs (Completion Form)
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#run-time-behavior" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Run-Time Behavior
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Run-Time Behavior">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#task-creation" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Task Creation
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#task-completion" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Task Completion
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#supported-node-types" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Supported Node Types
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#example-approval-workflow" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Example: Approval Workflow
-      
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -1282,10 +1135,37 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="lineage.html" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lineage
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="lineage.html" class="md-nav__link md-nav__link--active">
         
   
   
@@ -1301,6 +1181,159 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#api" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        API
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="API">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#link-paths" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Link paths
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#traces-and-their-owners" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Traces and Their Owners
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#traversal-rules" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Traversal Rules
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Traversal Rules">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#upstream-origin" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Upstream (origin)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#downstream-results" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Downstream (results)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#limits-and-truncation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Limits and Truncation
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cost" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cost
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#query-batching-no-n1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Query Batching (No N+1)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dangling-references" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Dangling References
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ui" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        UI
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -1424,33 +1457,22 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#authoring-a-human-task-node" class="md-nav__link">
+  <a href="#api" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Authoring a Human-Task Node
+        API
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Authoring a Human-Task Node">
+    <nav class="md-nav" aria-label="API">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#inputs-display-context" class="md-nav__link">
+  <a href="#link-paths" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Inputs (Display Context)
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#outputs-completion-form" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Outputs (Completion Form)
+        Link paths
       
     </span>
   </a>
@@ -1463,22 +1485,33 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#run-time-behavior" class="md-nav__link">
+  <a href="#traces-and-their-owners" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Run-Time Behavior
+        Traces and Their Owners
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Run-Time Behavior">
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#traversal-rules" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Traversal Rules
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Traversal Rules">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#task-creation" class="md-nav__link">
+  <a href="#upstream-origin" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Task Creation
+        Upstream (origin)
       
     </span>
   </a>
@@ -1486,10 +1519,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#task-completion" class="md-nav__link">
+  <a href="#downstream-results" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Task Completion
+        Downstream (results)
       
     </span>
   </a>
@@ -1502,10 +1535,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#supported-node-types" class="md-nav__link">
+  <a href="#limits-and-truncation" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Supported Node Types
+        Limits and Truncation
       
     </span>
   </a>
@@ -1513,10 +1546,43 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#example-approval-workflow" class="md-nav__link">
+  <a href="#cost" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Example: Approval Workflow
+        Cost
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#query-batching-no-n1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Query Batching (No N+1)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dangling-references" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Dangling References
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ui" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        UI
       
     </span>
   </a>
@@ -1543,176 +1609,359 @@
   
 
 
-<h1 id="workflow-human-task-nodes">Workflow Human-Task Nodes</h1>
-<p>Axiom workflows support <code>human-task</code> nodes, which pause execution until a user completes a form through
-the Inbox UI. When the engine reaches a human-task node, it parks the workflow instance in <code>WAITING</code> and
-creates an inbox task with status <code>AwaitingInput</code>. A user completes the task via the unified completion
-endpoint, and Axiom resumes the workflow with the answers merged into context.</p>
-<hr />
-<h2 id="authoring-a-human-task-node">Authoring a Human-Task Node</h2>
-<p>A <code>human-task</code> node in a Flow workflow definition configures three things:</p>
-<ol>
-<li><strong>Node name</strong> — becomes the task title shown in the Inbox.</li>
-<li><strong>Inputs</strong> — mapped to read-only <code>details</code> displayed to the user for context.</li>
-<li><strong>Outputs</strong> — define the completion form fields (<code>outputSchema</code>) that the user fills in.</li>
-</ol>
-<h3 id="inputs-display-context">Inputs (Display Context)</h3>
-<p>A human-task node's <code>inputs</code> list declares what workflow context values should be shown to the user as
-read-only context. Each input is resolved from the current workflow context and displayed in the Inbox
-task's details section.</p>
-<p>Example (in Flow authoring UI):</p>
-<div class="language-json highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="p">{</span>
-</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">  </span><span class="nt">"inputs"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
-</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">    </span><span class="p">{</span><span class="w"> </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"issueTitle"</span><span class="p">,</span><span class="w"> </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w"> </span><span class="p">},</span>
-</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">    </span><span class="p">{</span><span class="w"> </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"repository"</span><span class="p">,</span><span class="w"> </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w"> </span><span class="p">}</span>
-</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">  </span><span class="p">]</span>
-</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="p">}</span>
+<h1 id="lineage">Lineage</h1>
+<p>The lineage API (#430) answers "where did this come from, and what did it lead to?" for any unit of work. It
+follows the links described in <a href="correlation.html">Correlation</a>, <a href="tracing.html">Tracing</a> and the
+<a href="event-sourcing-design.html">event sourcing design</a> in both directions, so a user does not have to hop between
+the event, ledger, trace, workflow run, task and usage pages.</p>
+<p>The implementation is <code>LineageService</code> (<code>app/src/main/java/io/apitomy/axiom/app/LineageService.java</code>), exposed
+by <code>LineageResourceImpl</code>. The UI component is <code>LineagePanel</code> (<code>ui/src/components/LineagePanel.tsx</code>).</p>
+<h2 id="api">API</h2>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>GET /api/v1/lineage/{entityType}/{id}?direction=both&amp;depth=5&amp;maxNodes=200
 </span></code></pre></div>
-<p>At run time, if the workflow context contains <code>{ issueTitle: "Fix login bug", repository:
-"apitomy/axiom" }</code>, the inbox task's details will show those values as read-only fields.</p>
-<h3 id="outputs-completion-form">Outputs (Completion Form)</h3>
-<p>A human-task node's <code>outputs</code> list declares the form fields the user must complete. Each output becomes a
-field in the task's completion form, with its <code>type</code> determining the input widget and validation.</p>
-<p>Axiom supports <strong>optional rich metadata</strong> on each output:</p>
 <table>
 <thead>
 <tr>
-<th>property</th>
-<th>purpose</th>
-<th>default if omitted</th>
+<th>Parameter</th>
+<th>Values</th>
+<th>Default</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><code>label</code></td>
-<td>Human-readable field label</td>
-<td>The output's <code>name</code> verbatim</td>
+<td><code>entityType</code></td>
+<td><code>event</code>, <code>trace</code>, <code>workflow-run</code>, <code>task</code>, <code>scheduled-job-run</code>, <code>report</code></td>
+<td>—</td>
 </tr>
 <tr>
-<td><code>description</code></td>
-<td>Help text shown below the field</td>
-<td>Empty</td>
+<td><code>id</code></td>
+<td>UUID for <code>event</code> and <code>trace</code>, a number otherwise</td>
+<td>—</td>
 </tr>
 <tr>
-<td><code>widget</code></td>
-<td>UI control hint (text/textarea/number/checkbox/select)</td>
-<td>Inferred from semantic <code>type</code></td>
+<td><code>direction</code></td>
+<td><code>upstream</code> (origin), <code>downstream</code> (results) or <code>both</code></td>
+<td><code>both</code></td>
 </tr>
 <tr>
-<td><code>defaultValue</code></td>
-<td>Pre-filled value when the form loads</td>
-<td>Empty</td>
+<td><code>depth</code></td>
+<td>Hops walked in each direction, 1–10</td>
+<td>5</td>
 </tr>
 <tr>
-<td><code>options</code></td>
-<td>List of choices (for <code>select</code> widget only)</td>
-<td>Empty array</td>
+<td><code>maxNodes</code></td>
+<td>Maximum number of nodes, 1–1000</td>
+<td>200</td>
 </tr>
 </tbody>
 </table>
-<p>Example (in Flow authoring UI):</p>
-<div class="language-json highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="p">{</span>
-</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">  </span><span class="nt">"outputs"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
-</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">    </span><span class="p">{</span>
-</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">      </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"approved"</span><span class="p">,</span>
-</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"boolean"</span><span class="p">,</span>
-</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="w">      </span><span class="nt">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Approve this change?"</span><span class="p">,</span>
-</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="w">      </span><span class="nt">"widget"</span><span class="p">:</span><span class="w"> </span><span class="s2">"checkbox"</span>
-</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="w">    </span><span class="p">},</span>
-</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="w">    </span><span class="p">{</span>
-</span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="w">      </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"comments"</span><span class="p">,</span>
-</span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="w">      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span>
-</span><span id="__span-1-12"><a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a><span class="w">      </span><span class="nt">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Review comments"</span><span class="p">,</span>
-</span><span id="__span-1-13"><a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a><span class="w">      </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Optional notes for the team"</span><span class="p">,</span>
-</span><span id="__span-1-14"><a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a><span class="w">      </span><span class="nt">"widget"</span><span class="p">:</span><span class="w"> </span><span class="s2">"textarea"</span>
-</span><span id="__span-1-15"><a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a><span class="w">    </span><span class="p">}</span>
-</span><span id="__span-1-16"><a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a><span class="w">  </span><span class="p">]</span>
-</span><span id="__span-1-17"><a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a><span class="p">}</span>
-</span></code></pre></div>
-<p>When metadata is omitted, Axiom derives sensible defaults:</p>
+<p>An unknown entity type, a malformed ID or an out-of-range or non-numeric parameter returns <code>400</code>. A root that
+does not exist returns <code>404</code>. Both carry the JSON <code>Error</code> body (<code>message</code>, <code>errorCode</code>). A non-numeric
+<code>depth</code> or <code>maxNodes</code> fails JAX-RS parameter conversion, which JAX-RS reports as <code>404</code>;
+<code>LineageResourceImpl</code> declares a <code>@ServerExceptionMapper</code> for <code>NotFoundException</code> that turns it into <code>400</code>.
+The mapper is declared on the resource class, so it applies to this resource only.</p>
+<p>Projects are not a root type: a project holds too much unrelated work to give a useful graph.</p>
+<p>The response is a <code>LineageGraph</code>:</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>root</code></td>
+<td>Key of the root node</td>
+</tr>
+<tr>
+<td><code>nodes</code></td>
+<td><code>LineageNode</code> list</td>
+</tr>
+<tr>
+<td><code>edges</code></td>
+<td><code>LineageEdge</code> list</td>
+</tr>
+<tr>
+<td><code>truncated</code></td>
+<td><code>true</code> when the depth or node limit cut the walk short</td>
+</tr>
+<tr>
+<td><code>depth</code>, <code>maxNodes</code></td>
+<td>The limits that were applied</td>
+</tr>
+<tr>
+<td><code>totalCostUsd</code></td>
+<td>Sum of the nodes' <code>costUsd</code></td>
+</tr>
+</tbody>
+</table>
+<p>Each <code>LineageNode</code> has a <code>key</code> (<code>type:id</code>, used by edges), <code>type</code>, <code>id</code>, <code>label</code>, <code>status</code>, <code>subtype</code> (trace
+type, action type, trigger or outcome item type), <code>linkPath</code> (UI route), <code>costUsd</code>, <code>direction</code> (<code>root</code>,
+<code>upstream</code> or <code>downstream</code>), <code>depth</code> (hops from the root), <code>available</code> and <code>createdOn</code>.</p>
+<p>Node types are the six root types plus <code>outcome</code>: a routing outcome item that is not a task or a workflow run
+(<code>ignored</code>, <code>escalated</code>, <code>decision</code>, <code>no-match</code>).</p>
+<p>Each <code>LineageEdge</code> has <code>from</code>, <code>to</code> and <code>relation</code>. Edges always point <strong>downstream</strong>, from the cause to the
+result, whichever direction was walked:</p>
+<table>
+<thead>
+<tr>
+<th>Relation</th>
+<th>From → to</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>triggered</code></td>
+<td>event → Manager (or other) trace, event → workflow run</td>
+</tr>
+<tr>
+<td><code>created</code></td>
+<td>trace / workflow run / job run / report / task → task</td>
+</tr>
+<tr>
+<td><code>resumed</code></td>
+<td>event → workflow run it resumed</td>
+</tr>
+<tr>
+<td><code>produced</code></td>
+<td>trace or event → outcome item (ignored, escalated, ...)</td>
+</tr>
+<tr>
+<td><code>part-of</code></td>
+<td>owning run or report → its trace (only when a trace is the root)</td>
+</tr>
+<tr>
+<td><code>triggered-by-agent</code></td>
+<td>caller (trace or its owner) → job run or report started through the REST API</td>
+</tr>
+</tbody>
+</table>
+<h3 id="link-paths">Link paths</h3>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th><code>linkPath</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>event</code></td>
+<td><code>/events/stream/{id}</code></td>
+</tr>
+<tr>
+<td><code>trace</code></td>
+<td><code>/logs/traces/{id}</code></td>
+</tr>
+<tr>
+<td><code>workflow-run</code></td>
+<td><code>/logs/workflow-runs/{id}</code></td>
+</tr>
+<tr>
+<td><code>task</code></td>
+<td><code>/logs/tasks?taskId={id}</code></td>
+</tr>
+<tr>
+<td><code>scheduled-job-run</code></td>
+<td><code>/logs/job-runs?runId={id}</code></td>
+</tr>
+<tr>
+<td><code>report</code></td>
+<td><code>/reports/{id}</code></td>
+</tr>
+<tr>
+<td><code>outcome</code></td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<p>Tasks and job runs have no detail page; the Tasks and Job Runs pages open a lineage modal for <code>?taskId=</code> and
+<code>?runId=</code>.</p>
+<h2 id="traces-and-their-owners">Traces and Their Owners</h2>
+<p>Workflow runs, scheduled job runs and reports each own a trace (<code>workflow</code>, <code>scheduled-job-execution</code> and
+<code>report-generation</code> trace types). Such a trace is shown as its owner, not as a separate node, so a job run and
+its trace never appear twice. Traces without an owner entity (<code>manager</code>, <code>manager-dry-run</code>, <code>user-action</code> and
+any other type) are <code>trace</code> nodes. If an owned trace's owner was deleted, the trace itself is shown.</p>
+<p>When an owned trace is the root (<code>GET /lineage/trace/{id}</code>), the trace stays the root and its owner is
+linked upstream with <code>part-of</code>.</p>
+<h2 id="traversal-rules">Traversal Rules</h2>
+<h3 id="upstream-origin">Upstream (origin)</h3>
+<p>Each node has at most one origin, except workflow runs, which can also have resume events.</p>
+<table>
+<thead>
+<tr>
+<th>Node</th>
+<th>Origin</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>task</td>
+<td>First that applies: <code>workflowRunId</code> → workflow run; the parent of the task's <code>task</code> trace node is another task's node → that task (a task created by an agent task, #427); <code>traceId</code> → trace or its owner; <code>eventId</code> → event</td>
+</tr>
+<tr>
+<td>trace</td>
+<td>Owned: its owner (<code>part-of</code>). Otherwise <code>eventId</code> → event</td>
+</tr>
+<tr>
+<td>workflow run</td>
+<td><code>trigger_event_id</code> → event (<code>triggered</code>); each <code>workflow_run_resume.event_id</code> → event (<code>resumed</code>)</td>
+</tr>
+<tr>
+<td>scheduled job run, report</td>
+<td><code>triggered_by_trace_id</code> → trace or its owner (<code>triggered-by-agent</code>)</td>
+</tr>
+<tr>
+<td>event</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<p>The caller of <code>triggered_by_trace_id</code> is recorded as a trace, not as a task: several tasks can share a trace,
+and the parent node of the request is not stored. The graph therefore links the job run or report to the
+trace (or to the run, job run or report that owns it).</p>
+<h3 id="downstream-results">Downstream (results)</h3>
+<table>
+<thead>
+<tr>
+<th>Node</th>
+<th>Results</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>event</td>
+<td>traces with <code>eventId</code> (owned ones as their owner); workflow runs with <code>trigger_event_id</code>; runs resumed by the event; <code>routing_outcome_item</code> rows reached through <code>event_processing_ledger</code> → <code>routing_outcome</code>: <code>workflow-run</code> and <code>workflow-resumed</code> items link the run; items of outcomes <strong>without</strong> a trace link a task or an <code>outcome</code> node</td>
+</tr>
+<tr>
+<td>trace</td>
+<td>the work in the trace (below); items of <code>routing_outcome</code> rows with this <code>trace_id</code> (tasks and <code>outcome</code> nodes)</td>
+</tr>
+<tr>
+<td>workflow run</td>
+<td>tasks with <code>workflow_run_id</code>; the work in its trace</td>
+</tr>
+<tr>
+<td>scheduled job run, report</td>
+<td>the work in its trace</td>
+</tr>
+<tr>
+<td>task</td>
+<td>tasks whose <code>task</code> trace node is a child of this task's node (created by its agent)</td>
+</tr>
+</tbody>
+</table>
+<p>"The work in a trace" is every task with that <code>trace_id</code> (including tasks that joined the trace through
+<code>POST /projects/{id}/tasks</code>, #427) and every job run or report whose <code>triggered_by_trace_id</code> is that trace. A
+task whose trace node is a child of another task's node is linked to that task instead of to the trace owner.</p>
+<p>Nodes reached from more than one place are included once, with every edge. With <code>direction=both</code> the upstream
+walk runs first, so a node found by both walks keeps <code>upstream</code>.</p>
+<h2 id="limits-and-truncation">Limits and Truncation</h2>
+<p>The walk is breadth-first. <code>depth</code> limits the hops in each direction.</p>
 <ul>
-<li><code>label</code> defaults to the output's <code>name</code> verbatim (e.g., an output named <code>approvedByManager</code> shows the
-  label <code>approvedByManager</code>).</li>
-<li><code>widget</code> is inferred from the semantic <code>type</code>: <code>boolean</code> defaults to <code>checkbox</code>, <code>number</code> to <code>number</code>,
-  <code>string</code> to <code>text</code>.</li>
+<li><code>maxNodes</code> also bounds the rows read: every expansion query (tasks of a trace or run, traces of an event,
+  job runs and reports triggered from a trace, outcome items, resumes, child tasks) uses <code>setMaxResults</code> with
+  the room left in the graph plus one. When a query returns that many rows, <code>truncated</code> is set. This is
+  conservative: <code>truncated</code> can be <code>true</code> when the extra row was a node that was already in the graph.</li>
+<li>Every <code>IN</code> list is split into chunks of at most 500 IDs (<code>LineageService.IN_CHUNK</code>).</li>
+<li>A node is added only when the other end of its edge is already in the graph, so a truncated graph has no
+  unconnected nodes. When a new node would exceed <code>maxNodes</code>, it is skipped and <code>truncated</code> is set; edges to
+  skipped nodes are left out, so every edge refers to a node in the response.</li>
+<li>When the depth limit is reached, the last level is expanded once more: edges between nodes that are already
+  in the graph are kept, and <code>truncated</code> is set if any neighbour lies beyond the limit.</li>
 </ul>
-<hr />
-<h2 id="run-time-behavior">Run-Time Behavior</h2>
-<h3 id="task-creation">Task Creation</h3>
-<p>When a running workflow reaches a human-task node:</p>
+<h2 id="cost">Cost</h2>
+<p><code>costUsd</code> is the <strong>direct</strong> AI cost of a node, so costs can be added up without counting anything twice:</p>
+<table>
+<thead>
+<tr>
+<th>Node</th>
+<th>Sum of <code>ai_usage.cost_usd</code> where</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>task</td>
+<td><code>task_id</code> = the task</td>
+</tr>
+<tr>
+<td>scheduled job run</td>
+<td><code>scheduled_job_run_id</code> = the run</td>
+</tr>
+<tr>
+<td>report</td>
+<td><code>report_id</code> = the report</td>
+</tr>
+<tr>
+<td>trace, workflow run</td>
+<td><code>trace_id</code> = the (run's) trace and <code>task_id</code>, <code>scheduled_job_run_id</code> and <code>report_id</code> are null (e.g. the Manager evaluation)</td>
+</tr>
+<tr>
+<td>event, outcome</td>
+<td>no cost</td>
+</tr>
+</tbody>
+</table>
+<h2 id="query-batching-no-n1">Query Batching (No N+1)</h2>
+<p>Every level of the walk does a fixed number of queries per node type, using <code>IN (...)</code> lists:</p>
 <ol>
-<li>The Flow engine transitions the workflow instance to <code>WAITING</code>.</li>
-<li>Axiom creates an inbox task with:</li>
-<li><code>title</code> = the node's name</li>
-<li><code>description</code> = the node's description (if provided)</li>
-<li><code>details</code> = a read-only map of the node's resolved inputs</li>
-<li><code>outputSchema</code> = the completion form derived from the node's outputs</li>
-<li><code>status</code> = <code>AwaitingInput</code></li>
+<li>Load the frontier: one query per type (<code>stream_event</code>, <code>trace</code>, <code>workflow_run</code>, <code>task</code>,
+   <code>scheduled_job_run</code>, <code>report</code>, <code>routing_outcome_item</code>), plus one for the scheduled job names. Events,
+   tasks, workflow runs, job runs and reports are read as projections of the label and link columns only, so
+   event payloads, task input, output and logs, report content and workflow instance state are never loaded.</li>
+<li>Resolve trace owners: one query per owned trace type present.</li>
+<li>Expand: for example, for events one query each for traces, workflow runs, resumes, ledger rows, outcomes
+   and items; for traces and owners one query each for tasks, the tasks' trace nodes and their parent nodes,
+   job runs and reports triggered from the traces.</li>
 </ol>
-<h3 id="task-completion">Task Completion</h3>
-<p>A user completes the task through the unified completion endpoint:</p>
-<p>The request body is a flat JSON object whose keys are the output names declared by the node (there is no
-<code>answers</code> wrapper):</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>POST /api/v1/inbox/{taskId}/complete
-</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>Content-Type: application/json
-</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>
-</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>{
-</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>  "approved": true,
-</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>  "comments": "Looks good to me"
-</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>}
-</span></code></pre></div>
-<p>This endpoint is used by:</p>
-<ul>
-<li>The Inbox page (global task list)</li>
-<li>The Project detail page (project-scoped task list)</li>
-</ul>
-<p>On completion, Axiom:</p>
-<ol>
-<li><strong>Validates</strong> the submission against the task's <code>outputSchema</code> before completion — missing required
-   fields or wrong-typed values are rejected with HTTP 400.</li>
-<li><strong>Coerces</strong> the accepted answers to the node's declared semantic types (<code>string</code>, <code>number</code>,
-   <code>boolean</code>, <code>object</code>) so downstream edge conditions compare correctly.</li>
-<li><strong>Merges</strong> the coerced answers into the workflow's context (top-level keys).</li>
-<li><strong>Resumes</strong> the workflow by calling the Flow engine's <code>completeCurrentNode</code> with the answers.</li>
-</ol>
-<p>Downstream nodes and edge conditions can reference the answers via their keys (e.g., <code>approved</code>,
-<code>comments</code>).</p>
-<hr />
-<h2 id="supported-node-types">Supported Node Types</h2>
-<p>Axiom workflows currently support the following node types:</p>
-<ul>
-<li><code>start</code> — workflow entry point (see <a href="workflow-input-contract.html">Workflow Input Contract</a>)</li>
-<li><code>end</code> — workflow termination</li>
-<li><code>action</code> — executes a tool or script</li>
-<li><code>human-task</code> — pauses for user input (this doc)</li>
-<li><code>wait</code> — pauses the instance for a fixed duration before resuming automatically</li>
-<li><code>receive-event</code> — pauses the instance until a matching stream event is dispatched to it by a
-  subscription's <code>workflow-dispatch</code> routing rule</li>
-</ul>
-<p>For the full authoring and run-time reference across all node types, see
-<a href="../user-guide/workflows.html">Workflows</a>.</p>
-<hr />
-<h2 id="example-approval-workflow">Example: Approval Workflow</h2>
-<p>A workflow that waits for manager approval before deploying:</p>
-<ol>
-<li><strong>Start node</strong> — receives <code>projectId</code> and <code>ref</code> (canonical inputs; see
-   <a href="workflow-input-contract.html">Workflow Input Contract</a>).</li>
-<li><strong>Action node</strong> — runs a build script, outputs <code>buildArtifact</code>.</li>
-<li><strong>Human-task node</strong> (<code>Manager Approval</code>) —</li>
-<li>Inputs: <code>ref</code>, <code>buildArtifact</code> (shown as read-only context)</li>
-<li>Outputs:
-     <div class="language-json highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="p">[</span>
-</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">  </span><span class="p">{</span><span class="w"> </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"approved"</span><span class="p">,</span><span class="w"> </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"boolean"</span><span class="p">,</span><span class="w"> </span><span class="nt">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Approve deployment?"</span><span class="w"> </span><span class="p">},</span>
-</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">  </span><span class="p">{</span><span class="w"> </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"notes"</span><span class="p">,</span><span class="w"> </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w"> </span><span class="nt">"widget"</span><span class="p">:</span><span class="w"> </span><span class="s2">"textarea"</span><span class="p">,</span><span class="w"> </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Optional comments"</span><span class="w"> </span><span class="p">}</span>
-</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="p">]</span>
-</span></code></pre></div></li>
-<li><strong>Conditional edge</strong> — if <code>approved == true</code>, advance to Deploy node; else, advance to Notify Owner
-   node.</li>
-<li><strong>Action node</strong> (<code>Deploy</code>) — uses <code>buildArtifact</code> from step 2.</li>
-</ol>
-<p>When the workflow reaches step 3, a manager sees a task titled "Manager Approval" with read-only details
-showing the project ref and build artifact, plus a checkbox for approval and a textarea for notes. After
-they submit, the workflow continues based on their <code>approved</code> answer.</p>
+<p>Entities found while expanding are cached, so they are not loaded again in the next level. Costs are computed
+once at the end with one grouped query per cost key (task, job run, report, trace). The number of queries
+therefore depends on the depth and the node types, not on the number of nodes. <code>LineageTest</code> checks this with
+Hibernate statistics (<code>%test.quarkus.hibernate-orm.statistics=true</code>): a graph with 2 tasks and one with 12
+tasks must use the same number of statements. It also checks that no <code>StreamEventEntity</code>, <code>TaskEntity</code>,
+<code>WorkflowRunEntity</code>, <code>ScheduledJobRunEntity</code> or <code>ReportEntity</code> is loaded as an entity (entity load count 0),
+and that a trace with 30 tasks and <code>maxNodes=5</code> reads at most 6 task rows (query execution row count).</p>
+<h2 id="dangling-references">Dangling References</h2>
+<p>All the links are soft references, and retention deletes events, traces, runs and reports independently (see
+<a href="data-retention.html">Data Retention</a>). A reference to a missing row becomes a node with <code>available: false</code>,
+<code>status: "unavailable"</code>, a label such as <code>Event 3f2a... (deleted or unavailable)</code> and no <code>linkPath</code>. The walk
+does not continue from such a node. Only a missing root returns <code>404</code>.</p>
+<h2 id="ui">UI</h2>
+<p><code>LineagePanel</code> takes an <code>entityType</code> and <code>id</code>. It has <strong>Show origin</strong> (<code>direction=upstream</code>) and <strong>Show
+results</strong> (<code>direction=downstream</code>) views, rendered as an indented tree from the root with a link, status and
+cost on each node. Nothing is fetched until the panel is opened, and each view is fetched once. A node reached
+twice is expanded only the first time.</p>
+<table>
+<thead>
+<tr>
+<th>Page</th>
+<th>Placement</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Event detail</td>
+<td>Expandable <strong>Lineage</strong> section below the tabs</td>
+</tr>
+<tr>
+<td>Workflow run detail</td>
+<td><strong>Lineage</strong> tab</td>
+</tr>
+<tr>
+<td>Report detail</td>
+<td>Expandable <strong>Lineage</strong> section below the summary</td>
+</tr>
+<tr>
+<td>Logs &gt; Tasks, project Tasks tab</td>
+<td><strong>Lineage</strong> button, opens <code>LineageModal</code></td>
+</tr>
+<tr>
+<td>Logs &gt; Job Runs</td>
+<td><strong>Lineage</strong> button, opens <code>LineageModal</code></td>
+</tr>
+</tbody>
+</table>
 
 
 
