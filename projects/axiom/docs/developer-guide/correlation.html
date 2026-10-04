@@ -18,7 +18,7 @@
         <link rel="prev" href="tracing.html">
       
       
-        <link rel="next" href="ui-development.html">
+        <link rel="next" href="data-retention.html">
       
       
         
@@ -1323,6 +1323,34 @@
   
   
     <li class="md-nav__item">
+      <a href="data-retention.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data Retention
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="ui-development.html" class="md-nav__link">
         
   
@@ -1608,8 +1636,10 @@ the trace ID, so given one trace ID you can find everything that belongs to that
 </tbody>
 </table>
 <p>All columns are nullable UUIDs with no foreign key. Trace data has a bounded lifetime: when <code>TraceCleanup</code>
-deletes a trace, it clears <code>trace_id</code> on <code>activity_log</code>, <code>ai_usage</code>, <code>task</code>, <code>scheduled_job_run</code> and <code>report</code>,
-and <code>triggered_by_trace_id</code> on <code>scheduled_job_run</code> and <code>report</code>.</p>
+deletes a trace, it clears <code>trace_id</code> on <code>activity_log</code>, <code>ai_usage</code>, <code>task</code>, <code>scheduled_job_run</code>, <code>report</code>,
+<code>workflow_run</code> and <code>routing_outcome</code>, and <code>triggered_by_trace_id</code> on <code>scheduled_job_run</code> and <code>report</code>. It also
+clears <code>trace_node_id</code> on <code>routing_outcome_item</code> and <code>workflow_run_resume</code> for the deleted trace's nodes. See
+<a href="data-retention.html">Data Retention</a>.</p>
 <h2 id="scheduled-job-run-and-report-columns">Scheduled Job Run and Report Columns</h2>
 <p>Traces are deleted after the retention period, so scheduled job runs and reports are also linked to their AI
 usage and activity rows by ID (migration <code>V70</code>, #424 and #425). These links remain after the trace is
@@ -1651,8 +1681,9 @@ deleted.</p>
 </tbody>
 </table>
 <p>All are nullable <code>BIGINT</code> columns with no foreign key. Rows written before <code>V70</code> have no value.</p>
-<p>Deleting a scheduled job, a report or a report definition intentionally keeps its <code>ai_usage</code> and
-<code>activity_log</code> rows, so cost and activity history survive. Their <code>scheduled_job_run_id</code>, <code>report_id</code> and
+<p>Deleting a scheduled job, a report or a report definition, or removing job runs and reports with the
+retention settings, intentionally keeps their <code>ai_usage</code> and <code>activity_log</code> rows, so cost and activity history
+survive. The same applies to <code>trace.report_id</code>. Their <code>scheduled_job_run_id</code>, <code>report_id</code> and
 <code>report_definition_id</code> values may then refer to rows that no longer exist; consumers must treat these IDs as
 possibly dangling.</p>
 <p>In the UI, the Activity log and AI usage pages have a <strong>Source</strong> column that links a row to its report

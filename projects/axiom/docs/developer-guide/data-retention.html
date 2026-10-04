@@ -12,13 +12,13 @@
         <meta name="author" content="Apitomy">
       
       
-        <link rel="canonical" href="https://www.apitomy.io/projects/axiom/docs/developer-guide/api-first-development.html">
+        <link rel="canonical" href="https://www.apitomy.io/projects/axiom/docs/developer-guide/data-retention.html">
       
       
-        <link rel="prev" href="how-to-contribute.html">
+        <link rel="prev" href="correlation.html">
       
       
-        <link rel="next" href="database-and-migrations.html">
+        <link rel="next" href="ui-development.html">
       
       
         
@@ -29,7 +29,7 @@
     
     
       
-        <title>API-First Development - Apitomy Axiom</title>
+        <title>Data Retention - Apitomy Axiom</title>
       
     
     
@@ -84,7 +84,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#api-first-development" class="md-skip">
+        <a href="#data-retention" class="md-skip">
           Skip to content
         </a>
       
@@ -141,7 +141,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              API-First Development
+              Data Retention
             
           </span>
         </div>
@@ -911,37 +911,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    API-First Development
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="api-first-development.html" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="api-first-development.html" class="md-nav__link">
         
   
   
@@ -957,142 +930,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#the-openapi-contract" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        The OpenAPI Contract
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#code-generation" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Code Generation
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#implementing-endpoints" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Implementing Endpoints
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#adding-a-new-endpoint" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Adding a New Endpoint
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Adding a New Endpoint">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#step-1-edit-the-openapi-spec" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Step 1: Edit the OpenAPI Spec
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#step-2-regenerate-interfaces" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Step 2: Regenerate Interfaces
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#step-3-implement-the-endpoint" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Step 3: Implement the Endpoint
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#step-4-add-ui-api-functions" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Step 4: Add UI API Functions
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#api-base-url" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        API Base URL
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#spa-routing" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        SPA Routing
-      
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -1298,10 +1135,37 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="data-retention.html" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data Retention
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="data-retention.html" class="md-nav__link md-nav__link--active">
         
   
   
@@ -1317,6 +1181,131 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#settings" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Settings
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#batching-and-retries" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Batching and Retries
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-each-job-does" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What Each Job Does
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="What Each Job Does">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tracecleanup" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        TraceCleanup
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#streameventcleanup" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        StreamEventCleanup
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#closedprojectcleanup-projectdeletionservice" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ClosedProjectCleanup / ProjectDeletionService
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#historycleanup" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        HistoryCleanup
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#concurrency" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Concurrency
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#accepted-dangling-references" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Accepted Dangling References
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -1412,10 +1401,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#the-openapi-contract" class="md-nav__link">
+  <a href="#settings" class="md-nav__link">
     <span class="md-ellipsis">
       
-        The OpenAPI Contract
+        Settings
       
     </span>
   </a>
@@ -1423,10 +1412,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#code-generation" class="md-nav__link">
+  <a href="#batching-and-retries" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Code Generation
+        Batching and Retries
       
     </span>
   </a>
@@ -1434,33 +1423,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#implementing-endpoints" class="md-nav__link">
+  <a href="#what-each-job-does" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Implementing Endpoints
+        What Each Job Does
       
     </span>
   </a>
   
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#adding-a-new-endpoint" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Adding a New Endpoint
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Adding a New Endpoint">
+    <nav class="md-nav" aria-label="What Each Job Does">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#step-1-edit-the-openapi-spec" class="md-nav__link">
+  <a href="#tracecleanup" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Step 1: Edit the OpenAPI Spec
+        TraceCleanup
       
     </span>
   </a>
@@ -1468,10 +1446,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#step-2-regenerate-interfaces" class="md-nav__link">
+  <a href="#streameventcleanup" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Step 2: Regenerate Interfaces
+        StreamEventCleanup
       
     </span>
   </a>
@@ -1479,10 +1457,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#step-3-implement-the-endpoint" class="md-nav__link">
+  <a href="#closedprojectcleanup-projectdeletionservice" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Step 3: Implement the Endpoint
+        ClosedProjectCleanup / ProjectDeletionService
       
     </span>
   </a>
@@ -1490,10 +1468,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#step-4-add-ui-api-functions" class="md-nav__link">
+  <a href="#historycleanup" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Step 4: Add UI API Functions
+        HistoryCleanup
       
     </span>
   </a>
@@ -1506,10 +1484,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#api-base-url" class="md-nav__link">
+  <a href="#concurrency" class="md-nav__link">
     <span class="md-ellipsis">
       
-        API Base URL
+        Concurrency
       
     </span>
   </a>
@@ -1517,10 +1495,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#spa-routing" class="md-nav__link">
+  <a href="#accepted-dangling-references" class="md-nav__link">
     <span class="md-ellipsis">
       
-        SPA Routing
+        Accepted Dangling References
       
     </span>
   </a>
@@ -1547,124 +1525,169 @@
   
 
 
-<h1 id="api-first-development">API-First Development</h1>
-<p>Axiom follows a contract-first API design. The OpenAPI specification is the source of
-truth — JAX-RS interfaces are generated from it at build time, and backend resource
-classes implement those generated interfaces.</p>
-<hr />
-<h2 id="the-openapi-contract">The OpenAPI Contract</h2>
-<p>The API specification lives at:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>common/api/src/main/resources/openapi.json
-</span></code></pre></div>
-<p>All REST endpoints, request/response schemas, and path parameters are defined here.
-This file is the starting point for any API change.</p>
-<hr />
-<h2 id="code-generation">Code Generation</h2>
-<p>The <code>common/api</code> module uses the
-<a href="https://www.apitomy.io/projects/codegen/">Apitomy Codegen</a> Maven plugin to generate
-JAX-RS interfaces from the OpenAPI spec at compile time.</p>
-<p>Generated output goes to:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>common/api/target/generated-sources/jaxrs/io/apitomy/axiom/api/
-</span></code></pre></div>
-<p>The generated code includes:</p>
-<ul>
-<li><strong>Resource interfaces</strong> — one per API tag/group, with JAX-RS annotations
-  (<code>@Path</code>, <code>@GET</code>, <code>@POST</code>, etc.)</li>
-<li><strong>Model classes</strong> — POJOs with Jackson <code>@JsonProperty</code> annotations for
-  request/response bodies</li>
-</ul>
-<p>The plugin is configured in <code>common/api/pom.xml</code>:</p>
-<div class="language-xml highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nt">&lt;plugin&gt;</span>
-</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">    </span><span class="nt">&lt;groupId&gt;</span>io.apitomy<span class="nt">&lt;/groupId&gt;</span>
-</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">    </span><span class="nt">&lt;artifactId&gt;</span>apitomy-codegen-maven-plugin<span class="nt">&lt;/artifactId&gt;</span>
-</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">    </span><span class="nt">&lt;configuration&gt;</span>
-</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="w">        </span><span class="nt">&lt;javaPackage&gt;</span>io.apitomy.axiom.api<span class="nt">&lt;/javaPackage&gt;</span>
-</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="w">    </span><span class="nt">&lt;/configuration&gt;</span>
-</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="nt">&lt;/plugin&gt;</span>
-</span></code></pre></div>
-<hr />
-<h2 id="implementing-endpoints">Implementing Endpoints</h2>
-<p>Backend implementations live in:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>app/src/main/java/io/apitomy/axiom/app/rest/
-</span></code></pre></div>
-<p>Each resource class implements the corresponding generated interface:</p>
-<div class="language-java highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="nd">@ApplicationScoped</span>
-</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">ProjectsResourceImpl</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">ProjectsResource</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>
-</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">    </span><span class="nd">@Override</span>
-</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">Response</span><span class="w"> </span><span class="nf">getProjects</span><span class="p">(</span><span class="cm">/* params */</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="w">        </span><span class="c1">// implementation</span>
-</span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="w">    </span><span class="p">}</span>
-</span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="p">}</span>
-</span></code></pre></div>
-<p>The generated interface provides the JAX-RS annotations — the implementation class
-only needs to provide the business logic.</p>
-<hr />
-<h2 id="adding-a-new-endpoint">Adding a New Endpoint</h2>
-<h3 id="step-1-edit-the-openapi-spec">Step 1: Edit the OpenAPI Spec</h3>
-<p>Add the path, operation, and any new schemas to <code>common/api/src/main/resources/openapi.json</code>.</p>
-<h3 id="step-2-regenerate-interfaces">Step 2: Regenerate Interfaces</h3>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="nb">cd</span><span class="w"> </span>common/api
-</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>mvn<span class="w"> </span>compile
-</span></code></pre></div>
-<p>This regenerates the JAX-RS interfaces. Check
-<code>target/generated-sources/jaxrs/io/apitomy/axiom/api/</code> to see the new interface
-method.</p>
-<h3 id="step-3-implement-the-endpoint">Step 3: Implement the Endpoint</h3>
-<p>In <code>app/src/main/java/io/apitomy/axiom/app/rest/</code>, either update an existing
-<code>*ResourceImpl.java</code> or create a new one implementing the generated interface.</p>
-<h3 id="step-4-add-ui-api-functions">Step 4: Add UI API Functions</h3>
-<p>In <code>ui/src/config/api.ts</code>, add:</p>
-<ol>
-<li>TypeScript interfaces matching the request/response schemas</li>
-<li>A <code>fetch()</code> function calling the new endpoint</li>
-</ol>
-<p>All API functions follow the same pattern:</p>
-<div class="language-typescript highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="kd">const</span><span class="w"> </span><span class="nx">API_BASE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="sb">`</span><span class="si">${</span><span class="nx">getApiBaseUrl</span><span class="p">()</span><span class="si">}</span><span class="sb">/api/v1`</span><span class="p">;</span>
-</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>
-</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="k">export</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="nx">fetchWidgets</span><span class="p">()</span><span class="o">:</span><span class="w"> </span><span class="nb">Promise</span><span class="o">&lt;</span><span class="nx">Widget</span><span class="p">[]</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">resp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">fetch</span><span class="p">(</span><span class="sb">`</span><span class="si">${</span><span class="nx">API_BASE</span><span class="si">}</span><span class="sb">/widgets`</span><span class="p">);</span>
-</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="nx">resp</span><span class="p">.</span><span class="nx">ok</span><span class="p">)</span><span class="w"> </span><span class="k">throw</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="ne">Error</span><span class="p">(</span><span class="s2">"Failed to fetch widgets"</span><span class="p">);</span>
-</span><span id="__span-6-6"><a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">resp</span><span class="p">.</span><span class="nx">json</span><span class="p">();</span>
-</span><span id="__span-6-7"><a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="p">}</span>
-</span></code></pre></div>
-<hr />
-<h2 id="api-base-url">API Base URL</h2>
-<p>The API base URL is resolved differently in development and production:</p>
+<h1 id="data-retention">Data Retention</h1>
+<p>Axiom deletes old data with scheduled cleanup jobs in <code>app/src/main/java/io/apitomy/axiom/app/</code>. The
+retention periods live in the single-row <code>retention_config</code> table and are edited on the <strong>Data Retention</strong>
+page (<code>/data-retention</code>) or with <code>GET</code>/<code>PUT /api/v1/system/retention</code>.</p>
+<p>The rule for every cleanup job is: <strong>after it runs, no row points at a deleted row</strong>, except for the
+documented soft references listed under <a href="#accepted-dangling-references">Accepted dangling references</a>.</p>
+<h2 id="settings">Settings</h2>
 <table>
 <thead>
 <tr>
-<th>Mode</th>
-<th>Base URL</th>
-<th>Mechanism</th>
+<th>Column</th>
+<th>API field</th>
+<th>Default</th>
+<th>Cleanup job</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>Development</td>
-<td>(empty string)</td>
-<td>Vite proxy forwards <code>/api</code> to <code>localhost:9090</code></td>
+<td><code>closed_project_retention_days</code></td>
+<td><code>closedProjectRetentionDays</code></td>
+<td>90</td>
+<td><code>ClosedProjectCleanup</code></td>
 </tr>
 <tr>
-<td>Production</td>
-<td>From <code>window.AXIOM_API_URL</code></td>
-<td>Injected by the backend at runtime</td>
+<td><code>trace_retention_days</code></td>
+<td><code>traceRetentionDays</code></td>
+<td>30</td>
+<td><code>TraceCleanup</code></td>
+</tr>
+<tr>
+<td><code>event_retention_days</code></td>
+<td><code>eventRetentionDays</code></td>
+<td>90</td>
+<td><code>StreamEventCleanup</code></td>
+</tr>
+<tr>
+<td><code>scheduled_job_run_retention_days</code></td>
+<td><code>scheduledJobRunRetentionDays</code></td>
+<td>0</td>
+<td><code>HistoryCleanup</code></td>
+</tr>
+<tr>
+<td><code>report_retention_days</code></td>
+<td><code>reportRetentionDays</code></td>
+<td>0</td>
+<td><code>HistoryCleanup</code></td>
+</tr>
+<tr>
+<td><code>workflow_run_retention_days</code></td>
+<td><code>workflowRunRetentionDays</code></td>
+<td>0</td>
+<td><code>HistoryCleanup</code></td>
+</tr>
+<tr>
+<td><code>activity_log_retention_days</code></td>
+<td><code>activityLogRetentionDays</code></td>
+<td>0</td>
+<td><code>HistoryCleanup</code></td>
+</tr>
+<tr>
+<td><code>ai_usage_retention_days</code></td>
+<td><code>aiUsageRetentionDays</code></td>
+<td>0</td>
+<td><code>HistoryCleanup</code></td>
 </tr>
 </tbody>
 </table>
-<p>This is handled by <code>getApiBaseUrl()</code> in <code>api.ts</code>.</p>
-<hr />
-<h2 id="spa-routing">SPA Routing</h2>
-<p><code>SpaRoutingFilter.java</code> in the <code>app</code> module catches all non-API routes and forwards
-them to <code>index.html</code>, allowing React Router to handle client-side navigation.</p>
-<p>Routes that are <strong>not</strong> forwarded:</p>
+<p>The five history settings were added in <code>V72</code> (#429). For them, <code>0</code> means <strong>keep forever</strong>, and <code>0</code> is the
+default, so upgrading never deletes data unexpectedly. Negative values are rejected with <code>400</code>. The three
+original settings must be at least 1, because 0 would delete everything; smaller values are also rejected with
+<code>400</code>. A <code>PUT</code> that omits any setting (or sends <code>null</code>) leaves its current value unchanged. <code>V72</code> also dropped
+the unused <code>event_source_log_retention_days</code> column.</p>
+<h2 id="batching-and-retries">Batching and Retries</h2>
+<p>Every job runs hourly (staggered with <code>delayed</code>), selects at most 500 IDs per transaction, and deletes by
+those IDs or with sub-selects, never with an unbounded <code>IN</code> list. Each batch runs in its own transaction
+through <code>CleanupRetry</code>, which retries database lock failures. Each job has a package-private <code>doCleanup()</code>
+that runs all batches in the caller's transaction; tests use it.</p>
+<h2 id="what-each-job-does">What Each Job Does</h2>
+<h3 id="tracecleanup"><code>TraceCleanup</code></h3>
+<p>Deletes traces whose <code>started_on</code> is older than the retention period, with their <code>trace_node</code> and
+<code>tool_execution</code> rows. Before deleting, it clears (sets to <code>NULL</code>):</p>
 <ul>
-<li><code>/api/*</code> — REST API endpoints</li>
-<li><code>/q/*</code> — Quarkus dev UI and health endpoints</li>
-<li>Paths with file extensions (e.g. <code>.js</code>, <code>.css</code>, <code>.png</code>)</li>
+<li><code>trace_id</code> on <code>task</code>, <code>scheduled_job_run</code>, <code>report</code>, <code>workflow_run</code>, <code>routing_outcome</code>, <code>activity_log</code> and
+  <code>ai_usage</code>;</li>
+<li><code>triggered_by_trace_id</code> on <code>scheduled_job_run</code> and <code>report</code>;</li>
+<li><code>trace_node_id</code> on <code>routing_outcome_item</code> and <code>workflow_run_resume</code>, for the deleted trace's nodes.</li>
 </ul>
-<p>Everything else returns <code>index.html</code>, and React Router renders the correct page based
-on the URL.</p>
+<p><code>TraceCleanupTest.everyTraceColumnIsHandled</code> scans every entity for columns named <code>trace_id</code>, <code>*_trace_id</code>
+or <code>trace_node_id</code> and fails if one is not in its list of handled columns. When you add such a column, clear
+it in <code>TraceCleanup</code>, add it to the assertions in <code>TraceCleanupTest</code>, and add it to the list.</p>
+<h3 id="streameventcleanup"><code>StreamEventCleanup</code></h3>
+<p>Deletes stream events older than the retention period, with their ledger entries, routing outcomes and
+routing outcome items. An event is <strong>kept</strong> while a workflow run with status <code>running</code> or <code>waiting</code>:</p>
+<ul>
+<li>has it as <code>trigger_event_id</code>, or</li>
+<li>has a <code>workflow_run_resume</code> row with that <code>event_id</code>.</li>
+</ul>
+<p>Such an event becomes eligible on the first cleanup after the run finishes, so the run → event link is never
+lost while the run can still use it. The job also deletes connection poll logs older than 3 days.</p>
+<h3 id="closedprojectcleanup-projectdeletionservice"><code>ClosedProjectCleanup</code> / <code>ProjectDeletionService</code></h3>
+<p>Deletes <code>Completed</code> projects whose <code>updated_on</code> is older than the retention period (the same code runs when a
+project is deleted through the API). It deletes the project's thread entries, AI usage, activity log entries,
+tasks, workflow runs and their waits, event subscriptions and resume rows, labels and workspace.</p>
+<p>Traces and routing outcomes are event history, not project data, so they are <strong>kept</strong> and their references
+are cleared: <code>trace.project_id</code>, <code>routing_outcome.project_id</code> and <code>task_id</code>, and <code>routing_outcome_item</code>
+<code>project_id</code>, <code>task_id</code> and <code>workflow_run_id</code>. Configuration versions are not project-scoped.</p>
+<h3 id="historycleanup"><code>HistoryCleanup</code></h3>
+<p>Each setting is skipped when it is <code>0</code>.</p>
+<table>
+<thead>
+<tr>
+<th>Data</th>
+<th>Deleted rows</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Scheduled job runs</td>
+<td>Status <code>Completed</code> or <code>Failed</code> and <code>created_on</code> older than the period</td>
+</tr>
+<tr>
+<td>Reports</td>
+<td>Status <code>Completed</code> or <code>Failed</code> and <code>created_on</code> older than the period, with labels</td>
+</tr>
+<tr>
+<td>Workflow runs</td>
+<td>Status <code>completed</code>, <code>failed</code> or <code>cancelled</code>, and <code>completed_on</code> (or <code>started_on</code> if unset) older than the period</td>
+</tr>
+<tr>
+<td>Activity log</td>
+<td><code>created_on</code> older than the period, with or without a project</td>
+</tr>
+<tr>
+<td>AI usage</td>
+<td><code>created_on</code> older than the period, with or without a project</td>
+</tr>
+</tbody>
+</table>
+<p>Workflow runs use an allow-list of finished statuses (<code>FINISHED_WORKFLOW_RUN_STATUSES</code>), so runs in a status
+added later are kept until the list is updated. Deleting a workflow run deletes its <code>workflow_wait</code>,
+<code>workflow_event_subscription</code> and <code>workflow_run_resume</code> rows and clears <code>task.workflow_run_id</code> and
+<code>routing_outcome_item.workflow_run_id</code>. Tasks are kept: they belong to the project and are deleted with it.
+The run's trace follows trace retention.</p>
+<p>Deleting a job run or report does not touch its configuration version (<code>scheduled_job_version</code> /
+<code>report_definition_version</code>), which belongs to the definition.</p>
+<h2 id="concurrency">Concurrency</h2>
+<p>The cleanup jobs use bulk JPQL <code>UPDATE</code> and <code>DELETE</code> statements, which bypass the persistence context. If
+another transaction has the same row loaded as a managed entity (for example a task whose <code>trace_id</code> is being
+cleared) and flushes it after the cleanup commits, it can write the old value back, or fail on a row that no
+longer exists. The window is small, because cleanup only touches rows that are past their retention period,
+and this was already true before #429. The next cleanup run clears any value that was written back.</p>
+<h2 id="accepted-dangling-references">Accepted Dangling References</h2>
+<p>These columns are soft references with no foreign key. They are kept on purpose so history survives, and
+consumers must treat them as possibly dangling:</p>
+<ul>
+<li><code>scheduled_job_run_id</code>, <code>report_id</code> and <code>report_definition_id</code> on <code>ai_usage</code> and <code>activity_log</code>, and
+  <code>trace.report_id</code>, after a job run, report or definition is deleted (see <a href="correlation.html">Correlation</a>).</li>
+<li><code>event_id</code> on <code>trace</code>, <code>task</code>, <code>activity_log</code>, <code>ai_usage</code> and <code>workflow_run_resume</code>, <code>ledger_id</code> on
+  <code>workflow_run_resume</code>, and <code>trigger_event_id</code> / <code>trigger_ledger_id</code> on <code>workflow_run</code>, after event
+  retention deletes the event of a finished run (see
+  <a href="tracing.html">Tracing</a> and <a href="event-sourcing-design.html">Event System Design</a>).</li>
+<li><code>trace_node.entity_type</code> / <code>entity_id</code>, which are free-form display references.</li>
+</ul>
 
 
 
