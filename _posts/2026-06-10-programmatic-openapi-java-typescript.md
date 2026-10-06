@@ -3,6 +3,7 @@ layout: post
 title: "Programmatically Manipulating OpenAPI Documents in Java and TypeScript"
 date: 2026-06-10
 author: Eric Wittmann
+description: 'How to read, modify, and write OpenAPI documents programmatically in Java and TypeScript using the Apitomy Data Models library.'
 ---
 
 There comes a point in every API team's life where you need to do something *programmatic* with

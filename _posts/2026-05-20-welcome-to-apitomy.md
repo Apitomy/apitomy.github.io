@@ -3,6 +3,7 @@ layout: post
 title: "Welcome to Apitomy"
 date: 2026-05-20
 author: Eric Wittmann
+description: 'Meet Apitomy: a new open source brand for API-first tooling, born from the Apicurio community. Libraries, editors, and generators for OpenAPI and AsyncAPI.'
 ---
 
 We're excited to introduce **Apitomy** -- a new open source brand for tools built around API and

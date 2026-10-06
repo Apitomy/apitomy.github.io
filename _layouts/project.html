@@ -2,6 +2,22 @@
 layout: default
 ---
 
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": {{ page.title | jsonify }},
+  "description": {{ page.description | jsonify }},
+  "url": {{ page.url | absolute_url | jsonify }},
+  "applicationCategory": "DeveloperApplication",
+  "operatingSystem": "Web",
+  "isAccessibleForFree": true,
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+  {% if page.github_url %}"sameAs": [{{ page.github_url | jsonify }}],{% endif %}
+  "publisher": { "@type": "Organization", "name": {{ site.title | jsonify }}, "url": {{ site.url | jsonify }} }
+}
+</script>
+
 <div style="--project-color: {{ page.project_color }}">
 
 <section class="project-hero"
