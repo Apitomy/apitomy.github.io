@@ -27,9 +27,7 @@ collections:
 defaults:
   - scope:
       path: ""
-      type: "pages"
     values:
-      layout: "page"
       image:
         path: /assets/images/og-default.png
         width: 1200
@@ -37,14 +35,39 @@ defaults:
         alt: "Apitomy: open source tools for OpenAPI and AsyncAPI"
   - scope:
       path: ""
+      type: "pages"
+    values:
+      layout: "page"
+  - scope:
+      path: ""
       type: "posts"
     values:
       layout: "post"
-      image:
-        path: /assets/images/og-default.png
-        width: 1200
-        height: 630
-        alt: "Apitomy: open source tools for OpenAPI and AsyncAPI"
+  # Collection docs without an explicit date get build-time dates, which churn
+  # in the JSON-LD on every deploy. The 2026-05-20 site launch date freezes
+  # them; a page published later should override date in its own front matter.
+  # jekyll-seo-tag still emits og:type article for dated pages (2.8 has no
+  # override); accepted, since og:type does not affect indexing and the JSON-LD
+  # types below are what search engines read.
+  - scope:
+      path: "_pages"
+    values:
+      # quoted: a YAML Date object in defaults breaks the jekyll 3.10 build
+      # (undefined method valid_encoding? for nil), a String parses fine
+      date: "2026-05-20"
+  # Landing pages are not posts: keep their JSON-LD type WebPage instead of the
+  # BlogPosting the plugin infers from the date. The homepage is exempt via the
+  # plugin's own homepage rule (WebSite).
+  - scope:
+      path: "_pages/projects"
+    values:
+      seo:
+        type: WebPage
+  - scope:
+      path: "_pages/blog.html"
+    values:
+      seo:
+        type: WebPage
 
 plugins:
   - jekyll-sitemap
@@ -58,6 +81,9 @@ exclude:
   - README.md
   - LICENSE
   - dev.sh
+  - todo.md
+  - scripts/
+  - tools/
 
 keep_files:
   - projects/codegen/docs

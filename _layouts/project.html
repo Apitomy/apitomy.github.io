@@ -13,8 +13,8 @@ layout: default
   "operatingSystem": "Web",
   "isAccessibleForFree": true,
   "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
-  "sameAs": [{{ page.github_url | jsonify }}],
-  "publisher": { "@type": "Organization", "name": "Apitomy", "url": "https://www.apitomy.io/" }
+  {% if page.github_url %}"sameAs": [{{ page.github_url | jsonify }}],{% endif %}
+  "publisher": { "@type": "Organization", "name": {{ site.title | jsonify }}, "url": {{ site.url | jsonify }} }
 }
 </script>
 

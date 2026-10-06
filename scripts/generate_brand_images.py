@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """Regenerate the brand images (og card, logo, favicons) into assets/images/.
 
-Colors are read from _sass/_variables.scss and _sass/_hero.scss so the images
-track the site palette. Requires Pillow; runs fully offline.
+Colors are read from _sass/_variables.scss so the images track the site
+palette. Requires Pillow; runs fully offline.
 """
 
 import os
@@ -26,8 +26,11 @@ def read_sass(name):
         return handle.read()
 
 
+VARIABLES = read_sass("_variables.scss")
+
+
 def sass_variable(name):
-    match = re.search(r"\$" + name + r":\s*(#[0-9A-Fa-f]{6})\s*;", read_sass("_variables.scss"))
+    match = re.search(r"\$" + name + r":\s*(#[0-9A-Fa-f]{6})\s*;", VARIABLES)
     if not match:
         sys.exit("missing $" + name + " in _sass/_variables.scss")
     return match.group(1)
@@ -37,12 +40,7 @@ NAVY = sass_variable("color-bg-dark")
 ACCENT = sass_variable("color-accent")
 ACCENT_DARK = sass_variable("color-accent-dark")
 SLATE = sass_variable("color-text-light")
-
-match = re.search(r"\.hero\s*\{.*?\n\s+p\s*\{[^}]*?color:\s*(#[0-9A-Fa-f]{6})",
-                  read_sass("_hero.scss"), re.DOTALL)
-if not match:
-    sys.exit("hero paragraph color not found in _sass/_hero.scss")
-HERO_TEXT = match.group(1)
+HERO_TEXT = sass_variable("color-text-on-dark")
 
 
 def rgb(hex_color):
@@ -53,12 +51,11 @@ def rgba(hex_color, alpha):
     return rgb(hex_color) + (alpha,)
 
 
-def save(image, name):
+def save(image, name, **save_kwargs):
     path = os.path.join(OUT_DIR, name)
-    image.save(path)
+    image.save(path, **save_kwargs)
     with Image.open(path) as written:
         print(f"{os.path.abspath(path)} {written.size[0]}x{written.size[1]}")
-    return path
 
 
 def write_og_card():
@@ -117,10 +114,7 @@ def main():
     touch = draw_tile(180 * SS, rounded=False).resize((180, 180), Image.LANCZOS)
     save(touch.convert("RGB"), "apple-touch-icon.png")
 
-    ico_path = os.path.join(OUT_DIR, "favicon.ico")
-    favicon_32.save(ico_path, format="ICO", sizes=[(16, 16), (32, 32)])
-    with Image.open(ico_path) as written:
-        print(f"{os.path.abspath(ico_path)} {written.size[0]}x{written.size[1]}")
+    save(favicon_32, "favicon.ico", format="ICO", sizes=[(16, 16), (32, 32)])
 
 
 if __name__ == "__main__":

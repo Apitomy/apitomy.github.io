@@ -6,3 +6,5 @@ _site/
 .bundle/
 vendor/
 .worktrees/
+.claude/
+.playwright-mcp/
