@@ -3,6 +3,7 @@ layout: post
 title: "Visual API Design vs. Writing YAML by Hand"
 date: 2026-06-10
 author: Eric Wittmann
+description: 'Visual API design tools vs hand-written YAML: where a visual editor wins, where text still matters, and how Apitomy bridges both.'
 ---
 
 Let's talk about YAML. Specifically, let's talk about the hundreds (or thousands) of lines of it

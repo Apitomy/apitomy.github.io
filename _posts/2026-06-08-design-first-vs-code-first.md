@@ -3,6 +3,7 @@ layout: post
 title: "Design-First vs Code-First APIs: Why Apitomy Bets on Design-First"
 date: 2026-06-08
 author: Eric Wittmann
+description: 'Design-first vs code-first APIs: what each approach costs at scale and why Apitomy bets on designing the OpenAPI contract before implementation.'
 ---
 
 If you've been building APIs for more than five minutes, you've probably run into The Debate:

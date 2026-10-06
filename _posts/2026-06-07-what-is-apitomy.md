@@ -3,6 +3,7 @@ layout: post
 title: "What is Apitomy? An API-First Toolkit for Modern Teams"
 date: 2026-06-07
 author: Eric Wittmann
+description: 'What Apitomy is and which problems it solves: an API-first toolkit of open source libraries and editors for teams that design APIs before writing code.'
 ---
 
 We've all been there. You sketch out an API on a whiteboard (or in a text file
