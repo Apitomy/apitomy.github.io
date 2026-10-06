@@ -1,8 +1,21 @@
 title: Apitomy
+tagline: Open-Source OpenAPI and AsyncAPI Tools
 description: >-
-  Open source tools for API and Schema specifications.
+  Open source tools for OpenAPI and AsyncAPI. Model, validate, generate,
+  and visually edit API specifications with Java, TypeScript, and React.
 url: "https://www.apitomy.io"
 baseurl: ""
+logo: /assets/images/logo.png
+
+social:
+  name: Apitomy
+  links:
+    - https://github.com/Apitomy
+
+# After creating the Google Search Console property, uncomment and paste
+# the verification token so the google-site-verification meta tag is emitted.
+# webmaster_verifications:
+#   google: "<token from Search Console>"
 
 permalink: /blog/:year/:month/:day/:title/
 
@@ -17,11 +30,21 @@ defaults:
       type: "pages"
     values:
       layout: "page"
+      image:
+        path: /assets/images/og-default.png
+        width: 1200
+        height: 630
+        alt: "Apitomy: open source tools for OpenAPI and AsyncAPI"
   - scope:
       path: ""
       type: "posts"
     values:
       layout: "post"
+      image:
+        path: /assets/images/og-default.png
+        width: 1200
+        height: 630
+        alt: "Apitomy: open source tools for OpenAPI and AsyncAPI"
 
 plugins:
   - jekyll-sitemap
