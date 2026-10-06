@@ -2,6 +2,22 @@
 layout: default
 ---
 
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": {{ page.title | jsonify }},
+  "description": {{ page.description | jsonify }},
+  "url": {{ page.url | absolute_url | jsonify }},
+  "applicationCategory": "DeveloperApplication",
+  "operatingSystem": "Web",
+  "isAccessibleForFree": true,
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+  "sameAs": [{{ page.github_url | jsonify }}],
+  "publisher": { "@type": "Organization", "name": "Apitomy", "url": "https://www.apitomy.io/" }
+}
+</script>
+
 <div style="--project-color: {{ page.project_color }}">
 
 <section class="project-hero"

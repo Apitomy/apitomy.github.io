@@ -2,4 +2,16 @@
 layout: default
 ---
 
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Apitomy",
+  "url": "https://www.apitomy.io/",
+  "logo": "https://www.apitomy.io/assets/images/logo.png",
+  "description": {{ site.description | jsonify }},
+  "sameAs": ["https://github.com/Apitomy"]
+}
+</script>
+
 {{ content }}
