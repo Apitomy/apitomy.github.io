@@ -1757,6 +1757,11 @@ human-task display values. Nested map access and Jackson <code>JsonNode</code> n
 <td>The human-task node name</td>
 </tr>
 <tr>
+<td><code>title</code></td>
+<td>String</td>
+<td>The task title (e.g. an inbox subject): the node's <code>title</code> expression resolved, else the node name</td>
+</tr>
+<tr>
 <td><code>description</code></td>
 <td>String</td>
 <td>Instructions for the person completing the task</td>
@@ -1774,6 +1779,10 @@ human-task display values. Nested map access and Jackson <code>JsonNode</code> n
 </tbody>
 </table>
 <p>Input expression strings resolve against instance context; non-string JSON inputs remain literals.</p>
+<p><code>title</code> is resolved against the instance context each time the info is read, and non-string results are
+converted to text. It falls back to <code>nodeName</code> when the node has no title, the expression fails, or it
+yields <code>null</code>; a failing title is logged as a warning and never blocks the task. Use <code>title</code> rather than
+<code>nodeName</code> as the subject of task inbox items.</p>
 <h3 id="output-field-metadata">Output field metadata</h3>
 <p>Each <code>OutputDefinition</code> describes one form field a person fills in to complete the task. Only <code>name</code>
 is required; every other attribute is optional and backward-compatible — an output that declares only
