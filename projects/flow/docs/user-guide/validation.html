@@ -979,6 +979,17 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#receive-event-correlation-key" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Receive-event correlation key
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#parallel-structure-error" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1550,6 +1561,17 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#receive-event-correlation-key" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Receive-event correlation key
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#parallel-structure-error" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1991,6 +2013,33 @@ Some codes in later tables can therefore be errors for malformed types and warni
 <td><code>UNSUPPORTED_EXPRESSION_DIALECT</code></td>
 <td>WARNING</td>
 <td>Browser cannot validate this syntax; consult Java</td>
+</tr>
+</tbody>
+</table>
+<h3 id="receive-event-correlation-key">Receive-event correlation key</h3>
+<table>
+<thead>
+<tr>
+<th>Code</th>
+<th>Severity</th>
+<th>Rule</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>INVALID_CORRELATION_KEY</code></td>
+<td>shape ERROR</td>
+<td><code>correlationKey</code> is not an object with string <code>subscriptionKey</code> / <code>eventKey</code></td>
+</tr>
+<tr>
+<td><code>MISSING_CORRELATION_KEY_EXPRESSION</code></td>
+<td>ERROR</td>
+<td><code>subscriptionKey</code> or <code>eventKey</code> missing/blank when <code>correlationKey</code> is present</td>
+</tr>
+<tr>
+<td><code>INVALID_CORRELATION_KEY_EXPRESSION</code></td>
+<td>ERROR</td>
+<td>Key expression is not valid EL</td>
 </tr>
 </tbody>
 </table>

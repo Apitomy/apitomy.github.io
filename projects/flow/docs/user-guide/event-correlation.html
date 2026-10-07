@@ -850,6 +850,17 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#correlationkey" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        correlationKey
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -1433,6 +1444,17 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#correlationkey" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        correlationKey
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -1536,7 +1558,8 @@ test correlation and deliver the event to the chosen branch.</p>
 <ol>
 <li>The instance is in <code>WAITING</code> status</li>
 <li>The addressed node is an active parked <code>receive-event</code> node</li>
-<li>The event matches the node's criteria (event type + match expressions)</li>
+<li>The event matches the node's criteria (event type, correlation key when configured, then match
+   expressions)</li>
 </ol>
 <p>Returns <code>false</code> in all other cases (wrong status, wrong node type, type mismatch, match expression failure).</p>
 <p>The overload without <code>nodeId</code> tests the single current node, or <strong>any</strong> parked receiver when there is no
@@ -1615,11 +1638,54 @@ event that arrived <em>before</em> the branch parked can still be delivered:</p>
 rejected with <code>INVALID_LOOKBACK</code>. Flow does not store events; running the look-back is the host's job.
 <code>ReceiveEventInfo.lookback()</code> returns the parsed <code>EventLookback</code> (a <code>Mode</code> of <code>RUN_START</code>, <code>NONE</code>, or
 <code>DURATION</code>, plus the <code>Duration</code> for the last mode), so hosts do not have to parse the value again.</p>
+<h3 id="correlationkey">correlationKey</h3>
+<p>Optional explicit correlation key. Hosts can store the evaluated subscription key in an indexed column
+and look up waiting runs by the event key instead of evaluating every <code>match</code> expression against every
+candidate.</p>
+<div class="language-json highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="p">{</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">  </span><span class="nt">"eventType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"order-shipped"</span><span class="p">,</span>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">  </span><span class="nt">"correlationKey"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">    </span><span class="nt">"subscriptionKey"</span><span class="p">:</span><span class="w"> </span><span class="s2">"context.orderId"</span><span class="p">,</span>
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">    </span><span class="nt">"eventKey"</span><span class="p">:</span><span class="w"> </span><span class="s2">"event.data.orderId"</span>
+</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="w">  </span><span class="p">}</span>
+</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="p">}</span>
+</span></code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Evaluated against</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>subscriptionKey</code></td>
+<td><code>context</code></td>
+<td>Evaluated when the node is parked; exposed as <code>ReceiveEventInfo.subscriptionKey()</code></td>
+</tr>
+<tr>
+<td><code>eventKey</code></td>
+<td><code>event</code></td>
+<td>Evaluated against the incoming event; see <code>WorkflowEngine.evaluateEventKey(...)</code></td>
+</tr>
+</tbody>
+</table>
+<p>Both expressions are required when <code>correlationKey</code> is present, and both must be valid EL. Each is a
+single expression; build composite keys with EL string concatenation, for example
+<code>context.orderId += ':' += context.region</code>. Evaluated keys are compared as strings.</p>
+<p>When a key is configured, <code>matchesEvent</code> requires the subscription key to be non-null and equal to the
+event key. <code>match</code> expressions still apply as an additional filter. Nodes without a <code>correlationKey</code>
+behave exactly as before, and <code>subscriptionKey()</code> / <code>evaluateEventKey(...)</code> return <code>null</code> for them.</p>
+<div class="language-java highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="n">ReceiveEventInfo</span><span class="w"> </span><span class="n">info</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">engine</span><span class="p">.</span><span class="na">getReceiveEventInfo</span><span class="p">(</span><span class="n">definition</span><span class="p">,</span><span class="w"> </span><span class="n">instance</span><span class="p">,</span><span class="w"> </span><span class="n">nodeId</span><span class="p">);</span>
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="n">String</span><span class="w"> </span><span class="n">subscriptionKey</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">info</span><span class="p">.</span><span class="na">subscriptionKey</span><span class="p">();</span><span class="w">          </span><span class="c1">// store in an indexed column</span>
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="n">String</span><span class="w"> </span><span class="n">eventKey</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">engine</span><span class="p">.</span><span class="na">evaluateEventKey</span><span class="p">(</span><span class="n">definition</span><span class="p">,</span><span class="w"> </span><span class="n">nodeId</span><span class="p">,</span><span class="w"> </span><span class="n">event</span><span class="p">);</span><span class="w">  </span><span class="c1">// look up waiting runs</span>
+</span></code></pre></div>
 <h2 id="expression-examples">Expression Examples</h2>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>event.repository == context.repository
-</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>event.pull_request.number == context.prNumber
-</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>event.action == 'closed' &amp;&amp; event.pull_request.merged == true
-</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>!(event.draft)
+<div class="language-text highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>event.repository == context.repository
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>event.pull_request.number == context.prNumber
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>event.action == 'closed' &amp;&amp; event.pull_request.merged == true
+</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>!(event.draft)
 </span></code></pre></div>
 <p>Dot notation navigates nested maps: <code>event.pull_request.number</code> reads the number inside <code>pull_request</code>.</p>
 <p>EL navigation supports nested Jackson <code>JsonNode</code> values as well as maps/lists. The public event parameter
@@ -1628,38 +1694,38 @@ that map. A root <code>JsonNode</code> cannot be passed directly to <code>matche
 <h2 id="complete-example">Complete Example</h2>
 <h3 id="setup">Setup</h3>
 <p>An earlier action node stored PR data in the context:</p>
-<div class="language-json highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="p">{</span><span class="w"> </span><span class="nt">"repository"</span><span class="p">:</span><span class="w"> </span><span class="s2">"apitomy/axiom"</span><span class="p">,</span><span class="w"> </span><span class="nt">"prNumber"</span><span class="p">:</span><span class="w"> </span><span class="mi">42</span><span class="w"> </span><span class="p">}</span>
+<div class="language-json highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="p">{</span><span class="w"> </span><span class="nt">"repository"</span><span class="p">:</span><span class="w"> </span><span class="s2">"apitomy/axiom"</span><span class="p">,</span><span class="w"> </span><span class="nt">"prNumber"</span><span class="p">:</span><span class="w"> </span><span class="mi">42</span><span class="w"> </span><span class="p">}</span>
 </span></code></pre></div>
 <p>The receive-event node config:</p>
-<div class="language-json highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="p">{</span>
-</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">  </span><span class="nt">"eventType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pr-merged"</span><span class="p">,</span>
-</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">  </span><span class="nt">"match"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
-</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="w">    </span><span class="s2">"event.repository == context.repository"</span><span class="p">,</span>
-</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="w">    </span><span class="s2">"event.pull_request.number == context.prNumber"</span>
-</span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="w">  </span><span class="p">]</span>
-</span><span id="__span-5-7"><a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="p">}</span>
+<div class="language-json highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="p">{</span>
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="w">  </span><span class="nt">"eventType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pr-merged"</span><span class="p">,</span>
+</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="w">  </span><span class="nt">"match"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="w">    </span><span class="s2">"event.repository == context.repository"</span><span class="p">,</span>
+</span><span id="__span-7-5"><a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="w">    </span><span class="s2">"event.pull_request.number == context.prNumber"</span>
+</span><span id="__span-7-6"><a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="w">  </span><span class="p">]</span>
+</span><span id="__span-7-7"><a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a><span class="p">}</span>
 </span></code></pre></div>
 <h3 id="correlation-flow">Correlation Flow</h3>
-<div class="language-java highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="c1">// An event arrives from GitHub</span>
-</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">Object</span><span class="o">&gt;</span><span class="w"> </span><span class="n">event</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Map</span><span class="p">.</span><span class="na">of</span><span class="p">(</span>
-</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="w">    </span><span class="s">"type"</span><span class="p">,</span><span class="w"> </span><span class="s">"pr-merged"</span><span class="p">,</span>
-</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="w">    </span><span class="s">"repository"</span><span class="p">,</span><span class="w"> </span><span class="s">"apitomy/axiom"</span><span class="p">,</span>
-</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="w">    </span><span class="s">"pull_request"</span><span class="p">,</span><span class="w"> </span><span class="n">Map</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="s">"number"</span><span class="p">,</span><span class="w"> </span><span class="mi">42</span><span class="p">)</span>
-</span><span id="__span-6-6"><a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="p">);</span>
-</span><span id="__span-6-7"><a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a>
-</span><span id="__span-6-8"><a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a><span class="c1">// Check all waiting instances</span>
-</span><span id="__span-6-9"><a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">WorkflowInstance</span><span class="w"> </span><span class="n">instance</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">waitingInstances</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-6-10"><a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a><span class="w">    </span><span class="n">Workflow</span><span class="w"> </span><span class="n">definition</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">getDefinition</span><span class="p">(</span><span class="n">instance</span><span class="p">.</span><span class="na">workflowId</span><span class="p">());</span>
-</span><span id="__span-6-11"><a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a>
-</span><span id="__span-6-12"><a id="__codelineno-6-12" name="__codelineno-6-12" href="#__codelineno-6-12"></a><span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">ActiveBranch</span><span class="w"> </span><span class="n">branch</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">instance</span><span class="p">.</span><span class="na">activeBranches</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-6-13"><a id="__codelineno-6-13" name="__codelineno-6-13" href="#__codelineno-6-13"></a><span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">engine</span><span class="p">.</span><span class="na">matchesEvent</span><span class="p">(</span><span class="n">definition</span><span class="p">,</span><span class="w"> </span><span class="n">instance</span><span class="p">,</span><span class="w"> </span><span class="n">branch</span><span class="p">.</span><span class="na">nodeId</span><span class="p">(),</span><span class="w"> </span><span class="n">event</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-6-14"><a id="__codelineno-6-14" name="__codelineno-6-14" href="#__codelineno-6-14"></a><span class="w">            </span><span class="n">NodeResult</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">NodeResult</span><span class="p">(</span><span class="n">NodeResultStatus</span><span class="p">.</span><span class="na">COMPLETED</span><span class="p">,</span><span class="w"> </span><span class="n">event</span><span class="p">);</span>
-</span><span id="__span-6-15"><a id="__codelineno-6-15" name="__codelineno-6-15" href="#__codelineno-6-15"></a><span class="w">            </span><span class="n">WorkflowInstance</span><span class="w"> </span><span class="n">updated</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">engine</span><span class="p">.</span><span class="na">completeNode</span><span class="p">(</span><span class="n">definition</span><span class="p">,</span><span class="w"> </span><span class="n">instance</span><span class="p">,</span><span class="w"> </span><span class="n">branch</span><span class="p">.</span><span class="na">nodeId</span><span class="p">(),</span><span class="w"> </span><span class="n">result</span><span class="p">);</span>
-</span><span id="__span-6-16"><a id="__codelineno-6-16" name="__codelineno-6-16" href="#__codelineno-6-16"></a><span class="w">            </span><span class="n">save</span><span class="p">(</span><span class="n">updated</span><span class="p">);</span>
-</span><span id="__span-6-17"><a id="__codelineno-6-17" name="__codelineno-6-17" href="#__codelineno-6-17"></a><span class="w">            </span><span class="k">break</span><span class="p">;</span><span class="w"> </span><span class="c1">// This host policy delivers to the first matching receiver only.</span>
-</span><span id="__span-6-18"><a id="__codelineno-6-18" name="__codelineno-6-18" href="#__codelineno-6-18"></a><span class="w">        </span><span class="p">}</span>
-</span><span id="__span-6-19"><a id="__codelineno-6-19" name="__codelineno-6-19" href="#__codelineno-6-19"></a><span class="w">    </span><span class="p">}</span>
-</span><span id="__span-6-20"><a id="__codelineno-6-20" name="__codelineno-6-20" href="#__codelineno-6-20"></a><span class="p">}</span>
+<div class="language-java highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="c1">// An event arrives from GitHub</span>
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">Object</span><span class="o">&gt;</span><span class="w"> </span><span class="n">event</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Map</span><span class="p">.</span><span class="na">of</span><span class="p">(</span>
+</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="w">    </span><span class="s">"type"</span><span class="p">,</span><span class="w"> </span><span class="s">"pr-merged"</span><span class="p">,</span>
+</span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="w">    </span><span class="s">"repository"</span><span class="p">,</span><span class="w"> </span><span class="s">"apitomy/axiom"</span><span class="p">,</span>
+</span><span id="__span-8-5"><a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="w">    </span><span class="s">"pull_request"</span><span class="p">,</span><span class="w"> </span><span class="n">Map</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="s">"number"</span><span class="p">,</span><span class="w"> </span><span class="mi">42</span><span class="p">)</span>
+</span><span id="__span-8-6"><a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a><span class="p">);</span>
+</span><span id="__span-8-7"><a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a>
+</span><span id="__span-8-8"><a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a><span class="c1">// Check all waiting instances</span>
+</span><span id="__span-8-9"><a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">WorkflowInstance</span><span class="w"> </span><span class="n">instance</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">waitingInstances</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-8-10"><a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a><span class="w">    </span><span class="n">Workflow</span><span class="w"> </span><span class="n">definition</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">getDefinition</span><span class="p">(</span><span class="n">instance</span><span class="p">.</span><span class="na">workflowId</span><span class="p">());</span>
+</span><span id="__span-8-11"><a id="__codelineno-8-11" name="__codelineno-8-11" href="#__codelineno-8-11"></a>
+</span><span id="__span-8-12"><a id="__codelineno-8-12" name="__codelineno-8-12" href="#__codelineno-8-12"></a><span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">ActiveBranch</span><span class="w"> </span><span class="n">branch</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">instance</span><span class="p">.</span><span class="na">activeBranches</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-8-13"><a id="__codelineno-8-13" name="__codelineno-8-13" href="#__codelineno-8-13"></a><span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">engine</span><span class="p">.</span><span class="na">matchesEvent</span><span class="p">(</span><span class="n">definition</span><span class="p">,</span><span class="w"> </span><span class="n">instance</span><span class="p">,</span><span class="w"> </span><span class="n">branch</span><span class="p">.</span><span class="na">nodeId</span><span class="p">(),</span><span class="w"> </span><span class="n">event</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-8-14"><a id="__codelineno-8-14" name="__codelineno-8-14" href="#__codelineno-8-14"></a><span class="w">            </span><span class="n">NodeResult</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">NodeResult</span><span class="p">(</span><span class="n">NodeResultStatus</span><span class="p">.</span><span class="na">COMPLETED</span><span class="p">,</span><span class="w"> </span><span class="n">event</span><span class="p">);</span>
+</span><span id="__span-8-15"><a id="__codelineno-8-15" name="__codelineno-8-15" href="#__codelineno-8-15"></a><span class="w">            </span><span class="n">WorkflowInstance</span><span class="w"> </span><span class="n">updated</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">engine</span><span class="p">.</span><span class="na">completeNode</span><span class="p">(</span><span class="n">definition</span><span class="p">,</span><span class="w"> </span><span class="n">instance</span><span class="p">,</span><span class="w"> </span><span class="n">branch</span><span class="p">.</span><span class="na">nodeId</span><span class="p">(),</span><span class="w"> </span><span class="n">result</span><span class="p">);</span>
+</span><span id="__span-8-16"><a id="__codelineno-8-16" name="__codelineno-8-16" href="#__codelineno-8-16"></a><span class="w">            </span><span class="n">save</span><span class="p">(</span><span class="n">updated</span><span class="p">);</span>
+</span><span id="__span-8-17"><a id="__codelineno-8-17" name="__codelineno-8-17" href="#__codelineno-8-17"></a><span class="w">            </span><span class="k">break</span><span class="p">;</span><span class="w"> </span><span class="c1">// This host policy delivers to the first matching receiver only.</span>
+</span><span id="__span-8-18"><a id="__codelineno-8-18" name="__codelineno-8-18" href="#__codelineno-8-18"></a><span class="w">        </span><span class="p">}</span>
+</span><span id="__span-8-19"><a id="__codelineno-8-19" name="__codelineno-8-19" href="#__codelineno-8-19"></a><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-8-20"><a id="__codelineno-8-20" name="__codelineno-8-20" href="#__codelineno-8-20"></a><span class="p">}</span>
 </span></code></pre></div>
 <p><code>getDefinition</code> and <code>save</code> are host operations in this sketch. Load/update under the host's concurrency
 policy, persist the returned snapshot, and deduplicate delivery. To fan out to more than one receiver,
@@ -1668,14 +1734,14 @@ The engine does not provide an event bus or exactly-once completion.</p>
 <h2 id="event-output-mappings">Event output mappings</h2>
 <p>Without mappings (absent, null, or empty <code>outputs</code>), the raw result payload is flat-merged into context.
 With mappings, only the declared keys are merged:</p>
-<div class="language-json highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="p">{</span>
-</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="w">    </span><span class="nt">"eventType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pr-merged"</span><span class="p">,</span>
-</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="w">    </span><span class="nt">"match"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"event.repository == context.repository"</span><span class="p">],</span>
-</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="w">    </span><span class="nt">"outputs"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
-</span><span id="__span-7-5"><a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="w">        </span><span class="p">{</span><span class="w"> </span><span class="nt">"contextKey"</span><span class="p">:</span><span class="w"> </span><span class="s2">"mergedPr"</span><span class="p">,</span><span class="w"> </span><span class="nt">"expression"</span><span class="p">:</span><span class="w"> </span><span class="s2">"event.pull_request.number"</span><span class="w"> </span><span class="p">},</span>
-</span><span id="__span-7-6"><a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="w">        </span><span class="p">{</span><span class="w"> </span><span class="nt">"contextKey"</span><span class="p">:</span><span class="w"> </span><span class="s2">"previousPr"</span><span class="p">,</span><span class="w"> </span><span class="nt">"expression"</span><span class="p">:</span><span class="w"> </span><span class="s2">"context.prNumber"</span><span class="w"> </span><span class="p">}</span>
-</span><span id="__span-7-7"><a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a><span class="w">    </span><span class="p">]</span>
-</span><span id="__span-7-8"><a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a><span class="p">}</span>
+<div class="language-json highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="p">{</span>
+</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="w">    </span><span class="nt">"eventType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pr-merged"</span><span class="p">,</span>
+</span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="w">    </span><span class="nt">"match"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"event.repository == context.repository"</span><span class="p">],</span>
+</span><span id="__span-9-4"><a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="w">    </span><span class="nt">"outputs"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+</span><span id="__span-9-5"><a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="w">        </span><span class="p">{</span><span class="w"> </span><span class="nt">"contextKey"</span><span class="p">:</span><span class="w"> </span><span class="s2">"mergedPr"</span><span class="p">,</span><span class="w"> </span><span class="nt">"expression"</span><span class="p">:</span><span class="w"> </span><span class="s2">"event.pull_request.number"</span><span class="w"> </span><span class="p">},</span>
+</span><span id="__span-9-6"><a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a><span class="w">        </span><span class="p">{</span><span class="w"> </span><span class="nt">"contextKey"</span><span class="p">:</span><span class="w"> </span><span class="s2">"previousPr"</span><span class="p">,</span><span class="w"> </span><span class="nt">"expression"</span><span class="p">:</span><span class="w"> </span><span class="s2">"context.prNumber"</span><span class="w"> </span><span class="p">}</span>
+</span><span id="__span-9-7"><a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a><span class="w">    </span><span class="p">]</span>
+</span><span id="__span-9-8"><a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a><span class="p">}</span>
 </span></code></pre></div>
 <p>All mappings see the same pre-merge <code>context</code> and incoming <code>event</code>; a mapping cannot read another
 mapping's newly written key. <code>ReceiveEventInfo.outputMappings()</code> exposes the declarations. A mapping
