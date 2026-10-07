@@ -839,6 +839,17 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#lookback" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        lookback
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -1411,6 +1422,17 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#lookback" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        lookback
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -1521,12 +1543,13 @@ test correlation and deliver the event to the chosen branch.</p>
 single cursor. A true result does not tell you which branch to complete. Matching is read-only, and
 <code>completeNode</code> does not re-check correlation: the host decides whether and where to deliver the result.</p>
 <h2 id="introspection">Introspection</h2>
-<p><code>getReceiveEventInfo(workflow, instance, nodeId)</code> returns the event type, match expressions, and output
-mappings for a parked receiver. Index by event type to avoid loading every waiting instance. The overload
+<p><code>getReceiveEventInfo(workflow, instance, nodeId)</code> returns the event type, match expressions, output
+mappings, and parsed lookback for a parked receiver. Index by event type to avoid loading every waiting instance. The overload
 without a node ID returns the current or first eligible receiver, not the full set.</p>
 <div class="language-java highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">ReceiveEventInfo</span><span class="w"> </span><span class="n">info</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">engine</span><span class="p">.</span><span class="na">getReceiveEventInfo</span><span class="p">(</span><span class="n">definition</span><span class="p">,</span><span class="w"> </span><span class="n">instance</span><span class="p">);</span>
 </span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="c1">// info.eventType()   → "pr-merged"</span>
 </span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="c1">// info.matchExpressions() → ["event.repository == context.repository", ...]</span>
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="c1">// info.lookback()    → EventLookback[mode=DURATION, duration=PT10M]</span>
 </span></code></pre></div>
 <h2 id="receive-event-node-config">Receive-Event Node Config</h2>
 <div class="language-json highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="p">{</span>
@@ -1534,8 +1557,9 @@ without a node ID returns the current or first eligible receiver, not the full s
 </span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">  </span><span class="nt">"match"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
 </span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">    </span><span class="s2">"event.repository == context.repository"</span><span class="p">,</span>
 </span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="w">    </span><span class="s2">"event.pull_request.number == context.prNumber"</span>
-</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="w">  </span><span class="p">]</span>
-</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="p">}</span>
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="w">  </span><span class="p">],</span>
+</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="w">  </span><span class="nt">"lookback"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PT10M"</span>
+</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="p">}</span>
 </span></code></pre></div>
 <h3 id="eventtype">eventType</h3>
 <p>Required for matching: an exact string match against the event's <code>type</code> field. A type mismatch rejects
@@ -1562,6 +1586,35 @@ variables are available:</p>
 </tbody>
 </table>
 <p>If <code>match</code> is absent or empty, any event of the correct type matches.</p>
+<h3 id="lookback">lookback</h3>
+<p>Optional. Controls how far back a host searches stored events when a branch parks on the node, so an
+event that arrived <em>before</em> the branch parked can still be delivered:</p>
+<table>
+<thead>
+<tr>
+<th>Value</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>run-start</code> (default)</td>
+<td>Events with timestamps at or after the start of the workflow instance</td>
+</tr>
+<tr>
+<td><code>none</code></td>
+<td>Only events delivered after the node parks</td>
+</tr>
+<tr>
+<td>ISO-8601 duration, e.g. <code>PT10M</code></td>
+<td>Events newer than <em>now minus duration</em>, still limited to the instance start</td>
+</tr>
+</tbody>
+</table>
+<p>Durations must be positive and use the <code>java.time.Duration</code> form (<code>PnDTnHnMnS</code>). Other values are
+rejected with <code>INVALID_LOOKBACK</code>. Flow does not store events; running the look-back is the host's job.
+<code>ReceiveEventInfo.lookback()</code> returns the parsed <code>EventLookback</code> (a <code>Mode</code> of <code>RUN_START</code>, <code>NONE</code>, or
+<code>DURATION</code>, plus the <code>Duration</code> for the last mode), so hosts do not have to parse the value again.</p>
 <h2 id="expression-examples">Expression Examples</h2>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>event.repository == context.repository
 </span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>event.pull_request.number == context.prNumber

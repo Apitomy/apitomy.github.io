@@ -1676,7 +1676,7 @@ Browser import also checks outer JSON types that Java's record/Jackson binding h
 If preflight finds errors, semantic checks do not run on the malformed data.</p>
 <p>Examples include <code>INVALID_WORKFLOW</code>, <code>INVALID_NODE</code>, <code>INVALID_EDGE</code>, <code>INVALID_NODE_TYPE</code>,
 <code>INVALID_NODE_POSITION</code>, <code>INVALID_INPUTS_TYPE</code>, <code>INVALID_OUTPUTS_TYPE</code>, <code>INVALID_INPUT_DEFINITION</code>,
-<code>INVALID_OUTPUT_DEFINITION</code>, <code>INVALID_TASK_DESCRIPTION</code>, and <code>INVALID_MATCH_TYPE</code>. Browser outer-field
+<code>INVALID_OUTPUT_DEFINITION</code>, <code>INVALID_TASK_DESCRIPTION</code>, <code>INVALID_MATCH_TYPE</code>, and <code>INVALID_LOOKBACK</code>. Browser outer-field
 checks additionally include <code>INVALID_NODES</code>, <code>INVALID_EDGES</code>, <code>INVALID_NODE_CONFIG</code>, <code>INVALID_NODE_NAME</code>,
 <code>INVALID_WORKFLOW_DESCRIPTION</code>, <code>INVALID_WORKFLOW_VERSION</code>, and edge field-type diagnostics.
 Some codes in later tables can therefore be errors for malformed types and warnings for missing values.</p>
@@ -1764,6 +1764,10 @@ Some codes in later tables can therefore be errors for malformed types and warni
 <tr>
 <td><code>INVALID_WAIT_DURATION</code></td>
 <td>Wait node <code>duration</code> is present but not a valid ISO 8601 duration</td>
+</tr>
+<tr>
+<td><code>INVALID_LOOKBACK</code></td>
+<td>Receive-event <code>lookback</code> is not <code>run-start</code>, <code>none</code>, or a positive ISO 8601 duration</td>
 </tr>
 </tbody>
 </table>
