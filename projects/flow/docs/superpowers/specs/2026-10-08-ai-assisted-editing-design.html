@@ -12,7 +12,7 @@
         <meta name="author" content="Apitomy">
       
       
-        <link rel="canonical" href="https://www.apitomy.io/projects/flow/docs/superpowers/specs/2026-09-21-code-quality-program-design.html">
+        <link rel="canonical" href="https://www.apitomy.io/projects/flow/docs/superpowers/specs/2026-10-08-ai-assisted-editing-design.html">
       
       
       
@@ -25,7 +25,7 @@
     
     
       
-        <title>Code-quality program design - Apitomy Flow</title>
+        <title>AI-Assisted Editing Foundations — Design - Apitomy Flow</title>
       
     
     
@@ -80,7 +80,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#code-quality-program-design" class="md-skip">
+        <a href="#ai-assisted-editing-foundations-design" class="md-skip">
           Skip to content
         </a>
       
@@ -137,7 +137,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Code-quality program design
+              AI-Assisted Editing Foundations — Design
             
           </span>
         </div>
@@ -1184,10 +1184,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#scope-and-architecture" class="md-nav__link">
+  <a href="#context" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Scope and architecture
+        Context
       
     </span>
   </a>
@@ -1195,10 +1195,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#isolation-and-integration" class="md-nav__link">
+  <a href="#decisions" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Isolation and integration
+        Decisions
       
     </span>
   </a>
@@ -1206,10 +1206,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#compatibility-decisions" class="md-nav__link">
+  <a href="#overall-feature-set" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Compatibility decisions
+        Overall Feature Set
       
     </span>
   </a>
@@ -1217,10 +1217,71 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#verification" class="md-nav__link">
+  <a href="#1-revision-and-origin" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Verification
+        §1 Revision and Origin
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="§1 Revision and Origin">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#placement-of-positionless-nodes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Placement of positionless nodes
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-change-sets" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        §2 Change Sets
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-proposal-review-ux" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        §3 Proposal Review UX
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#error-handling" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Error Handling
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#testing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Testing
       
     </span>
   </a>
@@ -1247,40 +1308,297 @@
   
 
 
-<h1 id="code-quality-program-design">Code-quality program design</h1>
-<p>The user approved this design on September 21, 2026: implement C1–C14 as fourteen separate pull requests,
-using concurrent isolated worktrees and stacked branches for dependent changes.</p>
-<h2 id="scope-and-architecture">Scope and architecture</h2>
-<p>GitHub issues #124–#137 define the acceptance criteria, in C1–C14 order. Preserve the current JSON wire
-format and public APIs where possible, with explicit documentation of necessary stricter validation.
-Independent execution, validation, immutable-model, editor, and diff work proceeds concurrently.</p>
+<h1 id="ai-assisted-editing-foundations-design">AI-Assisted Editing Foundations — Design</h1>
+<p>Date: 2026-10-08
+Status: Approved (brainstorming)</p>
+<h2 id="context">Context</h2>
+<p>Apitomy Axiom will offer an AI-based workflow creation experience in which the user makes manual and
+AI-assisted edits concurrently. Apitomy Flow (<code>@apitomy/flow-ui</code>) is the canvas for that experience. This
+spec covers the Flow-side foundations (sub-projects 1–3 of the feature set below).</p>
+<h2 id="decisions">Decisions</h2>
+<table>
+<thead>
+<tr>
+<th>Topic</th>
+<th>Decision</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Where the agent runs</td>
+<td>Outside Flow (Axiom/host). Flow is AI-agnostic and exposes an edit API.</td>
+</tr>
+<tr>
+<td>How AI edits land</td>
+<td>Staged change sets are the primitive; "apply live" = auto-accepting a change set as one tagged, undoable transaction.</td>
+</tr>
+<tr>
+<td>Action Types / tools authoring</td>
+<td>Not owned by Flow. Axiom has its own editors.</td>
+</tr>
+<tr>
+<td>AI entry points in Flow</td>
+<td>Host-defined context hooks only; no chat and no agent-status UI in Flow.</td>
+</tr>
+<tr>
+<td>Conflicts</td>
+<td>Strict base-revision check; stale change sets are rejected and the host re-asks the agent.</td>
+</tr>
+<tr>
+<td>Server parity</td>
+<td>Change-set application and <code>contentRevision</code> ship in both TS (<code>ui/</code>) and Java (<code>engine/</code>), verified by shared <code>conformance/</code> fixtures.</td>
+</tr>
+<tr>
+<td>Per-turn grouping</td>
+<td>No Flow support. Axiom accumulates a turn's change sets server-side and proposes one combined set.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="overall-feature-set">Overall Feature Set</h2>
+<ol>
+<li>Revision and origin model (this spec)</li>
+<li>Change sets and imperative editor handle (this spec)</li>
+<li>Proposal review UX (this spec)</li>
+<li>Context hooks: host <code>contextActions</code> in canvas, node, edge and selection menus and on Problems panel rows,
+   receiving a <code>FlowContext { workflow, contentRevision, selection, problems, position? }</code> (future spec)</li>
+<li>Live Action Type catalog: subscribable <code>ActionTypeProvider</code>, "unresolved" rendering for unknown action
+   types, <code>onOpenActionType(value)</code> host callback (future spec)</li>
+</ol>
+<p>Out of scope: in-Flow chat, agent status display, per-change rebase, Action Type / tool editing in Flow.</p>
+<h2 id="1-revision-and-origin">§1 Revision and Origin</h2>
 <ul>
-<li>Execution: preserve parked branches, reject unsupported joins before side effects, queue recovery
-  iteratively under one budget, and unify completion eligibility/required-output checks.</li>
-<li>Data: normalize untrusted JSON, snapshot JSON ownership, introduce typed config adapters, and execute
-  common Java/TypeScript conformance fixtures.</li>
-<li>UI: use atomic document transactions for undo/redo and scoped interaction, with real-browser tests.</li>
-<li>Maintenance: structured failures, indexed graph analysis, focused components, and accurate docs.</li>
+<li><strong><code>contentRevision</code></strong>: <code>"sha256:" + hex(SHA-256(JCS(stripLayout(workflow))))</code>.</li>
+<li><code>JCS</code> is RFC 8785 JSON canonicalization.</li>
+<li><code>stripLayout</code> removes <code>position</code> from every node. All other fields, including workflow <code>id</code>, <code>name</code>,
+    <code>description</code>, <code>version</code> and config extension keys, are part of the content.</li>
+<li>It is distinct from the existing internal <code>revision</code> counter, which also increments on layout-only edits.
+    Layout-only edits do not change it, and undo to identical content restores the identical value.</li>
+<li>It is implemented in TS (<code>ui/src/changeset/contentRevision.ts</code>) and in Java (<code>ContentRevision</code> in
+    <code>engine/</code>). Both are verified by <code>conformance/content-revision.json</code>.</li>
+<li>Hosts computing it server-side must hash exactly the Flow <code>Workflow</code> document they send to the editor,
+    with no host-specific fields added.</li>
+<li><strong>Origin</strong>: <code>EditorCommand</code> gains optional <code>origin?: 'user' | 'host' |</code>agent:${string}<code>` (default</code>'user'`). Undo snapshots record the origin of the change that produced them so undo labels can name it.</li>
+<li><strong><code>onChange</code></strong> becomes <code>onChange(workflow, meta: { contentRevision, origin })</code>. The added argument is
+  backwards compatible.</li>
+<li><strong><code>handle.replace(workflow, origin)</code></strong> replaces the document via the existing <code>import</code> command as one
+  undo step. The <code>workflow</code> prop remains seed-only.</li>
+<li><strong><code>onSelectionChange({ nodeIds, edgeIds })</code></strong>: fires only when the selection actually changes. Hosts use
+  it to open related tabs (such as Action Type editors) and to feed "user is looking at X" context to the
+  agent. It is pulled forward from the context-hooks work.</li>
 </ul>
-<h2 id="isolation-and-integration">Isolation and integration</h2>
-<p>Each issue owns a branch and <code>.worktrees/cN</code> directory. Engine recovery changes stack C3 on C1 and C4
-on C3; C12 builds on that execution stack. C6 builds on C5, C8 combines stable model/boundary work,
-and C10 builds on C9. C11 is independent. C13 integrates prior fixes for targeted extraction and
-benchmarks. C14 documents the final combined contract. Dependency bases are recorded in every PR.</p>
-<h2 id="compatibility-decisions">Compatibility decisions</h2>
+<h3 id="placement-of-positionless-nodes">Placement of positionless nodes</h3>
+<p>Today <code>import</code> calls <code>needsLayout</code>, which returns true when <em>any</em> node lacks a position. It then lays out
+every node again, which would discard the user's manual layout whenever a server-produced document adds one
+positionless node. The new behaviour:</p>
 <ul>
-<li>C2 may reject unsupported conditional join shapes rather than introduce a new persisted token model.</li>
-<li>Java configuration adapters retain legacy map serialization and extension fields.</li>
-<li>Browser expression support is explicitly delimited; valid engine-only syntax must not be mislabeled
-  as malformed syntax without a documented distinction.</li>
-<li>Real-browser testing uses Playwright rather than adding jsdom to pure Vitest tests.</li>
-<li>Recovered failures retain their causes without requiring hosts to implement a replacement SPI.</li>
+<li>A pure helper, <code>placeNewNodes(workflow)</code>, positions only the nodes that have no position. It places each
+  one near its connected neighbours, falling back to a free spot below the existing bounds.</li>
+<li><code>import</code> (and therefore <code>replace</code>) uses <code>placeNewNodes</code> when at least one node already has a position.
+  Full <code>layoutWorkflow</code> is used only when no node has a position.</li>
+<li><code>applyChangeSet</code> uses <code>placeNewNodes</code> for added nodes.</li>
+<li>Placement is presentation only and is not part of the conformance fixtures. Java does not place nodes.</li>
 </ul>
-<h2 id="verification">Verification</h2>
-<p>Every behavioral issue gets a failing regression before its fix. Run Maven tests for engine changes;
-run relevant Vitest tests, <code>npx tsc --noEmit</code>, lint, and build for UI changes. Browser scenarios and
-consumer package smoke tests execute for C10. Independent review checks issue scope and correctness.
-A temporary integration branch verifies the combined result before handoff. No PR is automatically merged.</p>
+<h2 id="2-change-sets">§2 Change Sets</h2>
+<div class="language-ts highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kd">interface</span><span class="w"> </span><span class="nx">ChangeSet</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">    </span><span class="nx">id</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">    </span><span class="nx">baseRevision</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span><span class="w">            </span><span class="c1">// contentRevision the agent based this on</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">    </span><span class="nx">author</span><span class="o">:</span><span class="w"> </span><span class="sb">`agent:</span><span class="si">${</span><span class="kt">string</span><span class="si">}</span><span class="sb">`</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="s1">'host'</span><span class="p">;</span>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">    </span><span class="nx">summary</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="w">    </span><span class="nx">ops</span><span class="o">:</span><span class="w"> </span><span class="kt">ChangeOp</span><span class="p">[];</span>
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="p">}</span>
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="kr">type</span><span class="w"> </span><span class="nx">ChangeOp</span><span class="w"> </span><span class="o">=</span>
+</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">op</span><span class="o">:</span><span class="w"> </span><span class="s1">'addNode'</span><span class="p">;</span><span class="w"> </span><span class="nx">node</span><span class="o">:</span><span class="w"> </span><span class="kt">WorkflowNode</span><span class="w"> </span><span class="p">}</span>
+</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">op</span><span class="o">:</span><span class="w"> </span><span class="s1">'updateNode'</span><span class="p">;</span><span class="w"> </span><span class="nx">id</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span><span class="w"> </span><span class="nx">patch</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">name?</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span><span class="w"> </span><span class="nx">config?</span><span class="o">:</span><span class="w"> </span><span class="kt">Record</span><span class="o">&lt;</span><span class="kt">string</span><span class="p">,</span><span class="w"> </span><span class="nx">unknown</span><span class="o">&gt;</span><span class="w"> </span><span class="p">};</span>
+</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="w">        </span><span class="nx">unset?</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">[]</span><span class="w"> </span><span class="p">}</span>
+</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">op</span><span class="o">:</span><span class="w"> </span><span class="s1">'renameNode'</span><span class="p">;</span><span class="w"> </span><span class="nx">id</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span><span class="w"> </span><span class="nx">newId</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="p">}</span>
+</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">op</span><span class="o">:</span><span class="w"> </span><span class="s1">'removeNode'</span><span class="p">;</span><span class="w"> </span><span class="nx">id</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="p">}</span>
+</span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">op</span><span class="o">:</span><span class="w"> </span><span class="s1">'addEdge'</span><span class="p">;</span><span class="w"> </span><span class="nx">edge</span><span class="o">:</span><span class="w"> </span><span class="kt">WorkflowEdge</span><span class="w"> </span><span class="p">}</span>
+</span><span id="__span-0-16"><a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">op</span><span class="o">:</span><span class="w"> </span><span class="s1">'updateEdge'</span><span class="p">;</span><span class="w"> </span><span class="nx">id</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span><span class="w"> </span><span class="nx">patch</span><span class="o">:</span><span class="w"> </span><span class="kt">Partial</span><span class="o">&lt;</span><span class="nx">Omit</span><span class="o">&lt;</span><span class="nx">WorkflowEdge</span><span class="p">,</span><span class="w"> </span><span class="s1">'id'</span><span class="o">&gt;&gt;</span><span class="p">;</span><span class="w"> </span><span class="nx">unset?</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">[]</span><span class="w"> </span><span class="p">}</span>
+</span><span id="__span-0-17"><a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">op</span><span class="o">:</span><span class="w"> </span><span class="s1">'removeEdge'</span><span class="p">;</span><span class="w"> </span><span class="nx">id</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="p">}</span>
+</span><span id="__span-0-18"><a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">op</span><span class="o">:</span><span class="w"> </span><span class="s1">'metadata'</span><span class="p">;</span><span class="w"> </span><span class="nx">patch</span><span class="o">:</span><span class="w"> </span><span class="kt">Partial</span><span class="o">&lt;</span><span class="nx">Pick</span><span class="o">&lt;</span><span class="nx">Workflow</span><span class="p">,</span><span class="w"> </span><span class="s1">'name'</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="s1">'description'</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="s1">'version'</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="p">};</span>
+</span></code></pre></div>
+<p>Op semantics:</p>
+<ul>
+<li><code>updateNode.patch.config</code> is merged shallowly into the existing config. Nested values, such as the
+  <code>inputs</code> and <code>outputs</code> mappings, are replaced whole.</li>
+<li><code>updateNode.unset</code> lists top-level config keys to remove, for example <code>timeout</code> or <code>correlationKey</code>.
+  <code>updateEdge.unset</code> lists top-level edge fields to remove, for example <code>condition</code>. <code>unset</code> is applied after
+  <code>patch</code>, and a key appearing in both is <code>malformed</code>. <code>null</code> in a patch is stored as a value, not treated as
+  a removal.</li>
+<li>Because <code>unset</code> and patches operate on top-level keys only, removing one entry from a nested mapping means
+  resending the whole mapping. For example, to drop input <code>foo</code> from an action node, send
+  <code>patch.config.inputs</code> containing every remaining input; <code>unset: ["inputs"]</code> would remove all of them.</li>
+<li><code>renameNode</code> rewrites the <code>source</code>/<code>target</code> of attached edges, the same as the existing <code>renameNode</code>
+  command.</li>
+<li><code>removeNode</code> also removes all edges attached to the node.</li>
+<li>Ops apply in order. Later ops see the effects of earlier ops.</li>
+</ul>
+<p>Pure core, in <code>ui/src/changeset/applyChangeSet.ts</code>:</p>
+<ul>
+<li><code>applyChangeSet(workflow, changeSet)</code> returns <code>{ ok: true; workflow }</code> or
+  <code>{ ok: false; error: ChangeSetError }</code>.</li>
+<li><code>ChangeSetError</code> is <code>{ code, opIndex?, reason }</code>. <code>reason</code> is human-readable, and <code>code</code> is one of the
+  stable values below, which hosts may map to agent prompt hints:</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Code</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>target-missing</code></td>
+<td>The op references a node or edge that does not exist.</td>
+</tr>
+<tr>
+<td><code>duplicate-id</code></td>
+<td>An added or renamed element's id already exists.</td>
+</tr>
+<tr>
+<td><code>edge-endpoint-missing</code></td>
+<td>An edge's <code>source</code> or <code>target</code> does not exist.</td>
+</tr>
+<tr>
+<td><code>malformed</code></td>
+<td>The op is structurally invalid, for example a key in both <code>patch</code> and <code>unset</code>.</td>
+</tr>
+<tr>
+<td><code>read-only</code></td>
+<td>The editor is read-only. Handle only.</td>
+</tr>
+<tr>
+<td><code>stale</code></td>
+<td><code>baseRevision</code> does not match <code>contentRevision</code>. No <code>opIndex</code>.</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>It is atomic: any error leaves the workflow unchanged.</li>
+<li>Java parity: <code>ChangeSets.apply(workflow, changeSet)</code> in <code>engine/</code> has the same semantics and the same
+  error codes. Both implementations are verified by <code>conformance/changesets.json</code>. Each fixture case gives an
+  input workflow, a change set, and either the expected output workflow (compared with layout stripped) or
+  the expected error <code>code</code> and <code>opIndex</code>.</li>
+<li>Added nodes without a <code>position</code> are placed by <code>placeNewNodes</code> (see §1).</li>
+</ul>
+<p>Imperative handle, exposed through a <code>ref</code> on <code>WorkflowEditor</code>. None of these methods throw.</p>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Result</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>propose(cs)</code></td>
+<td><code>{ status: 'staged' }</code> or <code>{ status: 'rejected', error }</code></td>
+</tr>
+<tr>
+<td><code>apply(cs)</code></td>
+<td><code>{ status: 'applied' }</code> or <code>{ status: 'rejected', error }</code></td>
+</tr>
+<tr>
+<td><code>clearHighlights()</code></td>
+<td><code>void</code></td>
+</tr>
+<tr>
+<td><code>withdraw(id)</code></td>
+<td><code>void</code></td>
+</tr>
+<tr>
+<td><code>replace(workflow, origin)</code></td>
+<td><code>void</code></td>
+</tr>
+<tr>
+<td><code>getSnapshot()</code></td>
+<td><code>{ workflow, contentRevision, selection, problems }</code></td>
+</tr>
+</tbody>
+</table>
+<p>Rules:</p>
+<ul>
+<li><code>cs.baseRevision !== contentRevision</code> produces the error code <code>stale</code>.</li>
+<li><code>apply</code> dispatches a new reducer command, <code>applyChangeSet</code>. That command produces exactly one undo step,
+  with <code>origin = cs.author</code>.</li>
+<li>At most one staged proposal exists. A new <code>propose</code> replaces the current one, and the old one resolves as
+  <code>'withdrawn'</code>.</li>
+<li>A staged proposal becomes stale on any content edit. Edits the user makes through undo or redo count too.
+  It does not become stale on layout-only edits.</li>
+</ul>
+<h2 id="3-proposal-review-ux">§3 Proposal Review UX</h2>
+<ul>
+<li><strong>Preview</strong>: while a proposal is staged, <code>preview = applyChangeSet(document, cs)</code>. The canvas renders the
+  preview's elements plus ghosts of removed elements. Each element gets a diff status of <code>added</code>,
+  <code>modified</code>, <code>removed</code> or <code>unchanged</code>. That status comes from a pure helper, extracted from the existing
+  <code>WorkflowDiffViewer</code> diff logic and shared with it.</li>
+<li><strong>Interaction</strong>: the canvas stays editable. Proposal elements can't be edited. Selecting one shows a
+  read-only before/after view in the review bar.</li>
+<li><strong>Review bar</strong>: a floating panel at the bottom of the canvas, clear of the canvas toolbar.</li>
+<li>It shows the summary, the author, and change counts.</li>
+<li>It shows a validation delta for <code>preview</code> versus the current document, using built-in validation plus
+    <code>spi.validate</code>: "introduces N / fixes M".</li>
+<li><strong>Accept</strong> runs the same path as <code>apply</code> and resolves as <code>'accepted'</code>. <strong>Reject</strong> discards the proposal
+    and resolves as <code>'rejected'</code>.</li>
+<li>When the proposal is stale, the bar shows "Out of date" and only <strong>Dismiss</strong> is available.</li>
+<li><strong>Highlight after apply</strong>: elements added or modified by the most recently applied change set (via
+  <code>apply</code> or Accept) keep a lingering highlight. It uses the same diff-status helper and the same styling as
+  the review overlay. Removed elements get no ghost.</li>
+<li>The highlight clears on the next user content edit, on <code>handle.clearHighlights()</code>, or when another
+    change set is applied.</li>
+<li>It is enabled by default and can be disabled with the <code>highlightApplied={false}</code> prop.</li>
+<li><strong>Events</strong>: <code>onProposalResolved(id, 'accepted' | 'rejected' | 'stale' | 'withdrawn')</code>.</li>
+<li><code>'stale'</code> fires at the moment of invalidation.</li>
+<li>On accept, <code>onChange</code> fires once, with the agent origin.</li>
+<li><strong>Read-only mode</strong>:</li>
+<li><code>propose</code> renders the preview without the review bar, which is useful for displaying a diff.</li>
+<li><code>apply</code> returns an error with the code <code>read-only</code>.</li>
+</ul>
+<h2 id="error-handling">Error Handling</h2>
+<ul>
+<li>No handle method throws.</li>
+<li>Failed change sets return <code>{ status: 'rejected', error: { code, opIndex?, reason } }</code>, which is
+  suitable for sending back to the agent.</li>
+<li>Host validation failures in the preview are reported the same way as the existing host validation
+  failures.</li>
+</ul>
+<h2 id="testing">Testing</h2>
+<p>Shared conformance fixtures, run by both the vitest and JUnit 5 suites:</p>
+<ul>
+<li><code>conformance/changesets.json</code>: every op type, <code>unset</code>, every error code, cascade, rename rewrite, and
+  ordering.</li>
+<li><code>conformance/content-revision.json</code>: hashes for representative workflows, including key-order
+  permutations and number formatting edge cases.</li>
+</ul>
+<p>Vitest unit tests on pure logic. No jsdom.</p>
+<ul>
+<li><code>applyChangeSet</code>:</li>
+<li>each op type;</li>
+<li>missing targets and duplicate ids;</li>
+<li>cascade on <code>removeNode</code>;</li>
+<li>edge rewrite on <code>renameNode</code>;</li>
+<li>op ordering;</li>
+<li>atomicity.</li>
+<li><code>contentRevision</code>:</li>
+<li>stable for identical content;</li>
+<li>unchanged by layout-only edits;</li>
+<li>restored by undo.</li>
+<li>Reducer:</li>
+<li><code>applyChangeSet</code> creates a single undo step;</li>
+<li>origin is recorded;</li>
+<li>stale, staged and withdrawn transitions are correct.</li>
+<li>Diff status helper, including parity with <code>WorkflowDiffViewer</code> behaviour.</li>
+<li>Validation delta computation.</li>
+<li><code>placeNewNodes</code>: only positionless nodes move, and the full-layout fallback applies when no node has a
+  position.</li>
+<li>Highlight lifecycle: set on apply, cleared on user edit, on <code>clearHighlights</code> and on the next apply.</li>
+<li><code>onSelectionChange</code>: fires only on an actual change.</li>
+<li>Java: JUnit 5 tests for <code>ChangeSets</code> and <code>ContentRevision</code> that drive the conformance fixtures.</li>
+<li>Manual verification in the dev app (via Chrome DevTools MCP), with demo controls that propose or apply a
+  canned change set.</li>
+</ul>
 
 
 
