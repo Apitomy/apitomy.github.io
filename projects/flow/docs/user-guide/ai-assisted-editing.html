@@ -1024,6 +1024,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#context-actions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Context actions
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#events" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1439,6 +1450,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#context-actions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Context actions
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#events" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1722,6 +1744,79 @@ removed edge is drawn dashed in red.</p>
 <p><img alt="Applied change highlighted" src="images/ai-assisted-editing/after-accepted-highlight.png" /></p>
 <p>A user content edit makes the proposal stale. Only Dismiss remains, and the overlay is greyed out:</p>
 <p><img alt="Stale proposal" src="images/ai-assisted-editing/after-proposal-stale.png" /></p>
+<h2 id="context-actions">Context actions</h2>
+<p>Context menus are the place to start AI work from the canvas. <code>spi.contextActions</code> is called each time a
+menu opens. It receives a <code>FlowContext</code> and returns the host items, which are shown below the built-in
+Clone/Delete items. Flow never shows a prompt itself: open your own UI from <code>onSelect</code>, anchored at
+<code>screenPosition</code>.</p>
+<table>
+<thead>
+<tr>
+<th>Surface</th>
+<th>Opened by</th>
+<th>Target</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Canvas background</td>
+<td>Right-click</td>
+<td><code>{ kind: 'canvas', flowPosition }</code></td>
+</tr>
+<tr>
+<td>Node</td>
+<td>Right-click; ContextMenu key or Shift+F10 when focused</td>
+<td><code>{ kind: 'node', nodeId }</code></td>
+</tr>
+<tr>
+<td>Edge</td>
+<td>Right-click; ContextMenu key or Shift+F10 when focused</td>
+<td><code>{ kind: 'edge', edgeId }</code></td>
+</tr>
+<tr>
+<td>Inside a multi-selection</td>
+<td>Right-click on a selected element</td>
+<td><code>{ kind: 'selection', nodeIds, edgeIds }</code></td>
+</tr>
+<tr>
+<td>Problems panel row</td>
+<td>Right-click; the row's "⋯" button</td>
+<td><code>{ kind: 'problem', problem }</code></td>
+</tr>
+</tbody>
+</table>
+<div class="language-tsx highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="kd">const</span><span class="w"> </span><span class="nx">spi</span><span class="o">:</span><span class="w"> </span><span class="kt">EditorSpi</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="w">  </span><span class="nx">contextActions</span><span class="o">:</span><span class="w"> </span><span class="p">(</span><span class="nx">context</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">[</span>
+</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="w">    </span><span class="p">{</span>
+</span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="w">      </span><span class="nx">id</span><span class="o">:</span><span class="w"> </span><span class="s1">'ask-ai'</span><span class="p">,</span>
+</span><span id="__span-8-5"><a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="w">      </span><span class="nx">label</span><span class="o">:</span><span class="w"> </span><span class="kt">context.target.kind</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="s1">'problem'</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="s1">'Ask AI to fix this'</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="s1">'Ask AI…'</span><span class="p">,</span>
+</span><span id="__span-8-6"><a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a><span class="w">      </span><span class="nx">onSelect</span><span class="o">:</span><span class="w"> </span><span class="p">(</span><span class="nx">chosen</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">openPrompt</span><span class="p">({</span>
+</span><span id="__span-8-7"><a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a><span class="w">        </span><span class="nx">anchor</span><span class="o">:</span><span class="w"> </span><span class="kt">chosen.screenPosition</span><span class="p">,</span>
+</span><span id="__span-8-8"><a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a><span class="w">        </span><span class="c1">// Use the revision the user was looking at as the change set's base.</span>
+</span><span id="__span-8-9"><a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a><span class="w">        </span><span class="nx">onSubmit</span><span class="o">:</span><span class="w"> </span><span class="kt">async</span><span class="w"> </span><span class="p">(</span><span class="nx">text</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">editorRef</span><span class="p">.</span><span class="nx">current</span><span class="o">?</span><span class="p">.</span><span class="nx">propose</span><span class="p">(</span>
+</span><span id="__span-8-10"><a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a><span class="w">          </span><span class="k">await</span><span class="w"> </span><span class="nx">agent</span><span class="p">.</span><span class="nx">proposeChange</span><span class="p">({</span><span class="w"> </span><span class="nx">text</span><span class="p">,</span><span class="w"> </span><span class="nx">context</span><span class="o">:</span><span class="w"> </span><span class="kt">chosen</span><span class="p">,</span><span class="w"> </span><span class="nx">baseRevision</span><span class="o">:</span><span class="w"> </span><span class="kt">chosen.contentRevision</span><span class="w"> </span><span class="p">})),</span>
+</span><span id="__span-8-11"><a id="__codelineno-8-11" name="__codelineno-8-11" href="#__codelineno-8-11"></a><span class="w">      </span><span class="p">}),</span>
+</span><span id="__span-8-12"><a id="__codelineno-8-12" name="__codelineno-8-12" href="#__codelineno-8-12"></a><span class="w">    </span><span class="p">},</span>
+</span><span id="__span-8-13"><a id="__codelineno-8-13" name="__codelineno-8-13" href="#__codelineno-8-13"></a><span class="w">  </span><span class="p">],</span>
+</span><span id="__span-8-14"><a id="__codelineno-8-14" name="__codelineno-8-14" href="#__codelineno-8-14"></a><span class="p">};</span>
+</span></code></pre></div>
+<ul>
+<li><strong>Read-only editors:</strong> built-in items are hidden but host items are shown. Check <code>context.readOnly</code> to
+  hide your own items as well.</li>
+<li><strong>Interactivity lock:</strong> when the canvas interactivity lock is on, built-in items are hidden and host items
+  are still shown.</li>
+<li><strong>Simulation:</strong> no menus open while simulating.</li>
+<li><strong>Problems "⋯" button:</strong> disabled while simulating, and when <code>contextActions</code> returns no items for that
+  row.</li>
+<li><strong>Nothing to show:</strong> if neither Flow nor the host has an item, no menu opens.</li>
+<li><strong>Fresh items:</strong> <code>contextActions</code> runs on every opening, so items can depend on the current state, for
+  example to hide AI actions while an agent is busy. It is also called, with errors silenced, to decide
+  whether a Problems row's "⋯" button is enabled.</li>
+<li><strong>Errors:</strong> if <code>contextActions</code> throws or returns something invalid, Flow logs it and still shows the
+  built-in items. If an <code>onSelect</code> throws, the error is logged and the menu closes.</li>
+</ul>
+<p><img alt="Node menu with host actions" src="images/context-actions/after-node-menu.png" /></p>
+<p><img alt="Problems row menu" src="images/context-actions/after-problem-menu.png" /></p>
 <h2 id="events">Events</h2>
 <ul>
 <li><code>onChange(workflow, { contentRevision, origin })</code> — <code>origin</code> is <code>'user'</code>, <code>'host'</code> or <code>agent:&lt;name&gt;</code>.
@@ -1731,16 +1826,16 @@ removed edge is drawn dashed in red.</p>
 <li><code>onSelectionChange({ nodeIds, edgeIds })</code> — fires only when the selection actually changes; useful for
   opening related host tabs or giving the agent "user is looking at X" context.</li>
 </ul>
-<div class="language-tsx highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="p">&lt;</span><span class="nt">WorkflowEditor</span><span class="w"> </span><span class="na">ref</span><span class="o">=</span><span class="p">{</span><span class="nx">editorRef</span><span class="p">}</span><span class="w"> </span><span class="na">workflow</span><span class="o">=</span><span class="p">{</span><span class="nx">seed</span><span class="p">}</span>
-</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="w">    </span><span class="na">onChange</span><span class="o">=</span><span class="p">{(</span><span class="nx">workflow</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">contentRevision</span><span class="p">,</span><span class="w"> </span><span class="nx">origin</span><span class="w"> </span><span class="p">})</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">save</span><span class="p">(</span><span class="nx">workflow</span><span class="p">,</span><span class="w"> </span><span class="nx">contentRevision</span><span class="p">,</span><span class="w"> </span><span class="nx">origin</span><span class="p">)}</span>
-</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="w">    </span><span class="na">onProposalResolved</span><span class="o">=</span><span class="p">{(</span><span class="nx">id</span><span class="p">,</span><span class="w"> </span><span class="nx">outcome</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">agent</span><span class="p">.</span><span class="nx">notify</span><span class="p">(</span><span class="nx">id</span><span class="p">,</span><span class="w"> </span><span class="nx">outcome</span><span class="p">)}</span>
-</span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="w">    </span><span class="na">onSelectionChange</span><span class="o">=</span><span class="p">{({</span><span class="w"> </span><span class="nx">nodeIds</span><span class="p">,</span><span class="w"> </span><span class="nx">edgeIds</span><span class="w"> </span><span class="p">})</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">agent</span><span class="p">.</span><span class="nx">setFocus</span><span class="p">(</span><span class="nx">nodeIds</span><span class="p">,</span><span class="w"> </span><span class="nx">edgeIds</span><span class="p">)}</span><span class="w"> </span><span class="p">/&gt;</span>
+<div class="language-tsx highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="p">&lt;</span><span class="nt">WorkflowEditor</span><span class="w"> </span><span class="na">ref</span><span class="o">=</span><span class="p">{</span><span class="nx">editorRef</span><span class="p">}</span><span class="w"> </span><span class="na">workflow</span><span class="o">=</span><span class="p">{</span><span class="nx">seed</span><span class="p">}</span>
+</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="w">    </span><span class="na">onChange</span><span class="o">=</span><span class="p">{(</span><span class="nx">workflow</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">contentRevision</span><span class="p">,</span><span class="w"> </span><span class="nx">origin</span><span class="w"> </span><span class="p">})</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">save</span><span class="p">(</span><span class="nx">workflow</span><span class="p">,</span><span class="w"> </span><span class="nx">contentRevision</span><span class="p">,</span><span class="w"> </span><span class="nx">origin</span><span class="p">)}</span>
+</span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="w">    </span><span class="na">onProposalResolved</span><span class="o">=</span><span class="p">{(</span><span class="nx">id</span><span class="p">,</span><span class="w"> </span><span class="nx">outcome</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">agent</span><span class="p">.</span><span class="nx">notify</span><span class="p">(</span><span class="nx">id</span><span class="p">,</span><span class="w"> </span><span class="nx">outcome</span><span class="p">)}</span>
+</span><span id="__span-9-4"><a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="w">    </span><span class="na">onSelectionChange</span><span class="o">=</span><span class="p">{({</span><span class="w"> </span><span class="nx">nodeIds</span><span class="p">,</span><span class="w"> </span><span class="nx">edgeIds</span><span class="w"> </span><span class="p">})</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">agent</span><span class="p">.</span><span class="nx">setFocus</span><span class="p">(</span><span class="nx">nodeIds</span><span class="p">,</span><span class="w"> </span><span class="nx">edgeIds</span><span class="p">)}</span><span class="w"> </span><span class="p">/&gt;</span>
 </span></code></pre></div>
 <h2 id="read-only-behaviour">Read-only behaviour</h2>
 <p>In a read-only editor, <code>propose</code> renders the preview without the review bar, which is useful for displaying
 a diff. <code>apply</code> is refused with the code <code>read-only</code>.</p>
-<div class="language-ts highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="kd">const</span><span class="w"> </span><span class="nx">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">readOnlyRef</span><span class="p">.</span><span class="nx">current</span><span class="o">!</span><span class="p">.</span><span class="nx">apply</span><span class="p">(</span><span class="nx">changeSet</span><span class="p">);</span>
-</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="c1">// { status: 'rejected', error: { code: 'read-only', reason: '...' } }</span>
+<div class="language-ts highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="kd">const</span><span class="w"> </span><span class="nx">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">readOnlyRef</span><span class="p">.</span><span class="nx">current</span><span class="o">!</span><span class="p">.</span><span class="nx">apply</span><span class="p">(</span><span class="nx">changeSet</span><span class="p">);</span>
+</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="c1">// { status: 'rejected', error: { code: 'read-only', reason: '...' } }</span>
 </span></code></pre></div>
 <h2 id="limitations">Limitations</h2>
 <ul>
