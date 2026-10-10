@@ -1035,6 +1035,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#live-action-type-catalog" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Live Action Type catalog
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#events" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1461,6 +1472,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#live-action-type-catalog" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Live Action Type catalog
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#events" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1817,6 +1839,29 @@ Clone/Delete items. Flow never shows a prompt itself: open your own UI from <cod
 </ul>
 <p><img alt="Node menu with host actions" src="images/context-actions/after-node-menu.png" /></p>
 <p><img alt="Problems row menu" src="images/context-actions/after-problem-menu.png" /></p>
+<h2 id="live-action-type-catalog">Live Action Type catalog</h2>
+<p>The editor loads <code>spi.actionTypes</code> once for the whole editor. To change the catalog, for example after an
+agent creates an Action Type, pass a new array or provider function. The editor reloads it without a
+remount, and while a provider function loads it keeps the previous list visible. A catalog that loaded empty
+shows a free-form Action Type field and marks every referenced Action Type as unresolved.</p>
+<div class="language-tsx highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="kd">const</span><span class="w"> </span><span class="p">[</span><span class="nx">catalog</span><span class="p">,</span><span class="w"> </span><span class="nx">setCatalog</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">useState</span><span class="p">&lt;</span><span class="nt">ActionTypeDescriptor</span><span class="err">[]</span><span class="p">&gt;(</span><span class="nx">initialCatalog</span><span class="p">);</span>
+</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="kd">const</span><span class="w"> </span><span class="nx">spi</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">useMemo</span><span class="p">&lt;</span><span class="nt">EditorSpi</span><span class="p">&gt;(()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">({</span>
+</span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="w">  </span><span class="nx">actionTypes</span><span class="o">:</span><span class="w"> </span><span class="kt">catalog</span><span class="p">,</span>
+</span><span id="__span-9-4"><a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="w">  </span><span class="nx">openActionType</span><span class="o">:</span><span class="w"> </span><span class="p">({</span><span class="w"> </span><span class="nx">value</span><span class="p">,</span><span class="w"> </span><span class="nx">resolved</span><span class="w"> </span><span class="p">})</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">(</span><span class="nx">resolved</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="nx">openEditor</span><span class="p">(</span><span class="nx">value</span><span class="p">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="nx">openCreateDialog</span><span class="p">(</span><span class="nx">value</span><span class="p">)),</span>
+</span><span id="__span-9-5"><a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="p">}),</span><span class="w"> </span><span class="p">[</span><span class="nx">catalog</span><span class="p">]);</span>
+</span><span id="__span-9-6"><a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a><span class="c1">// Later, when Axiom reports a new Action Type:</span>
+</span><span id="__span-9-7"><a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a><span class="nx">setCatalog</span><span class="p">(</span><span class="nx">previous</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">[...</span><span class="nx">previous</span><span class="p">,</span><span class="w"> </span><span class="nx">created</span><span class="p">]);</span>
+</span></code></pre></div>
+<ul>
+<li><strong>Unresolved references:</strong> once the catalog has loaded, an action node whose Action Type is not in it shows
+  a "?" marker, and the Properties panel says "Not in the catalog yet". Both disappear as soon as the catalog
+  includes the value. Built-in validation does not report unknown Action Types; use <code>spi.validate</code> if you
+  want a problem.</li>
+<li><strong>Opening your editor:</strong> when <code>openActionType</code> is provided, the Properties panel shows <strong>Open</strong> (or
+  <strong>Create…</strong> for an unresolved value) next to the Action Type field. This also applies in read-only
+  editors. To offer the same from the canvas, add a host item with <code>contextActions</code>.</li>
+</ul>
+<p><img alt="Unresolved Action Type marked on the canvas and in the panel" src="images/action-type-catalog/after-unresolved.png" /></p>
 <h2 id="events">Events</h2>
 <ul>
 <li><code>onChange(workflow, { contentRevision, origin })</code> — <code>origin</code> is <code>'user'</code>, <code>'host'</code> or <code>agent:&lt;name&gt;</code>.
@@ -1826,16 +1871,16 @@ Clone/Delete items. Flow never shows a prompt itself: open your own UI from <cod
 <li><code>onSelectionChange({ nodeIds, edgeIds })</code> — fires only when the selection actually changes; useful for
   opening related host tabs or giving the agent "user is looking at X" context.</li>
 </ul>
-<div class="language-tsx highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="p">&lt;</span><span class="nt">WorkflowEditor</span><span class="w"> </span><span class="na">ref</span><span class="o">=</span><span class="p">{</span><span class="nx">editorRef</span><span class="p">}</span><span class="w"> </span><span class="na">workflow</span><span class="o">=</span><span class="p">{</span><span class="nx">seed</span><span class="p">}</span>
-</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="w">    </span><span class="na">onChange</span><span class="o">=</span><span class="p">{(</span><span class="nx">workflow</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">contentRevision</span><span class="p">,</span><span class="w"> </span><span class="nx">origin</span><span class="w"> </span><span class="p">})</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">save</span><span class="p">(</span><span class="nx">workflow</span><span class="p">,</span><span class="w"> </span><span class="nx">contentRevision</span><span class="p">,</span><span class="w"> </span><span class="nx">origin</span><span class="p">)}</span>
-</span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="w">    </span><span class="na">onProposalResolved</span><span class="o">=</span><span class="p">{(</span><span class="nx">id</span><span class="p">,</span><span class="w"> </span><span class="nx">outcome</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">agent</span><span class="p">.</span><span class="nx">notify</span><span class="p">(</span><span class="nx">id</span><span class="p">,</span><span class="w"> </span><span class="nx">outcome</span><span class="p">)}</span>
-</span><span id="__span-9-4"><a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="w">    </span><span class="na">onSelectionChange</span><span class="o">=</span><span class="p">{({</span><span class="w"> </span><span class="nx">nodeIds</span><span class="p">,</span><span class="w"> </span><span class="nx">edgeIds</span><span class="w"> </span><span class="p">})</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">agent</span><span class="p">.</span><span class="nx">setFocus</span><span class="p">(</span><span class="nx">nodeIds</span><span class="p">,</span><span class="w"> </span><span class="nx">edgeIds</span><span class="p">)}</span><span class="w"> </span><span class="p">/&gt;</span>
+<div class="language-tsx highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="p">&lt;</span><span class="nt">WorkflowEditor</span><span class="w"> </span><span class="na">ref</span><span class="o">=</span><span class="p">{</span><span class="nx">editorRef</span><span class="p">}</span><span class="w"> </span><span class="na">workflow</span><span class="o">=</span><span class="p">{</span><span class="nx">seed</span><span class="p">}</span>
+</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="w">    </span><span class="na">onChange</span><span class="o">=</span><span class="p">{(</span><span class="nx">workflow</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">contentRevision</span><span class="p">,</span><span class="w"> </span><span class="nx">origin</span><span class="w"> </span><span class="p">})</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">save</span><span class="p">(</span><span class="nx">workflow</span><span class="p">,</span><span class="w"> </span><span class="nx">contentRevision</span><span class="p">,</span><span class="w"> </span><span class="nx">origin</span><span class="p">)}</span>
+</span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="w">    </span><span class="na">onProposalResolved</span><span class="o">=</span><span class="p">{(</span><span class="nx">id</span><span class="p">,</span><span class="w"> </span><span class="nx">outcome</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">agent</span><span class="p">.</span><span class="nx">notify</span><span class="p">(</span><span class="nx">id</span><span class="p">,</span><span class="w"> </span><span class="nx">outcome</span><span class="p">)}</span>
+</span><span id="__span-10-4"><a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="w">    </span><span class="na">onSelectionChange</span><span class="o">=</span><span class="p">{({</span><span class="w"> </span><span class="nx">nodeIds</span><span class="p">,</span><span class="w"> </span><span class="nx">edgeIds</span><span class="w"> </span><span class="p">})</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">agent</span><span class="p">.</span><span class="nx">setFocus</span><span class="p">(</span><span class="nx">nodeIds</span><span class="p">,</span><span class="w"> </span><span class="nx">edgeIds</span><span class="p">)}</span><span class="w"> </span><span class="p">/&gt;</span>
 </span></code></pre></div>
 <h2 id="read-only-behaviour">Read-only behaviour</h2>
 <p>In a read-only editor, <code>propose</code> renders the preview without the review bar, which is useful for displaying
 a diff. <code>apply</code> is refused with the code <code>read-only</code>.</p>
-<div class="language-ts highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="kd">const</span><span class="w"> </span><span class="nx">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">readOnlyRef</span><span class="p">.</span><span class="nx">current</span><span class="o">!</span><span class="p">.</span><span class="nx">apply</span><span class="p">(</span><span class="nx">changeSet</span><span class="p">);</span>
-</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="c1">// { status: 'rejected', error: { code: 'read-only', reason: '...' } }</span>
+<div class="language-ts highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="kd">const</span><span class="w"> </span><span class="nx">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">readOnlyRef</span><span class="p">.</span><span class="nx">current</span><span class="o">!</span><span class="p">.</span><span class="nx">apply</span><span class="p">(</span><span class="nx">changeSet</span><span class="p">);</span>
+</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="c1">// { status: 'rejected', error: { code: 'read-only', reason: '...' } }</span>
 </span></code></pre></div>
 <h2 id="limitations">Limitations</h2>
 <ul>
