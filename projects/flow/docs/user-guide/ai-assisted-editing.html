@@ -1754,8 +1754,17 @@ seed-only; use <code>replace</code> to push a new document from the host.</p>
 <li><strong>Applied highlight.</strong> Elements added or modified by the most recently applied change set (via <code>apply</code>
   or Accept) stay highlighted until the next user content edit, <code>clearHighlights()</code>, or the next applied
   change set. Disable it with <code>highlightApplied={false}</code>.</li>
+<li><strong>Layout of applied changes.</strong> <code>appliedChangeLayout</code> controls how change sets are laid out:</li>
+<li><code>'place'</code> (default): only new nodes are positioned, next to their neighbours, and existing nodes never
+    move.</li>
+<li><code>'tidy'</code>: whenever a change set adds, removes or re-points nodes or edges, the whole graph is
+    auto-laid-out, like the toolbar's <strong>Tidy up</strong>. The tidied layout is what the proposal preview shows, and
+    Accept or <code>apply</code> commits the change and the tidy as one undo step. Renames and config changes never move
+    nodes.</li>
 </ul>
-<div class="language-tsx highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="p">&lt;</span><span class="nt">WorkflowEditor</span><span class="w"> </span><span class="na">ref</span><span class="o">=</span><span class="p">{</span><span class="nx">editorRef</span><span class="p">}</span><span class="w"> </span><span class="na">workflow</span><span class="o">=</span><span class="p">{</span><span class="nx">seed</span><span class="p">}</span><span class="w"> </span><span class="na">highlightApplied</span><span class="o">=</span><span class="p">{</span><span class="kc">false</span><span class="p">}</span><span class="w"> </span><span class="p">/&gt;</span>
+<p>Layout is not content, so either setting leaves <code>contentRevision</code> unchanged. Expose it as a user preference
+  if your users differ in how much they want an agent to rearrange their graph.</p>
+<div class="language-tsx highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="p">&lt;</span><span class="nt">WorkflowEditor</span><span class="w"> </span><span class="na">ref</span><span class="o">=</span><span class="p">{</span><span class="nx">editorRef</span><span class="p">}</span><span class="w"> </span><span class="na">workflow</span><span class="o">=</span><span class="p">{</span><span class="nx">seed</span><span class="p">}</span><span class="w"> </span><span class="na">highlightApplied</span><span class="o">=</span><span class="p">{</span><span class="kc">false</span><span class="p">}</span><span class="w"> </span><span class="na">appliedChangeLayout</span><span class="o">=</span><span class="s">"tidy"</span><span class="w"> </span><span class="p">/&gt;</span>
 </span></code></pre></div>
 <p>A staged proposal that adds a Wait node before End: the new node and edges are dashed ghosts, and the
 removed edge is drawn dashed in red.</p>
@@ -1885,8 +1894,8 @@ a diff. <code>apply</code> is refused with the code <code>read-only</code>.</p>
 <h2 id="limitations">Limitations</h2>
 <ul>
 <li><strong>Placement of added nodes.</strong> Added nodes without a position are placed next to their neighbours
-  without moving existing nodes. This can produce edges that look like loop-backs; use <strong>Tidy up</strong> to
-  re-layout.</li>
+  without moving existing nodes. This can produce edges that look like loop-backs; use <strong>Tidy up</strong>, or
+  <code>appliedChangeLayout="tidy"</code>, to re-layout.</li>
 <li><strong>Stale overlays.</strong> A stale proposal's overlay is diffed against the current document, so while it is
   shown greyed out the user's own later edits also appear as changes.</li>
 <li><strong>Snapshot problems.</strong> The <code>problems</code> in <code>getSnapshot()</code> may lag by one render after a handle dispatch
