@@ -1708,11 +1708,11 @@ Inputs must be structured-cloneable plain JSON data; a change set that cannot be
 <tbody>
 <tr>
 <td><code>propose(cs)</code></td>
-<td><code>{ status: 'staged' }</code> or <code>{ status: 'rejected', error }</code>. On a read-only editor it returns <code>'staged'</code> but shows no review bar.</td>
+<td><code>{ status: 'staged' }</code> or <code>{ status: 'rejected', error }</code>. Exits simulation first. On a read-only editor it returns <code>'staged'</code> but shows no review bar.</td>
 </tr>
 <tr>
 <td><code>apply(cs)</code></td>
-<td><code>{ status: 'applied' }</code> or <code>{ status: 'rejected', error }</code></td>
+<td><code>{ status: 'applied' }</code> or <code>{ status: 'rejected', error }</code>. Exits simulation first.</td>
 </tr>
 <tr>
 <td><code>withdraw(id)</code></td>
@@ -1720,7 +1720,7 @@ Inputs must be structured-cloneable plain JSON data; a change set that cannot be
 </tr>
 <tr>
 <td><code>replace(workflow, origin?)</code></td>
-<td>Replaces the whole document as one undo step. <code>origin</code> defaults to <code>'host'</code>.</td>
+<td>Replaces the whole document as one undo step. Exits simulation first. <code>origin</code> defaults to <code>'host'</code>.</td>
 </tr>
 <tr>
 <td><code>clearHighlights()</code></td>
@@ -1734,6 +1734,9 @@ Inputs must be structured-cloneable plain JSON data; a change set that cannot be
 </table>
 <p><code>apply</code> produces exactly one undo step tagged with <code>origin = cs.author</code>. The <code>workflow</code> prop remains
 seed-only; use <code>replace</code> to push a new document from the host.</p>
+<p>A change never lands under a running simulation. If the user is simulating when <code>propose</code>, <code>apply</code> or
+<code>replace</code> is called (or when they <strong>Accept</strong> a staged proposal), the editor leaves simulation first and the
+run is discarded. A rejected change set (for example a <code>stale</code> one) leaves the simulation running.</p>
 <div class="language-ts highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="kd">const</span><span class="w"> </span><span class="nx">handle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">editorRef</span><span class="p">.</span><span class="nx">current</span><span class="o">!</span><span class="p">;</span>
 </span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="kd">const</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">contentRevision</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">handle</span><span class="p">.</span><span class="nx">getSnapshot</span><span class="p">();</span>
 </span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="kd">const</span><span class="w"> </span><span class="nx">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">handle</span><span class="p">.</span><span class="nx">apply</span><span class="p">({</span><span class="w"> </span><span class="p">...</span><span class="nx">changeSet</span><span class="p">,</span><span class="w"> </span><span class="nx">baseRevision</span><span class="o">:</span><span class="w"> </span><span class="kt">contentRevision</span><span class="w"> </span><span class="p">});</span>
