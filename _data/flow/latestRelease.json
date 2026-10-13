@@ -1,9 +1,9 @@
 {
-  "url": "https://api.github.com/repos/Apitomy/apitomy-flow/releases/410623746",
-  "assets_url": "https://api.github.com/repos/Apitomy/apitomy-flow/releases/410623746/assets",
-  "upload_url": "https://uploads.github.com/repos/Apitomy/apitomy-flow/releases/410623746/assets{?name,label}",
-  "html_url": "https://github.com/Apitomy/apitomy-flow/releases/tag/v3.0.1",
-  "id": 410623746,
+  "url": "https://api.github.com/repos/Apitomy/apitomy-flow/releases/411951168",
+  "assets_url": "https://api.github.com/repos/Apitomy/apitomy-flow/releases/411951168/assets",
+  "upload_url": "https://uploads.github.com/repos/Apitomy/apitomy-flow/releases/411951168/assets{?name,label}",
+  "html_url": "https://github.com/Apitomy/apitomy-flow/releases/tag/v3.0.2",
+  "id": 411951168,
   "author": {
     "login": "apitomy-ci",
     "id": 286337598,
@@ -25,22 +25,22 @@
     "user_view_type": "public",
     "site_admin": false
   },
-  "node_id": "RE_kwDOT70xbM4YeZ8C",
-  "tag_name": "v3.0.1",
+  "node_id": "RE_kwDOT70xbM4YjeBA",
+  "tag_name": "v3.0.2",
   "target_commitish": "main",
-  "name": "3.0.1",
+  "name": "3.0.2",
   "draft": false,
   "immutable": false,
   "prerelease": false,
-  "created_at": "2026-10-12T13:21:54Z",
-  "updated_at": "2026-10-12T13:21:58Z",
-  "published_at": "2026-10-12T13:21:58Z",
+  "created_at": "2026-10-13T17:47:43Z",
+  "updated_at": "2026-10-13T17:47:47Z",
+  "published_at": "2026-10-13T17:47:47Z",
   "assets": [
     {
-      "url": "https://api.github.com/repos/Apitomy/apitomy-flow/releases/assets/633856609",
-      "id": 633856609,
-      "node_id": "RA_kwDOT70xbM4lx-Jh",
-      "name": "apitomy-flow-engine-3.0.1.jar",
+      "url": "https://api.github.com/repos/Apitomy/apitomy-flow/releases/assets/637795259",
+      "id": 637795259,
+      "node_id": "RA_kwDOT70xbM4mA_u7",
+      "name": "apitomy-flow-engine-3.0.2.jar",
       "label": "",
       "uploader": {
         "login": "apitomy-ci",
@@ -65,16 +65,16 @@
       },
       "content_type": "application/java-archive",
       "state": "uploaded",
-      "size": 144893,
-      "digest": "sha256:2c858ad1fcfccd44a7d128882bb7c22b58bf2d24d8d305441939a7e838efde4d",
+      "size": 144894,
+      "digest": "sha256:4ad4c17023c4e69dda72be787d3ee5da8678e4f0e6803e8d63808737278bd042",
       "download_count": 0,
-      "created_at": "2026-10-12T13:21:57Z",
-      "updated_at": "2026-10-12T13:21:57Z",
-      "browser_download_url": "https://github.com/Apitomy/apitomy-flow/releases/download/v3.0.1/apitomy-flow-engine-3.0.1.jar"
+      "created_at": "2026-10-13T17:47:46Z",
+      "updated_at": "2026-10-13T17:47:46Z",
+      "browser_download_url": "https://github.com/Apitomy/apitomy-flow/releases/download/v3.0.2/apitomy-flow-engine-3.0.2.jar"
     }
   ],
-  "tarball_url": "https://api.github.com/repos/Apitomy/apitomy-flow/tarball/v3.0.1",
-  "zipball_url": "https://api.github.com/repos/Apitomy/apitomy-flow/zipball/v3.0.1",
-  "body": "## What's Changed\n* Exit simulation before applying or staging change sets by @EricWittmann in https://github.com/Apitomy/apitomy-flow/pull/193\n\n\n**Full Changelog**: https://github.com/Apitomy/apitomy-flow/compare/v3.0.0...v3.0.1",
-  "mentions_count": 1
+  "tarball_url": "https://api.github.com/repos/Apitomy/apitomy-flow/tarball/v3.0.2",
+  "zipball_url": "https://api.github.com/repos/Apitomy/apitomy-flow/zipball/v3.0.2",
+  "body": "## What's Changed\n* Add an optional properties dialog mode to the workflow editor by @EricWittmann in https://github.com/Apitomy/apitomy-flow/pull/195\n* Select, highlight and center a problem's node or edge (both properties modes) by @EricWittmann in https://github.com/Apitomy/apitomy-flow/pull/196\n* Let hosts switch off Import, Export, Image and Simulate by @EricWittmann in https://github.com/Apitomy/apitomy-flow/pull/197\n* Update dependency typescript-eslint to v8.71.2 by @renovate[bot] in https://github.com/Apitomy/apitomy-flow/pull/194\n\n\n**Full Changelog**: https://github.com/Apitomy/apitomy-flow/compare/v3.0.1...v3.0.2",
+  "mentions_count": 2
 }
