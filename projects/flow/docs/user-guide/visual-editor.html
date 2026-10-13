@@ -2005,9 +2005,10 @@ then uses the full width; the side panel only returns while simulating, to show 
 <ul>
 <li><strong>double-clicking</strong> it;</li>
 <li>choosing <strong>Properties</strong>, the first item in its context menu (also reachable from the keyboard with
-  Shift+F10 or the ContextMenu key on a focused node or edge);</li>
-<li>clicking a row in the <strong>Problems</strong> panel, which opens the dialog for that problem's node or edge.</li>
+  Shift+F10 or the ContextMenu key on a focused node or edge).</li>
 </ul>
+<p>Clicking a row in the <strong>Problems</strong> panel behaves as in panel mode: it makes the problem's node or edge the
+(highlighted) selection and centers the view on it, without opening the dialog.</p>
 <p>The dialog contains the same fields as the panel and edits are <strong>live</strong>: each change is applied
 immediately, with the same undo steps as the panel, and the canvas updates behind the dialog. Close it with
 <strong>Close</strong>, the × button or Escape. In a read-only editor the dialog shows the fields disabled, and
@@ -2022,7 +2023,7 @@ revision; built-in and host validation do not rerun just to move a node. Feedbac
 Each affected node also shows a small corner badge in the top-right — red for errors, amber for
 warnings — carrying the highest-severity problem for that node, with the message available on hover.</p>
 <p><strong>Problems panel:</strong> A collapsible panel groups problems by severity, errors first. Click a problem to
-select and center its affected node or edge.</p>
+select (and highlight) its affected node or edge and center the view on it.</p>
 <h3 id="forkjoin-hint">Fork/Join Hint</h3>
 <p>The editor tags nodes with a small corner badge showing their role in a parallel region: <strong>Fork</strong> on a
 node whose outgoing edges all run in parallel, and <strong>Join</strong> on the node where those branches
