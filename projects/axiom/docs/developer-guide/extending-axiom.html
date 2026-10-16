@@ -18,6 +18,8 @@
         <link rel="prev" href="ui-development.html">
       
       
+        <link rel="next" href="../release-notes/v3.0.0.html">
+      
       
         
       
@@ -311,6 +313,26 @@
   
   
   Developer Guide
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../release-notes/v3.0.0.html" class="md-tabs__link">
+          
+  
+  
+  Release Notes
 
         </a>
       </li>
@@ -688,6 +710,34 @@
     
   
     Workflows
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../user-guide/workbench.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Workflow Workbench
   
 
     
@@ -1385,15 +1435,15 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#adding-a-connection-type" class="md-nav__link">
+  <a href="#adding-an-event-source-type" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Adding a Connection Type
+        Adding an Event Source Type
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Adding a Connection Type">
+    <nav class="md-nav" aria-label="Adding an Event Source Type">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -1446,6 +1496,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#adding-an-axiom-sdk-function" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Adding an Axiom SDK Function
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#adding-a-notification-channel" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1484,10 +1545,110 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#configuration-item-validation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configuration Item Validation
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
       
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Release Notes
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Release Notes
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../release-notes/v3.0.0.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3.0.0
+  
+
+    
+  </span>
+  
+  
+
+      </a>
     </li>
   
 
@@ -1632,15 +1793,15 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#adding-a-connection-type" class="md-nav__link">
+  <a href="#adding-an-event-source-type" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Adding a Connection Type
+        Adding an Event Source Type
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Adding a Connection Type">
+    <nav class="md-nav" aria-label="Adding an Event Source Type">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -1693,6 +1854,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#adding-an-axiom-sdk-function" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Adding an Axiom SDK Function
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#adding-a-notification-channel" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1731,6 +1903,17 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#configuration-item-validation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configuration Item Validation
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -1752,7 +1935,7 @@
 
 
 <h1 id="extending-axiom">Extending Axiom</h1>
-<p>Axiom is designed to be extended at several key points: AI agents, event connections,
+<p>Axiom is designed to be extended at several key points: AI agents, event sources,
 and notification channels. Extension points generally follow the same pattern —
 define an interface in an SPI module, implement it in a sibling module, and let CDI
 discover it at runtime.</p>
@@ -1768,8 +1951,8 @@ discovers all implementations at startup. The active implementation is selected 
 configuration or, for agent pool work, by capability matching.</p>
 <hr />
 <h2 id="adding-an-ai-agent">Adding an AI Agent</h2>
-<p>An agent provides the ability to invoke an LLM for Manager evaluations, task
-execution, report generation, and agent-mode scheduled jobs. Axiom ships with three
+<p>An agent provides the ability to invoke an LLM for task execution (workflow action
+nodes) and AI Assistant sessions (including the Workflow Workbench chat). Axiom ships with three
 agent implementations: Claude Code, OpenCode, and GitHub Copilot CLI.</p>
 <h3 id="interface-agent">Interface: <code>Agent</code></h3>
 <p>Location: <code>agents/spi/src/main/java/io/apitomy/axiom/agents/spi/Agent.java</code></p>
@@ -1794,16 +1977,20 @@ agent implementations: Claude Code, OpenCode, and GitHub Copilot CLI.</p>
 <td>Models available for the UI model picker</td>
 </tr>
 <tr>
+<td><code>String getModelSource()</code></td>
+<td><code>"configured"</code> (default) or <code>"dynamic"</code> (models discovered at runtime)</td>
+</tr>
+<tr>
+<td><code>void refreshAvailableModels()</code></td>
+<td>Refresh a cached model list (default: no-op)</td>
+</tr>
+<tr>
 <td><code>boolean supportsInteractiveSessions()</code></td>
-<td>Whether this agent can back AI Assistant sessions</td>
+<td>Whether this agent can back AI Assistant sessions (default: <code>false</code>)</td>
 </tr>
 <tr>
 <td><code>CompletableFuture&lt;AgentResult&gt; execute(AgentRequest request)</code></td>
 <td>Invoke the agent with a prompt</td>
-</tr>
-<tr>
-<td><code>CompletableFuture&lt;AgentResult&gt; executeWithSchema(AgentRequest request, String jsonSchema)</code></td>
-<td>Invoke with a JSON schema constraint for structured output</td>
 </tr>
 <tr>
 <td><code>void cancel(String executionId)</code></td>
@@ -1864,23 +2051,29 @@ type when the <code>Agent</code> implementation also implements <code>AgentMcpMa
 <h3 id="the-agent-pool">The Agent Pool</h3>
 <p>Registered agents don't self-select work — <code>AgentPool</code> leases an enabled, idle
 <code>AgentEntity</code> to a caller based on a requested capability string (e.g.
-<code>action:Auto-Label Issue</code>, <code>report:weekly-status</code>, <code>job:cleanup</code>). See
-<a href="../user-guide/concepts.html#ai-agents">AI Agents</a> for the capability-matching model
-that all agent-consuming services (<code>TaskExecutionService</code>, <code>ReportExecutionService</code>,
-<code>ScheduledJobExecutionService</code>) share.</p>
+<code>action:Auto-Label Issue</code>). <code>TaskExecutionService</code> requests <code>action:&lt;action type&gt;</code> for every task
+created by a workflow action node, together with the action type's engine: when the engine is set, only
+agents of that <code>agentType</code> are considered (an explicit agent assignment of another type is ignored); when it
+is blank, any type may run the task. If a suitable agent exists but is busy the task waits; if no enabled
+agent of the engine exists the task fails with a message naming the missing engine. See
+<a href="../user-guide/concepts.html#ai-agents">AI Agents</a> for the capability-matching model.</p>
 <h3 id="interactive-assistant-session-drivers">Interactive Assistant Session Drivers</h3>
 <p>The AI Assistant runtime uses <code>InteractiveSessionDriver</code> as an agent-neutral contract for
 session lifecycle, prompt submission, permission handling, and interrupt/teardown behavior.
 <code>InteractiveSessionDriverFactory</code> selects the concrete driver per session
 (<code>ClaudeInteractiveSessionDriver</code> or <code>OpenCodeInteractiveSessionDriver</code>) based on the
 session's resolved agent type, and enforces fail-closed OpenCode compatibility checks
-before allowing session startup.</p>
+before allowing session startup. Only Claude Code and OpenCode have interactive session drivers; the GitHub
+Copilot CLI agent runs tasks only.</p>
+<p>Workflow Workbench compositions use the same session runtime with the built-in <code>axiom-workbench</code> session
+template and <code>@axiom-workbench</code> MCP server (see
+<a href="stack-and-architecture.html#workflow-workbench">Stack &amp; Architecture</a>).</p>
 <hr />
-<h2 id="adding-a-connection-type">Adding a Connection Type</h2>
-<p>A Connection polls an external system for activity and produces normalized events for
-the event stream. Axiom ships with GitHub and Jira connection types.</p>
+<h2 id="adding-an-event-source-type">Adding an Event Source Type</h2>
+<p>An Event Source polls an external system for activity and produces normalized events for
+the event stream. Axiom ships with GitHub and Jira event source types.</p>
 <h3 id="pattern">Pattern</h3>
-<p>Connection pollers are <code>@Scheduled</code> beans that use <code>EventStreamService</code> to persist
+<p>Event source pollers are <code>@Scheduled</code> beans that use <code>EventStreamService</code> to persist
 normalized events. There is no formal SPI interface — the pattern is convention-based,
 built around a shared normalized event model (<code>NormalizedEvent</code> and its typed payload
 records) defined in <code>core</code>.</p>
@@ -1903,26 +2096,80 @@ records) defined in <code>core</code>.</p>
 <h3 id="implementation-pattern">Implementation Pattern</h3>
 <ol>
 <li>Create a scheduled poller with <code>@Scheduled</code> and <code>concurrentExecution = SKIP</code></li>
-<li>Find enabled connections of your source type from <code>EventSourceConnectionEntity</code></li>
-<li>Check if the connection's poll interval has elapsed since <code>lastPolledAt</code></li>
+<li>Find enabled event sources of your source type from <code>EventSourceEntity</code></li>
+<li>Check if the event source's poll interval has elapsed since <code>lastPolledAt</code></li>
 <li>Fetch activity from the external API</li>
 <li>Normalize each item into a <code>NormalizedEvent</code> with a typed payload and call
    <code>eventStreamService.persistEvent()</code></li>
-<li>Update <code>lastPolledAt</code> on the connection</li>
-<li>Record the poll result in <code>ConnectionPollLogEntity</code></li>
+<li>Update <code>lastPolledAt</code> on the event source</li>
+<li>Record the poll result in <code>EventSourcePollLogEntity</code></li>
 </ol>
-<p>New connections do not need any corresponding Subscription configuration to start
-recording events — subscriptions are what route recorded events onward to the Manager,
-a workflow, or an action.</p>
+<p>New event sources do not need any corresponding Subscription configuration to start
+recording events — subscriptions are what route recorded events onward to workflows
+(<code>create-workflow</code> and <code>workflow-dispatch</code> routing rules).</p>
 <h3 id="reference-implementations_1">Reference Implementations</h3>
 <ul>
-<li><strong>GitHub</strong>: <code>events/github/src/main/java/.../v2/GitHubConnectionPoller.java</code> —
+<li><strong>GitHub</strong>: <code>events/github/src/main/java/.../v2/GitHubEventSourcePoller.java</code> —
   polls the GitHub Repository Events API, backfilling PR payloads as needed</li>
-<li><strong>Jira</strong>: <code>events/jira/src/main/java/.../v2/JiraConnectionPoller.java</code> — polls the
+<li><strong>Jira</strong>: <code>events/jira/src/main/java/.../v2/JiraEventSourcePoller.java</code> — polls the
   Jira REST API using JQL search with changelog expansion</li>
 </ul>
 <p>See <a href="event-sourcing-design.html">Event System — Design Document</a> for the full event
 schema and per-source normalization details.</p>
+<hr />
+<h2 id="adding-an-axiom-sdk-function">Adding an Axiom SDK Function</h2>
+<p>The Axiom SDK is the set of <code>axiom_*</code> functions agents call through the <code>axiom-sdk</code> MCP server and that
+workflows call directly from <code>sdk:</code> action nodes (see
+<a href="../user-guide/workflows.html#axiom-sdk-functions">Axiom SDK Functions</a> for the current list). An SDK change
+must update all of these consistently:</p>
+<table>
+<thead>
+<tr>
+<th>Location</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>core/src/main/resources/axiom-sdk-functions.json</code></td>
+<td>Authoritative function definitions (name, description, parameters)</td>
+</tr>
+<tr>
+<td><code>core/.../SdkFunctionRegistry.java</code></td>
+<td>Loads the definitions</td>
+</tr>
+<tr>
+<td><code>app/.../SdkCallService.java</code></td>
+<td>Implementations used by <code>sdk:</code> action nodes</td>
+</tr>
+<tr>
+<td><code>app/.../rest/SdkResource.java</code></td>
+<td>REST endpoint used by the MCP server</td>
+</tr>
+<tr>
+<td><code>app/src/main/resources/templates/axiom-mcp-server/sdk-server.js</code></td>
+<td>The <code>axiom-sdk</code> MCP server</td>
+</tr>
+<tr>
+<td><code>app/src/main/resources/templates/axiom-assistant-mcp/server.js</code>, <code>templates/assistant-templates/axiom-config-assistant.json</code></td>
+<td>Assistant templates that reference SDK tools</td>
+</tr>
+<tr>
+<td><code>core/.../services/ActionTypeValidator.java</code></td>
+<td>Validates SDK tool names in an action type's allowed tools</td>
+</tr>
+<tr>
+<td><code>ui/src/config/sdkTools.ts</code>, <code>ui/src/components/assistant/toolNames.ts</code></td>
+<td>UI tool pickers and display names</td>
+</tr>
+<tr>
+<td><code>SdkResourceTest</code>, <code>McpConfigGeneratorTest</code>, <code>ActionTypeValidatorTest</code></td>
+<td>Tests</td>
+</tr>
+</tbody>
+</table>
+<p>SDK functions must not start work outside a workflow: there are no functions for creating tasks directly,
+closing or reopening subjects, or reports.</p>
 <hr />
 <h2 id="adding-a-notification-channel">Adding a Notification Channel</h2>
 <p>Notification channels deliver alerts to humans (e.g. when a task requires human
@@ -1962,6 +2209,36 @@ is configured.</p>
    implementation</p>
 </li>
 </ol>
+<h2 id="configuration-item-validation">Configuration Item Validation</h2>
+<p><code>io.apitomy.axiom.app.validation.ConfigItemValidationService</code> is the single place where configuration items
+(tools, action types, toolsets, session templates, workflows, event sources, and subscriptions) are
+validated. It is called by:</p>
+<ul>
+<li><code>ToolsResourceImpl</code> — tool validate and create endpoints</li>
+<li><code>ActionResourceImpl</code> — action type validate and create endpoints</li>
+<li><code>SubscriptionsResourceImpl</code> — subscription create and update</li>
+<li><code>ImportExportService</code> — configuration-pack import (including import from the UI) and assistant Apply</li>
+<li><code>AssistantItemValidator</code> — the Configuration Assistant's live feedback, the <code>axiom_validate_item</code> MCP
+  tool, and <code>POST /api/v1/assistant/sessions/{sessionId}/validate</code></li>
+<li><code>CompositionValidator</code> and <code>CompositionPublisher</code> — Workflow Workbench draft validation and publishing</li>
+</ul>
+<p>Workflow publishing does not call the service. <code>WorkflowPublisher</code> calls
+<code>WorkflowContentRules.engineProblems</code> and <code>WorkflowContentRules.startInputViolation</code> directly. The service's
+workflow validation uses those same <code>WorkflowContentRules</code> checks and adds cross-reference checks: referenced
+action types exist, <code>sdk:</code> functions are valid, and <code>receive-event</code> event types are known.</p>
+<p>When adding or changing a rule: graph and Start-input rules belong in <code>WorkflowContentRules</code> (shared by
+publishing and the service); cross-reference checks belong in <code>ConfigItemValidationService</code>. Do not add
+ad-hoc checks in REST resources.</p>
+<p>Configuration-pack import and assistant Apply validate the whole pack before writing anything. Any error
+aborts the operation with nothing written (REST import returns <code>400</code> with <code>{message, problems}</code>). Items are
+then written in dependency order — tools, toolsets, action types, session templates, workflows, event
+sources, subscriptions — workflows are published (skipped when unchanged), and <code>workflowDefinitionName</code> in
+subscription routing rules is resolved to <code>workflowDefinitionId</code> by <code>SubscriptionRoutingResolver</code>.</p>
+<p>The Configuration Assistant's system prompt reference is generated by <code>AssistantReferenceGenerator</code> and
+substituted for the <code>{{reference}}</code> placeholder. Its worked examples live under
+<code>app/src/main/resources/templates/assistant-reference/examples/</code> and are listed in <code>index.txt</code>.
+<code>AssistantReferenceTest</code> validates and applies every listed example, so any new example must be added to
+<code>index.txt</code> and must pass validation.</p>
 
 
 

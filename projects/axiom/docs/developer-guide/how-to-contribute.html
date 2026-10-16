@@ -320,6 +320,26 @@
   
 
       
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../release-notes/v3.0.0.html" class="md-tabs__link">
+          
+  
+  
+  Release Notes
+
+        </a>
+      </li>
+    
+  
+
+      
     </ul>
   </div>
 </nav>
@@ -710,6 +730,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../user-guide/workbench.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Workflow Workbench
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../user-guide/ai-assistant.html" class="md-nav__link">
         
   
@@ -1062,6 +1110,17 @@
     <span class="md-ellipsis">
       
         Unit Tests
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ui-tests" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        UI Tests
       
     </span>
   </a>
@@ -1475,6 +1534,95 @@
   
 
     
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Release Notes
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Release Notes
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../release-notes/v3.0.0.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3.0.0
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
   </ul>
 </nav>
                   </div>
@@ -1625,6 +1773,17 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#ui-tests" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        UI Tests
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#integration-tests" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1734,12 +1893,8 @@ process for contributing to Axiom.</p>
 <td><code>common/api</code> (OpenAPI spec) + <code>app/rest/</code> (implementation)</td>
 </tr>
 <tr>
-<td>Domain entity or lifecycle</td>
+<td>Domain entity or SDK function definitions</td>
 <td><code>core/</code></td>
-</tr>
-<tr>
-<td>Manager behavior</td>
-<td><code>manager/</code></td>
 </tr>
 <tr>
 <td>Claude Code agent</td>
@@ -1766,16 +1921,28 @@ process for contributing to Axiom.</p>
 <td><code>app/</code> (<code>EventStreamOrchestrator</code>, <code>TaskExecutionService</code>, <code>WorkflowExecutionService</code>, etc.)</td>
 </tr>
 <tr>
+<td>Workflow Workbench (compositions, AI turns, test runs, publishing)</td>
+<td><code>app/src/main/java/io/apitomy/axiom/app/composition/</code> + <code>CompositionsResourceImpl</code></td>
+</tr>
+<tr>
+<td>AI Assistant sessions and engine drivers</td>
+<td><code>app/src/main/java/io/apitomy/axiom/app/assistant/</code></td>
+</tr>
+<tr>
+<td>Built-in MCP servers and assistant templates</td>
+<td><code>app/src/main/resources/templates/</code></td>
+</tr>
+<tr>
 <td>UI page or component</td>
-<td><code>ui/src/pages/</code> or <code>ui/src/components/</code></td>
+<td><code>ui/src/pages/</code> (workbench: <code>ui/src/pages/workbench/</code>) or <code>ui/src/components/</code></td>
 </tr>
 <tr>
 <td>API client functions</td>
-<td><code>ui/src/config/api.ts</code></td>
+<td><code>ui/src/config/api.ts</code> (workbench: <code>ui/src/config/compositions.ts</code>)</td>
 </tr>
 <tr>
-<td>Database migration</td>
-<td><code>app/src/main/resources/db/migration/</code></td>
+<td>Database schema</td>
+<td><code>app/src/main/resources/db/migration/</code> (<code>V1__baseline.sql</code> is frozen; add <code>V&lt;n&gt;__…</code> migrations)</td>
 </tr>
 </tbody>
 </table>
@@ -1836,7 +2003,7 @@ process for contributing to Axiom.</p>
 </tbody>
 </table>
 <p>Examples:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>feat: add Jira connection polling
+<div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>feat: add Jira event source polling
 </span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>fix: resolve timeout in Claude Code subprocess
 </span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>docs: add extending-axiom developer guide
 </span></code></pre></div>
@@ -1848,8 +2015,10 @@ process for contributing to Axiom.</p>
 </span></code></pre></div></li>
 <li><strong>Make your changes</strong> following the conventions above</li>
 <li><strong>Test locally</strong>:</li>
-<li><code>mvn test</code> — run backend unit tests</li>
+<li><code>mvn test</code> — run backend unit tests (or one test:
+     <code>mvn -q -pl app -am test -Dtest=MyTest -Dsurefire.failIfNoSpecifiedTests=false</code>)</li>
 <li><code>cd ui &amp;&amp; npm run build</code> — type-check the frontend</li>
+<li><code>cd ui &amp;&amp; npm test</code> — run the UI unit tests</li>
 <li><code>./dev.sh</code> — verify the change works end-to-end</li>
 <li><strong>Commit</strong> with a conventional commit message</li>
 <li><strong>Push</strong> and open a pull request against <code>main</code></li>
@@ -1867,20 +2036,25 @@ process for contributing to Axiom.</p>
 <hr />
 <h2 id="testing">Testing</h2>
 <h3 id="unit-tests">Unit Tests</h3>
-<p>Standard Maven tests — run with <code>mvn test</code> from the project root or a specific module
-directory.</p>
-<h3 id="integration-tests">Integration Tests</h3>
-<p>Some tests require a running AI agent CLI. These are gated behind an environment
-variable:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="nv">AXIOM_CLAUDE_TESTS</span><span class="o">=</span><span class="nb">true</span><span class="w"> </span>mvn<span class="w"> </span><span class="nb">test</span>
+<p>Standard JUnit 5 tests — run with <code>mvn test</code> from the project root. To run one test class in a module and
+build the modules it depends on:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>mvn<span class="w"> </span>-q<span class="w"> </span>-pl<span class="w"> </span>app<span class="w"> </span>-am<span class="w"> </span><span class="nb">test</span><span class="w"> </span>-Dtest<span class="o">=</span>MyTest<span class="w"> </span>-Dsurefire.failIfNoSpecifiedTests<span class="o">=</span><span class="nb">false</span>
 </span></code></pre></div>
-<p>This requires the <code>claude</code> CLI on your PATH and a valid <code>ANTHROPIC_API_KEY</code>.</p>
+<h3 id="ui-tests">UI Tests</h3>
+<p>UI unit and component tests use Vitest — run them with <code>cd ui &amp;&amp; npm test</code>. They also run as part of
+<code>./build.sh -Pui</code>.</p>
+<h3 id="integration-tests">Integration Tests</h3>
+<p>Some tests start a real AI agent CLI (<code>opencode</code> or <code>claude</code>) and may consume tokens. They are tagged
+<code>live-cli</code> and excluded by default. Enable them with the <code>live-cli-tests</code> profile:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>mvn<span class="w"> </span><span class="nb">test</span><span class="w"> </span>-Plive-cli-tests
+</span></code></pre></div>
+<p>This requires the agent CLI on your PATH and valid credentials for it.</p>
 <hr />
 <h2 id="documentation">Documentation</h2>
 <p>The documentation site uses <a href="https://www.mkdocs.org/">MkDocs</a> with the
 <a href="https://squidfunk.github.io/mkdocs-material/">Material for MkDocs</a> theme.</p>
 <h3 id="local-preview">Local Preview</h3>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>./serve-docs.sh
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>./serve-docs.sh
 </span></code></pre></div>
 <p>This starts a local server at <code>http://localhost:8000</code> with live reload.</p>
 <h3 id="adding-a-page">Adding a Page</h3>
@@ -1889,6 +2063,7 @@ variable:</p>
 <li>Add a nav entry in <code>mkdocs.yml</code></li>
 <li>Verify the build: <code>python3 -m mkdocs build --strict</code></li>
 </ol>
+<p>Install the tools with <code>pip install mkdocs mkdocs-material</code>.</p>
 
 
 

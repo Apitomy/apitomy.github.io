@@ -320,6 +320,26 @@
   
 
       
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../release-notes/v3.0.0.html" class="md-tabs__link">
+          
+  
+  
+  Release Notes
+
+        </a>
+      </li>
+    
+  
+
+      
     </ul>
   </div>
 </nav>
@@ -690,6 +710,34 @@
     
   
     Workflows
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../user-guide/workbench.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Workflow Workbench
   
 
     
@@ -1430,6 +1478,95 @@
   
 
     
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Release Notes
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Release Notes
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../release-notes/v3.0.0.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3.0.0
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
   </ul>
 </nav>
                   </div>
@@ -1610,7 +1747,7 @@
 
 
 <h1 id="lineage">Lineage</h1>
-<p>The lineage API (#430) answers "where did this come from, and what did it lead to?" for any unit of work. It
+<p>The lineage API answers "where did this come from, and what did it lead to?" for any unit of work. It
 follows the links described in <a href="correlation.html">Correlation</a>, <a href="tracing.html">Tracing</a> and the
 <a href="event-sourcing-design.html">event sourcing design</a> in both directions, so a user does not have to hop between
 the event, ledger, trace, workflow run, task and usage pages.</p>
@@ -1630,7 +1767,7 @@ by <code>LineageResourceImpl</code>. The UI component is <code>LineagePanel</cod
 <tbody>
 <tr>
 <td><code>entityType</code></td>
-<td><code>event</code>, <code>trace</code>, <code>workflow-run</code>, <code>task</code>, <code>scheduled-job-run</code>, <code>report</code></td>
+<td><code>event</code>, <code>trace</code>, <code>workflow-run</code>, <code>task</code></td>
 <td>—</td>
 </tr>
 <tr>
@@ -1660,7 +1797,7 @@ does not exist returns <code>404</code>. Both carry the JSON <code>Error</code> 
 <code>depth</code> or <code>maxNodes</code> fails JAX-RS parameter conversion, which JAX-RS reports as <code>404</code>;
 <code>LineageResourceImpl</code> declares a <code>@ServerExceptionMapper</code> for <code>NotFoundException</code> that turns it into <code>400</code>.
 The mapper is declared on the resource class, so it applies to this resource only.</p>
-<p>Projects are not a root type: a project holds too much unrelated work to give a useful graph.</p>
+<p>Subjects are not a root type: a subject holds too much unrelated work to give a useful graph.</p>
 <p>The response is a <code>LineageGraph</code>:</p>
 <table>
 <thead>
@@ -1699,8 +1836,8 @@ The mapper is declared on the resource class, so it applies to this resource onl
 <p>Each <code>LineageNode</code> has a <code>key</code> (<code>type:id</code>, used by edges), <code>type</code>, <code>id</code>, <code>label</code>, <code>status</code>, <code>subtype</code> (trace
 type, action type, trigger or outcome item type), <code>linkPath</code> (UI route), <code>costUsd</code>, <code>direction</code> (<code>root</code>,
 <code>upstream</code> or <code>downstream</code>), <code>depth</code> (hops from the root), <code>available</code> and <code>createdOn</code>.</p>
-<p>Node types are the six root types plus <code>outcome</code>: a routing outcome item that is not a task or a workflow run
-(<code>ignored</code>, <code>escalated</code>, <code>decision</code>, <code>no-match</code>).</p>
+<p>Node types are the four root types plus <code>outcome</code>: a routing outcome item that is not a task or a workflow
+run (for example <code>no-match</code>).</p>
 <p>Each <code>LineageEdge</code> has <code>from</code>, <code>to</code> and <code>relation</code>. Edges always point <strong>downstream</strong>, from the cause to the
 result, whichever direction was walked:</p>
 <table>
@@ -1713,11 +1850,11 @@ result, whichever direction was walked:</p>
 <tbody>
 <tr>
 <td><code>triggered</code></td>
-<td>event → Manager (or other) trace, event → workflow run</td>
+<td>event → trace, event → workflow run</td>
 </tr>
 <tr>
 <td><code>created</code></td>
-<td>trace / workflow run / job run / report / task → task</td>
+<td>trace / workflow run / task → task</td>
 </tr>
 <tr>
 <td><code>resumed</code></td>
@@ -1725,15 +1862,11 @@ result, whichever direction was walked:</p>
 </tr>
 <tr>
 <td><code>produced</code></td>
-<td>trace or event → outcome item (ignored, escalated, ...)</td>
+<td>trace or event → outcome item (e.g. <code>no-match</code>)</td>
 </tr>
 <tr>
 <td><code>part-of</code></td>
-<td>owning run or report → its trace (only when a trace is the root)</td>
-</tr>
-<tr>
-<td><code>triggered-by-agent</code></td>
-<td>caller (trace or its owner) → job run or report started through the REST API</td>
+<td>owning workflow run → its trace (only when a trace is the root)</td>
 </tr>
 </tbody>
 </table>
@@ -1756,19 +1889,11 @@ result, whichever direction was walked:</p>
 </tr>
 <tr>
 <td><code>workflow-run</code></td>
-<td><code>/logs/workflow-runs/{id}</code></td>
+<td><code>/runs/{id}</code></td>
 </tr>
 <tr>
 <td><code>task</code></td>
 <td><code>/logs/tasks?taskId={id}</code></td>
-</tr>
-<tr>
-<td><code>scheduled-job-run</code></td>
-<td><code>/logs/job-runs?runId={id}</code></td>
-</tr>
-<tr>
-<td><code>report</code></td>
-<td><code>/reports/{id}</code></td>
 </tr>
 <tr>
 <td><code>outcome</code></td>
@@ -1776,13 +1901,11 @@ result, whichever direction was walked:</p>
 </tr>
 </tbody>
 </table>
-<p>Tasks and job runs have no detail page; the Tasks and Job Runs pages open a lineage modal for <code>?taskId=</code> and
-<code>?runId=</code>.</p>
+<p>Tasks have no detail page; the Tasks page opens a lineage modal for <code>?taskId=</code>.</p>
 <h2 id="traces-and-their-owners">Traces and Their Owners</h2>
-<p>Workflow runs, scheduled job runs and reports each own a trace (<code>workflow</code>, <code>scheduled-job-execution</code> and
-<code>report-generation</code> trace types). Such a trace is shown as its owner, not as a separate node, so a job run and
-its trace never appear twice. Traces without an owner entity (<code>manager</code>, <code>manager-dry-run</code>, <code>user-action</code> and
-any other type) are <code>trace</code> nodes. If an owned trace's owner was deleted, the trace itself is shown.</p>
+<p>Workflow runs own their trace (<code>workflow</code> trace type). Such a trace is shown as its owner, not as a separate
+node, so a run and its trace never appear twice. Traces of any other type are <code>trace</code> nodes. If an owned
+trace's owner was deleted, the trace itself is shown.</p>
 <p>When an owned trace is the root (<code>GET /lineage/trace/{id}</code>), the trace stays the root and its owner is
 linked upstream with <code>part-of</code>.</p>
 <h2 id="traversal-rules">Traversal Rules</h2>
@@ -1798,7 +1921,7 @@ linked upstream with <code>part-of</code>.</p>
 <tbody>
 <tr>
 <td>task</td>
-<td>First that applies: <code>workflowRunId</code> → workflow run; the parent of the task's <code>task</code> trace node is another task's node → that task (a task created by an agent task, #427); <code>traceId</code> → trace or its owner; <code>eventId</code> → event</td>
+<td>First that applies: <code>workflowRunId</code> → workflow run; the parent of the task's <code>task</code> trace node is another task's node → that task; <code>traceId</code> → trace or its owner; <code>eventId</code> → event</td>
 </tr>
 <tr>
 <td>trace</td>
@@ -1809,18 +1932,15 @@ linked upstream with <code>part-of</code>.</p>
 <td><code>trigger_event_id</code> → event (<code>triggered</code>); each <code>workflow_run_resume.event_id</code> → event (<code>resumed</code>)</td>
 </tr>
 <tr>
-<td>scheduled job run, report</td>
-<td><code>triggered_by_trace_id</code> → trace or its owner (<code>triggered-by-agent</code>)</td>
-</tr>
-<tr>
 <td>event</td>
 <td>none</td>
 </tr>
 </tbody>
 </table>
-<p>The caller of <code>triggered_by_trace_id</code> is recorded as a trace, not as a task: several tasks can share a trace,
-and the parent node of the request is not stored. The graph therefore links the job run or report to the
-trace (or to the run, job run or report that owns it).</p>
+<p><code>trigger_event_id</code> is set for every run started from an event: by a <code>create-workflow</code> routing rule, manually
+from the event detail page, or as a re-run of a run that was started from an event. Manual runs from an event
+have no ledger entry or routing outcome, so they are linked only through <code>trigger_event_id</code>. A re-run is not
+linked to the run it repeats; that link exists only as the run's <code>rerunOf:&lt;runId&gt;</code> label.</p>
 <h3 id="downstream-results">Downstream (results)</h3>
 <table>
 <thead>
@@ -1843,25 +1963,20 @@ trace (or to the run, job run or report that owns it).</p>
 <td>tasks with <code>workflow_run_id</code>; the work in its trace</td>
 </tr>
 <tr>
-<td>scheduled job run, report</td>
-<td>the work in its trace</td>
-</tr>
-<tr>
 <td>task</td>
 <td>tasks whose <code>task</code> trace node is a child of this task's node (created by its agent)</td>
 </tr>
 </tbody>
 </table>
-<p>"The work in a trace" is every task with that <code>trace_id</code> (including tasks that joined the trace through
-<code>POST /projects/{id}/tasks</code>, #427) and every job run or report whose <code>triggered_by_trace_id</code> is that trace. A
-task whose trace node is a child of another task's node is linked to that task instead of to the trace owner.</p>
+<p>"The work in a trace" is every task with that <code>trace_id</code>. A task whose trace node is a child of another task's
+node is linked to that task instead of to the trace owner.</p>
 <p>Nodes reached from more than one place are included once, with every edge. With <code>direction=both</code> the upstream
 walk runs first, so a node found by both walks keeps <code>upstream</code>.</p>
 <h2 id="limits-and-truncation">Limits and Truncation</h2>
 <p>The walk is breadth-first. <code>depth</code> limits the hops in each direction.</p>
 <ul>
 <li><code>maxNodes</code> also bounds the rows read: every expansion query (tasks of a trace or run, traces of an event,
-  job runs and reports triggered from a trace, outcome items, resumes, child tasks) uses <code>setMaxResults</code> with
+  outcome items, resumes, child tasks) uses <code>setMaxResults</code> with
   the room left in the graph plus one. When a query returns that many rows, <code>truncated</code> is set. This is
   conservative: <code>truncated</code> can be <code>true</code> when the extra row was a node that was already in the graph.</li>
 <li>Every <code>IN</code> list is split into chunks of at most 500 IDs (<code>LineageService.IN_CHUNK</code>).</li>
@@ -1886,16 +2001,8 @@ walk runs first, so a node found by both walks keeps <code>upstream</code>.</p>
 <td><code>task_id</code> = the task</td>
 </tr>
 <tr>
-<td>scheduled job run</td>
-<td><code>scheduled_job_run_id</code> = the run</td>
-</tr>
-<tr>
-<td>report</td>
-<td><code>report_id</code> = the report</td>
-</tr>
-<tr>
 <td>trace, workflow run</td>
-<td><code>trace_id</code> = the (run's) trace and <code>task_id</code>, <code>scheduled_job_run_id</code> and <code>report_id</code> are null (e.g. the Manager evaluation)</td>
+<td><code>trace_id</code> = the (run's) trace and <code>task_id</code> is null</td>
 </tr>
 <tr>
 <td>event, outcome</td>
@@ -1907,23 +2014,23 @@ walk runs first, so a node found by both walks keeps <code>upstream</code>.</p>
 <p>Every level of the walk does a fixed number of queries per node type, using <code>IN (...)</code> lists:</p>
 <ol>
 <li>Load the frontier: one query per type (<code>stream_event</code>, <code>trace</code>, <code>workflow_run</code>, <code>task</code>,
-   <code>scheduled_job_run</code>, <code>report</code>, <code>routing_outcome_item</code>), plus one for the scheduled job names. Events,
-   tasks, workflow runs, job runs and reports are read as projections of the label and link columns only, so
-   event payloads, task input, output and logs, report content and workflow instance state are never loaded.</li>
+   <code>routing_outcome_item</code>). Events, tasks and workflow runs are read as projections of the label and link
+   columns only, so event payloads, task input, output and logs, and workflow instance state are never
+   loaded.</li>
 <li>Resolve trace owners: one query per owned trace type present.</li>
 <li>Expand: for example, for events one query each for traces, workflow runs, resumes, ledger rows, outcomes
-   and items; for traces and owners one query each for tasks, the tasks' trace nodes and their parent nodes,
-   job runs and reports triggered from the traces.</li>
+   and items; for traces and owners one query each for tasks, the tasks' trace nodes and their parent
+   nodes.</li>
 </ol>
 <p>Entities found while expanding are cached, so they are not loaded again in the next level. Costs are computed
-once at the end with one grouped query per cost key (task, job run, report, trace). The number of queries
+once at the end with one grouped query per cost key (task, trace). The number of queries
 therefore depends on the depth and the node types, not on the number of nodes. <code>LineageTest</code> checks this with
 Hibernate statistics (<code>%test.quarkus.hibernate-orm.statistics=true</code>): a graph with 2 tasks and one with 12
 tasks must use the same number of statements. It also checks that no <code>StreamEventEntity</code>, <code>TaskEntity</code>,
-<code>WorkflowRunEntity</code>, <code>ScheduledJobRunEntity</code> or <code>ReportEntity</code> is loaded as an entity (entity load count 0),
+or <code>WorkflowRunEntity</code> is loaded as an entity (entity load count 0),
 and that a trace with 30 tasks and <code>maxNodes=5</code> reads at most 6 task rows (query execution row count).</p>
 <h2 id="dangling-references">Dangling References</h2>
-<p>All the links are soft references, and retention deletes events, traces, runs and reports independently (see
+<p>All the links are soft references, and retention deletes events, traces and runs independently (see
 <a href="data-retention.html">Data Retention</a>). A reference to a missing row becomes a node with <code>available: false</code>,
 <code>status: "unavailable"</code>, a label such as <code>Event 3f2a... (deleted or unavailable)</code> and no <code>linkPath</code>. The walk
 does not continue from such a node. Only a missing root returns <code>404</code>.</p>
@@ -1949,15 +2056,7 @@ twice is expanded only the first time.</p>
 <td><strong>Lineage</strong> tab</td>
 </tr>
 <tr>
-<td>Report detail</td>
-<td>Expandable <strong>Lineage</strong> section below the summary</td>
-</tr>
-<tr>
-<td>Logs &gt; Tasks, project Tasks tab</td>
-<td><strong>Lineage</strong> button, opens <code>LineageModal</code></td>
-</tr>
-<tr>
-<td>Logs &gt; Job Runs</td>
+<td>Logs &gt; Tasks, subject Tasks tab</td>
 <td><strong>Lineage</strong> button, opens <code>LineageModal</code></td>
 </tr>
 </tbody>

@@ -1,0 +1,2224 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Event-driven project orchestration platform">
+      
+      
+        <meta name="author" content="Apitomy">
+      
+      
+        <link rel="canonical" href="https://www.apitomy.io/projects/axiom/docs/release-notes/v3.0.0.html">
+      
+      
+        <link rel="prev" href="../developer-guide/extending-axiom.html">
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>3.0.0 - Apitomy Axiom</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../theme/css/project-colors.css">
+    
+      <link rel="stylesheet" href="../theme/css/apitomy-base.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#apitomy-axiom-300" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+        <aside class="md-banner">
+          <div class="md-banner__inner md-grid md-typeset">
+            
+            
+<div class="apitomy-masthead">
+    <div class="apitomy-masthead-inner">
+        <a href="https://www.apitomy.io/" class="apitomy-masthead-logo">Apitomy</a>
+        <nav class="apitomy-masthead-nav">
+            <a href="https://www.apitomy.io/#projects">Projects</a>
+            <a href="https://www.apitomy.io/blog/">Blog</a>
+            <a href="https://github.com/Apitomy" class="apitomy-masthead-github" aria-label="GitHub">
+                <svg width="22" height="22" viewBox="0 0 16 16" fill="currentColor">
+                    <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/>
+                </svg>
+            </a>
+        </nav>
+    </div>
+</div>
+
+          </div>
+          
+        </aside>
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../index.html" title="Apitomy Axiom" class="md-header__button md-logo" aria-label="Apitomy Axiom" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Apitomy Axiom
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              3.0.0
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom"  aria-hidden="true"  type="radio" name="__palette" id="__palette_0">
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="Share" aria-label="Share" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/Apitomy/apitomy-axiom" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Apitomy/apitomy-axiom
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../index.html" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../getting-started/running-axiom.html" class="md-tabs__link">
+          
+  
+  
+  Getting Started
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../user-guide/concepts.html" class="md-tabs__link">
+          
+  
+  
+  User Guide
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../developer-guide/stack-and-architecture.html" class="md-tabs__link">
+          
+  
+  
+  Developer Guide
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="v3.0.0.html" class="md-tabs__link">
+          
+  
+  
+  Release Notes
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../index.html" title="Apitomy Axiom" class="md-nav__button md-logo" aria-label="Apitomy Axiom" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Apitomy Axiom
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/Apitomy/apitomy-axiom" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Apitomy/apitomy-axiom
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Getting Started
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Getting Started
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../getting-started/running-axiom.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Running Axiom
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../getting-started/configuring-axiom.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Configuring Axiom
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../getting-started/contributing.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    How to Contribute
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    User Guide
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    User Guide
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../user-guide/concepts.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Concepts
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../user-guide/navigating-the-ui.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Navigating the UI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../user-guide/usage-examples.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Usage Examples
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../user-guide/workflows.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Workflows
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../user-guide/workbench.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Workflow Workbench
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../user-guide/ai-assistant.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AI Assistant
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../user-guide/logging-and-debugging.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Logging and Debugging
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Developer Guide
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Developer Guide
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../developer-guide/stack-and-architecture.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Stack & Architecture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../developer-guide/building-axiom.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Building Axiom
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../developer-guide/how-to-contribute.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    How to Contribute
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../developer-guide/api-first-development.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API-First Development
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../developer-guide/database-and-migrations.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Database & Migrations
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../developer-guide/upgrading-and-backups.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Upgrading and Backups
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../developer-guide/event-sourcing-design.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Event System Design
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../developer-guide/workflow-input-contract.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Workflow Input Contract
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../developer-guide/workflow-human-task-nodes.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Workflow Human-Task Nodes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../developer-guide/tracing.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tracing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../developer-guide/correlation.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Correlation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../developer-guide/lineage.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lineage
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../developer-guide/data-retention.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data Retention
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../developer-guide/ui-development.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UI Development
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../developer-guide/extending-axiom.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Extending Axiom
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Release Notes
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Release Notes
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3.0.0
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="v3.0.0.html" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3.0.0
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#highlights" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Highlights
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#new-features" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        New Features
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="New Features">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#workflows" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Workflows
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#workflow-workbench" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Workflow Workbench
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#runs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Runs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#events" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Events
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#action-types-and-tools" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Action types and tools
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ai-assistant-and-engines" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AI assistant and engines
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#observability-and-operations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Observability and operations
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#breaking-changes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Breaking Changes
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Breaking Changes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#secrets-are-no-longer-injected-automatically" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Secrets are no longer injected automatically
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#removed-features" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Removed features
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#renamed-concepts-and-api-changes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Renamed concepts and API changes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configuration-properties" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configuration properties
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#upgrading-from-2x" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Upgrading from 2.x
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#requirements" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Requirements
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#known-limitations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Known Limitations
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#notable-fixes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Notable Fixes
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#highlights" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Highlights
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#new-features" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        New Features
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="New Features">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#workflows" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Workflows
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#workflow-workbench" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Workflow Workbench
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#runs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Runs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#events" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Events
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#action-types-and-tools" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Action types and tools
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ai-assistant-and-engines" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AI assistant and engines
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#observability-and-operations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Observability and operations
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#breaking-changes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Breaking Changes
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Breaking Changes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#secrets-are-no-longer-injected-automatically" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Secrets are no longer injected automatically
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#removed-features" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Removed features
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#renamed-concepts-and-api-changes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Renamed concepts and API changes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configuration-properties" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configuration properties
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#upgrading-from-2x" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Upgrading from 2.x
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#requirements" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Requirements
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#known-limitations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Known Limitations
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#notable-fixes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Notable Fixes
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="apitomy-axiom-300">Apitomy Axiom 3.0.0</h1>
+<p>Axiom 3.0 is a new major version that puts <strong>workflows</strong> at the center. Events from GitHub and Jira flow into
+a durable <strong>event stream</strong>; <strong>subscriptions</strong> match them and start or resume <strong>workflow runs</strong>; workflows
+orchestrate <strong>action types</strong> (AI agents, Bash scripts or Node.js code), <strong>SDK calls</strong>, <strong>human tasks</strong> in a
+new <strong>Inbox</strong>, waits and event correlation. The new <strong>Workflow Workbench</strong> lets you build all of this together
+with an AI assistant.</p>
+<p>3.0 is a <strong>clean break</strong> from 2.x: it cannot use a 2.x database. Read <a href="#upgrading-from-2x">Upgrading from 2.x</a>
+before installing.</p>
+<h2 id="highlights">Highlights</h2>
+<ul>
+<li><strong>Workflows.</strong> Visual workflow definitions (powered by Apitomy Flow 3.0) with start, end, action,
+  human-task, wait and receive-event nodes, conditional and parallel branches, versions and publishing.</li>
+<li><strong>Workflow Workbench.</strong> An AI-assisted editor for a workflow together with its action types, tools and
+  subscriptions: AI edits arrive as reviewable, undoable change sets; drafts are validated continuously;
+  action types and tools can be test-run from the workbench; publish when ready.</li>
+<li><strong>Event stream and subscriptions.</strong> GitHub and Jira event sources poll into a durable stream; subscriptions
+  filter events with expressions and start workflows or deliver events to waiting runs, with retries and a
+  full processing audit trail.</li>
+<li><strong>Runs.</strong> A runs list as the landing page, run detail with a live diagram, timeline, trace and lineage,
+  re-run of failed runs, and running a workflow by hand from any stream event.</li>
+<li><strong>Inbox.</strong> Human-task nodes create tasks with structured forms; workflows wait for the answer.</li>
+<li><strong>Dashboards, tracing and lineage.</strong> Custom dashboards, end-to-end trace IDs, correlation IDs in logs, and a
+  lineage view connecting events, runs, tasks, traces and AI usage.</li>
+<li><strong>Multiple AI engines.</strong> Claude Code, OpenCode and the GitHub Copilot CLI, side by side.</li>
+</ul>
+<h2 id="new-features">New Features</h2>
+<h3 id="workflows">Workflows</h3>
+<ul>
+<li>Workflow definitions with a visual editor, version history with diffs, publishing, and import/export in
+  configuration packs (<strong>Components → Workflows</strong>).</li>
+<li>Node types:</li>
+<li><code>start</code>, <code>end</code>;</li>
+<li><code>action</code>: runs an action type, or calls an Axiom SDK function directly (<code>sdk:&lt;function&gt;</code>);</li>
+<li><code>human-task</code>: creates an Inbox task with a form and waits for the answer;</li>
+<li><code>wait</code>: pauses for an ISO-8601 duration;</li>
+<li><code>receive-event</code>: waits for a matching stream event, with correlation keys, match conditions, output
+    mappings, look-back for events that arrived earlier, and a timeout.</li>
+<li>Conditional edges (expressions over the run context) and parallel fork/join.</li>
+<li><strong>Standard inputs.</strong> A workflow's Start node declares which standard inputs a run receives: <code>subject</code> (the
+  subject's <code>id</code>, <code>name</code>, <code>type</code>, <code>ref</code>, <code>refSource</code>, <code>repository</code>) and <code>event</code> (the triggering event). A run
+  whose required inputs are not available is not created. Expressions read <code>context.subject.&lt;field&gt;</code> and
+  <code>context.event.&lt;field&gt;</code>.</li>
+<li>Validation at publish and while editing, including a warning when a node output would overwrite a workflow
+  input.</li>
+<li><strong>Schedule triggers</strong>: run a workflow on a cron schedule against a fixed subject.</li>
+<li>One active run per subject and workflow; duplicate starts are rejected (manual) or skipped and recorded
+  (subscriptions and schedules).</li>
+<li>SDK functions, including new <code>axiom_create_subject</code>, <code>axiom_update_subject_body</code>, <code>axiom_list_agents</code>,
+  <code>axiom_list_subject_runs</code>, <code>axiom_get_workflow_run</code> and <code>axiom_set_workflow_run_title</code>.</li>
+</ul>
+<h3 id="workflow-workbench">Workflow Workbench</h3>
+<ul>
+<li><strong>Workbench</strong> page listing compositions; each composition is a workflow plus its action types, tools and
+  subscriptions, edited as server-side drafts with revision history and restore.</li>
+<li>AI assistant bound to the composition: it edits the workflow through change sets that are highlighted on the
+  canvas and can be undone per turn; it can read stream events, evaluate expressions against them, preview
+  subscription filters, analyse runs and traces, and suggest tests.</li>
+<li>Live validation with "Ask AI to fix this" and "Ask AI about this…" actions.</li>
+<li>Test-run node and script action types and tools with sample inputs (Tests panel); runs of the published
+  workflow with "Ask AI to analyze" (Runs panel).</li>
+<li><strong>Subscriptions in compositions.</strong> Start the workflow (<code>create-workflow</code>) or feed its receive-event nodes
+  (<code>workflow-dispatch</code>). A matching-events preview shows which recent events a filter matches. Publishing
+  never turns automation on: subscriptions are published disabled and enabled with an explicit <strong>Enabled</strong>
+  switch.</li>
+<li>Dependency-aware publishing with conflict detection, and engine/model selection per composition.</li>
+</ul>
+<h3 id="runs">Runs</h3>
+<ul>
+<li><strong>Runs</strong> list (the landing page) with filter chips for status, workflow, subject and labels.</li>
+<li>Run detail: diagram with the current node, overview (subject, workflow, inputs, labels, trigger event), step
+  timeline, execution trace and lineage.</li>
+<li><strong>Re-run</strong> a failed run with the latest published version of its workflow.</li>
+<li><strong>Run workflow…</strong> from any event in the event stream, with suggested workflows, an optional title and
+  labels.</li>
+<li>Optional run titles, set when starting a run or by the workflow itself (<code>axiom_set_workflow_run_title</code>).</li>
+<li>Cancel running and waiting runs.</li>
+</ul>
+<h3 id="events">Events</h3>
+<ul>
+<li><strong>Event sources</strong> for GitHub (Repository Events API) and Jira (JQL and changelog) poll into a durable
+  <strong>event stream</strong>, with poll logs and status.</li>
+<li><strong>Event Stream</strong> page: filter by type and actor, live updates, and an event detail page with the processing
+  audit trail, routing outcomes, started runs and lineage.</li>
+<li><strong>Subscriptions</strong> with expression filters, a live preview against recent events (including evaluation
+  errors), routing rules (<code>create-workflow</code>, <code>workflow-dispatch</code>) and a "process events from" time.</li>
+<li>Failed event processing is retried with backoff and can be retried by hand.</li>
+<li>Expression evaluator for authoring (<code>POST /expressions/evaluate</code>), with the same scopes and context
+  (<code>context.subject</code>, <code>context.event</code>) as a real run, including subscription filters.</li>
+</ul>
+<h3 id="action-types-and-tools">Action types and tools</h3>
+<ul>
+<li><strong>Node.js</strong> execution mode: an ES module exporting <code>run(inputs, ctx)</code>.</li>
+<li>Declared, typed <code>inputs</code> and <code>outputs</code>, validated when a workflow is published and when the task runs;
+  workflow nodes map every required input explicitly; <code>{{inputs.&lt;name&gt;}}</code> is the only template placeholder.</li>
+<li>Per-action-type step and budget limits, timeouts and labels.</li>
+</ul>
+<h3 id="ai-assistant-and-engines">AI assistant and engines</h3>
+<ul>
+<li><strong>Session templates</strong> and a subject-scoped assistant; auto-approval rules, subagent views, stop/interrupt,
+  todo and thinking display, cost and token totals.</li>
+<li>The configuration assistant validates its drafts and previews workflows, subscriptions and event sources
+  before applying them.</li>
+<li>Claude Code, OpenCode (as a full interactive assistant engine) and the GitHub Copilot CLI can be used at the
+  same time; per-engine settings in <strong>Settings → Engine</strong>.</li>
+</ul>
+<h3 id="observability-and-operations">Observability and operations</h3>
+<ul>
+<li>Custom <strong>dashboards</strong> with tabs and widgets.</li>
+<li>Trace IDs across activity, AI usage, tasks and runs; correlation IDs in server logs; a <strong>lineage</strong> API and
+  panel.</li>
+<li>AI usage records the engine and the exact model.</li>
+<li><strong>Data retention</strong> settings for events, traces, runs and inactive subjects.</li>
+<li>Dark mode.</li>
+</ul>
+<h2 id="breaking-changes">Breaking Changes</h2>
+<h3 id="secrets-are-no-longer-injected-automatically">Secrets are no longer injected automatically</h3>
+<p>In 2.x every secret was passed to every agent and script that did not configure its own environment. In 3.0
+a process gets <strong>only the variables its environment declares</strong>:</p>
+<ul>
+<li>Declare each secret an action type (or a tool it allows) needs in the action type's <strong>Environment</strong>, for
+  example <code>GH_TOKEN=${secret:GH_TOKEN}</code>; the <strong>Add secret</strong> picker fills this in. Session templates have their
+  own Environment.</li>
+<li>A reference to a secret that does not exist fails the task, test run or session instead of passing the
+  literal <code>${secret:NAME}</code> text.</li>
+<li>Validation warns when a script, Node.js code or a tool uses a secret (<code>$GH_TOKEN</code>, <code>process.env.GH_TOKEN</code>)
+  that is not declared.</li>
+</ul>
+<p>This keeps credentials away from code and agents that do not need them, and limits what a prompt-injected
+agent could reveal.</p>
+<h3 id="removed-features">Removed features</h3>
+<ul>
+<li><strong>Reports and report definitions</strong>, including their pages, REST endpoints, SDK functions
+  (<code>axiom_list_reports</code>, <code>axiom_list_report_definitions</code>, <code>axiom_add_report_label</code>,
+  <code>axiom_remove_report_label</code>) and the <code>reportDefinitions</code> section of configuration packs.</li>
+<li><strong>The AI Manager</strong>: its pages, <code>/manager/**</code> endpoints and escalations. Workflows replace manager-driven
+  routing.</li>
+<li><strong>Projects</strong> and their open/close lifecycle, replaced by <strong>subjects</strong> (see below).</li>
+<li><strong>Invoking action types directly</strong>: manual task creation, the free-form task response endpoint, the
+  <code>invoke-action</code> routing type and the SDK function <code>axiom_create_task</code>. Action types run only from workflow
+  <code>action</code> nodes; human input goes through Inbox tasks.</li>
+<li><strong>The 2.x event pipeline</strong> (<code>/events</code>, the event queue and the Events log page), replaced by the event
+  stream, subscriptions and poll logs.</li>
+<li><strong>AI edit endpoints and per-editor AI assistants</strong> for action types and tools, replaced by the Workflow
+  Workbench.</li>
+<li><strong>The fixed home dashboard</strong>: <code>/</code> now opens the Runs list; dashboards are user-defined.</li>
+<li><strong>Action type flags</strong> <code>userTriggerable</code>, <code>managerTriggerable</code>, <code>emitsEvent</code> and the free-form <code>inputSchema</code>,
+  replaced by declared <code>inputs</code> and <code>outputs</code>.</li>
+<li><strong>Legacy template placeholders</strong> (<code>{{input}}</code>, <code>{{ref}}</code>, <code>{{repository}}</code>, <code>{{subjectName}}</code>,
+  <code>{{subjectId}}</code>, <code>{{eventId}}</code>, <code>{{actionType}}</code>, <code>{{workDir}}</code>, <code>{{apiBaseUrl}}</code>, <code>{{taskId}}</code>) and the
+  ambient <code>AXIOM_SUBJECT_*</code> environment variables. Use <code>{{inputs.&lt;name&gt;}}</code> and map values from the workflow.</li>
+</ul>
+<h3 id="renamed-concepts-and-api-changes">Renamed concepts and API changes</h3>
+<ul>
+<li><strong>Projects → Subjects</strong>: <code>/projects/**</code> → <code>/subjects/**</code>; <code>projectId</code> → <code>subjectId</code> in tasks, thread
+  entries, activity, AI usage and traces. A subject's description is now a Markdown <code>body</code>.</li>
+<li><strong>Actors → Agents</strong>: <code>/actors/**</code> → <code>/agents/**</code>; <code>Task.assignedActor</code> → <code>assignedAgent</code>; <code>AiUsage.actorId</code>
+  → <code>agentId</code>.</li>
+<li><strong>System configuration</strong>: <code>SystemConfig.engine</code> is removed; use <code>defaultEngine</code> and <code>engines</code>.</li>
+<li><strong>SDK</strong>: <code>*_project*</code> functions are renamed to <code>*_subject*</code>; <code>axiom_close_project</code>, <code>axiom_reopen_project</code>
+  and <code>axiom_list_actors</code> are removed (use <code>axiom_list_agents</code>).</li>
+<li><strong>Configuration packs</strong> are format version <code>3.0</code>. 2.x packs are not expected to import cleanly.</li>
+<li><strong>Navigation</strong> is reorganized: Runs, Subjects, Inbox, Dashboards, Events, Workbench, Logs, Metrics,
+  Components and Settings.</li>
+</ul>
+<h3 id="configuration-properties">Configuration properties</h3>
+<table>
+<thead>
+<tr>
+<th>2.x property</th>
+<th>3.0 property</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>axiom.ai-engine</code></td>
+<td><code>axiom.agent.default-type</code></td>
+</tr>
+<tr>
+<td><code>axiom.claude-code.*</code></td>
+<td><code>axiom.agent.claude-code.*</code> (<code>max-turns</code> → <code>max-steps</code>)</td>
+</tr>
+<tr>
+<td><code>axiom.opencode.*</code></td>
+<td><code>axiom.agent.opencode.*</code></td>
+</tr>
+<tr>
+<td><code>axiom.manager.*</code>, <code>axiom.reports.*</code>, <code>axiom.github.poll-interval</code>, <code>axiom.pipeline.poll-interval</code></td>
+<td>removed</td>
+</tr>
+</tbody>
+</table>
+<p>New properties include <code>axiom.home</code> (default <code>~/.axiom</code>; workspaces, sessions, installed MCP servers and the
+encryption key live under it), <code>axiom.agent.copilot.*</code>, <code>axiom.assistant.*</code>, <code>axiom.stream-pipeline.*</code> and
+<code>axiom.workflow.*</code>.</p>
+<h2 id="upgrading-from-2x">Upgrading from 2.x</h2>
+<p>Axiom 3.0 starts from a new database schema and <strong>cannot use a 2.x database</strong>. If it finds one, it refuses to
+start and tells you to remove it. No 2.x data is migrated (projects, reports, events, tasks and manager
+configuration are not carried over).</p>
+<ol>
+<li>Stop Axiom 2.x.</li>
+<li>Back up <code>~/.axiom</code> if you want to keep the old data.</li>
+<li>Delete <code>~/.axiom/data/</code>.</li>
+<li>Install and start Axiom 3.0.0. It creates a new database.</li>
+<li>Recreate your configuration: secrets, event sources, action types, tools, workflows and subscriptions. The
+   Workflow Workbench is the quickest way to rebuild automation as workflows. Declare the secrets each action
+   type needs in its <strong>Environment</strong> (see <a href="#secrets-are-no-longer-injected-automatically">Secrets</a>).</li>
+</ol>
+<p>From 3.0.0 on, schema changes ship as incremental migrations that are applied automatically at startup.</p>
+<h2 id="requirements">Requirements</h2>
+<ul>
+<li>Java 25.</li>
+<li>Node.js on the <code>PATH</code> (Axiom runs its MCP tool servers and Node.js action types with it).</li>
+<li>At least one AI engine CLI for agent work: Claude Code, OpenCode or the GitHub Copilot CLI.</li>
+<li>Start with <code>java -jar apitomy-axiom-3.0.0.jar</code>; the UI and API are served on <code>http://localhost:9191</code>.</li>
+</ul>
+<h2 id="known-limitations">Known Limitations</h2>
+<ul>
+<li><strong>No authentication.</strong> Axiom is intended for local, single-user use. The release build listens on
+  <code>127.0.0.1</code> only; if you set <code>quarkus.http.host</code> to accept connections from other machines, protect access
+  yourself (for example behind an authenticating reverse proxy).</li>
+<li>The Workflow Workbench cannot test a draft workflow end to end; test action types and tools individually and
+  run the published workflow (#469).</li>
+<li>The workbench cannot delete or disable published items (except enabling and disabling its subscriptions),
+  and existing subscriptions cannot be added to a composition.</li>
+<li>Retrying failed event routing re-runs rules that already succeeded (#341).</li>
+<li>Jira polling can skip changes when ingestion fails part-way (#342).</li>
+<li>Tasks interrupted by a restart are not resumed (#343).</li>
+<li>Workflow scripts and Node.js actions enforce their timeout, but the Tools page's tool test and a few setup
+  commands can run past theirs, and process output is not size-limited (#344).</li>
+<li>Schedule triggers assume a single Axiom instance.</li>
+</ul>
+<h2 id="notable-fixes">Notable Fixes</h2>
+<ul>
+<li>Deleting a subject workspace never follows symbolic links out of the workspace (#340).</li>
+<li>Scripts always run in the subject workspace; placeholder substitution is quoting-aware; stderr is captured
+  separately.</li>
+<li>Inbox tasks complete correctly after a server restart.</li>
+<li>Cleanup jobs retry on database deadlocks; orphaned processing entries are recovered at startup.</li>
+<li>GitHub and Jira pollers use HTTP timeouts and shut down cleanly.</li>
+<li>"Process events from" compares the event's own timestamp.</li>
+<li>Orphaned and incomplete traces are closed; retention leaves no dangling references.</li>
+<li>Invalid requests return 400 instead of 500 across several endpoints.</li>
+<li>AI assistant: correct cumulative session cost, interruption without killing the process, subagent permission
+  routing, and better chat performance in long conversations.</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/Apitomy/apitomy-axiom" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.tabs", "navigation.sections", "navigation.expand", "navigation.top", "search.highlight", "search.share", "search.suggest", "content.code.copy"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+    
+  </body>
+</html>

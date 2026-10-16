@@ -320,6 +320,26 @@
   
 
       
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../release-notes/v3.0.0.html" class="md-tabs__link">
+          
+  
+  
+  Release Notes
+
+        </a>
+      </li>
+    
+  
+
+      
     </ul>
   </div>
 </nav>
@@ -690,6 +710,34 @@
     
   
     Workflows
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../user-guide/workbench.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Workflow Workbench
   
 
     
@@ -1081,10 +1129,10 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#connections-eventsourceconnection" class="md-nav__link">
+  <a href="#event-sources-eventsourceentity" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Connections (EventSourceConnection)
+        Event Sources (EventSourceEntity)
       
     </span>
   </a>
@@ -1118,6 +1166,17 @@
     <span class="md-ellipsis">
       
         Routing Rules
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#starting-a-run-from-an-event" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Starting a run from an event
       
     </span>
   </a>
@@ -1181,10 +1240,10 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#connections" class="md-nav__link">
+  <a href="#event-sources" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Connections
+        Event Sources
       
     </span>
   </a>
@@ -1480,6 +1539,95 @@
   
 
     
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Release Notes
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Release Notes
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../release-notes/v3.0.0.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3.0.0
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
   </ul>
 </nav>
                   </div>
@@ -1530,10 +1678,10 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#connections-eventsourceconnection" class="md-nav__link">
+  <a href="#event-sources-eventsourceentity" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Connections (EventSourceConnection)
+        Event Sources (EventSourceEntity)
       
     </span>
   </a>
@@ -1567,6 +1715,17 @@
     <span class="md-ellipsis">
       
         Routing Rules
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#starting-a-run-from-an-event" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Starting a run from an event
       
     </span>
   </a>
@@ -1630,10 +1789,10 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#connections" class="md-nav__link">
+  <a href="#event-sources" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Connections
+        Event Sources
       
     </span>
   </a>
@@ -1714,30 +1873,30 @@
 <p>Axiom's event system provides a three-layer architecture for monitoring external systems
 and reacting to changes:</p>
 <ol>
-<li><strong>Connections</strong> — authenticated links to external systems (GitHub, Jira) that poll
+<li><strong>Event Sources</strong> — authenticated links to external systems (GitHub, Jira) that poll
    for changes and produce a normalized event stream</li>
 <li><strong>Event Stream</strong> — a single database table of typed, schema-validated events from
-   all connections, browsable via REST API and UI</li>
+   all event sources, browsable via REST API and UI</li>
 <li><strong>Subscriptions</strong> — filtered views over the event stream with EL expression matching
-   and configurable routing rules that send matched events to destinations (Manager
-   triage, workflow dispatch, workflow creation, action invocation)</li>
+   and configurable routing rules that send matched events to workflows (workflow creation
+   and workflow dispatch)</li>
 </ol>
 <h2 id="architecture">Architecture</h2>
-<h3 id="connections-eventsourceconnection">Connections (EventSourceConnection)</h3>
+<h3 id="event-sources-eventsourceentity">Event Sources (EventSourceEntity)</h3>
 <p>A configured, authenticated link to an external system. Produces a raw, normalized event
 stream. No filtering — every detectable event gets recorded.</p>
 <ul>
-<li>Each connection has a user-provided <strong>slug ID</strong> as its primary key (lowercase letters,
+<li>Each event source has a user-provided <strong>slug ID</strong> as its primary key (lowercase letters,
   numbers, dashes; max 63 characters, e.g., <code>github-com</code>, <code>github-ibm</code>, <code>jira-prod</code>)</li>
-<li>Multiple connections of the same type are supported (e.g., github.com + GitHub Enterprise)</li>
-<li>Each connection specifies what to watch (repositories for GitHub, projects for Jira)</li>
-<li>A background poller runs per connection, iterating over watched resources</li>
-<li>Poll results are audited in the <code>connection_poll_log</code> table with status, timing,
+<li>Multiple event sources of the same type are supported (e.g., github.com + GitHub Enterprise)</li>
+<li>Each event source specifies what to watch (repositories for GitHub, projects for Jira)</li>
+<li>A background poller runs per event source, iterating over watched resources</li>
+<li>Poll results are audited in the <code>event_source_poll_log</code> table with status, timing,
   events ingested, and error details (3-day retention)</li>
-<li>The connection's <code>baseUrl</code> stores the <strong>human-readable URL</strong> (e.g., <code>https://github.com</code>);
-  the poller derives the API URL automatically</li>
+<li>The event source's <code>baseUrl</code> identifies the server (e.g., <code>https://github.com</code>); for GitHub the poller
+  resolves the web and API URLs from it (see "Base URL resolution" below)</li>
 </ul>
-<p><strong>GitHub connection:</strong>
+<p><strong>GitHub event source:</strong>
 - Uses the Repository Events API (<code>GET /repos/{owner}/{repo}/events</code>)
 - ETag-based conditional polling for efficiency (304 when nothing changed)
 - Per-repo polling under a shared authentication token
@@ -1745,19 +1904,19 @@ stream. No filtering — every detectable event gets recorded.</p>
   <code>GET /repos/{owner}/{repo}/pulls/{number}</code>
 - Configuration: <code>baseUrl</code> (e.g., <code>https://github.com</code>), <code>secretName</code>,
   <code>repositories</code> (list of <code>owner/repo</code>), <code>pollInterval</code></p>
-<p><strong>Jira connection:</strong>
+<p><strong>Jira event source:</strong>
 - Uses JQL search with changelog expansion (<code>expand=changelog</code>)
 - Single query covers all configured projects via <code>project in (A, B, C)</code> clause
 - Field-level change detection from changelog entries
 - ADF-to-plain-text conversion for description and comment bodies
 - Configuration: <code>baseUrl</code> (e.g., <code>https://myorg.atlassian.net</code>), <code>secretName</code>,
   <code>projects</code> (list of project keys), <code>pollInterval</code></p>
-<p><strong>Authentication:</strong> Three-tier fallback for both types: per-connection secret (by name
+<p><strong>Authentication:</strong> Three-tier fallback for both types: per-event-source secret (by name
 from the secrets store), default provider secret (<code>GH_TOKEN</code>/<code>GITHUB_TOKEN</code> for GitHub,
 <code>JIRA_API_TOKEN</code> for Jira), environment variable.</p>
 <h3 id="event-stream">Event Stream</h3>
 <p>A single <code>stream_event</code> database table of normalized, schema-validated events produced
-by all connections.</p>
+by all event sources.</p>
 <ul>
 <li>Each event has a UUID primary key and a well-defined typed payload determined by its
   event type (26 types across issue, PR, and repository events)</li>
@@ -1769,18 +1928,18 @@ by all connections.</p>
 <p>A filtered view over the event stream with configurable routing. Each subscription has:</p>
 <ul>
 <li><strong>Filter Expression</strong> — a Jakarta EL expression that evaluates to boolean against the
-  event map (e.g., <code>event.type.startsWith('pr.') &amp;&amp; event.connectionId == 'github-com'</code>).
+  event map (e.g., <code>event.type.startsWith('pr.') &amp;&amp; event.eventSourceId == 'github-com'</code>).
   Empty expression matches all events.</li>
 <li><strong>Routing Rules</strong> — a list of destinations for matched events (see Routing below)</li>
 <li><strong>Labels</strong> — free-form strings for categorization and downstream scoping</li>
 <li><strong>Enabled/Disabled</strong> — subscriptions must be explicitly enabled to process events</li>
 </ul>
 <p><strong>Filter expression evaluation</strong> uses the flow engine's <code>ConditionEvaluator</code> (Jakarta EL).
-The event is exposed as an <code>event</code> variable with fields: <code>type</code>, <code>source</code>, <code>connectionId</code>,
+The event is exposed as an <code>event</code> variable with fields: <code>type</code>, <code>source</code>, <code>eventSourceId</code>,
 <code>ref</code>, <code>timestamp</code>, <code>actor.*</code>, and <code>payload.*</code> (with full typed payload field access).</p>
 <h3 id="routing-rules">Routing Rules</h3>
 <p>Each subscription defines zero or more routing rules. When an event matches the filter
-expression, each routing rule executes in order:</p>
+expression, each routing rule executes in order. There are exactly two routing types:</p>
 <table>
 <thead>
 <tr>
@@ -1791,29 +1950,42 @@ expression, each routing rule executes in order:</p>
 </thead>
 <tbody>
 <tr>
-<td><code>manager</code></td>
-<td>None</td>
-<td>Sends the event to the AI Manager for triage. Manager returns decisions (create_task, ignore, script_action, escalate) which are processed: tasks are created, projects auto-created, scripts executed, escalations logged with SSE notifications. Decisions below the confidence threshold are auto-escalated.</td>
+<td><code>create-workflow</code></td>
+<td><code>workflowDefinitionId</code> (or <code>workflowDefinitionName</code>, resolved to the id on save)</td>
+<td>Finds or auto-creates a Subject from the event's <code>ref</code> URL, then starts a new workflow run of the specified definition on that subject, with <code>subjectId</code>, <code>ref</code>, and <code>event</code> in its context. If the subject already has an active (<code>running</code> or <code>waiting</code>) run of that definition, no run is started or queued: the outcome records a <code>skipped</code> <code>workflow-run</code> item.</td>
 </tr>
 <tr>
 <td><code>workflow-dispatch</code></td>
 <td>None</td>
-<td>Offers the event to any workflow instances parked at <code>receive-event</code> nodes. Matching uses the flow engine's <code>matchesEvent</code> with event type and EL expressions.</td>
-</tr>
-<tr>
-<td><code>create-workflow</code></td>
-<td><code>workflowDefinitionId</code></td>
-<td>Finds or auto-creates a project from the event's <code>ref</code> URL, then starts a new workflow instance from the specified definition on that project.</td>
-</tr>
-<tr>
-<td><code>invoke-action</code></td>
-<td><code>actionTypeId</code></td>
-<td>Finds or auto-creates a project, then creates a <code>TaskEntity</code> with status "Pending" for the specified action type. The task queue picks it up for execution.</td>
+<td>Broadcasts the event to <strong>every</strong> workflow run parked at a <code>receive-event</code> node whose event type and EL expression match (flow engine <code>matchesEvent</code>). When the event's <code>ref</code> correlates to a subject, delivery is limited to waiting runs on that subject (all of them, across definitions); otherwise all waiting runs with a matching event type are offered the event.</td>
 </tr>
 </tbody>
 </table>
 <p>A subscription with no routing rules matches events silently (useful for previewing
 matches before committing to a routing destination).</p>
+<p>Event processing is driven by <code>EventStreamOrchestrator</code>, a scheduled job that runs every
+<code>axiom.stream-pipeline.poll-interval</code> (default 5s). Each tick evaluates new events against enabled
+subscriptions, records the result in the processing ledger (below), runs the routing rules of matching
+subscriptions, and then retries failed ledger entries that are due.</p>
+<h3 id="starting-a-run-from-an-event">Starting a run from an event</h3>
+<p><code>create-workflow</code> rules start runs through <code>EventStreamOrchestrator.startRunFromEvent</code>. The same method is
+used for two runs that are not started by a subscription:</p>
+<ul>
+<li><strong>Manual runs from an event.</strong> The event detail page's "Run workflow…" action
+  (<code>POST /stream/events/{eventId}/runs</code>) starts any published workflow for the event. Workflows started by
+  <code>create-workflow</code> rules of subscriptions that matched the event are suggested first
+  (<code>GET /stream/events/{eventId}/workflow-suggestions</code>). The run gets the label <code>trigger:manual</code> in addition
+  to any labels in the request.</li>
+<li><strong>Re-runs.</strong> <code>POST /workflow/runs/{runId}/rerun</code> re-runs a failed run. When the failed run was started
+  from an event that still exists, the re-run is started from that event.</li>
+</ul>
+<p><code>startRunFromEvent</code> finds or creates the subject from the event's <code>ref</code>, puts the event into the run's
+context as <code>event</code>, and starts the run in its own transaction with the event recorded as its trigger. The
+run, its trace and its <code>event</code> context are the same however the run was started. The difference is the
+ledger: only a subscription's <code>create-workflow</code> rule has a ledger entry. Manual runs and re-runs write no
+ledger entry and no routing outcome, so their <code>trigger_ledger_id</code> is null. If the subject already has an
+active run of the workflow, a manual run fails with HTTP 409 (a routing rule records a <code>skipped</code> item
+instead).</p>
 <h2 id="processing-ledger">Processing Ledger</h2>
 <p>The <code>event_processing_ledger</code> table provides durable, restart-safe event processing.
 Each <code>(event_id, subscription_id)</code> pair gets a ledger entry with one of four statuses:</p>
@@ -1861,20 +2033,20 @@ Each <code>(event_id, subscription_id)</code> pair gets a ledger entry with one 
   events whose <code>timestamp</code> is at or after that cutoff are ever evaluated against the
   subscription. Enabling a subscription does not retroactively evaluate events that
   occurred before its cutoff.
-- <strong>Retry:</strong> Each ledger entry tracks its attempts (V69, #422): <code>attempt_count</code> (the first try
-  included), <code>last_attempt_at</code> and, while it is <code>failed</code>, <code>next_attempt_at</code>. A failed attempt sets
-  <code>next_attempt_at = now + min(retry-initial-delay * 2^(n-1), retry-max-delay)</code> where <code>n</code> is the number of
-  the attempt that failed (defaults 30s and 1h: 30s, 1m, 2m, ... capped at 1h). The retry pass selects
-  only <code>failed</code> entries whose <code>next_attempt_at</code> has passed (index on <code>(status, next_attempt_at)</code>), and
-  never an entry attempted since the tick started, so the first pass and the retry pass cannot both run
-  an entry in one tick. A retry marks the entry <code>pending</code>, increments <code>attempt_count</code> and sets
-  <code>last_attempt_at</code> before routing, in one conditional update (<code>... where id = ? and status =
-  'failed'</code>). If it changes no row, a manual retry or another node got the entry first and it is skipped,
-  so two nodes can never start the same attempt. A retry that re-evaluates the filter (see below) and
-  marks the entry <code>skipped</code> still counts as an attempt. When the attempt that reaches
-  <code>axiom.stream-pipeline.max-attempts</code> (default 3) fails, the entry becomes <code>exhausted</code> (a distinct status rather than <code>failed</code> with a null
-  <code>next_attempt_at</code>, so lists, filters and the UI can tell "will retry" from "gave up" by status alone),
-  "(giving up after N attempts)" is appended to its error message and a WARN is logged once.
+- <strong>Retry:</strong> Each ledger entry tracks its attempts: <code>attempt_count</code> (the first try included),
+  <code>last_attempt_at</code> and, while it is <code>failed</code>, <code>next_attempt_at</code>. A failed attempt sets <code>next_attempt_at = now
+  + min(retry-initial-delay * 2^(n-1), retry-max-delay)</code> where <code>n</code> is the number of the attempt that failed
+  (defaults 30s and 1h: 30s, 1m, 2m, ... capped at 1h). The retry pass selects only <code>failed</code> entries whose
+  <code>next_attempt_at</code> has passed (index on <code>(status, next_attempt_at)</code>), and never an entry attempted since the
+  tick started, so the first pass and the retry pass cannot both run an entry in one tick. A retry marks the
+  entry <code>pending</code>, increments <code>attempt_count</code> and sets <code>last_attempt_at</code> before routing, in one conditional
+  update (<code>... where id = ? and status = 'failed'</code>). If it changes no row, a manual retry or another node got
+  the entry first and it is skipped, so two nodes can never start the same attempt. A retry that re-evaluates
+  the filter (see below) and marks the entry <code>skipped</code> still counts as an attempt. When the attempt that
+  reaches <code>axiom.stream-pipeline.max-attempts</code> (default 3) fails, the entry becomes <code>exhausted</code> (a distinct
+  status rather than <code>failed</code> with a null <code>next_attempt_at</code>, so lists, filters and the UI can tell "will
+  retry" from "gave up" by status alone), "(giving up after N attempts)" is appended to its error message and
+  a WARN is logged once.
 - <strong>Manual retry:</strong> <code>POST /stream/events/{eventId}/processing/{ledgerId}/retry</code> (the retry button on the
   event detail page) makes a <code>failed</code> or <code>exhausted</code> entry <code>failed</code> and due immediately, with one
   conditional update (<code>... where status in ('failed', 'exhausted')</code>); it returns 409 for any other status,
@@ -1884,12 +2056,7 @@ Each <code>(event_id, subscription_id)</code> pair gets a ledger entry with one 
   if it fails it is exhausted again.
 - <strong>Attempt history:</strong> Every <code>routing_outcome</code> records its <code>attempt_number</code>, so the outcomes of an entry
   group into attempts; the processing API returns them all with the entry's attempt fields and the
-  configured maximum. V69 backfills <code>attempt_number</code> (1 + failed outcomes recorded before it) and
-  <code>attempt_count</code> (failed outcomes, plus one for a <code>completed</code> entry), marks failed entries with 3 or more
-  attempts (the old default cap) <code>exhausted</code> and makes the other failed entries due immediately.
-- <strong>Upgrade:</strong> the V69 backfill assumes the old default cap of 3, since a migration cannot read the
-  configuration. Failed entries with 3 or more attempts therefore become <code>exhausted</code> even when
-  <code>axiom.stream-pipeline.max-attempts</code> is set higher; retry them manually if needed.
+  configured maximum.
 - <strong>Configuration validation:</strong> startup fails with a message naming the property when
   <code>max-attempts</code> &lt; 1, <code>retry-initial-delay</code> &lt;= 0 or <code>retry-max-delay</code> &lt; <code>retry-initial-delay</code>. Invalid
   values are rejected rather than clamped, so a misconfiguration is never silently replaced.
@@ -1912,7 +2079,7 @@ Each <code>(event_id, subscription_id)</code> pair gets a ledger entry with one 
   to <code>failed</code> on the first tick, then retried normally.</p>
 <h3 id="routing-outcomes-and-items">Routing outcomes and items</h3>
 <p>Each routing rule run records one <code>routing_outcome</code> row per attempt (routing type, status, summary,
-trace ID, error). Everything the rule produced is recorded as <code>routing_outcome_item</code> rows (V67, #418),
+trace ID, error). Everything the rule produced is recorded as <code>routing_outcome_item</code> rows,
 children of the outcome deleted with it (<code>ON DELETE CASCADE</code>; <code>StreamEventCleanup</code> also deletes them
 explicitly):</p>
 <table>
@@ -1925,63 +2092,44 @@ explicitly):</p>
 </thead>
 <tbody>
 <tr>
-<td><code>task</code></td>
-<td>Manager <code>create_task</code> / <code>script_action</code> decision; <code>invoke-action</code> rule</td>
-<td><code>task_id</code>, <code>project_id</code></td>
-</tr>
-<tr>
 <td><code>workflow-run</code></td>
-<td><code>create-workflow</code> rule</td>
-<td><code>workflow_run_id</code>, <code>project_id</code></td>
+<td><code>create-workflow</code> rule (status <code>skipped</code> when the subject already had an active run of the definition)</td>
+<td><code>workflow_run_id</code> (not set when skipped), <code>subject_id</code></td>
 </tr>
 <tr>
 <td><code>workflow-resumed</code></td>
 <td><code>workflow-dispatch</code> rule, one per run the event resumed</td>
-<td><code>workflow_run_id</code>, <code>project_id</code>, <code>trace_node_id</code> (the receive-event node)</td>
+<td><code>workflow_run_id</code>, <code>subject_id</code>, <code>trace_node_id</code> (the receive-event node)</td>
 </tr>
 <tr>
 <td><code>no-match</code></td>
 <td><code>workflow-dispatch</code> rule that resumed no run</td>
 <td>—</td>
 </tr>
-<tr>
-<td><code>ignored</code></td>
-<td>Manager <code>ignore</code> decision</td>
-<td>—</td>
-</tr>
-<tr>
-<td><code>escalated</code></td>
-<td>Manager <code>escalate</code> decision, or any decision below the confidence threshold</td>
-<td><code>project_id</code> if the escalation was posted to a project</td>
-</tr>
-<tr>
-<td><code>decision</code></td>
-<td>Manager decision of an unknown type (always <code>failed</code>)</td>
-<td>—</td>
-</tr>
 </tbody>
 </table>
-<p>Each item has a <code>status</code> (<code>completed</code> or <code>failed</code>), a <code>summary</code> and, when failed, an <code>error_message</code>.
-Manager items have one row per decision, including decisions that failed, and <code>trace_node_id</code> points to
-the decision's <code>manager-decision</code> trace node. A <code>workflow-dispatch</code> rule writes one <code>workflow-resumed</code>
+<p>Each item has a <code>status</code> (<code>completed</code>, <code>failed</code>, or <code>skipped</code>), a <code>summary</code> and, when failed, an
+<code>error_message</code>. A <code>workflow-dispatch</code> rule writes one <code>workflow-resumed</code>
 item per resumed run, or a single <code>no-match</code> item (outcome summary "No waiting workflow run matched the
 event") when nothing matched, so "nothing happened" is recorded explicitly. A run that matched but
 failed to resume gets a <code>failed</code> <code>workflow-resumed</code> item with the error; the outcome stays <code>completed</code>
 so the rule is not retried (a retry would re-dispatch the event to every run). The processing API adds the
 run's <code>traceId</code> to <code>workflow-run</code> and <code>workflow-resumed</code> items, so the event page links to the run and its
 trace.</p>
-<p>The outcome's own <code>project_id</code> and <code>task_id</code> columns are kept for backward compatibility. They still hold
-only the <strong>first</strong> project and task; readers should use the items. Outcomes recorded before V67 have no
-items.</p>
+<p>The outcome's own <code>subject_id</code> and <code>task_id</code> columns hold only the <strong>first</strong> subject and task; readers
+should use the items.</p>
 <h3 id="links-between-events-and-workflow-runs">Links between events and workflow runs</h3>
-<p>Events and workflow runs are linked both ways (V68, #420, #421). None of these links are foreign keys:
+<p>Events and workflow runs are linked both ways. None of these links are foreign keys:
 event retention deletes events and ledger entries while runs are kept (but never while the run is still
 running or waiting).</p>
 <ul>
-<li><strong>Started runs (<code>create-workflow</code>).</strong> The run stores <code>trigger_event_id</code> and <code>trigger_ledger_id</code>; the
-  run's <code>workflow</code> trace has <code>eventId</code> set to the event; the run's context has the event ID as
-  <code>event.id</code>; and the outcome's <code>trace_id</code> is the run's trace. Runs started any other way (e.g.
-  <code>POST /projects/{id}/workflow</code>) have null trigger fields.</li>
+<li><strong>Started runs.</strong> A run started from an event (by a <code>create-workflow</code> rule, manually from the event, or
+  as a re-run of a run started from an event) stores <code>trigger_event_id</code>; the run's <code>workflow</code> trace has
+  <code>eventId</code> set to the event; and the run's context has the event ID as <code>event.id</code>. Only runs started by a
+  <code>create-workflow</code> rule also store <code>trigger_ledger_id</code>, and their outcome's <code>trace_id</code> is the run's trace.
+  Runs started any other way (a schedule trigger, or a re-run of such a run) have null trigger
+  fields. <code>GET /workflow/runs?triggerEventId=&lt;id&gt;</code> lists the runs started from an event; the event detail
+  page shows them on its "Runs" tab.</li>
 <li><strong>Resumed runs (<code>workflow-dispatch</code>).</strong> <code>WorkflowEventDispatcher.dispatchStreamEvent</code> returns the
   runs it resumed (run, node, trace and receive-event trace node). The <code>workflow_event_subscription</code> row
   is deleted when it is consumed, so each resumption is recorded as a <code>workflow_run_resume</code> row (run,
@@ -1996,7 +2144,7 @@ running or waiting).</p>
 status and routing type, not items. Each attempt persists its own outcome together with its items, so the
 items of an attempt stay on that attempt's outcome and never appear on a later attempt's outcome.</p>
 <h2 id="rest-api">REST API</h2>
-<h3 id="connections">Connections</h3>
+<h3 id="event-sources">Event Sources</h3>
 <table>
 <thead>
 <tr>
@@ -2008,37 +2156,37 @@ items of an attempt stay on that attempt's outcome and never appear on a later a
 <tbody>
 <tr>
 <td>GET</td>
-<td><code>/connections</code></td>
-<td>List all connections</td>
+<td><code>/event-sources</code></td>
+<td>List all event sources</td>
 </tr>
 <tr>
 <td>POST</td>
-<td><code>/connections</code></td>
-<td>Create a connection</td>
+<td><code>/event-sources</code></td>
+<td>Create an event source</td>
 </tr>
 <tr>
 <td>GET</td>
-<td><code>/connections/{connectionId}</code></td>
-<td>Get a connection (by slug)</td>
+<td><code>/event-sources/{eventSourceId}</code></td>
+<td>Get an event source (by slug)</td>
 </tr>
 <tr>
 <td>PUT</td>
-<td><code>/connections/{connectionId}</code></td>
-<td>Update a connection</td>
+<td><code>/event-sources/{eventSourceId}</code></td>
+<td>Update an event source</td>
 </tr>
 <tr>
 <td>DELETE</td>
-<td><code>/connections/{connectionId}</code></td>
-<td>Delete a connection</td>
+<td><code>/event-sources/{eventSourceId}</code></td>
+<td>Delete an event source</td>
 </tr>
 <tr>
 <td>GET</td>
-<td><code>/connections/{connectionId}/status</code></td>
+<td><code>/event-sources/{eventSourceId}/status</code></td>
 <td>Poll health, last poll time, errors</td>
 </tr>
 <tr>
 <td>GET</td>
-<td><code>/connections/{connectionId}/logs</code></td>
+<td><code>/event-sources/{eventSourceId}/logs</code></td>
 <td>Poll log history</td>
 </tr>
 </tbody>
@@ -2056,12 +2204,32 @@ items of an attempt stay on that attempt's outcome and never appear on a later a
 <tr>
 <td>GET</td>
 <td><code>/stream/events</code></td>
-<td>Browse events (paginated, filterable by type, connectionId, ref)</td>
+<td>Browse events (paginated; filters <code>filterType</code>, <code>filterEventSourceId</code>, <code>filterRef</code>, <code>filterActor</code>)</td>
 </tr>
 <tr>
 <td>GET</td>
 <td><code>/stream/events/{eventId}</code></td>
 <td>Get a single event with full typed payload</td>
+</tr>
+<tr>
+<td>GET</td>
+<td><code>/stream/events/{eventId}/processing</code></td>
+<td>Ledger entries, routing outcomes and items for the event</td>
+</tr>
+<tr>
+<td>POST</td>
+<td><code>/stream/events/{eventId}/processing/{ledgerId}/retry</code></td>
+<td>Retry a <code>failed</code> or <code>exhausted</code> ledger entry</td>
+</tr>
+<tr>
+<td>POST</td>
+<td><code>/stream/events/{eventId}/runs</code></td>
+<td>Start a workflow run from the event (label <code>trigger:manual</code>, no ledger entry)</td>
+</tr>
+<tr>
+<td>GET</td>
+<td><code>/stream/events/{eventId}/workflow-suggestions</code></td>
+<td>Workflows started by <code>create-workflow</code> rules of subscriptions that matched the event</td>
 </tr>
 </tbody>
 </table>
@@ -2087,17 +2255,17 @@ items of an attempt stay on that attempt's outcome and never appear on a later a
 </tr>
 <tr>
 <td>GET</td>
-<td><code>/subscriptions/{id}</code></td>
+<td><code>/subscriptions/{subscriptionId}</code></td>
 <td>Get a subscription</td>
 </tr>
 <tr>
 <td>PUT</td>
-<td><code>/subscriptions/{id}</code></td>
+<td><code>/subscriptions/{subscriptionId}</code></td>
 <td>Update a subscription</td>
 </tr>
 <tr>
 <td>DELETE</td>
-<td><code>/subscriptions/{id}</code></td>
+<td><code>/subscriptions/{subscriptionId}</code></td>
 <td>Delete a subscription</td>
 </tr>
 <tr>
@@ -2114,10 +2282,10 @@ items of an attempt stay on that attempt's outcome and never appear on a later a
   then events. Events that a <code>running</code> or <code>waiting</code> workflow run was started by (<code>trigger_event_id</code>) or
   resumed by (<code>workflow_run_resume.event_id</code>) are kept until the run finishes. See
   <a href="data-retention.html">Data Retention</a>.</li>
-<li><strong>Connection poll logs:</strong> Cleaned up hourly with a 3-day fixed retention.</li>
+<li><strong>Event source poll logs:</strong> Cleaned up hourly with a 3-day fixed retention.</li>
 </ul>
 <h2 id="configuration-packs">Configuration Packs</h2>
-<p>Connections and subscriptions are included in the configuration pack export/import
+<p>Event sources and subscriptions are included in the configuration pack export/import
 system, allowing portable sharing of event system configuration.</p>
 <hr />
 <h1 id="event-schema">Event Schema</h1>
@@ -2148,9 +2316,9 @@ system, allowing portable sharing of event system configuration.</p>
 <td>Source system identifier: <code>"github"</code> or <code>"jira"</code></td>
 </tr>
 <tr>
-<td><code>connectionId</code></td>
+<td><code>eventSourceId</code></td>
 <td><code>string</code></td>
-<td>Slug of the connection that produced this event</td>
+<td>Slug of the event source that produced this event</td>
 </tr>
 <tr>
 <td><code>type</code></td>
@@ -2676,9 +2844,43 @@ system, allowing portable sharing of event system configuration.</p>
 <p><strong>PR backfill:</strong> Events API truncates PR payloads. The poller fetches the full PR via
 <code>GET /repos/{owner}/{repo}/pulls/{number}</code> for all PR-related events. For
 <code>PullRequestEvent/closed</code>, the <code>merged</code> field distinguishes <code>pr.closed</code> from <code>pr.merged</code>.</p>
-<p><strong>Base URL derivation:</strong> The stored <code>baseUrl</code> is human-readable (e.g., <code>https://github.com</code>).
-The poller derives the API URL: <code>https://github.com</code> becomes <code>https://api.github.com</code>;
-GHE URLs get <code>/api/v3</code> appended.</p>
+<p><strong>Base URL resolution:</strong> <code>GitHubUrls.resolve</code> turns the stored <code>baseUrl</code> into a web URL (used to build
+<code>ref</code>s) and a REST API URL (used for polling). The stored value is kept as entered and resolved on each poll.
+Scheme and host are case-insensitive, a missing scheme means <code>https</code>, and trailing slashes, query and fragment
+are ignored. A repository path in the URL is ignored; repositories always come from <code>configuration</code>.</p>
+<table>
+<thead>
+<tr>
+<th><code>baseUrl</code></th>
+<th>Web URL</th>
+<th>API URL</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>github.com</code>, <code>www.github.com</code> or <code>api.github.com</code> (any path)</td>
+<td><code>https://github.com</code></td>
+<td><code>https://api.github.com</code></td>
+</tr>
+<tr>
+<td><code>&lt;org&gt;.ghe.com</code> or <code>api.&lt;org&gt;.ghe.com</code></td>
+<td><code>https://&lt;org&gt;.ghe.com</code></td>
+<td><code>https://api.&lt;org&gt;.ghe.com</code></td>
+</tr>
+<tr>
+<td>Other host with <code>/api/v3</code> in the path</td>
+<td>everything before <code>/api/v3</code></td>
+<td>up to and including <code>/api/v3</code></td>
+</tr>
+<tr>
+<td>Any other host (GitHub Enterprise Server)</td>
+<td><code>&lt;scheme&gt;://&lt;host&gt;</code></td>
+<td><code>&lt;scheme&gt;://&lt;host&gt;/api/v3</code></td>
+</tr>
+</tbody>
+</table>
+<p>A value that is not an http(s) URL with a host fails validation and is recorded as a configuration error
+when polled. In the <code>ref</code> formats below, <code>{baseUrl}</code> is the resolved web URL.</p>
 <p><strong><code>ref</code> construction:</strong></p>
 <table>
 <thead>
@@ -2711,7 +2913,7 @@ GHE URLs get <code>/api/v3</code> appended.</p>
 </tbody>
 </table>
 <p><strong>Deduplication:</strong> Each Events API event has a unique <code>id</code>. The poller tracks seen IDs
-per connection+repo in memory and deduplicates in the database via the <code>source_event_id</code>
+per event source + repo in memory and deduplicates in the database via the <code>source_event_id</code>
 unique index.</p>
 <p><strong>Polling:</strong> ETag-based conditional polling (304 on no change). Default 60-second interval.</p>
 <h2 id="jira">Jira</h2>

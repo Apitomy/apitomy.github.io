@@ -320,6 +320,26 @@
   
 
       
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../release-notes/v3.0.0.html" class="md-tabs__link">
+          
+  
+  
+  Release Notes
+
+        </a>
+      </li>
+    
+  
+
+      
     </ul>
   </div>
 </nav>
@@ -531,6 +551,34 @@
     <span class="md-ellipsis">
       
         Run Axiom
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Run Axiom">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#running-a-release-jar-directly" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Running a Release JAR Directly
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#running-from-source" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Running from Source
       
     </span>
   </a>
@@ -773,6 +821,34 @@
     
   
     Workflows
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../user-guide/workbench.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Workflow Workbench
   
 
     
@@ -1330,6 +1406,95 @@
   
 
     
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Release Notes
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Release Notes
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../release-notes/v3.0.0.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3.0.0
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
   </ul>
 </nav>
                   </div>
@@ -1376,6 +1541,34 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Run Axiom">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#running-a-release-jar-directly" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Running a Release JAR Directly
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#running-from-source" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Running from Source
+      
+    </span>
+  </a>
+  
 </li>
       
         <li class="md-nav__item">
@@ -1414,10 +1607,11 @@
 downloads and runs the latest release automatically.</p>
 <h2 id="prerequisites">Prerequisites</h2>
 <ul>
-<li><strong>Java</strong></li>
+<li><strong>Java 25+</strong></li>
 <li><strong>curl</strong> and <strong>jq</strong> (for downloading releases)</li>
-<li><strong>Node.js</strong> and <strong>npm</strong> (used by Axiom at runtime for custom MCP tool servers and the
-  AI Assistant's MCP server)</li>
+<li><strong>Node.js</strong> (the <code>node</code> binary on the <code>PATH</code>; used by Axiom at runtime to run the MCP tool servers it
+  gives to AI agents and the AI Assistant, and Node.js action types). The AI engine CLIs installed with
+  <code>npm</code> also need <strong>npm</strong>.</li>
 <li>One of the supported AI engine CLIs:</li>
 </ul>
 <table>
@@ -1466,14 +1660,70 @@ downloads and runs the latest release automatically.</p>
 <ol>
 <li>Query GitHub for the latest Apitomy Axiom release</li>
 <li>Download the application JAR (cached in <code>~/.axiom/releases/</code> for future runs)</li>
-<li>Start the application on <strong>http://localhost:9191</strong></li>
+<li>Start the application on <strong>http://localhost:9191</strong> with the <code>prod</code> profile (file-based H2 database
+   in <code>~/.axiom/data/</code>)</li>
 </ol>
-<p>Open <strong>http://localhost:9191</strong> in your browser to access the Axiom dashboard.</p>
+<p>Open <strong>http://localhost:9191</strong> in your browser to access the Axiom UI. The REST API is served under
+<code>http://localhost:9191/api/v1</code>. Arguments passed to the script are passed on to <code>java -jar</code>.</p>
+<h3 id="running-a-release-jar-directly">Running a Release JAR Directly</h3>
+<p>Each GitHub release publishes a single uber-jar named <code>apitomy-axiom-&lt;version&gt;.jar</code>. You can download it
+yourself and run it with:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>java<span class="w"> </span>-jar<span class="w"> </span>apitomy-axiom-3.0.0.jar
+</span></code></pre></div>
+<p>The release JAR uses the <code>prod</code> profile: it listens on port <strong>9191</strong> and stores its H2 database in
+<code>~/.axiom/data/</code>.</p>
+<div class="admonition warning">
+<p class="admonition-title">Local access only</p>
+<p>Axiom has no authentication, so the release build only accepts connections from the same machine
+(<code>127.0.0.1</code>). To make it reachable from other machines, set the bind address, for example
+<code>java -Dquarkus.http.host=0.0.0.0 -jar apitomy-axiom-3.0.0.jar</code> (or <code>QUARKUS_HTTP_HOST=0.0.0.0</code>), and
+protect access yourself, for example behind an authenticating reverse proxy.</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Upgrading from Axiom 2.x</p>
+<p>Axiom 3 cannot use a database created by Axiom 2.x (or older) and refuses to start on one. See
+<a href="../developer-guide/upgrading-and-backups.html#upgrading-from-axiom-2x">Upgrading From Axiom 2.x</a>.</p>
+</div>
+<h2 id="running-from-source">Running from Source</h2>
+<p>To run the current source code, clone the repository and run <code>./dev.sh</code> (requires Java 25+, Maven 3.9+,
+Node.js 20.19+ or 22.12+ and npm). It builds all modules, then starts the backend on
+<strong>http://localhost:9090</strong> and the Vite UI dev server on <strong>http://localhost:9191</strong>, which proxies API
+requests to the backend.</p>
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Effect</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--skip-ui</code></td>
+<td>Start the backend only</td>
+</tr>
+<tr>
+<td><code>--persist</code></td>
+<td>Use the <code>persist</code> profile (file-based H2 database in <code>~/.axiom/data/</code>) instead of the in-memory <code>dev</code> database</td>
+</tr>
+<tr>
+<td><code>--dataDir=/path</code></td>
+<td>Store the H2 database in <code>/path</code> (implies <code>--persist</code>)</td>
+</tr>
+<tr>
+<td><code>--portOffset=N</code></td>
+<td>Add <code>N</code> to both ports (for example <code>100</code> gives backend 9190 and UI 9291)</td>
+</tr>
+</tbody>
+</table>
+<p>Press <strong>Ctrl+C</strong> to stop both processes.</p>
+<p>To build a release JAR yourself, run <code>./build-release.sh</code> (backend and UI, <code>prod</code> profile). It produces
+<code>app/target/apitomy-axiom-app-&lt;version&gt;-runner.jar</code>, which the release workflow publishes as
+<code>apitomy-axiom-&lt;version&gt;.jar</code>. See <a href="../developer-guide/building-axiom.html">Building Axiom</a>.</p>
 <h2 id="next-steps">Next Steps</h2>
 <ul>
 <li><a href="configuring-axiom.html">Configuring Axiom</a> — AI engine settings, database profiles, and
   application properties</li>
-<li><a href="../user-guide/concepts.html">User Guide</a> — Core concepts, connections, action types,
+<li><a href="../user-guide/concepts.html">User Guide</a> — Core concepts, event sources, action types,
   and advanced usage</li>
 </ul>
 

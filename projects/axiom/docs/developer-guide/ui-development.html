@@ -320,6 +320,26 @@
   
 
       
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../release-notes/v3.0.0.html" class="md-tabs__link">
+          
+  
+  
+  Release Notes
+
+        </a>
+      </li>
+    
+  
+
+      
     </ul>
   </div>
 </nav>
@@ -690,6 +710,34 @@
     
   
     Workflows
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../user-guide/workbench.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Workflow Workbench
   
 
     
@@ -1541,6 +1589,95 @@
   
 
     
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Release Notes
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Release Notes
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../release-notes/v3.0.0.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3.0.0
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
   </ul>
 </nav>
                   </div>
@@ -1845,11 +1982,11 @@ in the Axiom React UI.</p>
 </thead>
 <tbody>
 <tr>
-<td>React</td>
+<td>React 19</td>
 <td>UI framework</td>
 </tr>
 <tr>
-<td>PatternFly</td>
+<td>PatternFly 6</td>
 <td>Component library (Red Hat's design system)</td>
 </tr>
 <tr>
@@ -1861,12 +1998,24 @@ in the Axiom React UI.</p>
 <td>Build tool and dev server</td>
 </tr>
 <tr>
+<td>React Router</td>
+<td>Client-side routing</td>
+</tr>
+<tr>
+<td><code>@apitomy/flow-ui</code> 3.0.2</td>
+<td>Workflow editor and viewer (<code>WorkflowViewer</code>)</td>
+</tr>
+<tr>
 <td>Monaco Editor</td>
 <td>Code editors (prompt templates, scripts, logs)</td>
 </tr>
 <tr>
 <td>react-markdown</td>
-<td>Markdown rendering (reports, thread entries)</td>
+<td>Markdown rendering (subject bodies, thread entries)</td>
+</tr>
+<tr>
+<td>Vitest + Testing Library</td>
+<td>Unit and component tests (<code>npm test</code>)</td>
 </tr>
 <tr>
 <td><code>@apitomy/common-ui-components</code></td>
@@ -1880,87 +2029,105 @@ in the Axiom React UI.</p>
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>├── main.tsx               Entry point — React root, BrowserRouter
 </span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>├── App.tsx                 Route definitions, SSE client init, health check
 </span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>├── config/
-</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>│   ├── api.ts              REST API client layer (all fetch functions + types)
-</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>│   └── sse.ts              Server-Sent Events client (auto-reconnect)
-</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>├── pages/                  One component per route
-</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>│   ├── DashboardPage.tsx
-</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>│   ├── ProjectsPage.tsx
-</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>│   ├── ProjectDetailPage.tsx
-</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>│   ├── ActionTypesPage.tsx
-</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>│   ├── AssistantPage.tsx
-</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>│   ├── AssistantSessionPage.tsx
-</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>│   ├── SessionTemplatesPage.tsx
-</span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>│   ├── SessionTemplateDetailPage.tsx
-</span><span id="__span-0-16"><a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>│   └── ...
-</span><span id="__span-0-17"><a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>├── components/             Reusable UI components
-</span><span id="__span-0-18"><a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a>│   ├── AppMasthead.tsx
-</span><span id="__span-0-19"><a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a>│   ├── AppSidebar.tsx
-</span><span id="__span-0-20"><a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a>│   ├── ExecutionLogModal.tsx
-</span><span id="__span-0-21"><a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a>│   ├── EventDetailModal.tsx
-</span><span id="__span-0-22"><a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a>│   └── assistant/          AI Assistant components
-</span><span id="__span-0-23"><a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a>│       ├── AssistantChatPanel.tsx      SSE-connected chat orchestrator
-</span><span id="__span-0-24"><a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a>│       ├── AssistantMessageList.tsx    Message rendering (markdown, tools, permissions)
-</span><span id="__span-0-25"><a id="__codelineno-0-25" name="__codelineno-0-25" href="#__codelineno-0-25"></a>│       ├── AssistantMessageInput.tsx   Input with slash-command autocomplete
-</span><span id="__span-0-26"><a id="__codelineno-0-26" name="__codelineno-0-26" href="#__codelineno-0-26"></a>│       ├── AssistantToolUseBlock.tsx   Expandable tool use display + permission UX
-</span><span id="__span-0-27"><a id="__codelineno-0-27" name="__codelineno-0-27" href="#__codelineno-0-27"></a>│       ├── AssistantPermissionPrompt.tsx  Permission allow/deny UI
-</span><span id="__span-0-28"><a id="__codelineno-0-28" name="__codelineno-0-28" href="#__codelineno-0-28"></a>│       ├── AssistantAskUserQuestion.tsx   Structured question rendering
-</span><span id="__span-0-29"><a id="__codelineno-0-29" name="__codelineno-0-29" href="#__codelineno-0-29"></a>│       └── AssistantGeneratedItems.tsx    Config Assistant sidebar
-</span><span id="__span-0-30"><a id="__codelineno-0-30" name="__codelineno-0-30" href="#__codelineno-0-30"></a>└── vite-env.d.ts           Vite type declarations
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>│   ├── api.ts              REST API client layer (fetch functions + types)
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>│   ├── compositions.ts     Workflow Workbench API client (/compositions) + types
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>│   ├── sse.ts              Server-Sent Events client (auto-reconnect)
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>│   └── sse-worker.ts       SharedWorker that owns the single SSE connection
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>├── hooks/                  Shared hooks (useTheme, useWorkflowEditorSpi)
+</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>├── pages/                  One component per route
+</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>│   ├── WorkflowRunsPage.tsx     Runs list — the landing page (/runs)
+</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>│   ├── WorkflowRunDetailPage.tsx
+</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>│   ├── SubjectsPage.tsx
+</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>│   ├── SubjectDetailPage.tsx
+</span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>│   ├── ActionTypesPage.tsx
+</span><span id="__span-0-16"><a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>│   ├── AssistantPage.tsx
+</span><span id="__span-0-17"><a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>│   ├── AssistantSessionPage.tsx
+</span><span id="__span-0-18"><a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a>│   ├── SessionTemplatesPage.tsx
+</span><span id="__span-0-19"><a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a>│   ├── SessionTemplateDetailPage.tsx
+</span><span id="__span-0-20"><a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a>│   ├── WorkbenchListPage.tsx    Workbench composition list (/workbench)
+</span><span id="__span-0-21"><a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a>│   ├── workbench/               Workflow Workbench (/workbench/:compositionId)
+</span><span id="__span-0-22"><a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a>│   │   ├── WorkbenchPage.tsx        Three-pane layout, toolbar, bottom Tests/Runs panel
+</span><span id="__span-0-23"><a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a>│   │   ├── useWorkbench.ts          Composition state, saves, SSE handling
+</span><span id="__span-0-24"><a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a>│   │   ├── CompositionTree.tsx      Components tree
+</span><span id="__span-0-25"><a id="__codelineno-0-25" name="__codelineno-0-25" href="#__codelineno-0-25"></a>│   │   ├── WorkflowTab.tsx, ItemTab.tsx   Centre editor tabs
+</span><span id="__span-0-26"><a id="__codelineno-0-26" name="__codelineno-0-26" href="#__codelineno-0-26"></a>│   │   ├── ChatPane.tsx             AI Assistant chat
+</span><span id="__span-0-27"><a id="__codelineno-0-27" name="__codelineno-0-27" href="#__codelineno-0-27"></a>│   │   ├── TestRunDialog.tsx, TestRunDetailModal.tsx, RunsList.tsx, RunDetailDialog.tsx
+</span><span id="__span-0-28"><a id="__codelineno-0-28" name="__codelineno-0-28" href="#__codelineno-0-28"></a>│   │   └── PublishDialog.tsx
+</span><span id="__span-0-29"><a id="__codelineno-0-29" name="__codelineno-0-29" href="#__codelineno-0-29"></a>│   └── ...
+</span><span id="__span-0-30"><a id="__codelineno-0-30" name="__codelineno-0-30" href="#__codelineno-0-30"></a>├── test/                   Vitest setup (setup.ts) and helpers (renderWithRouter.tsx)
+</span><span id="__span-0-31"><a id="__codelineno-0-31" name="__codelineno-0-31" href="#__codelineno-0-31"></a>├── components/             Reusable UI components
+</span><span id="__span-0-32"><a id="__codelineno-0-32" name="__codelineno-0-32" href="#__codelineno-0-32"></a>│   ├── AppMasthead.tsx
+</span><span id="__span-0-33"><a id="__codelineno-0-33" name="__codelineno-0-33" href="#__codelineno-0-33"></a>│   ├── AppSidebar.tsx
+</span><span id="__span-0-34"><a id="__codelineno-0-34" name="__codelineno-0-34" href="#__codelineno-0-34"></a>│   ├── ExecutionLogModal.tsx
+</span><span id="__span-0-35"><a id="__codelineno-0-35" name="__codelineno-0-35" href="#__codelineno-0-35"></a>│   ├── StreamEventDetailModal.tsx
+</span><span id="__span-0-36"><a id="__codelineno-0-36" name="__codelineno-0-36" href="#__codelineno-0-36"></a>│   └── assistant/          AI Assistant components
+</span><span id="__span-0-37"><a id="__codelineno-0-37" name="__codelineno-0-37" href="#__codelineno-0-37"></a>│       ├── AssistantChatPanel.tsx      SSE-connected chat orchestrator
+</span><span id="__span-0-38"><a id="__codelineno-0-38" name="__codelineno-0-38" href="#__codelineno-0-38"></a>│       ├── AssistantMessageList.tsx    Message rendering (markdown, tools, permissions)
+</span><span id="__span-0-39"><a id="__codelineno-0-39" name="__codelineno-0-39" href="#__codelineno-0-39"></a>│       ├── AssistantMessageInput.tsx   Input with slash-command autocomplete
+</span><span id="__span-0-40"><a id="__codelineno-0-40" name="__codelineno-0-40" href="#__codelineno-0-40"></a>│       ├── AssistantToolUseBlock.tsx   Expandable tool use display + permission UX
+</span><span id="__span-0-41"><a id="__codelineno-0-41" name="__codelineno-0-41" href="#__codelineno-0-41"></a>│       ├── AssistantPermissionPrompt.tsx  Permission allow/deny UI
+</span><span id="__span-0-42"><a id="__codelineno-0-42" name="__codelineno-0-42" href="#__codelineno-0-42"></a>│       ├── AssistantAskUserQuestion.tsx   Structured question rendering
+</span><span id="__span-0-43"><a id="__codelineno-0-43" name="__codelineno-0-43" href="#__codelineno-0-43"></a>│       └── AssistantGeneratedItems.tsx    Config Assistant sidebar
+</span><span id="__span-0-44"><a id="__codelineno-0-44" name="__codelineno-0-44" href="#__codelineno-0-44"></a>└── vite-env.d.ts           Vite type declarations
 </span></code></pre></div>
 <hr />
 <h2 id="api-layer-apits">API Layer (<code>api.ts</code>)</h2>
-<p>All backend communication goes through <code>ui/src/config/api.ts</code>. This file contains:</p>
+<p>Backend communication goes through <code>ui/src/config/api.ts</code>. The Workflow Workbench API (<code>/compositions</code>) has
+its own client in <code>ui/src/config/compositions.ts</code>. <code>api.ts</code> contains:</p>
 <ul>
-<li><strong>TypeScript interfaces</strong> for every API entity (<code>Project</code>, <code>Task</code>, <code>ActionType</code>,
+<li><strong>TypeScript interfaces</strong> for every API entity (<code>Subject</code>, <code>Task</code>, <code>ActionType</code>,
   <code>ToolDefinition</code>, etc.)</li>
-<li><strong>Fetch functions</strong> for every REST endpoint (<code>fetchProjects()</code>, <code>createTool()</code>,
+<li><strong>Fetch functions</strong> for every REST endpoint (<code>fetchSubjects()</code>, <code>createTool()</code>,
   <code>updateActionType()</code>, etc.)</li>
 <li><strong>Pagination type</strong> — <code>SearchResults&lt;T&gt;</code> with <code>items</code>, <code>totalCount</code>, <code>page</code>, <code>limit</code></li>
 </ul>
 <h3 id="base-url-resolution">Base URL Resolution</h3>
-<div class="language-typescript highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kd">function</span><span class="w"> </span><span class="nx">getApiBaseUrl</span><span class="p">()</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">    </span><span class="c1">// Dev: empty string (Vite proxy handles /api)</span>
-</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">    </span><span class="c1">// Prod: window.AXIOM_API_URL injected by backend</span>
+<div class="language-typescript highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">export</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="nx">getApiBaseUrl</span><span class="p">()</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">    </span><span class="c1">// window.AXIOM_API_URL if defined, otherwise "" (same origin;</span>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">    </span><span class="c1">// in development the Vite proxy forwards /api to the backend)</span>
 </span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="p">}</span>
 </span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>
-</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="kd">const</span><span class="w"> </span><span class="nx">API_BASE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="sb">`</span><span class="si">${</span><span class="nx">getApiBaseUrl</span><span class="p">()</span><span class="si">}</span><span class="sb">/api/v1`</span><span class="p">;</span>
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="kd">const</span><span class="w"> </span><span class="nx">API</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="sb">`</span><span class="si">${</span><span class="nx">getApiBaseUrl</span><span class="p">()</span><span class="si">}</span><span class="sb">/api/v1`</span><span class="p">;</span>
 </span></code></pre></div>
 <h3 id="api-function-pattern">API Function Pattern</h3>
-<p>Every function follows the same pattern:</p>
-<div class="language-typescript highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">export</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="nx">fetchProjects</span><span class="p">(</span>
-</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">    </span><span class="nx">page</span><span class="o">:</span><span class="w"> </span><span class="kt">number</span><span class="p">,</span>
-</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">    </span><span class="nx">limit</span><span class="o">:</span><span class="w"> </span><span class="kt">number</span><span class="p">,</span>
-</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">    </span><span class="nx">name?</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">,</span>
-</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="p">)</span><span class="o">:</span><span class="w"> </span><span class="nb">Promise</span><span class="o">&lt;</span><span class="nx">SearchResults</span><span class="o">&lt;</span><span class="nx">Project</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">params</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">URLSearchParams</span><span class="p">();</span>
-</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="w">    </span><span class="nx">params</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="s2">"page"</span><span class="p">,</span><span class="w"> </span><span class="nb">String</span><span class="p">(</span><span class="nx">page</span><span class="p">));</span>
-</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="w">    </span><span class="nx">params</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="s2">"limit"</span><span class="p">,</span><span class="w"> </span><span class="nb">String</span><span class="p">(</span><span class="nx">limit</span><span class="p">));</span>
-</span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">name</span><span class="p">)</span><span class="w"> </span><span class="nx">params</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="s2">"name"</span><span class="p">,</span><span class="w"> </span><span class="nx">name</span><span class="p">);</span>
-</span><span id="__span-2-10"><a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>
-</span><span id="__span-2-11"><a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a><span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">resp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">fetch</span><span class="p">(</span><span class="sb">`</span><span class="si">${</span><span class="nx">API_BASE</span><span class="si">}</span><span class="sb">/projects?</span><span class="si">${</span><span class="nx">params</span><span class="si">}</span><span class="sb">`</span><span class="p">);</span>
-</span><span id="__span-2-12"><a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="nx">resp</span><span class="p">.</span><span class="nx">ok</span><span class="p">)</span><span class="w"> </span><span class="k">throw</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="ne">Error</span><span class="p">(</span><span class="s2">"Failed to fetch projects"</span><span class="p">);</span>
-</span><span id="__span-2-13"><a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">resp</span><span class="p">.</span><span class="nx">json</span><span class="p">();</span>
-</span><span id="__span-2-14"><a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a><span class="p">}</span>
+<p>Functions follow the same pattern:</p>
+<div class="language-typescript highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">export</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="nx">fetchSubjects</span><span class="p">(</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">    </span><span class="nx">page</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1</span><span class="p">,</span><span class="w"> </span><span class="nx">limit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">20</span><span class="p">,</span><span class="w"> </span><span class="nx">filterName?</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">,</span><span class="w"> </span><span class="nx">filterActive?</span><span class="o">:</span><span class="w"> </span><span class="kt">boolean</span><span class="p">,</span><span class="w"> </span><span class="nx">filterLabels?</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="p">)</span><span class="o">:</span><span class="w"> </span><span class="nb">Promise</span><span class="o">&lt;</span><span class="nx">SearchResults</span><span class="o">&lt;</span><span class="nx">Subject</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">params</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">URLSearchParams</span><span class="p">();</span>
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="w">    </span><span class="nx">params</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="s2">"page"</span><span class="p">,</span><span class="w"> </span><span class="nb">String</span><span class="p">(</span><span class="nx">page</span><span class="p">));</span>
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="w">    </span><span class="nx">params</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="s2">"limit"</span><span class="p">,</span><span class="w"> </span><span class="nb">String</span><span class="p">(</span><span class="nx">limit</span><span class="p">));</span>
+</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">filterName</span><span class="p">)</span><span class="w"> </span><span class="nx">params</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="s2">"filterName"</span><span class="p">,</span><span class="w"> </span><span class="nx">filterName</span><span class="p">);</span>
+</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">filterActive</span><span class="w"> </span><span class="o">!==</span><span class="w"> </span><span class="kc">undefined</span><span class="p">)</span><span class="w"> </span><span class="nx">params</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="s2">"filterActive"</span><span class="p">,</span><span class="w"> </span><span class="nb">String</span><span class="p">(</span><span class="nx">filterActive</span><span class="p">));</span>
+</span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">filterLabels</span><span class="p">)</span><span class="w"> </span><span class="nx">params</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="s2">"filterLabels"</span><span class="p">,</span><span class="w"> </span><span class="nx">filterLabels</span><span class="p">);</span>
+</span><span id="__span-2-10"><a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">fetch</span><span class="p">(</span><span class="sb">`</span><span class="si">${</span><span class="nx">API</span><span class="si">}</span><span class="sb">/subjects?</span><span class="si">${</span><span class="nx">params</span><span class="si">}</span><span class="sb">`</span><span class="p">);</span>
+</span><span id="__span-2-11"><a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="nx">response</span><span class="p">.</span><span class="nx">ok</span><span class="p">)</span><span class="w"> </span><span class="k">throw</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="ne">Error</span><span class="p">(</span><span class="sb">`Failed to fetch subjects: </span><span class="si">${</span><span class="nx">response</span><span class="p">.</span><span class="nx">status</span><span class="si">}</span><span class="sb">`</span><span class="p">);</span>
+</span><span id="__span-2-12"><a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">response</span><span class="p">.</span><span class="nx">json</span><span class="p">();</span>
+</span><span id="__span-2-13"><a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a><span class="p">}</span>
 </span></code></pre></div>
-<p>When adding a new API function, follow this pattern — plain <code>fetch()</code>, check <code>resp.ok</code>,
-return typed JSON.</p>
+<p>When adding a new API function, follow this pattern — plain <code>fetch()</code>, check <code>response.ok</code>,
+return typed JSON. Use <code>extractErrorMessage()</code> when the server returns a useful error message (for example a
+422 validation error).</p>
 <hr />
 <h2 id="sse-system">SSE System</h2>
 <p>Axiom uses Server-Sent Events for real-time UI updates (task status changes, new
-activity log entries, report progress, etc.).</p>
+activity log entries, workflow run updates, etc.).</p>
 <h3 id="frontend-sseclient-ssets">Frontend: <code>SseClient</code> (<code>sse.ts</code>)</h3>
-<p>A class-based singleton managing a persistent <code>EventSource</code> connection:</p>
+<p>A class-based singleton (<code>sseClient</code>) managing a persistent <code>EventSource</code> connection:</p>
 <ul>
+<li>When the browser supports <code>SharedWorker</code>, one worker (<code>sse-worker.ts</code>) owns the connection and broadcasts
+  events to all tabs, so there is exactly one SSE connection per browser; otherwise each tab opens its own</li>
 <li>Auto-reconnects with exponential backoff (1 second to 30 seconds max)</li>
 <li>Parses nested JSON (data serialized as a string within JSON)</li>
-<li>Subscriber pattern — components subscribe to events and receive callbacks</li>
+<li>Subscriber pattern — components subscribe to events and receive callbacks; <code>subscribeSession()</code> delivers
+  the events of one AI Assistant session</li>
 </ul>
 <div class="language-typescript highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1">// In App.tsx:</span>
 </span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="nx">sseClient</span><span class="p">.</span><span class="nx">connect</span><span class="p">();</span>
 </span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>
 </span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="c1">// In a component:</span>
 </span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="kd">const</span><span class="w"> </span><span class="nx">unsub</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">sseClient</span><span class="p">.</span><span class="nx">subscribe</span><span class="p">((</span><span class="nx">event</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="kr">type</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="s2">"task-completed"</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="kr">type</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="s2">"task-updated"</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 </span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="w">        </span><span class="c1">// refresh data</span>
 </span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="w">    </span><span class="p">}</span>
 </span><span id="__span-3-9"><a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="p">});</span>
@@ -1970,7 +2137,11 @@ activity log entries, report progress, etc.).</p>
 <li>Endpoint: <code>GET /api/v1/sse</code> (produces <code>text/event-stream</code>)</li>
 <li>Maintains a map of active client emitters</li>
 <li>Observes CDI <code>SseEvent</code> events and broadcasts to all connected clients</li>
-<li>Any service can fire an SSE event: <code>sseEvents.fire(new SseEvent(type, data))</code></li>
+<li>Any service can fire an SSE event with one of the <code>SseEvent</code> factory methods, e.g.
+  <code>sseEvents.fire(SseEvent.traceUpdated(traceId))</code></li>
+<li>Event types include <code>subject-updated</code>, <code>task-updated</code>, <code>workflow-updated</code>, <code>stream-event</code>,
+  <code>assistant-session-event</code> and the workbench events <code>composition-item-changed</code>, <code>composition-turn</code>,
+  <code>composition-changeset</code> and <code>composition-test-run</code></li>
 </ul>
 <hr />
 <h2 id="adding-a-new-page">Adding a New Page</h2>
@@ -1996,7 +2167,8 @@ activity log entries, report progress, etc.).</p>
 </span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="o">&lt;</span><span class="nx">Route</span><span class="w"> </span><span class="nx">path</span><span class="o">=</span><span class="s2">"/my-feature"</span><span class="w"> </span><span class="nx">element</span><span class="o">=</span><span class="p">{</span><span class="o">&lt;</span><span class="nx">MyFeaturePage</span><span class="w"> </span><span class="o">/&gt;</span><span class="p">}</span><span class="w"> </span><span class="o">/&gt;</span>
 </span></code></pre></div>
 <h3 id="3-add-sidebar-navigation">3. Add Sidebar Navigation</h3>
-<p>In <code>AppSidebar.tsx</code>, add a <code>&lt;NavItem&gt;</code>:</p>
+<p>In <code>AppSidebar.tsx</code>, add a <code>&lt;NavItem&gt;</code> (inside a <code>&lt;NavExpandable&gt;</code> if it belongs to a group such as
+Events or Components):</p>
 <div class="language-typescript highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="o">&lt;</span><span class="nx">NavItem</span>
 </span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="w">    </span><span class="nx">isActive</span><span class="o">=</span><span class="p">{</span><span class="nx">location</span><span class="p">.</span><span class="nx">pathname</span><span class="p">.</span><span class="nx">startsWith</span><span class="p">(</span><span class="s2">"/my-feature"</span><span class="p">)}</span>
 </span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="w">    </span><span class="nx">onClick</span><span class="o">=</span><span class="p">{()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">navigate</span><span class="p">(</span><span class="s2">"/my-feature"</span><span class="p">)}</span>
@@ -2065,6 +2237,9 @@ activity log entries, report progress, etc.).</p>
    on port 9090</li>
 <li>Hot module replacement (HMR) updates the browser instantly when you save a file</li>
 <li>Run <code>npm run build</code> (which runs <code>tsc -b &amp;&amp; vite build</code>) to type-check before committing</li>
+<li>Run <code>npm test</code> (Vitest, configured in <code>vitest.config.ts</code>) to run the UI unit and component tests.
+   Tests live next to the code they cover as <code>*.test.ts(x)</code> files (e.g. <code>pages/WorkflowRunsPage.test.tsx</code>).
+   <code>./build.sh -Pui</code> builds the UI and runs these tests as part of the Maven build</li>
 </ol>
 
 

@@ -320,6 +320,26 @@
   
 
       
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../release-notes/v3.0.0.html" class="md-tabs__link">
+          
+  
+  
+  Release Notes
+
+        </a>
+      </li>
+    
+  
+
+      
     </ul>
   </div>
 </nav>
@@ -690,6 +710,34 @@
     
   
     Workflows
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../user-guide/workbench.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Workflow Workbench
   
 
     
@@ -1397,6 +1445,95 @@
   
 
     
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Release Notes
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Release Notes
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../release-notes/v3.0.0.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3.0.0
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
   </ul>
 </nav>
                   </div>
@@ -1550,30 +1687,34 @@ creates an inbox task with status <code>AwaitingInput</code>. A user completes t
 endpoint, and Axiom resumes the workflow with the answers merged into context.</p>
 <hr />
 <h2 id="authoring-a-human-task-node">Authoring a Human-Task Node</h2>
-<p>A <code>human-task</code> node in a Flow workflow definition configures three things:</p>
+<p>A <code>human-task</code> node in a Flow workflow definition configures these things under <code>config</code>:</p>
 <ol>
-<li><strong>Node name</strong> — becomes the task title shown in the Inbox.</li>
+<li><strong>Title</strong> (<code>title</code>, optional) — an EL expression for the task title shown in the Inbox, for example
+   <code>'Review ' += context.subject.ref</code>. When it is absent or fails, the node's name is used.</li>
+<li><strong>Description</strong> (<code>description</code>, optional) — text shown with the task.</li>
 <li><strong>Inputs</strong> — mapped to read-only <code>details</code> displayed to the user for context.</li>
 <li><strong>Outputs</strong> — define the completion form fields (<code>outputSchema</code>) that the user fills in.</li>
 </ol>
 <h3 id="inputs-display-context">Inputs (Display Context)</h3>
-<p>A human-task node's <code>inputs</code> list declares what workflow context values should be shown to the user as
-read-only context. Each input is resolved from the current workflow context and displayed in the Inbox
-task's details section.</p>
-<p>Example (in Flow authoring UI):</p>
+<p>A human-task node's <code>inputs</code> is a map from a display name to an EL expression. Each expression is
+evaluated against the current workflow context, and the result is shown in the Inbox task's details section
+as a read-only value under its name.</p>
+<p>Example (from <code>templates/assistant-reference/examples/workflows/issue-triage.json</code>):</p>
 <div class="language-json highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="p">{</span>
-</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">  </span><span class="nt">"inputs"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
-</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">    </span><span class="p">{</span><span class="w"> </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"issueTitle"</span><span class="p">,</span><span class="w"> </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w"> </span><span class="p">},</span>
-</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">    </span><span class="p">{</span><span class="w"> </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"repository"</span><span class="p">,</span><span class="w"> </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w"> </span><span class="p">}</span>
-</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">  </span><span class="p">]</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">  </span><span class="nt">"inputs"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">    </span><span class="nt">"issue"</span><span class="p">:</span><span class="w"> </span><span class="s2">"context.subject.ref"</span><span class="p">,</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">    </span><span class="nt">"severity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"context.severity"</span>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">  </span><span class="p">}</span>
 </span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="p">}</span>
 </span></code></pre></div>
-<p>At run time, if the workflow context contains <code>{ issueTitle: "Fix login bug", repository:
-"apitomy/axiom" }</code>, the inbox task's details will show those values as read-only fields.</p>
+<p>At run time, if the workflow context contains <code>{ ref: "https://github.com/apitomy/axiom/issues/7", severity:
+"high" }</code>, the inbox task's details show <code>issue</code> and <code>severity</code> with those values. Values that are not
+strings are shown as their string form.</p>
 <h3 id="outputs-completion-form">Outputs (Completion Form)</h3>
 <p>A human-task node's <code>outputs</code> list declares the form fields the user must complete. Each output becomes a
 field in the task's completion form, with its <code>type</code> determining the input widget and validation.</p>
-<p>Axiom supports <strong>optional rich metadata</strong> on each output:</p>
+<p>Each output has a <code>name</code> and a semantic <code>type</code> (<code>string</code>, <code>number</code>, <code>boolean</code> or <code>object</code>), and may be
+marked <code>required</code>. Axiom also supports <strong>optional rich metadata</strong> on each output:</p>
 <table>
 <thead>
 <tr>
@@ -1595,8 +1736,8 @@ field in the task's completion form, with its <code>type</code> determining the 
 </tr>
 <tr>
 <td><code>widget</code></td>
-<td>UI control hint (text/textarea/number/checkbox/select)</td>
-<td>Inferred from semantic <code>type</code></td>
+<td>UI control (<code>text</code>, <code>textarea</code>, <code>number</code>, <code>checkbox</code>, <code>select</code>)</td>
+<td><code>text</code></td>
 </tr>
 <tr>
 <td><code>defaultValue</code></td>
@@ -1605,8 +1746,13 @@ field in the task's completion form, with its <code>type</code> determining the 
 </tr>
 <tr>
 <td><code>options</code></td>
-<td>List of choices (for <code>select</code> widget only)</td>
+<td>List of <code>{ label, value }</code> choices (for the <code>select</code> widget only)</td>
 <td>Empty array</td>
+</tr>
+<tr>
+<td><code>contextKey</code></td>
+<td>Context key the answer is stored under</td>
+<td>The output's <code>name</code></td>
 </tr>
 </tbody>
 </table>
@@ -1629,12 +1775,14 @@ field in the task's completion form, with its <code>type</code> determining the 
 </span><span id="__span-1-16"><a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a><span class="w">  </span><span class="p">]</span>
 </span><span id="__span-1-17"><a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a><span class="p">}</span>
 </span></code></pre></div>
-<p>When metadata is omitted, Axiom derives sensible defaults:</p>
+<p>When metadata is omitted, Axiom uses these defaults (<code>WorkflowHumanTaskMapper.toOutputSchema</code>):</p>
 <ul>
 <li><code>label</code> defaults to the output's <code>name</code> verbatim (e.g., an output named <code>approvedByManager</code> shows the
   label <code>approvedByManager</code>).</li>
-<li><code>widget</code> is inferred from the semantic <code>type</code>: <code>boolean</code> defaults to <code>checkbox</code>, <code>number</code> to <code>number</code>,
-  <code>string</code> to <code>text</code>.</li>
+<li>The form field's control comes from <code>widget</code> only; it is not inferred from <code>type</code>. An output without a
+  <code>widget</code> is a <code>text</code> field, so set <code>widget</code> to <code>checkbox</code> for a <code>boolean</code> output and to <code>number</code> for a
+  <code>number</code> output. The widget value <code>boolean</code> is also accepted as <code>checkbox</code>.</li>
+<li>A node with no outputs gets no <code>outputSchema</code>, and the task takes a free-form response.</li>
 </ul>
 <hr />
 <h2 id="run-time-behavior">Run-Time Behavior</h2>
@@ -1642,12 +1790,13 @@ field in the task's completion form, with its <code>type</code> determining the 
 <p>When a running workflow reaches a human-task node:</p>
 <ol>
 <li>The Flow engine transitions the workflow instance to <code>WAITING</code>.</li>
-<li>Axiom creates an inbox task with:</li>
-<li><code>title</code> = the node's name</li>
-<li><code>description</code> = the node's description (if provided)</li>
-<li><code>details</code> = a read-only map of the node's resolved inputs</li>
+<li>Axiom creates an inbox task (<code>WorkflowExecutionService.createHumanTaskForNode</code>) with:</li>
+<li>the task name (<code>actionType</code>) = the evaluated <code>title</code>, or the node's name when there is none</li>
+<li><code>humanContext.title</code> = the node's name, <code>humanContext.description</code> = the node's description (if
+     provided), and <code>humanContext.details</code> = the node's resolved inputs</li>
 <li><code>outputSchema</code> = the completion form derived from the node's outputs</li>
 <li><code>status</code> = <code>AwaitingInput</code></li>
+<li><code>traceId</code> = the run's trace; a <code>task</code> trace node with summary <code>Human task: &lt;title&gt;</code> is added to it</li>
 </ol>
 <h3 id="task-completion">Task Completion</h3>
 <p>A user completes the task through the unified completion endpoint:</p>
@@ -1664,16 +1813,18 @@ field in the task's completion form, with its <code>type</code> determining the 
 <p>This endpoint is used by:</p>
 <ul>
 <li>The Inbox page (global task list)</li>
-<li>The Project detail page (project-scoped task list)</li>
+<li>The Subject detail page (subject-scoped task list)</li>
 </ul>
 <p>On completion, Axiom:</p>
+<p>Only a task with status <code>AwaitingInput</code> can be completed; any other task returns HTTP 404.</p>
 <ol>
 <li><strong>Validates</strong> the submission against the task's <code>outputSchema</code> before completion — missing required
    fields or wrong-typed values are rejected with HTTP 400.</li>
 <li><strong>Coerces</strong> the accepted answers to the node's declared semantic types (<code>string</code>, <code>number</code>,
    <code>boolean</code>, <code>object</code>) so downstream edge conditions compare correctly.</li>
-<li><strong>Merges</strong> the coerced answers into the workflow's context (top-level keys).</li>
-<li><strong>Resumes</strong> the workflow by calling the Flow engine's <code>completeCurrentNode</code> with the answers.</li>
+<li><strong>Merges</strong> the coerced answers into the workflow's context, each under its output's <code>contextKey</code> (or its
+   <code>name</code> when no <code>contextKey</code> is set).</li>
+<li><strong>Resumes</strong> the workflow by calling the Flow engine's <code>completeNode</code> with the answers.</li>
 </ol>
 <p>Downstream nodes and edge conditions can reference the answers via their keys (e.g., <code>approved</code>,
 <code>comments</code>).</p>
@@ -1683,7 +1834,7 @@ field in the task's completion form, with its <code>type</code> determining the 
 <ul>
 <li><code>start</code> — workflow entry point (see <a href="workflow-input-contract.html">Workflow Input Contract</a>)</li>
 <li><code>end</code> — workflow termination</li>
-<li><code>action</code> — executes a tool or script</li>
+<li><code>action</code> — runs an action type (AI agent, Node.js or script)</li>
 <li><code>human-task</code> — pauses for user input (this doc)</li>
 <li><code>wait</code> — pauses the instance for a fixed duration before resuming automatically</li>
 <li><code>receive-event</code> — pauses the instance until a matching stream event is dispatched to it by a
@@ -1695,23 +1846,25 @@ field in the task's completion form, with its <code>type</code> determining the 
 <h2 id="example-approval-workflow">Example: Approval Workflow</h2>
 <p>A workflow that waits for manager approval before deploying:</p>
 <ol>
-<li><strong>Start node</strong> — receives <code>projectId</code> and <code>ref</code> (canonical inputs; see
+<li><strong>Start node</strong> — declares the standard input <code>subject</code> (see
    <a href="workflow-input-contract.html">Workflow Input Contract</a>).</li>
 <li><strong>Action node</strong> — runs a build script, outputs <code>buildArtifact</code>.</li>
 <li><strong>Human-task node</strong> (<code>Manager Approval</code>) —</li>
-<li>Inputs: <code>ref</code>, <code>buildArtifact</code> (shown as read-only context)</li>
+<li>Inputs: <code>{ "ref": "context.subject.ref", "buildArtifact": "context.buildArtifact" }</code> (shown as read-only
+     context)</li>
 <li>Outputs:
      <div class="language-json highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="p">[</span>
-</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">  </span><span class="p">{</span><span class="w"> </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"approved"</span><span class="p">,</span><span class="w"> </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"boolean"</span><span class="p">,</span><span class="w"> </span><span class="nt">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Approve deployment?"</span><span class="w"> </span><span class="p">},</span>
-</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">  </span><span class="p">{</span><span class="w"> </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"notes"</span><span class="p">,</span><span class="w"> </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w"> </span><span class="nt">"widget"</span><span class="p">:</span><span class="w"> </span><span class="s2">"textarea"</span><span class="p">,</span><span class="w"> </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Optional comments"</span><span class="w"> </span><span class="p">}</span>
-</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="p">]</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">  </span><span class="p">{</span><span class="w"> </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"approved"</span><span class="p">,</span><span class="w"> </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"boolean"</span><span class="p">,</span><span class="w"> </span><span class="nt">"required"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w"> </span><span class="nt">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Approve deployment?"</span><span class="p">,</span>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">    </span><span class="nt">"widget"</span><span class="p">:</span><span class="w"> </span><span class="s2">"checkbox"</span><span class="w"> </span><span class="p">},</span>
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">  </span><span class="p">{</span><span class="w"> </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"notes"</span><span class="p">,</span><span class="w"> </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w"> </span><span class="nt">"widget"</span><span class="p">:</span><span class="w"> </span><span class="s2">"textarea"</span><span class="p">,</span><span class="w"> </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Optional comments"</span><span class="w"> </span><span class="p">}</span>
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="p">]</span>
 </span></code></pre></div></li>
 <li><strong>Conditional edge</strong> — if <code>approved == true</code>, advance to Deploy node; else, advance to Notify Owner
    node.</li>
 <li><strong>Action node</strong> (<code>Deploy</code>) — uses <code>buildArtifact</code> from step 2.</li>
 </ol>
 <p>When the workflow reaches step 3, a manager sees a task titled "Manager Approval" with read-only details
-showing the project ref and build artifact, plus a checkbox for approval and a textarea for notes. After
+showing the subject ref and build artifact, plus a checkbox for approval and a textarea for notes. After
 they submit, the workflow continues based on their <code>approved</code> answer.</p>
 
 

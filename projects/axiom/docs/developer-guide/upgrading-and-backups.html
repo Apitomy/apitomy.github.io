@@ -320,6 +320,26 @@
   
 
       
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../release-notes/v3.0.0.html" class="md-tabs__link">
+          
+  
+  
+  Release Notes
+
+        </a>
+      </li>
+    
+  
+
+      
     </ul>
   </div>
 </nav>
@@ -710,6 +730,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../user-guide/workbench.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Workflow Workbench
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../user-guide/ai-assistant.html" class="md-nav__link">
         
   
@@ -1041,6 +1089,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#upgrading-from-axiom-2x" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Upgrading From Axiom 2.x
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#what-makes-up-a-full-backup" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1347,6 +1406,95 @@
   
 
     
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Release Notes
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Release Notes
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../release-notes/v3.0.0.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3.0.0
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
   </ul>
 </nav>
                   </div>
@@ -1378,6 +1526,17 @@
     <span class="md-ellipsis">
       
         What a Version Upgrade Can Change
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#upgrading-from-axiom-2x" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Upgrading From Axiom 2.x
       
     </span>
   </a>
@@ -1450,37 +1609,45 @@ same thing as a safe, reversible upgrade. This guide covers what changes across
 versions, what to back up, and how to restore an instance.</p>
 <hr />
 <h2 id="what-a-version-upgrade-can-change">What a Version Upgrade Can Change</h2>
-<p>Because Flyway migrations run automatically and are not designed to be rolled back,
-review the migration files in
-<code>app/src/main/resources/db/migration/</code> between your current version and the version
-you're upgrading to before upgrading a production instance. Migrations can:</p>
-<ul>
-<li><strong>Rename or restructure tables and columns.</strong> For example, the actor-to-agent
-  rename dropped the <code>human</code> agent type, renamed <code>assigned_actor</code> to <code>assigned_agent</code>,
-  and changed the <code>actor</code>/<code>agent</code> execution-mode value used by action types and
-  scheduled jobs.</li>
-<li><strong>Drop tables outright.</strong> For example, the legacy event/event-queue/event-source
-  tables were dropped once fully replaced by the event stream pipeline
-  (connections, stream events, and subscriptions).</li>
-<li><strong>Delete data as part of the migration</strong>, not just restructure it (as in the actor
-  removal above).</li>
-</ul>
-<p>There is no automatic downgrade path. If you need the ability to roll back, take a
-database backup (see below) before upgrading.</p>
+<p>Schema changes ship as incremental Flyway migrations (see
+<a href="database-and-migrations.html#migrations">Database &amp; Migrations</a>) that run automatically at startup. They are
+not designed to be rolled back: review the migration files between your current version and the target
+version before upgrading a production instance, and take a backup (see below) first. There is no automatic
+downgrade path.</p>
+<h2 id="upgrading-from-axiom-2x">Upgrading From Axiom 2.x</h2>
+<p>Axiom 3.0 is a clean break from 2.x: it starts from a new database schema and <strong>cannot use a 2.x database</strong>.
+If Axiom 3 finds a database created by 2.x (or older) it refuses to start, with a message telling you to
+remove the old data. To upgrade:</p>
+<ol>
+<li>Stop Axiom 2.x.</li>
+<li>Back up <code>~/.axiom</code> (or move it aside) if you want to keep the old data for reference.</li>
+<li>Delete the database directory, <code>~/.axiom/data/</code>.</li>
+<li>Start Axiom 3. It creates a new, empty database.</li>
+<li>Recreate your configuration: event sources, secrets, action types, tools, workflows and subscriptions.
+   Many 2.x concepts were removed or reworked (see the 3.0.0 release notes), so 2.x configuration packs are
+   not expected to import cleanly; the <a href="../user-guide/workbench.html">Workflow Workbench</a> is the quickest way
+   to rebuild workflows. The <a href="../release-notes/v3.0.0.html">3.0.0 release notes</a> list what was removed and
+   renamed.</li>
+</ol>
+<p>Secrets are stored in the database, so they must be re-entered. The rest of <code>~/.axiom</code> (the encryption key,
+workspaces and session directories) can stay; old 2.x subject workspaces are no longer referenced and can be
+removed.</p>
 <h2 id="what-makes-up-a-full-backup">What Makes Up a Full Backup</h2>
 <p>A configuration pack (<strong>Settings &gt; Configuration Packs</strong>) exports action types, tools,
-toolsets, MCP servers, report definitions, scheduled jobs, session templates,
-connections, subscriptions, and workflow definitions as JSON. <strong>It is not a full
+toolsets, MCP servers, session templates,
+event sources, subscriptions, and workflow definitions as JSON. <strong>It is not a full
 instance backup.</strong> A configuration pack does not include:</p>
 <ul>
-<li>Projects, tasks, thread entries, or activity history</li>
-<li>Generated reports, scheduled job runs, or workflow run state</li>
+<li>Subjects, tasks, thread entries, or activity history</li>
+<li>Workflow runs and their state</li>
 <li>The stream event history and processing ledger</li>
 <li>Secrets (secret values are never exported by the API)</li>
 <li>The AI usage/cost history</li>
+<li>Workbench compositions and their unpublished drafts (only published workflows, action types and tools can
+  be exported)</li>
 </ul>
 <p>To fully back up and restore an Axiom instance, you need all of the following, taken
-together at the same point in time:</p>
+together at the same point in time. <code>~/.axiom</code> is the default Axiom home (<code>axiom.home</code>):</p>
 <table>
 <thead>
 <tr>
@@ -1501,14 +1668,14 @@ together at the same point in time:</p>
 <td>Generated automatically on first startup. Secret values in the database are encrypted with this key — <strong>without it, encrypted secrets cannot be decrypted, even by restoring the database.</strong></td>
 </tr>
 <tr>
-<td>Project workspaces</td>
+<td>Subject workspaces</td>
 <td><code>~/.axiom/workspaces/</code> (or <code>axiom.workspace.root</code> if overridden)</td>
-<td>Git clones and working directories backing each project</td>
+<td>Working directories (<code>subject-&lt;id&gt;</code>) backing each subject</td>
 </tr>
 <tr>
 <td>Assistant session directories (optional)</td>
 <td><code>~/.axiom/assistant/sessions/</code></td>
-<td>Sessions are in-memory and do not survive a restart regardless of backup; this directory is cleaned up automatically at startup</td>
+<td>Running agent processes do not survive a restart. Workbench composition session directories are kept and hold the conversation history that the workbench restores after a restart; other stale session directories are removed at startup</td>
 </tr>
 </tbody>
 </table>
@@ -1519,12 +1686,12 @@ snapshot (H2 does not support online hot backups of the file store used here).</
 <li>Install the target Axiom version.</li>
 <li>Restore <code>~/.axiom/data/</code> and <code>~/.axiom/secret.key</code> from backup <strong>together</strong> — the
    encryption key must match the database it was used to encrypt secrets for.</li>
-<li>Restore <code>~/.axiom/workspaces/</code> if project working directories are needed.</li>
-<li>Start Axiom with the <code>persist</code> or <code>prod</code> profile so Flyway applies any migrations
-   needed to bring the restored schema up to the target version.</li>
+<li>Restore <code>~/.axiom/workspaces/</code> if subject workspaces are needed.</li>
+<li>Start Axiom with the <code>persist</code> or <code>prod</code> profile. Restore into the same or a newer 3.x version than the
+   one that created the backup; newer versions migrate the restored database at startup.</li>
 </ol>
 <h2 id="configuration-packs-are-for-sharing-not-disaster-recovery">Configuration Packs Are for Sharing, Not Disaster Recovery</h2>
-<p>Use configuration packs to move a known-good set of tools, action types, connections,
+<p>Use configuration packs to move a known-good set of tools, action types, event sources,
 subscriptions, and workflows between instances (e.g. staging to production), or to
 version-control your configuration outside the database. Don't rely on them as your
 only backup mechanism — they intentionally exclude runtime history and secret values.</p>

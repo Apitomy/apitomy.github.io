@@ -320,6 +320,26 @@
   
 
       
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../release-notes/v3.0.0.html" class="md-tabs__link">
+          
+  
+  
+  Release Notes
+
+        </a>
+      </li>
+    
+  
+
+      
     </ul>
   </div>
 </nav>
@@ -710,6 +730,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../user-guide/workbench.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Workflow Workbench
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../user-guide/ai-assistant.html" class="md-nav__link">
         
   
@@ -945,6 +993,17 @@
     <span class="md-ellipsis">
       
         build.sh — Standard Build
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ui-tests" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        UI Tests
       
     </span>
   </a>
@@ -1424,6 +1483,95 @@
   
 
     
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Release Notes
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Release Notes
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../release-notes/v3.0.0.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3.0.0
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
   </ul>
 </nav>
                   </div>
@@ -1478,6 +1626,17 @@
     <span class="md-ellipsis">
       
         build.sh — Standard Build
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ui-tests" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        UI Tests
       
     </span>
   </a>
@@ -1610,15 +1769,15 @@
 </thead>
 <tbody>
 <tr>
-<td>Java</td>
+<td>Java 25+</td>
 <td>Backend compilation and runtime</td>
 </tr>
 <tr>
-<td>Maven</td>
+<td>Maven 3.9+</td>
 <td>Build system</td>
 </tr>
 <tr>
-<td>Node.js and npm</td>
+<td>Node.js 20.19+ or 22.12+ and npm</td>
 <td>UI build (auto-installed by Maven in release builds) and runtime support for custom MCP tool servers and the AI Assistant's MCP server</td>
 </tr>
 <tr>
@@ -1638,31 +1797,44 @@
 <p>Builds the backend and runs unit tests. Does <strong>not</strong> build the UI.</p>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>./build.sh
 </span></code></pre></div>
-<p>Runs: <code>mvn clean package</code></p>
+<p>Runs: <code>mvn clean package</code>. Extra arguments are passed to Maven, so <code>./build.sh -Pui</code> also builds the UI
+and runs the UI unit tests (see below).</p>
+<h3 id="ui-tests">UI Tests</h3>
+<p>The UI has unit and component tests written with <a href="https://vitest.dev/">Vitest</a> and Testing Library. Run
+them on their own with:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nb">cd</span><span class="w"> </span>ui<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>npm<span class="w"> </span><span class="nb">test</span>
+</span></code></pre></div>
+<p>They also run as part of any Maven build with the <code>-Pui</code> profile (<code>./build.sh -Pui</code>,
+<code>./build-release.sh</code>), so a failing UI test fails the build.</p>
 <h3 id="build-releasesh-release-build"><code>build-release.sh</code> — Release Build</h3>
 <p>Builds the complete application with the React UI bundled into a single runnable JAR.</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>./build-release.sh
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>./build-release.sh
 </span></code></pre></div>
 <p>Runs: <code>mvn clean package -Pui,prod</code></p>
 <p>The <code>-Pui</code> profile activates the <code>ui-bundle</code> module, which uses the
-<code>frontend-maven-plugin</code> to install Node.js, run <code>npm install</code> and <code>npm run build</code>,
+<code>frontend-maven-plugin</code> to install Node.js, run <code>npm install</code>, <code>npm run build</code> and <code>npm test</code>,
 and package the resulting <code>dist/</code> folder into <code>META-INF/resources/</code> inside the JAR.</p>
 <p>The <code>-Pprod</code> profile configures Quarkus to produce an uber-jar.</p>
-<p>Output: <code>app/target/quarkus-app/quarkus-run.jar</code> (the release workflow republishes
-this as <code>app/target/apitomy-axiom-app-&lt;version&gt;-runner.jar</code>)</p>
+<p>Output: <code>app/target/apitomy-axiom-app-&lt;version&gt;-runner.jar</code> (the release workflow republishes
+this as <code>apitomy-axiom-&lt;version&gt;.jar</code>)</p>
 <p>The resulting application can be started with:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>java<span class="w"> </span>-jar<span class="w"> </span>app/target/quarkus-app/quarkus-run.jar
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>java<span class="w"> </span>-jar<span class="w"> </span>app/target/apitomy-axiom-app-&lt;version&gt;-runner.jar
 </span></code></pre></div>
 <h3 id="build-allsh-full-build-with-integration-tests"><code>build-all.sh</code> — Full Build with Integration Tests</h3>
-<p>Includes integration tests that require the Claude Code CLI to be installed and an
-<code>ANTHROPIC_API_KEY</code> set.</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>./build-all.sh
+<p>Intended for a full build including tests that need a real AI agent CLI. The script warns if the
+<code>claude</code> CLI is not on the <code>PATH</code> or <code>ANTHROPIC_API_KEY</code> is not set.</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>./build-all.sh
 </span></code></pre></div>
-<p>Runs: <code>AXIOM_CLAUDE_TESTS=true mvn clean package</code></p>
+<p>Runs: <code>mvn clean package</code>, after checking for Java 25, Maven and the <code>claude</code> CLI. Extra arguments are
+passed to Maven.</p>
+<p>Tests tagged <code>live-cli</code> start a real <code>opencode</code> or <code>claude</code> CLI and may consume tokens. They are excluded by
+default. Enable them with the <code>live-cli-tests</code> profile:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>./build-all.sh<span class="w"> </span>-Plive-cli-tests
+</span></code></pre></div>
 <h3 id="devsh-development-mode"><code>dev.sh</code> — Development Mode</h3>
 <p>Builds all Maven modules, then launches the packaged backend JAR together with the
 Vite UI dev server side by side.</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>./dev.sh
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>./dev.sh
 </span></code></pre></div>
 <table>
 <thead>
@@ -1713,12 +1885,17 @@ backend code, run <code>mvn quarkus:dev</code> directly from the <code>app</code
 <td><code>--portOffset=N</code></td>
 <td>Offset both the backend and UI dev server ports by <code>N</code></td>
 </tr>
+<tr>
+<td><code>--dataDir=PATH</code></td>
+<td>Store the H2 database in <code>PATH</code> (implies <code>--persist</code>)</td>
+</tr>
 </tbody>
 </table>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>./dev.sh<span class="w"> </span>--skip-ui<span class="w">              </span><span class="c1"># Backend only</span>
-</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>./dev.sh<span class="w"> </span>--persist<span class="w">              </span><span class="c1"># Persistent database</span>
-</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>./dev.sh<span class="w"> </span>--persist<span class="w"> </span>--skip-ui<span class="w">    </span><span class="c1"># Both flags</span>
-</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>./dev.sh<span class="w"> </span>--portOffset<span class="o">=</span><span class="m">100</span><span class="w">       </span><span class="c1"># Backend on 9190, UI on 9291</span>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>./dev.sh<span class="w"> </span>--skip-ui<span class="w">              </span><span class="c1"># Backend only</span>
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>./dev.sh<span class="w"> </span>--persist<span class="w">              </span><span class="c1"># Persistent database</span>
+</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>./dev.sh<span class="w"> </span>--persist<span class="w"> </span>--skip-ui<span class="w">    </span><span class="c1"># Both flags</span>
+</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>./dev.sh<span class="w"> </span>--portOffset<span class="o">=</span><span class="m">100</span><span class="w">       </span><span class="c1"># Backend on 9190, UI on 9291</span>
+</span><span id="__span-7-5"><a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a>./dev.sh<span class="w"> </span>--dataDir<span class="o">=</span>/tmp/axiom<span class="w">   </span><span class="c1"># Persistent database in /tmp/axiom</span>
 </span></code></pre></div>
 <hr />
 <h2 id="maven-profiles">Maven Profiles</h2>
@@ -1740,6 +1917,11 @@ backend code, run <code>mvn quarkus:dev</code> directly from the <code>app</code
 <td><code>prod</code></td>
 <td>Produces an uber-jar with production settings</td>
 <td><code>-Pprod</code> or auto in <code>build-release.sh</code></td>
+</tr>
+<tr>
+<td><code>live-cli-tests</code></td>
+<td>Runs tests tagged <code>live-cli</code>, which start a real agent CLI</td>
+<td><code>-Plive-cli-tests</code></td>
 </tr>
 </tbody>
 </table>
@@ -1765,7 +1947,13 @@ needed.</p>
 <li>Edit frontend TypeScript/React code — Vite hot-reloads instantly</li>
 <li>Edit backend Java code — re-run <code>./dev.sh</code> (or use <code>mvn quarkus:dev</code> from the <code>app</code>
    module for hot reload)</li>
-<li>Run <code>mvn test</code> in a module directory to run unit tests for that module</li>
+<li>
+<p>Run the tests of one module (and build the modules it depends on) from the project root, for example:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>mvn<span class="w"> </span>-q<span class="w"> </span>-pl<span class="w"> </span>app<span class="w"> </span>-am<span class="w"> </span><span class="nb">test</span><span class="w"> </span>-Dtest<span class="o">=</span>WorkflowScheduleTriggersResourceTest
+</span></code></pre></div>
+<p>Add <code>-Dsurefire.failIfNoSpecifiedTests=false</code> when the selected test class is not present in every
+built module.</p>
+</li>
 </ol>
 <hr />
 <h2 id="port-reference">Port Reference</h2>
@@ -1786,7 +1974,7 @@ needed.</p>
 <tr>
 <td>9191</td>
 <td>Vite UI dev server</td>
-<td>Development (<code>npm run dev</code>)</td>
+<td>Development (<code>./dev.sh</code> or <code>npm run dev</code>)</td>
 </tr>
 <tr>
 <td>9191</td>

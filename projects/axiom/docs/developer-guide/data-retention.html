@@ -320,6 +320,26 @@
   
 
       
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../release-notes/v3.0.0.html" class="md-tabs__link">
+          
+  
+  
+  Release Notes
+
+        </a>
+      </li>
+    
+  
+
+      
     </ul>
   </div>
 </nav>
@@ -690,6 +710,34 @@
     
   
     Workflows
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../user-guide/workbench.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Workflow Workbench
   
 
     
@@ -1282,10 +1330,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#closedprojectcleanup-projectdeletionservice" class="md-nav__link">
+  <a href="#inactivesubjectcleanup-subjectdeletionservice" class="md-nav__link">
     <span class="md-ellipsis">
       
-        ClosedProjectCleanup / ProjectDeletionService
+        InactiveSubjectCleanup / SubjectDeletionService
       
     </span>
   </a>
@@ -1305,6 +1353,17 @@
         
       </ul>
     </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#data-not-covered-by-retention" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Data Not Covered by Retention
+      
+    </span>
+  </a>
   
 </li>
       
@@ -1382,6 +1441,95 @@
     
   
     Extending Axiom
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Release Notes
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Release Notes
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../release-notes/v3.0.0.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3.0.0
   
 
     
@@ -1485,10 +1633,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#closedprojectcleanup-projectdeletionservice" class="md-nav__link">
+  <a href="#inactivesubjectcleanup-subjectdeletionservice" class="md-nav__link">
     <span class="md-ellipsis">
       
-        ClosedProjectCleanup / ProjectDeletionService
+        InactiveSubjectCleanup / SubjectDeletionService
       
     </span>
   </a>
@@ -1508,6 +1656,17 @@
         
       </ul>
     </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#data-not-covered-by-retention" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Data Not Covered by Retention
+      
+    </span>
+  </a>
   
 </li>
       
@@ -1571,10 +1730,10 @@ documented soft references listed under <a href="#accepted-dangling-references">
 </thead>
 <tbody>
 <tr>
-<td><code>closed_project_retention_days</code></td>
-<td><code>closedProjectRetentionDays</code></td>
+<td><code>inactive_subject_retention_days</code></td>
+<td><code>inactiveSubjectRetentionDays</code></td>
 <td>90</td>
-<td><code>ClosedProjectCleanup</code></td>
+<td><code>InactiveSubjectCleanup</code></td>
 </tr>
 <tr>
 <td><code>trace_retention_days</code></td>
@@ -1587,18 +1746,6 @@ documented soft references listed under <a href="#accepted-dangling-references">
 <td><code>eventRetentionDays</code></td>
 <td>90</td>
 <td><code>StreamEventCleanup</code></td>
-</tr>
-<tr>
-<td><code>scheduled_job_run_retention_days</code></td>
-<td><code>scheduledJobRunRetentionDays</code></td>
-<td>0</td>
-<td><code>HistoryCleanup</code></td>
-</tr>
-<tr>
-<td><code>report_retention_days</code></td>
-<td><code>reportRetentionDays</code></td>
-<td>0</td>
-<td><code>HistoryCleanup</code></td>
 </tr>
 <tr>
 <td><code>workflow_run_retention_days</code></td>
@@ -1620,24 +1767,24 @@ documented soft references listed under <a href="#accepted-dangling-references">
 </tr>
 </tbody>
 </table>
-<p>The five history settings were added in <code>V72</code> (#429). For them, <code>0</code> means <strong>keep forever</strong>, and <code>0</code> is the
-default, so upgrading never deletes data unexpectedly. Negative values are rejected with <code>400</code>. The three
-original settings must be at least 1, because 0 would delete everything; smaller values are also rejected with
-<code>400</code>. A <code>PUT</code> that omits any setting (or sends <code>null</code>) leaves its current value unchanged. <code>V72</code> also dropped
-the unused <code>event_source_log_retention_days</code> column.</p>
+<p>For the three history settings, <code>0</code> means <strong>keep forever</strong>, and <code>0</code> is the default. Negative values are
+rejected with <code>400</code>. The inactive-subject, trace and event settings must be at least 1, because 0 would delete
+everything; smaller values are also rejected with <code>400</code>. A <code>PUT</code> that omits any setting (or sends <code>null</code>)
+leaves its current value unchanged.</p>
 <h2 id="batching-and-retries">Batching and Retries</h2>
-<p>Every job runs hourly (staggered with <code>delayed</code>), selects at most 500 IDs per transaction, and deletes by
-those IDs or with sub-selects, never with an unbounded <code>IN</code> list. Each batch runs in its own transaction
-through <code>CleanupRetry</code>, which retries database lock failures. Each job has a package-private <code>doCleanup()</code>
-that runs all batches in the caller's transaction; tests use it.</p>
+<p>Every job runs hourly. <code>TraceCleanup</code>, <code>StreamEventCleanup</code> and <code>HistoryCleanup</code> are batched: they are
+staggered with <code>delayed</code> start times of 3, 6 and 9 minutes, select at most 500 IDs (<code>BATCH_SIZE</code>) per
+transaction, and delete by those IDs or with sub-selects, never with an unbounded <code>IN</code> list. Each batch runs
+in its own transaction through <code>CleanupRetry</code>, which retries database lock failures. Each of these three jobs
+has a package-private <code>doCleanup()</code> that runs all batches in the caller's transaction; tests use it.</p>
+<p><code>InactiveSubjectCleanup</code> is not batched. It runs hourly without a start delay and deletes all qualifying
+subjects in one <code>@Transactional</code> method through <code>SubjectDeletionService</code>, without <code>CleanupRetry</code>.</p>
 <h2 id="what-each-job-does">What Each Job Does</h2>
 <h3 id="tracecleanup"><code>TraceCleanup</code></h3>
 <p>Deletes traces whose <code>started_on</code> is older than the retention period, with their <code>trace_node</code> and
 <code>tool_execution</code> rows. Before deleting, it clears (sets to <code>NULL</code>):</p>
 <ul>
-<li><code>trace_id</code> on <code>task</code>, <code>scheduled_job_run</code>, <code>report</code>, <code>workflow_run</code>, <code>routing_outcome</code>, <code>activity_log</code> and
-  <code>ai_usage</code>;</li>
-<li><code>triggered_by_trace_id</code> on <code>scheduled_job_run</code> and <code>report</code>;</li>
+<li><code>trace_id</code> on <code>task</code>, <code>workflow_run</code>, <code>routing_outcome</code>, <code>activity_log</code> and <code>ai_usage</code>;</li>
 <li><code>trace_node_id</code> on <code>routing_outcome_item</code> and <code>workflow_run_resume</code>, for the deleted trace's nodes.</li>
 </ul>
 <p><code>TraceCleanupTest.everyTraceColumnIsHandled</code> scans every entity for columns named <code>trace_id</code>, <code>*_trace_id</code>
@@ -1651,14 +1798,16 @@ routing outcome items. An event is <strong>kept</strong> while a workflow run wi
 <li>has a <code>workflow_run_resume</code> row with that <code>event_id</code>.</li>
 </ul>
 <p>Such an event becomes eligible on the first cleanup after the run finishes, so the run → event link is never
-lost while the run can still use it. The job also deletes connection poll logs older than 3 days.</p>
-<h3 id="closedprojectcleanup-projectdeletionservice"><code>ClosedProjectCleanup</code> / <code>ProjectDeletionService</code></h3>
-<p>Deletes <code>Completed</code> projects whose <code>updated_on</code> is older than the retention period (the same code runs when a
-project is deleted through the API). It deletes the project's thread entries, AI usage, activity log entries,
-tasks, workflow runs and their waits, event subscriptions and resume rows, labels and workspace.</p>
-<p>Traces and routing outcomes are event history, not project data, so they are <strong>kept</strong> and their references
-are cleared: <code>trace.project_id</code>, <code>routing_outcome.project_id</code> and <code>task_id</code>, and <code>routing_outcome_item</code>
-<code>project_id</code>, <code>task_id</code> and <code>workflow_run_id</code>. Configuration versions are not project-scoped.</p>
+lost while the run can still use it. The job also deletes event source poll logs older than 3 days.</p>
+<h3 id="inactivesubjectcleanup-subjectdeletionservice"><code>InactiveSubjectCleanup</code> / <code>SubjectDeletionService</code></h3>
+<p>Deletes <strong>inactive</strong> subjects — subjects with no <code>running</code> or <code>waiting</code> workflow run — whose most recent run
+finished (<code>completed_on</code>) longer ago than the retention period. Subjects that have never had a run are not
+deleted automatically. The same <code>SubjectDeletionService</code> code runs when a subject is deleted through the API.
+It deletes the subject's thread entries, AI usage, activity log entries, tasks, workflow runs and their waits,
+event subscriptions and resume rows, and its workspace directory (<code>subject-&lt;id&gt;</code>).</p>
+<p>Traces and routing outcomes are event history, not subject data, so they are <strong>kept</strong> and their references
+are cleared: <code>trace.subject_id</code>, <code>routing_outcome.subject_id</code> and <code>task_id</code>, and <code>routing_outcome_item</code>
+<code>subject_id</code>, <code>task_id</code> and <code>workflow_run_id</code>.</p>
 <h3 id="historycleanup"><code>HistoryCleanup</code></h3>
 <p>Each setting is skipped when it is <code>0</code>.</p>
 <table>
@@ -1670,34 +1819,29 @@ are cleared: <code>trace.project_id</code>, <code>routing_outcome.project_id</co
 </thead>
 <tbody>
 <tr>
-<td>Scheduled job runs</td>
-<td>Status <code>Completed</code> or <code>Failed</code> and <code>created_on</code> older than the period</td>
-</tr>
-<tr>
-<td>Reports</td>
-<td>Status <code>Completed</code> or <code>Failed</code> and <code>created_on</code> older than the period, with labels</td>
-</tr>
-<tr>
 <td>Workflow runs</td>
 <td>Status <code>completed</code>, <code>failed</code> or <code>cancelled</code>, and <code>completed_on</code> (or <code>started_on</code> if unset) older than the period</td>
 </tr>
 <tr>
 <td>Activity log</td>
-<td><code>created_on</code> older than the period, with or without a project</td>
+<td><code>created_on</code> older than the period, with or without a subject</td>
 </tr>
 <tr>
 <td>AI usage</td>
-<td><code>created_on</code> older than the period, with or without a project</td>
+<td><code>created_on</code> older than the period, with or without a subject</td>
 </tr>
 </tbody>
 </table>
 <p>Workflow runs use an allow-list of finished statuses (<code>FINISHED_WORKFLOW_RUN_STATUSES</code>), so runs in a status
 added later are kept until the list is updated. Deleting a workflow run deletes its <code>workflow_wait</code>,
 <code>workflow_event_subscription</code> and <code>workflow_run_resume</code> rows and clears <code>task.workflow_run_id</code> and
-<code>routing_outcome_item.workflow_run_id</code>. Tasks are kept: they belong to the project and are deleted with it.
+<code>routing_outcome_item.workflow_run_id</code>. Tasks are kept: they belong to the subject and are deleted with it.
 The run's trace follows trace retention.</p>
-<p>Deleting a job run or report does not touch its configuration version (<code>scheduled_job_version</code> /
-<code>report_definition_version</code>), which belongs to the definition.</p>
+<h2 id="data-not-covered-by-retention">Data Not Covered by Retention</h2>
+<p>Workbench test runs of draft action types and tools (<code>CompositionTestRuns</code>) are not stored in the database.
+They are kept in memory, at most 50 per composition (the oldest is dropped first), and are lost when the
+server restarts. Deleting a composition drops its test runs. They create no traces, tasks or workflow runs, so
+no cleanup job handles them.</p>
 <h2 id="concurrency">Concurrency</h2>
 <p>The cleanup jobs use bulk JPQL <code>UPDATE</code> and <code>DELETE</code> statements, which bypass the persistence context. If
 another transaction has the same row loaded as a managed entity (for example a task whose <code>trace_id</code> is being
@@ -1708,8 +1852,6 @@ and this was already true before #429. The next cleanup run clears any value tha
 <p>These columns are soft references with no foreign key. They are kept on purpose so history survives, and
 consumers must treat them as possibly dangling:</p>
 <ul>
-<li><code>scheduled_job_run_id</code>, <code>report_id</code> and <code>report_definition_id</code> on <code>ai_usage</code> and <code>activity_log</code>, and
-  <code>trace.report_id</code>, after a job run, report or definition is deleted (see <a href="correlation.html">Correlation</a>).</li>
 <li><code>event_id</code> on <code>trace</code>, <code>task</code>, <code>activity_log</code>, <code>ai_usage</code> and <code>workflow_run_resume</code>, <code>ledger_id</code> on
   <code>workflow_run_resume</code>, and <code>trigger_event_id</code> / <code>trigger_ledger_id</code> on <code>workflow_run</code>, after event
   retention deletes the event of a finished run (see

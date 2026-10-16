@@ -320,6 +320,26 @@
   
 
       
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../release-notes/v3.0.0.html" class="md-tabs__link">
+          
+  
+  
+  Release Notes
+
+        </a>
+      </li>
+    
+  
+
+      
     </ul>
   </div>
 </nav>
@@ -690,6 +710,34 @@
     
   
     Workflows
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../user-guide/workbench.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Workflow Workbench
   
 
     
@@ -1413,6 +1461,95 @@
   
 
     
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Release Notes
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Release Notes
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../release-notes/v3.0.0.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3.0.0
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
   </ul>
 </nav>
                   </div>
@@ -1598,17 +1735,23 @@ JAX-RS interfaces from the OpenAPI spec at compile time.</p>
 <ul>
 <li><strong>Resource interfaces</strong> — one per API tag/group, with JAX-RS annotations
   (<code>@Path</code>, <code>@GET</code>, <code>@POST</code>, etc.)</li>
-<li><strong>Model classes</strong> — POJOs with Jackson <code>@JsonProperty</code> annotations for
-  request/response bodies</li>
+<li><strong>Bean classes</strong> (package <code>io.apitomy.axiom.api.beans</code>) — POJOs with Jackson <code>@JsonProperty</code> annotations
+  for request/response bodies</li>
 </ul>
+<p>Resource methods take and return these generated beans. Do not use raw <code>JsonNode</code> for request or response
+bodies.</p>
 <p>The plugin is configured in <code>common/api/pom.xml</code>:</p>
 <div class="language-xml highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nt">&lt;plugin&gt;</span>
 </span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">    </span><span class="nt">&lt;groupId&gt;</span>io.apitomy<span class="nt">&lt;/groupId&gt;</span>
 </span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">    </span><span class="nt">&lt;artifactId&gt;</span>apitomy-codegen-maven-plugin<span class="nt">&lt;/artifactId&gt;</span>
 </span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">    </span><span class="nt">&lt;configuration&gt;</span>
-</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="w">        </span><span class="nt">&lt;javaPackage&gt;</span>io.apitomy.axiom.api<span class="nt">&lt;/javaPackage&gt;</span>
-</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="w">    </span><span class="nt">&lt;/configuration&gt;</span>
-</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="nt">&lt;/plugin&gt;</span>
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="w">        </span><span class="nt">&lt;projectSettings&gt;</span>
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="w">            </span><span class="nt">&lt;javaPackage&gt;</span>io.apitomy.axiom.api<span class="nt">&lt;/javaPackage&gt;</span>
+</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="w">            </span><span class="nt">&lt;generatesOpenApi&gt;</span>false<span class="nt">&lt;/generatesOpenApi&gt;</span>
+</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="w">        </span><span class="nt">&lt;/projectSettings&gt;</span>
+</span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="w">        </span><span class="nt">&lt;inputSpec&gt;</span>${project.basedir}/src/main/resources/openapi.json<span class="nt">&lt;/inputSpec&gt;</span>
+</span><span id="__span-2-10"><a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="w">    </span><span class="nt">&lt;/configuration&gt;</span>
+</span><span id="__span-2-11"><a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a><span class="nt">&lt;/plugin&gt;</span>
 </span></code></pre></div>
 <hr />
 <h2 id="implementing-endpoints">Implementing Endpoints</h2>
@@ -1617,42 +1760,43 @@ JAX-RS interfaces from the OpenAPI spec at compile time.</p>
 </span></code></pre></div>
 <p>Each resource class implements the corresponding generated interface:</p>
 <div class="language-java highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="nd">@ApplicationScoped</span>
-</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">ProjectsResourceImpl</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">ProjectsResource</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">SubjectsResourceImpl</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">SubjectsResource</span><span class="w"> </span><span class="p">{</span>
 </span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>
 </span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">    </span><span class="nd">@Override</span>
-</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">Response</span><span class="w"> </span><span class="nf">getProjects</span><span class="p">(</span><span class="cm">/* params */</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">SubjectSearchResults</span><span class="w"> </span><span class="nf">listSubjects</span><span class="p">(</span><span class="cm">/* params */</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 </span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="w">        </span><span class="c1">// implementation</span>
 </span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="w">    </span><span class="p">}</span>
 </span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="p">}</span>
 </span></code></pre></div>
 <p>The generated interface provides the JAX-RS annotations — the implementation class
-only needs to provide the business logic.</p>
+only needs to provide the business logic. Never put <code>@Path</code> on an implementation class; the paths come from
+the generated interface.</p>
 <hr />
 <h2 id="adding-a-new-endpoint">Adding a New Endpoint</h2>
 <h3 id="step-1-edit-the-openapi-spec">Step 1: Edit the OpenAPI Spec</h3>
 <p>Add the path, operation, and any new schemas to <code>common/api/src/main/resources/openapi.json</code>.</p>
 <h3 id="step-2-regenerate-interfaces">Step 2: Regenerate Interfaces</h3>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="nb">cd</span><span class="w"> </span>common/api
-</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>mvn<span class="w"> </span>compile
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>mvn<span class="w"> </span>-q<span class="w"> </span>-pl<span class="w"> </span>common/api<span class="w"> </span>install
 </span></code></pre></div>
-<p>This regenerates the JAX-RS interfaces. Check
+<p>This regenerates the JAX-RS interfaces and beans and installs the module, so that <code>app</code> builds against the
+new interface (<code>./build.sh</code> also does this). Check
 <code>target/generated-sources/jaxrs/io/apitomy/axiom/api/</code> to see the new interface
 method.</p>
 <h3 id="step-3-implement-the-endpoint">Step 3: Implement the Endpoint</h3>
 <p>In <code>app/src/main/java/io/apitomy/axiom/app/rest/</code>, either update an existing
 <code>*ResourceImpl.java</code> or create a new one implementing the generated interface.</p>
 <h3 id="step-4-add-ui-api-functions">Step 4: Add UI API Functions</h3>
-<p>In <code>ui/src/config/api.ts</code>, add:</p>
+<p>In <code>ui/src/config/api.ts</code> (or <code>ui/src/config/compositions.ts</code> for the workbench <code>/compositions</code> API), add:</p>
 <ol>
 <li>TypeScript interfaces matching the request/response schemas</li>
 <li>A <code>fetch()</code> function calling the new endpoint</li>
 </ol>
-<p>All API functions follow the same pattern:</p>
-<div class="language-typescript highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="kd">const</span><span class="w"> </span><span class="nx">API_BASE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="sb">`</span><span class="si">${</span><span class="nx">getApiBaseUrl</span><span class="p">()</span><span class="si">}</span><span class="sb">/api/v1`</span><span class="p">;</span>
+<p>Most API functions in <code>api.ts</code> follow the same pattern:</p>
+<div class="language-typescript highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="kd">const</span><span class="w"> </span><span class="nx">API</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="sb">`</span><span class="si">${</span><span class="nx">getApiBaseUrl</span><span class="p">()</span><span class="si">}</span><span class="sb">/api/v1`</span><span class="p">;</span>
 </span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>
 </span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="k">export</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="nx">fetchWidgets</span><span class="p">()</span><span class="o">:</span><span class="w"> </span><span class="nb">Promise</span><span class="o">&lt;</span><span class="nx">Widget</span><span class="p">[]</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">resp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">fetch</span><span class="p">(</span><span class="sb">`</span><span class="si">${</span><span class="nx">API_BASE</span><span class="si">}</span><span class="sb">/widgets`</span><span class="p">);</span>
-</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="nx">resp</span><span class="p">.</span><span class="nx">ok</span><span class="p">)</span><span class="w"> </span><span class="k">throw</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="ne">Error</span><span class="p">(</span><span class="s2">"Failed to fetch widgets"</span><span class="p">);</span>
+</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">resp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">fetch</span><span class="p">(</span><span class="sb">`</span><span class="si">${</span><span class="nx">API</span><span class="si">}</span><span class="sb">/widgets`</span><span class="p">);</span>
+</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="nx">resp</span><span class="p">.</span><span class="nx">ok</span><span class="p">)</span><span class="w"> </span><span class="k">throw</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="ne">Error</span><span class="p">(</span><span class="k">await</span><span class="w"> </span><span class="nx">extractErrorMessage</span><span class="p">(</span><span class="nx">resp</span><span class="p">,</span><span class="w"> </span><span class="s2">"Failed to fetch widgets"</span><span class="p">));</span>
 </span><span id="__span-6-6"><a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">resp</span><span class="p">.</span><span class="nx">json</span><span class="p">();</span>
 </span><span id="__span-6-7"><a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="p">}</span>
 </span></code></pre></div>
@@ -1671,16 +1815,17 @@ method.</p>
 <tr>
 <td>Development</td>
 <td>(empty string)</td>
-<td>Vite proxy forwards <code>/api</code> to <code>localhost:9090</code></td>
+<td>Vite proxy forwards <code>/api</code> to the backend (<code>localhost:9090</code> by default)</td>
 </tr>
 <tr>
 <td>Production</td>
-<td>From <code>window.AXIOM_API_URL</code></td>
-<td>Injected by the backend at runtime</td>
+<td>(empty string)</td>
+<td>The backend serves the UI and the API from the same origin</td>
 </tr>
 </tbody>
 </table>
-<p>This is handled by <code>getApiBaseUrl()</code> in <code>api.ts</code>.</p>
+<p>This is handled by <code>getApiBaseUrl()</code> in <code>api.ts</code>. If a global <code>window.AXIOM_API_URL</code> string is defined, it is
+used as the base URL instead; the backend does not set it.</p>
 <hr />
 <h2 id="spa-routing">SPA Routing</h2>
 <p><code>SpaRoutingFilter.java</code> in the <code>app</code> module catches all non-API routes and forwards

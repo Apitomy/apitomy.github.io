@@ -318,6 +318,26 @@
   
 
       
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="release-notes/v3.0.0.html" class="md-tabs__link">
+          
+  
+  
+  Release Notes
+
+        </a>
+      </li>
+    
+  
+
+      
     </ul>
   </div>
 </nav>
@@ -779,6 +799,34 @@
     
   
     Workflows
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="user-guide/workbench.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Workflow Workbench
   
 
     
@@ -1336,6 +1384,95 @@
   
 
     
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Release Notes
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Release Notes
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="release-notes/v3.0.0.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3.0.0
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
   </ul>
 </nav>
                   </div>
@@ -1427,25 +1564,39 @@
 
 
 <h1 id="apitomy-axiom">Apitomy Axiom</h1>
-<p>An event-driven project orchestration platform that monitors GitHub and Jira issues, creates
-long-lived projects around them, and delegates work to human and AI agents.</p>
+<p>A workflow-first, event-driven orchestration platform that monitors GitHub and Jira activity and runs
+versioned workflows that delegate work to AI agents, scripts, and humans.</p>
 <h2 id="key-features">Key Features</h2>
 <ul>
-<li><strong>AI-Powered Triage</strong> — an AI Manager triages incoming stream events and decides what actions to take</li>
-<li><strong>Human + AI Agents</strong> — pluggable agent pool supports Claude Code, OpenCode, GitHub Copilot CLI, and human-completed tasks</li>
-<li><strong>Project Lifecycle</strong> — long-lived projects track work from triage through completion</li>
-<li><strong>Event Connections &amp; Subscriptions</strong> — polls GitHub and Jira for activity, then routes matched events to the Manager, a workflow, or an action via filterable subscriptions</li>
-<li><strong>Workflows</strong> — visually authored, versioned automations with human-task, wait, and event-triggered nodes</li>
-<li><strong>Scheduled Jobs</strong> — CRON-style automation with agent or script execution modes</li>
-<li><strong>Web Dashboard</strong> — React + PatternFly UI with real-time SSE updates</li>
+<li><strong>Workflows</strong> — visually authored, versioned automations with action, human-task, wait, and
+  receive-event nodes; workflow runs are the primary object in the UI</li>
+<li><strong>Standard Workflow Inputs</strong> — a workflow's Start node declares the standard inputs it needs
+  (<code>subject</code>, <code>event</code>), and Axiom supplies them when a run starts</li>
+<li><strong>Event Sources &amp; Subscriptions</strong> — polls GitHub and Jira for activity, then routes matched events
+  to workflows: <code>create-workflow</code> starts a run, <code>workflow-dispatch</code> resumes waiting runs</li>
+<li><strong>Schedule Triggers</strong> — cron schedules that start workflow runs on a fixed subject</li>
+<li><strong>Workflow Workbench</strong> — an authoring workspace for a workflow and its action types, tools and
+  subscriptions, with a workflow canvas, editors, test runs, run history and an AI Assistant that proposes
+  changes you can review or apply live</li>
+<li><strong>Subjects</strong> — the issue, pull request, or named subject a run is about, with a shared workspace and
+  thread</li>
+<li><strong>Human + AI Agents</strong> — pluggable agent pool supports Claude Code, OpenCode, GitHub Copilot CLI, and
+  human-completed tasks</li>
+<li><strong>Inbox &amp; Dashboards</strong> — human tasks waiting for a person, and configurable dashboards</li>
+<li><strong>Web UI</strong> — React + PatternFly UI with real-time SSE updates</li>
 <li><strong>AI Assistant</strong> — interactive conversational interface with customizable session templates,
   real-time tool permission management, and plan mode</li>
-<li><strong>Pluggable AI Agents</strong> — swap between Claude Code CLI, OpenCode, and GitHub Copilot CLI without code changes</li>
+<li><strong>Pluggable AI Agents</strong> — swap between Claude Code CLI, OpenCode, and GitHub Copilot CLI without code
+  changes</li>
 </ul>
 <h2 id="quick-links">Quick Links</h2>
 <ul>
 <li><a href="getting-started/running-axiom.html">Running Axiom</a> — Prerequisites and running Axiom</li>
+<li><a href="getting-started/configuring-axiom.html">Configuring Axiom</a> — AI engines, profiles, and properties</li>
 <li><a href="user-guide/concepts.html">User Guide</a> — Core concepts, configuration, and extending Axiom</li>
+<li><a href="user-guide/workbench.html">Workflow Workbench</a> — Author workflows with their action types, tools and
+  subscriptions</li>
+<li><a href="developer-guide/upgrading-and-backups.html">Upgrading and Backups</a> — Axiom 3 cannot use a 2.x database</li>
 <li><a href="https://github.com/Apitomy/apitomy-axiom">GitHub Repository</a> — Source code and issues</li>
 </ul>
 <h2 id="tech-stack">Tech Stack</h2>
@@ -1459,7 +1610,7 @@ long-lived projects around them, and delegates work to human and AI agents.</p>
 <tbody>
 <tr>
 <td>Backend</td>
-<td>Java / Quarkus</td>
+<td>Java 25 / Quarkus</td>
 </tr>
 <tr>
 <td>Frontend</td>
@@ -1476,6 +1627,10 @@ long-lived projects around them, and delegates work to human and AI agents.</p>
 <tr>
 <td>AI Agents</td>
 <td>Claude Code CLI, OpenCode, GitHub Copilot CLI (pluggable)</td>
+</tr>
+<tr>
+<td>Workflows</td>
+<td>Apitomy Flow (editor and engine)</td>
 </tr>
 <tr>
 <td>API</td>

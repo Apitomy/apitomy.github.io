@@ -320,6 +320,26 @@
   
 
       
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../release-notes/v3.0.0.html" class="md-tabs__link">
+          
+  
+  
+  Release Notes
+
+        </a>
+      </li>
+    
+  
+
+      
     </ul>
   </div>
 </nav>
@@ -690,6 +710,34 @@
     
   
     Workflows
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../user-guide/workbench.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Workflow Workbench
   
 
     
@@ -1181,28 +1229,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#scheduled-job-run-and-report-columns" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Scheduled Job Run and Report Columns
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#who-triggered-a-run-or-report" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Who Triggered a Run or Report
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#finding-all-records-for-a-trace" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1282,17 +1308,6 @@
         
       </ul>
     </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#accepted-risk" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Accepted Risk
-      
-    </span>
-  </a>
   
 </li>
       
@@ -1435,6 +1450,95 @@
   
 
     
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Release Notes
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Release Notes
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../release-notes/v3.0.0.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3.0.0
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
   </ul>
 </nav>
                   </div>
@@ -1466,28 +1570,6 @@
     <span class="md-ellipsis">
       
         Tables That Carry trace_id
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#scheduled-job-run-and-report-columns" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Scheduled Job Run and Report Columns
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#who-triggered-a-run-or-report" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Who Triggered a Run or Report
       
     </span>
   </a>
@@ -1578,17 +1660,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#accepted-risk" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Accepted Risk
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#known-limitations" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1620,8 +1691,8 @@
 
 
 <h1 id="correlation-by-trace-id">Correlation by Trace ID</h1>
-<p>Axiom uses the <strong>trace ID</strong> as its correlation ID. Every unit of work (event processing, a task, a workflow
-run, a scheduled job run or a report) is identified by its trace ID. Every record produced by that work stores
+<p>Axiom uses the <strong>trace ID</strong> as its correlation ID. Every unit of work — a workflow run and the tasks its
+nodes create — is identified by its trace ID. Every record produced by that work stores
 the trace ID, so given one trace ID you can find everything that belongs to that unit of work. See
 <a href="tracing.html">Tracing</a> for the trace model itself.</p>
 <h2 id="tables-that-carry-trace_id">Tables That Carry <code>trace_id</code></h2>
@@ -1638,146 +1709,38 @@ the trace ID, so given one trace ID you can find everything that belongs to that
 <td>Trace the task runs in</td>
 </tr>
 <tr>
-<td><code>report</code></td>
-<td>Trace of the report generation</td>
-</tr>
-<tr>
 <td><code>workflow_run</code></td>
 <td>Trace of the workflow run</td>
 </tr>
 <tr>
-<td><code>scheduled_job_run</code></td>
-<td>Trace of the scheduled job run</td>
-</tr>
-<tr>
 <td><code>routing_outcome</code></td>
-<td>Trace of the event that was routed</td>
+<td>Trace of the run the routing rule started</td>
 </tr>
 <tr>
 <td><code>activity_log</code></td>
-<td>Added in migration <code>V66</code></td>
+<td>Trace of the work that wrote the row</td>
 </tr>
 <tr>
 <td><code>ai_usage</code></td>
-<td>Added in migration <code>V66</code></td>
+<td>Trace of the work that incurred the cost</td>
 </tr>
 </tbody>
 </table>
 <p>All columns are nullable UUIDs with no foreign key. Trace data has a bounded lifetime: when <code>TraceCleanup</code>
-deletes a trace, it clears <code>trace_id</code> on <code>activity_log</code>, <code>ai_usage</code>, <code>task</code>, <code>scheduled_job_run</code>, <code>report</code>,
-<code>workflow_run</code> and <code>routing_outcome</code>, and <code>triggered_by_trace_id</code> on <code>scheduled_job_run</code> and <code>report</code>. It also
-clears <code>trace_node_id</code> on <code>routing_outcome_item</code> and <code>workflow_run_resume</code> for the deleted trace's nodes. See
-<a href="data-retention.html">Data Retention</a>.</p>
-<h2 id="scheduled-job-run-and-report-columns">Scheduled Job Run and Report Columns</h2>
-<p>Traces are deleted after the retention period, so scheduled job runs and reports are also linked to their AI
-usage and activity rows by ID (migration <code>V70</code>, #424 and #425). These links remain after the trace is
-deleted.</p>
-<table>
-<thead>
-<tr>
-<th>Table</th>
-<th>Column</th>
-<th>Written by</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>ai_usage</code></td>
-<td><code>scheduled_job_run_id</code></td>
-<td><code>ScheduledJobExecutionService</code> (agent mode)</td>
-</tr>
-<tr>
-<td><code>ai_usage</code></td>
-<td><code>report_id</code></td>
-<td><code>ReportExecutionService</code></td>
-</tr>
-<tr>
-<td><code>activity_log</code></td>
-<td><code>scheduled_job_run_id</code></td>
-<td><code>ScheduledJobExecutionService</code> (agent and script)</td>
-</tr>
-<tr>
-<td><code>activity_log</code></td>
-<td><code>report_id</code></td>
-<td><code>ReportExecutionService</code></td>
-</tr>
-<tr>
-<td><code>activity_log</code></td>
-<td><code>report_definition_id</code></td>
-<td><code>ReportExecutionService</code></td>
-</tr>
-</tbody>
-</table>
-<p>All are nullable <code>BIGINT</code> columns with no foreign key. Rows written before <code>V70</code> have no value.</p>
-<p>Deleting a scheduled job, a report or a report definition, or removing job runs and reports with the
-retention settings, intentionally keeps their <code>ai_usage</code> and <code>activity_log</code> rows, so cost and activity history
-survive. The same applies to <code>trace.report_id</code>. Their <code>scheduled_job_run_id</code>, <code>report_id</code> and
-<code>report_definition_id</code> values may then refer to rows that no longer exist; consumers must treat these IDs as
-possibly dangling.</p>
-<p>In the UI, the Activity log and AI usage pages have a <strong>Source</strong> column that links a row to its report
-(<code>/reports/:id</code>) or, for job runs, to the job runs page (<code>/logs/job-runs</code>). The rows carry only the run ID,
-not the job ID, and that page cannot yet be filtered or anchored to a single run.</p>
-<ul>
-<li><code>GET /activity?filterScheduledJobRunId={id}</code> and <code>GET /usage/ai?filterScheduledJobRunId={id}</code> return the
-  rows of one run. <code>filterReportId</code> does the same for a report.</li>
-<li><code>GET /traces?filterScheduledJobRunId={id}</code> returns the run's trace. Reports already had
-  <code>GET /traces?filterReportId={id}</code>.</li>
-<li>A malformed (non-numeric) value for any of these filters returns <code>400 Bad Request</code>. These filters are
-  typed as strings in OpenAPI for this reason. Integer-typed query parameters such as <code>filterProjectId</code>
-  return <code>404</code> for malformed values, which is standard JAX-RS behaviour.</li>
-</ul>
-<p>In the UI, each row of the Scheduled Job Runs page links to the run's trace, AI usage
-(<code>/metrics/ai-usage?scheduledJobRunId=</code>) and activity (<code>/logs/activity?scheduledJobRunId=</code>). The report
-detail page shows the report's AI cost with links to <code>/metrics/ai-usage?reportId=</code> and
-<code>/logs/activity?reportId=</code>. Both pages accept these query parameters as deep links, as with <code>?traceId=</code>.</p>
-<h2 id="who-triggered-a-run-or-report">Who Triggered a Run or Report</h2>
-<p><code>scheduled_job_run</code> and <code>report</code> record how and by whom they were triggered:</p>
-<table>
-<thead>
-<tr>
-<th>Column</th>
-<th>Values</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>run_trigger</code> / <code>report_trigger</code></td>
-<td><code>scheduled</code> or <code>manual</code></td>
-</tr>
-<tr>
-<td><code>triggered_by</code></td>
-<td><code>scheduler</code> for scheduled runs, <code>manual</code> for runs started through the REST API</td>
-</tr>
-<tr>
-<td><code>triggered_by_trace_id</code></td>
-<td>For manual runs, the caller's trace if the request carried a valid caller trace</td>
-</tr>
-</tbody>
-</table>
-<p>Axiom has no authentication, so <code>triggered_by</code> cannot hold a user identity. If authentication is added later,
-<code>triggered_by</code> is where the user should be recorded. <code>triggered_by_trace_id</code> is set when an agent triggers a
-run through <code>POST /scheduled-jobs/{id}/run</code> or <code>POST /reports/definitions/{id}/run</code> and its request carries
-the caller trace headers (see below). The new run still gets its own trace; it does not join the caller's.</p>
-<p><code>V70</code> sets <code>triggered_by</code> on existing scheduled job runs from <code>run_trigger</code>. Existing reports keep <code>NULL</code> for
-all three columns, because their trigger was never recorded. The API exposes these as <code>trigger</code>,
-<code>triggeredBy</code> and <code>triggeredByTraceId</code> on <code>ScheduledJobRun</code> and <code>Report</code>.</p>
+deletes a trace, it clears <code>trace_id</code> on <code>activity_log</code>, <code>ai_usage</code>, <code>task</code>, <code>workflow_run</code> and
+<code>routing_outcome</code>. It also clears <code>trace_node_id</code> on <code>routing_outcome_item</code> and <code>workflow_run_resume</code> for the
+deleted trace's nodes. See <a href="data-retention.html">Data Retention</a>.</p>
 <h2 id="finding-all-records-for-a-trace">Finding All Records for a Trace</h2>
 <ul>
 <li><code>GET /traces/{id}</code> returns the trace tree (nodes, tool calls).</li>
 <li><code>GET /activity?filterTraceId={id}</code> returns the activity rows for the trace.</li>
 <li><code>GET /usage/ai?filterTraceId={id}</code> returns the AI usage rows for the trace.</li>
-<li>Tasks, workflow runs, scheduled job runs and reports expose a <code>traceId</code> field.</li>
+<li>Tasks and workflow runs expose a <code>traceId</code> field.</li>
 </ul>
 <p>For both filters, a malformed <code>filterTraceId</code> returns <code>400 Bad Request</code>.</p>
 <p>In the UI, the Activity log and AI usage pages show a <strong>Trace</strong> column that links to <code>/logs/traces/:traceId</code>,
 and a <strong>Trace ID</strong> filter. Both pages accept a <code>?traceId=</code> query parameter as a deep link, for example
 <code>/logs/activity?traceId=...</code>.</p>
-<p>The Manager Decisions page links each evaluation to its event and its trace. Expanding a <code>manager-evaluated</code>
-row shows the decisions recorded in the trace (with their reasoning) and the tasks each decision created.
-The Manager's <code>manager-evaluated</code> / <code>manager-error</code> activity row and its <code>ai_usage</code> row carry both the event
-ID and the trace ID, so the AI cost of an evaluation can be found from either. This includes manual
-evaluations through <code>POST /manager/evaluate/{eventId}</code>: their rows carry the ID of the <code>manager-dry-run</code>
-trace, which the endpoint returns in the <code>X-Axiom-Trace-Id</code> response header.</p>
 <h2 id="agent-calls-joining-the-callers-trace">Agent Calls: Joining the Caller's Trace</h2>
 <p>When an agent calls Axiom APIs through the Axiom MCP server, <code>sdk-server.js</code> sends two headers on every
 request when the matching environment variables are set:</p>
@@ -1808,12 +1771,11 @@ request when the matching environment variables are set:</p>
 </ol>
 <p>If any check fails, the headers are removed and ignored, and a debug log is written. A request never fails
 because of these headers.</p>
-<p><code>POST /projects/{id}/tasks</code> joins a valid caller trace: the new task joins the caller's trace and its task
-node is added under the caller's parent node, instead of a new <code>user-action</code> trace being created. The task's
-<code>createdBy</code> stays <code>user</code>. <code>POST /scheduled-jobs/{id}/run</code> and <code>POST /reports/definitions/{id}/run</code> only
-record the caller trace in <code>triggered_by_trace_id</code>. Other endpoints ignore the caller trace.</p>
+<p>A valid caller trace is put into the logging MDC for the rest of the request, so server log lines written
+while handling the agent's call carry the caller's trace ID. No endpoint creates work in the caller's
+trace: tasks are created only by workflow nodes, in the run's own trace.</p>
 <h2 id="server-logs-correlation-ids-in-the-mdc">Server Logs: Correlation IDs in the MDC</h2>
-<p>Server log lines carry the correlation IDs of the work they belong to (#428). The IDs are put into the
+<p>Server log lines carry the correlation IDs of the work they belong to. The IDs are put into the
 logging MDC (<code>org.jboss.logging.MDC</code>) by <code>io.apitomy.axiom.core.logging.LogContext</code>:</p>
 <table>
 <thead>
@@ -1832,51 +1794,42 @@ logging MDC (<code>org.jboss.logging.MDC</code>) by <code>io.apitomy.axiom.core.
 <td>Stream event being routed</td>
 </tr>
 <tr>
-<td><code>projectId</code></td>
-<td>Project</td>
+<td><code>subjectId</code></td>
+<td>Subject</td>
 </tr>
 <tr>
 <td><code>taskId</code></td>
 <td>Task</td>
 </tr>
 <tr>
-<td><code>runId</code></td>
-<td>Scheduled job run</td>
-</tr>
-<tr>
 <td><code>workflowRunId</code></td>
 <td>Workflow run</td>
-</tr>
-<tr>
-<td><code>reportId</code></td>
-<td>Report</td>
 </tr>
 </tbody>
 </table>
 <p><code>LogContext</code> also maintains the composite key <code>axiomCtx</code>, which holds only the keys that are present, for
-example <code>[traceId=3f2a9c1e-... projectId=7 taskId=42]</code>, and is absent when none are set. The console and file
+example <code>[traceId=3f2a9c1e-... subjectId=7 taskId=42]</code>, and is absent when none are set. The console and file
 log formats in <code>application.properties</code> print it with <code>%X{axiomCtx}</code>, so lines outside any unit of work look
 exactly as before:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>2026-10-03 11:53:27 INFO  [io.ap.ax.ap.TaskExecutionService] (main) [traceId=3f2a9c1e-... projectId=7 taskId=42] Task 42 completed
+<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>2026-10-03 11:53:27 INFO  [io.ap.ax.ap.TaskExecutionService] (main) [traceId=3f2a9c1e-... subjectId=7 taskId=42] Task 42 completed
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>2026-10-03 11:53:27 INFO  [io.ap.ax.ap.EventStreamOrchestrator] (executor-thread-1) Recovered 2 orphaned pending ledger entries
 </span></code></pre></div>
 <h3 id="grepping-the-logs">Grepping the Logs</h3>
-<p>Given a trace ID (from the trace UI, a task, a report, a run or a <code>routing_outcome</code> row):</p>
+<p>Given a trace ID (from the trace UI, a task, a workflow run or a <code>routing_outcome</code> row):</p>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>grep<span class="w"> </span><span class="s1">'traceId=3f2a9c1e-0000-4000-8000-000000000001'</span><span class="w"> </span>axiom.log
-</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="c1"># Everything for one task, scheduled job run, report or stream event</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="c1"># Everything for one task, workflow run or stream event</span>
 </span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>grep<span class="w"> </span>-E<span class="w"> </span><span class="s1">'taskId=42[] ]'</span><span class="w"> </span>axiom.log
-</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>grep<span class="w"> </span>-E<span class="w"> </span><span class="s1">'runId=17[] ]'</span><span class="w"> </span>axiom.log
-</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>grep<span class="w"> </span>-E<span class="w"> </span><span class="s1">'reportId=5[] ]'</span><span class="w"> </span>axiom.log
-</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>grep<span class="w"> </span><span class="s1">'eventId=6b1d...'</span><span class="w"> </span>axiom.log
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>grep<span class="w"> </span>-E<span class="w"> </span><span class="s1">'workflowRunId=17[] ]'</span><span class="w"> </span>axiom.log
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>grep<span class="w"> </span><span class="s1">'eventId=6b1d...'</span><span class="w"> </span>axiom.log
 </span></code></pre></div>
 <p>Match numeric IDs with a trailing <code>]</code> or space (as above) so that <code>taskId=4</code> does not also match <code>taskId=42</code>.
 The console log goes to standard output; the file log is written only when <code>quarkus.log.file.enabled=true</code>.</p>
 <p>A failed routing rule logs two lines: <code>Routing rule &lt;type&gt; failed for event &lt;id&gt;: &lt;message&gt;</code>, written inside
-the rule's context (so it carries the <code>eventId</code> and the rule's <code>traceId</code>) and <strong>without</strong> a stack trace, and then
-<code>Routing failed for event &lt;id&gt; / subscription &lt;id&gt;</code>, written in the event's context (<code>eventId</code> only) <strong>with</strong>
-the stack trace. The stack trace is logged once, on the second line, because not every routing failure
-passes through a rule. To find the stack trace for a trace ID, grep the trace ID, then grep the <code>eventId</code> shown
-on the rule line.</p>
+the rule's context (so it carries the <code>eventId</code> and the rule's <code>traceId</code>) and <strong>without</strong> a stack trace, and
+then <code>Routing failed for event &lt;id&gt; / subscription &lt;id&gt;</code>, written in the event's context (<code>eventId</code> only)
+<strong>with</strong> the stack trace. The stack trace is logged once, on the second line, because not every routing
+failure passes through a rule. To find the stack trace for a trace ID, grep the trace ID, then grep the
+<code>eventId</code> shown on the rule line.</p>
 <h3 id="where-the-context-is-set">Where the Context Is Set</h3>
 <table>
 <thead>
@@ -1888,27 +1841,19 @@ on the rule line.</p>
 <tbody>
 <tr>
 <td><code>EventStreamOrchestrator</code>, per event and ledger retry</td>
-<td><code>eventId</code>; per routing rule also <code>traceId</code> once the Manager or invoke-action trace exists</td>
+<td><code>eventId</code>; per routing rule also <code>traceId</code> once the started run's trace exists</td>
 </tr>
 <tr>
 <td><code>TaskExecutionService.executeTask</code>, <code>onTaskCompleted</code>, <code>failTask</code></td>
-<td><code>traceId</code>, <code>eventId</code>, <code>projectId</code>, <code>taskId</code>, <code>workflowRunId</code></td>
+<td><code>traceId</code>, <code>eventId</code>, <code>subjectId</code>, <code>taskId</code>, <code>workflowRunId</code></td>
 </tr>
 <tr>
 <td><code>ScriptExecutionService.executeScript</code> (incl. the async script body)</td>
 <td>as for tasks</td>
 </tr>
 <tr>
-<td><code>ScheduledJobQueueConsumer</code>, <code>ScheduledJobExecutionService.executeRun</code></td>
-<td><code>runId</code>, then <code>traceId</code></td>
-</tr>
-<tr>
-<td><code>ReportQueueConsumer</code>, <code>ReportExecutionService.generateReport</code></td>
-<td><code>reportId</code>, then <code>traceId</code></td>
-</tr>
-<tr>
 <td><code>WorkflowExecutionService</code> start and advance (task completion, wait elapsed, event received)</td>
-<td><code>traceId</code>, <code>projectId</code>, <code>workflowRunId</code></td>
+<td><code>traceId</code>, <code>subjectId</code>, <code>workflowRunId</code></td>
 </tr>
 <tr>
 <td><code>CallerTraceFilter</code> (REST requests with a valid <code>X-Axiom-Trace-Id</code>)</td>
@@ -1940,24 +1885,17 @@ MDC. Notes for a follow-up:</p>
   be separate IDs. Keep the Axiom trace ID as the correlation ID and add it as a span attribute
   (<code>axiom.trace_id</code>) rather than trying to make the two equal. The MDC key <code>traceId</code> would clash with the
   OpenTelemetry one; rename ours (for example <code>axiomTraceId</code>) at that point.</li>
-<li>Context propagation across the <code>CompletableFuture</code> callbacks and the queue consumer threads has the same
+<li>Context propagation across the <code>CompletableFuture</code> callbacks and scheduler threads has the same
   problem as the MDC and would need the same wrapping (or SmallRye Context Propagation's <code>ManagedExecutor</code>).</li>
 <li>It needs a collector to be useful; Axiom is a single-process app with its own trace UI, so the benefit is
   mainly for deployments that already run an observability stack. It is not added for now.</li>
 </ul>
-<h2 id="accepted-risk">Accepted Risk</h2>
-<p>An agent can keep its trace open by creating tasks that join it, because <code>TaskTraceFinalizer</code> keeps a trace
-open while any task node is in progress. This is accepted: agent-created tasks are deliberate work that
-belongs to the trace.</p>
 <h2 id="known-limitations">Known Limitations</h2>
 <ul>
-<li>Any in-progress trace can be joined. There is no check that the caller belongs to the same project.</li>
-<li>AI editor and assistant sessions (<code>ActionTypeAiService</code>, <code>ReportAiService</code>, <code>ScriptAiService</code>,
-  <code>ToolAiService</code>, <code>AssistantSessionManager</code>) are not traced. Their AI usage rows have no trace ID.</li>
-<li>Tasks that join a report, scheduled-job or workflow trace never complete it; the owning service does. If
-  the owner finishes first, its trace is marked complete while the joined task may still be running. The
-  task's own node still completes when the task finishes.</li>
-<li>Script-mode scheduled job runs have no <code>ai_usage</code> row, because no AI is invoked.</li>
+<li>Any in-progress trace can be named in the caller headers. There is no check that the caller belongs to the
+  same subject; the header only affects log correlation.</li>
+<li>Assistant sessions (<code>AssistantSessionManager</code>) are not traced. Their AI usage rows have no trace ID.</li>
+<li>Script-mode tasks have no <code>ai_usage</code> row, because no AI is invoked.</li>
 <li>The lineage view that follows these links across entities is described in <a href="lineage.html">Lineage</a>.</li>
 </ul>
 
