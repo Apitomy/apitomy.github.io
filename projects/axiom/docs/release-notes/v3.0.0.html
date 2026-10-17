@@ -2128,8 +2128,7 @@ before), alongside the rest of Axiom's data. Setting <code>axiom.home</code> (or
 <li>Jira polling can skip changes when ingestion fails part-way (#342).</li>
 <li>Tasks running when Axiom stops are marked failed at the next startup and the workflow run continues as if
   the task had failed; they are not resumed. Tasks waiting for human input are kept (#343).</li>
-<li>Workflow scripts and Node.js actions enforce their timeout, but the Tools page's tool test and a few setup
-  commands can run past theirs, and process output is not size-limited (#344).</li>
+<li>Agent health checks and startup checks run subprocesses without the 1 MiB output limit (#344).</li>
 <li>Schedule triggers assume a single Axiom instance.</li>
 </ul>
 <h2 id="notable-fixes">Notable Fixes</h2>
@@ -2141,6 +2140,11 @@ before), alongside the rest of Axiom's data. Setting <code>axiom.home</code> (or
 <li>Setup failures after an agent is assigned no longer leave the task stuck or the agent busy.</li>
 <li>Cleanup jobs retry on database deadlocks; orphaned processing entries are recovered at startup.</li>
 <li>GitHub and Jira pollers use HTTP timeouts and shut down cleanly.</li>
+<li>Workflow scripts, Node.js actions, tool tests, session init scripts, the MCP server <code>npm install</code>, and the
+  workspace disk-usage check enforce their timeouts, close stdin, and kill the whole process tree when the
+  timeout expires (#344). Each keeps at most 1 MiB of output per stream: the beginning and the end, with the
+  middle replaced by <code>[Output truncated]</code>. Scripts and actions should write logs to stderr and print their
+  JSON result last on stdout; a run whose stdout exceeds 1 MiB without a JSON result at its end fails.</li>
 <li>"Process events from" compares the event's own timestamp.</li>
 <li>Orphaned and incomplete traces are closed; retention leaves no dangling references.</li>
 <li>Invalid requests return 400 instead of 500 across several endpoints.</li>
