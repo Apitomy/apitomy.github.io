@@ -2126,7 +2126,8 @@ before), alongside the rest of Axiom's data. Setting <code>axiom.home</code> (or
   and existing subscriptions cannot be added to a composition.</li>
 <li>Retrying failed event routing re-runs rules that already succeeded (#341).</li>
 <li>Jira polling can skip changes when ingestion fails part-way (#342).</li>
-<li>Tasks interrupted by a restart are not resumed (#343).</li>
+<li>Tasks running when Axiom stops are marked failed at the next startup and the workflow run continues as if
+  the task had failed; they are not resumed. Tasks waiting for human input are kept (#343).</li>
 <li>Workflow scripts and Node.js actions enforce their timeout, but the Tools page's tool test and a few setup
   commands can run past theirs, and process output is not size-limited (#344).</li>
 <li>Schedule triggers assume a single Axiom instance.</li>
@@ -2137,6 +2138,7 @@ before), alongside the rest of Axiom's data. Setting <code>axiom.home</code> (or
 <li>Scripts always run in the subject workspace; placeholder substitution is quoting-aware; stderr is captured
   separately.</li>
 <li>Inbox tasks complete correctly after a server restart.</li>
+<li>Setup failures after an agent is assigned no longer leave the task stuck or the agent busy.</li>
 <li>Cleanup jobs retry on database deadlocks; orphaned processing entries are recovered at startup.</li>
 <li>GitHub and Jira pollers use HTTP timeouts and shut down cleanly.</li>
 <li>"Process events from" compares the event's own timestamp.</li>
