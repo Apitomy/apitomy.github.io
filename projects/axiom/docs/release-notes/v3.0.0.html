@@ -2125,7 +2125,6 @@ before), alongside the rest of Axiom's data. Setting <code>axiom.home</code> (or
 <li>The workbench cannot delete or disable published items (except enabling and disabling its subscriptions),
   and existing subscriptions cannot be added to a composition.</li>
 <li>Retrying failed event routing re-runs rules that already succeeded (#341).</li>
-<li>Jira polling can skip changes when ingestion fails part-way (#342).</li>
 <li>Tasks running when Axiom stops are marked failed at the next startup and the workflow run continues as if
   the task had failed; they are not resumed. Tasks waiting for human input are kept (#343).</li>
 <li>Agent health checks and startup checks run subprocesses without the 1 MiB output limit (#344).</li>
@@ -2145,6 +2144,9 @@ before), alongside the rest of Axiom's data. Setting <code>axiom.home</code> (or
   timeout expires (#344). Each keeps at most 1 MiB of output per stream: the beginning and the end, with the
   middle replaced by <code>[Output truncated]</code>. Scripts and actions should write logs to stderr and print their
   JSON result last on stdout; a run whose stdout exceeds 1 MiB without a JSON result at its end fails.</li>
+<li>Jira polling no longer skips changes: the checkpoint only advances after a complete poll, all result pages
+  and full changelogs are fetched, JQL time bounds are timezone-independent, and failed polls are retried
+  (#342).</li>
 <li>"Process events from" compares the event's own timestamp.</li>
 <li>Orphaned and incomplete traces are closed; retention leaves no dangling references.</li>
 <li>Invalid requests return 400 instead of 500 across several endpoints.</li>
