@@ -2096,10 +2096,12 @@ encryption key live under it), <code>axiom.agent.copilot.*</code>, <code>axiom.a
 <p>Axiom 3.0 starts from a new database schema and <strong>cannot use a 2.x database</strong>. If it finds one, it refuses to
 start and tells you to remove it. No 2.x data is migrated (projects, reports, events, tasks and manager
 configuration are not carried over).</p>
+<p>The database lives under the Axiom home, at <code>&lt;axiom.home&gt;/data/axiom</code> (by default <code>~/.axiom/data/axiom</code>, as
+before), alongside the rest of Axiom's data. Setting <code>axiom.home</code> (or <code>AXIOM_HOME</code>) moves the database too.</p>
 <ol>
 <li>Stop Axiom 2.x.</li>
 <li>Back up <code>~/.axiom</code> if you want to keep the old data.</li>
-<li>Delete <code>~/.axiom/data/</code>.</li>
+<li>Delete <code>~/.axiom/data/</code> (or <code>&lt;axiom.home&gt;/data/</code> if you set <code>axiom.home</code>).</li>
 <li>Install and start Axiom 3.0.0. It creates a new database.</li>
 <li>Recreate your configuration: secrets, event sources, action types, tools, workflows and subscriptions. The
    Workflow Workbench is the quickest way to rebuild automation as workflows. Declare the secrets each action

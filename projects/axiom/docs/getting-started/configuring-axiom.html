@@ -1920,7 +1920,7 @@ CLI). Set the default agent used for tasks
 <tr>
 <td><code>axiom.home</code></td>
 <td><code>~/.axiom</code></td>
-<td>Home for assistant sessions, task files, MCP servers, workspaces and the encryption key</td>
+<td>Home for the database (<code>data/</code>), assistant sessions, task files, MCP servers, workspaces and the encryption key. Override with <code>-Daxiom.home=...</code> or the <code>AXIOM_HOME</code> environment variable</td>
 </tr>
 <tr>
 <td><code>axiom.agent.default-type</code></td>
@@ -2275,12 +2275,12 @@ fixed 3 days and are not configurable.</p>
 </tr>
 <tr>
 <td><code>persist</code></td>
-<td>H2 file (<code>~/.axiom/data/axiom</code>)</td>
+<td>H2 file (<code>&lt;axiom.home&gt;/data/axiom</code>, default <code>~/.axiom/data/axiom</code>)</td>
 <td>Persistent dev — Flyway migrations</td>
 </tr>
 <tr>
 <td><code>prod</code></td>
-<td>H2 file</td>
+<td>H2 file (<code>&lt;axiom.home&gt;/data/axiom</code>, default <code>~/.axiom/data/axiom</code>)</td>
 <td>Production — release JAR with Flyway</td>
 </tr>
 </tbody>

@@ -1659,9 +1659,10 @@ downloads and runs the latest release automatically.</p>
 <p>The script will:</p>
 <ol>
 <li>Query GitHub for the latest Apitomy Axiom release</li>
-<li>Download the application JAR (cached in <code>~/.axiom/releases/</code> for future runs)</li>
+<li>Download the application JAR (cached in <code>$AXIOM_HOME/releases/</code>, default <code>~/.axiom/releases/</code>, for future
+   runs)</li>
 <li>Start the application on <strong>http://localhost:9191</strong> with the <code>prod</code> profile (file-based H2 database
-   in <code>~/.axiom/data/</code>)</li>
+   in <code>~/.axiom/data/</code>, or <code>&lt;axiom.home&gt;/data/</code> if <code>axiom.home</code> is set)</li>
 </ol>
 <p>Open <strong>http://localhost:9191</strong> in your browser to access the Axiom UI. The REST API is served under
 <code>http://localhost:9191/api/v1</code>. Arguments passed to the script are passed on to <code>java -jar</code>.</p>
@@ -1671,7 +1672,7 @@ yourself and run it with:</p>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>java<span class="w"> </span>-jar<span class="w"> </span>apitomy-axiom-3.0.0.jar
 </span></code></pre></div>
 <p>The release JAR uses the <code>prod</code> profile: it listens on port <strong>9191</strong> and stores its H2 database in
-<code>~/.axiom/data/</code>.</p>
+<code>~/.axiom/data/</code> (<code>&lt;axiom.home&gt;/data/</code> if <code>axiom.home</code> is set).</p>
 <div class="admonition warning">
 <p class="admonition-title">Local access only</p>
 <p>Axiom has no authentication, so the release build only accepts connections from the same machine
@@ -1703,7 +1704,7 @@ requests to the backend.</p>
 </tr>
 <tr>
 <td><code>--persist</code></td>
-<td>Use the <code>persist</code> profile (file-based H2 database in <code>~/.axiom/data/</code>) instead of the in-memory <code>dev</code> database</td>
+<td>Use the <code>persist</code> profile (file-based H2 database in <code>&lt;axiom.home&gt;/data/</code>, default <code>~/.axiom/data/</code>) instead of the in-memory <code>dev</code> database</td>
 </tr>
 <tr>
 <td><code>--dataDir=/path</code></td>
