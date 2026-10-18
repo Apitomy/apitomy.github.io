@@ -1658,18 +1658,53 @@ downloads and runs the latest release automatically.</p>
 </span></code></pre></div>
 <p>The script will:</p>
 <ol>
-<li>Query GitHub for the latest Apitomy Axiom release</li>
+<li>Query GitHub for the latest Apitomy Axiom release (or the release pinned with <code>AXIOM_VERSION</code>)</li>
 <li>Download the application JAR (cached in <code>$AXIOM_HOME/releases/</code>, default <code>~/.axiom/releases/</code>, for future
-   runs)</li>
+   runs). The JAR is downloaded to a temporary <code>.part</code> file and only moved into place once complete.</li>
+<li>Check for Java 25+, <code>curl</code>, <code>jq</code> and Node.js (<code>node</code> is required for Axiom 3.x; for older versions a
+   missing <code>node</code> only produces a warning)</li>
 <li>Start the application on <strong>http://localhost:9191</strong> with the <code>prod</code> profile (file-based H2 database
-   in <code>~/.axiom/data/</code>, or <code>&lt;axiom.home&gt;/data/</code> if <code>axiom.home</code> is set)</li>
+   in <code>$AXIOM_HOME/data/</code>, default <code>~/.axiom/data/</code>)</li>
 </ol>
 <p>Open <strong>http://localhost:9191</strong> in your browser to access the Axiom UI. The REST API is served under
 <code>http://localhost:9191/api/v1</code>. Arguments passed to the script are passed on to <code>java -jar</code>.</p>
+<p>The script reads these environment variables:</p>
+<table>
+<thead>
+<tr>
+<th>Variable</th>
+<th>Effect</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>AXIOM_VERSION</code></td>
+<td>Release to run, without the leading <code>v</code> (for example <code>AXIOM_VERSION=2.1.2</code>). Default: the latest release</td>
+</tr>
+<tr>
+<td><code>AXIOM_HOME</code></td>
+<td>Axiom home directory holding the JAR cache (<code>releases/</code>) and the database (<code>data/</code>). Default: <code>~/.axiom</code></td>
+</tr>
+</tbody>
+</table>
+<p>For example, to stay on Axiom 2.1.2:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nv">AXIOM_VERSION</span><span class="o">=</span><span class="m">2</span>.1.2<span class="w"> </span>./scripts/run-axiom.sh
+</span></code></pre></div>
+<p><strong>Offline use.</strong> If GitHub cannot be reached (no network, API rate limit, HTTP error), the script falls back
+to the cache with a warning: the newest cached JAR when no version is pinned, or the cached JAR of the pinned
+<code>AXIOM_VERSION</code>. It fails only if no suitable JAR is cached.</p>
+<p><strong>Upgrade warning.</strong> The script records the last version it ran in <code>$AXIOM_HOME/releases/last-run-version</code>.
+Before starting Axiom 3.x it checks whether <code>$AXIOM_HOME/data/axiom.mv.db</code> exists and appears to come from
+Axiom 2.x (the recorded version is 2.x, or there is no record but a 2.x JAR is cached). If so, it explains
+that Axiom 3 cannot use a 2.x database and that you can either back up and delete <code>$AXIOM_HOME/data</code> or pin
+<code>AXIOM_VERSION=2.1.2</code>, and links to the
+<a href="https://github.com/Apitomy/apitomy-axiom/releases/tag/v3.0.0">3.0.0 release notes</a>. In an interactive
+terminal it asks for confirmation; otherwise it continues and Axiom itself refuses to start on the old
+database. This check is a heuristic and can miss databases created outside the script.</p>
 <h3 id="running-a-release-jar-directly">Running a Release JAR Directly</h3>
 <p>Each GitHub release publishes a single uber-jar named <code>apitomy-axiom-&lt;version&gt;.jar</code>. You can download it
 yourself and run it with:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>java<span class="w"> </span>-jar<span class="w"> </span>apitomy-axiom-3.0.0.jar
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>java<span class="w"> </span>-jar<span class="w"> </span>apitomy-axiom-3.0.0.jar
 </span></code></pre></div>
 <p>The release JAR uses the <code>prod</code> profile: it listens on port <strong>9191</strong> and stores its H2 database in
 <code>~/.axiom/data/</code> (<code>&lt;axiom.home&gt;/data/</code> if <code>axiom.home</code> is set).</p>
