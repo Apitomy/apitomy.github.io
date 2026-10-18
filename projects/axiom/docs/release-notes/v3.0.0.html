@@ -1973,7 +1973,7 @@ before installing.</p>
 <li><strong>Run workflow…</strong> from any event in the event stream, with suggested workflows, an optional title and
   labels.</li>
 <li>Optional run titles, set when starting a run or by the workflow itself (<code>axiom_set_workflow_run_title</code>).</li>
-<li>Cancel running and waiting runs.</li>
+<li>Cancel running and waiting runs. Cancelling or failing a run marks its open Inbox tasks Cancelled.</li>
 </ul>
 <h3 id="events">Events</h3>
 <ul>
@@ -1984,6 +1984,11 @@ before installing.</p>
 <li><strong>Subscriptions</strong> with expression filters, a live preview against recent events (including evaluation
   errors), routing rules (<code>create-workflow</code>, <code>workflow-dispatch</code>) and a "process events from" time.</li>
 <li>Failed event processing is retried with backoff and can be retried by hand.</li>
+<li>A subscription filter that cannot be evaluated against an event is recorded as <code>filter_error</code> and shown as
+  an error. It is not retried automatically; it is retried by hand or when the subscription's filter is
+  changed (#348).</li>
+<li>The event stream's match badge counts every matched subscription, and the events API exposes per-state
+  processing counts for each event (<code>processingStates</code>) (#346).</li>
 <li>Expression evaluator for authoring (<code>POST /expressions/evaluate</code>), with the same scopes and context
   (<code>context.subject</code>, <code>context.event</code>) as a real run, including subscription filters.</li>
 </ul>
@@ -2045,9 +2050,13 @@ agent could reveal.</p>
 <li><strong>The fixed home dashboard</strong>: <code>/</code> now opens the Runs list; dashboards are user-defined.</li>
 <li><strong>Action type flags</strong> <code>userTriggerable</code>, <code>managerTriggerable</code>, <code>emitsEvent</code> and the free-form <code>inputSchema</code>,
   replaced by declared <code>inputs</code> and <code>outputs</code>.</li>
-<li><strong>Legacy template placeholders</strong> (<code>{{input}}</code>, <code>{{ref}}</code>, <code>{{repository}}</code>, <code>{{subjectName}}</code>,
-  <code>{{subjectId}}</code>, <code>{{eventId}}</code>, <code>{{actionType}}</code>, <code>{{workDir}}</code>, <code>{{apiBaseUrl}}</code>, <code>{{taskId}}</code>) and the
-  ambient <code>AXIOM_SUBJECT_*</code> environment variables. Use <code>{{inputs.&lt;name&gt;}}</code> and map values from the workflow.</li>
+<li><strong>Legacy template placeholders in action types</strong> (<code>{{input}}</code>, <code>{{ref}}</code>, <code>{{repository}}</code>,
+  <code>{{subjectName}}</code>, <code>{{subjectId}}</code>, <code>{{eventId}}</code>, <code>{{actionType}}</code>, <code>{{workDir}}</code>, <code>{{apiBaseUrl}}</code>,
+  <code>{{taskId}}</code>) and the ambient <code>AXIOM_SUBJECT_*</code> environment variables for action types. Use
+  <code>{{inputs.&lt;name&gt;}}</code> and map values from the workflow. Assistant session templates are not affected: a
+  subject-scoped session still sets <code>AXIOM_SUBJECT_ID</code>, <code>AXIOM_SUBJECT_NAME</code>, <code>AXIOM_REF</code> and
+  <code>AXIOM_REPOSITORY</code>, its welcome and initial messages support <code>{{subjectName}}</code>, and its system prompt
+  supports <code>{{subjectName}}</code> and <code>{{subjectContext}}</code>.</li>
 </ul>
 <h3 id="renamed-concepts-and-api-changes">Renamed concepts and API changes</h3>
 <ul>
@@ -2058,7 +2067,8 @@ agent could reveal.</p>
 <li><strong>System configuration</strong>: <code>SystemConfig.engine</code> is removed; use <code>defaultEngine</code> and <code>engines</code>.</li>
 <li><strong>SDK</strong>: <code>*_project*</code> functions are renamed to <code>*_subject*</code>; <code>axiom_close_project</code>, <code>axiom_reopen_project</code>
   and <code>axiom_list_actors</code> are removed (use <code>axiom_list_agents</code>).</li>
-<li><strong>Configuration packs</strong> are format version <code>3.0</code>. 2.x packs are not expected to import cleanly.</li>
+<li><strong>Configuration packs</strong> are format version <code>3.0</code>. Import does not check a pack's version, so a 2.x pack is
+  not rejected but may apply only partially. Recreate your configuration instead of importing 2.x packs.</li>
 <li><strong>Navigation</strong> is reorganized: Runs, Subjects, Inbox, Dashboards, Events, Workbench, Logs, Metrics,
   Components and Settings.</li>
 </ul>
@@ -2084,14 +2094,29 @@ agent could reveal.</p>
 <td><code>axiom.agent.opencode.*</code></td>
 </tr>
 <tr>
-<td><code>axiom.manager.*</code>, <code>axiom.reports.*</code>, <code>axiom.github.poll-interval</code>, <code>axiom.pipeline.poll-interval</code></td>
+<td><code>axiom.github.tick-interval</code></td>
+<td><code>axiom.github-v2.tick-interval</code></td>
+</tr>
+<tr>
+<td><code>axiom.jira.tick-interval</code></td>
+<td><code>axiom.jira-v2.tick-interval</code></td>
+</tr>
+<tr>
+<td><code>axiom.manager.*</code>, <code>axiom.reports.poll-interval</code>, <code>axiom.github.poll-interval</code>, <code>axiom.pipeline.poll-interval</code></td>
+<td>removed</td>
+</tr>
+<tr>
+<td><code>axiom.ai-assistant.timeout-seconds</code>, <code>axiom.assistant.idle-timeout-seconds</code>, <code>axiom.event-source-logs.retention-days</code></td>
 <td>removed</td>
 </tr>
 </tbody>
 </table>
-<p>New properties include <code>axiom.home</code> (default <code>~/.axiom</code>; workspaces, sessions, installed MCP servers and the
-encryption key live under it), <code>axiom.agent.copilot.*</code>, <code>axiom.assistant.*</code>, <code>axiom.stream-pipeline.*</code> and
-<code>axiom.workflow.*</code>.</p>
+<p><code>axiom.assistant.max-sessions</code> is unchanged. New properties include <code>axiom.home</code> (default <code>~/.axiom</code>;
+workspaces, sessions, installed MCP servers, the encryption key and the database live under it),
+<code>axiom.agent.copilot.*</code>, <code>axiom.agent.opencode.model-discovery.*</code>, <code>axiom.assistant.opencode.*</code>,
+<code>axiom.events.jira.max-search-pages</code>, <code>axiom.stream-pipeline.*</code>, <code>axiom.workbench.interrupt-timeout-seconds</code>
+and <code>axiom.workflow.*</code> (<code>schedule-poll-interval</code>, <code>wait-poll-interval</code>). <code>axiom.data-url</code> (the database JDBC
+URL) is derived from <code>axiom.home</code>; set it only to override the database location.</p>
 <h2 id="upgrading-from-2x">Upgrading from 2.x</h2>
 <p>Axiom 3.0 starts from a new database schema and <strong>cannot use a 2.x database</strong>. If it finds one, it refuses to
 start and tells you to remove it. No 2.x data is migrated (projects, reports, events, tasks and manager
@@ -2124,7 +2149,9 @@ before), alongside the rest of Axiom's data. Setting <code>axiom.home</code> (or
   run the published workflow (#469).</li>
 <li>The workbench cannot delete or disable published items (except enabling and disabling its subscriptions),
   and existing subscriptions cannot be added to a composition.</li>
-<li>Retrying failed event routing re-runs rules that already succeeded (#341).</li>
+<li>Retrying failed event routing skips rules that already completed, but a rule can still run twice if Axiom
+  crashes between the rule's side effect and its recorded outcome, or if a subscription's routing rules are
+  edited between attempts (#341).</li>
 <li>Tasks running when Axiom stops are marked failed at the next startup and the workflow run continues as if
   the task had failed; they are not resumed. Tasks waiting for human input are kept (#343).</li>
 <li>Agent health checks and startup checks run subprocesses without the 1 MiB output limit (#344).</li>
@@ -2150,6 +2177,7 @@ before), alongside the rest of Axiom's data. Setting <code>axiom.home</code> (or
 <li>"Process events from" compares the event's own timestamp.</li>
 <li>Orphaned and incomplete traces are closed; retention leaves no dangling references.</li>
 <li>Invalid requests return 400 instead of 500 across several endpoints.</li>
+<li>Assistant session templates expand nested toolsets (#138).</li>
 <li>AI assistant: correct cumulative session cost, interruption without killing the process, subagent permission
   routing, and better chat performance in long conversations.</li>
 </ul>
