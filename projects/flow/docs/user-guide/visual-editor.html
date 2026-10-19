@@ -1082,6 +1082,23 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Action-type descriptors">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#action-node-icons-and-colors" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Action node icons and colors
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
           <li class="md-nav__item">
@@ -1736,6 +1753,23 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Action-type descriptors">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#action-node-icons-and-colors" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Action node icons and colors
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
           <li class="md-nav__item">
@@ -2221,15 +2255,23 @@ function returning a <code>Promise</code> of them (so the list can be fetched fr
 </span><span id="__span-8-6"><a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a><span class="w">  </span><span class="nx">description?</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
 </span><span id="__span-8-7"><a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a><span class="w">  </span><span class="nx">inputs?</span><span class="o">:</span><span class="w"> </span><span class="kt">ActionTypeField</span><span class="p">[];</span>
 </span><span id="__span-8-8"><a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a><span class="w">  </span><span class="nx">outputs?</span><span class="o">:</span><span class="w"> </span><span class="kt">ActionTypeField</span><span class="p">[];</span>
-</span><span id="__span-8-9"><a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a><span class="p">}</span>
-</span><span id="__span-8-10"><a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a>
-</span><span id="__span-8-11"><a id="__codelineno-8-11" name="__codelineno-8-11" href="#__codelineno-8-11"></a><span class="kd">interface</span><span class="w"> </span><span class="nx">ActionTypeField</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-8-12"><a id="__codelineno-8-12" name="__codelineno-8-12" href="#__codelineno-8-12"></a><span class="w">  </span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
-</span><span id="__span-8-13"><a id="__codelineno-8-13" name="__codelineno-8-13" href="#__codelineno-8-13"></a><span class="w">  </span><span class="kr">type</span><span class="o">:</span><span class="w"> </span><span class="s1">'string'</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="s1">'number'</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="s1">'boolean'</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="s1">'object'</span><span class="p">;</span>
-</span><span id="__span-8-14"><a id="__codelineno-8-14" name="__codelineno-8-14" href="#__codelineno-8-14"></a><span class="w">  </span><span class="nx">required?</span><span class="o">:</span><span class="w"> </span><span class="kt">boolean</span><span class="p">;</span>
-</span><span id="__span-8-15"><a id="__codelineno-8-15" name="__codelineno-8-15" href="#__codelineno-8-15"></a><span class="w">  </span><span class="nx">description?</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
-</span><span id="__span-8-16"><a id="__codelineno-8-16" name="__codelineno-8-16" href="#__codelineno-8-16"></a><span class="p">}</span>
+</span><span id="__span-8-9"><a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a><span class="w">  </span><span class="nx">icon?</span><span class="o">:</span><span class="w"> </span><span class="kt">ReactNode</span><span class="p">;</span><span class="w">              </span><span class="c1">// shown on Action nodes of this type and in the dropdown</span>
+</span><span id="__span-8-10"><a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a><span class="w">  </span><span class="nx">color?</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span><span class="w">                </span><span class="c1">// accent color (any CSS color) for the node border and icon</span>
+</span><span id="__span-8-11"><a id="__codelineno-8-11" name="__codelineno-8-11" href="#__codelineno-8-11"></a><span class="p">}</span>
+</span><span id="__span-8-12"><a id="__codelineno-8-12" name="__codelineno-8-12" href="#__codelineno-8-12"></a>
+</span><span id="__span-8-13"><a id="__codelineno-8-13" name="__codelineno-8-13" href="#__codelineno-8-13"></a><span class="kd">interface</span><span class="w"> </span><span class="nx">ActionTypeField</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-8-14"><a id="__codelineno-8-14" name="__codelineno-8-14" href="#__codelineno-8-14"></a><span class="w">  </span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
+</span><span id="__span-8-15"><a id="__codelineno-8-15" name="__codelineno-8-15" href="#__codelineno-8-15"></a><span class="w">  </span><span class="kr">type</span><span class="o">:</span><span class="w"> </span><span class="s1">'string'</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="s1">'number'</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="s1">'boolean'</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="s1">'object'</span><span class="p">;</span>
+</span><span id="__span-8-16"><a id="__codelineno-8-16" name="__codelineno-8-16" href="#__codelineno-8-16"></a><span class="w">  </span><span class="nx">required?</span><span class="o">:</span><span class="w"> </span><span class="kt">boolean</span><span class="p">;</span>
+</span><span id="__span-8-17"><a id="__codelineno-8-17" name="__codelineno-8-17" href="#__codelineno-8-17"></a><span class="w">  </span><span class="nx">description?</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
+</span><span id="__span-8-18"><a id="__codelineno-8-18" name="__codelineno-8-18" href="#__codelineno-8-18"></a><span class="p">}</span>
 </span></code></pre></div>
+<h5 id="action-node-icons-and-colors">Action node icons and colors</h5>
+<p>Set <code>icon</code> and/or <code>color</code> on a descriptor to make Action nodes of that type easy to tell apart. <code>icon</code>
+replaces the default play icon (it is sized to 16px). <code>color</code> is a single accent applied to the node border
+and icon; the background and text keep their theme colors so nodes stay readable in light and dark mode.
+Nodes whose type has no descriptor, or whose catalog is still loading, use the default look. Pass the same
+catalog to <code>WorkflowViewer</code>'s <code>actionTypes</code> prop so running workflows look the same.</p>
 <h4 id="host-provided-validation">Host-provided validation</h4>
 <p>In addition to the editor's built-in validation, a host application can contribute its own
 validations through the <code>validate</code> function on the editor SPI. Problems it returns are merged

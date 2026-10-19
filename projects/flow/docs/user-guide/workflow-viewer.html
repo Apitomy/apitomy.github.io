@@ -1006,6 +1006,17 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#action-type-icons-and-colors" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Action Type Icons and Colors
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -1499,6 +1510,17 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#action-type-icons-and-colors" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Action Type Icons and Colors
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -1585,6 +1607,12 @@
 <td><code>WorkflowViewerNodeMenuItem[] \| ((nodeId: string) =&gt; WorkflowViewerNodeMenuItem[])</code></td>
 <td>No</td>
 <td>Host-contributed actions for a node's right-click menu. See <a href="#node-context-menu">Node Context Menu</a></td>
+</tr>
+<tr>
+<td><code>actionTypes</code></td>
+<td><code>ActionTypeProvider</code></td>
+<td>No</td>
+<td>Action Type catalog used for Action node icons and colors. Pass the same value as the editor's <code>spi.actionTypes</code>. See <a href="#action-type-icons-and-colors">Action Type Icons and Colors</a></td>
 </tr>
 </tbody>
 </table>
@@ -1712,11 +1740,28 @@ that node.</p>
 </span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="w">  </span><span class="nx">onSelect</span><span class="o">:</span><span class="w"> </span><span class="p">(</span><span class="nx">nodeId</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="ow">void</span><span class="p">;</span><span class="w">      </span><span class="c1">// invoked with the right-clicked node's id</span>
 </span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="p">}</span>
 </span></code></pre></div>
+<h3 id="action-type-icons-and-colors">Action Type Icons and Colors</h3>
+<p>When <code>actionTypes</code> is set, Action nodes use the <code>icon</code> and <code>color</code> of their Action Type descriptor, exactly
+as in the editor. Share one catalog between the two components:</p>
+<div class="language-tsx highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="kr">type</span><span class="w"> </span><span class="nx">ActionTypeDescriptor</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">'@apitomy/flow-ui'</span><span class="p">;</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">EnvelopeIcon</span><span class="p">,</span><span class="w"> </span><span class="nx">SlackIcon</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">'@patternfly/react-icons'</span><span class="p">;</span>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="kd">const</span><span class="w"> </span><span class="nx">actionTypes</span><span class="o">:</span><span class="w"> </span><span class="kt">ActionTypeDescriptor</span><span class="p">[]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span>
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">  </span><span class="p">{</span><span class="w"> </span><span class="nx">value</span><span class="o">:</span><span class="w"> </span><span class="s1">'email.send'</span><span class="p">,</span><span class="w"> </span><span class="nx">label</span><span class="o">:</span><span class="w"> </span><span class="s1">'Send email'</span><span class="p">,</span><span class="w"> </span><span class="nx">icon</span><span class="o">:</span><span class="w"> </span><span class="p">&lt;</span><span class="nt">EnvelopeIcon</span><span class="w"> </span><span class="p">/&gt;,</span><span class="w"> </span><span class="nx">color</span><span class="o">:</span><span class="w"> </span><span class="s1">'#c9190b'</span><span class="w"> </span><span class="p">},</span>
+</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="w">  </span><span class="p">{</span><span class="w"> </span><span class="nx">value</span><span class="o">:</span><span class="w"> </span><span class="s1">'slack.post'</span><span class="p">,</span><span class="w"> </span><span class="nx">label</span><span class="o">:</span><span class="w"> </span><span class="s1">'Post to Slack'</span><span class="p">,</span><span class="w"> </span><span class="nx">icon</span><span class="o">:</span><span class="w"> </span><span class="p">&lt;</span><span class="nt">SlackIcon</span><span class="w"> </span><span class="p">/&gt;</span><span class="w"> </span><span class="p">},</span>
+</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="p">];</span>
+</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>
+</span><span id="__span-3-9"><a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="p">&lt;</span><span class="nt">WorkflowEditor</span><span class="w"> </span><span class="na">spi</span><span class="o">=</span><span class="p">{{</span><span class="w"> </span><span class="nx">actionTypes</span><span class="w"> </span><span class="p">}}</span><span class="w"> </span><span class="na">...</span><span class="w"> </span><span class="p">/&gt;</span>
+</span><span id="__span-3-10"><a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="p">&lt;</span><span class="nt">WorkflowViewer</span><span class="w"> </span><span class="na">actionTypes</span><span class="o">=</span><span class="p">{</span><span class="nx">actionTypes</span><span class="p">}</span><span class="w"> </span><span class="na">...</span><span class="w"> </span><span class="p">/&gt;</span>
+</span></code></pre></div>
+<p>Keep the catalog reference stable (define it outside the component or memoize it), because passing a new
+array on every render reloads the catalog. The editor's <code>spi.actionTypes</code> behaves the same way.</p>
+<p>A function provider is loaded the same way as in the editor; nodes use the default look until it resolves.</p>
 <h2 id="styling">Styling</h2>
 <p>The viewer requires the same CSS imports as the editor:</p>
-<div class="language-typescript highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">import</span><span class="w"> </span><span class="s1">'@patternfly/patternfly/patternfly.css'</span><span class="p">;</span>
-</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="k">import</span><span class="w"> </span><span class="s1">'@xyflow/react/dist/style.css'</span><span class="p">;</span>
-</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="k">import</span><span class="w"> </span><span class="s1">'@apitomy/flow-ui/style.css'</span><span class="p">;</span>
+<div class="language-typescript highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="k">import</span><span class="w"> </span><span class="s1">'@patternfly/patternfly/patternfly.css'</span><span class="p">;</span>
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="k">import</span><span class="w"> </span><span class="s1">'@xyflow/react/dist/style.css'</span><span class="p">;</span>
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="k">import</span><span class="w"> </span><span class="s1">'@apitomy/flow-ui/style.css'</span><span class="p">;</span>
 </span></code></pre></div>
 <p>The viewer fills its container — ensure the parent element has explicit dimensions.</p>
 <p>See <a href="workflow-diff.html">Workflow Diff Viewer</a> for definition comparisons and
