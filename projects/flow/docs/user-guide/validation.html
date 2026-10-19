@@ -1900,6 +1900,10 @@ Some codes in later tables can therefore be errors for malformed types and warni
 <td>Node has a single outgoing edge with a condition but no fallback</td>
 </tr>
 <tr>
+<td><code>REDUNDANT_DEFAULT_EDGE</code></td>
+<td>Default edge is the node's only outgoing edge; a default is only needed as the fallback for conditional edges. (Timeout edges are not counted; quick fix: "Remove default flag")</td>
+</tr>
+<tr>
 <td><code>NO_DEFAULT_EDGE</code></td>
 <td>Node has multiple conditional edges but no default fallback</td>
 </tr>

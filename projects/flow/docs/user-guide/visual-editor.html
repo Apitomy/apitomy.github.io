@@ -2119,7 +2119,9 @@ revision; built-in and host validation do not rerun just to move a node. Feedbac
 Each affected node also shows a small corner badge in the top-right — red for errors, amber for
 warnings — carrying the highest-severity problem for that node, with the message available on hover.</p>
 <p><strong>Problems panel:</strong> A collapsible panel groups problems by severity, errors first. Click a problem to
-select (and highlight) its affected node or edge and center the view on it.</p>
+select (and highlight) its affected node or edge and center the view on it. Some problems offer a
+built-in quick fix from the row's context menu or "⋯" button: for example, <code>REDUNDANT_DEFAULT_EDGE</code> offers
+<strong>Remove default flag</strong>, which clears the edge's default flag in one undoable step.</p>
 <h3 id="forkjoin-hint">Fork/Join Hint</h3>
 <p>The editor tags nodes with a small corner badge showing their role in a parallel region: <strong>Fork</strong> on a
 node whose outgoing edges all run in parallel, and <strong>Join</strong> on the node where those branches
