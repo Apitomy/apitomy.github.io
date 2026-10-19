@@ -1724,7 +1724,7 @@ Inputs must be structured-cloneable plain JSON data; a change set that cannot be
 </tr>
 <tr>
 <td><code>clearHighlights()</code></td>
-<td>Removes the applied-change highlight.</td>
+<td><strong>Deprecated.</strong> Clears the canvas selection. Applied changes are now selected rather than highlighted. Works when read-only.</td>
 </tr>
 <tr>
 <td><code>getSnapshot()</code></td>
@@ -1758,9 +1758,13 @@ run is discarded. A rejected change set (for example a <code>stale</code> one) l
   <code>spi.validate</code>). <strong>Accept</strong> runs the same path as <code>apply</code>; <strong>Reject</strong> discards the proposal.</li>
 <li><strong>Staleness.</strong> Any content edit makes the staged proposal stale, including undo and redo. Layout-only
   edits do not. A stale proposal shows "Out of date" and can only be <strong>Dismiss</strong>ed.</li>
-<li><strong>Applied highlight.</strong> Elements added or modified by the most recently applied change set (via <code>apply</code>
-  or Accept) stay highlighted until the next user content edit, <code>clearHighlights()</code>, or the next applied
-  change set. Disable it with <code>highlightApplied={false}</code>.</li>
+<li><strong>Applied changes are selected.</strong> After a change set is applied (via <code>apply</code> or Accept), the elements it
+  added or modified become the canvas selection, replacing any previous selection, exactly as if the user
+  had ctrl-clicked each one. If only one element changed, the properties panel shows it. A change set that
+  only removes elements clears the selection. Clear the selection like any other: click empty canvas or
+  press Esc. Pressing Delete removes the selected changes, as one undoable step. Undo restores the
+  selection from before the apply, and redo selects the applied changes again. With
+  <code>highlightApplied={false}</code> applying a change set leaves the current selection as it is.</li>
 <li><strong>Layout of applied changes.</strong> <code>appliedChangeLayout</code> controls how change sets are laid out:</li>
 <li><code>'place'</code> (default): only new nodes are positioned, next to their neighbours, and existing nodes never
     move.</li>
@@ -1778,8 +1782,8 @@ removed edge is drawn dashed in red.</p>
 <p><img alt="Staged proposal with the review bar" src="images/ai-assisted-editing/after-proposal-staged.png" /></p>
 <p>Clicking a changed element shows its before/after in the review bar:</p>
 <p><img alt="Proposal details in the review bar" src="images/ai-assisted-editing/after-proposal-details.png" /></p>
-<p>After Accept, the change is one undo step and the changed elements stay highlighted:</p>
-<p><img alt="Applied change highlighted" src="images/ai-assisted-editing/after-accepted-highlight.png" /></p>
+<p>After Accept, the change is one undo step and the changed elements are selected:</p>
+<p><img alt="Applied change selected" src="images/ai-assisted-editing/after-accepted-highlight.png" /></p>
 <p>A user content edit makes the proposal stale. Only Dismiss remains, and the overlay is greyed out:</p>
 <p><img alt="Stale proposal" src="images/ai-assisted-editing/after-proposal-stale.png" /></p>
 <h2 id="context-actions">Context actions</h2>
