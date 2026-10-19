@@ -1730,6 +1730,10 @@ Inputs must be structured-cloneable plain JSON data; a change set that cannot be
 <td><code>getSnapshot()</code></td>
 <td><code>{ workflow, contentRevision, selection, problems }</code> (a detached copy).</td>
 </tr>
+<tr>
+<td><code>select(target, options?)</code></td>
+<td>Selects <code>{ nodeId }</code> or <code>{ edgeId }</code> and highlights it on the canvas; <code>{ center: true }</code> also pans to it like clicking a Problems row (default <code>false</code>). <code>null</code> or an unknown id clears the selection. Given both ids, both are selected and the node is highlighted and centered. Works when read-only.</td>
+</tr>
 </tbody>
 </table>
 <p><code>apply</code> produces exactly one undo step tagged with <code>origin = cs.author</code>. The <code>workflow</code> prop remains
