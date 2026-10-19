@@ -18,7 +18,7 @@
         <link rel="prev" href="concepts.html">
       
       
-        <link rel="next" href="usage-examples.html">
+        <link rel="next" href="dashboards.html">
       
       
         
@@ -764,17 +764,6 @@
   
 </li>
         
-          <li class="md-nav__item">
-  <a href="#widget-catalog" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Widget Catalog
-      
-    </span>
-  </a>
-  
-</li>
-        
       </ul>
     </nav>
   
@@ -922,6 +911,34 @@
   
 </nav>
       
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="dashboards.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Dashboards
+  
+
+    
+  </span>
+  
+  
+
+      </a>
     </li>
   
 
@@ -1726,17 +1743,6 @@
   
 </li>
         
-          <li class="md-nav__item">
-  <a href="#widget-catalog" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Widget Catalog
-      
-    </span>
-  </a>
-  
-</li>
-        
       </ul>
     </nav>
   
@@ -1917,66 +1923,34 @@ find things.</p>
 </ul>
 <hr />
 <h2 id="dashboards">Dashboards</h2>
-<p>Rather than a single fixed view, Axiom supports multiple <strong>user-configurable dashboards</strong>, each populated with
-widgets chosen from a built-in catalog.</p>
+<p>Axiom supports multiple <strong>user-configurable dashboards</strong>, each with tabs of widgets chosen from a built-in
+catalog. <strong>Dashboards</strong> in the sidebar (<code>/dashboards</code>) opens the default dashboard, or the dashboards list
+when no dashboard is the default. See <a href="dashboards.html">Dashboards</a> for every widget and its settings.</p>
 <h3 id="dashboard-list">Dashboard List</h3>
-<p>The <strong>Dashboards</strong> page shows all dashboards with their name, description, labels, and
-creation date. From here you can:</p>
+<p>The dashboards list (<code>/dashboards/all</code>) shows all dashboards with their name, labels, number of widgets and
+last update. From here you can:</p>
 <ul>
-<li><strong>Create</strong> a new dashboard with a name, description, and optional labels</li>
-<li><strong>Set as default</strong> — click the star icon to designate a dashboard as the default
-  landing page (only one dashboard can be default at a time)</li>
-<li><strong>Delete</strong> — remove a dashboard with a confirmation prompt</li>
+<li><strong>Create Dashboard</strong>: create an empty dashboard with a name, description and optional labels</li>
+<li><strong>Create from Template</strong>: create a dashboard from the Operations, Event Operations or AI Usage template</li>
+<li><strong>Set as default</strong>: click the star icon (only one dashboard can be the default)</li>
+<li><strong>Delete</strong>: remove a dashboard after confirming</li>
 </ul>
-<p>Click any dashboard to open its view page.</p>
+<p>When there are no dashboards, the list offers the templates directly. Click a dashboard to open it.</p>
 <h3 id="dashboard-view">Dashboard View</h3>
-<p>Each dashboard displays its widgets on a responsive grid. The view page has two modes:</p>
+<p>Each dashboard shows its widgets on a responsive grid. <strong>All dashboards</strong> returns to the list and
+<strong>Refresh</strong> reloads every widget. The view has two modes:</p>
 <ul>
-<li><strong>Normal mode</strong> (default) — widgets are displayed read-only; the layout is locked</li>
-<li><strong>Edit mode</strong> — click <strong>Edit</strong> in the toolbar to enable drag-and-drop repositioning,
-  widget resizing, per-widget configuration (gear icon), and widget removal (X icon).
-  You can also edit the dashboard's name, description, and labels inline.</li>
+<li><strong>Normal mode</strong> (default): widgets are read-only and the layout is locked</li>
+<li><strong>Edit mode</strong>: click <strong>Edit</strong> to drag and resize widgets, change a widget's settings (gear icon), remove
+  widgets (X icon), manage tabs, and edit the dashboard's name, description and labels</li>
 </ul>
-<p>Click <strong>Add Widget</strong> in edit mode to open the widget catalog, which lets you browse and
-search widgets organized by category.</p>
+<p>In edit mode, <strong>Add Widget</strong> opens the widget catalog, grouped by category (Runs, Inbox, Events, AI &amp; Cost,
+System and Subjects).</p>
 <h3 id="dashboard-labels">Dashboard Labels</h3>
-<p>Dashboards support labels for organization. Dashboard labels also serve as <strong>data
-filters</strong> — when a dashboard has labels, its widgets filter their data to show only
-items matching those labels. For example, a dashboard labeled <code>"team-a"</code> would show
-only subjects, events, and activity associated with that label.</p>
-<h3 id="widget-catalog">Widget Catalog</h3>
-<p>Axiom ships with built-in widget types across several categories:</p>
-<table>
-<thead>
-<tr>
-<th>Category</th>
-<th>Widgets</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>Subjects</strong></td>
-<td>Active Subjects, Subject Spotlight</td>
-</tr>
-<tr>
-<td><strong>Operations</strong></td>
-<td>Recent Activity, Inbox, Recent Events</td>
-</tr>
-<tr>
-<td><strong>AI &amp; Cost</strong></td>
-<td>AI Cost Summary, AI Cost by Subject</td>
-</tr>
-<tr>
-<td><strong>System</strong></td>
-<td>System Status, Action Types, Disk Usage Breakdown</td>
-</tr>
-</tbody>
-</table>
-<p>Each widget has a default size but can be resized on the grid. Many widgets support
-per-widget configuration — for example, the Active Subjects widget has a configurable
-maximum row count, and the AI Cost Summary widget lets you choose a time window
-(24 hours, 7 days, 30 days, or 90 days). Click the gear icon on a widget in edit mode
-to adjust its settings.</p>
+<p>Dashboard labels are <strong>subject labels</strong>. Widgets that show subject-related data (runs, tasks, activity,
+subjects and AI usage) only include subjects with those labels. Widgets for event sources, subscriptions,
+schedules and system health are global and ignore them. When a dashboard has labels, each widget shows a
+<strong>Filtered</strong> or <strong>Global</strong> badge.</p>
 <hr />
 <h2 id="sidebar-navigation">Sidebar Navigation</h2>
 <p>The sidebar lists, in order: Runs, Subjects, Inbox, Dashboards, the <strong>Events</strong> section (Event Sources,

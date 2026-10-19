@@ -672,6 +672,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../user-guide/dashboards.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Dashboards
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../user-guide/usage-examples.html" class="md-nav__link">
         
   
@@ -2010,10 +2038,18 @@ before installing.</p>
 </ul>
 <h3 id="observability-and-operations">Observability and operations</h3>
 <ul>
-<li>Custom <strong>dashboards</strong> with tabs and widgets.</li>
+<li>Custom <strong>dashboards</strong> with tabs and widgets for workflow runs (runs by status, failed runs with re-run,
+  waiting runs, upcoming schedules, workflows), tasks awaiting input, event operations (event source health,
+  subscription processing, processing failures with retry, event volume, recent events), AI usage (cost
+  summary, breakdown by subject, workflow, engine, model or action type) and application health with
+  per-component checks. Dashboard labels filter subject-related widgets by subject label; global widgets
+  are marked. Widgets refresh live from server events or by polling. Templates (Operations, Event
+  Operations, AI Usage) create a ready-made dashboard, <code>/dashboards</code> opens the default dashboard, and
+  dashboards can be included in configuration packs. See
+  <a href="https://www.apitomy.io/projects/axiom/docs/user-guide/dashboards/">Dashboards</a>.</li>
 <li>Trace IDs across activity, AI usage, tasks and runs; correlation IDs in server logs; a <strong>lineage</strong> API and
   panel.</li>
-<li>AI usage records the engine and the exact model.</li>
+<li>AI usage records the engine, the exact model, and the workflow run and workflow that caused it.</li>
 <li><strong>Data retention</strong> settings for events, traces, runs and inactive subjects.</li>
 <li>Dark mode.</li>
 </ul>

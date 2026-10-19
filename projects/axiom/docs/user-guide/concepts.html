@@ -1173,6 +1173,34 @@
   
   
     <li class="md-nav__item">
+      <a href="dashboards.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Dashboards
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="usage-examples.html" class="md-nav__link">
         
   
@@ -2988,6 +3016,7 @@ include any combination of:</p>
 <li>Event Sources</li>
 <li>Subscriptions</li>
 <li>Workflow definitions</li>
+<li>Dashboards</li>
 </ul>
 <p>This is useful for sharing configurations between Axiom instances, backing up configuration, or
 distributing pre-built setups. A configuration pack is not a full instance backup — see
@@ -3004,10 +3033,11 @@ templates), and you can create your own templates.</p>
 <p>For full details, see the <a href="ai-assistant.html">AI Assistant</a> guide.</p>
 <hr />
 <h2 id="dashboards">Dashboards</h2>
-<p>Dashboards provide a customizable at-a-glance view of your Axiom instance. You can create multiple
-dashboards, each with a different set of <strong>widgets</strong> arranged on a drag-and-drop grid.</p>
+<p>Dashboards give you an at-a-glance view of your Axiom instance. You can create several dashboards, each with
+tabs of <strong>widgets</strong> arranged on a drag-and-drop grid, either from scratch or from a <strong>template</strong>
+(Operations, Event Operations or AI Usage).</p>
 <h3 id="widgets">Widgets</h3>
-<p>Axiom ships with a catalog of built-in widgets organized by category:</p>
+<p>Widgets are grouped by category:</p>
 <table>
 <thead>
 <tr>
@@ -3017,33 +3047,44 @@ dashboards, each with a different set of <strong>widgets</strong> arranged on a 
 </thead>
 <tbody>
 <tr>
-<td><strong>Subjects</strong></td>
-<td>Active Subjects, Subject Spotlight</td>
+<td><strong>Runs</strong></td>
+<td>Runs by Status, Recent Failed Runs, Waiting Runs, Upcoming Schedules, Workflows, Recent Activity</td>
 </tr>
 <tr>
-<td><strong>Operations</strong></td>
-<td>Recent Activity, Inbox, Recent Events</td>
+<td><strong>Inbox</strong></td>
+<td>Tasks Awaiting Input</td>
+</tr>
+<tr>
+<td><strong>Events</strong></td>
+<td>Event Source Health, Subscription Processing, Processing Failures, Event Volume, Recent Events</td>
 </tr>
 <tr>
 <td><strong>AI &amp; Cost</strong></td>
-<td>AI Cost Summary, AI Cost by Subject</td>
+<td>AI Cost Summary, AI Usage Breakdown, AI Cost by Subject</td>
 </tr>
 <tr>
 <td><strong>System</strong></td>
-<td>System Status, Action Types, Disk Usage Breakdown</td>
+<td>Application Health, Disk Usage Breakdown, Action Types</td>
+</tr>
+<tr>
+<td><strong>Subjects</strong></td>
+<td>Active Subjects, Subject Spotlight</td>
 </tr>
 </tbody>
 </table>
-<p>Each widget is self-contained — it fetches its own data and renders independently. Many widgets support
-per-widget configuration (e.g. time window, maximum rows, or which subject to spotlight).</p>
+<p>Each widget loads its own data and has its own settings (for example a time window or a maximum number of
+rows). Most widgets refresh by themselves, either when Axiom reports a relevant change or on a timer.</p>
 <h3 id="dashboard-labels-and-filtering">Dashboard Labels and Filtering</h3>
-<p>Dashboards support labels for organization. When a dashboard has labels, those labels are passed to all
-its widgets as <strong>data filters</strong>. Widgets use these labels to scope their data — for example, a dashboard
-labeled <code>"team-a"</code> would show only subjects, events, and activity associated with that label.</p>
+<p>Dashboard labels are <strong>subject labels</strong>. When a dashboard has labels, widgets that show subject-related data
+(runs, tasks, activity, subjects and AI usage) only include subjects that have those labels. Widgets for data
+that does not belong to a subject, such as event sources, subscriptions, schedules and system health, are
+<strong>global</strong> and ignore the labels. Each widget shows a <strong>Filtered</strong> or <strong>Global</strong> badge when the dashboard has
+labels.</p>
 <h3 id="default-dashboard">Default Dashboard</h3>
-<p>One dashboard can be designated as the <strong>default</strong>. The default dashboard is displayed when you navigate
-to the Dashboards page. If no default is set, the dashboards list is shown instead.</p>
-<p>For details on the dashboard UI, see <a href="navigating-the-ui.html#dashboards">Navigating the UI</a>.</p>
+<p>One dashboard can be the <strong>default</strong>. <strong>Dashboards</strong> in the sidebar opens the default dashboard, or the
+dashboards list when there is no default.</p>
+<p>Dashboards can be included in <a href="#configuration-packs">configuration packs</a>. For every widget and its
+settings, see <a href="dashboards.html">Dashboards</a>.</p>
 <hr />
 <h2 id="how-it-all-fits-together">How It All Fits Together</h2>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>Event Source ──► Event Stream ──► Subscription ──┬─ create-workflow ───┐
