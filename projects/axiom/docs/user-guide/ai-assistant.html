@@ -880,6 +880,23 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Built-in Templates">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#customizing-built-in-templates" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Customizing Built-in Templates
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
           <li class="md-nav__item">
@@ -1836,6 +1853,23 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Built-in Templates">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#customizing-built-in-templates" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Customizing Built-in Templates
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
           <li class="md-nav__item">
@@ -2275,7 +2309,7 @@ Each template specifies:</p>
 </tbody>
 </table>
 <h3 id="built-in-templates">Built-in Templates</h3>
-<p>Axiom ships four immutable built-in templates:</p>
+<p>Axiom ships four built-in templates:</p>
 <ul>
 <li><strong>Axiom Configuration Assistant</strong> (<code>axiom-config-assistant</code>) — purpose-built for creating
   and updating Axiom configuration items (tools, action types, toolsets, event sources,
@@ -2290,8 +2324,20 @@ Each template specifies:</p>
   <a href="workbench.html">Workflow Workbench</a>'s AI Assistant. It works on a workbench composition through the
   <code>axiom-workbench</code> MCP server; use it from the Workbench rather than from the AI Assistant page.</li>
 </ul>
-<p>Built-in templates cannot be modified or deleted. You can clone the General, Subject and Workflow
-Workbench templates to create editable copies; the Configuration Assistant cannot be cloned.</p>
+<p>Built-in templates cannot be deleted, and most of their fields are locked. You can clone the General,
+Subject and Workflow Workbench templates to create fully editable copies; the Configuration Assistant
+cannot be cloned.</p>
+<h4 id="customizing-built-in-templates">Customizing Built-in Templates</h4>
+<p>The <strong>Engine</strong>, <strong>Model</strong> and <strong>Environment</strong> of each built-in template can be customized per deployment
+from the template's detail page. Customized fields are marked <strong>Modified</strong>, and the template list shows a
+<strong>Customized</strong> label. Click <strong>Reset to defaults</strong> to discard all customizations and restore the shipped
+values; Axiom asks for confirmation before resetting. For any other change, clone the template instead.
+Cloning a customized built-in template copies its current (customized) engine, model and environment
+into the new template.</p>
+<p>Customizations are stored in Axiom's database and are not included in configuration packs, so exporting
+and importing a pack does not carry them over. They are also available through the REST API at
+<code>/api/v1/assistant/templates/{templateId}/overrides</code> (<code>GET</code>, <code>PUT</code>, and <code>DELETE</code> to reset); template
+responses list customized fields in <code>overriddenFields</code>.</p>
 <h3 id="user-defined-templates">User-Defined Templates</h3>
 <p>You create and manage custom templates from <strong>Components &gt; AI Assistant</strong> (the <strong>AI Assistant
 Templates</strong> page, <code>/session-templates</code>). Click <strong>Create Template</strong> to add one. Each
