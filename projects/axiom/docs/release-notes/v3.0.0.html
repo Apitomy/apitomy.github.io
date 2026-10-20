@@ -1975,12 +1975,14 @@ before installing.</p>
   (subscriptions and schedules).</li>
 <li>SDK functions, including new <code>axiom_create_subject</code>, <code>axiom_update_subject_body</code>, <code>axiom_list_agents</code>,
   <code>axiom_list_subject_runs</code>, <code>axiom_get_workflow_run</code> and <code>axiom_set_workflow_run_title</code>.</li>
+<li>Action nodes that call an SDK function or run an AI agent action type have their own icon and color in the
+  editor and in run diagrams.</li>
 </ul>
 <h3 id="workflow-workbench">Workflow Workbench</h3>
 <ul>
 <li><strong>Workbench</strong> page listing compositions; each composition is a workflow plus its action types, tools and
   subscriptions, edited as server-side drafts with revision history and restore.</li>
-<li>AI assistant bound to the composition: it edits the workflow through change sets that are highlighted on the
+<li>AI assistant bound to the composition: it edits the workflow through change sets that are selected on the
   canvas and can be undone per turn; it can read stream events, evaluate expressions against them, preview
   subscription filters, analyse runs and traces, and suggest tests.</li>
 <li>Live validation with "Ask AI to fix this" and "Ask AI about this…" actions.</li>
@@ -1997,6 +1999,8 @@ before installing.</p>
 <li><strong>Runs</strong> list (the landing page) with filter chips for status, workflow, subject and labels.</li>
 <li>Run detail: diagram with the current node, overview (subject, workflow, inputs, labels, trigger event), step
   timeline, execution trace and lineage.</li>
+<li><strong>Open in workflow editor</strong> from a node in the run diagram opens the workflow with that node selected and
+  centered.</li>
 <li><strong>Re-run</strong> a failed run with the latest published version of its workflow.</li>
 <li><strong>Run workflow…</strong> from any event in the event stream, with suggested workflows, an optional title and
   labels.</li>
@@ -2031,6 +2035,8 @@ before installing.</p>
 <ul>
 <li><strong>Session templates</strong> and a subject-scoped assistant; auto-approval rules, subagent views, stop/interrupt,
   todo and thinking display, cost and token totals.</li>
+<li>Built-in session templates can be customized: engine, model and environment are editable per installation
+  and can be reset to defaults. Customizations are not included in configuration packs.</li>
 <li>The configuration assistant validates its drafts and previews workflows, subscriptions and event sources
   before applying them.</li>
 <li>Claude Code, OpenCode (as a full interactive assistant engine) and the GitHub Copilot CLI can be used at the
