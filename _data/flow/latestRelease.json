@@ -1,9 +1,9 @@
 {
-  "url": "https://api.github.com/repos/Apitomy/apitomy-flow/releases/417649378",
-  "assets_url": "https://api.github.com/repos/Apitomy/apitomy-flow/releases/417649378/assets",
-  "upload_url": "https://uploads.github.com/repos/Apitomy/apitomy-flow/releases/417649378/assets{?name,label}",
-  "html_url": "https://github.com/Apitomy/apitomy-flow/releases/tag/v3.0.3",
-  "id": 417649378,
+  "url": "https://api.github.com/repos/Apitomy/apitomy-flow/releases/420913860",
+  "assets_url": "https://api.github.com/repos/Apitomy/apitomy-flow/releases/420913860/assets",
+  "upload_url": "https://uploads.github.com/repos/Apitomy/apitomy-flow/releases/420913860/assets{?name,label}",
+  "html_url": "https://github.com/Apitomy/apitomy-flow/releases/tag/v3.0.4",
+  "id": 420913860,
   "author": {
     "login": "apitomy-ci",
     "id": 286337598,
@@ -25,22 +25,22 @@
     "user_view_type": "public",
     "site_admin": false
   },
-  "node_id": "RE_kwDOT70xbM4Y5NLi",
-  "tag_name": "v3.0.3",
+  "node_id": "RE_kwDOT70xbM4ZFqLE",
+  "tag_name": "v3.0.4",
   "target_commitish": "main",
-  "name": "3.0.3",
+  "name": "3.0.4",
   "draft": false,
   "immutable": false,
   "prerelease": false,
-  "created_at": "2026-10-19T19:12:35Z",
-  "updated_at": "2026-10-19T19:12:39Z",
-  "published_at": "2026-10-19T19:12:39Z",
+  "created_at": "2026-10-22T15:52:16Z",
+  "updated_at": "2026-10-22T15:52:21Z",
+  "published_at": "2026-10-22T15:52:21Z",
   "assets": [
     {
-      "url": "https://api.github.com/repos/Apitomy/apitomy-flow/releases/assets/657179093",
-      "id": 657179093,
-      "node_id": "RA_kwDOT70xbM4nK8HV",
-      "name": "apitomy-flow-engine-3.0.3.jar",
+      "url": "https://api.github.com/repos/Apitomy/apitomy-flow/releases/assets/666323949",
+      "id": 666323949,
+      "node_id": "RA_kwDOT70xbM4nt0vt",
+      "name": "apitomy-flow-engine-3.0.4.jar",
       "label": "",
       "uploader": {
         "login": "apitomy-ci",
@@ -66,15 +66,15 @@
       "content_type": "application/java-archive",
       "state": "uploaded",
       "size": 144992,
-      "digest": "sha256:1de3db1e25e42b32118494031445fe67e66380338a1cfb790000772c8417b84c",
+      "digest": "sha256:e278dcb212fd7010579dc6b91db607b588896e6b846c36c46f1ed8fe8d226ebf",
       "download_count": 0,
-      "created_at": "2026-10-19T19:12:38Z",
-      "updated_at": "2026-10-19T19:12:38Z",
-      "browser_download_url": "https://github.com/Apitomy/apitomy-flow/releases/download/v3.0.3/apitomy-flow-engine-3.0.3.jar"
+      "created_at": "2026-10-22T15:52:20Z",
+      "updated_at": "2026-10-22T15:52:20Z",
+      "browser_download_url": "https://github.com/Apitomy/apitomy-flow/releases/download/v3.0.4/apitomy-flow-engine-3.0.4.jar"
     }
   ],
-  "tarball_url": "https://api.github.com/repos/Apitomy/apitomy-flow/tarball/v3.0.3",
-  "zipball_url": "https://api.github.com/repos/Apitomy/apitomy-flow/zipball/v3.0.3",
-  "body": "## What's Changed\n* Retry the Maven Wrapper download in CI with exponential backoff by @EricWittmann in https://github.com/Apitomy/apitomy-flow/pull/198\n* Update dependency org.sonatype.central:central-publishing-maven-plugin to v0.11.1 by @renovate[bot] in https://github.com/Apitomy/apitomy-flow/pull/199\n* Support default values on Start node inputs by @EricWittmann in https://github.com/Apitomy/apitomy-flow/pull/205\n* Update dependency @playwright/test to v1.64.1 by @renovate[bot] in https://github.com/Apitomy/apitomy-flow/pull/202\n* Update react monorepo to v19.3.1 by @renovate[bot] in https://github.com/Apitomy/apitomy-flow/pull/204\n* Update actions/setup-java digest to b843ebf by @renovate[bot] in https://github.com/Apitomy/apitomy-flow/pull/206\n* Update dependency node to v24.22.0 by @renovate[bot] in https://github.com/Apitomy/apitomy-flow/pull/207\n* Update dependency org.sonatype.central:central-publishing-maven-plugin to v0.12.0 by @renovate[bot] in https://github.com/Apitomy/apitomy-flow/pull/200\n* Host-configurable icon and color for Action nodes by action type by @EricWittmann in https://github.com/Apitomy/apitomy-flow/pull/215\n* Update jackson monorepo to v2.22.4 by @renovate[bot] in https://github.com/Apitomy/apitomy-flow/pull/214\n* Update dependency eslint to v10.13.0 by @renovate[bot] in https://github.com/Apitomy/apitomy-flow/pull/213\n* Update Apitomy/apitomy-github-actions action to v1.0.1 by @renovate[bot] in https://github.com/Apitomy/apitomy-flow/pull/212\n* Update dependency @patternfly/react-icons to v6.7.0 by @renovate[bot] in https://github.com/Apitomy/apitomy-flow/pull/211\n* Update dependency @patternfly/react-core to v6.7.0 by @renovate[bot] in https://github.com/Apitomy/apitomy-flow/pull/210\n* Update dependency @patternfly/patternfly to v6.7.0 by @renovate[bot] in https://github.com/Apitomy/apitomy-flow/pull/209\n* Update dependency vitest to v4.1.12 by @renovate[bot] in https://github.com/Apitomy/apitomy-flow/pull/208\n* Warn about redundant default edges (#203) by @EricWittmann in https://github.com/Apitomy/apitomy-flow/pull/216\n* Add WorkflowEditorHandle.select to select and center a node or edge (#201) by @EricWittmann in https://github.com/Apitomy/apitomy-flow/pull/217\n* Select applied change set elements instead of highlighting them by @EricWittmann in https://github.com/Apitomy/apitomy-flow/pull/218\n\n\n**Full Changelog**: https://github.com/Apitomy/apitomy-flow/compare/v3.0.2...v3.0.3",
+  "tarball_url": "https://api.github.com/repos/Apitomy/apitomy-flow/tarball/v3.0.4",
+  "zipball_url": "https://api.github.com/repos/Apitomy/apitomy-flow/zipball/v3.0.4",
+  "body": "## What's Changed\n* Update dependency typescript-eslint to v8.72.0 by @renovate[bot] in https://github.com/Apitomy/apitomy-flow/pull/219\n* Update Slack notifications to use the shared notify-slack action by @EricWittmann in https://github.com/Apitomy/apitomy-flow/pull/220\n* Show expandable values in the viewer's Instance Context panel by @EricWittmann in https://github.com/Apitomy/apitomy-flow/pull/221\n* Update dependency vite to v8.3.5 by @renovate[bot] in https://github.com/Apitomy/apitomy-flow/pull/222\n* Update dependency node to v24.22.1 by @renovate[bot] in https://github.com/Apitomy/apitomy-flow/pull/223\n* Update dependency python to v3.15.1 by @renovate[bot] in https://github.com/Apitomy/apitomy-flow/pull/224\n* Update actions/setup-python digest to 6d4fd22 by @renovate[bot] in https://github.com/Apitomy/apitomy-flow/pull/226\n* Highlight all join arrival edges and show Fork/Join badges in WorkflowViewer (#227) by @EricWittmann in https://github.com/Apitomy/apitomy-flow/pull/228\n\n\n**Full Changelog**: https://github.com/Apitomy/apitomy-flow/compare/v3.0.3...v3.0.4",
   "mentions_count": 2
 }
