@@ -1973,6 +1973,11 @@ CLI). Set the default agent used for tasks
 <td>Path to the Claude CLI binary</td>
 </tr>
 <tr>
+<td><code>axiom.agent.claude-code.plugin-dirs</code></td>
+<td><em>(empty)</em></td>
+<td>Comma-separated absolute paths passed to the CLI as repeated <code>--plugin-dir</code> flags (paths cannot contain commas). Each path is a plugin directory, a folder of plugins, or a plugin <code>.zip</code>, as the CLI's <code>--plugin-dir</code> accepts; with <code>--bare</code> (Axiom's default) skills load from plugin dirs only</td>
+</tr>
+<tr>
 <td><code>axiom.agent.claude-code.model</code></td>
 <td><em>(agent default)</em></td>
 <td>AI model override</td>
