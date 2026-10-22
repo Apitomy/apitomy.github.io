@@ -2317,6 +2317,46 @@ items of an attempt stay on that attempt's outcome and never appear on a later a
 system, allowing portable sharing of event system configuration.</p>
 <hr />
 <h1 id="event-schema">Event Schema</h1>
+<h2 id="event-schemas">Event schemas</h2>
+<p>Every event type has a JSON Schema (draft 2020-12). The schema files live under
+<code>core/src/main/resources/schemas/events/</code>:</p>
+<ul>
+<li><code>envelope.json</code> — the common envelope (see below).</li>
+<li><code>defs.json</code> — shared <code>$defs</code> (<code>Timestamp</code>, <code>NullableTimestamp</code>, <code>Actor</code>, <code>Change</code>, <code>CommitAuthor</code>,
+  <code>Commit</code>, <code>NormalizedLabel</code>, <code>NormalizedComment</code>, <code>NormalizedIssue</code>, <code>NormalizedPullRequest</code>,
+  <code>NormalizedReview</code>).</li>
+<li><code>payloads/&lt;type&gt;.json</code> — one payload schema per event type, e.g. <code>payloads/issue.closed.json</code>.</li>
+</ul>
+<p>These files are hand-maintained and are the source of truth. The script
+<code>tools/generate-event-payload-schemas.py</code> was used only to bootstrap them; do not re-run it.</p>
+<p><code>EventSchemaRegistry</code> loads the files at startup and assembles one self-contained schema per event type
+(envelope + payload + all of <code>defs.json</code> copied in as local <code>$defs</code>). If the schemas cannot be loaded,
+startup fails. The assembled schemas are served by <code>GET /api/v1/schemas/events</code> (summary list of <code>type</code> and <code>description</code>) and
+<code>GET /api/v1/schemas/events/{eventType}</code> (the schema; 404 for an unknown type). The paths use
+<code>/schemas/events</code> rather than <code>/event-schemas</code> because the code generator groups paths by the first word
+before <code>-</code>, which would collide with <code>/event-sources</code>.</p>
+<p><code>sourceData</code> (the raw source payload) is not validated; the schemas allow any object there.</p>
+<h3 id="runtime-validation">Runtime validation</h3>
+<p><code>EventStreamService</code> validates each event against its schema before persisting it. An invalid event is
+still saved, with the validation messages stored in <code>stream_event.validation_errors</code> and exposed as
+<code>validationErrors</code> on <code>StreamEvent</code>. Each invalid event is logged as a warning, and the poll log message
+gets the suffix <code>(N failed schema validation)</code>. If the validator itself throws, the exception is recorded
+as a validation error rather than dropping the event.</p>
+<h3 id="drift-tests-and-adding-an-event-type">Drift tests and adding an event type</h3>
+<p><code>EventSchemaDriftTest</code> checks that the <code>EventType</code> enum, the payload records registered in
+<code>@JsonSubTypes</code>, and the payload schema files stay in sync. <code>ValidatingGitHubNormalizer</code> and
+<code>ValidatingJiraNormalizer</code> wrap the normalizers in tests and validate every event they produce against the
+schemas, so a normalizer change that breaks a schema fails the build.</p>
+<p>To add a new event type:</p>
+<ol>
+<li>Add the value to the <code>EventType</code> enum.</li>
+<li>Add a payload record in <code>core/src/main/java/io/apitomy/axiom/core/events/model/payloads/</code>.</li>
+<li>Register the record in the <code>@JsonSubTypes</code> list in <code>EventPayload.java</code>.</li>
+<li>Add <code>payloads/&lt;type&gt;.json</code> under <code>core/src/main/resources/schemas/events/</code>.</li>
+</ol>
+<h3 id="identity-and-timestamps">Identity and timestamps</h3>
+<p>Source event IDs are unique per event source: the unique key is (<code>eventSourceId</code>, <code>sourceEventId</code>)
+(migration <code>V4__event_schema_validation.sql</code>). All timestamps are ISO-8601 UTC strings ending in <code>Z</code>.</p>
 <h2 id="common-event-envelope">Common Event Envelope</h2>
 <p>Every event in the stream shares this envelope structure.</p>
 <table>
