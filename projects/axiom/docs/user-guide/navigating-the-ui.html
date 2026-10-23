@@ -2013,10 +2013,24 @@ item to review its context and respond; the waiting workflow run then resumes.</
 </tr>
 </tbody>
 </table>
+<p>On a subscription's <strong>Filter</strong> tab, the <strong>Event fields</strong> panel below the expression editor lists the fields
+you can use in a filter expression, built from the event schemas Axiom validates events against. Each row
+shows the EL path (for example <code>event.payload.issue.state</code>), its type, a description and an example value.
+Click a path to append it to the expression; the editor's autocompletion uses the same fields.</p>
+<p>The panel shows the event types your expression compares <code>event.type</code> to with <code>==</code> (for example
+<code>event.type == 'issue.closed'</code>). If the expression names no type, pick one from the <strong>Event type</strong> list; it
+starts on <code>issue.created</code>. Array elements appear as <code>[0]</code> (for example
+<code>event.payload.issue.assignees[0].login</code>), and <code>event.sourceData</code> is listed once as source-specific because
+its shape depends on the event source.</p>
 <p>The event detail page shows the full typed payload (<strong>Event</strong> tab), how subscriptions processed it
 (<strong>Processing</strong> tab), and the runs started from it (<strong>Runs</strong> tab). <strong>Run workflow…</strong> starts a run of any
 published workflow with the event, listing suggested workflows first; such runs get the label
 <code>trigger:manual</code>.</p>
+<p>Axiom checks every incoming event against the schema for its type. An event that does not match is still
+stored and processed, and its detail page shows a warning listing each problem with the JSON path of the
+field (for example <code>$.payload.issue.state: must be one of [open, closed]</code>). Subscription filters that use
+those fields may not behave as expected for that event. Events recorded before schema validation existed
+show no warning.</p>
 <h3 id="workbench">Workbench</h3>
 <p>The <strong>Workbench</strong> (<code>/workbench</code>) lists compositions. Open one to design a workflow together with its
 action types and tools, with an AI Assistant chat beside the canvas, test script and Node.js items, review
