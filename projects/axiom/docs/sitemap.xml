@@ -2,226 +2,226 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://www.apitomy.io/projects/axiom/docs/index.html</loc>
-         <lastmod>2026-10-22</lastmod>
+         <lastmod>2026-10-23</lastmod>
     </url>
     <url>
          <loc>https://www.apitomy.io/projects/axiom/docs/developer-guide/api-first-development.html</loc>
-         <lastmod>2026-10-22</lastmod>
+         <lastmod>2026-10-23</lastmod>
     </url>
     <url>
          <loc>https://www.apitomy.io/projects/axiom/docs/developer-guide/building-axiom.html</loc>
-         <lastmod>2026-10-22</lastmod>
+         <lastmod>2026-10-23</lastmod>
     </url>
     <url>
          <loc>https://www.apitomy.io/projects/axiom/docs/developer-guide/correlation.html</loc>
-         <lastmod>2026-10-22</lastmod>
+         <lastmod>2026-10-23</lastmod>
     </url>
     <url>
          <loc>https://www.apitomy.io/projects/axiom/docs/developer-guide/data-retention.html</loc>
-         <lastmod>2026-10-22</lastmod>
+         <lastmod>2026-10-23</lastmod>
     </url>
     <url>
          <loc>https://www.apitomy.io/projects/axiom/docs/developer-guide/database-and-migrations.html</loc>
-         <lastmod>2026-10-22</lastmod>
+         <lastmod>2026-10-23</lastmod>
     </url>
     <url>
          <loc>https://www.apitomy.io/projects/axiom/docs/developer-guide/event-sourcing-design.html</loc>
-         <lastmod>2026-10-22</lastmod>
+         <lastmod>2026-10-23</lastmod>
     </url>
     <url>
          <loc>https://www.apitomy.io/projects/axiom/docs/developer-guide/extending-axiom.html</loc>
-         <lastmod>2026-10-22</lastmod>
+         <lastmod>2026-10-23</lastmod>
     </url>
     <url>
          <loc>https://www.apitomy.io/projects/axiom/docs/developer-guide/how-to-contribute.html</loc>
-         <lastmod>2026-10-22</lastmod>
+         <lastmod>2026-10-23</lastmod>
     </url>
     <url>
          <loc>https://www.apitomy.io/projects/axiom/docs/developer-guide/lineage.html</loc>
-         <lastmod>2026-10-22</lastmod>
+         <lastmod>2026-10-23</lastmod>
     </url>
     <url>
          <loc>https://www.apitomy.io/projects/axiom/docs/developer-guide/stack-and-architecture.html</loc>
-         <lastmod>2026-10-22</lastmod>
+         <lastmod>2026-10-23</lastmod>
     </url>
     <url>
          <loc>https://www.apitomy.io/projects/axiom/docs/developer-guide/tracing.html</loc>
-         <lastmod>2026-10-22</lastmod>
+         <lastmod>2026-10-23</lastmod>
     </url>
     <url>
          <loc>https://www.apitomy.io/projects/axiom/docs/developer-guide/ui-development.html</loc>
-         <lastmod>2026-10-22</lastmod>
+         <lastmod>2026-10-23</lastmod>
     </url>
     <url>
          <loc>https://www.apitomy.io/projects/axiom/docs/developer-guide/upgrading-and-backups.html</loc>
-         <lastmod>2026-10-22</lastmod>
+         <lastmod>2026-10-23</lastmod>
     </url>
     <url>
          <loc>https://www.apitomy.io/projects/axiom/docs/developer-guide/workflow-human-task-nodes.html</loc>
-         <lastmod>2026-10-22</lastmod>
+         <lastmod>2026-10-23</lastmod>
     </url>
     <url>
          <loc>https://www.apitomy.io/projects/axiom/docs/developer-guide/workflow-input-contract.html</loc>
-         <lastmod>2026-10-22</lastmod>
+         <lastmod>2026-10-23</lastmod>
     </url>
     <url>
          <loc>https://www.apitomy.io/projects/axiom/docs/getting-started/configuring-axiom.html</loc>
-         <lastmod>2026-10-22</lastmod>
+         <lastmod>2026-10-23</lastmod>
     </url>
     <url>
          <loc>https://www.apitomy.io/projects/axiom/docs/getting-started/contributing.html</loc>
-         <lastmod>2026-10-22</lastmod>
+         <lastmod>2026-10-23</lastmod>
     </url>
     <url>
          <loc>https://www.apitomy.io/projects/axiom/docs/getting-started/running-axiom.html</loc>
-         <lastmod>2026-10-22</lastmod>
+         <lastmod>2026-10-23</lastmod>
     </url>
     <url>
          <loc>https://www.apitomy.io/projects/axiom/docs/release-notes/v3.0.0.html</loc>
-         <lastmod>2026-10-22</lastmod>
+         <lastmod>2026-10-23</lastmod>
     </url>
     <url>
          <loc>https://www.apitomy.io/projects/axiom/docs/superpowers/plans/2026-10-02-correlation-id.html</loc>
-         <lastmod>2026-10-22</lastmod>
+         <lastmod>2026-10-23</lastmod>
     </url>
     <url>
          <loc>https://www.apitomy.io/projects/axiom/docs/superpowers/plans/2026-10-08-workbench-phase1-foundation.html</loc>
-         <lastmod>2026-10-22</lastmod>
+         <lastmod>2026-10-23</lastmod>
     </url>
     <url>
          <loc>https://www.apitomy.io/projects/axiom/docs/superpowers/plans/2026-10-12-workbench-phase2a-composition-backend.html</loc>
-         <lastmod>2026-10-22</lastmod>
+         <lastmod>2026-10-23</lastmod>
     </url>
     <url>
          <loc>https://www.apitomy.io/projects/axiom/docs/superpowers/plans/2026-10-12-workbench-phase2b-turn-loop.html</loc>
-         <lastmod>2026-10-22</lastmod>
+         <lastmod>2026-10-23</lastmod>
     </url>
     <url>
          <loc>https://www.apitomy.io/projects/axiom/docs/superpowers/plans/2026-10-12-workbench-phase3-4-ui.html</loc>
-         <lastmod>2026-10-22</lastmod>
+         <lastmod>2026-10-23</lastmod>
     </url>
     <url>
          <loc>https://www.apitomy.io/projects/axiom/docs/superpowers/plans/2026-10-13-workbench-phase5-testing.html</loc>
-         <lastmod>2026-10-22</lastmod>
+         <lastmod>2026-10-23</lastmod>
     </url>
     <url>
          <loc>https://www.apitomy.io/projects/axiom/docs/superpowers/plans/2026-10-13-workbench-phase5b-suggested-tests.html</loc>
-         <lastmod>2026-10-22</lastmod>
+         <lastmod>2026-10-23</lastmod>
     </url>
     <url>
          <loc>https://www.apitomy.io/projects/axiom/docs/superpowers/plans/2026-10-14-run-workflow-from-event.html</loc>
-         <lastmod>2026-10-22</lastmod>
+         <lastmod>2026-10-23</lastmod>
     </url>
     <url>
          <loc>https://www.apitomy.io/projects/axiom/docs/superpowers/plans/2026-10-14-workbench-chat-cards.html</loc>
-         <lastmod>2026-10-22</lastmod>
+         <lastmod>2026-10-23</lastmod>
     </url>
     <url>
          <loc>https://www.apitomy.io/projects/axiom/docs/superpowers/plans/2026-10-14-workbench-runs-tab.html</loc>
-         <lastmod>2026-10-22</lastmod>
+         <lastmod>2026-10-23</lastmod>
     </url>
     <url>
          <loc>https://www.apitomy.io/projects/axiom/docs/superpowers/plans/2026-10-15-standard-workflow-inputs.html</loc>
-         <lastmod>2026-10-22</lastmod>
+         <lastmod>2026-10-23</lastmod>
     </url>
     <url>
          <loc>https://www.apitomy.io/projects/axiom/docs/superpowers/plans/2026-10-15-workbench-subscriptions.html</loc>
-         <lastmod>2026-10-22</lastmod>
+         <lastmod>2026-10-23</lastmod>
     </url>
     <url>
          <loc>https://www.apitomy.io/projects/axiom/docs/superpowers/plans/2026-10-19-builtin-template-overrides.html</loc>
-         <lastmod>2026-10-22</lastmod>
+         <lastmod>2026-10-23</lastmod>
     </url>
     <url>
          <loc>https://www.apitomy.io/projects/axiom/docs/superpowers/plans/2026-10-21-event-schema-registry.html</loc>
-         <lastmod>2026-10-22</lastmod>
+         <lastmod>2026-10-23</lastmod>
     </url>
     <url>
          <loc>https://www.apitomy.io/projects/axiom/docs/superpowers/plans/2026-10-21-event-schema-ui.html</loc>
-         <lastmod>2026-10-22</lastmod>
+         <lastmod>2026-10-23</lastmod>
     </url>
     <url>
          <loc>https://www.apitomy.io/projects/axiom/docs/superpowers/plans/2026-10-21-jira-ingestion-fidelity.html</loc>
-         <lastmod>2026-10-22</lastmod>
+         <lastmod>2026-10-23</lastmod>
     </url>
     <url>
          <loc>https://www.apitomy.io/projects/axiom/docs/superpowers/specs/2026-10-02-correlation-id-design.html</loc>
-         <lastmod>2026-10-22</lastmod>
+         <lastmod>2026-10-23</lastmod>
     </url>
     <url>
          <loc>https://www.apitomy.io/projects/axiom/docs/superpowers/specs/2026-10-05-workflow-first-streamlining-design.html</loc>
-         <lastmod>2026-10-22</lastmod>
+         <lastmod>2026-10-23</lastmod>
     </url>
     <url>
          <loc>https://www.apitomy.io/projects/axiom/docs/superpowers/specs/2026-10-06-config-assistant-correctness-design.html</loc>
-         <lastmod>2026-10-22</lastmod>
+         <lastmod>2026-10-23</lastmod>
     </url>
     <url>
          <loc>https://www.apitomy.io/projects/axiom/docs/superpowers/specs/2026-10-06-event-source-rename-design.html</loc>
-         <lastmod>2026-10-22</lastmod>
+         <lastmod>2026-10-23</lastmod>
     </url>
     <url>
          <loc>https://www.apitomy.io/projects/axiom/docs/superpowers/specs/2026-10-06-explicit-action-inputs-design.html</loc>
-         <lastmod>2026-10-22</lastmod>
+         <lastmod>2026-10-23</lastmod>
     </url>
     <url>
          <loc>https://www.apitomy.io/projects/axiom/docs/superpowers/specs/2026-10-07-node-action-types-design.html</loc>
-         <lastmod>2026-10-22</lastmod>
+         <lastmod>2026-10-23</lastmod>
     </url>
     <url>
          <loc>https://www.apitomy.io/projects/axiom/docs/superpowers/specs/2026-10-08-workflow-workbench-design.html</loc>
-         <lastmod>2026-10-22</lastmod>
+         <lastmod>2026-10-23</lastmod>
     </url>
     <url>
          <loc>https://www.apitomy.io/projects/axiom/docs/superpowers/specs/2026-10-14-workbench-workflow-testing-design.html</loc>
-         <lastmod>2026-10-22</lastmod>
+         <lastmod>2026-10-23</lastmod>
     </url>
     <url>
          <loc>https://www.apitomy.io/projects/axiom/docs/superpowers/specs/2026-10-15-standard-workflow-inputs-design.html</loc>
-         <lastmod>2026-10-22</lastmod>
+         <lastmod>2026-10-23</lastmod>
     </url>
     <url>
          <loc>https://www.apitomy.io/projects/axiom/docs/superpowers/specs/2026-10-15-workbench-subscriptions-design.html</loc>
-         <lastmod>2026-10-22</lastmod>
+         <lastmod>2026-10-23</lastmod>
     </url>
     <url>
          <loc>https://www.apitomy.io/projects/axiom/docs/superpowers/specs/2026-10-19-builtin-template-overrides-design.html</loc>
-         <lastmod>2026-10-22</lastmod>
+         <lastmod>2026-10-23</lastmod>
     </url>
     <url>
          <loc>https://www.apitomy.io/projects/axiom/docs/superpowers/specs/2026-10-21-event-schemas-and-jira-ingestion-design.html</loc>
-         <lastmod>2026-10-22</lastmod>
+         <lastmod>2026-10-23</lastmod>
     </url>
     <url>
          <loc>https://www.apitomy.io/projects/axiom/docs/user-guide/ai-assistant.html</loc>
-         <lastmod>2026-10-22</lastmod>
+         <lastmod>2026-10-23</lastmod>
     </url>
     <url>
          <loc>https://www.apitomy.io/projects/axiom/docs/user-guide/concepts.html</loc>
-         <lastmod>2026-10-22</lastmod>
+         <lastmod>2026-10-23</lastmod>
     </url>
     <url>
          <loc>https://www.apitomy.io/projects/axiom/docs/user-guide/dashboards.html</loc>
-         <lastmod>2026-10-22</lastmod>
+         <lastmod>2026-10-23</lastmod>
     </url>
     <url>
          <loc>https://www.apitomy.io/projects/axiom/docs/user-guide/logging-and-debugging.html</loc>
-         <lastmod>2026-10-22</lastmod>
+         <lastmod>2026-10-23</lastmod>
     </url>
     <url>
          <loc>https://www.apitomy.io/projects/axiom/docs/user-guide/navigating-the-ui.html</loc>
-         <lastmod>2026-10-22</lastmod>
+         <lastmod>2026-10-23</lastmod>
     </url>
     <url>
          <loc>https://www.apitomy.io/projects/axiom/docs/user-guide/usage-examples.html</loc>
-         <lastmod>2026-10-22</lastmod>
+         <lastmod>2026-10-23</lastmod>
     </url>
     <url>
          <loc>https://www.apitomy.io/projects/axiom/docs/user-guide/workbench.html</loc>
-         <lastmod>2026-10-22</lastmod>
+         <lastmod>2026-10-23</lastmod>
     </url>
     <url>
          <loc>https://www.apitomy.io/projects/axiom/docs/user-guide/workflows.html</loc>
-         <lastmod>2026-10-22</lastmod>
+         <lastmod>2026-10-23</lastmod>
     </url>
 </urlset>
