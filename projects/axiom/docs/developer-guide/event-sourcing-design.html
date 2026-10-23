@@ -1934,11 +1934,12 @@ stream. No filtering — every detectable event gets recorded.</p>
   <code>repositories</code> (list of <code>owner/repo</code>), <code>pollInterval</code></p>
 <p><strong>Jira event source:</strong>
 - Uses JQL search with changelog expansion (<code>expand=changelog</code>)
-- Single query covers all configured projects via <code>project in (A, B, C)</code> clause
-- Field-level change detection from changelog entries
+- Single query covers all configured projects via a <code>project in ("A", "B")</code> clause (keys are quoted)
+- Field-level change detection from changelog entries; every event carries the issue state as of that event
 - ADF-to-plain-text conversion for description and comment bodies
-- Configuration: <code>baseUrl</code> (e.g., <code>https://myorg.atlassian.net</code>), <code>secretName</code>,
-  <code>projects</code> (list of project keys), <code>pollInterval</code></p>
+- Configuration: <code>baseUrl</code> (e.g., <code>https://myorg.atlassian.net</code>; must start with <code>http://</code> or <code>https://</code>,
+  a trailing <code>/</code> is removed when saved), <code>secretName</code>, <code>projects</code> (list of project keys matching
+  <code>^[A-Z][A-Z0-9_]+$</code>), optional <code>extraFields</code> (list of Jira field names), <code>pollInterval</code></p>
 <p><strong>Authentication:</strong> Three-tier fallback for both types: per-event-source secret (by name
 from the secrets store), default provider secret (<code>GH_TOKEN</code>/<code>GITHUB_TOKEN</code> for GitHub,
 <code>JIRA_API_TOKEN</code> for Jira), environment variable.</p>
@@ -2331,10 +2332,10 @@ system, allowing portable sharing of event system configuration.</p>
 <code>tools/generate-event-payload-schemas.py</code> was used only to bootstrap them; do not re-run it.</p>
 <p><code>EventSchemaRegistry</code> loads the files at startup and assembles one self-contained schema per event type
 (envelope + payload + all of <code>defs.json</code> copied in as local <code>$defs</code>). If the schemas cannot be loaded,
-startup fails. The assembled schemas are served by <code>GET /api/v1/schemas/events</code> (summary list of <code>type</code> and <code>description</code>) and
-<code>GET /api/v1/schemas/events/{eventType}</code> (the schema; 404 for an unknown type). The paths use
-<code>/schemas/events</code> rather than <code>/event-schemas</code> because the code generator groups paths by the first word
-before <code>-</code>, which would collide with <code>/event-sources</code>.</p>
+startup fails. The assembled schemas are served by <code>GET /api/v1/schemas/events</code> (summary list of <code>type</code> and
+<code>description</code>) and <code>GET /api/v1/schemas/events/{eventType}</code> (the schema; 404 for an unknown type). The
+paths use <code>/schemas/events</code> rather than <code>/event-schemas</code> because the code generator groups paths by the
+first word before <code>-</code>, which would collide with <code>/event-sources</code>.</p>
 <p><code>sourceData</code> (the raw source payload) is not validated; the schemas allow any object there.</p>
 <h3 id="runtime-validation">Runtime validation</h3>
 <p><code>EventStreamService</code> validates each event against its schema before persisting it. An invalid event is
@@ -2757,17 +2758,17 @@ schemas, so a normalizer change that breaks a schema fails the build.</p>
 <tr>
 <td><code>issue.updated</code></td>
 <td><code>IssuesEvent</code> / <code>edited</code></td>
-<td>Changelog: <code>summary</code> or <code>description</code> change</td>
+<td>Changelog: other tracked field change (see <a href="#jira">Jira</a>)</td>
 </tr>
 <tr>
 <td><code>issue.closed</code></td>
 <td><code>IssuesEvent</code> / <code>closed</code></td>
-<td>Changelog: status to <code>Done</code> category</td>
+<td>Changelog: status into the <code>done</code> category</td>
 </tr>
 <tr>
 <td><code>issue.reopened</code></td>
 <td><code>IssuesEvent</code> / <code>reopened</code></td>
-<td>Changelog: status from <code>Done</code> to non-<code>Done</code></td>
+<td>Changelog: status out of the <code>done</code> category</td>
 </tr>
 <tr>
 <td><code>issue.assigned</code></td>
@@ -2797,12 +2798,12 @@ schemas, so a normalizer change that breaks a schema fails the build.</p>
 <tr>
 <td><code>issue.comment.updated</code></td>
 <td><code>IssueCommentEvent</code> / <code>edited</code></td>
-<td>Comment <code>updated</code> &gt; <code>created</code> and &gt; last poll</td>
+<td>Comment <code>updated</code> &gt; <code>created</code> and in poll window (one event per observed edit: the latest <code>updated</code> seen in each poll window)</td>
 </tr>
 <tr>
 <td><code>issue.comment.deleted</code></td>
 <td><code>IssueCommentEvent</code> / <code>deleted</code></td>
-<td>Not detectable</td>
+<td>Changelog: <code>Comment</code> item with <code>fromString</code> and no <code>toString</code></td>
 </tr>
 </tbody>
 </table>
@@ -2985,55 +2986,153 @@ per event source + repo in memory and deduplicates in the database via the <code
 unique index.</p>
 <p><strong>Polling:</strong> ETag-based conditional polling (304 on no change). Default 60-second interval.</p>
 <h2 id="jira">Jira</h2>
-<p><strong>Event detection:</strong> JQL search with <code>expand=changelog</code>. Changelog entries are filtered
-by timestamp and classified into normalized event types.</p>
+<p><strong>Event detection:</strong> JQL search with <code>expand=changelog</code>, ordered by <code>updated</code>. The search requests the fields
+used for snapshots (<code>summary</code>, <code>description</code>, <code>status</code>, <code>assignee</code>, <code>reporter</code>, <code>labels</code>, <code>priority</code>,
+<code>resolution</code>, <code>resolutiondate</code>, <code>duedate</code>, <code>fixVersions</code>, <code>components</code>, <code>issuetype</code>, <code>project</code>, <code>comment</code>,
+<code>created</code>, <code>updated</code>, <code>parent</code>) plus the IDs of the configured <code>extraFields</code>. Truncated changelogs are
+completed with <code>GET /rest/api/3/issue/{key}/changelog</code>; incomplete comment lists (<code>total</code> greater than the
+number returned) with <code>GET /rest/api/3/issue/{key}/comment</code>. A 404/403 on either falls back to the embedded
+data; 5xx, 429 and network errors abort the poll window without advancing the checkpoint.</p>
+<p><strong>Per-poll lookups:</strong> once per event source and poll, <code>GET /rest/api/3/status</code> builds a status ID →
+category key map, and (only when <code>extraFields</code> is configured) <code>GET /rest/api/3/field</code> resolves field names to
+IDs, ignoring case. Unknown <code>extraFields</code> names are ignored with a warning. If the status lookup fails, a
+warning is logged and status names <code>done</code>, <code>closed</code> and <code>resolved</code> (case-insensitive) are treated as done.
+In this degraded mode a transition into a custom done status (for example <code>Shipped</code>) is emitted as
+<code>issue.updated</code> while the snapshot's <code>state</code> may already be <code>closed</code>.</p>
+<p><strong>Issue state as of each event:</strong> <code>JiraIssueHistory</code> sorts the changelog newest first, starts from the current
+issue, and for each entry records the state after that entry and then undoes the entry's items (<code>to</code> →
+<code>from</code>). What remains is the state at creation, used by <code>issue.created</code>. Comment events use the state in
+effect at the comment's timestamp. Tracked: status (name, ID, category → <code>state</code>/<code>stateDetail</code>), summary,
+description, assignee, labels, resolution and <code>closedAt</code>, priority, due date, fix versions, components and
+every configured extra field. <code>updatedAt</code> of a snapshot is the timestamp of the entry that produced it
+(<code>created</code> for the creation state). <code>closedAt</code> is the time of the most recent resolution change to a
+non-null value at or before the snapshot, and null while the resolution is empty.</p>
+<p>Limits:
+- Fields without changelog history keep their current values in every snapshot.
+- A rebuilt description is the changelog's plain/wiki text; the current one is converted from ADF.
+- Comment bodies are always the current text (Jira keeps no comment history).
+- Jira exposes only a comment's latest <code>updated</code> time, so several edits of one comment within one poll window
+  produce a single <code>issue.comment.updated</code>; intermediate edits are not recorded individually.
+- Extra-field values from the changelog are Jira's display strings (<code>toString</code>); current values are rendered
+  from the field JSON (<code>value</code>, <code>name</code>, <code>displayName</code> or <code>key</code> of objects, arrays joined with <code>,</code>, integral
+  numbers without a fraction).</p>
+<p><strong>Open/closed:</strong> <code>state</code> is <code>closed</code> exactly when the status category key is <code>done</code>. A status change into
+the <code>done</code> category emits <code>issue.closed</code>, out of it <code>issue.reopened</code>, anything else <code>issue.updated</code>.</p>
 <p><strong>Changelog classification:</strong></p>
 <table>
 <thead>
 <tr>
-<th>Field</th>
+<th>Changelog <code>field</code> (case-insensitive)</th>
 <th>Event Type</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><code>status</code> to Done category</td>
+<td><code>status</code> into the done category</td>
 <td><code>issue.closed</code></td>
 </tr>
 <tr>
-<td><code>status</code> from Done category</td>
+<td><code>status</code> out of the done category</td>
 <td><code>issue.reopened</code></td>
 </tr>
 <tr>
-<td><code>summary</code> or <code>description</code></td>
-<td><code>issue.updated</code></td>
+<td>other <code>status</code> changes</td>
+<td><code>issue.updated</code> with <code>change</code></td>
+</tr>
+<tr>
+<td><code>summary</code>, <code>description</code>, <code>priority</code>, <code>resolution</code>, <code>duedate</code>, <code>Fix Version</code>, <code>Component</code></td>
+<td><code>issue.updated</code> with <code>change</code></td>
+</tr>
+<tr>
+<td>a name listed in <code>configuration.extraFields</code></td>
+<td><code>issue.updated</code> with <code>change</code></td>
 </tr>
 <tr>
 <td><code>assignee</code> set</td>
-<td><code>issue.assigned</code></td>
+<td><code>issue.assigned</code> (<code>assignee.login</code> = account ID from <code>to</code>)</td>
 </tr>
 <tr>
 <td><code>assignee</code> cleared</td>
-<td><code>issue.unassigned</code></td>
+<td><code>issue.unassigned</code> (<code>assignee.login</code> = account ID from <code>from</code>)</td>
 </tr>
 <tr>
 <td><code>labels</code> added</td>
-<td><code>issue.labeled</code></td>
+<td><code>issue.labeled</code> (one per label)</td>
 </tr>
 <tr>
 <td><code>labels</code> removed</td>
-<td><code>issue.unlabeled</code></td>
+<td><code>issue.unlabeled</code> (one per label)</td>
+</tr>
+<tr>
+<td><code>Comment</code> with <code>fromString</code> and no <code>toString</code></td>
+<td><code>issue.comment.deleted</code> (comment <code>id</code> and <code>author</code> null, <code>body</code> = deleted text; actor = history author)</td>
 </tr>
 </tbody>
 </table>
-<p><strong>Label diffing:</strong> Jira provides space-separated before/after lists in changelog.
-The sourcer diffs them to emit individual labeled/unlabeled events.</p>
-<p><strong>ADF conversion:</strong> Jira v3 returns description and comment body in Atlassian Document
-Format. The sourcer extracts plain text for normalized fields and preserves raw ADF
-in <code>sourceData</code>.</p>
+<p><strong><code>sourceEventId</code> formats:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Trigger</th>
+<th><code>sourceEventId</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Issue created</td>
+<td><code>{KEY}-created</code></td>
+</tr>
+<tr>
+<td>Changelog entry producing one event</td>
+<td><code>{KEY}-{historyId}</code></td>
+</tr>
+<tr>
+<td>Changelog entry producing several events</td>
+<td><code>{KEY}-{historyId}-{i}</code> (item order)</td>
+</tr>
+<tr>
+<td>Comment created</td>
+<td><code>{KEY}-comment-{commentId}</code></td>
+</tr>
+<tr>
+<td>Comment edited</td>
+<td><code>{KEY}-comment-{commentId}-updated-{updatedEpochMillis}</code> (one per observed edit, keyed by the latest <code>updated</code>)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Timestamps:</strong> every timestamp in the payload (<code>createdAt</code>, <code>updatedAt</code>, <code>closedAt</code>, comment timestamps) and
+the event <code>timestamp</code> are ISO-8601 UTC ending in <code>Z</code>.</p>
+<p><strong><code>sourceData</code></strong> (a selected set, not validated by the event schemas; values follow the snapshot of the
+event where history exists):</p>
+<div class="language-json highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="p">{</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">  </span><span class="nt">"jiraId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"7358053"</span><span class="p">,</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">  </span><span class="nt">"project"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"APICURIO"</span><span class="p">,</span><span class="w"> </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Apicurio"</span><span class="p">},</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">  </span><span class="nt">"issueType"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Task"</span><span class="p">},</span>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">  </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Closed"</span><span class="p">,</span><span class="w"> </span><span class="nt">"categoryKey"</span><span class="p">:</span><span class="w"> </span><span class="s2">"done"</span><span class="p">},</span>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="w">  </span><span class="nt">"priority"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Major"</span><span class="p">},</span>
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="w">  </span><span class="nt">"resolution"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Done"</span><span class="p">},</span>
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="w">  </span><span class="nt">"dueDate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2026-10-30"</span><span class="p">,</span>
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="w">  </span><span class="nt">"components"</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"core"</span><span class="p">}],</span>
+</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="w">  </span><span class="nt">"fixVersions"</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.2.0"</span><span class="p">}],</span>
+</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="w">  </span><span class="nt">"extraFields"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"Story Points"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5"</span><span class="p">}</span>
+</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="p">}</span>
+</span></code></pre></div>
+<p><code>extraFields</code> is present only when configured; a configured field with no value is <code>null</code>.</p>
 <p><strong><code>ref</code> construction:</strong> <code>{baseUrl}/browse/{issueKey}</code></p>
-<p><strong>Deduplication:</strong> Stable <code>sourceEventId</code> from <code>{issueKey}-{changelogEntryId}</code>,
-<code>{issueKey}-created</code>, or <code>{issueKey}-comment-{commentId}</code>.</p>
+<p><strong>Upgrade notes:</strong>
+- Existing events and IDs are kept.
+- A comment edit that already has an old-format <code>{KEY}-comment-{id}-updated</code> event gets one more event under
+  the new format after the upgrade (accepted one-time effect).
+- Changelog entries that now produce more events (for example a status change plus a resolution change)
+  use <code>-{i}</code> suffixes; such an entry re-read in the first poll window after the upgrade is stored once more
+  under the new IDs (accepted one-time effect, limited to the two-minute query overlap).
+- Whether an entry gets <code>{KEY}-{historyId}</code> or <code>-{i}</code> IDs depends on how many events it produces, which
+  depends on <code>configuration.extraFields</code>; changing <code>extraFields</code> can likewise re-key an entry re-read inside
+  the two-minute overlap, which is then stored once more.
+- GitHub and Jira event sources whose <code>baseUrl</code> lacks <code>http://</code> or <code>https://</code> (for example
+  <code>github.ibm.com/api/v3</code>) now fail validation when edited or imported and must be updated.</p>
+<p><strong>Verification tool:</strong> <code>tools/jira-groundtruth.py</code> compares raw Jira activity with the stored events and
+reports field-quality problems and schema-validation results (see the script's <code>--help</code>).</p>
 
 
 
