@@ -25,7 +25,7 @@
       
       
       <link rel="icon" href="../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.8.0">
     
     
       
@@ -33,10 +33,10 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.ec1eaa64.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.57a0d79d.min.css">
       
         
-        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
+        <link rel="stylesheet" href="../assets/stylesheets/palette.fb2fffe2.min.css">
       
       
 
@@ -2211,9 +2211,10 @@ environment.</p>
 <p>The workbench agent reaches Axiom through the built-in <code>@axiom-workbench</code> MCP server
 (<code>app/src/main/resources/templates/axiom-workbench-mcp/server.js</code>). Its tools read the composition, write
 action types and tools (<code>upsert_item</code>, <code>remove_item</code>), propose workflow changes
-(<code>propose_workflow_changes</code>), validate, suggest tests (<code>suggest_test</code>), and look up events, runs, traces and
-existing components. The agent cannot run tests or change the workflow directly: workflow change sets are
-applied by the user's editor when the turn ends, and only the user runs tests. Calls from the MCP server to
+(<code>propose_workflow_changes</code>), validate, suggest tests (<code>suggest_test</code>), read test runs the user shares
+(<code>get_test_run</code>), and look up events, runs, traces and existing components. The agent cannot run tests or change
+the workflow directly: workflow change sets are applied by the user's editor when the turn ends, and only the
+user runs tests. Calls from the MCP server to
 the <code>/compositions/{compositionId}/agent/...</code> routes are checked by <code>SessionTokenGuard</code>.</p>
 <p>See <a href="../user-guide/workbench.html">Workflow Workbench</a> for the user-facing description.</p>
 <h4 id="init-script-security">Init Script Security</h4>
@@ -2379,10 +2380,10 @@ wait scheduler, and the workflow schedule trigger scheduler.</p>
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.tabs", "navigation.sections", "navigation.expand", "navigation.top", "search.highlight", "search.share", "search.suggest", "content.code.copy"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.tabs", "navigation.sections", "navigation.expand", "navigation.top", "search.highlight", "search.share", "search.suggest", "content.code.copy"], "search": "../assets/javascripts/workers/search.a7633da7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="../assets/javascripts/bundle.d7400e89.min.js"></script>
+      <script src="../assets/javascripts/bundle.c21346df.min.js"></script>
       
     
   </body>
