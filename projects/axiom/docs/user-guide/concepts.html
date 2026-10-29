@@ -2879,7 +2879,7 @@ saving.</p>
 <tbody>
 <tr>
 <td><strong><code>create-workflow</code></strong></td>
-<td>Finds or creates the subject from the event's <code>ref</code> URL, then starts a run of the configured workflow definition on that subject (with its declared <code>subject</code> and <code>event</code> inputs in context). If the subject already has an active run of that definition, the run is skipped and the skip is recorded in the routing outcome.</td>
+<td>Finds or creates the subject from the event's <code>ref</code> URL, then starts a run of the configured workflow definition on that subject (with its declared <code>subject</code> and <code>event</code> inputs in context). The run, and the subject when it is newly created, get a copy of the subscription's labels; an existing subject's labels are left unchanged. If the subject already has an active run of that definition, the run is skipped and the skip is recorded in the routing outcome.</td>
 </tr>
 <tr>
 <td><strong><code>workflow-dispatch</code></strong></td>

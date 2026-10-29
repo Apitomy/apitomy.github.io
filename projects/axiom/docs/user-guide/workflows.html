@@ -2044,9 +2044,13 @@ executing. The <strong>Runs</strong> tab lists the runs of the definition.</p>
 example from the <strong>Title</strong> field of an event's <strong>Run workflow…</strong> dialog, or the REST API), or when the
 workflow sets it with the <code>axiom_set_workflow_run_title</code> SDK function (see
 <a href="#axiom-sdk-functions">Axiom SDK Functions</a>); lists and headers name other runs by their subject and
-workflow. Runs also carry free-form key/value <strong>labels</strong> (runs started by a schedule trigger are labeled
-<code>trigger: schedule</code>). A run cannot be started with supplied inputs: its inputs are always resolved by Axiom
-(see below).</p>
+workflow. Runs also carry free-form <strong>labels</strong>, a list of strings like subject labels. Axiom adds built-in
+labels in <code>key:value</code> form: <code>trigger:manual</code> for runs started from an event's <strong>Run workflow…</strong> dialog,
+<code>trigger:schedule</code> for runs started by a schedule trigger, and <code>rerunOf:&lt;run id&gt;</code> for re-runs. A run started by
+a subscription's <code>create-workflow</code> routing rule gets a copy of the subscription's labels. Labels can be edited
+on the run's page, through the REST API (<code>PUT /api/v1/workflow/runs/{runId}/labels</code>), and with the
+<code>axiom_add_run_label</code> / <code>axiom_remove_run_label</code> SDK functions. A run cannot be started with supplied inputs:
+its inputs are always resolved by Axiom (see below).</p>
 <p>A run's context starts with exactly the standard inputs its Start node declares: <code>subject</code> (always
 available) and <code>event</code> (available only when the run was started from a stream event). A declared optional
 input that is not available is absent; a declared required input that is not available stops the run from
@@ -2244,6 +2248,10 @@ cancelled run cannot be resumed. Other runs on the same subject are unaffected.<
 <tr>
 <td><code>axiom_respond_to_task</code></td>
 <td>Submit a response to a task awaiting human input</td>
+</tr>
+<tr>
+<td><code>axiom_add_run_label</code> / <code>axiom_remove_run_label</code></td>
+<td>Add or remove a workflow run label (<code>runId</code>, <code>label</code>). In an <code>sdk:</code> action node, <code>runId</code> is filled in automatically with the node's own run.</td>
 </tr>
 <tr>
 <td><code>axiom_get_workflow_run</code></td>
