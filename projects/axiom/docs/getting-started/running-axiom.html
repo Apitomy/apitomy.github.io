@@ -925,6 +925,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../user-guide/mcp-servers.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MCP Servers
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../user-guide/logging-and-debugging.html" class="md-nav__link">
         
   
@@ -1672,6 +1700,16 @@ downloads and runs the latest release automatically.</p>
 </tr>
 </tbody>
 </table>
+<p>Optional, for external MCP servers that run locally:</p>
+<ul>
+<li><strong>npx</strong> (comes with Node.js) for servers distributed as npm packages</li>
+<li><strong>uvx</strong> (<a href="https://docs.astral.sh/uv/getting-started/installation/">uv</a>) for servers distributed as Python
+  packages, such as Jira &amp; Confluence</li>
+<li><strong>Docker</strong> (client and a running daemon) for servers distributed as container images</li>
+</ul>
+<p>Axiom checks for these when it starts and shows the results under <strong>Prerequisites</strong> on <strong>Settings → AI
+Engine</strong>. A missing optional tool is only a warning: MCP servers that need it won't start. Restart Axiom after
+installing one.</p>
 <ul>
 <li>An API key for your LLM provider (e.g., <code>ANTHROPIC_API_KEY</code> environment variable)</li>
 </ul>

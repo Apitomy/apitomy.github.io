@@ -1313,6 +1313,34 @@
   
   
     <li class="md-nav__item">
+      <a href="mcp-servers.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MCP Servers
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="logging-and-debugging.html" class="md-nav__link">
         
   
@@ -2942,14 +2970,18 @@ you can reference a toolset using the <code>@</code> prefix:</p>
 <p>When an action type includes <code>@GitHub Tools</code> in its allowed tools, all tools in that toolset are made
 available to the agent. This keeps tool lists manageable and consistent across multiple action types.</p>
 <h3 id="mcp-servers">MCP Servers</h3>
-<p>An MCP (Model Context Protocol) Server provides tools to AI agents via the MCP standard. Axiom can connect
-to MCP servers using two transport modes:</p>
+<p>An MCP (Model Context Protocol) server provides tools to AI agents through the MCP standard. Axiom connects to
+MCP servers using one of three transports:</p>
 <ul>
-<li><strong>stdio</strong> — Axiom launches the server as a subprocess using a configured command and arguments</li>
-<li><strong>HTTP</strong> — Axiom connects to a running server at a configured URL</li>
+<li><strong>stdio</strong>: Axiom starts the server as a local process with a configured command and arguments, usually on
+  demand with <code>npx</code>, <code>uvx</code> or <code>docker</code></li>
+<li><strong>HTTP</strong>: Axiom connects to a remote server at a URL (streamable HTTP)</li>
+<li><strong>SSE</strong>: Axiom connects to a remote server that uses the older HTTP + server-sent events transport</li>
 </ul>
-<p>MCP servers extend the tool ecosystem beyond built-in shell commands. For example, you might run a custom
-MCP server that provides database query tools, API clients, or domain-specific analysis capabilities.</p>
+<p>MCP servers extend the tool ecosystem beyond built-in shell commands, for example with GitHub, Jira or
+database tools. A server's tools are named <code>mcp__&lt;server&gt;__&lt;tool&gt;</code>. Action types and session templates select
+the servers their agents get; credentials are usually <code>${secret:NAME}</code> references. Popular servers can be
+added from a built-in catalog or the official MCP Registry. See <a href="mcp-servers.html">MCP Servers</a>.</p>
 <h3 id="secrets">Secrets</h3>
 <p>Secrets are encrypted key-value pairs that processes receive as environment variables. Common uses:</p>
 <ul>
