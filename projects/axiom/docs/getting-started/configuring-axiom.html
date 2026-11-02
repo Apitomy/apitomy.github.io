@@ -1983,6 +1983,11 @@ CLI). Set the default agent used for tasks
 <td><code>claude-code</code></td>
 <td>Default agent type (<code>claude-code</code>, <code>opencode</code>, or <code>copilot</code>)</td>
 </tr>
+<tr>
+<td><code>axiom.agent.env.passthrough</code></td>
+<td><code>PATH,HOME,TMPDIR,LANG,NODE_EXTRA_CA_CERTS</code></td>
+<td>Comma-separated variables of Axiom's own environment passed through to script tools and stdio MCP servers. Nothing else is inherited: tools and servers get only these, their own declared environment and (script tools) the <code>AXIOM_*</code> variables</td>
+</tr>
 </tbody>
 </table>
 <h4 id="claude-code-settings">Claude Code Settings</h4>
