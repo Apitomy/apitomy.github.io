@@ -1704,7 +1704,8 @@ coordinates) is optional and nullable; the browser can lay out definitions that 
 <ul>
 <li><strong>Config</strong>: <code>eventType</code> (required) and <code>match</code> expressions (optional) for event correlation</li>
 <li><strong>Behavior</strong>: The host uses <code>matchesEvent</code> to correlate, then <code>completeNode</code> to deliver a matching event.
-  Optional <code>outputs</code> expressions map selected event values into context.</li>
+  Optional <code>outputs</code> (<code>contextKey</code> + EL <code>expression</code> over <code>event</code>) write selected event values into
+  context; with no outputs, nothing from the event is written to context.</li>
 <li><strong>Timeout</strong> (optional): <code>timeout</code> is a positive ISO 8601 duration (e.g. <code>PT1H</code>). A node with a timeout
   must have exactly one outgoing edge with <code>isTimeout: true</code> (like a BPMN boundary timer) plus at least one
   normal edge. The host schedules a timer from <code>ReceiveEventInfo.timeout()</code> and calls

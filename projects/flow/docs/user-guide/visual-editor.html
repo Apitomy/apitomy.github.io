@@ -2068,8 +2068,9 @@ routing simulation (see <a href="#simulation-and-condition-testing">Simulation a
 <ul>
 <li>Name (all node types)</li>
 <li>Action Type (action nodes)</li>
-<li>Event Type, Match Expressions, Lookback (<code>run-start</code> default, <code>none</code>, or a duration), and Output
-  mappings (receive-event nodes)</li>
+<li>Event Type, Match Expressions, Lookback (<code>run-start</code> default, <code>none</code>, or a duration), and Outputs
+  (receive-event nodes; each output is a Name plus an EL expression over <code>event</code>, and with no outputs
+  nothing is written to the context)</li>
 <li>Title (an EL expression for the task inbox subject; blank uses the node name), Description, Inputs
   (label/expression pairs), and Outputs (human task nodes). Each output is a
   form field the assignee fills in to complete the task and supports rich authoring metadata: name,
@@ -2183,7 +2184,8 @@ aid; host execution and full Jakarta EL behavior require verification with the J
    fork; it is not necessarily one transition-budget unit. <strong>Reset</strong> clears the run.</li>
 <li>Where a node would block for real work — <code>action</code>, <code>human-task</code>, or <code>receive-event</code> — the
    simulation pauses so you can supply a <strong>mock output</strong> (JSON). The output is merged into the
-   context using declared output aliases and receive-event mappings, and the run continues. <code>wait</code>
+   context using declared output aliases and receive-event outputs (a receive-event node with no outputs
+   writes nothing), and the run continues. <code>wait</code>
    nodes route through immediately (no input needed); real engine waits pause for external completion.</li>
 </ol>
 <p><strong>Expression support:</strong> the browser supports JSON property/index access, literals, arithmetic,

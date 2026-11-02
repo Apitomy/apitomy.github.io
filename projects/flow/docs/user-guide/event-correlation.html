@@ -936,6 +936,23 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Event output mappings">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#migrating-from-the-flat-merge" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Migrating from the flat merge
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
     </ul>
@@ -1569,6 +1586,23 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Event output mappings">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#migrating-from-the-flat-merge" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Migrating from the flat merge
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
     </ul>
@@ -1796,8 +1830,10 @@ policy, persist the returned snapshot, and deduplicate delivery. To fan out to m
 re-check each candidate against the latest returned state; one completion may terminate the instance.
 The engine does not provide an event bus or exactly-once completion.</p>
 <h2 id="event-output-mappings">Event output mappings</h2>
-<p>Without mappings (absent, null, or empty <code>outputs</code>), the raw result payload is flat-merged into context.
-With mappings, only the declared keys are merged:</p>
+<p>A receive-event node writes only what its <code>outputs</code> declare. Each output has a <code>contextKey</code> (the name of
+the context key to write) and an EL <code>expression</code> evaluated against the received <code>event</code>. Without outputs
+(absent, null, or empty <code>outputs</code>), <strong>nothing</strong> is written to the context; the event is still consumed and
+the node still completes and routes normally.</p>
 <div class="language-json highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="p">{</span>
 </span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="w">    </span><span class="nt">"eventType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pr-merged"</span><span class="p">,</span>
 </span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="w">    </span><span class="nt">"match"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"event.repository == context.repository"</span><span class="p">],</span>
@@ -1812,6 +1848,21 @@ mapping's newly written key. <code>ReceiveEventInfo.outputMappings()</code> expo
 exception enters structured <code>OUTPUT_MAPPING</code> recovery without merging a partial result; RETRY leaves the
 receiver parked for another delivery. Shared <a href="../developer-guide/documentation-checks.html">executable fixtures</a>
 cover mappings and serialized parallel resumes.</p>
+<p>To keep the whole event, declare a single output that stores it under one key:</p>
+<div class="language-json highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="nt">"outputs"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"contextKey"</span><span class="p">:</span><span class="w"> </span><span class="s2">"event"</span><span class="p">,</span><span class="w"> </span><span class="nt">"expression"</span><span class="p">:</span><span class="w"> </span><span class="s2">"event"</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">]</span>
+</span></code></pre></div>
+<p>Downstream nodes then read fields as <code>context.event.&lt;field&gt;</code>.</p>
+<h3 id="migrating-from-the-flat-merge">Migrating from the flat merge</h3>
+<p>Earlier releases flat-merged the raw event payload into context when a receive-event node declared no
+outputs (for example, a payload <code>{"fundingReference": "WIRE-1"}</code> produced <code>context.fundingReference</code>).
+That implicit merge has been removed (<a href="https://github.com/Apitomy/apitomy-flow/issues/229">#229</a>). For each
+receive-event node without outputs whose event fields are read later, either:</p>
+<ul>
+<li>declare one output per field that later nodes read, keeping their existing references, e.g.
+  <code>{ "contextKey": "fundingReference", "expression": "event.fundingReference" }</code>; or</li>
+<li>declare <code>{ "contextKey": "event", "expression": "event" }</code> and change downstream references from
+  <code>context.&lt;field&gt;</code> to <code>context.event.&lt;field&gt;</code>.</li>
+</ul>
 
 
 
