@@ -2191,8 +2191,9 @@ running or waiting).</p>
   runs it resumed (run, node, trace and receive-event trace node). The <code>workflow_event_subscription</code> row
   is deleted when it is consumed, so each resumption is recorded as a <code>workflow_run_resume</code> row (run,
   node, event, ledger entry, trace node; deleted with the run), and the receive-event trace node's
-  summary gets "resumed by event <id>". The event map passed to the run (<code>event</code> in its context)
-  includes the event ID as <code>id</code>.</li>
+  summary gets "resumed by event <id>". The event map delivered to the receive-event node (<code>event</code>
+  in its <code>match</code> and <code>outputs</code> expressions) includes the event ID as <code>id</code>; only the node's declared
+  <code>outputs</code> write it into the run's context.</li>
 <li><strong>API.</strong> <code>WorkflowInstance</code> and <code>WorkflowRunSummary</code> expose <code>triggerEventId</code> and <code>triggerLedgerId</code>;
   <code>WorkflowInstance.resumedBy</code> lists the resuming events. The workflow run page shows "Triggered by"
   and "Resumed by" links to <code>/events/stream/:id</code>.</li>
