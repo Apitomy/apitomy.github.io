@@ -1,9 +1,9 @@
 {
-  "url": "https://api.github.com/repos/Apitomy/apitomy-axiom/releases/432089767",
-  "assets_url": "https://api.github.com/repos/Apitomy/apitomy-axiom/releases/432089767/assets",
-  "upload_url": "https://uploads.github.com/repos/Apitomy/apitomy-axiom/releases/432089767/assets{?name,label}",
-  "html_url": "https://github.com/Apitomy/apitomy-axiom/releases/tag/v3.0.2",
-  "id": 432089767,
+  "url": "https://api.github.com/repos/Apitomy/apitomy-axiom/releases/434088361",
+  "assets_url": "https://api.github.com/repos/Apitomy/apitomy-axiom/releases/434088361/assets",
+  "upload_url": "https://uploads.github.com/repos/Apitomy/apitomy-axiom/releases/434088361/assets{?name,label}",
+  "html_url": "https://github.com/Apitomy/apitomy-axiom/releases/tag/v3.0.3",
+  "id": 434088361,
   "author": {
     "login": "github-actions[bot]",
     "id": 41898282,
@@ -25,22 +25,22 @@
     "user_view_type": "public",
     "site_admin": false
   },
-  "node_id": "RE_kwDORIrTwc4ZwSqn",
-  "tag_name": "v3.0.2",
+  "node_id": "RE_kwDORIrTwc4Z36mp",
+  "tag_name": "v3.0.3",
   "target_commitish": "main",
-  "name": "3.0.2",
+  "name": "3.0.3",
   "draft": false,
   "immutable": false,
   "prerelease": false,
-  "created_at": "2026-11-02T23:44:28Z",
-  "updated_at": "2026-11-02T23:51:28Z",
-  "published_at": "2026-11-02T23:51:28Z",
+  "created_at": "2026-11-04T15:13:29Z",
+  "updated_at": "2026-11-04T16:43:32Z",
+  "published_at": "2026-11-04T16:43:32Z",
   "assets": [
     {
-      "url": "https://api.github.com/repos/Apitomy/apitomy-axiom/releases/assets/703578791",
-      "id": 703578791,
-      "node_id": "RA_kwDORIrTwc4p78Kn",
-      "name": "apitomy-axiom-3.0.2.jar",
+      "url": "https://api.github.com/repos/Apitomy/apitomy-axiom/releases/assets/709935282",
+      "id": 709935282,
+      "node_id": "RA_kwDORIrTwc4qUMCy",
+      "name": "apitomy-axiom-3.0.3.jar",
       "label": "",
       "uploader": {
         "login": "github-actions[bot]",
@@ -65,16 +65,16 @@
       },
       "content_type": "application/java-archive",
       "state": "uploaded",
-      "size": 56444394,
-      "digest": "sha256:c19b9faf3466b5a9137abc50fddd980f5b0ed16f5545d9191a74c5ae9037cac1",
+      "size": 56032795,
+      "digest": "sha256:00ebd234202224283917d6434cc01c3ef597c7081a7bc66422bf9728bc3bcb3a",
       "download_count": 0,
-      "created_at": "2026-11-02T23:44:37Z",
-      "updated_at": "2026-11-02T23:44:39Z",
-      "browser_download_url": "https://github.com/Apitomy/apitomy-axiom/releases/download/v3.0.2/apitomy-axiom-3.0.2.jar"
+      "created_at": "2026-11-04T15:13:42Z",
+      "updated_at": "2026-11-04T15:13:45Z",
+      "browser_download_url": "https://github.com/Apitomy/apitomy-axiom/releases/download/v3.0.3/apitomy-axiom-3.0.3.jar"
     }
   ],
-  "tarball_url": "https://api.github.com/repos/Apitomy/apitomy-axiom/tarball/v3.0.2",
-  "zipball_url": "https://api.github.com/repos/Apitomy/apitomy-axiom/zipball/v3.0.2",
-  "body": "## What's Changed\n* feat(ui): add Workflow column to runs list and drop Duration by @EricWittmann in https://github.com/Apitomy/apitomy-axiom/pull/576\n* feat(ui): friendly labels for every workbench MCP tool by @EricWittmann in https://github.com/Apitomy/apitomy-axiom/pull/577\n* chore(deps): update dependency node to v24.22.2 by @renovate[bot] in https://github.com/Apitomy/apitomy-axiom/pull/578\n* fix(claude-code): report an inconclusive startup probe as warning when no server-side ANTHROPIC_API_KEY is set by @paoloantinori in https://github.com/Apitomy/apitomy-axiom/pull/535\n* fix(agents): share one bounded CLI runner across agent checks and runs by @EricWittmann in https://github.com/Apitomy/apitomy-axiom/pull/579\n* Workbench: show assistant subagents / background tasks / todos as a compact strip (#525) by @EricWittmann in https://github.com/Apitomy/apitomy-axiom/pull/580\n* Run labels as a list of strings, labeled from their subscription (#526) by @EricWittmann in https://github.com/Apitomy/apitomy-axiom/pull/581\n* ShellContext: placeholders inside comments are no longer substituted as live code by @EricWittmann in https://github.com/Apitomy/apitomy-axiom/pull/582\n* Gate the UI on engines[].available and Node.js; stop downgrading engine errors by @EricWittmann in https://github.com/Apitomy/apitomy-axiom/pull/583\n* docs: agent tools can read every secret on the action type, including the model key by @paoloantinori in https://github.com/Apitomy/apitomy-axiom/pull/584\n* MCP servers: service layer and validation (#586) by @EricWittmann in https://github.com/Apitomy/apitomy-axiom/pull/600\n* MCP servers: return serverEnv; args/env can be cleared (#587) by @EricWittmann in https://github.com/Apitomy/apitomy-axiom/pull/601\n* MCP servers: unify resolution and config generation (#590) by @EricWittmann in https://github.com/Apitomy/apitomy-axiom/pull/602\n* MCP servers: transport, headers, timeout, enabled flag, timestamps (#588) by @EricWittmann in https://github.com/Apitomy/apitomy-axiom/pull/603\n* MCP servers: ${secret:NAME} references in env and headers (#589) by @EricWittmann in https://github.com/Apitomy/apitomy-axiom/pull/604\n* OpenCode tasks: MCP server edits and deletes take effect (#591) by @EricWittmann in https://github.com/Apitomy/apitomy-axiom/pull/605\n* Action types: explicit mcpServers field (#593) by @EricWittmann in https://github.com/Apitomy/apitomy-axiom/pull/606\n* MCP servers: no implicit loading; external servers get only their own env (#592) by @EricWittmann in https://github.com/Apitomy/apitomy-axiom/pull/607\n* MCP servers: usage, blocked deletes, rename cascade, validation (#594) by @EricWittmann in https://github.com/Apitomy/apitomy-axiom/pull/608\n* MCP servers: test connection and list tools (#595) by @EricWittmann in https://github.com/Apitomy/apitomy-axiom/pull/609\n* MCP servers: rework the list, detail and create UI (#596) by @EricWittmann in https://github.com/Apitomy/apitomy-axiom/pull/610\n* Configuration packs: MCP server validation, conflict modes, credential warnings (#597) by @EricWittmann in https://github.com/Apitomy/apitomy-axiom/pull/611\n* MCP servers: catalog search and guided install of popular servers (#599) by @EricWittmann in https://github.com/Apitomy/apitomy-axiom/pull/612\n* MCP servers: end-to-end test and user documentation (#598) by @EricWittmann in https://github.com/Apitomy/apitomy-axiom/pull/613\n* Startup checks for optional MCP runtimes (npx, uvx, docker) on /engine (#614) by @EricWittmann in https://github.com/Apitomy/apitomy-axiom/pull/615\n* Epic #585: usable MCP server management by @EricWittmann in https://github.com/Apitomy/apitomy-axiom/pull/616\n* Update dependency @vitejs/plugin-react to v6.2.0 by @renovate[bot] in https://github.com/Apitomy/apitomy-axiom/pull/620\n* Update dependency @vitejs/plugin-react to v6.2.1 by @renovate[bot] in https://github.com/Apitomy/apitomy-axiom/pull/621\n* Update dependency @xyflow/react to v12.12.1 by @renovate[bot] in https://github.com/Apitomy/apitomy-axiom/pull/622\n* Update dependency vitest to v5.1.0 by @renovate[bot] in https://github.com/Apitomy/apitomy-axiom/pull/624\n* Script tools and MCP servers get only their own declared environment by @EricWittmann in https://github.com/Apitomy/apitomy-axiom/pull/623\n* Register per-task MCP managers in AgentRegistry so OpenCode tasks get their MCP servers by @EricWittmann in https://github.com/Apitomy/apitomy-axiom/pull/626\n* Update dependency @apitomy/flow-ui to v3.0.5 by @renovate[bot] in https://github.com/Apitomy/apitomy-axiom/pull/627\n* Fix MCP server management issues found in manual QA by @EricWittmann in https://github.com/Apitomy/apitomy-axiom/pull/628\n\n\n**Full Changelog**: https://github.com/Apitomy/apitomy-axiom/compare/v3.0.1...v3.0.2",
-  "mentions_count": 3
+  "tarball_url": "https://api.github.com/repos/Apitomy/apitomy-axiom/tarball/v3.0.3",
+  "zipball_url": "https://api.github.com/repos/Apitomy/apitomy-axiom/zipball/v3.0.3",
+  "body": "## What's Changed\n* Upgrade Apitomy Flow to 3.0.5 and fix receive-event output mapping by @EricWittmann in https://github.com/Apitomy/apitomy-axiom/pull/629\n* Support polled GitHub PR events (merged, assigned, review updates, inline review comments) by @EricWittmann in https://github.com/Apitomy/apitomy-axiom/pull/630\n* Update dependency mermaid to v12.3.0 by @renovate[bot] in https://github.com/Apitomy/apitomy-axiom/pull/632\n* Update dependency rimraf to v6.1.4 by @renovate[bot] in https://github.com/Apitomy/apitomy-axiom/pull/631\n* Make the timeout configurable for script and node action types by @EricWittmann in https://github.com/Apitomy/apitomy-axiom/pull/634\n* Subscription preview: toggle to show only matched events by @EricWittmann in https://github.com/Apitomy/apitomy-axiom/pull/636\n\n\n**Full Changelog**: https://github.com/Apitomy/apitomy-axiom/compare/v3.0.2...v3.0.3",
+  "mentions_count": 2
 }
