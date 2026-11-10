@@ -2841,7 +2841,11 @@ and evaluates each event against your <strong>Subscriptions</strong> to decide w
 </tr>
 <tr>
 <td><strong>Authentication secret</strong></td>
-<td>Which secret to use for API access, or fall back to a default provider secret or environment variable</td>
+<td>Which secret to use for API access, or fall back to a default provider secret or environment variable. For Jira, the secret holds the API token</td>
+</tr>
+<tr>
+<td><strong>Jira email</strong></td>
+<td>Jira only: the Atlassian account email that goes with the API token. Type it as plain text or choose an existing secret</td>
 </tr>
 <tr>
 <td><strong>Enabled</strong></td>
@@ -2851,6 +2855,10 @@ and evaluates each event against your <strong>Subscriptions</strong> to decide w
 </table>
 <p>You can create multiple event sources of the same type — for example, one for <code>github.com</code> and another for
 a GitHub Enterprise instance.</p>
+<p>Jira authenticates with the account email and an API token. Before each poll Axiom checks them with Jira;
+if Jira rejects them, the poll is logged as an error ("Jira authentication failed") and no events are
+missed: the next successful poll picks up from the last checkpoint. Older Jira event sources that store
+<code>email:api_token</code> in the authentication secret and have no Jira email keep working.</p>
 <h3 id="event-stream">Event Stream</h3>
 <p>Every event an event source detects is normalized into a single, browsable stream of typed events (issue,
 pull request, and repository activity for GitHub; issue activity for Jira). Events are deduplicated so the

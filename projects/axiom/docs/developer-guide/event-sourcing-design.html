@@ -1967,7 +1967,15 @@ stream. No filtering — every detectable event gets recorded.</p>
 - ADF-to-plain-text conversion for description and comment bodies
 - Configuration: <code>baseUrl</code> (e.g., <code>https://myorg.atlassian.net</code>; must start with <code>http://</code> or <code>https://</code>,
   a trailing <code>/</code> is removed when saved), <code>secretName</code>, <code>projects</code> (list of project keys matching
-  <code>^[A-Z][A-Z0-9_]+$</code>), optional <code>extraFields</code> (list of Jira field names), <code>pollInterval</code></p>
+  <code>^[A-Z][A-Z0-9_]+$</code>), optional <code>extraFields</code> (list of Jira field names), optional <code>email</code> (the
+  account email: a plain address or a <code>${secret:NAME}</code> reference), <code>pollInterval</code>
+- Credentials: Basic auth with <code>email:api_token</code>. The token comes from the authentication secret (fallback
+  below); the email from <code>configuration.email</code>. Without an email, a token that already has the
+  <code>email:api_token</code> form is used as is (legacy); otherwise the poll fails with "Invalid Jira credentials".
+- Before searching, each poll calls <code>GET /rest/api/3/myself</code>. Jira Cloud answers searches with bad
+  credentials as an anonymous user (an empty result, not a 401), so without this check a wrong token looks
+  like a healthy source that finds no issues. A rejected check logs "Jira authentication failed" and leaves
+  the checkpoint unchanged.</p>
 <p><strong>Authentication:</strong> Three-tier fallback for both types: per-event-source secret (by name
 from the secrets store), default provider secret (<code>GH_TOKEN</code>/<code>GITHUB_TOKEN</code> for GitHub,
 <code>JIRA_API_TOKEN</code> for Jira), environment variable.</p>
