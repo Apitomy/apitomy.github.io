@@ -25,7 +25,7 @@
       
       
       <link rel="icon" href="../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.8.0">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.8.1">
     
     
       
@@ -1795,6 +1795,11 @@ human-task display values. Nested map access and Jackson <code>JsonNode</code> n
 <td>Instructions for the person completing the task</td>
 </tr>
 <tr>
+<td><code>body</code></td>
+<td>String</td>
+<td>Rich task content as raw markdown: the node's <code>body</code> template rendered, else the <code>description</code></td>
+</tr>
+<tr>
 <td><code>inputs</code></td>
 <td>Map<String, Object></td>
 <td>Display labels as keys, resolved context values as values</td>
@@ -1811,6 +1816,12 @@ human-task display values. Nested map access and Jackson <code>JsonNode</code> n
 converted to text. It falls back to <code>nodeName</code> when the node has no title, the expression fails, or it
 yields <code>null</code>; a failing title is logged as a warning and never blocks the task. Use <code>title</code> rather than
 <code>nodeName</code> as the subject of task inbox items.</p>
+<p><code>body</code> is also rendered each time the info is read. Every embedded <code>${...}</code> expression is evaluated on its
+own; one that fails or yields <code>null</code> renders as an empty string (logged as a warning), so the rest of the
+body still renders. When the node has no body, or the template cannot be parsed, <code>body</code> is the
+<code>description</code> (possibly <code>null</code>), so hosts can always render <code>body</code> as the main task content. The value is
+<strong>raw, unescaped markdown</strong>: context values are inserted verbatim and may contain markdown, HTML, or links
+from external data, so hosts must sanitize it when rendering.</p>
 <h3 id="output-field-metadata">Output field metadata</h3>
 <p>Each <code>OutputDefinition</code> describes one form field a person fills in to complete the task. Only <code>name</code>
 is required; every other attribute is optional and backward-compatible — an output that declares only
@@ -2101,7 +2112,7 @@ parallel resumes, input ownership, and error recovery checked against this imple
       <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.tabs", "navigation.sections", "navigation.expand", "navigation.top", "search.highlight", "search.share", "search.suggest", "content.code.copy"], "search": "../assets/javascripts/workers/search.a7633da7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="../assets/javascripts/bundle.c21346df.min.js"></script>
+      <script src="../assets/javascripts/bundle.a5f9d56c.min.js"></script>
       
     
   </body>

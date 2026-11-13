@@ -25,7 +25,7 @@
       
       
       <link rel="icon" href="../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.8.0">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.8.1">
     
     
       
@@ -1683,12 +1683,18 @@ coordinates) is optional and nullable; the browser can lay out definitions that 
 <h3 id="human-task">Human Task</h3>
 <p>Blocks until a human responds. The engine sets the instance to <code>WAITING</code> status.</p>
 <ul>
-<li><strong>Config</strong>: The engine interprets four keys:<ul>
+<li><strong>Config</strong>: The engine interprets five keys:<ul>
 <li><code>title</code> (String, optional) — an EL expression computing the task title, e.g. the subject of the item
   in a task inbox. Join text and values with the EL string concatenation operator <code>+=</code>
   (e.g. <code>"'Review ' += context.cveId"</code>; note that <code>+</code> is numeric addition in EL). When the title is
   absent or blank, fails to evaluate, or yields <code>null</code>, the node name is used instead.</li>
 <li><code>description</code> (String) — instructions for the person completing the task</li>
+<li><code>body</code> (String, optional) — a markdown template for rich task content, with EL expressions embedded
+  as <code>${...}</code> (e.g. <code>"## Review ${context.cveId}\n\nSeverity: **${context.severity}**"</code>). Each
+  expression is evaluated separately: one that fails or yields <code>null</code> renders as an empty string and
+  is logged. Write <code>\${</code> for a literal <code>${</code>. When the body is absent or blank, or cannot be parsed
+  (e.g. an unterminated <code>${</code>), the description is used instead. The result is raw markdown and is
+  <strong>not escaped</strong> — context values are inserted verbatim, so hosts must sanitize it when rendering.</li>
 <li><code>inputs</code> (Map<String, Object>) — expression strings or JSON literals, resolved on entry and info reads
   (e.g. <code>{"Credit Score": "context.creditScore"}</code>)</li>
 <li><code>outputs</code> (List of <code>{name, type, required}</code>) — defines the form schema for task completion</li>
@@ -1696,7 +1702,8 @@ coordinates) is optional and nullable; the browser can lay out definitions that 
 </li>
 </ul>
 <p>The validator emits <code>MISSING_TASK_DESCRIPTION</code> and <code>MISSING_TASK_OUTPUTS</code> warnings when these are absent,
-  and an <code>INVALID_TASK_TITLE_EXPRESSION</code> warning when the title is not valid EL.
+  an <code>INVALID_TASK_TITLE_EXPRESSION</code> warning when the title is not valid EL, and an
+  <code>INVALID_TASK_BODY_EXPRESSION</code> warning when the body has an invalid or unterminated <code>${...}</code> expression.
 - <strong>Behavior</strong>: Completes when the host calls <code>completeNode</code> with the response (<code>completeCurrentNode</code> for
   one parked branch). The host validates the submitted form values.</p>
 <h3 id="receive-event">Receive Event</h3>
@@ -1894,7 +1901,8 @@ persistence.</p>
 substitute for status and branch records. Each <code>HistoryEntry</code> has an optional <code>branchId</code> tagging its visit;
 a missing history branch ID denotes <code>root</code>. Entries also record, when the node is entered, the <code>input</code>
 values it received (declared workflow inputs for a start node, resolved inputs for action and human-task
-nodes) and, for human-task nodes, the computed task <code>title</code>; both are omitted when absent, so viewers can
+nodes) and, for human-task nodes, the computed task <code>title</code> and, when the node configures a <code>body</code>, the
+rendered <code>body</code>; all are omitted when absent, so viewers can
 show per-visit values even after later nodes change the context. Java timestamps serialize as ISO strings
 with the Jackson Java Time module. Old instances missing branch collections normalize to empty collections
 in Java; that alone does not synthesize parked branches for safe resume. Hosts must migrate legacy runtime
@@ -1994,7 +2002,7 @@ state and retain the correct definition. See <a href="current-contracts.html">cu
       <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.tabs", "navigation.sections", "navigation.expand", "navigation.top", "search.highlight", "search.share", "search.suggest", "content.code.copy"], "search": "../assets/javascripts/workers/search.a7633da7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="../assets/javascripts/bundle.c21346df.min.js"></script>
+      <script src="../assets/javascripts/bundle.a5f9d56c.min.js"></script>
       
     
   </body>
