@@ -2201,6 +2201,31 @@ not greater than zero, or <code>retry-max-delay</code> is less than <code>retry-
 <td><code>10s</code></td>
 <td>How often to resume workflow runs whose <code>wait</code> node has elapsed</td>
 </tr>
+<tr>
+<td><code>axiom.run-summary.enabled</code></td>
+<td><code>true</code></td>
+<td>Global switch for AI run summaries (automatic and on demand); see <a href="../user-guide/workflows.html#ai-run-summaries">AI Run Summaries</a>. The engine and model are chosen in <strong>Settings → AI Engine</strong></td>
+</tr>
+<tr>
+<td><code>axiom.run-summary.poll-interval</code></td>
+<td><code>5s</code></td>
+<td>How often pending run summaries are picked up for generation</td>
+</tr>
+<tr>
+<td><code>axiom.run-summary.batch-size</code></td>
+<td><code>2</code></td>
+<td>Maximum number of run summaries generated at the same time</td>
+</tr>
+<tr>
+<td><code>axiom.run-summary.max-steps</code></td>
+<td><code>10</code></td>
+<td>Maximum agent steps for one run summary</td>
+</tr>
+<tr>
+<td><code>axiom.run-summary.timeout-seconds</code></td>
+<td><code>300</code></td>
+<td>Time limit, in seconds, for generating one run summary; the agent is stopped when it is exceeded and the attempt counts as failed</td>
+</tr>
 </tbody>
 </table>
 <h3 id="scripts">Scripts</h3>

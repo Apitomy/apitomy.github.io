@@ -954,6 +954,17 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#ai-run-summaries" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AI Run Summaries
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -1867,6 +1878,17 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#ai-run-summaries" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AI Run Summaries
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -2212,6 +2234,43 @@ once a matching event is dispatched to it.</p>
 <code>POST /api/v1/workflow/runs/{runId}/cancel</code>). Cancelling marks the run <code>cancelled</code>, fails any in-progress
 task the run created, and removes any pending wait or event-subscription state associated with it. A
 cancelled run cannot be resumed. Other runs on the same subject are unaffected.</p>
+<h3 id="ai-run-summaries">AI Run Summaries</h3>
+<p>Axiom can ask an AI agent to write a short summary of a finished run: a one-line headline and a few
+Markdown bullet points explaining what the run did and, for a failed run, why it failed.</p>
+<ul>
+<li><strong>Opt in per workflow</strong> — check <strong>Generate AI summaries for completed and failed runs</strong> in the workflow's
+  <strong>Edit Workflow Definition</strong> dialog (REST: <code>summarizeRuns: true</code> on the workflow definition). It is off
+  by default. Runs of an opted-in workflow are summarized automatically when they end <code>completed</code> or
+  <code>failed</code>; cancelled runs are not.</li>
+<li><strong>On demand</strong> — the <strong>AI summary</strong> card above the tabs of any finished run's detail page has a
+  <strong>Summarize this run</strong> button (and <strong>Regenerate</strong> / <strong>Retry</strong> once a summary exists or has failed),
+  whether or not the workflow opted in (REST: <code>POST /api/v1/workflow/runs/{runId}/ai-summary</code>, which
+  returns <code>202</code>; <code>409</code> while the run is still active or a summary is being generated, <code>404</code> for an unknown
+  run, <code>503</code> when run summaries are turned off).</li>
+<li><strong>Where it shows</strong> — run lists show the headline (or <em>Summarizing…</em> while it is generated) under the run
+  title; the run detail card shows the full summary and which engine and model produced it. The summary is
+  also returned as <code>aiSummary</code> on <code>GET /api/v1/workflow/runs/{runId}</code> and in run lists, with a <code>status</code> of
+  <code>pending</code>, <code>generating</code>, <code>ready</code>, or <code>failed</code>.</li>
+<li><strong>Engine and model</strong> — choose them under <strong>Settings → AI Engine → Run summaries</strong> (REST: <code>summaryEngine</code>
+  and <code>summaryModel</code> on <code>/api/v1/system/config</code>). They default to the system default engine and that
+  engine's default model; a small, cheap model is usually enough.</li>
+</ul>
+<p>Summaries are generated in the background, a few at a time, by an agent from the agent pool. The agent
+can only read the run through the read-only <code>axiom-run-summary</code> MCP server (the run, its tasks, task logs,
+and its trace); it cannot change anything. Shell, file-editing and web tools are denied to it.</p>
+<blockquote>
+<p><strong>OpenCode limitation:</strong> with OpenCode as the summary engine, the summary agent can still use OpenCode's
+file <code>read</code> tool, so it can read local files on the Axiom host (OpenCode stops responding when that tool
+is disabled; tracked in <a href="https://github.com/Apitomy/apitomy-axiom/issues/681">#681</a>). Tools of other MCP
+servers registered with the shared OpenCode server are not disabled either. Conversely, the read-only
+<code>axiom-run-summary</code> tools stay registered on the shared OpenCode server, so they are visible to other
+OpenCode tasks (they are read-only; see #681). Claude Code is recommended as the summary engine.</p>
+</blockquote>
+<p>A failed attempt is retried once before the summary is marked
+<code>failed</code>. The cost of each summary is recorded as AI usage with the invocation type <code>run-summary</code>.
+Summaries are deleted with their run. The <code>axiom.run-summary.*</code> properties
+(<a href="../getting-started/configuring-axiom.html#workflows">Configuring Axiom</a>) tune the background generation or
+turn it off.</p>
 <h2 id="axiom-sdk-functions">Axiom SDK Functions</h2>
 <p>The <strong>Axiom SDK</strong> is a set of functions for reading and updating Axiom data. They are available in two ways:</p>
 <ul>
