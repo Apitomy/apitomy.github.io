@@ -2273,6 +2273,11 @@ items of an attempt stay on that attempt's outcome and never appear on a later a
 <td>Browse events (paginated; filters <code>filterType</code>, <code>filterEventSourceId</code>, <code>filterRef</code>, <code>filterActor</code>)</td>
 </tr>
 <tr>
+<td>POST</td>
+<td><code>/stream/events</code></td>
+<td>Publish an event under the <code>sdk</code> event source (backs the <code>axiom_fire_event</code> MCP tool)</td>
+</tr>
+<tr>
 <td>GET</td>
 <td><code>/stream/events/{eventId}</code></td>
 <td>Get a single event with full typed payload</td>
